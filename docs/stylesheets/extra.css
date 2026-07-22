@@ -1,53 +1,47 @@
-/* Rosso scuro istituzionale */
-:root {
-  --md-primary-fg-color: #9c1c1c;
-  --md-primary-fg-color--light: #c62828;
-  --md-primary-fg-color--dark: #7a0000;
-}
-
-/* Header compatto */
-.md-header {
-  height: 4.2rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-
+/* Forza l'header a essere una singola riga flessibile */
 .md-header__inner {
-  padding: 0 1.8rem;
-  align-items: center;
-  gap: 1.5rem;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
 }
 
-/* Logo più grande e senza titolo */
-.md-logo img {
-  height: 2.4rem;
+/* Il contenitore delle schede occupa lo spazio centrale */
+.md-header__inner .md-tabs {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
 }
 
-.md-header__title {
-  display: none;   /* Nasconde il titolo testuale */
+/* Lista delle schede orizzontale e scrollabile */
+.md-header__inner .md-tabs .md-tabs__list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.5rem 1.5rem;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
-/* Migliora tabs */
-.md-tabs {
-  background-color: var(--md-primary-fg-color);
-  color: white;
+/* Stile compatto per i link */
+.md-header__inner .md-tabs .md-tabs__link {
+    font-size: 0.7rem;
+    padding: 0.4rem 0;
+    opacity: 0.7;
+    transition: opacity 0.15s;
+    white-space: nowrap;
 }
 
-.md-tabs__link {
-  color: rgba(255,255,255,0.85);
+.md-header__inner .md-tabs .md-tabs__link--active,
+.md-header__inner .md-tabs .md-tabs__link:hover {
+    opacity: 1;
+    text-decoration: none;
 }
 
-.md-tabs__link--active {
-  color: white;
-  border-bottom-color: white;
-}
-
-/* Barra ricerca */
-.md-search__form {
-  background-color: rgba(255,255,255,0.95);
-  border-radius: 50px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.md-search__input {
-  color: #222;
+/* Nasconde la vecchia riga delle tabs (se generata come duplicato) */
+.md-tabs--initial {
+    display: none !important;
 }
