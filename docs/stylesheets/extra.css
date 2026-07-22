@@ -1,35 +1,53 @@
-/* Header stile accademico / istituzionale */
+/* Rosso scuro istituzionale */
+:root {
+  --md-primary-fg-color: #9c1c1c;
+  --md-primary-fg-color--light: #c62828;
+  --md-primary-fg-color--dark: #7a0000;
+}
+
+/* Header compatto */
 .md-header {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 4.25rem;
+  height: 4.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .md-header__inner {
-  padding: 0 1.5rem;
+  padding: 0 1.8rem;
+  align-items: center;
+  gap: 1.5rem;
 }
 
+/* Logo più grande e senza titolo */
 .md-logo img {
-  height: 2.2rem;
+  height: 2.4rem;
 }
 
 .md-header__title {
-  font-weight: 600;
-  letter-spacing: -0.015em;
+  display: none;   /* Nasconde il titolo testuale */
 }
 
-/* Migliora il pulsante di ricerca */
+/* Migliora tabs */
+.md-tabs {
+  background-color: var(--md-primary-fg-color);
+  color: white;
+}
+
+.md-tabs__link {
+  color: rgba(255,255,255,0.85);
+}
+
+.md-tabs__link--active {
+  color: white;
+  border-bottom-color: white;
+}
+
+/* Barra ricerca */
 .md-search__form {
-  background-color: #f8f8f8;
-  border-radius: 9999px;
-  border: 1px solid #e0e0e0;
+  background-color: rgba(255,255,255,0.95);
+  border-radius: 50px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .md-search__input {
-  padding-left: 2.8rem;
-}
-
-/* Colore rosso più elegante */
-[data-md-color-scheme="default"] {
-  --md-primary-fg-color: #b71c1c;
-  --md-primary-fg-color--light: #e53935;
+  color: #222;
 }

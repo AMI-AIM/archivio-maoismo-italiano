@@ -7,7 +7,7 @@ theme:
   name: material
   language: it
   features:
-    - header.autohide          # Nasconde header su scroll (effetto elegante)
+    - header.autohide
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.top
@@ -15,7 +15,7 @@ theme:
     - search.highlight
   palette:
     - scheme: default
-      primary: red
+      primary: custom          # useremo rosso scuro custom
       accent: red
   logo: immagini/logo.png
   favicon: immagini/favicon.png
@@ -42,9 +42,7 @@ nav:
   - Organizzazioni: organizzazioni/
 
 extra:
-  homepage: /archivio-maoismo-italiano/   # fa linkare il logo alla home
+  homepage: /archivio-maoismo-italiano/
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/AMI-AIM/archivio-maoismo-italiano
-      name: AMI su GitHub
-  copyright: "&copy; 2026 AMI - Archivio del Maoismo Italiano"
