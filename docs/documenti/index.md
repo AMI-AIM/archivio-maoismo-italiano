@@ -55,11 +55,14 @@ hide:
                 <span class="toggle-icon">▼</span>
             </button>
             <div class="filtro-contenuto" id="filtro-anno-container">
-                <div class="slider-container">
-                    <span id="anno-min-label">1964</span>
+                <div class="slider-container" id="slider-container">
+                    <div class="slider-track-fill" id="slider-track-fill"></div>
                     <input type="range" id="filtro-anno-min" min="1964" max="1992" value="1964">
                     <input type="range" id="filtro-anno-max" min="1964" max="1992" value="1992">
-                    <span id="anno-max-label">1992</span>
+                    <div class="slider-labels">
+                        <span id="anno-min-label">1964</span>
+                        <span id="anno-max-label">1992</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -193,28 +196,35 @@ hide:
 }
 
 .slider-container {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding-top: 0.2rem;
+    position: relative;
+    width: 100%;
+    height: 30px;
+    margin: 0.5rem 0;
 }
 
 .slider-container input[type="range"] {
-    flex: 1;
-    min-width: 60px;
+    position: absolute;
+    width: 100%;
     height: 4px;
+    top: 50%;
+    transform: translateY(-50%);
     -webkit-appearance: none;
-    background: var(--md-default-fg-color--lightest);
-    border-radius: 2px;
+    appearance: none;
+    background: transparent;
+    pointer-events: none;
 }
 
 .slider-container input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
+    appearance: none;
     width: 14px;
     height: 14px;
     border-radius: 50%;
     background: var(--md-primary-fg-color);
     cursor: pointer;
+    pointer-events: auto;
+    border: 2px solid var(--md-default-bg-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
 .slider-container input[type="range"]::-moz-range-thumb {
@@ -223,14 +233,41 @@ hide:
     border-radius: 50%;
     background: var(--md-primary-fg-color);
     cursor: pointer;
-    border: none;
+    pointer-events: auto;
+    border: 2px solid var(--md-default-bg-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-.slider-container span {
+.slider-container input[type="range"]::-webkit-slider-runnable-track {
+    height: 4px;
+    background: var(--md-default-fg-color--lightest);
+    border-radius: 2px;
+}
+
+.slider-container input[type="range"]::-moz-range-track {
+    height: 4px;
+    background: var(--md-default-fg-color--lightest);
+    border-radius: 2px;
+}
+
+.slider-track-fill {
+    position: absolute;
+    height: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--md-primary-fg-color);
+    border-radius: 2px;
+    pointer-events: none;
+    left: 0%;
+    right: 0%;
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
     font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--md-primary-fg-color);
-    min-width: 35px;
+    color: var(--md-default-fg-color--light);
 }
 
 .filtri-azioni {

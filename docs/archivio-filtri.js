@@ -65,45 +65,62 @@ function inizializzaFiltri() {
     popolaSelect('filtro-tipo', tipi);
     
     // Imposta lo slider degli anni
-    const inputMin = document.getElementById('filtro-anno-min');
-    const inputMax = document.getElementById('filtro-anno-max');
-    const labelMin = document.getElementById('anno-min-label');
-    const labelMax = document.getElementById('anno-max-label');
+    const minSlider = document.getElementById('filtro-anno-min');
+    const maxSlider = document.getElementById('filtro-anno-max');
+    const minLabel = document.getElementById('anno-min-label');
+    const maxLabel = document.getElementById('anno-max-label');
     
-    inputMin.min = annoMin;
-    inputMax.max = annoMax;
-    inputMin.value = annoMin;
-    inputMax.min = annoMin;
-    inputMax.max = annoMax;
-    inputMax.value = annoMax;
-    labelMin.textContent = annoMin;
-    labelMax.textContent = annoMax;
+    minSlider.min = annoMin;
+    minSlider.max = annoMax;
+    minSlider.value = annoMin;
+    maxSlider.min = annoMin;
+    maxSlider.max = annoMax;
+    maxSlider.value = annoMax;
+    minLabel.textContent = annoMin;
+    maxLabel.textContent = annoMax;
     
-    inputMin.addEventListener('input', function() {
+    // Sincronizzazione e riempimento della traccia
+    function aggiornaTrack() {
+        const min = parseInt(minSlider.value);
+        const max = parseInt(maxSlider.value);
+        const minVal = parseInt(minSlider.min);
+        const maxVal = parseInt(maxSlider.max);
+        const range = maxVal - minVal;
+        
+        const leftPercent = ((min - minVal) / range) * 100;
+        const rightPercent = ((maxVal - max) / range) * 100;
+        
+        const track = document.getElementById('slider-track-fill');
+        if (track) {
+            track.style.left = leftPercent + '%';
+            track.style.right = rightPercent + '%';
+        }
+    }
+    
+    minSlider.addEventListener('input', function() {
         const val = parseInt(this.value);
-        const maxVal = parseInt(inputMax.value);
+        const maxVal = parseInt(maxSlider.value);
         if (val > maxVal) {
-            inputMax.value = val;
-            labelMax.textContent = val;
+            this.value = maxVal;
         }
-        labelMin.textContent = val;
+        document.getElementById('anno-min-label').textContent = this.value;
+        aggiornaTrack();
         applicaFiltri();
     });
     
-    inputMax.addEventListener('input', function() {
+    maxSlider.addEventListener('input', function() {
         const val = parseInt(this.value);
-        const minVal = parseInt(inputMin.value);
+        const minVal = parseInt(minSlider.value);
         if (val < minVal) {
-            inputMin.value = val;
-            labelMin.textContent = val;
+            this.value = minVal;
         }
-        labelMax.textContent = val;
+        document.getElementById('anno-max-label').textContent = this.value;
+        aggiornaTrack();
         applicaFiltri();
     });
     
-    document.querySelectorAll('select, input').forEach(el => {
-        el.addEventListener('change', applicaFiltri);
-    });
+    // Inizializza la traccia
+    aggiornaTrack();
     
     document.getElementById('filtro-testo').addEventListener('input', applicaFiltri);
     document.getElementById('reset-filtri').addEventListener('click', resetFiltri);
@@ -164,7 +181,7 @@ function applicaFiltri() {
         return true;
     });
     
-    // 🔥 ORDINA CRONOLOGICAMENTE
+    // ORDINA CRONOLOGICAMENTE
     risultati.sort((a, b) => {
         if (a.anno === null && b.anno === null) return a.titolo.localeCompare(b.titolo);
         if (a.anno === null) return 1;
@@ -254,6 +271,23 @@ function resetFiltri() {
     document.getElementById('filtro-anno-max').value = annoMax;
     document.getElementById('anno-min-label').textContent = annoMin;
     document.getElementById('anno-max-label').textContent = annoMax;
+    
+    // Aggiorna la traccia dopo il reset
+    const minSlider = document.getElementById('filtro-anno-min');
+    const maxSlider = document.getElementById('filtro-anno-max');
+    const min = parseInt(minSlider.value);
+    const max = parseInt(maxSlider.value);
+    const minVal = parseInt(minSlider.min);
+    const maxVal = parseInt(maxSlider.max);
+    const range = maxVal - minVal;
+    const leftPercent = ((min - minVal) / range) * 100;
+    const rightPercent = ((maxVal - max) / range) * 100;
+    const track = document.getElementById('slider-track-fill');
+    if (track) {
+        track.style.left = leftPercent + '%';
+        track.style.right = rightPercent + '%';
+    }
+    
     applicaFiltri();
 }
 
