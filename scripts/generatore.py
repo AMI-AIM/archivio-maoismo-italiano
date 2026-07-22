@@ -835,11 +835,11 @@ hide:
 }}
 
 .slider-labels {{
-        display: flex;
-        justify-content: space-between;
-        margin-top: 1 rem;  
-        font-size: 0.75rem;
-        color: var(--md-default-fg-color--light);
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.8rem;
+    font-size: 0.75rem;
+    color: var(--md-default-fg-color--light);
 }}
 
 .slider-labels span {{
@@ -1006,6 +1006,7 @@ hide:
     }}
     .slider-labels {{
         font-size: 0.65rem;
+        margin-top: 0.6rem;
     }}
 }}
 </style>
@@ -1017,6 +1018,7 @@ hide:
     
     print(f"   ✅ Pagina Archivio generata con {len(schede)} schede.")
     print(f"   📅 Intervallo anni: {anno_min} - {anno_max}")
+
 
 
 # ============================================================
