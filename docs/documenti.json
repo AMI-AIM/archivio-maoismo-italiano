@@ -1,221 +1,21 @@
 {
   "documenti": [
     {
-      "id": "AMI-0001",
-      "titolo": "Citazioni dalle opere del presidente Mao Tse-tung",
-      "autore": "Mao Zedong",
-      "organizzazione": "Casa editrice in lingue estere",
-      "data": "1969",
-      "anno": 1969,
-      "tipo": "Libro",
-      "serie": "Testi del maoismo",
-      "keywords": "Partito comunista cinese; Rivoluzione culturale; Maoismo; Libretto rosso",
-      "url_ia": "https://archive.org/details/1967-citazioni-dalle-opere-del-presidente-mao-tse-tung-lingue-estere/mode/2up",
+      "id": "AMI-0018",
+      "titolo": "Delegazione delle Edizioni Oriente accolta dal Presidente Mao Zedong",
+      "autore": "Nuova Unità",
+      "organizzazione": "Edizioni Oriente",
+      "data": "14 maggio 1964",
+      "anno": 1964,
+      "tipo": "Foto",
+      "serie": "Edizioni Oriente",
+      "keywords": "Edizioni Oriente; Delegazione",
+      "url_ia": "https://archive.org/details/delegazione-edizioni-oriente",
       "persone": [
-        "Mao Zedong"
+        "Nuova Unità"
       ],
       "organizzazioni": [
-        "Casa editrice in lingue estere"
-      ]
-    },
-    {
-      "id": "AMI-0002",
-      "titolo": "Sulla giusta soluzione delle contraddizioni in seno al popolo",
-      "autore": "Mao Zedong",
-      "organizzazione": "Casa editrice in lingue estere",
-      "data": "1967",
-      "anno": 1967,
-      "tipo": "Opuscolo",
-      "serie": "Testi del maoismo",
-      "keywords": "Partito comunista cinese; Maoismo; Teoria politica",
-      "url_ia": "https://archive.org/details/sulla-giusta-soluzione-delle-contraddizioni-in-seno-al-popolo/mode/2up",
-      "persone": [
-        "Mao Zedong"
-      ],
-      "organizzazioni": [
-        "Casa editrice in lingue estere"
-      ]
-    },
-    {
-      "id": "AMI-0003",
-      "titolo": "Come correggere le idee errate nel Partito",
-      "autore": "Mao Zedong",
-      "organizzazione": "Casa editrice in lingue estere",
-      "data": "1968",
-      "anno": 1968,
-      "tipo": "Opuscolo",
-      "serie": "Testi del maoismo",
-      "keywords": "Partito comunista cinese; Maoismo; Teoria politica",
-      "url_ia": "https://archive.org/details/idee-errate/mode/2up",
-      "persone": [
-        "Mao Zedong"
-      ],
-      "organizzazioni": [
-        "Casa editrice in lingue estere"
-      ]
-    },
-    {
-      "id": "AMI-0004",
-      "titolo": "Dichiarazione del compagno Mao Tse-tung, presidente del Comitato Centrale del Partito Comunista Cinese, in appoggio alla lotta degli afroamericani contro la repressione violenta",
-      "autore": "Mao Zedong",
-      "organizzazione": "Casa editrice in lingue estere",
-      "data": "1968",
-      "anno": 1968,
-      "tipo": "Opuscolo",
-      "serie": "Testi del maoismo",
-      "keywords": "Partito comunista cinese; Maoismo; Internazionalismo",
-      "url_ia": "https://archive.org/details/dichiarazione-in-supporto-degli-afroamericani/mode/2up",
-      "persone": [
-        "Mao Zedong"
-      ],
-      "organizzazioni": [
-        "Casa editrice in lingue estere"
-      ]
-    },
-    {
-      "id": "AMI-0005",
-      "titolo": "Da dove provengono le idee giuste?",
-      "autore": "Mao Zedong",
-      "organizzazione": "Casa editrice in lingue estere",
-      "data": "1968",
-      "anno": 1968,
-      "tipo": "Opuscolo",
-      "serie": "Testi del maoismo",
-      "keywords": "Partito comunista cinese; Maoismo; Teoria politica; Filosofia",
-      "url_ia": "https://archive.org/details/idee-giuste/mode/2up",
-      "persone": [
-        "Mao Zedong"
-      ],
-      "organizzazioni": [
-        "Casa editrice in lingue estere"
-      ]
-    },
-    {
-      "id": "AMI-0006",
-      "titolo": "Al servizio del popolo; In memoria di Norman Bethune; Come Yu Kung rimosse le montagne",
-      "autore": "Mao Zedong",
-      "organizzazione": "Casa editrice in lingue estere",
-      "data": "1968",
-      "anno": 1968,
-      "tipo": "Opuscolo",
-      "serie": "Testi del maoismo",
-      "keywords": "Partito comunista cinese; Maoismo",
-      "url_ia": "https://archive.org/details/tre-vecchi-articoli/mode/2up",
-      "persone": [
-        "Mao Zedong"
-      ],
-      "organizzazioni": [
-        "Casa editrice in lingue estere"
-      ]
-    },
-    {
-      "id": "AMI-0007",
-      "titolo": "Preoccuparsi delle condizioni di vita delle masse fare attenzione ai metodi di lavoro",
-      "autore": "Mao Zedong",
-      "organizzazione": "Casa editrice in lingue estere",
-      "data": "1968",
-      "anno": 1968,
-      "tipo": "Opuscolo",
-      "serie": "Testi del maoismo",
-      "keywords": "Partito comunista cinese; Maoismo",
-      "url_ia": "https://archive.org/details/preoccuparsi-delle-condizioni-di-vita-delle-masse-fare-attenzione-ai-metodi-di-lavoro/mode/2up",
-      "persone": [
-        "Mao Zedong"
-      ],
-      "organizzazioni": [
-        "Casa editrice in lingue estere"
-      ]
-    },
-    {
-      "id": "AMI-0008",
-      "titolo": "Sul rafforzamento del sistema dei comitati di partito",
-      "autore": "Mao Zedong",
-      "organizzazione": "Casa editrice in lingue estere",
-      "data": "1969",
-      "anno": 1969,
-      "tipo": "Opuscolo",
-      "serie": "Testi del maoismo",
-      "keywords": "Partito comunista cinese; Maoismo",
-      "url_ia": "https://archive.org/details/comitati-di-partito/mode/2up",
-      "persone": [
-        "Mao Zedong"
-      ],
-      "organizzazioni": [
-        "Casa editrice in lingue estere"
-      ]
-    },
-    {
-      "id": "AMI-0009",
-      "titolo": "Orientamento del movimento giovanile",
-      "autore": "Mao Zedong",
-      "organizzazione": "Casa editrice in lingue estere",
-      "data": "1969",
-      "anno": 1969,
-      "tipo": "Opuscolo",
-      "serie": "Testi del maoismo",
-      "keywords": "Partito comunista cinese; Maoismo",
-      "url_ia": "https://archive.org/details/movimento-giovanile/mode/2up",
-      "persone": [
-        "Mao Zedong"
-      ],
-      "organizzazioni": [
-        "Casa editrice in lingue estere"
-      ]
-    },
-    {
-      "id": "AMI-0010",
-      "titolo": "Popoli di tutto il mondo, unitevi per sconfiggere gli aggressori americani e tutti i loro lacché! (Dichiarazione del 20 maggio 1970)",
-      "autore": "Mao Zedong",
-      "organizzazione": "Casa editrice in lingue estere",
-      "data": "1970",
-      "anno": 1970,
-      "tipo": "Opuscolo",
-      "serie": "Testi del maoismo",
-      "keywords": "Partito comunista cinese; Maoismo",
-      "url_ia": "https://archive.org/details/popoli-di-tutto-il-mondo/mode/2up",
-      "persone": [
-        "Mao Zedong"
-      ],
-      "organizzazioni": [
-        "Casa editrice in lingue estere"
-      ]
-    },
-    {
-      "id": "AMI-0011",
-      "titolo": "Circolare del 16 maggio 1966 - Un grande documento storico",
-      "autore": "Partito Comunista Cinese; Renmin Ribao; Hongqi",
-      "organizzazione": "Casa editrice in lingue estere",
-      "data": "1968",
-      "anno": 1968,
-      "tipo": "Opuscolo",
-      "serie": "Testi del maoismo",
-      "keywords": "Partito comunista cinese; Maoismo; Rivoluzione culturale",
-      "url_ia": "https://archive.org/details/circolare-16-maggio/mode/2up",
-      "persone": [
-        "Partito Comunista Cinese",
-        "Hongqi",
-        "Renmin Ribao"
-      ],
-      "organizzazioni": [
-        "Casa editrice in lingue estere"
-      ]
-    },
-    {
-      "id": "AMI-0012",
-      "titolo": "La classe operaia deve esercitare la sua direzione in ogni campo",
-      "autore": "Yao Wenyuan",
-      "organizzazione": "Casa editrice in lingue estere",
-      "data": "1968",
-      "anno": 1968,
-      "tipo": "Opuscolo",
-      "serie": "Testi del maoismo",
-      "keywords": "Partito comunista cinese; Maoismo; Rivoluzione culturale",
-      "url_ia": "https://archive.org/details/la-classe-operai-deve-esercitare-la-sua-direzione-in-ogni-cam/mode/2up",
-      "persone": [
-        "Yao Wenyuan"
-      ],
-      "organizzazioni": [
-        "Casa editrice in lingue estere"
+        "Edizioni Oriente"
       ]
     },
     {
@@ -235,131 +35,6 @@
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)"
       ]
-    },
-    {
-      "id": "AMI-0014",
-      "titolo": "Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta dalla leadership del Partito Comunista Cinese",
-      "autore": "Renmin Ribao",
-      "organizzazione": "Partito Comunista d'Italia (marxista-leninista)",
-      "data": "14 agosto 1968",
-      "anno": 1968,
-      "tipo": "Foto",
-      "serie": "Partito Comunista d'Italia (marxista-leninista)",
-      "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
-      "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
-      "persone": [
-        "Renmin Ribao"
-      ],
-      "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)"
-      ]
-    },
-    {
-      "id": "AMI-0015",
-      "titolo": "Osvaldo Pesce, Partito Comunista d'Italia (marxista-leninista), incontra il presidente Mao Zedong",
-      "autore": "Nuova Unità",
-      "organizzazione": "Partito Comunista d'Italia (marxista-leninista)",
-      "data": "31 agosto 1968",
-      "anno": 1968,
-      "tipo": "Foto",
-      "serie": "Partito Comunista d'Italia (marxista-leninista)",
-      "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
-      "url_ia": "https://archive.org/details/Pesce-e-Mao",
-      "persone": [
-        "Nuova Unità"
-      ],
-      "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)"
-      ]
-    },
-    {
-      "id": "AMI-0016",
-      "titolo": "Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese",
-      "autore": "Renmin Ribao",
-      "organizzazione": "Partito Comunista d'Italia (marxista-leninista)",
-      "data": "3 ottobre 1969",
-      "anno": 1969,
-      "tipo": "Foto",
-      "serie": "Partito Comunista d'Italia (marxista-leninista)",
-      "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
-      "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
-      "persone": [
-        "Renmin Ribao"
-      ],
-      "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)"
-      ]
-    },
-    {
-      "id": "AMI-0017",
-      "titolo": "Studenti ed intellettuali rivoluzionari",
-      "autore": "Comitato di Partito di Catania (UCI-m.l)",
-      "organizzazione": "Unione dei Comunisti Italiani (marxisti-leninisti)",
-      "data": "9 ottobre 1969",
-      "anno": 1969,
-      "tipo": "Volantino",
-      "serie": "UCI (m-l) - Servire il Popolo",
-      "keywords": "Unione dei Comunisti Italiani (marxisti-leninisti); Servire il Popolo; Volantino",
-      "url_ia": "https://archive.org/details/studenti-ed-intellettuali-ciclostilato-uci-m-l/mode/2up",
-      "persone": [
-        "Comitato di Partito di Catania (UCI-m.l)"
-      ],
-      "organizzazioni": [
-        "Unione dei Comunisti Italiani (marxisti-leninisti)"
-      ]
-    },
-    {
-      "id": "AMI-0018",
-      "titolo": "Delegazione delle Edizioni Oriente accolta dal Presidente Mao Zedong",
-      "autore": "Nuova Unità",
-      "organizzazione": "Edizioni Oriente",
-      "data": "14 maggio 1964",
-      "anno": 1964,
-      "tipo": "Foto",
-      "serie": "Edizioni Oriente",
-      "keywords": "Edizioni Oriente; Delegazione",
-      "url_ia": "https://archive.org/details/delegazione-edizioni-oriente",
-      "persone": [
-        "Nuova Unità"
-      ],
-      "organizzazioni": [
-        "Edizioni Oriente"
-      ]
-    },
-    {
-      "id": "AMI-0019",
-      "titolo": "Citazioni del presidente Mao Tse-tung",
-      "autore": "Mao Zedong",
-      "organizzazione": "Signal",
-      "data": "1969",
-      "anno": 1969,
-      "tipo": "Audio",
-      "serie": "Varie",
-      "keywords": "Partito comunista cinese; Rivoluzione culturale; Maoismo; Libretto rosso",
-      "url_ia": "https://archive.org/details/mao-tse-tung-citazioni-presidente-vinile",
-      "persone": [
-        "Mao Zedong"
-      ],
-      "organizzazioni": [
-        "Signal"
-      ]
-    },
-    {
-      "id": "AMI-0020",
-      "titolo": "Ribellarsi è giusto! Antologia",
-      "autore": "Mao Zedong; Roberto Sassi",
-      "organizzazione": "",
-      "data": "1992",
-      "anno": 1992,
-      "tipo": "Libro",
-      "serie": "Varie",
-      "keywords": "Maoismo",
-      "url_ia": "https://archive.org/details/ribellarsi-e-giusto//mode/2up",
-      "persone": [
-        "Roberto Sassi",
-        "Mao Zedong"
-      ],
-      "organizzazioni": []
     },
     {
       "id": "AMI-0021",
@@ -390,6 +65,207 @@
       "serie": "Lavoro Politico",
       "keywords": "Maoismo; Marxismo-leninismo",
       "url_ia": "https://archive.org/details/lavoro-politico-02//mode/2up",
+      "persone": [
+        "Centro di Informazione di Verona"
+      ],
+      "organizzazioni": [
+        "Centro di Informazione di Verona"
+      ]
+    },
+    {
+      "id": "AMI-0002",
+      "titolo": "Sulla giusta soluzione delle contraddizioni in seno al popolo",
+      "autore": "Mao Zedong",
+      "organizzazione": "Casa editrice in lingue estere",
+      "data": "1967",
+      "anno": 1967,
+      "tipo": "Opuscolo",
+      "serie": "Testi del maoismo",
+      "keywords": "Partito comunista cinese; Maoismo; Teoria politica",
+      "url_ia": "https://archive.org/details/sulla-giusta-soluzione-delle-contraddizioni-in-seno-al-popolo/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Casa editrice in lingue estere"
+      ]
+    },
+    {
+      "id": "AMI-0006",
+      "titolo": "Al servizio del popolo; In memoria di Norman Bethune; Come Yu Kung rimosse le montagne",
+      "autore": "Mao Zedong",
+      "organizzazione": "Casa editrice in lingue estere",
+      "data": "1968",
+      "anno": 1968,
+      "tipo": "Opuscolo",
+      "serie": "Testi del maoismo",
+      "keywords": "Partito comunista cinese; Maoismo",
+      "url_ia": "https://archive.org/details/tre-vecchi-articoli/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Casa editrice in lingue estere"
+      ]
+    },
+    {
+      "id": "AMI-0011",
+      "titolo": "Circolare del 16 maggio 1966 - Un grande documento storico",
+      "autore": "Partito Comunista Cinese; Renmin Ribao; Hongqi",
+      "organizzazione": "Casa editrice in lingue estere",
+      "data": "1968",
+      "anno": 1968,
+      "tipo": "Opuscolo",
+      "serie": "Testi del maoismo",
+      "keywords": "Partito comunista cinese; Maoismo; Rivoluzione culturale",
+      "url_ia": "https://archive.org/details/circolare-16-maggio/mode/2up",
+      "persone": [
+        "Renmin Ribao",
+        "Partito Comunista Cinese",
+        "Hongqi"
+      ],
+      "organizzazioni": [
+        "Casa editrice in lingue estere"
+      ]
+    },
+    {
+      "id": "AMI-0003",
+      "titolo": "Come correggere le idee errate nel Partito",
+      "autore": "Mao Zedong",
+      "organizzazione": "Casa editrice in lingue estere",
+      "data": "1968",
+      "anno": 1968,
+      "tipo": "Opuscolo",
+      "serie": "Testi del maoismo",
+      "keywords": "Partito comunista cinese; Maoismo; Teoria politica",
+      "url_ia": "https://archive.org/details/idee-errate/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Casa editrice in lingue estere"
+      ]
+    },
+    {
+      "id": "AMI-0005",
+      "titolo": "Da dove provengono le idee giuste?",
+      "autore": "Mao Zedong",
+      "organizzazione": "Casa editrice in lingue estere",
+      "data": "1968",
+      "anno": 1968,
+      "tipo": "Opuscolo",
+      "serie": "Testi del maoismo",
+      "keywords": "Partito comunista cinese; Maoismo; Teoria politica; Filosofia",
+      "url_ia": "https://archive.org/details/idee-giuste/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Casa editrice in lingue estere"
+      ]
+    },
+    {
+      "id": "AMI-0014",
+      "titolo": "Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta dalla leadership del Partito Comunista Cinese",
+      "autore": "Renmin Ribao",
+      "organizzazione": "Partito Comunista d'Italia (marxista-leninista)",
+      "data": "14 agosto 1968",
+      "anno": 1968,
+      "tipo": "Foto",
+      "serie": "Partito Comunista d'Italia (marxista-leninista)",
+      "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
+      "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
+      "persone": [
+        "Renmin Ribao"
+      ],
+      "organizzazioni": [
+        "Partito Comunista d'Italia (marxista-leninista)"
+      ]
+    },
+    {
+      "id": "AMI-0004",
+      "titolo": "Dichiarazione del compagno Mao Tse-tung, presidente del Comitato Centrale del Partito Comunista Cinese, in appoggio alla lotta degli afroamericani contro la repressione violenta",
+      "autore": "Mao Zedong",
+      "organizzazione": "Casa editrice in lingue estere",
+      "data": "1968",
+      "anno": 1968,
+      "tipo": "Opuscolo",
+      "serie": "Testi del maoismo",
+      "keywords": "Partito comunista cinese; Maoismo; Internazionalismo",
+      "url_ia": "https://archive.org/details/dichiarazione-in-supporto-degli-afroamericani/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Casa editrice in lingue estere"
+      ]
+    },
+    {
+      "id": "AMI-0030",
+      "titolo": "La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria",
+      "autore": "Renmin Ribao; Jiefangjun Bao",
+      "organizzazione": "Casa editrice in lingue estere",
+      "data": "1968",
+      "anno": 1968,
+      "tipo": "Opuscolo",
+      "serie": "Testi del maoismo",
+      "keywords": "Partito comunista cinese; Maoismo; Rivoluzione culturale",
+      "url_ia": "https://archive.org/details/la-bussola-che-guida//mode/2up",
+      "persone": [
+        "Jiefangjun Bao",
+        "Renmin Ribao"
+      ],
+      "organizzazioni": [
+        "Casa editrice in lingue estere"
+      ]
+    },
+    {
+      "id": "AMI-0012",
+      "titolo": "La classe operaia deve esercitare la sua direzione in ogni campo",
+      "autore": "Yao Wenyuan",
+      "organizzazione": "Casa editrice in lingue estere",
+      "data": "1968",
+      "anno": 1968,
+      "tipo": "Opuscolo",
+      "serie": "Testi del maoismo",
+      "keywords": "Partito comunista cinese; Maoismo; Rivoluzione culturale",
+      "url_ia": "https://archive.org/details/la-classe-operai-deve-esercitare-la-sua-direzione-in-ogni-cam/mode/2up",
+      "persone": [
+        "Yao Wenyuan"
+      ],
+      "organizzazioni": [
+        "Casa editrice in lingue estere"
+      ]
+    },
+    {
+      "id": "AMI-0028",
+      "titolo": "Lavoro Politico no. 10",
+      "autore": "Centro di Informazione di Verona",
+      "organizzazione": "Centro di Informazione di Verona",
+      "data": "1 settembre 1968",
+      "anno": 1968,
+      "tipo": "Periodico",
+      "serie": "Lavoro Politico; Partito Comunista d'Italia (marxista-leninista)",
+      "keywords": "Partito Comunista d'Italia (marxista-leninista); Lavoro politico; Maoismo; Marxismo-leninismo",
+      "url_ia": "https://archive.org/details/lavoro-politico-10/mode/2up",
+      "persone": [
+        "Centro di Informazione di Verona"
+      ],
+      "organizzazioni": [
+        "Centro di Informazione di Verona"
+      ]
+    },
+    {
+      "id": "AMI-0029",
+      "titolo": "Lavoro Politico no. 11/12",
+      "autore": "Centro di Informazione di Verona",
+      "organizzazione": "Centro di Informazione di Verona",
+      "data": "1 dicembre 1968",
+      "anno": 1968,
+      "tipo": "Periodico",
+      "serie": "Lavoro Politico; Partito Comunista d'Italia (marxista-leninista) - linea rossa",
+      "keywords": "Partito Comunista d'Italia (marxista-leninista); Partito Comunista d'Italia (marxista-leninista) - linea rossa; Lavoro Politico; Maoismo; Marxismo-leninismo",
+      "url_ia": "https://archive.org/details/lavoro-politico-11-12/mode/2up",
       "persone": [
         "Centro di Informazione di Verona"
       ],
@@ -488,55 +364,36 @@
       ]
     },
     {
-      "id": "AMI-0028",
-      "titolo": "Lavoro Politico no. 10",
-      "autore": "Centro di Informazione di Verona",
-      "organizzazione": "Centro di Informazione di Verona",
-      "data": "1 settembre 1968",
+      "id": "AMI-0015",
+      "titolo": "Osvaldo Pesce, Partito Comunista d'Italia (marxista-leninista), incontra il presidente Mao Zedong",
+      "autore": "Nuova Unità",
+      "organizzazione": "Partito Comunista d'Italia (marxista-leninista)",
+      "data": "31 agosto 1968",
       "anno": 1968,
-      "tipo": "Periodico",
-      "serie": "Lavoro Politico; Partito Comunista d'Italia (marxista-leninista)",
-      "keywords": "Partito Comunista d'Italia (marxista-leninista); Lavoro politico; Maoismo; Marxismo-leninismo",
-      "url_ia": "https://archive.org/details/lavoro-politico-10/mode/2up",
+      "tipo": "Foto",
+      "serie": "Partito Comunista d'Italia (marxista-leninista)",
+      "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
+      "url_ia": "https://archive.org/details/Pesce-e-Mao",
       "persone": [
-        "Centro di Informazione di Verona"
+        "Nuova Unità"
       ],
       "organizzazioni": [
-        "Centro di Informazione di Verona"
+        "Partito Comunista d'Italia (marxista-leninista)"
       ]
     },
     {
-      "id": "AMI-0029",
-      "titolo": "Lavoro Politico no. 11/12",
-      "autore": "Centro di Informazione di Verona",
-      "organizzazione": "Centro di Informazione di Verona",
-      "data": "1 dicembre 1968",
-      "anno": 1968,
-      "tipo": "Periodico",
-      "serie": "Lavoro Politico; Partito Comunista d'Italia (marxista-leninista) - linea rossa",
-      "keywords": "Partito Comunista d'Italia (marxista-leninista); Partito Comunista d'Italia (marxista-leninista) - linea rossa; Lavoro Politico; Maoismo; Marxismo-leninismo",
-      "url_ia": "https://archive.org/details/lavoro-politico-11-12/mode/2up",
-      "persone": [
-        "Centro di Informazione di Verona"
-      ],
-      "organizzazioni": [
-        "Centro di Informazione di Verona"
-      ]
-    },
-    {
-      "id": "AMI-0030",
-      "titolo": "La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria",
-      "autore": "Renmin Ribao; Jiefangjun Bao",
+      "id": "AMI-0007",
+      "titolo": "Preoccuparsi delle condizioni di vita delle masse fare attenzione ai metodi di lavoro",
+      "autore": "Mao Zedong",
       "organizzazione": "Casa editrice in lingue estere",
       "data": "1968",
       "anno": 1968,
       "tipo": "Opuscolo",
       "serie": "Testi del maoismo",
-      "keywords": "Partito comunista cinese; Maoismo; Rivoluzione culturale",
-      "url_ia": "https://archive.org/details/la-bussola-che-guida//mode/2up",
+      "keywords": "Partito comunista cinese; Maoismo",
+      "url_ia": "https://archive.org/details/preoccuparsi-delle-condizioni-di-vita-delle-masse-fare-attenzione-ai-metodi-di-lavoro/mode/2up",
       "persone": [
-        "Jiefangjun Bao",
-        "Renmin Ribao"
+        "Mao Zedong"
       ],
       "organizzazioni": [
         "Casa editrice in lingue estere"
@@ -559,6 +416,149 @@
       "organizzazioni": [
         "Casa editrice in lingue estere"
       ]
+    },
+    {
+      "id": "AMI-0001",
+      "titolo": "Citazioni dalle opere del presidente Mao Tse-tung",
+      "autore": "Mao Zedong",
+      "organizzazione": "Casa editrice in lingue estere",
+      "data": "1969",
+      "anno": 1969,
+      "tipo": "Libro",
+      "serie": "Testi del maoismo",
+      "keywords": "Partito comunista cinese; Rivoluzione culturale; Maoismo; Libretto rosso",
+      "url_ia": "https://archive.org/details/1967-citazioni-dalle-opere-del-presidente-mao-tse-tung-lingue-estere/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Casa editrice in lingue estere"
+      ]
+    },
+    {
+      "id": "AMI-0019",
+      "titolo": "Citazioni del presidente Mao Tse-tung",
+      "autore": "Mao Zedong",
+      "organizzazione": "Signal",
+      "data": "1969",
+      "anno": 1969,
+      "tipo": "Audio",
+      "serie": "Varie",
+      "keywords": "Partito comunista cinese; Rivoluzione culturale; Maoismo; Libretto rosso",
+      "url_ia": "https://archive.org/details/mao-tse-tung-citazioni-presidente-vinile",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Signal"
+      ]
+    },
+    {
+      "id": "AMI-0016",
+      "titolo": "Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese",
+      "autore": "Renmin Ribao",
+      "organizzazione": "Partito Comunista d'Italia (marxista-leninista)",
+      "data": "3 ottobre 1969",
+      "anno": 1969,
+      "tipo": "Foto",
+      "serie": "Partito Comunista d'Italia (marxista-leninista)",
+      "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
+      "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
+      "persone": [
+        "Renmin Ribao"
+      ],
+      "organizzazioni": [
+        "Partito Comunista d'Italia (marxista-leninista)"
+      ]
+    },
+    {
+      "id": "AMI-0009",
+      "titolo": "Orientamento del movimento giovanile",
+      "autore": "Mao Zedong",
+      "organizzazione": "Casa editrice in lingue estere",
+      "data": "1969",
+      "anno": 1969,
+      "tipo": "Opuscolo",
+      "serie": "Testi del maoismo",
+      "keywords": "Partito comunista cinese; Maoismo",
+      "url_ia": "https://archive.org/details/movimento-giovanile/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Casa editrice in lingue estere"
+      ]
+    },
+    {
+      "id": "AMI-0017",
+      "titolo": "Studenti ed intellettuali rivoluzionari",
+      "autore": "Comitato di Partito di Catania (UCI-m.l)",
+      "organizzazione": "Unione dei Comunisti Italiani (marxisti-leninisti)",
+      "data": "9 ottobre 1969",
+      "anno": 1969,
+      "tipo": "Volantino",
+      "serie": "UCI (m-l) - Servire il Popolo",
+      "keywords": "Unione dei Comunisti Italiani (marxisti-leninisti); Servire il Popolo; Volantino",
+      "url_ia": "https://archive.org/details/studenti-ed-intellettuali-ciclostilato-uci-m-l/mode/2up",
+      "persone": [
+        "Comitato di Partito di Catania (UCI-m.l)"
+      ],
+      "organizzazioni": [
+        "Unione dei Comunisti Italiani (marxisti-leninisti)"
+      ]
+    },
+    {
+      "id": "AMI-0008",
+      "titolo": "Sul rafforzamento del sistema dei comitati di partito",
+      "autore": "Mao Zedong",
+      "organizzazione": "Casa editrice in lingue estere",
+      "data": "1969",
+      "anno": 1969,
+      "tipo": "Opuscolo",
+      "serie": "Testi del maoismo",
+      "keywords": "Partito comunista cinese; Maoismo",
+      "url_ia": "https://archive.org/details/comitati-di-partito/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Casa editrice in lingue estere"
+      ]
+    },
+    {
+      "id": "AMI-0010",
+      "titolo": "Popoli di tutto il mondo, unitevi per sconfiggere gli aggressori americani e tutti i loro lacché! (Dichiarazione del 20 maggio 1970)",
+      "autore": "Mao Zedong",
+      "organizzazione": "Casa editrice in lingue estere",
+      "data": "1970",
+      "anno": 1970,
+      "tipo": "Opuscolo",
+      "serie": "Testi del maoismo",
+      "keywords": "Partito comunista cinese; Maoismo",
+      "url_ia": "https://archive.org/details/popoli-di-tutto-il-mondo/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Casa editrice in lingue estere"
+      ]
+    },
+    {
+      "id": "AMI-0020",
+      "titolo": "Ribellarsi è giusto! Antologia",
+      "autore": "Mao Zedong; Roberto Sassi",
+      "organizzazione": "",
+      "data": "1992",
+      "anno": 1992,
+      "tipo": "Libro",
+      "serie": "Varie",
+      "keywords": "Maoismo",
+      "url_ia": "https://archive.org/details/ribellarsi-e-giusto//mode/2up",
+      "persone": [
+        "Mao Zedong",
+        "Roberto Sassi"
+      ],
+      "organizzazioni": []
     }
   ],
   "anno_min": 1964,

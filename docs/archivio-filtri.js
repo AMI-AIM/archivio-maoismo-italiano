@@ -22,23 +22,30 @@ async function caricaDati() {
 }
 
 // ============================================================
-// INIZIALIZZAZIONE FILTRI (con collassabilità)
+// INIZIALIZZAZIONE FILTRI (collassabili)
 // ============================================================
 
 function inizializzaFiltri() {
     // 🔥 ATTIVA I FILTRI COLLASSABILI
-    document.querySelectorAll('.filtro-toggle').forEach(button => {
-        // Imposta lo stato iniziale: chiuso
-        const targetId = button.getAttribute('data-target');
-        const target = document.getElementById(targetId);
-        if (target) {
-            target.classList.remove('open');
-        }
+    const toggleIds = ['toggle-organizzazione', 'toggle-persona', 'toggle-tipo', 'toggle-anno'];
+    
+    toggleIds.forEach(id => {
+        const button = document.getElementById(id);
+        if (!button) return;
         
-        button.addEventListener('click', function() {
-            const targetId = this.getAttribute('data-target');
-            const target = document.getElementById(targetId);
-            if (target) {
+        // Trova il contenitore associato (il fratello successivo .filtro-contenuto)
+        const container = button.nextElementSibling;
+        if (!container || !container.classList.contains('filtro-contenuto')) return;
+        
+        // Imposta lo stato iniziale: chiuso
+        container.classList.remove('open');
+        button.classList.remove('open');
+        
+        button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            // Trova il contenitore
+            const target = this.nextElementSibling;
+            if (target && target.classList.contains('filtro-contenuto')) {
                 target.classList.toggle('open');
                 this.classList.toggle('open');
             }
@@ -67,7 +74,7 @@ function inizializzaFiltri() {
     const labelMax = document.getElementById('anno-max-label');
     
     inputMin.min = annoMin;
-    inputMin.max = annoMax;
+    inputMax.max = annoMax;
     inputMin.value = annoMin;
     inputMax.min = annoMin;
     inputMax.max = annoMax;
@@ -204,6 +211,7 @@ function mostraRisultati(risultati) {
         // Badge per organizzazioni e persone
         const orgBadge = doc.organizzazioni.map(o => `<span class="badge org-badge">${o}</span>`).join('');
         const personeBadge = doc.persone.map(p => `<span class="badge">${p}</span>`).join('');
+        const tipoBadge = doc.tipo ? `<span class="badge tipo-badge">${doc.tipo}</span>` : '';
         
         html += `
         <div class="risultato-card">
@@ -216,6 +224,7 @@ function mostraRisultati(risultati) {
                 <div class="risultato-badge-container">
                     ${orgBadge}
                     ${personeBadge}
+                    ${tipoBadge}
                 </div>
             </div>
         </div>

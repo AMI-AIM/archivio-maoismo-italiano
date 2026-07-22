@@ -496,7 +496,7 @@ hide:
     return contatore
 
 # ============================================================
-# GENERAZIONE INDICE ARCHIVIO (CON FILTRI A LATO)
+# GENERAZIONE INDICE ARCHIVIO (CON FILTRI COLLASSABILI E ORDINE CRONOLOGICO)
 # ============================================================
 
 def genera_indice(df):
@@ -551,6 +551,7 @@ def genera_indice(df):
             'organizzazione': org
         })
     
+    # 🔥 ORDINAMENTO CRONOLOGICO CORRETTO (per data_ordine, dal più vecchio al più recente)
     schede.sort(key=lambda x: (x['data_ordine'], x['titolo']))
     
     anno_min = min(anni_valori) if anni_valori else 1900
@@ -567,12 +568,12 @@ hide:
 
 <div id="archivio-container" class="archivio-layout">
 
-    <!-- SIDEBAR FILTRI -->
+    <!-- SIDEBAR FILTRI COLLASSABILI -->
     <aside class="filtri-sidebar" id="filtri-sidebar">
         <h4>Filtri</h4>
         
         <div class="filtro-gruppo collapsible">
-            <button class="filtro-toggle" data-target="filtro-organizzazione-container">
+            <button class="filtro-toggle" id="toggle-organizzazione">
                 <span>Organizzazione</span>
                 <span class="toggle-icon">▼</span>
             </button>
@@ -584,7 +585,7 @@ hide:
         </div>
         
         <div class="filtro-gruppo collapsible">
-            <button class="filtro-toggle" data-target="filtro-persona-container">
+            <button class="filtro-toggle" id="toggle-persona">
                 <span>Persona</span>
                 <span class="toggle-icon">▼</span>
             </button>
@@ -596,7 +597,7 @@ hide:
         </div>
         
         <div class="filtro-gruppo collapsible">
-            <button class="filtro-toggle" data-target="filtro-tipo-container">
+            <button class="filtro-toggle" id="toggle-tipo">
                 <span>Tipologia</span>
                 <span class="toggle-icon">▼</span>
             </button>
@@ -608,7 +609,7 @@ hide:
         </div>
         
         <div class="filtro-gruppo collapsible">
-            <button class="filtro-toggle" data-target="filtro-anno-container">
+            <button class="filtro-toggle" id="toggle-anno">
                 <span>Anno</span>
                 <span class="toggle-icon">▼</span>
             </button>
@@ -951,7 +952,7 @@ hide:
     print(f"   📅 Intervallo anni: {anno_min} - {anno_max}")
 
 # ============================================================
-# GENERAZIONE JSON PER I FILTRI
+# GENERAZIONE JSON PER I FILTRI (CON ORDINE CRONOLOGICO)
 # ============================================================
 
 def genera_json(df, persone, organizzazioni):
@@ -1046,6 +1047,10 @@ def genera_json(df, persone, organizzazioni):
         }
         documenti_json.append(doc_obj)
     
+    # 🔥 ORDINA I DOCUMENTI NEL JSON PER DATA (cronologico)
+    # I documenti senza data (n.d.) vanno in fondo
+    documenti_json.sort(key=lambda x: (x['anno'] is None, x['anno'] if x['anno'] else 9999, x['titolo']))
+    
     json_data = {
         'documenti': documenti_json,
         'anno_min': min(anni_valori) if anni_valori else 1900,
@@ -1056,7 +1061,7 @@ def genera_json(df, persone, organizzazioni):
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(json_data, f, ensure_ascii=False, indent=2)
     
-    print(f"   ✅ JSON generato con {len(documenti_json)} documenti")
+    print(f"   ✅ JSON generato con {len(documenti_json)} documenti (ordinati cronologicamente)")
     print(f"   📅 Intervallo anni: {json_data['anno_min']} - {json_data['anno_max']}")
 
 # ============================================================
