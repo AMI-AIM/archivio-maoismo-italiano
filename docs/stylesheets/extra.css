@@ -1,5 +1,5 @@
 /* ============================================================
-   MIGLIORIE ESTETICHE - TEMA MATERIAL DI DEFAULT
+   MIGLIORIE ESTETICHE
    ============================================================ */
 
 /* ============================================================
@@ -28,14 +28,29 @@
 }
 
 /* ============================================================
-   3. HEADER CON OMBRA LEGGERA
+   3. TABS CENTRATI E IN GRASSETTO
    ============================================================ */
-.md-header {
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+.md-tabs {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.md-tabs__list {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 0.8rem;
+}
+
+.md-tabs__link {
+    font-weight: 700 !important;          /* ← Grassetto */
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    padding: 0.4rem 0.8rem;
+    transition: color 0.15s;
 }
 
 /* ============================================================
-   4. SIDEBAR NASCOSTA (non serve con i tabs)
+   4. SIDEBAR NASCOSTA
    ============================================================ */
 .md-sidebar--primary {
     display: none !important;
@@ -45,36 +60,41 @@
 }
 
 /* ============================================================
-   5. FOOTER MIGLIORATO
+   5. HEADER CON OMBRA LEGGERA
    ============================================================ */
-.md-footer-meta {
-    padding: 1.5rem 0;
-    background: var(--md-default-fg-color--lightest);
-}
-
-.md-footer-meta__inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.md-social {
-    display: flex;
-    gap: 0.8rem;
-}
-
-.md-social__link {
-    font-size: 1.2rem;
+.md-header {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
 /* ============================================================
-   6. RESPONSIVE (logo più piccolo su mobile)
+   6. RICERCA: PLACEHOLDER "cerca" IN NERO
+   ============================================================ */
+.md-search__input::placeholder {
+    color: #000000 !important;            /* ← Nero */
+    opacity: 0.8 !important;
+}
+
+/* ============================================================
+   7. RESPONSIVE
    ============================================================ */
 @media (max-width: 768px) {
     .md-header__button.md-logo img {
         height: 32px;
         max-width: 130px;
+    }
+
+    .md-tabs__list {
+        gap: 0.3rem;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start !important;
+        padding: 0.2rem 0.4rem;
+    }
+
+    .md-tabs__link {
+        font-size: 0.8rem;
+        font-weight: 600 !important;
+        padding: 0.2rem 0.4rem;
+        white-space: nowrap;
     }
 }

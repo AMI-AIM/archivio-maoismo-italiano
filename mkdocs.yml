@@ -14,7 +14,7 @@ theme:
     - navigation.tabs
   palette:
     - scheme: default
-      primary: red          # ← cambiato da 'custom' a 'red'
+      primary: custom
       accent: red
   logo: immagini/logo.png
   favicon: immagini/favicon.png
@@ -42,3 +42,4 @@ nav:
 
 extra:
   homepage: /archivio-maoismo-italiano/
+  generator: false          # ← Rimuove "Made with Material for MkDocs"
