@@ -28,12 +28,19 @@ async function caricaDati() {
 function inizializzaFiltri() {
     // 🔥 ATTIVA I FILTRI COLLASSABILI
     document.querySelectorAll('.filtro-toggle').forEach(button => {
+        // Imposta lo stato iniziale: chiuso
+        const targetId = button.getAttribute('data-target');
+        const target = document.getElementById(targetId);
+        if (target) {
+            target.classList.remove('open');
+        }
+        
         button.addEventListener('click', function() {
-            const expanded = this.getAttribute('aria-expanded') === 'true' || false;
-            this.setAttribute('aria-expanded', !expanded);
-            const content = this.parentElement.querySelector('.filtro-contenuto');
-            if (content) {
-                content.style.display = expanded ? 'none' : 'block';
+            const targetId = this.getAttribute('data-target');
+            const target = document.getElementById(targetId);
+            if (target) {
+                target.classList.toggle('open');
+                this.classList.toggle('open');
             }
         });
     });
@@ -167,7 +174,7 @@ function getSelectedValues(id) {
 }
 
 // ============================================================
-// VISUALIZZAZIONE RISULTATI (layout compatto)
+// VISUALIZZAZIONE RISULTATI (stile UMD)
 // ============================================================
 
 function mostraRisultati(risultati) {
@@ -184,39 +191,38 @@ function mostraRisultati(risultati) {
     
     let html = '';
     risultati.forEach(doc => {
-        const icona = getIcona(doc.tipo);
-        const personeBadge = doc.persone.map(p => `<span class="badge">${p}</span>`).join('');
+        // Costruisci il sommario combinando tipo e organizzazione
+        let sommario = '';
+        if (doc.tipo && doc.organizzazione) {
+            sommario = `${doc.tipo} · ${doc.organizzazione}`;
+        } else if (doc.tipo) {
+            sommario = doc.tipo;
+        } else if (doc.organizzazione) {
+            sommario = doc.organizzazione;
+        }
+        
+        // Badge per organizzazioni e persone
         const orgBadge = doc.organizzazioni.map(o => `<span class="badge org-badge">${o}</span>`).join('');
+        const personeBadge = doc.persone.map(p => `<span class="badge">${p}</span>`).join('');
         
         html += `
         <div class="risultato-card">
             <div class="risultato-data">${doc.data || 'n.d.'}</div>
-            <div class="risultato-titolo">
-                <a href="/archivio-maoismo-italiano/documenti/${doc.id}/">${icona} ${doc.titolo}</a>
-            </div>
-            <div class="risultato-badge-container">
-                ${orgBadge}
-                ${personeBadge}
-                ${doc.tipo ? `<span class="badge tipo-badge">${doc.tipo}</span>` : ''}
+            <div class="risultato-contenuto">
+                <div class="risultato-titolo">
+                    <a href="/archivio-maoismo-italiano/documenti/${doc.id}/">${doc.titolo}</a>
+                </div>
+                ${sommario ? `<div class="risultato-sommario">${sommario}</div>` : ''}
+                <div class="risultato-badge-container">
+                    ${orgBadge}
+                    ${personeBadge}
+                </div>
             </div>
         </div>
         `;
     });
     
     container.innerHTML = html;
-}
-
-function getIcona(tipo) {
-    if (!tipo) return '📄';
-    const t = tipo.toLowerCase();
-    if (t === 'opuscolo') return '📘';
-    if (t === 'manifesto') return '🖼️';
-    if (t === 'foto' || t === 'fotografia') return '📷';
-    if (t === 'periodico') return '📰';
-    if (t === 'volantino') return '📃';
-    if (t === 'libro') return '📕';
-    if (t === 'audio') return '🎵';
-    return '📄';
 }
 
 // ============================================================

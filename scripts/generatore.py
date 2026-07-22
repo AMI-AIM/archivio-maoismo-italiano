@@ -544,14 +544,13 @@ def genera_indice(df):
             'id': ami_id,
             'titolo': titolo,
             'data': data_formattata,
-            'data_ordine': data_ordine,  # (anno, mese, giorno) per ordinamento
+            'data_ordine': data_ordine,
             'sommario': sommario,
             'keywords': keywords,
             'tipo': tipo,
             'organizzazione': org
         })
     
-    # 🔥 ORDINAMENTO CRONOLOGICO CORRETTO (per data_ordine)
     schede.sort(key=lambda x: (x['data_ordine'], x['titolo']))
     
     anno_min = min(anni_valori) if anni_valori else 1900
@@ -568,16 +567,16 @@ hide:
 
 <div id="archivio-container" class="archivio-layout">
 
-    <!-- SIDEBAR FILTRI COLLASSABILI -->
-    <aside class="filtri-sidebar">
+    <!-- SIDEBAR FILTRI -->
+    <aside class="filtri-sidebar" id="filtri-sidebar">
         <h4>Filtri</h4>
         
         <div class="filtro-gruppo collapsible">
-            <button class="filtro-toggle" aria-expanded="false">
+            <button class="filtro-toggle" data-target="filtro-organizzazione-container">
                 <span>Organizzazione</span>
                 <span class="toggle-icon">▼</span>
             </button>
-            <div class="filtro-contenuto" style="display: none;">
+            <div class="filtro-contenuto" id="filtro-organizzazione-container">
                 <select id="filtro-organizzazione" multiple>
                     <option value="all">Tutte</option>
                 </select>
@@ -585,11 +584,11 @@ hide:
         </div>
         
         <div class="filtro-gruppo collapsible">
-            <button class="filtro-toggle" aria-expanded="false">
+            <button class="filtro-toggle" data-target="filtro-persona-container">
                 <span>Persona</span>
                 <span class="toggle-icon">▼</span>
             </button>
-            <div class="filtro-contenuto" style="display: none;">
+            <div class="filtro-contenuto" id="filtro-persona-container">
                 <select id="filtro-persona" multiple>
                     <option value="all">Tutte</option>
                 </select>
@@ -597,11 +596,11 @@ hide:
         </div>
         
         <div class="filtro-gruppo collapsible">
-            <button class="filtro-toggle" aria-expanded="false">
+            <button class="filtro-toggle" data-target="filtro-tipo-container">
                 <span>Tipologia</span>
                 <span class="toggle-icon">▼</span>
             </button>
-            <div class="filtro-contenuto" style="display: none;">
+            <div class="filtro-contenuto" id="filtro-tipo-container">
                 <select id="filtro-tipo" multiple>
                     <option value="all">Tutte</option>
                 </select>
@@ -609,11 +608,11 @@ hide:
         </div>
         
         <div class="filtro-gruppo collapsible">
-            <button class="filtro-toggle" aria-expanded="false">
+            <button class="filtro-toggle" data-target="filtro-anno-container">
                 <span>Anno</span>
                 <span class="toggle-icon">▼</span>
             </button>
-            <div class="filtro-contenuto" style="display: none;">
+            <div class="filtro-contenuto" id="filtro-anno-container">
                 <div class="slider-container">
                     <span id="anno-min-label">{anno_min}</span>
                     <input type="range" id="filtro-anno-min" min="{anno_min}" max="{anno_max}" value="{anno_min}">
@@ -674,7 +673,6 @@ hide:
     padding-bottom: 0.5rem;
 }}
 
-/* 🔥 FILTRI COLLASSABILI */
 .filtro-gruppo {{
     margin-bottom: 0.5rem;
     border-bottom: 1px solid var(--md-default-fg-color--lightest);
@@ -704,15 +702,18 @@ hide:
     transition: transform 0.25s ease;
 }}
 
-.filtro-toggle[aria-expanded="true"] .toggle-icon {{
+.filtro-toggle.open .toggle-icon {{
     transform: rotate(180deg);
 }}
 
 .filtro-contenuto {{
     padding: 0.2rem 0 0.8rem 0;
+    display: none;
 }}
 
-/* Fine filtri collassabili */
+.filtro-contenuto.open {{
+    display: block;
+}}
 
 .filtro-gruppo label {{
     display: block;
@@ -827,15 +828,14 @@ hide:
     min-width: 0;
 }}
 
-/* 🔥 VISUALIZZAZIONE COMPATTA: data e titolo sulla stessa riga */
+/* 🔥 LAYOUT STILE UMD: data a sinistra, titolo e metadati a destra */
 .risultato-card {{
     display: flex;
-    align-items: baseline;
-    padding: 0.4rem 0.6rem;
+    align-items: flex-start;
+    padding: 0.6rem 0.8rem;
     border-bottom: 1px solid var(--md-default-fg-color--lightest);
     transition: background 0.15s;
     gap: 1.5rem;
-    flex-wrap: wrap;
 }}
 
 .risultato-card:hover {{
@@ -843,18 +843,23 @@ hide:
 }}
 
 .risultato-data {{
-    flex: 0 0 150px;
+    flex: 0 0 140px;
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--md-primary-fg-color);
     white-space: nowrap;
+    padding-top: 0.05rem;
+}}
+
+.risultato-contenuto {{
+    flex: 1;
+    min-width: 0;
 }}
 
 .risultato-titolo {{
-    flex: 1;
-    font-size: 1rem;
-    font-weight: 500;
-    min-width: 200px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.1rem;
 }}
 
 .risultato-titolo a {{
@@ -867,12 +872,16 @@ hide:
     color: var(--md-primary-fg-color);
 }}
 
+.risultato-sommario {{
+    font-size: 0.9rem;
+    color: var(--md-default-fg-color--light);
+    margin-bottom: 0.1rem;
+}}
+
 .risultato-badge-container {{
     display: flex;
     flex-wrap: wrap;
     gap: 0.25rem;
-    margin-top: 0.1rem;
-    width: 100%;
 }}
 
 .badge {{
@@ -922,7 +931,6 @@ hide:
     }}
     .risultato-card {{
         flex-direction: column;
-        align-items: flex-start;
         gap: 0.1rem;
         padding: 0.6rem 0.4rem;
     }}
@@ -930,10 +938,6 @@ hide:
         flex: 0 0 auto;
         white-space: normal;
         font-size: 0.85rem;
-    }}
-    .risultato-titolo {{
-        font-size: 0.95rem;
-        min-width: unset;
     }}
 }}
 </style>
