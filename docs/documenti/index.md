@@ -270,7 +270,6 @@ hide:
     min-width: 0;
 }
 
-/* 🔥 LAYOUT STILE UMD: data a sinistra, titolo e metadati a destra */
 .risultato-card {
     display: flex;
     align-items: flex-start;

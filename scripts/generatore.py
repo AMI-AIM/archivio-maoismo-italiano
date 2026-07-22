@@ -496,7 +496,7 @@ hide:
     return contatore
 
 # ============================================================
-# GENERAZIONE INDICE ARCHIVIO (CON FILTRI COLLASSABILI E ORDINE CRONOLOGICO)
+# GENERAZIONE INDICE ARCHIVIO
 # ============================================================
 
 def genera_indice(df):
@@ -551,7 +551,6 @@ def genera_indice(df):
             'organizzazione': org
         })
     
-    # 🔥 ORDINAMENTO CRONOLOGICO CORRETTO (per data_ordine, dal più vecchio al più recente)
     schede.sort(key=lambda x: (x['data_ordine'], x['titolo']))
     
     anno_min = min(anni_valori) if anni_valori else 1900
@@ -829,7 +828,6 @@ hide:
     min-width: 0;
 }}
 
-/* 🔥 LAYOUT STILE UMD: data a sinistra, titolo e metadati a destra */
 .risultato-card {{
     display: flex;
     align-items: flex-start;
@@ -952,7 +950,7 @@ hide:
     print(f"   📅 Intervallo anni: {anno_min} - {anno_max}")
 
 # ============================================================
-# GENERAZIONE JSON PER I FILTRI (CON ORDINE CRONOLOGICO)
+# GENERAZIONE JSON PER I FILTRI (CORRETTA)
 # ============================================================
 
 def genera_json(df, persone, organizzazioni):
@@ -1017,21 +1015,7 @@ def genera_json(df, persone, organizzazioni):
             anno = int(data_raw)
             anni_valori.append(anno)
         
-        # 🔥 ELENCO ORGANIZZAZIONI (dalla colonna Organizzazione + Organizzazioni_collegate)
-        organizzazioni_lista = []
-        if org_raw and org_raw not in ['nan', 'None']:
-            organizzazioni_lista.extend(split_nomi(org_raw))
-        if organizzazioni_collegate and organizzazioni_collegate not in ['nan', 'None']:
-            organizzazioni_lista.extend(split_nomi(organizzazioni_collegate))
-        # Aggiungi anche gli autori che sono organizzazioni (verificato dal dizionario)
-        if autore_raw and autore_raw not in ['nan', 'None']:
-            autori = split_nomi(autore_raw)
-            for autore in autori:
-                if autore in organizzazioni:
-                    organizzazioni_lista.append(autore)
-        organizzazioni_lista = list(set(organizzazioni_lista))
-        
-        # 🔥 ELENCO PERSONE (dalla colonna Autore + Persone_collegate, solo se sono persone)
+        # 🔥 PERSONE: SOLO da persone.xlsx (via Autore + Persone_collegate)
         persone_lista = []
         if autore_raw and autore_raw not in ['nan', 'None']:
             autori = split_nomi(autore_raw)
@@ -1044,6 +1028,19 @@ def genera_json(df, persone, organizzazioni):
                 if collegato in persone:
                     persone_lista.append(collegato)
         persone_lista = list(set(persone_lista))
+        
+        # 🔥 ORGANIZZAZIONI: da organizzazioni.xlsx (Organizzazione + Organizzazioni_collegate + Autore se in organizzazioni.xlsx)
+        organizzazioni_lista = []
+        if org_raw and org_raw not in ['nan', 'None']:
+            organizzazioni_lista.extend(split_nomi(org_raw))
+        if organizzazioni_collegate and organizzazioni_collegate not in ['nan', 'None']:
+            organizzazioni_lista.extend(split_nomi(organizzazioni_collegate))
+        if autore_raw and autore_raw not in ['nan', 'None']:
+            autori = split_nomi(autore_raw)
+            for autore in autori:
+                if autore in organizzazioni:
+                    organizzazioni_lista.append(autore)
+        organizzazioni_lista = list(set(organizzazioni_lista))
         
         doc_obj = {
             'id': ami_id,

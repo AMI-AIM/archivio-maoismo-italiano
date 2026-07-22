@@ -16,6 +16,8 @@ theme:
       primary: red
       accent: red
       
+  logo: docs/immagini/logo.png
+
 plugins:
   - search
 
