@@ -1,12 +1,8 @@
 /* ============================================================
-   LAYOUT UMD - PULITO
+   LAYOUT UMD - SOLO PER L'HEADER
    ============================================================ */
 
-/* ============================================================
-   1. NASCONDI TUTTO QUELLO CHE NON SERVE
-   ============================================================ */
-
-/* Nasconde il titolo del sito nell'header */
+/* Nasconde il titolo del sito nell'header (lo abbiamo già nel logo) */
 .md-header__title {
     display: none !important;
 }
@@ -16,24 +12,24 @@
     display: none !important;
 }
 
-/* Nasconde il pulsante "Torna su" (lo teniamo) */
-/* .md-top { display: none !important; } */
+/* Allarga il contenuto principale */
+.md-content {
+    margin-left: 0 !important;
+}
 
 /* ============================================================
-   2. HEADER: LOGO + NAVIGAZIONE SULLA STESSA RIGA
+   HEADER: LOGO + NAV + PULSANTE TEMA
    ============================================================ */
 
-/* Layout dell'header */
 .md-header__inner {
     display: flex !important;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.5rem 1rem;
+    gap: 1rem;
     padding: 0.4rem 0.8rem;
 }
 
-/* Logo grande a sinistra */
+/* Logo a sinistra */
 .md-header__button.md-logo {
     padding: 0;
     margin: 0;
@@ -50,21 +46,15 @@
     border-radius: 0;
 }
 
-/* Contenitore della navigazione (centrato) */
-.md-header__nav-container {
-    display: flex;
-    justify-content: center;
-    flex: 1;
-}
-
-/* Lista della navigazione */
+/* Navigazione al centro */
 .md-header__nav-list {
     display: flex;
     list-style: none;
     gap: 0.5rem;
     margin: 0;
     padding: 0;
-    align-items: center;
+    flex: 1;
+    justify-content: center;
 }
 
 .md-header__nav-item {
@@ -93,18 +83,16 @@
     color: var(--md-primary-fg-color);
 }
 
-/* Pulsante tema scuro/chiaro (a destra) */
+/* Pulsante tema scuro/chiaro a destra */
 .md-header__option {
     flex-shrink: 0;
 }
 
 /* ============================================================
-   3. BARRA DI RICERCA SOTTO L'HEADER
+   BARRA DI RICERCA SOTTO L'HEADER
    ============================================================ */
 
-/* Sposta la ricerca sotto l'header */
 .md-search {
-    order: 10;
     width: 100%;
     max-width: 700px;
     margin: 0 auto;
@@ -113,7 +101,6 @@
     border-top: 1px solid var(--md-default-fg-color--lightest);
 }
 
-/* Stile della barra di ricerca */
 .md-search__form {
     background: var(--md-default-bg-color);
     border: 1px solid var(--md-default-fg-color--lightest);
@@ -127,7 +114,6 @@
     box-shadow: 0 0 0 2px var(--md-primary-fg-color--light);
 }
 
-/* Input di ricerca */
 .md-search__input {
     font-size: 0.95rem;
     color: var(--md-default-fg-color);
@@ -140,7 +126,7 @@
 }
 
 /* ============================================================
-   4. RESPONSIVE
+   RESPONSIVE
    ============================================================ */
 
 @media (max-width: 768px) {

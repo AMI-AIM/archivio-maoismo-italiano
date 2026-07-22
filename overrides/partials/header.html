@@ -2,7 +2,7 @@
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="{{ lang.t('header') }}">
     
-    {#- Logo (sinistra) -#}
+    {#- Logo a sinistra -#}
     <a href="{{ config.site_url | default(nav.homepage.url, true) | url }}" 
        title="{{ config.site_name | e }}" 
        class="md-header__button md-logo" 
@@ -10,21 +10,19 @@
       {% include "partials/logo.html" %}
     </a>
 
-    {#- Navigazione (centro) -#}
-    <div class="md-header__nav-container">
-      <ul class="md-header__nav-list">
-        {% for nav_item in nav %}
-          <li class="md-header__nav-item">
-            <a href="{{ nav_item.url | url }}" 
-               class="md-header__nav-link{% if nav_item.active %} md-header__nav-link--active{% endif %}">
-              {{ nav_item.title }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
+    {#- Navigazione al centro -#}
+    <ul class="md-header__nav-list">
+      {% for nav_item in nav %}
+        <li class="md-header__nav-item">
+          <a href="{{ nav_item.url | url }}" 
+             class="md-header__nav-link{% if nav_item.active %} md-header__nav-link--active{% endif %}">
+            {{ nav_item.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
 
-    {#- Pulsante tema scuro/chiaro (destra) -#}
+    {#- Pulsante tema scuro/chiaro a destra -#}
     <div class="md-header__option">
       {% if config.extra.alternate %}
         {% include "partials/alternate.html" %}
