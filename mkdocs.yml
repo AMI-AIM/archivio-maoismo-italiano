@@ -13,14 +13,10 @@ theme:
     - search.highlight
     - navigation.tabs
   palette:
-    # Tema chiaro (default)
     - scheme: default
       primary: red
       accent: red
-      toggle:
-        icon: material/brightness-7
-        name: "Passa al tema scuro"
-    
+          
   logo: immagini/logo.png
   favicon: immagini/favicon.png
 
