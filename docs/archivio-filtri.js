@@ -97,6 +97,7 @@ function inizializzaFiltri() {
         }
     }
     
+    // 🔥 IMPORTANTE: i listener ora chiamano applicaFiltri()
     minSlider.addEventListener('input', function() {
         const val = parseInt(this.value);
         const maxVal = parseInt(maxSlider.value);
@@ -105,7 +106,7 @@ function inizializzaFiltri() {
         }
         document.getElementById('anno-min-label').textContent = this.value;
         aggiornaTrack();
-        applicaFiltri();
+        applicaFiltri();  // ← Questo filtra i risultati
     });
     
     maxSlider.addEventListener('input', function() {
@@ -116,11 +117,16 @@ function inizializzaFiltri() {
         }
         document.getElementById('anno-max-label').textContent = this.value;
         aggiornaTrack();
-        applicaFiltri();
+        applicaFiltri();  // ← Questo filtra i risultati
     });
     
     // Inizializza la traccia
     aggiornaTrack();
+    
+    // Ascolta i cambiamenti su tutti i filtri
+    document.querySelectorAll('select, input').forEach(el => {
+        el.addEventListener('change', applicaFiltri);
+    });
     
     document.getElementById('filtro-testo').addEventListener('input', applicaFiltri);
     document.getElementById('reset-filtri').addEventListener('click', resetFiltri);

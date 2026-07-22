@@ -837,7 +837,7 @@ hide:
 .slider-labels {{
         display: flex;
         justify-content: space-between;
-        margin-top: 0.8rem;  /* ← aumentato da 0.5rem a 0.8rem */
+        margin-top: 1 rem;  
         font-size: 0.75rem;
         color: var(--md-default-fg-color--light);
 }}
