@@ -1209,9 +1209,9 @@ def genera_home(df):
     schede.sort(key=lambda x: x['num_id'], reverse=True)
     ultime_tre = schede[:3]
     
-    home_content = """# Archivio del Maoismo Italiano
+    # 🔥 MODIFICA: rimuovi la parte che genera l'header e lascia solo il contenuto
+    home_content = f"""# Archivio del Maoismo Italiano
 
-<!-- QUI SCRIVI LA TUA INTRODUZIONE -->
 L'**AMI** è un archivio digitale dedicato alla documentazione storica sul maoismo italiano. Questo sito funge da catalogo scientifico: ogni scheda descrive un documento conservato su **Internet Archive**.
 
 ---

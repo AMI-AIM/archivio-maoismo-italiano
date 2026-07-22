@@ -1,6 +1,5 @@
 # Archivio del Maoismo Italiano
 
-<!-- QUI SCRIVI LA TUA INTRODUZIONE -->
 L'**AMI** è un archivio digitale dedicato alla documentazione storica sul maoismo italiano. Questo sito funge da catalogo scientifico: ogni scheda descrive un documento conservato su **Internet Archive**.
 
 ---
