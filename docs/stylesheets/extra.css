@@ -3,19 +3,26 @@
    ============================================================ */
 
 /* ============================================================
-   1. HEADER ROSSO (sovrascrive il colore primario)
+   1. NASCONDI IL TITOLO DEL SITO NELL'HEADER
+   ============================================================ */
+.md-header__title {
+    display: none !important;
+}
+
+/* ============================================================
+   2. HEADER ROSSO
    ============================================================ */
 [data-md-color-primary="red"] {
-    --md-primary-fg-color: #b71c1c;        /* Rosso scuro */
+    --md-primary-fg-color: #b71c1c;
     --md-primary-fg-color--light: #e53935;
     --md-primary-fg-color--dark: #8e0000;
 }
 
 /* ============================================================
-   2. HEADER PIÙ GRANDE
+   3. HEADER PIÙ GRANDE
    ============================================================ */
 .md-header {
-    min-height: 80px !important;           /* Altezza maggiore */
+    min-height: 80px !important;
     padding: 0.4rem 0 !important;
 }
 
@@ -24,29 +31,29 @@
 }
 
 /* ============================================================
-   3. LOGO PIÙ GRANDE
+   4. LOGO PIÙ GRANDE
    ============================================================ */
 .md-header__button.md-logo img {
-    height: 55px !important;               /* Logo più grande */
+    height: 55px !important;
     width: auto;
     max-width: 220px;
     object-fit: contain;
 }
 
 /* ============================================================
-   4. TABS EQUIDISTANTI DAI BORDI E CENTRATI
+   5. TABS EQUIDISTANTI CON PIÙ DISTANZA DAL BORDO INFERIORE
    ============================================================ */
 .md-tabs {
     display: flex !important;
     justify-content: center !important;
-    padding: 0 2rem !important;            /* Distanza dai bordi laterali */
+    padding: 0.4rem 2rem 0.8rem 2rem !important;
 }
 
 .md-tabs__list {
     display: flex !important;
-    justify-content: space-around !important; /* Equidistanza */
+    justify-content: space-around !important;
     width: 100%;
-    max-width: 900px;                     /* Larghezza massima per evitare eccessiva spaziatura */
+    max-width: 900px;
     gap: 0.5rem;
 }
 
@@ -54,27 +61,20 @@
     font-weight: 700 !important;
     font-size: 1rem;
     letter-spacing: 0.02em;
-    padding: 0.4rem 0.8rem;
+    padding: 0.4rem 0.8rem 0.6rem 0.8rem !important;
     white-space: nowrap;
     transition: color 0.15s;
 }
 
 /* ============================================================
-   5. LENTE DI INGRANDIMENTO NERA
+   6. LENTE DI INGRANDIMENTO NERA
    ============================================================ */
 .md-search__icon svg {
-    fill: #000000 !important;              /* Lente nera */
+    fill: #000000 !important;
 }
-
-/* Per la dark mode, la lente rimane nera, ma se vuoi che sia bianca in dark mode, decommenta il blocco sotto */
-/*
-[data-md-color-scheme="slate"] .md-search__icon svg {
-    fill: #ffffff !important;
-}
-*/
 
 /* ============================================================
-   6. BARRA DI RICERCA ARROTONDATA
+   7. BARRA DI RICERCA ARROTONDATA
    ============================================================ */
 .md-search__form {
     border-radius: 24px !important;
@@ -89,7 +89,7 @@
 }
 
 /* ============================================================
-   7. PLACEHOLDER "cerca" IN NERO
+   8. PLACEHOLDER "cerca" IN NERO
    ============================================================ */
 .md-search__input::placeholder {
     color: #000000 !important;
@@ -97,7 +97,7 @@
 }
 
 /* ============================================================
-   8. SIDEBAR NASCOSTA
+   9. SIDEBAR NASCOSTA
    ============================================================ */
 .md-sidebar--primary {
     display: none !important;
@@ -107,7 +107,7 @@
 }
 
 /* ============================================================
-   9. RESPONSIVE
+   10. RESPONSIVE
    ============================================================ */
 @media (max-width: 768px) {
     .md-header {
@@ -122,7 +122,7 @@
         max-width: 150px;
     }
     .md-tabs {
-        padding: 0 0.8rem !important;
+        padding: 0.2rem 0.8rem 0.6rem 0.8rem !important;
         overflow-x: auto;
     }
     .md-tabs__list {
@@ -133,7 +133,7 @@
     }
     .md-tabs__link {
         font-size: 0.8rem;
-        padding: 0.2rem 0.4rem;
+        padding: 0.2rem 0.4rem 0.4rem 0.4rem !important;
         white-space: nowrap;
     }
 }
@@ -145,6 +145,6 @@
     }
     .md-tabs__link {
         font-size: 0.7rem;
-        padding: 0.15rem 0.3rem;
+        padding: 0.15rem 0.3rem 0.3rem 0.3rem !important;
     }
 }
