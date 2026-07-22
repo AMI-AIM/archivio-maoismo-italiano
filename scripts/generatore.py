@@ -250,19 +250,14 @@ hide:
 <div class="embed-container">
 """
 
-        # 🔥 GESTIONE FOTO AD ALTA RISOLUZIONE
-        if tipo.lower() == 'foto':
+        # 🔥 GESTIONE FOTO CON TENTATIVO AUTOMATICO (senza colonna extra)
+        if tipo.lower() == 'foto' and identifier:
             content += f"""
-    <div class="photo-viewer">
-        <picture>
-            <source srcset="https://archive.org/download/{identifier}/{identifier}.png" type="image/png">
-            <source srcset="https://archive.org/download/{identifier}/{identifier}.jpeg" type="image/jpeg">
-            <source srcset="https://archive.org/download/{identifier}/{identifier}.jpg" type="image/jpeg">
-            <img src="https://archive.org/download/{identifier}/{identifier}.jpg" 
-                 alt="{titolo}" 
-                 class="photo-embed"
-                 onerror="this.style.display='none'; this.parentElement.querySelector('.photo-fallback').style.display='block';">
-        </picture>
+    <div class="photo-viewer" id="photo-{ami_id}">
+        <img id="img-{ami_id}" src="" alt="{titolo}" class="photo-embed" style="display:none;">
+        <div class="photo-loading" style="padding:1rem; text-align:center; color: var(--md-default-fg-color--light);">
+            Caricamento foto...
+        </div>
         <div class="photo-fallback" style="display:none; padding:1rem; text-align:center;">
             <p>🔗 <a href="{url_ia}" target="_blank">Visualizza la foto su Internet Archive</a></p>
         </div>
@@ -270,6 +265,39 @@ hide:
             <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
         </div>
     </div>
+    <script>
+    (function() {{
+        var img = document.getElementById('img-{ami_id}');
+        var container = document.getElementById('photo-{ami_id}');
+        var loading = container.querySelector('.photo-loading');
+        var fallback = container.querySelector('.photo-fallback');
+        var urls = [
+            'https://archive.org/download/{identifier}/{identifier}.jpeg',
+            'https://archive.org/download/{identifier}/{identifier}.jpg',
+            'https://archive.org/download/{identifier}/{identifier}.png',
+            'https://archive.org/download/{identifier}/{identifier}_orig.jpg',
+            'https://archive.org/download/{identifier}/{identifier}_orig.jpeg'
+        ];
+        var current = 0;
+        function tryNext() {{
+            if (current >= urls.length) {{
+                loading.style.display = 'none';
+                fallback.style.display = 'block';
+                return;
+            }}
+            img.src = urls[current];
+            img.onload = function() {{
+                loading.style.display = 'none';
+                img.style.display = 'block';
+            }};
+            img.onerror = function() {{
+                current++;
+                tryNext();
+            }};
+        }}
+        tryNext();
+    }})();
+    </script>
 """
         elif identifier:
             if tipo.lower() == 'audio':
@@ -513,6 +541,7 @@ hide:
         print(f"   ✅ Creata scheda per {ami_id} (tipo: {tipo})")
     
     return contatore
+
 
 # ============================================================
 # GENERAZIONE INDICE ARCHIVIO (CON DUAL-HANDLE SLIDER)
