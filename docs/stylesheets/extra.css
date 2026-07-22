@@ -1,170 +1,125 @@
 /* ============================================================
-   LAYOUT UMD - SOLO PER L'HEADER
+   LAYOUT UMD - DEFINITIVO
    ============================================================ */
 
-/* Nasconde il titolo del sito nell'header (lo abbiamo già nel logo) */
+/* Nasconde titolo e sidebar */
 .md-header__title {
     display: none !important;
 }
-
-/* Nasconde la sidebar di navigazione (duplicata) */
 .md-sidebar--primary {
     display: none !important;
 }
-
-/* Allarga il contenuto principale */
 .md-content {
     margin-left: 0 !important;
 }
+.md-header__source {
+    display: none !important;
+}
 
-/* ============================================================
-   HEADER: LOGO + NAV + PULSANTE TEMA
-   ============================================================ */
+/* HEADER PIÙ GRANDE */
+.md-header {
+    padding: 0.8rem 0;
+    min-height: 90px;
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
 
 .md-header__inner {
     display: flex !important;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    padding: 0.4rem 0.8rem;
+    gap: 1.5rem;
+    padding: 0 1.5rem;
 }
 
-/* Logo a sinistra */
+/* LOGO */
 .md-header__button.md-logo {
     padding: 0;
     margin: 0;
     width: auto;
     height: auto;
-    flex-shrink: 0;
 }
-
 .md-header__button.md-logo img {
-    height: 45px;
+    height: 55px;
     width: auto;
-    max-width: 180px;
+    max-width: 200px;
     object-fit: contain;
-    border-radius: 0;
 }
 
-/* Navigazione al centro */
+/* NAVIGAZIONE */
 .md-header__nav-list {
     display: flex;
     list-style: none;
-    gap: 0.5rem;
+    gap: 0.8rem;
     margin: 0;
     padding: 0;
     flex: 1;
     justify-content: center;
 }
-
 .md-header__nav-item {
-    padding: 0.3rem 0.8rem;
-    border-radius: 4px;
-    transition: background 0.15s;
+    padding: 0.4rem 0.8rem;
 }
-
-.md-header__nav-item:hover {
-    background: var(--md-primary-fg-color--light);
-}
-
 .md-header__nav-link {
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
     color: var(--md-default-fg-color);
     transition: color 0.15s;
 }
-
 .md-header__nav-link:hover {
     color: var(--md-primary-fg-color);
 }
-
+/* NESSUN CAMBIAMENTO DI COLORE PER LA PAGINA ATTIVA */
 .md-header__nav-link--active {
-    color: var(--md-primary-fg-color);
+    color: var(--md-default-fg-color) !important;
 }
 
-/* Pulsante tema scuro/chiaro a destra */
-.md-header__option {
-    flex-shrink: 0;
-}
-
-/* ============================================================
-   BARRA DI RICERCA SOTTO L'HEADER
-   ============================================================ */
-
+/* RICERCA SOTTO */
 .md-search {
     width: 100%;
     max-width: 700px;
     margin: 0 auto;
-    padding: 0.8rem 0.8rem 0.8rem 0.8rem;
+    padding: 0.8rem 0;
     background: var(--md-code-bg-color);
     border-top: 1px solid var(--md-default-fg-color--lightest);
 }
-
 .md-search__form {
     background: var(--md-default-bg-color);
     border: 1px solid var(--md-default-fg-color--lightest);
-    border-radius: 6px;
-    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+    padding: 0.3rem 1rem;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
-
 .md-search__form:focus-within {
     border-color: var(--md-primary-fg-color);
     box-shadow: 0 0 0 2px var(--md-primary-fg-color--light);
 }
-
 .md-search__input {
-    font-size: 0.95rem;
-    color: var(--md-default-fg-color);
-    padding: 0.3rem 0;
+    font-size: 1rem;
+    padding: 0.4rem 0;
 }
 
-.md-search__input::placeholder {
-    color: var(--md-default-fg-color--light);
-    opacity: 0.7;
-}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-
+/* RESPONSIVE */
 @media (max-width: 768px) {
+    .md-header {
+        min-height: 60px;
+        padding: 0.4rem 0;
+    }
     .md-header__inner {
         flex-wrap: wrap;
-        gap: 0.3rem 0.6rem;
-        padding: 0.3rem 0.6rem;
+        gap: 0.3rem;
+        padding: 0 0.8rem;
     }
-
     .md-header__button.md-logo img {
-        height: 32px;
+        height: 35px;
         max-width: 120px;
     }
-
-    .md-header__nav-item {
-        padding: 0.2rem 0.4rem;
-    }
-
     .md-header__nav-link {
         font-size: 0.8rem;
     }
-
-    .md-search {
-        padding: 0.6rem 0.6rem 0.6rem 0.6rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .md-header__button.md-logo img {
-        height: 28px;
-        max-width: 100px;
-    }
-
-    .md-header__nav-link {
-        font-size: 0.7rem;
-    }
-
     .md-header__nav-item {
-        padding: 0.15rem 0.3rem;
+        padding: 0.2rem 0.4rem;
+    }
+    .md-search {
+        padding: 0.5rem 0.5rem;
     }
 }
