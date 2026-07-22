@@ -1,19 +1,80 @@
 /* ============================================================
-   MIGLIORIE ESTETICHE
+   STILE PERSONALIZZATO - TEMA MATERIAL
    ============================================================ */
 
 /* ============================================================
-   1. LOGO PIÙ GRANDE
+   1. HEADER ROSSO (sovrascrive il colore primario)
+   ============================================================ */
+[data-md-color-primary="red"] {
+    --md-primary-fg-color: #b71c1c;        /* Rosso scuro */
+    --md-primary-fg-color--light: #e53935;
+    --md-primary-fg-color--dark: #8e0000;
+}
+
+/* ============================================================
+   2. HEADER PIÙ GRANDE
+   ============================================================ */
+.md-header {
+    min-height: 80px !important;           /* Altezza maggiore */
+    padding: 0.4rem 0 !important;
+}
+
+.md-header__inner {
+    min-height: 80px !important;
+}
+
+/* ============================================================
+   3. LOGO PIÙ GRANDE
    ============================================================ */
 .md-header__button.md-logo img {
-    height: 45px;
+    height: 55px !important;               /* Logo più grande */
     width: auto;
-    max-width: 200px;
+    max-width: 220px;
     object-fit: contain;
 }
 
 /* ============================================================
-   2. BARRA DI RICERCA PIÙ ELEGANTE
+   4. TABS EQUIDISTANTI DAI BORDI E CENTRATI
+   ============================================================ */
+.md-tabs {
+    display: flex !important;
+    justify-content: center !important;
+    padding: 0 2rem !important;            /* Distanza dai bordi laterali */
+}
+
+.md-tabs__list {
+    display: flex !important;
+    justify-content: space-around !important; /* Equidistanza */
+    width: 100%;
+    max-width: 900px;                     /* Larghezza massima per evitare eccessiva spaziatura */
+    gap: 0.5rem;
+}
+
+.md-tabs__link {
+    font-weight: 700 !important;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    padding: 0.4rem 0.8rem;
+    white-space: nowrap;
+    transition: color 0.15s;
+}
+
+/* ============================================================
+   5. LENTE DI INGRANDIMENTO NERA
+   ============================================================ */
+.md-search__icon svg {
+    fill: #000000 !important;              /* Lente nera */
+}
+
+/* Per la dark mode, la lente rimane nera, ma se vuoi che sia bianca in dark mode, decommenta il blocco sotto */
+/*
+[data-md-color-scheme="slate"] .md-search__icon svg {
+    fill: #ffffff !important;
+}
+*/
+
+/* ============================================================
+   6. BARRA DI RICERCA ARROTONDATA
    ============================================================ */
 .md-search__form {
     border-radius: 24px !important;
@@ -28,29 +89,15 @@
 }
 
 /* ============================================================
-   3. TABS CENTRATI E IN GRASSETTO
+   7. PLACEHOLDER "cerca" IN NERO
    ============================================================ */
-.md-tabs {
-    display: flex !important;
-    justify-content: center !important;
-}
-
-.md-tabs__list {
-    display: flex !important;
-    justify-content: center !important;
-    gap: 0.8rem;
-}
-
-.md-tabs__link {
-    font-weight: 700 !important;          /* ← Grassetto */
-    font-size: 0.95rem;
-    letter-spacing: 0.02em;
-    padding: 0.4rem 0.8rem;
-    transition: color 0.15s;
+.md-search__input::placeholder {
+    color: #000000 !important;
+    opacity: 0.8 !important;
 }
 
 /* ============================================================
-   4. SIDEBAR NASCOSTA
+   8. SIDEBAR NASCOSTA
    ============================================================ */
 .md-sidebar--primary {
     display: none !important;
@@ -60,41 +107,44 @@
 }
 
 /* ============================================================
-   5. HEADER CON OMBRA LEGGERA
-   ============================================================ */
-.md-header {
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-}
-
-/* ============================================================
-   6. RICERCA: PLACEHOLDER "cerca" IN NERO
-   ============================================================ */
-.md-search__input::placeholder {
-    color: #000000 !important;            /* ← Nero */
-    opacity: 0.8 !important;
-}
-
-/* ============================================================
-   7. RESPONSIVE
+   9. RESPONSIVE
    ============================================================ */
 @media (max-width: 768px) {
+    .md-header {
+        min-height: 60px !important;
+        padding: 0.2rem 0 !important;
+    }
+    .md-header__inner {
+        min-height: 60px !important;
+    }
     .md-header__button.md-logo img {
-        height: 32px;
-        max-width: 130px;
+        height: 38px !important;
+        max-width: 150px;
     }
-
-    .md-tabs__list {
-        gap: 0.3rem;
-        flex-wrap: nowrap;
+    .md-tabs {
+        padding: 0 0.8rem !important;
         overflow-x: auto;
-        justify-content: flex-start !important;
-        padding: 0.2rem 0.4rem;
     }
-
+    .md-tabs__list {
+        justify-content: flex-start !important;
+        flex-wrap: nowrap;
+        gap: 0.3rem;
+        max-width: 100%;
+    }
     .md-tabs__link {
         font-size: 0.8rem;
-        font-weight: 600 !important;
         padding: 0.2rem 0.4rem;
         white-space: nowrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .md-header__button.md-logo img {
+        height: 30px !important;
+        max-width: 120px;
+    }
+    .md-tabs__link {
+        font-size: 0.7rem;
+        padding: 0.15rem 0.3rem;
     }
 }

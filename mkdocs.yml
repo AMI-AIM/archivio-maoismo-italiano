@@ -13,9 +13,20 @@ theme:
     - search.highlight
     - navigation.tabs
   palette:
+    # Tema chiaro (default)
     - scheme: default
-      primary: custom
+      primary: red
       accent: red
+      toggle:
+        icon: material/brightness-7
+        name: "Passa al tema scuro"
+    # Tema scuro
+    - scheme: slate
+      primary: red
+      accent: red
+      toggle:
+        icon: material/brightness-4
+        name: "Passa al tema chiaro"
   logo: immagini/logo.png
   favicon: immagini/favicon.png
 
@@ -42,4 +53,4 @@ nav:
 
 extra:
   homepage: /archivio-maoismo-italiano/
-  generator: false          # ← Rimuove "Made with Material for MkDocs"
+  generator: false
