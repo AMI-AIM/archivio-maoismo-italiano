@@ -14,7 +14,7 @@ theme:
     - navigation.tabs
   palette:
     - scheme: default
-      primary: custom
+      primary: red          # ← cambiato da 'custom' a 'red'
       accent: red
   logo: immagini/logo.png
   favicon: immagini/favicon.png

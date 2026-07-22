@@ -1,0 +1,80 @@
+/* ============================================================
+   MIGLIORIE ESTETICHE - TEMA MATERIAL DI DEFAULT
+   ============================================================ */
+
+/* ============================================================
+   1. LOGO PIÙ GRANDE
+   ============================================================ */
+.md-header__button.md-logo img {
+    height: 45px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+}
+
+/* ============================================================
+   2. BARRA DI RICERCA PIÙ ELEGANTE
+   ============================================================ */
+.md-search__form {
+    border-radius: 24px !important;
+    background: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.md-search__form:focus-within {
+    border-color: var(--md-primary-fg-color);
+    box-shadow: 0 0 0 2px var(--md-primary-fg-color--light);
+}
+
+/* ============================================================
+   3. HEADER CON OMBRA LEGGERA
+   ============================================================ */
+.md-header {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================================
+   4. SIDEBAR NASCOSTA (non serve con i tabs)
+   ============================================================ */
+.md-sidebar--primary {
+    display: none !important;
+}
+.md-content {
+    margin-left: 0 !important;
+}
+
+/* ============================================================
+   5. FOOTER MIGLIORATO
+   ============================================================ */
+.md-footer-meta {
+    padding: 1.5rem 0;
+    background: var(--md-default-fg-color--lightest);
+}
+
+.md-footer-meta__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.md-social {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.md-social__link {
+    font-size: 1.2rem;
+}
+
+/* ============================================================
+   6. RESPONSIVE (logo più piccolo su mobile)
+   ============================================================ */
+@media (max-width: 768px) {
+    .md-header__button.md-logo img {
+        height: 32px;
+        max-width: 130px;
+    }
+}
