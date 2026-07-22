@@ -11,7 +11,7 @@ theme:
     - navigation.top
     - search.suggest
     - search.highlight
-    - navigation.tabs          # <-- DECOMMENTATA
+    - navigation.tabs
   palette:
     - scheme: default
       primary: custom
