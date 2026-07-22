@@ -1,0 +1,42 @@
+name: Deploy MkDocs
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Install dependencies
+        run: |
+          pip install mkdocs-material
+          pip install pandas openpyxl
+      
+      - name: Generate document schede
+        run: python scripts/generatore.py
+      
+      - name: Generate people pages
+        run: python scripts/persone.py
+      
+      - name: Generate organization pages
+        run: python scripts/org.py
+      
+      - name: Copy static files to site
+        run: |
+          mkdocs build
+          if [ -f docs/documenti.json ]; then cp docs/documenti.json site/; fi
+          if [ -f docs/archivio-filtri.js ]; then cp docs/archivio-filtri.js site/; fi
+      
+      - name: Deploy to gh-pages
+        run: mkdocs gh-deploy --force
