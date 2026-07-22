@@ -225,12 +225,14 @@ hide:
 .slider-container input[type="range"] {
     position: absolute;
     width: 100%;
-    top: -0.4rem;
+    top: 50%;
+    transform: translateY(-50%);
     -webkit-appearance: none;
     appearance: none;
     background: transparent;
     pointer-events: none;
     margin: 0;
+    height: 4px;
 }
 
 .slider-container input[type="range"]::-webkit-slider-thumb {
@@ -246,6 +248,8 @@ hide:
     box-shadow: 0 1px 4px rgba(0,0,0,0.2);
     z-index: 2;
     position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .slider-container input[type="range"]::-moz-range-thumb {
