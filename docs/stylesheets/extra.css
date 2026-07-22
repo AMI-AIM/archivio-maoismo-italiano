@@ -1,36 +1,31 @@
 /* ============================================================
-   LAYOUT UMD - TUTTO SULLA STESSA RIGA
+   LAYOUT UMD - TEMA MATERIAL DI DEFAULT
    ============================================================ */
 
-/* Nasconde titolo e sidebar */
+/* Nasconde il titolo del sito (lo abbiamo nel logo) */
 .md-header__title {
     display: none !important;
 }
+
+/* Nasconde la sidebar */
 .md-sidebar--primary {
     display: none !important;
 }
 .md-content {
     margin-left: 0 !important;
 }
-.md-header__source {
-    display: none !important;
-}
 
 /* ============================================================
-   HEADER: LOGO + NAV + RICERCA SULLA STESSA RIGA
+   HEADER: LOGO, NAV, RICERCA SULLA STESSA RIGA
    ============================================================ */
-
-.md-header {
-    padding: 0.4rem 0;
-    border-bottom: 1px solid var(--md-default-fg-color--lightest);
-}
 
 .md-header__inner {
     display: flex !important;
     align-items: center;
     justify-content: space-between;
-    gap: 1.2rem;
-    padding: 0 1rem;
+    flex-wrap: nowrap;
+    gap: 0.8rem;
+    padding: 0.4rem 1rem;
 }
 
 /* LOGO a sinistra */
@@ -39,7 +34,6 @@
     margin: 0;
     width: auto;
     height: auto;
-    flex-shrink: 0;
 }
 .md-header__button.md-logo img {
     height: 50px;
@@ -48,45 +42,53 @@
     object-fit: contain;
 }
 
-/* NAVIGAZIONE al centro */
-.md-header__nav-list {
-    display: flex;
-    list-style: none;
-    gap: 0.3rem;
-    margin: 0;
-    padding: 0;
+/* NAVIGAZIONE (tabs) al centro */
+.md-tabs {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
     flex: 1;
+    display: flex;
     justify-content: center;
 }
-.md-header__nav-item {
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
+.md-tabs__list {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
 }
-.md-header__nav-link {
-    text-decoration: none;
+.md-tabs__item {
+    padding: 0.3rem 0.6rem;
+}
+.md-tabs__link {
     font-size: 0.95rem;
     font-weight: 500;
     color: var(--md-default-fg-color);
-    white-space: nowrap;
+    opacity: 0.8;
+    text-decoration: none;
+    transition: opacity 0.15s, color 0.15s;
 }
-.md-header__nav-link:hover {
+.md-tabs__link:hover {
+    opacity: 1;
     color: var(--md-primary-fg-color);
 }
-.md-header__nav-link--active {
-    color: var(--md-default-fg-color) !important;
+.md-tabs__link--active {
+    opacity: 1;
+    color: var(--md-primary-fg-color);
 }
 
-/* FRECCE (▾) accanto alle voci */
-.nav-arrow {
+/* Aggiunge freccette ▾ dopo ogni link di navigazione */
+.md-tabs__link::after {
+    content: " ▾";
     font-size: 0.6rem;
-    margin-left: 0.15rem;
     color: var(--md-default-fg-color--light);
 }
 
-/* RICERCA a destra (più compatta) */
+/* RICERCA a destra (compatta) */
 .md-search {
-    flex: 0 0 260px;
-    max-width: 300px;
+    flex: 0 0 200px;
+    max-width: 250px;
     background: transparent;
     border: none;
     padding: 0;
@@ -111,14 +113,10 @@
     color: var(--md-default-fg-color--light);
     font-size: 0.85rem;
 }
-.md-search__icon {
-    font-size: 1rem;
-}
 
-/* PULSANTE TEMA (destra) */
-.md-header__option {
-    flex-shrink: 0;
-    margin-left: 0.2rem;
+/* Nasconde il pulsante di ricerca mobile (overlay) */
+.md-search__overlay {
+    display: none !important;
 }
 
 /* ============================================================
@@ -128,30 +126,33 @@
 @media (max-width: 768px) {
     .md-header__inner {
         flex-wrap: wrap;
-        gap: 0.5rem;
+        gap: 0.3rem;
         padding: 0.3rem 0.6rem;
     }
-    .md-header__button.md-logo img {
-        height: 35px;
-        max-width: 120px;
-    }
-    .md-header__nav-list {
+    .md-tabs {
         order: 3;
         flex: 1 1 100%;
-        justify-content: flex-start;
-        flex-wrap: nowrap;
         overflow-x: auto;
-        gap: 0.1rem;
-        padding-bottom: 0.2rem;
+        justify-content: flex-start;
+        padding: 0.2rem 0 !important;
     }
-    .md-header__nav-item {
+    .md-tabs__list {
+        gap: 0.2rem;
+        flex-wrap: nowrap;
+    }
+    .md-tabs__item {
         padding: 0.15rem 0.4rem;
     }
-    .md-header__nav-link {
+    .md-tabs__link {
         font-size: 0.8rem;
+        white-space: nowrap;
     }
     .md-search {
         flex: 1;
         max-width: 100%;
+    }
+    .md-header__button.md-logo img {
+        height: 35px;
+        max-width: 120px;
     }
 }
