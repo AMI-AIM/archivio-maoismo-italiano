@@ -9,7 +9,7 @@ hide:
 
 <div id="archivio-container" class="archivio-layout">
 
-    <!-- SIDEBAR FILTRI COLLASSABILI -->
+    <!-- SIDEBAR FILTRI -->
     <aside class="filtri-sidebar" id="filtri-sidebar">
         <h4>Filtri</h4>
         

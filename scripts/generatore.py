@@ -567,7 +567,7 @@ hide:
 
 <div id="archivio-container" class="archivio-layout">
 
-    <!-- SIDEBAR FILTRI COLLASSABILI -->
+    <!-- SIDEBAR FILTRI -->
     <aside class="filtri-sidebar" id="filtri-sidebar">
         <h4>Filtri</h4>
         
@@ -1015,7 +1015,7 @@ def genera_json(df, persone, organizzazioni):
             anno = int(data_raw)
             anni_valori.append(anno)
         
-        # 🔥 PERSONE: SOLO da persone.xlsx (via Autore + Persone_collegate)
+        # 🔥 PERSONE: SOLO quelle che sono in persone.xlsx
         persone_lista = []
         if autore_raw and autore_raw not in ['nan', 'None']:
             autori = split_nomi(autore_raw)
@@ -1029,12 +1029,18 @@ def genera_json(df, persone, organizzazioni):
                     persone_lista.append(collegato)
         persone_lista = list(set(persone_lista))
         
-        # 🔥 ORGANIZZAZIONI: da organizzazioni.xlsx (Organizzazione + Organizzazioni_collegate + Autore se in organizzazioni.xlsx)
+        # 🔥 ORGANIZZAZIONI: SOLO quelle che sono in organizzazioni.xlsx
         organizzazioni_lista = []
         if org_raw and org_raw not in ['nan', 'None']:
-            organizzazioni_lista.extend(split_nomi(org_raw))
+            orgs = split_nomi(org_raw)
+            for org in orgs:
+                if org in organizzazioni:
+                    organizzazioni_lista.append(org)
         if organizzazioni_collegate and organizzazioni_collegate not in ['nan', 'None']:
-            organizzazioni_lista.extend(split_nomi(organizzazioni_collegate))
+            collegati = split_nomi(organizzazioni_collegate)
+            for collegato in collegati:
+                if collegato in organizzazioni:
+                    organizzazioni_lista.append(collegato)
         if autore_raw and autore_raw not in ['nan', 'None']:
             autori = split_nomi(autore_raw)
             for autore in autori:

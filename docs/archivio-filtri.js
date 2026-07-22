@@ -26,24 +26,21 @@ async function caricaDati() {
 // ============================================================
 
 function inizializzaFiltri() {
-    // 🔥 ATTIVA I FILTRI COLLASSABILI
+    // ATTIVA I FILTRI COLLASSABILI
     const toggleIds = ['toggle-organizzazione', 'toggle-persona', 'toggle-tipo', 'toggle-anno'];
     
     toggleIds.forEach(id => {
         const button = document.getElementById(id);
         if (!button) return;
         
-        // Trova il contenitore associato (il fratello successivo .filtro-contenuto)
         const container = button.nextElementSibling;
         if (!container || !container.classList.contains('filtro-contenuto')) return;
         
-        // Imposta lo stato iniziale: chiuso
         container.classList.remove('open');
         button.classList.remove('open');
         
         button.addEventListener('click', function(e) {
             e.stopPropagation();
-            // Trova il contenitore
             const target = this.nextElementSibling;
             if (target && target.classList.contains('filtro-contenuto')) {
                 target.classList.toggle('open');
@@ -82,7 +79,6 @@ function inizializzaFiltri() {
     labelMin.textContent = annoMin;
     labelMax.textContent = annoMax;
     
-    // Event listeners
     inputMin.addEventListener('input', function() {
         const val = parseInt(this.value);
         const maxVal = parseInt(inputMax.value);
@@ -168,15 +164,12 @@ function applicaFiltri() {
         return true;
     });
     
-    // 🔥 ORDINA CRONOLOGICAMENTE (dal più vecchio al più recente)
+    // 🔥 ORDINA CRONOLOGICAMENTE
     risultati.sort((a, b) => {
-        // Gestisce i documenti senza data (n.d.)
         if (a.anno === null && b.anno === null) return a.titolo.localeCompare(b.titolo);
         if (a.anno === null) return 1;
         if (b.anno === null) return -1;
-        // Ordina per anno
         if (a.anno !== b.anno) return a.anno - b.anno;
-        // Se stesso anno, ordina per titolo
         return a.titolo.localeCompare(b.titolo);
     });
     
@@ -193,7 +186,7 @@ function getSelectedValues(id) {
 }
 
 // ============================================================
-// VISUALIZZAZIONE RISULTATI (stile UMD)
+// VISUALIZZAZIONE RISULTATI
 // ============================================================
 
 function mostraRisultati(risultati) {
@@ -210,7 +203,6 @@ function mostraRisultati(risultati) {
     
     let html = '';
     risultati.forEach(doc => {
-        // Costruisci il sommario combinando tipo e organizzazione
         let sommario = '';
         if (doc.tipo && doc.organizzazione) {
             sommario = `${doc.tipo} · ${doc.organizzazione}`;
@@ -220,7 +212,6 @@ function mostraRisultati(risultati) {
             sommario = doc.organizzazione;
         }
         
-        // Badge per organizzazioni e persone
         const orgBadge = doc.organizzazioni.map(o => `<span class="badge org-badge">${o}</span>`).join('');
         const personeBadge = doc.persone.map(p => `<span class="badge">${p}</span>`).join('');
         const tipoBadge = doc.tipo ? `<span class="badge tipo-badge">${doc.tipo}</span>` : '';
