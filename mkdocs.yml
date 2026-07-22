@@ -5,6 +5,7 @@ site_author: Ivan Masci
 theme:
   name: material
   language: it
+  custom_dir: overrides
   features:
     - navigation.tabs
     - navigation.sections
@@ -15,8 +16,10 @@ theme:
     - scheme: default
       primary: red
       accent: red
-      
   logo: immagini/logo.png
+
+extra_css:
+  - stylesheets/extra.css
 
 plugins:
   - search
