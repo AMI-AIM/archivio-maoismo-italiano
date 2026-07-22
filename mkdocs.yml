@@ -4,7 +4,6 @@ site_author: Ivan Masci
 
 theme:
   name: material
-  custom_dir: overrides
   language: it
   features:
     - navigation.tabs
