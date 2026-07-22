@@ -1017,18 +1017,32 @@ def genera_json(df, persone, organizzazioni):
             anno = int(data_raw)
             anni_valori.append(anno)
         
+        # 🔥 ELENCO ORGANIZZAZIONI (dalla colonna Organizzazione + Organizzazioni_collegate)
         organizzazioni_lista = []
         if org_raw and org_raw not in ['nan', 'None']:
             organizzazioni_lista.extend(split_nomi(org_raw))
         if organizzazioni_collegate and organizzazioni_collegate not in ['nan', 'None']:
             organizzazioni_lista.extend(split_nomi(organizzazioni_collegate))
+        # Aggiungi anche gli autori che sono organizzazioni (verificato dal dizionario)
+        if autore_raw and autore_raw not in ['nan', 'None']:
+            autori = split_nomi(autore_raw)
+            for autore in autori:
+                if autore in organizzazioni:
+                    organizzazioni_lista.append(autore)
         organizzazioni_lista = list(set(organizzazioni_lista))
         
+        # 🔥 ELENCO PERSONE (dalla colonna Autore + Persone_collegate, solo se sono persone)
         persone_lista = []
         if autore_raw and autore_raw not in ['nan', 'None']:
-            persone_lista.extend(split_nomi(autore_raw))
+            autori = split_nomi(autore_raw)
+            for autore in autori:
+                if autore in persone:
+                    persone_lista.append(autore)
         if persone_collegate and persone_collegate not in ['nan', 'None']:
-            persone_lista.extend(split_nomi(persone_collegate))
+            collegati = split_nomi(persone_collegate)
+            for collegato in collegati:
+                if collegato in persone:
+                    persone_lista.append(collegato)
         persone_lista = list(set(persone_lista))
         
         doc_obj = {
@@ -1047,8 +1061,6 @@ def genera_json(df, persone, organizzazioni):
         }
         documenti_json.append(doc_obj)
     
-    # 🔥 ORDINA I DOCUMENTI NEL JSON PER DATA (cronologico)
-    # I documenti senza data (n.d.) vanno in fondo
     documenti_json.sort(key=lambda x: (x['anno'] is None, x['anno'] if x['anno'] else 9999, x['titolo']))
     
     json_data = {
@@ -1061,7 +1073,7 @@ def genera_json(df, persone, organizzazioni):
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(json_data, f, ensure_ascii=False, indent=2)
     
-    print(f"   ✅ JSON generato con {len(documenti_json)} documenti (ordinati cronologicamente)")
+    print(f"   ✅ JSON generato con {len(documenti_json)} documenti")
     print(f"   📅 Intervallo anni: {json_data['anno_min']} - {json_data['anno_max']}")
 
 # ============================================================

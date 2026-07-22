@@ -11,11 +11,10 @@
       "serie": "Edizioni Oriente",
       "keywords": "Edizioni Oriente; Delegazione",
       "url_ia": "https://archive.org/details/delegazione-edizioni-oriente",
-      "persone": [
-        "Nuova Unità"
-      ],
+      "persone": [],
       "organizzazioni": [
-        "Edizioni Oriente"
+        "Edizioni Oriente",
+        "Nuova Unità"
       ]
     },
     {
@@ -29,11 +28,10 @@
       "serie": "Partito Comunista d'Italia (marxista-leninista)",
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci",
       "url_ia": "https://archive.org/details/statuto-pcdi/mode/2up",
-      "persone": [
-        "Ufficio Politico del PCd'I (m-l)"
-      ],
+      "persone": [],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Ufficio Politico del PCd'I (m-l)"
       ]
     },
     {
@@ -47,9 +45,7 @@
       "serie": "Lavoro Politico",
       "keywords": "Maoismo; Marxismo-leninismo",
       "url_ia": "https://archive.org/details/lavoro-politico-01/mode/2up",
-      "persone": [
-        "Centro di Informazione di Verona"
-      ],
+      "persone": [],
       "organizzazioni": [
         "Centro di Informazione di Verona"
       ]
@@ -65,9 +61,7 @@
       "serie": "Lavoro Politico",
       "keywords": "Maoismo; Marxismo-leninismo",
       "url_ia": "https://archive.org/details/lavoro-politico-02//mode/2up",
-      "persone": [
-        "Centro di Informazione di Verona"
-      ],
+      "persone": [],
       "organizzazioni": [
         "Centro di Informazione di Verona"
       ]
@@ -119,13 +113,12 @@
       "serie": "Testi del maoismo",
       "keywords": "Partito comunista cinese; Maoismo; Rivoluzione culturale",
       "url_ia": "https://archive.org/details/circolare-16-maggio/mode/2up",
-      "persone": [
-        "Renmin Ribao",
-        "Partito Comunista Cinese",
-        "Hongqi"
-      ],
+      "persone": [],
       "organizzazioni": [
-        "Casa editrice in lingue estere"
+        "Hongqi",
+        "Partito Comunista Cinese",
+        "Casa editrice in lingue estere",
+        "Renmin Ribao"
       ]
     },
     {
@@ -175,11 +168,10 @@
       "serie": "Partito Comunista d'Italia (marxista-leninista)",
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
       "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
-      "persone": [
-        "Renmin Ribao"
-      ],
+      "persone": [],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Renmin Ribao"
       ]
     },
     {
@@ -211,12 +203,11 @@
       "serie": "Testi del maoismo",
       "keywords": "Partito comunista cinese; Maoismo; Rivoluzione culturale",
       "url_ia": "https://archive.org/details/la-bussola-che-guida//mode/2up",
-      "persone": [
+      "persone": [],
+      "organizzazioni": [
+        "Casa editrice in lingue estere",
         "Jiefangjun Bao",
         "Renmin Ribao"
-      ],
-      "organizzazioni": [
-        "Casa editrice in lingue estere"
       ]
     },
     {
@@ -248,9 +239,7 @@
       "serie": "Lavoro Politico; Partito Comunista d'Italia (marxista-leninista)",
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Lavoro politico; Maoismo; Marxismo-leninismo",
       "url_ia": "https://archive.org/details/lavoro-politico-10/mode/2up",
-      "persone": [
-        "Centro di Informazione di Verona"
-      ],
+      "persone": [],
       "organizzazioni": [
         "Centro di Informazione di Verona"
       ]
@@ -266,9 +255,7 @@
       "serie": "Lavoro Politico; Partito Comunista d'Italia (marxista-leninista) - linea rossa",
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Partito Comunista d'Italia (marxista-leninista) - linea rossa; Lavoro Politico; Maoismo; Marxismo-leninismo",
       "url_ia": "https://archive.org/details/lavoro-politico-11-12/mode/2up",
-      "persone": [
-        "Centro di Informazione di Verona"
-      ],
+      "persone": [],
       "organizzazioni": [
         "Centro di Informazione di Verona"
       ]
@@ -284,9 +271,7 @@
       "serie": "Lavoro Politico",
       "keywords": "Maoismo; Marxismo-leninismo",
       "url_ia": "https://archive.org/details/lavoro-politico-03/mode/2up",
-      "persone": [
-        "Centro di Informazione di Verona"
-      ],
+      "persone": [],
       "organizzazioni": [
         "Centro di Informazione di Verona"
       ]
@@ -302,9 +287,7 @@
       "serie": "Lavoro Politico",
       "keywords": "Maoismo; Marxismo-leninismo",
       "url_ia": "https://archive.org/details/lavoro-politico-04/mode/2up",
-      "persone": [
-        "Centro di Informazione di Verona"
-      ],
+      "persone": [],
       "organizzazioni": [
         "Centro di Informazione di Verona"
       ]
@@ -320,9 +303,7 @@
       "serie": "Lavoro Politico",
       "keywords": "Maoismo; Marxismo-leninismo",
       "url_ia": "https://archive.org/details/lavoro-politico-05-06/mode/2up",
-      "persone": [
-        "Centro di Informazione di Verona"
-      ],
+      "persone": [],
       "organizzazioni": [
         "Centro di Informazione di Verona"
       ]
@@ -338,9 +319,7 @@
       "serie": "Lavoro Politico;  Partito Comunista d'Italia (marxista-leninista)",
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Lavoro politico; Maoismo; Marxismo-leninismo",
       "url_ia": "https://archive.org/details/lavoro-politico-07//mode/2up",
-      "persone": [
-        "Centro di Informazione di Verona"
-      ],
+      "persone": [],
       "organizzazioni": [
         "Centro di Informazione di Verona"
       ]
@@ -356,9 +335,7 @@
       "serie": "Lavoro Politico;  Partito Comunista d'Italia (marxista-leninista)",
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Lavoro politico; Maoismo; Marxismo-leninismo",
       "url_ia": "https://archive.org/details/lavoro-politico-08-09/mode/2up",
-      "persone": [
-        "Centro di Informazione di Verona"
-      ],
+      "persone": [],
       "organizzazioni": [
         "Centro di Informazione di Verona"
       ]
@@ -374,11 +351,10 @@
       "serie": "Partito Comunista d'Italia (marxista-leninista)",
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
       "url_ia": "https://archive.org/details/Pesce-e-Mao",
-      "persone": [
-        "Nuova Unità"
-      ],
+      "persone": [],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Nuova Unità"
       ]
     },
     {
@@ -464,11 +440,10 @@
       "serie": "Partito Comunista d'Italia (marxista-leninista)",
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
       "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
-      "persone": [
-        "Renmin Ribao"
-      ],
+      "persone": [],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Renmin Ribao"
       ]
     },
     {
@@ -500,10 +475,9 @@
       "serie": "UCI (m-l) - Servire il Popolo",
       "keywords": "Unione dei Comunisti Italiani (marxisti-leninisti); Servire il Popolo; Volantino",
       "url_ia": "https://archive.org/details/studenti-ed-intellettuali-ciclostilato-uci-m-l/mode/2up",
-      "persone": [
-        "Comitato di Partito di Catania (UCI-m.l)"
-      ],
+      "persone": [],
       "organizzazioni": [
+        "Comitato di Partito di Catania (UCI-m.l)",
         "Unione dei Comunisti Italiani (marxisti-leninisti)"
       ]
     },
@@ -555,8 +529,8 @@
       "keywords": "Maoismo",
       "url_ia": "https://archive.org/details/ribellarsi-e-giusto//mode/2up",
       "persone": [
-        "Mao Zedong",
-        "Roberto Sassi"
+        "Roberto Sassi",
+        "Mao Zedong"
       ],
       "organizzazioni": []
     }

@@ -135,7 +135,7 @@ function popolaSelect(id, items) {
 }
 
 // ============================================================
-// APPLICAZIONE FILTRI
+// APPLICAZIONE FILTRI (CON ORDINAMENTO CRONOLOGICO GARANTITO)
 // ============================================================
 
 function applicaFiltri() {
@@ -146,7 +146,7 @@ function applicaFiltri() {
     const annoMaxVal = parseInt(document.getElementById('filtro-anno-max').value);
     const testo = document.getElementById('filtro-testo').value.toLowerCase().trim();
     
-    const risultati = documenti.filter(doc => {
+    let risultati = documenti.filter(doc => {
         if (orgSelezionate.length > 0 && !orgSelezionate.some(o => doc.organizzazioni.includes(o))) {
             return false;
         }
@@ -166,6 +166,18 @@ function applicaFiltri() {
             }
         }
         return true;
+    });
+    
+    // 🔥 ORDINA CRONOLOGICAMENTE (dal più vecchio al più recente)
+    risultati.sort((a, b) => {
+        // Gestisce i documenti senza data (n.d.)
+        if (a.anno === null && b.anno === null) return a.titolo.localeCompare(b.titolo);
+        if (a.anno === null) return 1;
+        if (b.anno === null) return -1;
+        // Ordina per anno
+        if (a.anno !== b.anno) return a.anno - b.anno;
+        // Se stesso anno, ordina per titolo
+        return a.titolo.localeCompare(b.titolo);
     });
     
     mostraRisultati(risultati);
