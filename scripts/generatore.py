@@ -209,6 +209,11 @@ def crea_schede(df, persone, organizzazioni):
         if url_ia in ['nan', 'None', '']:
             url_ia = '#'
         
+        # 🔥 LEGGI IL NOME DEL FILE DALLA COLONNA 'nome_file'
+        nome_file = str(row.get('nome_file', '')).strip()
+        if nome_file in ['nan', 'None']:
+            nome_file = ''
+        
         identifier = None
         if url_ia and url_ia != '#':
             match = re.search(r'/details/([^/?#]+)', url_ia)
@@ -250,14 +255,20 @@ hide:
 <div class="embed-container">
 """
 
-        # 🔥 GESTIONE FOTO CON TENTATIVO AUTOMATICO (senza colonna extra)
+        # 🔥 GESTIONE FOTO CON nome_file
         if tipo.lower() == 'foto' and identifier:
+            if nome_file:
+                img_url = f"https://archive.org/download/{identifier}/{nome_file}"
+            else:
+                # Fallback: prova con l'identificativo + estensioni comuni
+                img_url = f"https://archive.org/download/{identifier}/{identifier}.jpg"
+            
             content += f"""
-    <div class="photo-viewer" id="photo-{ami_id}">
-        <img id="img-{ami_id}" src="" alt="{titolo}" class="photo-embed" style="display:none;">
-        <div class="photo-loading" style="padding:1rem; text-align:center; color: var(--md-default-fg-color--light);">
-            Caricamento foto...
-        </div>
+    <div class="photo-viewer">
+        <img src="{img_url}" 
+             alt="{titolo}" 
+             class="photo-embed"
+             onerror="this.style.display='none'; this.parentElement.querySelector('.photo-fallback').style.display='block';">
         <div class="photo-fallback" style="display:none; padding:1rem; text-align:center;">
             <p>🔗 <a href="{url_ia}" target="_blank">Visualizza la foto su Internet Archive</a></p>
         </div>
@@ -265,39 +276,6 @@ hide:
             <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
         </div>
     </div>
-    <script>
-    (function() {{
-        var img = document.getElementById('img-{ami_id}');
-        var container = document.getElementById('photo-{ami_id}');
-        var loading = container.querySelector('.photo-loading');
-        var fallback = container.querySelector('.photo-fallback');
-        var urls = [
-            'https://archive.org/download/{identifier}/{identifier}.jpeg',
-            'https://archive.org/download/{identifier}/{identifier}.jpg',
-            'https://archive.org/download/{identifier}/{identifier}.png',
-            'https://archive.org/download/{identifier}/{identifier}_orig.jpg',
-            'https://archive.org/download/{identifier}/{identifier}_orig.jpeg'
-        ];
-        var current = 0;
-        function tryNext() {{
-            if (current >= urls.length) {{
-                loading.style.display = 'none';
-                fallback.style.display = 'block';
-                return;
-            }}
-            img.src = urls[current];
-            img.onload = function() {{
-                loading.style.display = 'none';
-                img.style.display = 'block';
-            }};
-            img.onerror = function() {{
-                current++;
-                tryNext();
-            }};
-        }}
-        tryNext();
-    }})();
-    </script>
 """
         elif identifier:
             if tipo.lower() == 'audio':
