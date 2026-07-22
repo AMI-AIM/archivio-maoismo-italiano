@@ -1,5 +1,5 @@
 site_name: AMI - Archivio del Maoismo Italiano
-site_description: Risorsa digitale per la ricerca storica sul maoismo in Italia
+site_description: Catalogo digitale per la ricerca storica sul maoismo in Italia
 site_author: Ivan Masci
 site_url: https://ami-aim.github.io/archivio-maoismo-italiano/
 
@@ -8,14 +8,13 @@ theme:
   language: it
   features:
     - header.autohide
-    - navigation.tabs
-    - navigation.tabs.sticky
     - navigation.top
     - search.suggest
     - search.highlight
+    # - navigation.tabs          ← COMMENTATO (non serve più)
   palette:
     - scheme: default
-      primary: custom          # useremo rosso scuro custom
+      primary: custom
       accent: red
   logo: immagini/logo.png
   favicon: immagini/favicon.png
@@ -43,6 +42,3 @@ nav:
 
 extra:
   homepage: /archivio-maoismo-italiano/
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/AMI-AIM/archivio-maoismo-italiano
