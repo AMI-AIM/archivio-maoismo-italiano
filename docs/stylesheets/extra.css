@@ -1,48 +1,35 @@
-/* ==========================================================================
-   AMI - Archivio del Maoismo Italiano
-   Solo CSS, nessun override di header.html: il tema Material di default
-   resta intatto (drawer, ricerca, palette), riduciamo il rischio di
-   rompere funzionalità che già andavano bene.
-   ========================================================================== */
-
-/* Voci del menu in grassetto, come nella versione che funzionava */
-.md-tabs__link {
-    font-weight: 600;
+/* Header stile accademico / istituzionale */
+.md-header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 4.25rem;
 }
 
-/* Frecce ▾ decorative accanto a ogni voce di menu (solo estetiche) */
-.md-tabs__link::after {
-    content: "▾";
-    font-size: 0.7em;
-    margin-left: 4px;
-    display: inline-block;
-    opacity: 0.85;
+.md-header__inner {
+  padding: 0 1.5rem;
 }
 
-/* Logo: altezza coerente nell'header senza deformarlo */
-.md-header__button.md-logo img,
-.md-header__button.md-logo svg {
-    height: 42px;
-    width: auto;
+.md-logo img {
+  height: 2.2rem;
 }
 
-/* Pillola di ricerca "Catalogo": trasforma il pulsante di ricerca già
-   esistente in Material in una pillola con etichetta, aggiungendo solo
-   testo via CSS (::after). Nessun HTML custom, nessun rischio di rompere
-   il comportamento della ricerca (resta lo stesso elemento originale). */
-label[for="__search"] {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 999px;
-    padding: 6px 14px;
-    width: auto;
+.md-header__title {
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
-label[for="__search"]::after {
-    content: "Catalogo";
-    font-size: 0.75rem;
-    font-weight: 600;
-    white-space: nowrap;
+/* Migliora il pulsante di ricerca */
+.md-search__form {
+  background-color: #f8f8f8;
+  border-radius: 9999px;
+  border: 1px solid #e0e0e0;
+}
+
+.md-search__input {
+  padding-left: 2.8rem;
+}
+
+/* Colore rosso più elegante */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #b71c1c;
+  --md-primary-fg-color--light: #e53935;
 }
