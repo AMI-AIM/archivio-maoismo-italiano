@@ -15,16 +15,8 @@ theme:
     - scheme: default
       primary: red
       accent: red
-      toggle:
-        icon: material/brightness-7
-        name: "Passa al tema scuro"
-    - scheme: slate
-      primary: red
-      accent: red
-      toggle:
-        icon: material/brightness-4
-        name: "Passa al tema chiaro"
-  # logo: immagini/logo.png   # De-commenta se hai un logo
+     
+  logo: immagini/logo.png   
 
 plugins:
   - search:

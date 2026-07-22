@@ -22,10 +22,23 @@ async function caricaDati() {
 }
 
 // ============================================================
-// INIZIALIZZAZIONE FILTRI
+// INIZIALIZZAZIONE FILTRI (con collassabilità)
 // ============================================================
 
 function inizializzaFiltri() {
+    // 🔥 ATTIVA I FILTRI COLLASSABILI
+    document.querySelectorAll('.filtro-toggle').forEach(button => {
+        button.addEventListener('click', function() {
+            const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+            this.setAttribute('aria-expanded', !expanded);
+            const content = this.parentElement.querySelector('.filtro-contenuto');
+            if (content) {
+                content.style.display = expanded ? 'none' : 'block';
+            }
+        });
+    });
+    
+    // Popola i dropdown
     const organizzazioni = new Set();
     const persone = new Set();
     const tipi = new Set();
@@ -40,6 +53,7 @@ function inizializzaFiltri() {
     popolaSelect('filtro-persona', persone);
     popolaSelect('filtro-tipo', tipi);
     
+    // Imposta lo slider degli anni
     const inputMin = document.getElementById('filtro-anno-min');
     const inputMax = document.getElementById('filtro-anno-max');
     const labelMin = document.getElementById('anno-min-label');
@@ -54,6 +68,7 @@ function inizializzaFiltri() {
     labelMin.textContent = annoMin;
     labelMax.textContent = annoMax;
     
+    // Event listeners
     inputMin.addEventListener('input', function() {
         const val = parseInt(this.value);
         const maxVal = parseInt(inputMax.value);
@@ -152,7 +167,7 @@ function getSelectedValues(id) {
 }
 
 // ============================================================
-// VISUALIZZAZIONE RISULTATI
+// VISUALIZZAZIONE RISULTATI (layout compatto)
 // ============================================================
 
 function mostraRisultati(risultati) {
