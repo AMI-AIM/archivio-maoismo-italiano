@@ -20,13 +20,7 @@ theme:
       toggle:
         icon: material/brightness-7
         name: "Passa al tema scuro"
-    # Tema scuro
-    - scheme: slate
-      primary: red
-      accent: red
-      toggle:
-        icon: material/brightness-4
-        name: "Passa al tema chiaro"
+    
   logo: immagini/logo.png
   favicon: immagini/favicon.png
 
