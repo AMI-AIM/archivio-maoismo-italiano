@@ -949,6 +949,7 @@ hide:
     print(f"   ✅ Pagina Archivio generata con {len(schede)} schede.")
     print(f"   📅 Intervallo anni: {anno_min} - {anno_max}")
 
+
 # ============================================================
 # GENERAZIONE JSON PER I FILTRI (CORRETTA)
 # ============================================================
