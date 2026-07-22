@@ -56,7 +56,9 @@ hide:
             </button>
             <div class="filtro-contenuto" id="filtro-anno-container">
                 <div class="slider-container" id="slider-container">
-                    <div class="slider-track-fill" id="slider-track-fill"></div>
+                    <div class="slider-track">
+                        <div class="slider-track-fill" id="slider-track-fill"></div>
+                    </div>
                     <input type="range" id="filtro-anno-min" min="1964" max="1992" value="1964">
                     <input type="range" id="filtro-anno-max" min="1964" max="1992" value="1992">
                     <div class="slider-labels">
@@ -198,76 +200,91 @@ hide:
 .slider-container {
     position: relative;
     width: 100%;
-    height: 30px;
-    margin: 0.5rem 0;
+    padding: 0.5rem 0;
+    margin: 0.3rem 0 0.8rem 0;
+}
+
+.slider-track {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background: var(--md-default-fg-color--lightest);
+    border-radius: 2px;
+    margin: 0.8rem 0;
+}
+
+.slider-track-fill {
+    position: absolute;
+    height: 100%;
+    background: var(--md-primary-fg-color);
+    border-radius: 2px;
+    left: 0%;
+    right: 0%;
 }
 
 .slider-container input[type="range"] {
     position: absolute;
     width: 100%;
-    height: 4px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: -0.4rem;
     -webkit-appearance: none;
     appearance: none;
     background: transparent;
     pointer-events: none;
+    margin: 0;
 }
 
 .slider-container input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     background: var(--md-primary-fg-color);
     cursor: pointer;
     pointer-events: auto;
     border: 2px solid var(--md-default-bg-color);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    z-index: 2;
+    position: relative;
 }
 
 .slider-container input[type="range"]::-moz-range-thumb {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     background: var(--md-primary-fg-color);
     cursor: pointer;
     pointer-events: auto;
     border: 2px solid var(--md-default-bg-color);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    z-index: 2;
 }
 
 .slider-container input[type="range"]::-webkit-slider-runnable-track {
     height: 4px;
-    background: var(--md-default-fg-color--lightest);
+    background: transparent;
     border-radius: 2px;
 }
 
 .slider-container input[type="range"]::-moz-range-track {
     height: 4px;
-    background: var(--md-default-fg-color--lightest);
+    background: transparent;
     border-radius: 2px;
-}
-
-.slider-track-fill {
-    position: absolute;
-    height: 4px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--md-primary-fg-color);
-    border-radius: 2px;
-    pointer-events: none;
-    left: 0%;
-    right: 0%;
 }
 
 .slider-labels {
     display: flex;
     justify-content: space-between;
-    margin-top: 0.5rem;
-    font-size: 0.75rem;
+    margin-top: 0.8rem;
+    font-size: 0.7rem;
     color: var(--md-default-fg-color--light);
+}
+
+.slider-labels span {
+    background: var(--md-code-bg-color);
+    padding: 0.05rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
 }
 
 .filtri-azioni {
@@ -416,6 +433,12 @@ hide:
         flex: 0 0 auto;
         white-space: normal;
         font-size: 0.85rem;
+    }
+    .slider-container {
+        padding: 0.2rem 0;
+    }
+    .slider-labels {
+        font-size: 0.6rem;
     }
 }
 </style>
