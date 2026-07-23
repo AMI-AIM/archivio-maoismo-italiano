@@ -22,7 +22,7 @@ hide:
     <a href="roberto-sassi/" class="people-link">
         <div class="people-tipo">Persona</div>
         <div class="people-name">Roberto Sassi</div>
-        
+        <div class="people-dates">1960 – 2023</div>
         <div class="people-count">1 documento</div>
     </a>
 </div>
@@ -31,7 +31,7 @@ hide:
     <a href="yao-wenyuan/" class="people-link">
         <div class="people-tipo">Persona</div>
         <div class="people-name">Yao Wenyuan</div>
-        
+        <div class="people-dates">1931 – 2005</div>
         <div class="people-count">1 documento</div>
     </a>
 </div>

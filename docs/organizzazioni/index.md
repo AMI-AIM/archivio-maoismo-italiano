@@ -40,7 +40,7 @@ hide:
     <a href="edizioni-oriente/" class="org-link">
         <div class="org-tipo">Casa editrice</div>
         <div class="org-name">Edizioni Oriente</div>
-        <div class="org-dates">1963 – </div>
+        <div class="org-dates">1963 – 1979</div>
         <div class="org-count">1 documento</div>
     </a>
 </div>

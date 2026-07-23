@@ -8,7 +8,7 @@ hide:
 
 <h1 class="person-name">Roberto Sassi</h1>
 
-
+<div class="person-dates">1960 – 2023</div>
 
 <div class="person-bio">
     <p><em>Biografia in costruzione. Scrivi qui la storia di Roberto Sassi.</em></p>

@@ -8,7 +8,7 @@ hide:
 
 <h1 class="person-name">Yao Wenyuan</h1>
 
-
+<div class="person-dates">1931 – 2005</div>
 
 <div class="person-bio">
     <p><em>Biografia in costruzione. Scrivi qui la storia di Yao Wenyuan.</em></p>

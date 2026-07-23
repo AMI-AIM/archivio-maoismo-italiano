@@ -8,7 +8,7 @@ hide:
 
 <h1 class="org-name">Edizioni Oriente</h1>
 
-<div class="org-dates">1963 – </div>
+<div class="org-dates">1963 – 1979</div>
 
 <div class="org-bio">
     <p><em>Storia in costruzione. Scrivi qui le informazioni su Edizioni Oriente.</em></p>
