@@ -300,3 +300,15 @@
         font-size: 0.75rem;
     }
 }
+
+/* ============================================================
+   NASCONDI L'INDICE LATERALE (TOC) SULLA HOME
+   ============================================================ */
+.md-sidebar--secondary {
+    display: none !important;
+}
+
+/* Allarga il contenuto per occupare lo spazio della sidebar rimossa */
+.md-content {
+    margin-right: 0 !important;
+}

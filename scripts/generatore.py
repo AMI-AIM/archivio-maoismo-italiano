@@ -1304,17 +1304,21 @@ def genera_home(df):
     schede.sort(key=lambda x: x['num_id'], reverse=True)
     ultime_tre = schede[:3]
     
-    # 🔥 AGGIUNTA: blocco immagine centrata con ombra
+    # 🔥 IMMAGINE SENZA DIDASCALIA
     immagine_html = """
 <div class="home-image-wrapper">
-    <img src="/archivio-maoismo-italiano/immagini/nuova-unita.png" 
+    <img src="/archivio-maoismo-italiano/immagini/s-l1600.png" 
          alt="Prima pagina di Nuova Unità" 
          class="home-image">
-    <p class="home-image-caption">Prima pagina di <em>Nuova Unità</em>, organo del Partito Comunista d'Italia (marxista-leninista), 1 ottobre 1968.</p>
 </div>
 """
     
-    home_content = f"""# Archivio del Maoismo Italiano
+    home_content = f"""---
+hide:
+  - toc
+---
+
+# Archivio del Maoismo Italiano
 
 L'**AMI** è un archivio digitale dedicato alla documentazione storica sul maoismo italiano. Questo sito funge da catalogo scientifico: ogni scheda descrive un documento conservato su **Internet Archive**.
 
