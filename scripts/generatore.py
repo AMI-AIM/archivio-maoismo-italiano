@@ -151,6 +151,30 @@ def link_lista(nomi_str, persone, organizzazioni):
     return 'N/A'
 
 # ============================================================
+# SCARICA DESCRIZIONE DA INTERNET ARCHIVE
+# ============================================================
+
+def scarica_descrizione_ia(identifier):
+    if not identifier:
+        return None
+    
+    try:
+        import requests
+        url = f"https://archive.org/metadata/{identifier}"
+        response = requests.get(url, timeout=10)
+        if response.status_code == 200:
+            data = response.json()
+            desc = data.get('metadata', {}).get('description', '')
+            if desc:
+                desc = re.sub(r'<[^>]+>', '', desc)
+                desc = desc.strip()
+                return desc
+    except Exception as e:
+        print(f"   ⚠️ Errore scaricando descrizione per {identifier}: {e}")
+    
+    return None
+
+# ============================================================
 # CREAZIONE SCHEDE DOCUMENTI
 # ============================================================
 
@@ -209,7 +233,6 @@ def crea_schede(df, persone, organizzazioni):
         if url_ia in ['nan', 'None', '']:
             url_ia = '#'
         
-        # 🔥 LEGGI IL NOME DEL FILE DALLA COLONNA 'nome_file'
         nome_file = str(row.get('nome_file', '')).strip()
         if nome_file in ['nan', 'None']:
             nome_file = ''
@@ -219,6 +242,8 @@ def crea_schede(df, persone, organizzazioni):
             match = re.search(r'/details/([^/?#]+)', url_ia)
             if match:
                 identifier = match.group(1)
+        
+        descrizione_ia = scarica_descrizione_ia(identifier) if identifier else None
         
         autore_links = []
         if autore_raw and autore_raw not in ['nan', 'None']:
@@ -251,16 +276,23 @@ hide:
         content = f"""
 <div class="doc-date-large">{data_formattata if data_formattata else 'Data non disponibile'}</div>
 <h1 class="doc-title-large">{titolo}</h1>
+"""
 
+        if descrizione_ia:
+            content += f"""
+<div class="doc-abstract">
+    <p>{descrizione_ia}</p>
+</div>
+"""
+
+        content += f"""
 <div class="embed-container">
 """
 
-        # 🔥 GESTIONE FOTO CON nome_file
         if tipo.lower() == 'foto' and identifier:
             if nome_file:
                 img_url = f"https://archive.org/download/{identifier}/{nome_file}"
             else:
-                # Fallback: prova con l'identificativo + estensioni comuni
                 img_url = f"https://archive.org/download/{identifier}/{identifier}.jpg"
             
             content += f"""
@@ -352,10 +384,25 @@ hide:
 .doc-title-large {{
     font-size: 2.4rem;
     font-weight: 700;
-    margin: 0.2rem 0 1.5rem 0;
+    margin: 0.2rem 0 0.5rem 0;
     line-height: 1.2;
     letter-spacing: -0.02em;
     color: var(--md-default-fg-color);
+}}
+
+.doc-abstract {{
+    margin: 0.5rem 0 1.5rem 0;
+    padding: 1rem 1.5rem;
+    background: var(--md-code-bg-color);
+    border-left: 4px solid var(--md-primary-fg-color);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--md-default-fg-color--light);
+}}
+
+.doc-abstract p {{
+    margin: 0;
 }}
 
 .embed-container {{
@@ -481,6 +528,10 @@ hide:
     .doc-title-large {{
         font-size: 1.6rem;
     }}
+    .doc-abstract {{
+        padding: 0.8rem 1rem;
+        font-size: 0.85rem;
+    }}
     .universal-embed {{
         height: 400px;
     }}
@@ -520,9 +571,8 @@ hide:
     
     return contatore
 
-
 # ============================================================
-# GENERAZIONE INDICE ARCHIVIO (CON DUAL-HANDLE SLIDER)
+# GENERAZIONE INDICE ARCHIVIO (CON DESCRIZIONE E METADATI)
 # ============================================================
 
 def genera_indice(df):
@@ -551,17 +601,28 @@ def genera_indice(df):
         org = str(row.get('organizzazione', '')).strip()
         if org in ['nan', 'None']:
             org = ''
+        autore_raw = str(row.get('autore', '')).strip()
+        if autore_raw in ['nan', 'None']:
+            autore_raw = ''
         keywords = str(row.get('keywords', '')).strip()
         if keywords in ['nan', 'None']:
             keywords = ''
         
-        parti_sommario = []
-        if tipo:
-            parti_sommario.append(tipo)
-        if org:
-            parti_sommario.append(org)
+        # 🔥 RECUPERA LA DESCRIZIONE DA IA
+        url_ia = str(row.get('url', '#')).strip()
+        descrizione = None
+        if url_ia and url_ia != '#':
+            match = re.search(r'/details/([^/?#]+)', url_ia)
+            if match:
+                identifier = match.group(1)
+                descrizione = scarica_descrizione_ia(identifier)
         
-        sommario = ' · '.join(parti_sommario) if parti_sommario else 'Documento storico'
+        # 🔥 AUTORE PIÙ LEGGIBILE (prendi il primo autore se multiplo)
+        if autore_raw and autore_raw not in ['nan', 'None']:
+            autori = split_nomi(autore_raw)
+            autore_display = autori[0] if autori else 'N/A'
+        else:
+            autore_display = 'N/A'
         
         if data_ordine[0] != 9999:
             anni_valori.append(data_ordine[0])
@@ -571,10 +632,11 @@ def genera_indice(df):
             'titolo': titolo,
             'data': data_formattata,
             'data_ordine': data_ordine,
-            'sommario': sommario,
-            'keywords': keywords,
             'tipo': tipo,
-            'organizzazione': org
+            'organizzazione': org,
+            'autore': autore_display,
+            'descrizione': descrizione,
+            'keywords': keywords
         })
     
     schede.sort(key=lambda x: (x['data_ordine'], x['titolo']))
@@ -912,13 +974,13 @@ hide:
     min-width: 0;
 }}
 
+/* 🔥 NUOVO STILE PER I RISULTATI DELLA PAGINA ARCHIVIO */
 .risultato-card {{
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
     padding: 0.6rem 0.8rem;
     border-bottom: 1px solid var(--md-default-fg-color--lightest);
     transition: background 0.15s;
-    gap: 1.5rem;
 }}
 
 .risultato-card:hover {{
@@ -926,23 +988,15 @@ hide:
 }}
 
 .risultato-data {{
-    flex: 0 0 140px;
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--md-primary-fg-color);
-    white-space: nowrap;
-    padding-top: 0.05rem;
-}}
-
-.risultato-contenuto {{
-    flex: 1;
-    min-width: 0;
 }}
 
 .risultato-titolo {{
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 0.1rem;
+    margin: 0.1rem 0;
 }}
 
 .risultato-titolo a {{
@@ -955,39 +1009,30 @@ hide:
     color: var(--md-primary-fg-color);
 }}
 
-.risultato-sommario {{
+/* 🔥 DESCRIZIONE TRONCATA A 3 RIGHE */
+.risultato-desc {{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 0.9rem;
     color: var(--md-default-fg-color--light);
-    margin-bottom: 0.1rem;
+    line-height: 1.5;
+    max-height: 4.5em;
+    margin: 0.1rem 0 0.1rem 0;
 }}
 
-.risultato-badge-container {{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
-}}
-
-.badge {{
-    display: inline-block;
-    font-size: 0.6rem;
-    font-weight: 600;
-    padding: 0.05rem 0.5rem;
-    border-radius: 4px;
-    background: var(--md-code-bg-color);
+/* 🔥 METADATI: tipologia · autore · organizzazione */
+.risultato-meta {{
+    font-size: 0.85rem;
     color: var(--md-default-fg-color--light);
-    border: 1px solid var(--md-default-fg-color--lightest);
+    margin-top: 0.1rem;
 }}
 
-.org-badge {{
-    background: var(--md-primary-fg-color--light);
-    color: var(--md-primary-fg-color);
-    border-color: var(--md-primary-fg-color);
-}}
-
-.tipo-badge {{
-    background: var(--md-primary-fg-color);
-    color: var(--md-primary-bg-color);
-    border-color: var(--md-primary-fg-color);
+.risultato-meta .separator {{
+    margin: 0 0.3rem;
+    color: var(--md-default-fg-color--lightest);
 }}
 
 .nessun-risultato {{
@@ -1013,26 +1058,16 @@ hide:
         width: 100%;
     }}
     .risultato-card {{
-        flex-direction: column;
-        gap: 0.1rem;
         padding: 0.6rem 0.4rem;
     }}
-    .risultato-data {{
-        flex: 0 0 auto;
-        white-space: normal;
+    .risultato-titolo {{
+        font-size: 1rem;
+    }}
+    .risultato-desc {{
         font-size: 0.85rem;
     }}
-    .slider-container {{
-        height: 32px;
-    }}
-    .slider-container input[type="range"]::-webkit-slider-thumb {{
-        width: 14px;
-        height: 14px;
-        margin-top: -5px;
-    }}
-    .slider-labels {{
-        font-size: 0.65rem;
-        margin-top: 0.6rem;
+    .risultato-meta {{
+        font-size: 0.8rem;
     }}
 }}
 </style>
@@ -1044,8 +1079,6 @@ hide:
     
     print(f"   ✅ Pagina Archivio generata con {len(schede)} schede.")
     print(f"   📅 Intervallo anni: {anno_min} - {anno_max}")
-
-
 
 # ============================================================
 # GENERAZIONE JSON PER I FILTRI
@@ -1235,7 +1268,6 @@ def genera_home(df):
     schede.sort(key=lambda x: x['num_id'], reverse=True)
     ultime_tre = schede[:3]
     
-    # 🔥 MODIFICA: rimuovi la parte che genera l'header e lascia solo il contenuto
     home_content = f"""# Archivio del Maoismo Italiano
 
 L'**AMI** è un archivio digitale dedicato alla documentazione storica sul maoismo italiano. Questo sito funge da catalogo scientifico: ogni scheda descrive un documento conservato su **Internet Archive**.
