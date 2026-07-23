@@ -187,7 +187,7 @@
 .md-footer-social__link img {
     height: 32px;
     width: auto;
-    filter: brightness(0) invert(1); /* Rende il logo bianco per adattarsi al footer scuro */
+    filter: brightness(0) invert(1);
     transition: filter 0.2s;
 }
 
