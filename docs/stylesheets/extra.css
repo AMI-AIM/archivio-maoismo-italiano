@@ -195,12 +195,16 @@
 
 .md-footer-copyright__text {
     font-size: 0.85rem;
-    color: var(--md-default-fg-color--light);
+    color: #ffffff !important; /* Forza bianco */
 }
 
 .md-footer-copyright__subtext {
     font-size: 0.75rem;
-    color: var(--md-default-fg-color--lighter);
+    color: #ffffff !important; /* Forza bianco */
+}
+
+.md-footer-copyright__text strong {
+    color: #ffffff !important; /* Assicura che anche il grassetto sia bianco */
 }
 
 .md-footer-social {
@@ -211,22 +215,22 @@
 .md-footer-social__link {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    color: var(--md-default-fg-color--light);
+    color: #ffffff !important; /* Colore bianco per l'icona */
+    font-size: 2rem; /* Dimensione dell'icona */
     text-decoration: none;
-    font-size: 0.85rem;
     transition: color 0.2s;
 }
 
 .md-footer-social__link:hover {
-    color: var(--md-primary-fg-color);
+    color: var(--md-primary-fg-color) !important; /* Cambia colore al passaggio del mouse */
 }
 
-.md-footer-social__link svg {
-    width: 24px;
-    height: 24px;
+/* Nasconde la striscia superiore di navigazione (Precedente/Successivo) */
+.md-footer__inner {
+    display: none !important;
 }
 
+/* Responsive */
 @media (max-width: 600px) {
     .md-footer-meta__inner {
         flex-direction: column;
