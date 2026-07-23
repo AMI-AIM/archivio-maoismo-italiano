@@ -45,3 +45,7 @@ nav:
 extra:
   homepage: /archivio-maoismo-italiano/
   generator: false
+  social:
+    - icon: fontawesome/brands/internet-archive
+      link: https://archive.org/details/@ivan_masci/lists/1/archivio-del-maoismo-italiano
+      name: Internet Archive
