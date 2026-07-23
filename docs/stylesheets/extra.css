@@ -1,20 +1,4 @@
 /* ============================================================
-   FONT AWESOME (per icone nel footer)
-   ============================================================ */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
-
-/* ============================================================
-   FOOTER PERSONALIZZATO
-   ============================================================ */
-.md-footer-meta__inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-/* ============================================================
    STILE PERSONALIZZATO - TEMA MATERIAL
    ============================================================ */
 
@@ -142,7 +126,77 @@
 }
 
 /* ============================================================
-   11. RESPONSIVE
+   11. FOOTER PERSONALIZZATO
+   ============================================================ */
+
+/* Nasconde la striscia di navigazione superiore (Precedente/Successivo) */
+.md-footer__inner {
+    display: none !important;
+}
+
+.md-footer-meta__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.md-footer-copyright {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+}
+
+.md-footer-copyright__text {
+    font-size: 0.85rem;
+    color: #ffffff !important;
+}
+
+.md-footer-copyright__subtext {
+    font-size: 0.75rem;
+    color: #ffffff !important;
+}
+
+.md-footer-copyright__email {
+    font-size: 0.75rem;
+    color: #ffffff !important;
+}
+
+.md-footer-copyright__email a {
+    color: #ffffff !important;
+    text-decoration: none;
+}
+
+.md-footer-copyright__email a:hover {
+    text-decoration: underline;
+    color: var(--md-primary-fg-color) !important;
+}
+
+.md-footer-social {
+    display: flex;
+    align-items: center;
+}
+
+.md-footer-social__link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.md-footer-social__link img {
+    height: 32px;
+    width: auto;
+    filter: brightness(0) invert(1); /* Rende il logo bianco per adattarsi al footer scuro */
+    transition: filter 0.2s;
+}
+
+.md-footer-social__link:hover img {
+    filter: brightness(0) invert(0.7);
+}
+
+/* ============================================================
+   12. RESPONSIVE
    ============================================================ */
 @media (max-width: 768px) {
     .md-header {
@@ -194,76 +248,6 @@
     }
 }
 
-/* ============================================================
-   12. FOOTER PERSONALIZZATO
-   ============================================================ */
-
-.md-footer-meta__inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.md-footer-copyright {
-    display: flex;
-    flex-direction: column;
-    gap: 0.02rem;
-}
-
-.md-footer-copyright__text {
-    font-size: 0.85rem;
-    color: #ffffff !important;
-}
-
-.md-footer-copyright__subtext {
-    font-size: 0.75rem;
-    color: #ffffff !important;
-}
-
-.md-footer-copyright__email {
-    font-size: 0.75rem;
-    color: #ffffff !important;
-}
-
-.md-footer-copyright__email a {
-    color: #ffffff !important;
-    text-decoration: none;
-}
-
-.md-footer-copyright__email a:hover {
-    text-decoration: underline;
-    color: var(--md-primary-fg-color) !important;
-}
-
-.md-footer-social {
-    display: flex;
-    align-items: center;
-}
-
-.md-footer-social__link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #ffffff !important;
-    transition: color 0.2s;
-}
-
-.md-footer-social__link .fa-internet-archive {
-    font-size: 2.2rem;
-}
-
-.md-footer-social__link:hover {
-    color: var(--md-primary-fg-color) !important;
-}
-
-/* Nasconde la striscia di navigazione superiore (Precedente/Successivo) */
-.md-footer__inner {
-    display: none !important;
-}
-
-/* Responsive: su mobile i due blocchi si impilano */
 @media (max-width: 600px) {
     .md-footer-meta__inner {
         flex-direction: column;
