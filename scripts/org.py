@@ -78,6 +78,20 @@ def genera_organizzazioni():
         fondazione = str(row.get('fondazione', '')).strip()
         if fondazione in ['nan', 'None']:
             fondazione = ''
+        scioglimento = str(row.get('scioglimento', '')).strip()
+        if scioglimento in ['nan', 'None']:
+            scioglimento = ''
+        
+        # 🔥 COSTRUISCI IL RIFERIMENTO CRONOLOGICO
+        date_parts = []
+        if fondazione:
+            date_parts.append(fondazione)
+        if scioglimento:
+            date_parts.append(scioglimento)
+        if date_parts:
+            data_range = ' – '.join(date_parts)
+        else:
+            data_range = ''
         
         documenti = []
         
@@ -131,6 +145,8 @@ def genera_organizzazioni():
                 'storia': storia,
                 'categoria': categoria,
                 'fondazione': fondazione,
+                'scioglimento': scioglimento,
+                'data_range': data_range,
                 'documenti': documenti
             }
     
@@ -165,6 +181,9 @@ hide:
         content = f"""
 <h1 class="org-name">{nome}</h1>
 
+<!-- 🔥 RIFERIMENTO CRONOLOGICO -->
+{f'<div class="org-dates">{data["data_range"]}</div>' if data["data_range"] else ''}
+
 <div class="org-bio">
     {storia_text}
 </div>
@@ -193,8 +212,16 @@ hide:
 .org-name {
     font-size: 2.4rem;
     font-weight: 700;
-    margin: 0.5rem 0 1rem 0;
+    margin: 0.5rem 0 0 0;
     color: var(--md-primary-fg-color);
+}
+
+.org-dates {
+    font-size: 1rem;
+    color: var(--md-default-fg-color--light);
+    margin: 0 0 1rem 0;
+    font-weight: 400;
+    letter-spacing: 0.02em;
 }
 
 .org-bio {
@@ -262,14 +289,15 @@ hide:
     margin-top: 0.1rem;
 }
 
+/* 🔥 BADGE ROSSO CON TESTO BIANCO */
 .ruolo-badge {
     display: inline-block;
     font-size: 0.65rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--md-primary-fg-color);
-    background: var(--md-primary-fg-color--light);
+    color: #ffffff !important;
+    background: var(--md-primary-fg-color);
     padding: 0.05rem 0.6rem;
     border-radius: 4px;
 }
@@ -288,6 +316,9 @@ hide:
     .org-name {
         font-size: 1.6rem;
     }
+    .org-dates {
+        font-size: 0.85rem;
+    }
 }
 </style>
 """
@@ -297,6 +328,7 @@ hide:
         
         print(f"   ✅ Creata scheda per {nome} → {slug}.md")
     
+    # 🔥 INDICE ORGANIZZAZIONI (con badge rosso e testo bianco)
     index_content = """---
 title: "Organizzazioni"
 hide:
@@ -315,11 +347,16 @@ hide:
         count_text = f"{num_doc} documento" if num_doc == 1 else f"{num_doc} documenti"
         categoria = organizzazioni[nome]['categoria']
         
+        # 🔥 DATA RANGE PER L'INDICE
+        data_range = organizzazioni[nome]['data_range']
+        data_html = f'<div class="org-dates">{data_range}</div>' if data_range else ''
+        
         index_content += f"""
 <div class="org-card">
     <a href="{slug}/" class="org-link">
         <div class="org-tipo">{categoria}</div>
         <div class="org-name">{nome}</div>
+        {data_html}
         <div class="org-count">{count_text}</div>
     </a>
 </div>
@@ -358,17 +395,18 @@ hide:
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 0.2rem;
+    gap: 0.1rem;
 }
 
+/* 🔥 BADGE ROSSO CON TESTO BIANCO */
 .org-tipo {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--md-primary-fg-color);
-    background: var(--md-primary-fg-color--light);
-    padding: 0.1rem 0.6rem;
+    color: #ffffff !important;
+    background: var(--md-primary-fg-color);
+    padding: 0.05rem 0.6rem;
     border-radius: 4px;
     display: inline-block;
     width: fit-content;
@@ -382,10 +420,16 @@ hide:
     word-break: break-word;
 }
 
+.org-dates {
+    font-size: 0.7rem;
+    color: var(--md-default-fg-color--light);
+    margin-top: 0.05rem;
+}
+
 .org-count {
     font-size: 0.75rem;
     color: var(--md-default-fg-color--light);
-    margin-top: 0.2rem;
+    margin-top: 0.1rem;
 }
 
 @media (max-width: 900px) {
@@ -400,6 +444,9 @@ hide:
     }
     .org-name {
         font-size: 0.9rem;
+    }
+    .org-dates {
+        font-size: 0.65rem;
     }
 }
 </style>
