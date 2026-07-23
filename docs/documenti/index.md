@@ -328,7 +328,7 @@ hide:
     min-width: 0;
 }
 
-/* 🔥 NUOVO STILE PER I RISULTATI DELLA PAGINA ARCHIVIO */
+/* 🔥 STILE RISULTATI PAGINA ARCHIVIO */
 .risultato-card {
     display: flex;
     flex-direction: column;
@@ -363,7 +363,19 @@ hide:
     color: var(--md-primary-fg-color);
 }
 
-/* 🔥 DESCRIZIONE TRONCATA A 3 RIGHE */
+/* 🔥 UNA SOLA RIGA DI METADATI: Autore · Organizzazione · Tipologia */
+.risultato-meta {
+    font-size: 0.85rem;
+    color: var(--md-default-fg-color--light);
+    margin: 0.1rem 0 0.1rem 0;
+}
+
+.risultato-meta .separator {
+    margin: 0 0.3rem;
+    color: var(--md-default-fg-color--lightest);
+}
+
+/* 🔥 DESCRIZIONE TRONCATA A 3 RIGHE SOTTO I METADATI */
 .risultato-desc {
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -374,19 +386,7 @@ hide:
     color: var(--md-default-fg-color--light);
     line-height: 1.5;
     max-height: 4.5em;
-    margin: 0.1rem 0 0.1rem 0;
-}
-
-/* 🔥 METADATI: tipologia · autore · organizzazione */
-.risultato-meta {
-    font-size: 0.85rem;
-    color: var(--md-default-fg-color--light);
-    margin-top: 0.1rem;
-}
-
-.risultato-meta .separator {
-    margin: 0 0.3rem;
-    color: var(--md-default-fg-color--lightest);
+    margin: 0.1rem 0 0 0;
 }
 
 .nessun-risultato {
@@ -417,11 +417,11 @@ hide:
     .risultato-titolo {
         font-size: 1rem;
     }
-    .risultato-desc {
-        font-size: 0.85rem;
-    }
     .risultato-meta {
         font-size: 0.8rem;
+    }
+    .risultato-desc {
+        font-size: 0.85rem;
     }
 }
 </style>

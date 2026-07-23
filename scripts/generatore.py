@@ -276,16 +276,7 @@ hide:
         content = f"""
 <div class="doc-date-large">{data_formattata if data_formattata else 'Data non disponibile'}</div>
 <h1 class="doc-title-large">{titolo}</h1>
-"""
 
-        if descrizione_ia:
-            content += f"""
-<div class="doc-abstract">
-    <p>{descrizione_ia}</p>
-</div>
-"""
-
-        content += f"""
 <div class="embed-container">
 """
 
@@ -333,7 +324,17 @@ hide:
 
         content += f"""
 </div>
+"""
 
+        # 🔥 DESCRIZIONE SOTTO IL VISUALIZZATORE
+        if descrizione_ia:
+            content += f"""
+<div class="doc-abstract">
+    <p>{descrizione_ia}</p>
+</div>
+"""
+
+        content += f"""
 <div class="doc-metadata">
     <div class="metadata-grid">
         <div class="metadata-item">
@@ -384,25 +385,10 @@ hide:
 .doc-title-large {{
     font-size: 2.4rem;
     font-weight: 700;
-    margin: 0.2rem 0 0.5rem 0;
+    margin: 0.2rem 0 1.5rem 0;
     line-height: 1.2;
     letter-spacing: -0.02em;
     color: var(--md-default-fg-color);
-}}
-
-.doc-abstract {{
-    margin: 0.5rem 0 1.5rem 0;
-    padding: 1rem 1.5rem;
-    background: var(--md-code-bg-color);
-    border-left: 4px solid var(--md-primary-fg-color);
-    border-radius: 4px;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--md-default-fg-color--light);
-}}
-
-.doc-abstract p {{
-    margin: 0;
 }}
 
 .embed-container {{
@@ -478,6 +464,21 @@ hide:
     color: var(--md-default-fg-color--light);
 }}
 
+.doc-abstract {{
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    background: var(--md-code-bg-color);
+    border-left: 4px solid var(--md-primary-fg-color);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--md-default-fg-color--light);
+}}
+
+.doc-abstract p {{
+    margin: 0;
+}}
+
 .doc-metadata {{
     margin-top: 2.5rem;
     padding-top: 1.5rem;
@@ -528,10 +529,6 @@ hide:
     .doc-title-large {{
         font-size: 1.6rem;
     }}
-    .doc-abstract {{
-        padding: 0.8rem 1rem;
-        font-size: 0.85rem;
-    }}
     .universal-embed {{
         height: 400px;
     }}
@@ -540,6 +537,11 @@ hide:
     }}
     .photo-viewer {{
         padding: 0.5rem;
+    }}
+    .doc-abstract {{
+        padding: 0.8rem 1rem;
+        font-size: 0.85rem;
+        margin: 1rem 0;
     }}
     .metadata-grid {{
         grid-template-columns: 1fr;
@@ -572,7 +574,7 @@ hide:
     return contatore
 
 # ============================================================
-# GENERAZIONE INDICE ARCHIVIO (CON DESCRIZIONE E METADATI)
+# GENERAZIONE INDICE ARCHIVIO
 # ============================================================
 
 def genera_indice(df):
@@ -608,7 +610,7 @@ def genera_indice(df):
         if keywords in ['nan', 'None']:
             keywords = ''
         
-        # 🔥 RECUPERA LA DESCRIZIONE DA IA
+        # Descrizione da IA
         url_ia = str(row.get('url', '#')).strip()
         descrizione = None
         if url_ia and url_ia != '#':
@@ -617,7 +619,7 @@ def genera_indice(df):
                 identifier = match.group(1)
                 descrizione = scarica_descrizione_ia(identifier)
         
-        # 🔥 AUTORE PIÙ LEGGIBILE (prendi il primo autore se multiplo)
+        # Autore leggibile (primo autore se multiplo)
         if autore_raw and autore_raw not in ['nan', 'None']:
             autori = split_nomi(autore_raw)
             autore_display = autori[0] if autori else 'N/A'
@@ -974,7 +976,7 @@ hide:
     min-width: 0;
 }}
 
-/* 🔥 NUOVO STILE PER I RISULTATI DELLA PAGINA ARCHIVIO */
+/* 🔥 STILE RISULTATI PAGINA ARCHIVIO */
 .risultato-card {{
     display: flex;
     flex-direction: column;
@@ -1009,7 +1011,19 @@ hide:
     color: var(--md-primary-fg-color);
 }}
 
-/* 🔥 DESCRIZIONE TRONCATA A 3 RIGHE */
+/* 🔥 UNA SOLA RIGA DI METADATI: Autore · Organizzazione · Tipologia */
+.risultato-meta {{
+    font-size: 0.85rem;
+    color: var(--md-default-fg-color--light);
+    margin: 0.1rem 0 0.1rem 0;
+}}
+
+.risultato-meta .separator {{
+    margin: 0 0.3rem;
+    color: var(--md-default-fg-color--lightest);
+}}
+
+/* 🔥 DESCRIZIONE TRONCATA A 3 RIGHE SOTTO I METADATI */
 .risultato-desc {{
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -1020,19 +1034,7 @@ hide:
     color: var(--md-default-fg-color--light);
     line-height: 1.5;
     max-height: 4.5em;
-    margin: 0.1rem 0 0.1rem 0;
-}}
-
-/* 🔥 METADATI: tipologia · autore · organizzazione */
-.risultato-meta {{
-    font-size: 0.85rem;
-    color: var(--md-default-fg-color--light);
-    margin-top: 0.1rem;
-}}
-
-.risultato-meta .separator {{
-    margin: 0 0.3rem;
-    color: var(--md-default-fg-color--lightest);
+    margin: 0.1rem 0 0 0;
 }}
 
 .nessun-risultato {{
@@ -1063,11 +1065,11 @@ hide:
     .risultato-titolo {{
         font-size: 1rem;
     }}
-    .risultato-desc {{
-        font-size: 0.85rem;
-    }}
     .risultato-meta {{
         font-size: 0.8rem;
+    }}
+    .risultato-desc {{
+        font-size: 0.85rem;
     }}
 }}
 </style>
