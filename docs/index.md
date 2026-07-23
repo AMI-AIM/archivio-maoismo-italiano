@@ -9,7 +9,7 @@ L'**AMI** è un archivio digitale dedicato alla documentazione storica sul maois
 
 
 <div class="home-image-wrapper">
-    <img src="/archivio-maoismo-italiano/immagini/s-l1600.png" 
+    <img src="/archivio-maoismo-italiano/immagini/nuova-unita.png" 
          alt="Prima pagina di Nuova Unità" 
          class="home-image">
 </div>
