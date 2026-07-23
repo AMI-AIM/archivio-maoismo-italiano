@@ -1171,6 +1171,14 @@ def genera_json(df, persone, organizzazioni):
             anno = int(data_raw)
             anni_valori.append(anno)
         
+        # 🔥 RECUPERA LA DESCRIZIONE DA IA (se disponibile)
+        descrizione = None
+        if url_ia and url_ia != '#':
+            match = re.search(r'/details/([^/?#]+)', url_ia)
+            if match:
+                identifier = match.group(1)
+                descrizione = scarica_descrizione_ia(identifier)
+        
         # PERSONE: SOLO quelle che sono in persone.xlsx
         persone_lista = []
         if autore_raw and autore_raw not in ['nan', 'None']:
@@ -1204,6 +1212,7 @@ def genera_json(df, persone, organizzazioni):
                     organizzazioni_lista.append(autore)
         organizzazioni_lista = list(set(organizzazioni_lista))
         
+        # 🔥 OGGETTO DOCUMENTO CON DESCRIZIONE
         doc_obj = {
             'id': ami_id,
             'titolo': titolo,
@@ -1216,7 +1225,8 @@ def genera_json(df, persone, organizzazioni):
             'keywords': keywords,
             'url_ia': url_ia,
             'persone': persone_lista,
-            'organizzazioni': organizzazioni_lista
+            'organizzazioni': organizzazioni_lista,
+            'descrizione': descrizione if descrizione else ''
         }
         documenti_json.append(doc_obj)
     
@@ -1232,8 +1242,9 @@ def genera_json(df, persone, organizzazioni):
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(json_data, f, ensure_ascii=False, indent=2)
     
-    print(f"   ✅ JSON generato con {len(documenti_json)} documenti")
+    print(f"   ✅ JSON generato con {len(documenti_json)} documenti (incluse descrizioni)")
     print(f"   📅 Intervallo anni: {json_data['anno_min']} - {json_data['anno_max']}")
+
 
 # ============================================================
 # GENERAZIONE HOME
