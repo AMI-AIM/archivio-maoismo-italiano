@@ -610,7 +610,7 @@ def genera_indice(df):
         if keywords in ['nan', 'None']:
             keywords = ''
         
-        # Descrizione da IA
+        # 🔥 DESCRIZIONE DA IA
         url_ia = str(row.get('url', '#')).strip()
         descrizione = None
         if url_ia and url_ia != '#':
@@ -619,7 +619,7 @@ def genera_indice(df):
                 identifier = match.group(1)
                 descrizione = scarica_descrizione_ia(identifier)
         
-        # Autore leggibile (primo autore se multiplo)
+        # 🔥 AUTORE LEGGIBILE (primo autore se multiplo)
         if autore_raw and autore_raw not in ['nan', 'None']:
             autori = split_nomi(autore_raw)
             autore_display = autori[0] if autori else 'N/A'
@@ -637,8 +637,7 @@ def genera_indice(df):
             'tipo': tipo,
             'organizzazione': org,
             'autore': autore_display,
-            'descrizione': descrizione,
-            'keywords': keywords
+            'descrizione': descrizione
         })
     
     schede.sort(key=lambda x: (x['data_ordine'], x['titolo']))
@@ -976,7 +975,7 @@ hide:
     min-width: 0;
 }}
 
-/* 🔥 STILE RISULTATI PAGINA ARCHIVIO */
+/* 🔥 RISULTATI PULITI */
 .risultato-card {{
     display: flex;
     flex-direction: column;
@@ -1015,7 +1014,7 @@ hide:
 .risultato-meta {{
     font-size: 0.85rem;
     color: var(--md-default-fg-color--light);
-    margin: 0.1rem 0 0.1rem 0;
+    margin: 0.1rem 0;
 }}
 
 .risultato-meta .separator {{
@@ -1023,7 +1022,7 @@ hide:
     color: var(--md-default-fg-color--lightest);
 }}
 
-/* 🔥 DESCRIZIONE TRONCATA A 3 RIGHE SOTTO I METADATI */
+/* 🔥 DESCRIZIONE SOTTO I METADATI, TRONCATA A 3 RIGHE */
 .risultato-desc {{
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -1073,6 +1072,35 @@ hide:
     }}
 }}
 </style>
+"""
+    
+    # 🔥 CICLO DI GENERAZIONE DEI RISULTATI (PULITO)
+    for s in schede:
+        # Costruisci la riga di metadati: Autore · Organizzazione · Tipologia
+        meta_parts = []
+        if s['autore'] and s['autore'] != 'N/A':
+            meta_parts.append(s['autore'])
+        if s['organizzazione'] and s['organizzazione'] not in ['nan', 'None', '']:
+            meta_parts.append(s['organizzazione'])
+        if s['tipo'] and s['tipo'] not in ['nan', 'None', '']:
+            meta_parts.append(s['tipo'])
+        meta_line = ' · '.join(meta_parts) if meta_parts else 'N/A'
+        
+        index_content += f"""
+<div class="risultato-card">
+    <div class="risultato-data">{s['data']}</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="{s['id']}/">{s['titolo']}</a>
+        </div>
+        <div class="risultato-meta">{meta_line}</div>
+        {f'<div class="risultato-desc">{s["descrizione"]}</div>' if s.get("descrizione") else ''}
+    </div>
+</div>
+"""
+    
+    index_content += """
+</div>
 """
     
     index_path = os.path.join(OUTPUT_DIR, 'documenti', 'index.md')
