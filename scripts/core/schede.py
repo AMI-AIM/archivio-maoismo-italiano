@@ -1,0 +1,399 @@
+import os
+import re
+import pandas as pd
+from .utils import formatta_data, split_nomi, scarica_descrizione_ia
+from .soggetti import crea_link, link_lista
+
+def crea_schede(df, persone, organizzazioni, output_dir):
+    print("📄 Creazione delle schede dei documenti...")
+    
+    documenti_dir = os.path.join(output_dir, 'documenti')
+    os.makedirs(documenti_dir, exist_ok=True)
+    contatore = 0
+    
+    for index, row in df.iterrows():
+        ami_id = str(row.get('id', '')).strip()
+        if not ami_id or pd.isna(row.get('id')):
+            continue
+        
+        titolo = str(row.get('titolo', 'Senza titolo')).strip()
+        if titolo in ['nan', 'None', '']:
+            titolo = 'Senza titolo'
+        
+        autore_raw = str(row.get('autore', '')).strip()
+        if autore_raw in ['nan', 'None']:
+            autore_raw = ''
+        
+        org_raw = str(row.get('organizzazione', '')).strip()
+        if org_raw in ['nan', 'None']:
+            org_raw = ''
+        
+        persone_collegate = str(row.get('persone_collegate', '')).strip()
+        if persone_collegate in ['nan', 'None']:
+            persone_collegate = ''
+        
+        organizzazioni_collegate = str(row.get('organizzazioni_collegate', '')).strip()
+        if organizzazioni_collegate in ['nan', 'None']:
+            organizzazioni_collegate = ''
+        
+        data_raw = str(row.get('data', row.get('anno', ''))).strip()
+        if data_raw in ['nan', 'None', '']:
+            data_raw = ''
+        data_formattata, _ = formatta_data(data_raw)
+        
+        tipo = str(row.get('tipo', '')).strip()
+        if tipo in ['nan', 'None']:
+            tipo = ''
+        if tipo.lower() == 'fotografia':
+            tipo = 'foto'
+        
+        serie = str(row.get('serie', '')).strip()
+        if serie in ['nan', 'None']:
+            serie = ''
+        
+        keywords = str(row.get('keywords', '')).strip()
+        if keywords in ['nan', 'None']:
+            keywords = ''
+        
+        url_ia = str(row.get('url', '#')).strip()
+        if url_ia in ['nan', 'None', '']:
+            url_ia = '#'
+        
+        nome_file = str(row.get('nome_file', '')).strip()
+        if nome_file in ['nan', 'None']:
+            nome_file = ''
+        
+        identifier = None
+        if url_ia and url_ia != '#':
+            match = re.search(r'/details/([^/?#]+)', url_ia)
+            if match:
+                identifier = match.group(1)
+        
+        descrizione_ia = scarica_descrizione_ia(identifier) if identifier else None
+        
+        autore_links = []
+        if autore_raw and autore_raw not in ['nan', 'None']:
+            autori = split_nomi(autore_raw)
+            for autore in autori:
+                link = crea_link(autore, persone, organizzazioni)
+                autore_links.append(link)
+        autore_html = ', '.join(autore_links) if autore_links else 'N/A'
+        
+        org_html = link_lista(org_raw, persone, organizzazioni)
+        persone_collegate_html = link_lista(persone_collegate, persone, organizzazioni)
+        organizzazioni_collegate_html = link_lista(organizzazioni_collegate, persone, organizzazioni)
+        
+        frontmatter = f"""---
+title: "{titolo}"
+ami_id: {ami_id}
+organization: "{org_raw}"
+author: "{autore_raw}"
+year: "{data_formattata}"
+type: "{tipo}"
+series: "{serie}"
+keywords: "{keywords}"
+description: "{tipo} su {org_raw} - Documento conservato su Internet Archive."
+hide:
+  - navigation
+  - toc
+---
+"""
+        
+        content = f"""
+<div class="doc-date-large">{data_formattata if data_formattata else 'Data non disponibile'}</div>
+<h1 class="doc-title-large">{titolo}</h1>
+
+<div class="embed-container">
+"""
+
+        if tipo.lower() == 'foto' and identifier:
+            if nome_file:
+                img_url = f"https://archive.org/download/{identifier}/{nome_file}"
+            else:
+                img_url = f"https://archive.org/download/{identifier}/{identifier}.jpg"
+            
+            content += f"""
+    <div class="photo-viewer">
+        <img src="{img_url}" 
+             alt="{titolo}" 
+             class="photo-embed"
+             onerror="this.style.display='none'; this.parentElement.querySelector('.photo-fallback').style.display='block';">
+        <div class="photo-fallback" style="display:none; padding:1rem; text-align:center;">
+            <p>🔗 <a href="{url_ia}" target="_blank">Visualizza la foto su Internet Archive</a></p>
+        </div>
+        <div class="embed-footer">
+            <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
+        </div>
+    </div>
+"""
+        elif identifier:
+            if tipo.lower() == 'audio':
+                embed_url = f"https://archive.org/embed/{identifier}"
+            else:
+                embed_url = f"https://archive.org/embed/{identifier}?ui=embed&nav=0"
+            
+            content += f"""
+    <iframe src="{embed_url}" 
+            class="universal-embed" 
+            allowfullscreen>
+    </iframe>
+    <div class="embed-footer">
+        <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
+    </div>
+"""
+        else:
+            content += f"""
+    <div class="no-embed">
+        <p>📄 <a href="{url_ia}" target="_blank">Visualizza il documento su Internet Archive</a></p>
+    </div>
+"""
+
+        content += f"""
+</div>
+"""
+
+        if descrizione_ia:
+            content += f"""
+<div class="doc-abstract">
+    <p>{descrizione_ia}</p>
+</div>
+"""
+
+        content += f"""
+<div class="doc-metadata">
+    <div class="metadata-grid">
+        <div class="metadata-item">
+            <span class="metadata-label">Autore</span>
+            <span class="metadata-value">{autore_html}</span>
+        </div>
+        <div class="metadata-item">
+            <span class="metadata-label">Organizzazione</span>
+            <span class="metadata-value">{org_html}</span>
+        </div>
+        <div class="metadata-item">
+            <span class="metadata-label">Persone collegate</span>
+            <span class="metadata-value">{persone_collegate_html}</span>
+        </div>
+        <div class="metadata-item">
+            <span class="metadata-label">Organizzazioni collegate</span>
+            <span class="metadata-value">{organizzazioni_collegate_html}</span>
+        </div>
+        <div class="metadata-item">
+            <span class="metadata-label">Data</span>
+            <span class="metadata-value">{data_formattata if data_formattata else 'N/A'}</span>
+        </div>
+        <div class="metadata-item">
+            <span class="metadata-label">Tipologia</span>
+            <span class="metadata-value">{tipo if tipo else 'N/A'}</span>
+        </div>
+        <div class="metadata-item">
+            <span class="metadata-label">Serie</span>
+            <span class="metadata-value">{serie if serie else 'N/A'}</span>
+        </div>
+        <div class="metadata-item">
+            <span class="metadata-label">Parole chiave</span>
+            <span class="metadata-value">{keywords if keywords else 'N/A'}</span>
+        </div>
+    </div>
+</div>
+
+<style>
+.doc-date-large {{
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--md-primary-fg-color);
+    margin: 0.5rem 0 0 0;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}}
+
+.doc-title-large {{
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin: 0.2rem 0 1.5rem 0;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--md-default-fg-color);
+}}
+
+.embed-container {{
+    margin: 1.5rem 0;
+    background: var(--md-code-bg-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    min-height: 100px;
+}}
+
+.universal-embed {{
+    width: 100%;
+    height: 600px;
+    border: none;
+    display: block;
+    background: var(--md-code-bg-color);
+}}
+
+.photo-viewer {{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: var(--md-code-bg-color);
+}}
+
+.photo-embed {{
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}}
+
+.photo-fallback {{
+    padding: 2rem;
+    text-align: center;
+    color: var(--md-default-fg-color--light);
+}}
+
+.photo-fallback a {{
+    color: var(--md-primary-fg-color);
+    text-decoration: none;
+    font-weight: 500;
+}}
+
+.photo-fallback a:hover {{
+    text-decoration: underline;
+}}
+
+.embed-footer {{
+    padding: 0.5rem 1rem 0.8rem 1rem;
+    font-size: 0.9rem;
+    text-align: right;
+    background: var(--md-code-bg-color);
+    border-top: 1px solid var(--md-default-fg-color--lightest);
+}}
+
+.embed-footer a {{
+    color: var(--md-primary-fg-color);
+    text-decoration: none;
+    font-weight: 500;
+}}
+
+.embed-footer a:hover {{
+    text-decoration: underline;
+}}
+
+.no-embed {{
+    padding: 2rem;
+    text-align: center;
+    color: var(--md-default-fg-color--light);
+}}
+
+.doc-abstract {{
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    background: var(--md-code-bg-color);
+    border-left: 4px solid var(--md-primary-fg-color);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--md-default-fg-color--light);
+}}
+
+.doc-abstract p {{
+    margin: 0;
+}}
+
+.doc-metadata {{
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--md-default-fg-color--lightest);
+}}
+
+.metadata-grid {{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.8rem 2rem;
+}}
+
+.metadata-item {{
+    display: flex;
+    flex-direction: column;
+    padding: 0.3rem 0;
+}}
+
+.metadata-label {{
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--md-default-fg-color--light);
+    margin-bottom: 0.1rem;
+}}
+
+.metadata-value {{
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--md-default-fg-color);
+    word-break: break-word;
+}}
+
+.metadata-value a {{
+    color: var(--md-primary-fg-color);
+    text-decoration: none;
+}}
+
+.metadata-value a:hover {{
+    text-decoration: underline;
+}}
+
+@media (max-width: 600px) {{
+    .doc-date-large {{
+        font-size: 1.3rem;
+    }}
+    .doc-title-large {{
+        font-size: 1.6rem;
+    }}
+    .universal-embed {{
+        height: 400px;
+    }}
+    .photo-embed {{
+        max-height: 50vh;
+    }}
+    .photo-viewer {{
+        padding: 0.5rem;
+    }}
+    .doc-abstract {{
+        padding: 0.8rem 1rem;
+        font-size: 0.85rem;
+        margin: 1rem 0;
+    }}
+    .metadata-grid {{
+        grid-template-columns: 1fr;
+        gap: 0.3rem;
+    }}
+    .metadata-item {{
+        flex-direction: row;
+        gap: 0.5rem;
+        padding: 0.2rem 0;
+        border-bottom: 1px solid var(--md-default-fg-color--lightest);
+    }}
+    .metadata-label {{
+        min-width: 100px;
+        font-size: 0.7rem;
+    }}
+    .metadata-value {{
+        font-size: 0.85rem;
+    }}
+}}
+</style>
+"""
+        
+        file_path = os.path.join(documenti_dir, f'{ami_id}.md')
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(frontmatter + content)
+        
+        contatore += 1
+        print(f"   ✅ Creata scheda per {ami_id} (tipo: {tipo})")
+    
+    return contatore

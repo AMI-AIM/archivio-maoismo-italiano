@@ -2,34 +2,11 @@ import pandas as pd
 import os
 import re
 from collections import defaultdict
+from core.utils import slugify, formatta_data, split_nomi
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 OUTPUT_DIR = os.path.join(ROOT_DIR, 'docs')
-
-def slugify(name):
-    if not name or name in ['nan', 'None']:
-        return ''
-    name = name.lower()
-    name = re.sub(r'[àáâãäå]', 'a', name)
-    name = re.sub(r'[èéêë]', 'e', name)
-    name = re.sub(r'[ìíîï]', 'i', name)
-    name = re.sub(r'[òóôõö]', 'o', name)
-    name = re.sub(r'[ùúûü]', 'u', name)
-    name = re.sub(r'[()\.]', ' ', name)
-    name = re.sub(r'[^a-z0-9\s-]', '', name)
-    name = re.sub(r'\s+', '-', name)
-    name = re.sub(r'-+', '-', name)
-    return name.strip('-')
-
-def formatta_data(data_str):
-    from generatore import formatta_data
-    return formatta_data(data_str)
-
-def split_nomi(nomi_str):
-    if not nomi_str or nomi_str in ['nan', 'None']:
-        return []
-    return [n.strip() for n in re.split(r'[;,]+', nomi_str) if n.strip()]
 
 def get_categoria_automatica(nome):
     nome_lower = nome.lower()
