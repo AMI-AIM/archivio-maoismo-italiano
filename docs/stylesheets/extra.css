@@ -190,7 +190,7 @@
 .md-footer-copyright {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0.05rem;
 }
 
 .md-footer-copyright__text {
@@ -234,4 +234,18 @@
         flex-direction: column;
         align-items: flex-start;
     }
+}
+.md-footer-copyright__email {
+    font-size: 0.75rem;
+    color: #ffffff !important;
+}
+
+.md-footer-copyright__email a {
+    color: #ffffff !important;
+    text-decoration: none;
+}
+
+.md-footer-copyright__email a:hover {
+    text-decoration: underline;
+    color: var(--md-primary-fg-color) !important;
 }
