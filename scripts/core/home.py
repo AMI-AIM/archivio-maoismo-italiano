@@ -58,7 +58,7 @@ def genera_home(df, output_dir):
     
     immagine_html = """
 <div class="home-image-wrapper">
-    <img src="/immagini/nuova-unita.png" 
+    <img src="immagini/nuova-unita.png" 
          alt="Prima pagina di Nuova Unità" 
          class="home-image">
 </div>
