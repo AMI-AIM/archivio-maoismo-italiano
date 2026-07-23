@@ -178,7 +178,7 @@
     }
 }
 
-/* Footer personalizzato: layout a due colonne */
+/* Footer personalizzato */
 .md-footer-meta__inner {
     display: flex;
     justify-content: space-between;
@@ -204,7 +204,7 @@
 }
 
 .md-footer-copyright__text strong {
-    color: #ffffff !important; /* Assicura che anche il grassetto sia bianco */
+    color: #ffffff !important;
 }
 
 .md-footer-social {
@@ -215,17 +215,15 @@
 .md-footer-social__link {
     display: flex;
     align-items: center;
-    color: #ffffff !important; /* Colore bianco per l'icona */
-    font-size: 2rem; /* Dimensione dell'icona */
     text-decoration: none;
-    transition: color 0.2s;
 }
 
-.md-footer-social__link:hover {
-    color: var(--md-primary-fg-color) !important; /* Cambia colore al passaggio del mouse */
+.md-footer-social__link img {
+    height: 32px;
+    width: auto;
 }
 
-/* Nasconde la striscia superiore di navigazione (Precedente/Successivo) */
+/* Nasconde la striscia di navigazione superiore (Precedente/Successivo) */
 .md-footer__inner {
     display: none !important;
 }
