@@ -1,17 +1,17 @@
 ---
-title: "Yao Wenyuan"
-description: "Scheda biografica e documenti di Yao Wenyuan"
+title: "Vincenzo Calò"
+description: "Scheda biografica e documenti di Vincenzo Calò"
 hide:
   - navigation
   - toc
 ---
 
-<h1 class="person-name">Yao Wenyuan</h1>
+<h1 class="person-name">Vincenzo Calò</h1>
 
-<div class="person-dates">1931 – 2005</div>
+
 
 <div class="person-bio">
-    <p><em>Biografia in costruzione. Scrivi qui la storia di Yao Wenyuan.</em></p>
+    <p><em>Biografia in costruzione. Scrivi qui la storia di Vincenzo Calò.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI
@@ -19,18 +19,10 @@ hide:
 <div class="catalogo-lista">
 
 <div class="doc-row">
-    <div class="doc-data">14 agosto 1968</div>
+    <div class="doc-data">1970</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0014/">Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta dalla leadership del Partito Comunista Cinese</a></div>
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0032/">Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">1968</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0012/">La classe operaia deve esercitare la sua direzione in ogni campo</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
 

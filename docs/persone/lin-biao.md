@@ -1,17 +1,17 @@
 ---
-title: "Yao Wenyuan"
-description: "Scheda biografica e documenti di Yao Wenyuan"
+title: "Lin Biao"
+description: "Scheda biografica e documenti di Lin Biao"
 hide:
   - navigation
   - toc
 ---
 
-<h1 class="person-name">Yao Wenyuan</h1>
+<h1 class="person-name">Lin Biao</h1>
 
-<div class="person-dates">1931 – 2005</div>
+
 
 <div class="person-bio">
-    <p><em>Biografia in costruzione. Scrivi qui la storia di Yao Wenyuan.</em></p>
+    <p><em>Biografia in costruzione. Scrivi qui la storia di Lin Biao.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI
@@ -19,18 +19,10 @@ hide:
 <div class="catalogo-lista">
 
 <div class="doc-row">
-    <div class="doc-data">14 agosto 1968</div>
+    <div class="doc-data">3 ottobre 1969</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0014/">Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta dalla leadership del Partito Comunista Cinese</a></div>
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0016/">Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">1968</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0012/">La classe operaia deve esercitare la sua direzione in ogni campo</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
 

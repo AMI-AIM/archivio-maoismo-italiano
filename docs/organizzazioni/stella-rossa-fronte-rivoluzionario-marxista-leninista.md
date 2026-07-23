@@ -1,17 +1,17 @@
 ---
-title: "Yao Wenyuan"
-description: "Scheda biografica e documenti di Yao Wenyuan"
+title: "Stella Rossa - Fronte Rivoluzionario Marxista-Leninista"
+description: "Documenti relativi a Stella Rossa - Fronte Rivoluzionario Marxista-Leninista"
 hide:
   - navigation
   - toc
 ---
 
-<h1 class="person-name">Yao Wenyuan</h1>
+<h1 class="org-name">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</h1>
 
-<div class="person-dates">1931 – 2005</div>
+<div class="org-dates">1969 – 1976</div>
 
-<div class="person-bio">
-    <p><em>Biografia in costruzione. Scrivi qui la storia di Yao Wenyuan.</em></p>
+<div class="org-bio">
+    <p><em>Storia in costruzione. Scrivi qui le informazioni su Stella Rossa - Fronte Rivoluzionario Marxista-Leninista.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI
@@ -19,32 +19,24 @@ hide:
 <div class="catalogo-lista">
 
 <div class="doc-row">
-    <div class="doc-data">14 agosto 1968</div>
+    <div class="doc-data">1970</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0014/">Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta dalla leadership del Partito Comunista Cinese</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">1968</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0012/">La classe operaia deve esercitare la sua direzione in ogni campo</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0032/">Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da, autore</span></div>
     </div>
 </div>
 
 </div>
 
 <style>
-.person-name {
+.org-name {
     font-size: 2.4rem;
     font-weight: 700;
     margin: 0.5rem 0 0 0;
     color: var(--md-primary-fg-color);
 }
 
-.person-dates {
+.org-dates {
     font-size: 1rem;
     color: var(--md-default-fg-color--light);
     margin: 0 0 1rem 0;
@@ -52,7 +44,7 @@ hide:
     letter-spacing: 0.02em;
 }
 
-.person-bio {
+.org-bio {
     margin: 1.5rem 0;
     padding: 1rem;
     background: var(--md-code-bg-color);
@@ -60,7 +52,7 @@ hide:
     border-left: 4px solid var(--md-primary-fg-color);
 }
 
-.person-bio p {
+.org-bio p {
     margin: 0.5rem 0;
 }
 
@@ -140,10 +132,10 @@ hide:
         white-space: normal;
         font-size: 0.8rem;
     }
-    .person-name {
+    .org-name {
         font-size: 1.6rem;
     }
-    .person-dates {
+    .org-dates {
         font-size: 0.85rem;
     }
 }

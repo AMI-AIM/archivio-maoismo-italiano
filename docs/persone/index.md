@@ -10,11 +10,74 @@ hide:
 <div class="people-grid">
 
 <div class="people-card">
+    <a href="chen-boda/" class="people-link">
+        <div class="people-tipo">Persona</div>
+        <div class="people-name">Chen Boda</div>
+        
+        <div class="people-count">2 documenti</div>
+    </a>
+</div>
+
+<div class="people-card">
+    <a href="dino-dini/" class="people-link">
+        <div class="people-tipo">Persona</div>
+        <div class="people-name">Dino Dini</div>
+        
+        <div class="people-count">1 documento</div>
+    </a>
+</div>
+
+<div class="people-card">
+    <a href="fosco-dinucci/" class="people-link">
+        <div class="people-tipo">Persona</div>
+        <div class="people-name">Fosco Dinucci</div>
+        <div class="people-dates">1921 – 1993</div>
+        <div class="people-count">2 documenti</div>
+    </a>
+</div>
+
+<div class="people-card">
+    <a href="jiang-qing/" class="people-link">
+        <div class="people-tipo">Persona</div>
+        <div class="people-name">Jiang Qing</div>
+        
+        <div class="people-count">1 documento</div>
+    </a>
+</div>
+
+<div class="people-card">
+    <a href="kang-sheng/" class="people-link">
+        <div class="people-tipo">Persona</div>
+        <div class="people-name">Kang Sheng</div>
+        
+        <div class="people-count">2 documenti</div>
+    </a>
+</div>
+
+<div class="people-card">
+    <a href="lin-biao/" class="people-link">
+        <div class="people-tipo">Persona</div>
+        <div class="people-name">Lin Biao</div>
+        
+        <div class="people-count">1 documento</div>
+    </a>
+</div>
+
+<div class="people-card">
     <a href="mao-zedong/" class="people-link">
         <div class="people-tipo">Persona</div>
         <div class="people-name">Mao Zedong</div>
         <div class="people-dates">1893 – 1976</div>
-        <div class="people-count">13 documenti</div>
+        <div class="people-count">16 documenti</div>
+    </a>
+</div>
+
+<div class="people-card">
+    <a href="osvaldo-pesce/" class="people-link">
+        <div class="people-tipo">Persona</div>
+        <div class="people-name">Osvaldo Pesce</div>
+        <div class="people-dates">193? – 2021</div>
+        <div class="people-count">3 documenti</div>
     </a>
 </div>
 
@@ -28,11 +91,29 @@ hide:
 </div>
 
 <div class="people-card">
+    <a href="vincenzo-calo/" class="people-link">
+        <div class="people-tipo">Persona</div>
+        <div class="people-name">Vincenzo Calò</div>
+        
+        <div class="people-count">1 documento</div>
+    </a>
+</div>
+
+<div class="people-card">
     <a href="yao-wenyuan/" class="people-link">
         <div class="people-tipo">Persona</div>
         <div class="people-name">Yao Wenyuan</div>
         <div class="people-dates">1931 – 2005</div>
-        <div class="people-count">1 documento</div>
+        <div class="people-count">2 documenti</div>
+    </a>
+</div>
+
+<div class="people-card">
+    <a href="zhou-enlai/" class="people-link">
+        <div class="people-tipo">Persona</div>
+        <div class="people-name">Zhou Enlai</div>
+        
+        <div class="people-count">2 documenti</div>
     </a>
 </div>
 

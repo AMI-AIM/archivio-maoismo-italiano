@@ -1,17 +1,17 @@
 ---
-title: "Yao Wenyuan"
-description: "Scheda biografica e documenti di Yao Wenyuan"
+title: "Osvaldo Pesce"
+description: "Scheda biografica e documenti di Osvaldo Pesce"
 hide:
   - navigation
   - toc
 ---
 
-<h1 class="person-name">Yao Wenyuan</h1>
+<h1 class="person-name">Osvaldo Pesce</h1>
 
-<div class="person-dates">1931 – 2005</div>
+<div class="person-dates">193? – 2021</div>
 
 <div class="person-bio">
-    <p><em>Biografia in costruzione. Scrivi qui la storia di Yao Wenyuan.</em></p>
+    <p><em>Biografia in costruzione. Scrivi qui la storia di Osvaldo Pesce.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI
@@ -27,10 +27,18 @@ hide:
 </div>
 
 <div class="doc-row">
-    <div class="doc-data">1968</div>
+    <div class="doc-data">1967</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0012/">La classe operaia deve esercitare la sua direzione in ogni campo</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0013/">Dichiarazione di Principio - Statuto</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">31 agosto 1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0015/">Osvaldo Pesce, Partito Comunista d'Italia (marxista-leninista), incontra il presidente Mao Zedong</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
     </div>
 </div>
 

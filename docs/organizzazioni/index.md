@@ -109,6 +109,15 @@ hide:
 </div>
 
 <div class="org-card">
+    <a href="stella-rossa-fronte-rivoluzionario-marxista-leninista/" class="org-link">
+        <div class="org-tipo">Partito</div>
+        <div class="org-name">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</div>
+        <div class="org-dates">1969 – 1976</div>
+        <div class="org-count">1 documento</div>
+    </a>
+</div>
+
+<div class="org-card">
     <a href="ufficio-politico-del-pcdi-m-l/" class="org-link">
         <div class="org-tipo">Organo di partito</div>
         <div class="org-name">Ufficio Politico del PCd'I (m-l)</div>
