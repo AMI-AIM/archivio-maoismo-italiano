@@ -5,6 +5,7 @@ site_url: https://ami-aim.github.io/archivio-maoismo-italiano/
 
 theme:
   name: material
+  custom_dir: overrides
   language: it
   features:
     - header.autohide
