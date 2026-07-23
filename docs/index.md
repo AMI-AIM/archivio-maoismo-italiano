@@ -15,15 +15,15 @@ L'**AMI** è un archivio digitale dedicato alla documentazione storica sul maois
 </div>
 
 
----
-
 ## 📥 Aggiunti di recente
+
+<div class="recent-container">
 
 <div class="catalogo-lista">
 
 
 <div class="doc-row">
-    <div class="doc-data">📘 1968</div>
+    <div class="doc-data">1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0031/">Sulla tattica contro l'imperialismo giapponese</a></div>
         <div class="doc-sommario">Opuscolo · Casa editrice in lingue estere</div>
@@ -32,7 +32,7 @@ L'**AMI** è un archivio digitale dedicato alla documentazione storica sul maois
 </div>
 
 <div class="doc-row">
-    <div class="doc-data">📘 1968</div>
+    <div class="doc-data">1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0030/">La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria</a></div>
         <div class="doc-sommario">Opuscolo · Casa editrice in lingue estere</div>
@@ -41,7 +41,7 @@ L'**AMI** è un archivio digitale dedicato alla documentazione storica sul maois
 </div>
 
 <div class="doc-row">
-    <div class="doc-data">📰 1 dicembre 1968</div>
+    <div class="doc-data">1 dicembre 1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0029/">Lavoro Politico no. 11/12</a></div>
         <div class="doc-sommario">Periodico · Centro di Informazione di Verona</div>
@@ -49,6 +49,7 @@ L'**AMI** è un archivio digitale dedicato alla documentazione storica sul maois
     </div>
 </div>
 
+</div>
 </div>
 
 <div style="text-align: center; margin-top: 1.5rem;">
@@ -60,8 +61,8 @@ L'**AMI** è un archivio digitale dedicato alla documentazione storica sul maois
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    margin-top: 1rem;
 }
+
 .doc-row {
     display: flex;
     align-items: flex-start;
@@ -70,43 +71,67 @@ L'**AMI** è un archivio digitale dedicato alla documentazione storica sul maois
     transition: background-color 0.15s;
     gap: 1.5rem;
 }
+
+.doc-row:last-child {
+    border-bottom: none;
+}
+
 .doc-row:hover {
     background-color: var(--md-code-bg-color);
 }
+
 .doc-data {
-    flex: 0 0 180px;
-    font-size: 1rem;
-    color: var(--md-primary-fg-color);
+    flex: 0 0 150px;
+    font-size: 0.9rem;
     font-weight: 500;
+    color: var(--md-primary-fg-color);
     white-space: nowrap;
     padding-top: 0.05rem;
 }
+
 .doc-contenuto {
     flex: 1;
     min-width: 0;
 }
+
 .doc-titolo {
     font-size: 1.05rem;
     font-weight: 600;
     margin-bottom: 0.1rem;
 }
+
 .doc-titolo a {
     text-decoration: none;
     color: var(--md-default-fg-color);
 }
+
 .doc-titolo a:hover {
     text-decoration: underline;
     color: var(--md-primary-fg-color);
 }
+
 .doc-sommario {
     font-size: 0.9rem;
     color: var(--md-default-fg-color--light);
 }
+
 .doc-keywords {
     font-size: 0.8rem;
     color: var(--md-primary-fg-color--light);
     font-style: italic;
 }
+
+/* ============================================================
+   CONTAINER PER AGGIUNTI DI RECENTE
+   ============================================================ */
+.recent-container {
+    background: var(--md-code-bg-color);
+    border-radius: 12px;
+    padding: 0.5rem 0.5rem 0.2rem 0.5rem;
+    margin: 1.5rem 0 1rem 0;
+    border: 1px solid var(--md-default-fg-color--lightest);
+}
+
 .md-button {
     display: inline-block;
     padding: 0.6rem 1.5rem;
@@ -115,13 +140,39 @@ L'**AMI** è un archivio digitale dedicato alla documentazione storica sul maois
     text-decoration: none;
     transition: background-color 0.2s;
 }
+
 .md-button--primary {
     background-color: var(--md-primary-fg-color);
     color: var(--md-primary-bg-color) !important;
 }
+
 .md-button--primary:hover {
     background-color: var(--md-primary-fg-color--dark);
 }
+
+/* ============================================================
+   IMMAGINE HOME
+   ============================================================ */
+.home-image-wrapper {
+    margin: 2rem auto;
+    max-width: 800px;
+    text-align: center;
+}
+
+.home-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    transition: box-shadow 0.3s ease;
+    display: block;
+}
+
+.home-image:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
 @media (max-width: 600px) {
     .doc-row {
         flex-direction: column;
@@ -132,6 +183,13 @@ L'**AMI** è un archivio digitale dedicato alla documentazione storica sul maois
         flex: 0 0 auto;
         white-space: normal;
         font-size: 0.9rem;
+    }
+    .recent-container {
+        padding: 0.3rem 0.3rem 0.1rem 0.3rem;
+    }
+    .home-image-wrapper {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
     }
 }
 </style>
