@@ -8,6 +8,8 @@ hide:
 
 <h1 class="person-name">Yao Wenyuan</h1>
 
+
+
 <div class="person-bio">
     <p><em>Biografia in costruzione. Scrivi qui la storia di Yao Wenyuan.</em></p>
 </div>
@@ -30,8 +32,16 @@ hide:
 .person-name {
     font-size: 2.4rem;
     font-weight: 700;
-    margin: 0.5rem 0 1rem 0;
+    margin: 0.5rem 0 0 0;
     color: var(--md-primary-fg-color);
+}
+
+.person-dates {
+    font-size: 1rem;
+    color: var(--md-default-fg-color--light);
+    margin: 0 0 1rem 0;
+    font-weight: 400;
+    letter-spacing: 0.02em;
 }
 
 .person-bio {
@@ -105,8 +115,8 @@ hide:
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--md-primary-fg-color);
-    background: var(--md-primary-fg-color--light);
+    color: #ffffff !important;
+    background: var(--md-primary-fg-color);
     padding: 0.05rem 0.6rem;
     border-radius: 4px;
 }
@@ -124,6 +134,9 @@ hide:
     }
     .person-name {
         font-size: 1.6rem;
+    }
+    .person-dates {
+        font-size: 0.85rem;
     }
 }
 </style>

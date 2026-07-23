@@ -8,6 +8,8 @@ hide:
 
 <h1 class="org-name">Renmin Ribao</h1>
 
+<div class="org-dates">1948 – </div>
+
 <div class="org-bio">
     <p><em>Storia in costruzione. Scrivi qui le informazioni su Renmin Ribao.</em></p>
 </div>
@@ -54,8 +56,16 @@ hide:
 .org-name {
     font-size: 2.4rem;
     font-weight: 700;
-    margin: 0.5rem 0 1rem 0;
+    margin: 0.5rem 0 0 0;
     color: var(--md-primary-fg-color);
+}
+
+.org-dates {
+    font-size: 1rem;
+    color: var(--md-default-fg-color--light);
+    margin: 0 0 1rem 0;
+    font-weight: 400;
+    letter-spacing: 0.02em;
 }
 
 .org-bio {
@@ -129,8 +139,8 @@ hide:
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--md-primary-fg-color);
-    background: var(--md-primary-fg-color--light);
+    color: #ffffff !important;
+    background: var(--md-primary-fg-color);
     padding: 0.05rem 0.6rem;
     border-radius: 4px;
 }
@@ -148,6 +158,9 @@ hide:
     }
     .org-name {
         font-size: 1.6rem;
+    }
+    .org-dates {
+        font-size: 0.85rem;
     }
 }
 </style>

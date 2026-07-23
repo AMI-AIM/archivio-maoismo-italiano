@@ -58,14 +58,13 @@ def genera_persone():
         if morte in ['nan', 'None']:
             morte = ''
         
-        # 🔥 COSTRUISCI IL RIFERIMENTO CRONOLOGICO
-        date_parts = []
-        if nascita:
-            date_parts.append(nascita)
-        if morte:
-            date_parts.append(morte)
-        if date_parts:
-            data_range = ' – '.join(date_parts)
+        # 🔥 COSTRUISCI IL RIFERIMENTO CRONOLOGICO CON TRATTINO
+        if nascita and morte:
+            data_range = f"{nascita} – {morte}"
+        elif nascita:
+            data_range = f"{nascita} – "
+        elif morte:
+            data_range = f"? – {morte}"
         else:
             data_range = ''
         
@@ -150,7 +149,6 @@ hide:
         content = f"""
 <h1 class="person-name">{nome}</h1>
 
-<!-- 🔥 RIFERIMENTO CRONOLOGICO -->
 {f'<div class="person-dates">{data["data_range"]}</div>' if data["data_range"] else ''}
 
 <div class="person-bio">
@@ -258,7 +256,6 @@ hide:
     margin-top: 0.1rem;
 }
 
-/* 🔥 BADGE ROSSO CON TESTO BIANCO */
 .ruolo-badge {
     display: inline-block;
     font-size: 0.65rem;
@@ -297,7 +294,7 @@ hide:
         
         print(f"   ✅ Creata scheda per {nome} → {slug}.md")
     
-    # 🔥 INDICE PERSONE (con badge rosso e testo bianco)
+    # INDICE PERSONE
     index_content = """---
 title: "Persone"
 hide:
@@ -315,7 +312,6 @@ hide:
         num_doc = len(persone[nome]['documenti'])
         count_text = f"{num_doc} documento" if num_doc == 1 else f"{num_doc} documenti"
         
-        # 🔥 DATA RANGE PER L'INDICE
         data_range = persone[nome]['data_range']
         data_html = f'<div class="people-dates">{data_range}</div>' if data_range else ''
         
@@ -366,7 +362,6 @@ hide:
     gap: 0.1rem;
 }
 
-/* 🔥 BADGE ROSSO CON TESTO BIANCO */
 .people-tipo {
     font-size: 0.6rem;
     font-weight: 600;

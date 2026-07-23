@@ -13,6 +13,7 @@ hide:
     <a href="casa-editrice-in-lingue-estere/" class="org-link">
         <div class="org-tipo">Casa editrice</div>
         <div class="org-name">Casa editrice in lingue estere</div>
+        <div class="org-dates">1952 – </div>
         <div class="org-count">14 documenti</div>
     </a>
 </div>
@@ -21,6 +22,7 @@ hide:
     <a href="centro-di-informazione-di-verona/" class="org-link">
         <div class="org-tipo">Gruppo</div>
         <div class="org-name">Centro di Informazione di Verona</div>
+        
         <div class="org-count">9 documenti</div>
     </a>
 </div>
@@ -29,6 +31,7 @@ hide:
     <a href="comitato-di-partito-di-catania-uci-m-l/" class="org-link">
         <div class="org-tipo">Organo di partito</div>
         <div class="org-name">Comitato di Partito di Catania (UCI-m.l)</div>
+        <div class="org-dates">1968 – 1972</div>
         <div class="org-count">1 documento</div>
     </a>
 </div>
@@ -37,6 +40,7 @@ hide:
     <a href="edizioni-oriente/" class="org-link">
         <div class="org-tipo">Casa editrice</div>
         <div class="org-name">Edizioni Oriente</div>
+        <div class="org-dates">1963 – </div>
         <div class="org-count">1 documento</div>
     </a>
 </div>
@@ -45,6 +49,7 @@ hide:
     <a href="hongqi/" class="org-link">
         <div class="org-tipo">Giornale</div>
         <div class="org-name">Hongqi</div>
+        <div class="org-dates">1958 – 1998</div>
         <div class="org-count">1 documento</div>
     </a>
 </div>
@@ -53,6 +58,7 @@ hide:
     <a href="jiefangjun-bao/" class="org-link">
         <div class="org-tipo">Giornale</div>
         <div class="org-name">Jiefangjun Bao</div>
+        <div class="org-dates">1956 – </div>
         <div class="org-count">1 documento</div>
     </a>
 </div>
@@ -61,6 +67,7 @@ hide:
     <a href="nuova-unita/" class="org-link">
         <div class="org-tipo">Giornale</div>
         <div class="org-name">Nuova Unità</div>
+        <div class="org-dates">1964 – 1991</div>
         <div class="org-count">2 documenti</div>
     </a>
 </div>
@@ -69,6 +76,7 @@ hide:
     <a href="partito-comunista-cinese/" class="org-link">
         <div class="org-tipo">Partito</div>
         <div class="org-name">Partito Comunista Cinese</div>
+        <div class="org-dates">1921 – </div>
         <div class="org-count">1 documento</div>
     </a>
 </div>
@@ -77,6 +85,7 @@ hide:
     <a href="partito-comunista-ditalia-marxista-leninista/" class="org-link">
         <div class="org-tipo">Partito</div>
         <div class="org-name">Partito Comunista d'Italia (marxista-leninista)</div>
+        <div class="org-dates">1966 – 1991</div>
         <div class="org-count">4 documenti</div>
     </a>
 </div>
@@ -85,6 +94,7 @@ hide:
     <a href="renmin-ribao/" class="org-link">
         <div class="org-tipo">Giornale</div>
         <div class="org-name">Renmin Ribao</div>
+        <div class="org-dates">1948 – </div>
         <div class="org-count">4 documenti</div>
     </a>
 </div>
@@ -93,6 +103,7 @@ hide:
     <a href="signal/" class="org-link">
         <div class="org-tipo">Casa discografica</div>
         <div class="org-name">Signal</div>
+        
         <div class="org-count">1 documento</div>
     </a>
 </div>
@@ -101,6 +112,7 @@ hide:
     <a href="ufficio-politico-del-pcdi-m-l/" class="org-link">
         <div class="org-tipo">Organo di partito</div>
         <div class="org-name">Ufficio Politico del PCd'I (m-l)</div>
+        <div class="org-dates">1966 – 1991</div>
         <div class="org-count">1 documento</div>
     </a>
 </div>
@@ -109,6 +121,7 @@ hide:
     <a href="unione-dei-comunisti-italiani-marxisti-leninisti/" class="org-link">
         <div class="org-tipo">Partito</div>
         <div class="org-name">Unione dei Comunisti Italiani (marxisti-leninisti)</div>
+        <div class="org-dates">1968 – 1972</div>
         <div class="org-count">1 documento</div>
     </a>
 </div>
@@ -145,17 +158,17 @@ hide:
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 0.2rem;
+    gap: 0.1rem;
 }
 
 .org-tipo {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--md-primary-fg-color);
-    background: var(--md-primary-fg-color--light);
-    padding: 0.1rem 0.6rem;
+    color: #ffffff !important;
+    background: var(--md-primary-fg-color);
+    padding: 0.05rem 0.6rem;
     border-radius: 4px;
     display: inline-block;
     width: fit-content;
@@ -169,10 +182,16 @@ hide:
     word-break: break-word;
 }
 
+.org-dates {
+    font-size: 0.7rem;
+    color: var(--md-default-fg-color--light);
+    margin-top: 0.05rem;
+}
+
 .org-count {
     font-size: 0.75rem;
     color: var(--md-default-fg-color--light);
-    margin-top: 0.2rem;
+    margin-top: 0.1rem;
 }
 
 @media (max-width: 900px) {
@@ -187,6 +206,9 @@ hide:
     }
     .org-name {
         font-size: 0.9rem;
+    }
+    .org-dates {
+        font-size: 0.65rem;
     }
 }
 </style>

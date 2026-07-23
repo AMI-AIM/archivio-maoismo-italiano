@@ -13,6 +13,7 @@ hide:
     <a href="mao-zedong/" class="people-link">
         <div class="people-tipo">Persona</div>
         <div class="people-name">Mao Zedong</div>
+        <div class="people-dates">1893 – 1976</div>
         <div class="people-count">13 documenti</div>
     </a>
 </div>
@@ -21,6 +22,7 @@ hide:
     <a href="roberto-sassi/" class="people-link">
         <div class="people-tipo">Persona</div>
         <div class="people-name">Roberto Sassi</div>
+        
         <div class="people-count">1 documento</div>
     </a>
 </div>
@@ -29,6 +31,7 @@ hide:
     <a href="yao-wenyuan/" class="people-link">
         <div class="people-tipo">Persona</div>
         <div class="people-name">Yao Wenyuan</div>
+        
         <div class="people-count">1 documento</div>
     </a>
 </div>
@@ -65,17 +68,17 @@ hide:
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 0.2rem;
+    gap: 0.1rem;
 }
 
 .people-tipo {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--md-primary-fg-color);
-    background: var(--md-primary-fg-color--light);
-    padding: 0.1rem 0.6rem;
+    color: #ffffff !important;
+    background: var(--md-primary-fg-color);
+    padding: 0.05rem 0.6rem;
     border-radius: 4px;
     display: inline-block;
     width: fit-content;
@@ -89,10 +92,16 @@ hide:
     word-break: break-word;
 }
 
+.people-dates {
+    font-size: 0.7rem;
+    color: var(--md-default-fg-color--light);
+    margin-top: 0.05rem;
+}
+
 .people-count {
     font-size: 0.75rem;
     color: var(--md-default-fg-color--light);
-    margin-top: 0.2rem;
+    margin-top: 0.1rem;
 }
 
 @media (max-width: 900px) {
@@ -107,6 +116,9 @@ hide:
     }
     .people-name {
         font-size: 0.9rem;
+    }
+    .people-dates {
+        font-size: 0.65rem;
     }
 }
 </style>

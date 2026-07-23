@@ -82,14 +82,13 @@ def genera_organizzazioni():
         if scioglimento in ['nan', 'None']:
             scioglimento = ''
         
-        # 🔥 COSTRUISCI IL RIFERIMENTO CRONOLOGICO
-        date_parts = []
-        if fondazione:
-            date_parts.append(fondazione)
-        if scioglimento:
-            date_parts.append(scioglimento)
-        if date_parts:
-            data_range = ' – '.join(date_parts)
+        # 🔥 COSTRUISCI IL RIFERIMENTO CRONOLOGICO CON TRATTINO
+        if fondazione and scioglimento:
+            data_range = f"{fondazione} – {scioglimento}"
+        elif fondazione:
+            data_range = f"{fondazione} – "
+        elif scioglimento:
+            data_range = f"? – {scioglimento}"
         else:
             data_range = ''
         
@@ -181,7 +180,6 @@ hide:
         content = f"""
 <h1 class="org-name">{nome}</h1>
 
-<!-- 🔥 RIFERIMENTO CRONOLOGICO -->
 {f'<div class="org-dates">{data["data_range"]}</div>' if data["data_range"] else ''}
 
 <div class="org-bio">
@@ -289,7 +287,6 @@ hide:
     margin-top: 0.1rem;
 }
 
-/* 🔥 BADGE ROSSO CON TESTO BIANCO */
 .ruolo-badge {
     display: inline-block;
     font-size: 0.65rem;
@@ -328,7 +325,7 @@ hide:
         
         print(f"   ✅ Creata scheda per {nome} → {slug}.md")
     
-    # 🔥 INDICE ORGANIZZAZIONI (con badge rosso e testo bianco)
+    # INDICE ORGANIZZAZIONI
     index_content = """---
 title: "Organizzazioni"
 hide:
@@ -347,7 +344,6 @@ hide:
         count_text = f"{num_doc} documento" if num_doc == 1 else f"{num_doc} documenti"
         categoria = organizzazioni[nome]['categoria']
         
-        # 🔥 DATA RANGE PER L'INDICE
         data_range = organizzazioni[nome]['data_range']
         data_html = f'<div class="org-dates">{data_range}</div>' if data_range else ''
         
@@ -398,7 +394,6 @@ hide:
     gap: 0.1rem;
 }
 
-/* 🔥 BADGE ROSSO CON TESTO BIANCO */
 .org-tipo {
     font-size: 0.6rem;
     font-weight: 600;
