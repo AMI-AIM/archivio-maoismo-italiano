@@ -1,7 +1,7 @@
 import os
 import re
 import pandas as pd
-from .utils import formatta_data, split_nomi, scarica_descrizione_ia
+from .utils import formatta_data, split_nomi, scarica_descrizione_ia, scarica_testo_ia
 from .soggetti import crea_link, link_lista
 
 def crea_schede(df, persone, organizzazioni, output_dir):
@@ -106,6 +106,7 @@ hide:
 <div class="embed-container">
 """
 
+        # 🔥 GESTIONE FOTO
         if tipo.lower() == 'foto' and identifier:
             if nome_file:
                 img_url = f"https://archive.org/download/{identifier}/{nome_file}"
@@ -126,6 +127,29 @@ hide:
         </div>
     </div>
 """
+        
+        # 🔥 NUOVO: GESTIONE TESTO/TRASCRIZIONE
+        elif tipo.lower() in ['testo', 'trascrizione'] and identifier:
+            testo = scarica_testo_ia(identifier, nome_file)
+            if testo:
+                content += f"""
+    <div class="text-content">
+        <pre class="text-preview">{testo}</pre>
+    </div>
+"""
+            else:
+                content += f"""
+    <div class="text-fallback">
+        <p>🔗 <a href="{url_ia}" target="_blank">Visualizza il testo su Internet Archive</a></p>
+    </div>
+"""
+            content += f"""
+    <div class="embed-footer">
+        <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
+    </div>
+"""
+        
+        # 🔥 GESTIONE AUDIO, PDF, ETC.
         elif identifier:
             if tipo.lower() == 'audio':
                 embed_url = f"https://archive.org/embed/{identifier}"
@@ -347,6 +371,47 @@ hide:
     text-decoration: underline;
 }}
 
+/* ============================================================
+   VISUALIZZATORE TESTO
+   ============================================================ */
+.text-content {{
+    margin: 1rem 0;
+    background: var(--md-code-bg-color);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--md-default-fg-color--lightest);
+}}
+
+.text-preview {{
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: inherit;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    padding: 1.5rem;
+    margin: 0;
+    max-height: 600px;
+    overflow-y: auto;
+    background: transparent;
+    color: var(--md-default-fg-color);
+}}
+
+.text-fallback {{
+    padding: 2rem;
+    text-align: center;
+    color: var(--md-default-fg-color--light);
+}}
+
+.text-fallback a {{
+    color: var(--md-primary-fg-color);
+    text-decoration: none;
+    font-weight: 500;
+}}
+
+.text-fallback a:hover {{
+    text-decoration: underline;
+}}
+
 @media (max-width: 600px) {{
     .doc-date-large {{
         font-size: 1.3rem;
@@ -367,6 +432,11 @@ hide:
         padding: 0.8rem 1rem;
         font-size: 0.85rem;
         margin: 1rem 0;
+    }}
+    .text-preview {{
+        font-size: 0.85rem;
+        padding: 1rem;
+        max-height: 400px;
     }}
     .metadata-grid {{
         grid-template-columns: 1fr;

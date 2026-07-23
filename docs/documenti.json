@@ -13,8 +13,8 @@
       "url_ia": "https://archive.org/details/delegazione-edizioni-oriente",
       "persone": [],
       "organizzazioni": [
-        "Nuova Unità",
-        "Edizioni Oriente"
+        "Edizioni Oriente",
+        "Nuova Unità"
       ],
       "descrizione": "\"Il compagno Mao Tse-tung riceve la delegazione delle Edizioni Oriente, guidata dal compagno Dino Frangioni (Livio), Pechino, 17 maggio 1964.\" Da Nuova Unità, no. 4, giugno 1964.Presenti anche rappresentanti dell'organizzazione milanese Gruppo Proletario Luglio 60 (GPL60), come Giacomo (Gino) Montemezzani (alla sinistra di Mao)"
     },
@@ -31,8 +31,8 @@
       "url_ia": "https://archive.org/details/statuto-pcdi/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Ufficio Politico del PCd'I (m-l)",
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Ufficio Politico del PCd'I (m-l)"
       ],
       "descrizione": "Opuscolo contenente Dichiarazione di principio e Statuto del Partito Comunista d'Italia (marxista-leninista)."
     },
@@ -121,10 +121,10 @@
       "url_ia": "https://archive.org/details/circolare-16-maggio/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Partito Comunista Cinese",
-        "Hongqi",
         "Renmin Ribao",
-        "Casa editrice in lingue estere"
+        "Casa editrice in lingue estere",
+        "Hongqi",
+        "Partito Comunista Cinese"
       ],
       "descrizione": "Opuscolo contente la \"Circolare del Comitato Centrale del Partito ComunistaCinese (16 maggio 1966)\", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo \"Un Grande Documento Storico\", pubblicato su Bandiera Rossa e il Quotidiano del Popolo"
     },
@@ -217,8 +217,8 @@
       "persone": [],
       "organizzazioni": [
         "Renmin Ribao",
-        "Jiefangjun Bao",
-        "Casa editrice in lingue estere"
+        "Casa editrice in lingue estere",
+        "Jiefangjun Bao"
       ],
       "descrizione": "La Bussola Che Guida I Popoli Rivoluzionari Di Tutti I Paesi Verso La VittoriaCasa Editrice In Lingue EsterePechino 1968"
     },
@@ -373,8 +373,8 @@
       "url_ia": "https://archive.org/details/Pesce-e-Mao",
       "persone": [],
       "organizzazioni": [
-        "Nuova Unità",
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Nuova Unità"
       ],
       "descrizione": "Osvaldo Pesce, rappresentante del Partito Comunista d'Italia (marxista-leninista), incontra il presidente del Partito Comunista Cinese Mao Zedong. Foto pubblicata su Nuova Unità (31 agosto 1968, p. 4.)"
     },
@@ -548,6 +548,25 @@
       "descrizione": "Opuscolo contenente la dichiarazione anti-imperialista del presidente cinese Mao Zedong, tradotto e pubblicato dalla Casa editrice in lingue estere di Pechino, 1970."
     },
     {
+      "id": "AMI-0032",
+      "titolo": "Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista",
+      "autore": "Stella Rossa - Fronte Rivoluzionario Marxista-Leninista",
+      "organizzazione": "Stella Rossa - Fronte Rivoluzionario Marxista-Leninista",
+      "data": "1970",
+      "anno": 1970,
+      "tipo": "Testo",
+      "serie": "Galassia m-l",
+      "keywords": "Maoismo; Marxismo-leninismo",
+      "url_ia": "https://archive.org/details/statuto-stella-rossa",
+      "persone": [
+        "Vincenzo Calò"
+      ],
+      "organizzazioni": [
+        "Stella Rossa - Fronte Rivoluzionario Marxista-Leninista"
+      ],
+      "descrizione": "Estratto dall'opuscolo \"PER LA VITTORIA DEL POTERE ROSSO IN ITALIA-ATTI DEL CONGRESSO NAZIONALE COSTITUTIVO DI STELLA ROSSA FRONTE RIVOLUZIONARIO MARXISTA-LENINISTA\".Approvato nel suo testo definitivo dal Congresso Nazionale in seduta plenaria il 4 Novembre 1970.Stella Rossa fu un'organizzazione marxista-leninista (di orientamento maoista), fondata da Vincenzo Calò (già Viva il Leninismo!, Federazione Marxista-Leninista d'Italia, Tribuna Rossa) nel 1969. Nel 1976 si trasforma in Partito della rivoluzione socialista."
+    },
+    {
       "id": "AMI-0020",
       "titolo": "Ribellarsi è giusto! Antologia",
       "autore": "Mao Zedong; Roberto Sassi",
@@ -559,8 +578,8 @@
       "keywords": "Maoismo",
       "url_ia": "https://archive.org/details/ribellarsi-e-giusto//mode/2up",
       "persone": [
-        "Mao Zedong",
-        "Roberto Sassi"
+        "Roberto Sassi",
+        "Mao Zedong"
       ],
       "organizzazioni": [],
       "descrizione": "Mao Tse Tung Ribellarsi è giustoAntologia a cura di Roberto SassiEditore: SynergonAnno: 1993Numero di pagine: 127"

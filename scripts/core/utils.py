@@ -77,3 +77,24 @@ def scarica_descrizione_ia(identifier):
         print(f"   ⚠️ Errore scaricando descrizione per {identifier}: {e}")
     
     return None
+
+# 🔥 NUOVA FUNZIONE: scarica file .txt da Internet Archive
+def scarica_testo_ia(identifier, nome_file=None):
+    if not identifier:
+        return None
+    
+    if not nome_file:
+        nome_file = f"{identifier}.txt"
+    
+    try:
+        import requests
+        url = f"https://archive.org/download/{identifier}/{nome_file}"
+        response = requests.get(url, timeout=15)
+        if response.status_code == 200:
+            return response.text
+        else:
+            print(f"   ⚠️ Testo non trovato per {identifier} ({response.status_code})")
+    except Exception as e:
+        print(f"   ⚠️ Errore scaricando testo per {identifier}: {e}")
+    
+    return None

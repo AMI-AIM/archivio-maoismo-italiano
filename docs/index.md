@@ -25,6 +25,15 @@ In particolare, l'archivio raccoglie, descrive e rende consultabili documenti, p
 
 
 <div class="doc-row">
+    <div class="doc-data">1970</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="documenti/AMI-0032/">Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</a></div>
+        <div class="doc-sommario">Testo · Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</div>
+        <div class="doc-keywords">Maoismo; Marxismo-leninismo</div>
+    </div>
+</div>
+
+<div class="doc-row">
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0031/">Sulla tattica contro l'imperialismo giapponese</a></div>
@@ -39,15 +48,6 @@ In particolare, l'archivio raccoglie, descrive e rende consultabili documenti, p
         <div class="doc-titolo"><a href="documenti/AMI-0030/">La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria</a></div>
         <div class="doc-sommario">Opuscolo · Casa editrice in lingue estere</div>
         <div class="doc-keywords">Partito comunista cinese; Maoismo; Rivoluzione culturale</div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">1 dicembre 1968</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0029/">Lavoro Politico no. 11/12</a></div>
-        <div class="doc-sommario">Periodico · Centro di Informazione di Verona</div>
-        <div class="doc-keywords">Partito Comunista d'Italia (marxista-leninista); Partito Comunista d'Italia (marxista-leninista) - linea rossa; Lavoro Politico; Maoismo; Marxismo-leninismo</div>
     </div>
 </div>
 
