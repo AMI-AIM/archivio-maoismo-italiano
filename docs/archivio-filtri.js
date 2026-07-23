@@ -79,7 +79,6 @@ function inizializzaFiltri() {
     minLabel.textContent = annoMin;
     maxLabel.textContent = annoMax;
     
-    // Sincronizzazione e riempimento della traccia
     function aggiornaTrack() {
         const min = parseInt(minSlider.value);
         const max = parseInt(maxSlider.value);
@@ -97,7 +96,6 @@ function inizializzaFiltri() {
         }
     }
     
-    // 🔥 IMPORTANTE: i listener ora chiamano applicaFiltri()
     minSlider.addEventListener('input', function() {
         const val = parseInt(this.value);
         const maxVal = parseInt(maxSlider.value);
@@ -106,7 +104,7 @@ function inizializzaFiltri() {
         }
         document.getElementById('anno-min-label').textContent = this.value;
         aggiornaTrack();
-        applicaFiltri();  // ← Questo filtra i risultati
+        applicaFiltri();
     });
     
     maxSlider.addEventListener('input', function() {
@@ -117,13 +115,11 @@ function inizializzaFiltri() {
         }
         document.getElementById('anno-max-label').textContent = this.value;
         aggiornaTrack();
-        applicaFiltri();  // ← Questo filtra i risultati
+        applicaFiltri();
     });
     
-    // Inizializza la traccia
     aggiornaTrack();
     
-    // Ascolta i cambiamenti su tutti i filtri
     document.querySelectorAll('select, input').forEach(el => {
         el.addEventListener('change', applicaFiltri);
     });
@@ -154,7 +150,7 @@ function popolaSelect(id, items) {
 }
 
 // ============================================================
-// APPLICAZIONE FILTRI (CON ORDINAMENTO CRONOLOGICO GARANTITO)
+// APPLICAZIONE FILTRI (CON ORDINAMENTO CRONOLOGICO)
 // ============================================================
 
 function applicaFiltri() {
@@ -209,7 +205,7 @@ function getSelectedValues(id) {
 }
 
 // ============================================================
-// VISUALIZZAZIONE RISULTATI
+// VISUALIZZAZIONE RISULTATI (stile UMD - UNA RIGA)
 // ============================================================
 
 function mostraRisultati(risultati) {
@@ -226,18 +222,21 @@ function mostraRisultati(risultati) {
     
     let html = '';
     risultati.forEach(doc => {
-        let sommario = '';
-        if (doc.tipo && doc.organizzazione) {
-            sommario = `${doc.tipo} · ${doc.organizzazione}`;
-        } else if (doc.tipo) {
-            sommario = doc.tipo;
-        } else if (doc.organizzazione) {
-            sommario = doc.organizzazione;
+        // 🔥 UNA SOLA RIGA DI METADATI: Autore · Organizzazione · Tipologia
+        let metaParts = [];
+        if (doc.autore && doc.autore !== 'N/A' && doc.autore !== '') {
+            metaParts.push(doc.autore);
         }
+        if (doc.organizzazione && doc.organizzazione !== '') {
+            metaParts.push(doc.organizzazione);
+        }
+        if (doc.tipo && doc.tipo !== '') {
+            metaParts.push(doc.tipo);
+        }
+        let metaLine = metaParts.length > 0 ? metaParts.join(' · ') : 'N/A';
         
-        const orgBadge = doc.organizzazioni.map(o => `<span class="badge org-badge">${o}</span>`).join('');
-        const personeBadge = doc.persone.map(p => `<span class="badge">${p}</span>`).join('');
-        const tipoBadge = doc.tipo ? `<span class="badge tipo-badge">${doc.tipo}</span>` : '';
+        // 🔥 DESCRIZIONE (se disponibile)
+        let descrizione = doc.descrizione || '';
         
         html += `
         <div class="risultato-card">
@@ -246,12 +245,8 @@ function mostraRisultati(risultati) {
                 <div class="risultato-titolo">
                     <a href="/archivio-maoismo-italiano/documenti/${doc.id}/">${doc.titolo}</a>
                 </div>
-                ${sommario ? `<div class="risultato-sommario">${sommario}</div>` : ''}
-                <div class="risultato-badge-container">
-                    ${orgBadge}
-                    ${personeBadge}
-                    ${tipoBadge}
-                </div>
+                <div class="risultato-meta">${metaLine}</div>
+                ${descrizione ? `<div class="risultato-desc">${descrizione}</div>` : ''}
             </div>
         </div>
         `;
@@ -278,7 +273,6 @@ function resetFiltri() {
     document.getElementById('anno-min-label').textContent = annoMin;
     document.getElementById('anno-max-label').textContent = annoMax;
     
-    // Aggiorna la traccia dopo il reset
     const minSlider = document.getElementById('filtro-anno-min');
     const maxSlider = document.getElementById('filtro-anno-max');
     const min = parseInt(minSlider.value);

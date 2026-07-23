@@ -271,7 +271,7 @@ hide:
             <a href="AMI-0027/">Lavoro Politico no. 8/9</a>
         </div>
         <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · Periodico</div>
-        
+        <div class="risultato-desc">rivista "Lavoro politico", n. 8 - 9, giugno - luglio 1968</div>
     </div>
 </div>
 <div class="risultato-card">
