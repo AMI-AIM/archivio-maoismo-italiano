@@ -645,6 +645,31 @@ def genera_indice(df):
     anno_min = min(anni_valori) if anni_valori else 1900
     anno_max = max(anni_valori) if anni_valori else 2025
     
+    # 🔥 COSTRUISCI I RISULTATI PRIMA DI SCRIVERE IL FILE
+    risultati_html = ""
+    for s in schede:
+        meta_parts = []
+        if s['autore'] and s['autore'] != 'N/A':
+            meta_parts.append(s['autore'])
+        if s['organizzazione'] and s['organizzazione'] not in ['nan', 'None', '']:
+            meta_parts.append(s['organizzazione'])
+        if s['tipo'] and s['tipo'] not in ['nan', 'None', '']:
+            meta_parts.append(s['tipo'])
+        meta_line = ' · '.join(meta_parts) if meta_parts else 'N/A'
+        
+        risultati_html += f"""
+<div class="risultato-card">
+    <div class="risultato-data">{s['data']}</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="{s['id']}/">{s['titolo']}</a>
+        </div>
+        <div class="risultato-meta">{meta_line}</div>
+        {f'<div class="risultato-desc">{s["descrizione"]}</div>' if s.get("descrizione") else ''}
+    </div>
+</div>"""
+    
+    # 🔥 COSTRUISCI L'INTERO CONTENUTO CON I RISULTATI INCLUSI
     index_content = f"""---
 title: "Archivio"
 hide:
@@ -730,7 +755,7 @@ hide:
     <!-- RISULTATI -->
     <main class="risultati-main">
         <div id="risultati-container">
-            <p class="loading">Caricamento in corso...</p>
+            {risultati_html if risultati_html else '<p class="loading">Nessun documento trovato.</p>'}
         </div>
     </main>
 
@@ -975,7 +1000,6 @@ hide:
     min-width: 0;
 }}
 
-/* 🔥 RISULTATI PULITI */
 .risultato-card {{
     display: flex;
     flex-direction: column;
@@ -1010,7 +1034,6 @@ hide:
     color: var(--md-primary-fg-color);
 }}
 
-/* 🔥 UNA SOLA RIGA DI METADATI: Autore · Organizzazione · Tipologia */
 .risultato-meta {{
     font-size: 0.85rem;
     color: var(--md-default-fg-color--light);
@@ -1022,7 +1045,6 @@ hide:
     color: var(--md-default-fg-color--lightest);
 }}
 
-/* 🔥 DESCRIZIONE SOTTO I METADATI, TRONCATA A 3 RIGHE */
 .risultato-desc {{
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -1074,41 +1096,14 @@ hide:
 </style>
 """
     
-    # 🔥 CICLO DI GENERAZIONE DEI RISULTATI (PULITO)
-    for s in schede:
-        # Costruisci la riga di metadati: Autore · Organizzazione · Tipologia
-        meta_parts = []
-        if s['autore'] and s['autore'] != 'N/A':
-            meta_parts.append(s['autore'])
-        if s['organizzazione'] and s['organizzazione'] not in ['nan', 'None', '']:
-            meta_parts.append(s['organizzazione'])
-        if s['tipo'] and s['tipo'] not in ['nan', 'None', '']:
-            meta_parts.append(s['tipo'])
-        meta_line = ' · '.join(meta_parts) if meta_parts else 'N/A'
-        
-        index_content += f"""
-<div class="risultato-card">
-    <div class="risultato-data">{s['data']}</div>
-    <div class="risultato-contenuto">
-        <div class="risultato-titolo">
-            <a href="{s['id']}/">{s['titolo']}</a>
-        </div>
-        <div class="risultato-meta">{meta_line}</div>
-        {f'<div class="risultato-desc">{s["descrizione"]}</div>' if s.get("descrizione") else ''}
-    </div>
-</div>
-"""
-    
-    index_content += """
-</div>
-"""
-    
+    # 🔥 SCRIVI IL FILE CON TUTTO IL CONTENUTO
     index_path = os.path.join(OUTPUT_DIR, 'documenti', 'index.md')
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(index_content)
     
     print(f"   ✅ Pagina Archivio generata con {len(schede)} schede.")
     print(f"   📅 Intervallo anni: {anno_min} - {anno_max}")
+
 
 # ============================================================
 # GENERAZIONE JSON PER I FILTRI
