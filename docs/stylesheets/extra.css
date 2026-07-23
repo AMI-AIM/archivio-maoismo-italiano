@@ -259,3 +259,44 @@
         align-items: flex-start;
     }
 }
+
+/* ============================================================
+   IMMAGINE CENTRATA CON OMBRA - HOMEPAGE
+   ============================================================ */
+
+.home-image-wrapper {
+    margin: 2rem auto;
+    max-width: 800px;
+    text-align: center;
+}
+
+.home-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    transition: box-shadow 0.3s ease;
+    display: block;
+}
+
+.home-image:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.home-image-caption {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    color: var(--md-default-fg-color--light);
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .home-image-wrapper {
+        margin: 1.5rem auto;
+        padding: 0 0.5rem;
+    }
+    .home-image-caption {
+        font-size: 0.75rem;
+    }
+}
