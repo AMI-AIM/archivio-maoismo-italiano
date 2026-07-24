@@ -56,7 +56,7 @@
    4. LOGO PIÙ GRANDE (come prima)
    ============================================================ */
 .md-header__button.md-logo img {
-    height: 50px !important;       /* 🔥 Ripristinata la dimensione originale */
+    height: 80px !important;       /* 🔥 Ripristinata la dimensione originale */
     width: auto;
     max-width: 200px;
     object-fit: contain;

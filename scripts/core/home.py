@@ -64,7 +64,7 @@ def genera_home(df, output_dir):
          class="banner-image">
     <div class="banner-overlay"></div>
     <div class="banner-content">
-        <p>Documenti, periodici, opuscoli e fonti del movimento marxista-leninista italiano (1960-1992)</p>
+        <p>Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia </p>
         <a href="documenti/" class="banner-button">Esplora l'archivio</a>
     </div>
 </div>
