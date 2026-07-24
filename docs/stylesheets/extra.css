@@ -12,7 +12,7 @@
 }
 
 /* ============================================================
-   2. HEADER SU UNA RIGA (personalizzato)
+   2. HEADER SU UNA RIGA (personalizzato) - OTTIMIZZATO
    ============================================================ */
 .md-header {
     background: var(--md-primary-fg-color);
@@ -31,6 +31,7 @@
     margin: 0 auto;
     padding: 0 1rem;
     height: 64px;
+    flex-wrap: nowrap;   /* forza tutto su una riga su desktop */
 }
 
 /* LOGO */
@@ -49,12 +50,13 @@
     object-fit: contain;
 }
 
-/* NAVIGAZIONE */
+/* NAVIGAZIONE - CENTRATA */
 .md-header__nav {
     display: flex;
     align-items: center;
-    flex: 1;
+    flex: 1 1 auto;      /* occupa lo spazio disponibile */
     justify-content: center;
+    overflow: hidden;
 }
 
 .md-header__nav-list {
@@ -64,12 +66,15 @@
     margin: 0;
     padding: 0;
     align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;   /* impedisce il wrapping su desktop */
 }
 
 .md-header__nav-item {
     padding: 0.3rem 0.6rem;
     border-radius: 4px;
     transition: background 0.15s;
+    white-space: nowrap; /* evita che il testo vada a capo */
 }
 
 .md-header__nav-item:hover {
@@ -92,10 +97,11 @@
     color: #ffffff !important;
 }
 
-/* RICERCA */
+/* RICERCA - FISSA A DESTRA */
 .md-header__search {
-    flex-shrink: 0;
+    flex: 0 0 auto;      /* non si allarga né si restringe */
     width: 220px;
+    margin-left: 0.5rem;
 }
 
 .md-search {
@@ -218,7 +224,7 @@
 }
 
 /* ============================================================
-   4. RESPONSIVE
+   4. RESPONSIVE (migliorato)
    ============================================================ */
 @media (max-width: 768px) {
     .md-header {
@@ -227,14 +233,14 @@
     .md-header__inner {
         height: 56px;
         padding: 0 0.6rem;
-        flex-wrap: wrap;
+        flex-wrap: wrap;    /* consente alla nav di andare a capo su mobile */
     }
     .md-header__button.md-logo img {
         height: 32px;
         max-width: 130px;
     }
     .md-header__nav {
-        order: 3;
+        order: 3;           /* sposta la nav sotto logo e search */
         flex: 1 1 100%;
         overflow-x: auto;
         justify-content: flex-start;
@@ -242,7 +248,8 @@
     }
     .md-header__nav-list {
         gap: 0.2rem;
-        flex-wrap: nowrap;
+        flex-wrap: nowrap;  /* ancora in riga, ma scorrevole */
+        justify-content: flex-start;
     }
     .md-header__nav-item {
         padding: 0.15rem 0.4rem;
@@ -253,8 +260,9 @@
     }
     .md-header__search {
         width: auto;
-        flex: 1;
+        flex: 1;            /* occupa lo spazio rimanente */
         min-width: 100px;
+        margin-left: 0;
     }
 }
 
