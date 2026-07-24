@@ -391,7 +391,7 @@ hide:
             <a href="AMI-0032/">Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</a>
         </div>
         <div class="risultato-meta">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista · Stella Rossa - Fronte Rivoluzionario Marxista-Leninista · Testo</div>
-        
+        <div class="risultato-desc">Estratto dall'opuscolo "PER LA VITTORIA DEL POTERE ROSSO IN ITALIA-ATTI DEL CONGRESSO NAZIONALE COSTITUTIVO DI STELLA ROSSA FRONTE RIVOLUZIONARIO MARXISTA-LENINISTA".Approvato nel suo testo definitivo dal Congresso Nazionale in seduta plenaria il 4 Novembre 1970.Stella Rossa fu un'organizzazione marxista-leninista (di orientamento maoista), fondata da Vincenzo Calò (già Viva il Leninismo!, Federazione Marxista-Leninista d'Italia, Tribuna Rossa) nel 1969. Nel 1976 si trasforma in Partito della rivoluzione socialista.</div>
     </div>
 </div>
 <div class="risultato-card">

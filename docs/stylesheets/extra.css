@@ -12,115 +12,132 @@
 }
 
 /* ============================================================
-   2. HEADER PIÙ COMPATTO (riduce lo spazio rosso)
+   2. HEADER SU UNA RIGA (personalizzato)
    ============================================================ */
 .md-header {
-    min-height: 70px !important;
-    padding: 0.2rem 0 !important;
+    background: var(--md-primary-fg-color);
+    color: #ffffff;
+    height: 64px;
+    display: flex;
+    align-items: center;
 }
 
 .md-header__inner {
-    min-height: 70px !important;
-}
-
-/* ============================================================
-   3. TABS PIÙ COMPATTI (senza scroll orizzontale)
-   ============================================================ */
-.md-tabs {
-    display: flex !important;
-    justify-content: center !important;
-    padding: 0.1rem 2rem 0.2rem 2rem !important;
-    overflow: visible !important;  /* 🔥 Risolve lo scroll indesiderato */
-}
-
-.md-tabs__list {
-    display: flex !important;
-    justify-content: space-around !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    max-width: 900px;
-    gap: 0.5rem;
-    flex-wrap: wrap !important;    /* 🔥 Permette ai tabs di andare a capo se necessario */
-    margin-top: 0 !important;      /* 🔥 Rimuove il margine negativo che causava instabilità */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    height: 64px;
 }
 
-.md-tabs__link {
-    font-weight: 700 !important;
-    font-size: 1rem;
-    letter-spacing: 0.02em;
-    padding: 0.2rem 0.8rem 0.3rem 0.8rem !important;
-    white-space: nowrap;
-    transition: color 0.15s;
+/* LOGO */
+.md-header__button.md-logo {
+    padding: 0;
+    margin: 0;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
 }
 
-/* ============================================================
-   4. LOGO PIÙ GRANDE (come prima)
-   ============================================================ */
 .md-header__button.md-logo img {
-    height: 80px !important;       /* 🔥 Ripristinata la dimensione originale */
+    height: 50px;
     width: auto;
     max-width: 200px;
     object-fit: contain;
 }
 
-/* ============================================================
-   5. NASCONDI IL TITOLO DEL SITO NELL'HEADER
-   ============================================================ */
+/* NAVIGAZIONE */
+.md-header__nav {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+}
+
+.md-header__nav-list {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.md-header__nav-item {
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    transition: background 0.15s;
+}
+
+.md-header__nav-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.md-header__nav-link {
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    transition: color 0.15s;
+}
+
+.md-header__nav-link:hover {
+    color: #ffffff;
+}
+
+.md-header__nav-link--active {
+    color: #ffffff !important;
+}
+
+/* RICERCA */
+.md-header__search {
+    flex-shrink: 0;
+    width: 220px;
+}
+
+.md-search {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.md-search__form {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 0.2rem 0.8rem;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.md-search__form:focus-within {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.md-search__input {
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+    color: #ffffff !important;
+}
+
+.md-search__input::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.md-search__icon svg {
+    fill: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* NASCONDE IL TITOLO DEL SITO (non serve) */
 .md-header__title {
     display: none !important;
 }
 
-/* ============================================================
-   6. FORZA LAYOUT: LOGO A SINISTRA, RICERCA E TOGGLE A DESTRA
-   ============================================================ */
-.md-header__inner {
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between !important;
-    gap: 1.5rem;
-}
-
-.md-search {
-    margin-left: auto !important;
-}
-
-.md-header__option {
-    flex-shrink: 0;
-    margin-left: 0.5rem;
-}
-
-/* ============================================================
-   7. LENTE DI INGRANDIMENTO NERA
-   ============================================================ */
-.md-search__icon svg {
-    fill: #000000 !important;
-}
-
-/* ============================================================
-   8. BARRA DI RICERCA ARROTONDATA
-   ============================================================ */
-.md-search__form {
-    border-radius: 24px !important;
-    background: var(--md-default-bg-color);
-    border: 1px solid var(--md-default-fg-color--lightest);
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.md-search__form:focus-within {
-    border-color: var(--md-primary-fg-color);
-    box-shadow: 0 0 0 2px var(--md-primary-fg-color--light);
-}
-
-/* ============================================================
-   9. PLACEHOLDER "cerca" IN NERO
-   ============================================================ */
-.md-search__input::placeholder {
-    color: #000000 !important;
-    opacity: 0.8 !important;
-}
-
-/* ============================================================
-   10. SIDEBAR NASCOSTA
-   ============================================================ */
+/* SIDEBAR NASCOSTA */
 .md-sidebar--primary {
     display: none !important;
 }
@@ -130,7 +147,7 @@
 }
 
 /* ============================================================
-   11. FOOTER PERSONALIZZATO
+   3. FOOTER PERSONALIZZATO
    ============================================================ */
 
 /* Nasconde la striscia di navigazione superiore (Precedente/Successivo) */
@@ -201,65 +218,59 @@
 }
 
 /* ============================================================
-   12. RESPONSIVE
+   4. RESPONSIVE
    ============================================================ */
 @media (max-width: 768px) {
     .md-header {
-        min-height: 56px !important;
-        padding: 0.15rem 0 !important;
+        height: 56px;
     }
     .md-header__inner {
-        min-height: 56px !important;
-        flex-wrap: wrap !important;
-        gap: 0.3rem !important;
+        height: 56px;
+        padding: 0 0.6rem;
+        flex-wrap: wrap;
     }
     .md-header__button.md-logo img {
-        height: 35px !important;
+        height: 32px;
         max-width: 130px;
     }
-    .md-search {
-        margin-left: 0 !important;
-        flex: 1;
-        min-width: 120px;
+    .md-header__nav {
+        order: 3;
+        flex: 1 1 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 0.2rem 0;
     }
-    .md-header__option {
-        margin-left: 0 !important;
-    }
-    .md-tabs {
-        padding: 0.1rem 0.8rem 0.2rem 0.8rem !important;
-        overflow-x: auto !important;  /* 🔥 Solo su mobile lo scroll è consentito */
-        flex-wrap: nowrap !important;
-    }
-    .md-tabs__list {
-        justify-content: flex-start !important;
-        flex-wrap: nowrap !important;
+    .md-header__nav-list {
         gap: 0.2rem;
-        max-width: 100%;
-        margin-top: 0 !important;
+        flex-wrap: nowrap;
     }
-    .md-tabs__link {
+    .md-header__nav-item {
+        padding: 0.15rem 0.4rem;
+    }
+    .md-header__nav-link {
         font-size: 0.8rem;
-        padding: 0.15rem 0.4rem 0.2rem 0.4rem !important;
         white-space: nowrap;
     }
-    .md-footer-meta__inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.8rem;
-    }
-    .md-footer-social__link img {
-        height: 45px !important;
+    .md-header__search {
+        width: auto;
+        flex: 1;
+        min-width: 100px;
     }
 }
 
 @media (max-width: 480px) {
+    .md-header {
+        height: 50px;
+    }
+    .md-header__inner {
+        height: 50px;
+    }
     .md-header__button.md-logo img {
-        height: 28px !important;
+        height: 28px;
         max-width: 100px;
     }
-    .md-tabs__link {
+    .md-header__nav-link {
         font-size: 0.7rem;
-        padding: 0.1rem 0.3rem 0.15rem 0.3rem !important;
     }
     .md-footer-social__link img {
         height: 35px !important;
