@@ -3,14 +3,62 @@
    ============================================================ */
 
 /* ============================================================
-   1. NASCONDI IL TITOLO DEL SITO NELL'HEADER
+   1. HEADER ROSSO
+   ============================================================ */
+[data-md-color-primary="red"] {
+    --md-primary-fg-color: #b71c1c;
+    --md-primary-fg-color--light: #e53935;
+    --md-primary-fg-color--dark: #8e0000;
+}
+
+/* ============================================================
+   2. HEADER PIÙ COMPATTO (riduce lo spazio rosso)
+   ============================================================ */
+.md-header {
+    min-height: 60px !important;
+    padding: 0.2rem 0 !important;
+}
+
+.md-header__inner {
+    min-height: 60px !important;
+}
+
+/* ============================================================
+   3. TABS PIÙ COMPATTI (riduce lo spazio sotto)
+   ============================================================ */
+.md-tabs {
+    display: flex !important;
+    justify-content: center !important;
+    padding: 0.1rem 2rem 0.3rem 2rem !important;
+}
+
+.md-tabs__list {
+    display: flex !important;
+    justify-content: space-around !important;
+    width: 100%;
+    max-width: 900px;
+    gap: 0.5rem;
+    margin-top: -0.2rem !important;  /* Riduce ulteriormente lo spazio tra le righe */
+}
+
+.md-tabs__link {
+    font-weight: 700 !important;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    padding: 0.3rem 0.8rem 0.4rem 0.8rem !important;
+    white-space: nowrap;
+    transition: color 0.15s;
+}
+
+/* ============================================================
+   4. NASCONDI IL TITOLO DEL SITO NELL'HEADER
    ============================================================ */
 .md-header__title {
     display: none !important;
 }
 
 /* ============================================================
-   2. FORZA LAYOUT: LOGO A SINISTRA, RICERCA E TOGGLE A DESTRA
+   5. FORZA LAYOUT: LOGO A SINISTRA, RICERCA E TOGGLE A DESTRA
    ============================================================ */
 .md-header__inner {
     display: flex !important;
@@ -29,60 +77,13 @@
 }
 
 /* ============================================================
-   3. HEADER ROSSO
-   ============================================================ */
-[data-md-color-primary="red"] {
-    --md-primary-fg-color: #b71c1c;
-    --md-primary-fg-color--light: #e53935;
-    --md-primary-fg-color--dark: #8e0000;
-}
-
-/* ============================================================
-   4. HEADER PIÙ GRANDE
-   ============================================================ */
-.md-header {
-    min-height: 80px !important;
-    padding: 0.4rem 0 !important;
-}
-
-.md-header__inner {
-    min-height: 80px !important;
-}
-
-/* ============================================================
-   5. LOGO PIÙ GRANDE
+   6. LOGO PIÙ GRANDE
    ============================================================ */
 .md-header__button.md-logo img {
-    height: 90px !important;
+    height: 45px !important;
     width: auto;
-    max-width: 220px;
+    max-width: 200px;
     object-fit: contain;
-}
-
-/* ============================================================
-   6. TABS EQUIDISTANTI CON PIÙ DISTANZA DAL BORDO INFERIORE
-   ============================================================ */
-.md-tabs {
-    display: flex !important;
-    justify-content: center !important;
-    padding: 0.4rem 2rem 0.8rem 2rem !important;
-}
-
-.md-tabs__list {
-    display: flex !important;
-    justify-content: space-around !important;
-    width: 100%;
-    max-width: 900px;
-    gap: 0.5rem;
-}
-
-.md-tabs__link {
-    font-weight: 700 !important;
-    font-size: 1rem;
-    letter-spacing: 0.02em;
-    padding: 0.4rem 0.8rem 0.6rem 0.8rem !important;
-    white-space: nowrap;
-    transition: color 0.15s;
 }
 
 /* ============================================================
@@ -121,6 +122,7 @@
 .md-sidebar--primary {
     display: none !important;
 }
+
 .md-content {
     margin-left: 0 !important;
 }
@@ -137,7 +139,7 @@
 .md-footer-meta__inner {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Allinea verticalmente al centro */
+    align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
 }
@@ -145,9 +147,7 @@
 .md-footer-copyright {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centra verticalmente le righe di testo */
     gap: 0.05rem;
-    height: 100%;
 }
 
 .md-footer-copyright__text {
@@ -178,8 +178,6 @@
 .md-footer-social {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    min-height: 70px; /* Altezza minima per allinearsi con le 3 righe di testo */
 }
 
 .md-footer-social__link {
@@ -189,11 +187,11 @@
 }
 
 .md-footer-social__link img {
-    height: 60px; /* Logo più grande */
-    width: auto;
+    height: 60px !important;
+    width: auto !important;
+    max-height: none !important;
     filter: brightness(0) invert(1);
     transition: filter 0.2s;
-    margin-right: 0.5rem; /* Piccolo spazio dal bordo destro */
 }
 
 .md-footer-social__link:hover img {
@@ -205,159 +203,62 @@
    ============================================================ */
 @media (max-width: 768px) {
     .md-header {
-        min-height: 60px !important;
-        padding: 0.2rem 0 !important;
+        min-height: 50px !important;
+        padding: 0.15rem 0 !important;
     }
     .md-header__inner {
-        min-height: 60px !important;
+        min-height: 50px !important;
         flex-wrap: wrap !important;
-        gap: 0.5rem !important;
+        gap: 0.3rem !important;
     }
     .md-header__button.md-logo img {
-        height: 38px !important;
-        max-width: 150px;
+        height: 32px !important;
+        max-width: 130px;
     }
     .md-search {
         margin-left: 0 !important;
         flex: 1;
-        min-width: 150px;
+        min-width: 120px;
     }
     .md-header__option {
         margin-left: 0 !important;
     }
     .md-tabs {
-        padding: 0.2rem 0.8rem 0.6rem 0.8rem !important;
+        padding: 0.1rem 0.8rem 0.2rem 0.8rem !important;
         overflow-x: auto;
     }
     .md-tabs__list {
         justify-content: flex-start !important;
         flex-wrap: nowrap;
-        gap: 0.3rem;
+        gap: 0.2rem;
         max-width: 100%;
+        margin-top: 0 !important;
     }
     .md-tabs__link {
         font-size: 0.8rem;
-        padding: 0.2rem 0.4rem 0.4rem 0.4rem !important;
+        padding: 0.15rem 0.4rem 0.25rem 0.4rem !important;
         white-space: nowrap;
+    }
+    .md-footer-meta__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+    .md-footer-social__link img {
+        height: 45px !important;
     }
 }
 
 @media (max-width: 480px) {
     .md-header__button.md-logo img {
-        height: 30px !important;
-        max-width: 120px;
+        height: 28px !important;
+        max-width: 100px;
     }
     .md-tabs__link {
         font-size: 0.7rem;
-        padding: 0.15rem 0.3rem 0.3rem 0.3rem !important;
+        padding: 0.1rem 0.3rem 0.2rem 0.3rem !important;
     }
-}
-
-@media (max-width: 600px) {
-    .md-footer-meta__inner {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
-
-/* ============================================================
-   IMMAGINE CENTRATA CON OMBRA - HOMEPAGE
-   ============================================================ */
-
-.home-image-wrapper {
-    margin: 2rem auto;
-    max-width: 800px;
-    text-align: center;
-}
-
-.home-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    border: 1px solid var(--md-default-fg-color--lightest);
-    transition: box-shadow 0.3s ease;
-    display: block;
-}
-
-.home-image:hover {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-}
-
-.home-image-caption {
-    margin-top: 0.6rem;
-    font-size: 0.85rem;
-    color: var(--md-default-fg-color--light);
-    font-style: italic;
-}
-
-@media (max-width: 600px) {
-    .home-image-wrapper {
-        margin: 1.5rem auto;
-        padding: 0 0.5rem;
-    }
-    .home-image-caption {
-        font-size: 0.75rem;
-    }
-}
-
-/* ============================================================
-   NASCONDI L'INDICE LATERALE (TOC) SULLA HOME
-   ============================================================ */
-.md-sidebar--secondary {
-    display: none !important;
-}
-
-/* Allarga il contenuto per occupare lo spazio della sidebar rimossa */
-.md-content {
-    margin-right: 0 !important;
-}
-
-/* ============================================================
-   VISUALIZZATORE TESTO
-   ============================================================ */
-.text-content {
-    margin: 1rem 0;
-    background: var(--md-code-bg-color);
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--md-default-fg-color--lightest);
-}
-
-.text-preview {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    font-family: inherit;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    padding: 1.5rem;
-    margin: 0;
-    max-height: 600px;
-    overflow-y: auto;
-    background: transparent;
-    color: var(--md-default-fg-color);
-}
-
-.text-fallback {
-    padding: 2rem;
-    text-align: center;
-    color: var(--md-default-fg-color--light);
-}
-
-.text-fallback a {
-    color: var(--md-primary-fg-color);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.text-fallback a:hover {
-    text-decoration: underline;
-}
-
-@media (max-width: 600px) {
-    .text-preview {
-        font-size: 0.85rem;
-        padding: 1rem;
-        max-height: 400px;
+    .md-footer-social__link img {
+        height: 35px !important;
     }
 }
