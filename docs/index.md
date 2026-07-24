@@ -55,6 +55,16 @@ hide:
 </div>
 
 <style>
+/* ============================================================
+   NASCONDE IL TITOLO "Home" NELLA PAGINA
+   ============================================================ */
+.md-content article h1:first-of-type {
+    display: none !important;
+}
+
+/* ============================================================
+   CATALOGO
+   ============================================================ */
 .catalogo-lista {
     display: flex;
     flex-direction: column;
@@ -146,7 +156,7 @@ hide:
 }
 
 /* ============================================================
-   BANNER A LARGHEZZA COMPLETA (corretto)
+   BANNER A LARGHEZZA COMPLETA (ATTACCATO ALL'HEADER)
    ============================================================ */
 .banner-full {
     position: relative;
@@ -162,10 +172,11 @@ hide:
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-top: -0.1rem;        /* Annulla lo spazio residuo */
+    margin-top: -2.8rem;        /* Compensa il padding del contenuto */
     margin-bottom: 2rem;
     padding-top: 0;
     padding-bottom: 0;
+    transform: translateY(0);
 }
 
 .banner-overlay {
@@ -223,7 +234,7 @@ hide:
         height: 38vh;
         min-height: 220px;
         margin-bottom: 1.5rem;
-        margin-top: -0.1rem;
+        margin-top: -1.8rem;
     }
     .banner-content {
         margin-left: 1.5rem;
@@ -242,6 +253,7 @@ hide:
     .banner-full {
         height: 30vh;
         min-height: 180px;
+        margin-top: -1.2rem;
     }
     .banner-content p {
         font-size: 0.85rem;
