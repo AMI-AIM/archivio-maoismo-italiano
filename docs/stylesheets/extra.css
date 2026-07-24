@@ -15,21 +15,22 @@
    2. HEADER PIÙ COMPATTO (riduce lo spazio rosso)
    ============================================================ */
 .md-header {
-    min-height: 60px !important;
+    min-height: 70px !important;
     padding: 0.2rem 0 !important;
 }
 
 .md-header__inner {
-    min-height: 60px !important;
+    min-height: 70px !important;
 }
 
 /* ============================================================
-   3. TABS PIÙ COMPATTI (riduce lo spazio sotto)
+   3. TABS PIÙ COMPATTI (senza scroll orizzontale)
    ============================================================ */
 .md-tabs {
     display: flex !important;
     justify-content: center !important;
-    padding: 0.1rem 2rem 0.3rem 2rem !important;
+    padding: 0.1rem 2rem 0.2rem 2rem !important;
+    overflow: visible !important;  /* 🔥 Risolve lo scroll indesiderato */
 }
 
 .md-tabs__list {
@@ -38,27 +39,38 @@
     width: 100%;
     max-width: 900px;
     gap: 0.5rem;
-    margin-top: -0.2rem !important;  /* Riduce ulteriormente lo spazio tra le righe */
+    flex-wrap: wrap !important;    /* 🔥 Permette ai tabs di andare a capo se necessario */
+    margin-top: 0 !important;      /* 🔥 Rimuove il margine negativo che causava instabilità */
 }
 
 .md-tabs__link {
     font-weight: 700 !important;
     font-size: 1rem;
     letter-spacing: 0.02em;
-    padding: 0.3rem 0.8rem 0.4rem 0.8rem !important;
+    padding: 0.2rem 0.8rem 0.3rem 0.8rem !important;
     white-space: nowrap;
     transition: color 0.15s;
 }
 
 /* ============================================================
-   4. NASCONDI IL TITOLO DEL SITO NELL'HEADER
+   4. LOGO PIÙ GRANDE (come prima)
+   ============================================================ */
+.md-header__button.md-logo img {
+    height: 50px !important;       /* 🔥 Ripristinata la dimensione originale */
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+}
+
+/* ============================================================
+   5. NASCONDI IL TITOLO DEL SITO NELL'HEADER
    ============================================================ */
 .md-header__title {
     display: none !important;
 }
 
 /* ============================================================
-   5. FORZA LAYOUT: LOGO A SINISTRA, RICERCA E TOGGLE A DESTRA
+   6. FORZA LAYOUT: LOGO A SINISTRA, RICERCA E TOGGLE A DESTRA
    ============================================================ */
 .md-header__inner {
     display: flex !important;
@@ -74,16 +86,6 @@
 .md-header__option {
     flex-shrink: 0;
     margin-left: 0.5rem;
-}
-
-/* ============================================================
-   6. LOGO PIÙ GRANDE
-   ============================================================ */
-.md-header__button.md-logo img {
-    height: 45px !important;
-    width: auto;
-    max-width: 200px;
-    object-fit: contain;
 }
 
 /* ============================================================
@@ -203,16 +205,16 @@
    ============================================================ */
 @media (max-width: 768px) {
     .md-header {
-        min-height: 50px !important;
+        min-height: 56px !important;
         padding: 0.15rem 0 !important;
     }
     .md-header__inner {
-        min-height: 50px !important;
+        min-height: 56px !important;
         flex-wrap: wrap !important;
         gap: 0.3rem !important;
     }
     .md-header__button.md-logo img {
-        height: 32px !important;
+        height: 35px !important;
         max-width: 130px;
     }
     .md-search {
@@ -225,18 +227,19 @@
     }
     .md-tabs {
         padding: 0.1rem 0.8rem 0.2rem 0.8rem !important;
-        overflow-x: auto;
+        overflow-x: auto !important;  /* 🔥 Solo su mobile lo scroll è consentito */
+        flex-wrap: nowrap !important;
     }
     .md-tabs__list {
         justify-content: flex-start !important;
-        flex-wrap: nowrap;
+        flex-wrap: nowrap !important;
         gap: 0.2rem;
         max-width: 100%;
         margin-top: 0 !important;
     }
     .md-tabs__link {
         font-size: 0.8rem;
-        padding: 0.15rem 0.4rem 0.25rem 0.4rem !important;
+        padding: 0.15rem 0.4rem 0.2rem 0.4rem !important;
         white-space: nowrap;
     }
     .md-footer-meta__inner {
@@ -256,7 +259,7 @@
     }
     .md-tabs__link {
         font-size: 0.7rem;
-        padding: 0.1rem 0.3rem 0.2rem 0.3rem !important;
+        padding: 0.1rem 0.3rem 0.15rem 0.3rem !important;
     }
     .md-footer-social__link img {
         height: 35px !important;
