@@ -153,18 +153,19 @@ hide:
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
-    height: 60vh;
-    min-height: 350px;
-    max-height: 600px;
+    height: 55vh;
+    min-height: 320px;
+    max-height: 550px;
     background-image: url('/archivio-maoismo-italiano/immagini/banner.png');
     background-size: cover;
     background-position: center;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-top: 0;
+    margin-top: -0.1rem;        /* Annulla lo spazio residuo */
     margin-bottom: 2rem;
     padding-top: 0;
+    padding-bottom: 0;
 }
 
 .banner-overlay {
@@ -182,21 +183,21 @@ hide:
     text-align: left;
     color: #ffffff;
     padding: 0 2rem;
-    max-width: 700px;
+    max-width: 650px;
     margin-left: 3rem;
-}
-
-.banner-content h1 {
-    display: none !important;
 }
 
 .banner-content p {
     font-size: 1.2rem;
-    opacity: 0.9;
+    opacity: 0.92;
     margin: 0 0 1.5rem 0;
     line-height: 1.5;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
     font-weight: 400;
+}
+
+.banner-content h1 {
+    display: none !important;
 }
 
 .banner-button {
@@ -219,9 +220,10 @@ hide:
 
 @media (max-width: 768px) {
     .banner-full {
-        height: 40vh;
-        min-height: 250px;
+        height: 38vh;
+        min-height: 220px;
         margin-bottom: 1.5rem;
+        margin-top: -0.1rem;
     }
     .banner-content {
         margin-left: 1.5rem;
@@ -238,8 +240,8 @@ hide:
 
 @media (max-width: 480px) {
     .banner-full {
-        height: 35vh;
-        min-height: 200px;
+        height: 30vh;
+        min-height: 180px;
     }
     .banner-content p {
         font-size: 0.85rem;
