@@ -56,9 +56,12 @@ def genera_home(df, output_dir):
     schede.sort(key=lambda x: x['num_id'], reverse=True)
     ultime_tre = schede[:3]
     
-    # 🔥 BANNER (senza titolo, allineato a sinistra, attaccato all'header)
+    # 🔥 BANNER CON TAG <img> (larghezza 100%, altezza automatica)
     banner_html = """
 <div class="banner-full">
+    <img src="/archivio-maoismo-italiano/immagini/banner.png" 
+         alt="Archivio del Maoismo Italiano" 
+         class="banner-image">
     <div class="banner-overlay"></div>
     <div class="banner-content">
         <p>Documenti, periodici, opuscoli e fonti del movimento marxista-leninista italiano (1960-1992)</p>
@@ -204,26 +207,22 @@ hide:
 }
 
 /* ============================================================
-   BANNER A LARGHEZZA COMPLETA (ATTACCATO ALL'HEADER)
+   BANNER A LARGHEZZA COMPLETA (con img)
    ============================================================ */
 .banner-full {
     position: relative;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
-    height: 1000px;          /* ← fisso */
-    min-height: 1000px;      /* ← fisso */
-    max-height: 1000px;      /* ← fisso */
-    background-image: url('/archivio-maoismo-italiano/immagini/banner.png');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-top: -2.8rem;     /* potrebbe andare aumentato a -3.5rem se c'è spazio */
+    overflow: hidden;
+    margin-top: -2.8rem;       /* Compensa il padding del contenuto */
     margin-bottom: 2rem;
-    padding-top: 0;
-    padding-bottom: 0;
+}
+
+.banner-image {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .banner-overlay {
@@ -236,13 +235,15 @@ hide:
 }
 
 .banner-content {
-    position: relative;
+    position: absolute;
     z-index: 1;
     text-align: left;
     color: #ffffff;
     padding: 0 2rem;
     max-width: 650px;
     margin-left: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .banner-content p {
@@ -278,14 +279,13 @@ hide:
 
 @media (max-width: 768px) {
     .banner-full {
-        height: 38vh;
-        min-height: 220px;
-        margin-bottom: 1.5rem;
         margin-top: -1.8rem;
+        margin-bottom: 1.5rem;
     }
     .banner-content {
         margin-left: 1.5rem;
         padding: 0 1rem;
+        max-width: 90%;
     }
     .banner-content p {
         font-size: 1rem;
@@ -298,8 +298,6 @@ hide:
 
 @media (max-width: 480px) {
     .banner-full {
-        height: 30vh;
-        min-height: 180px;
         margin-top: -1.2rem;
     }
     .banner-content p {
