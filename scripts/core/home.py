@@ -56,12 +56,11 @@ def genera_home(df, output_dir):
     schede.sort(key=lambda x: x['num_id'], reverse=True)
     ultime_tre = schede[:3]
     
-    # 🔥 BANNER A LARGHEZZA COMPLETA
+    # 🔥 BANNER A LARGHEZZA COMPLETA (con correzioni)
     banner_html = """
 <div class="banner-full">
     <div class="banner-overlay"></div>
     <div class="banner-content">
-        <h1>Archivio del Maoismo Italiano</h1>
         <p>Documenti, periodici, opuscoli e fonti del movimento marxista-leninista italiano (1960-1992)</p>
         <a href="documenti/" class="banner-button">Esplora l'archivio</a>
     </div>
@@ -195,7 +194,7 @@ hide:
 }
 
 /* ============================================================
-   BANNER A LARGHEZZA COMPLETA (sotto l'header)
+   BANNER A LARGHEZZA COMPLETA (corretto)
    ============================================================ */
 .banner-full {
     position: relative;
@@ -210,9 +209,10 @@ hide:
     background-position: center;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     margin-top: 0;
     margin-bottom: 2rem;
+    padding-top: 0;
 }
 
 .banner-overlay {
@@ -227,26 +227,24 @@ hide:
 .banner-content {
     position: relative;
     z-index: 1;
-    text-align: center;
+    text-align: left;
     color: #ffffff;
     padding: 0 2rem;
     max-width: 700px;
+    margin-left: 3rem;
 }
 
 .banner-content h1 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin: 0 0 0.5rem 0;
-    letter-spacing: -0.02em;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    display: none !important;
 }
 
 .banner-content p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     opacity: 0.9;
     margin: 0 0 1.5rem 0;
     line-height: 1.5;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+    font-weight: 400;
 }
 
 .banner-button {
@@ -273,11 +271,12 @@ hide:
         min-height: 250px;
         margin-bottom: 1.5rem;
     }
-    .banner-content h1 {
-        font-size: 1.8rem;
+    .banner-content {
+        margin-left: 1.5rem;
+        padding: 0 1rem;
     }
     .banner-content p {
-        font-size: 0.95rem;
+        font-size: 1rem;
     }
     .banner-button {
         padding: 0.6rem 1.5rem;
@@ -289,9 +288,6 @@ hide:
     .banner-full {
         height: 35vh;
         min-height: 200px;
-    }
-    .banner-content h1 {
-        font-size: 1.4rem;
     }
     .banner-content p {
         font-size: 0.85rem;

@@ -3,21 +3,17 @@ hide:
   - toc
 ---
 
-# Archivio del Maoismo Italiano
 
-L'Archivio del Maoismo Italiano (**AMI**) è un progetto di conservazione, catalogazione e valorizzazione digitale dedicato alla documentazione relativa alla diffusione del maoismo e dell'influenza politico-culturale della Repubblica Popolare Cinese in Italia nella seconda metà del Novecento.
-
-In particolare, l'archivio raccoglie, descrive e rende consultabili documenti, periodici, opuscoli e altri materiali prodotti dalle organizzazioni maoiste italiane, fungendo da risorsa digitale utile alla ricerca storica su una delle componenti più eclettiche e meno studiate della Nuova Sinistra italiana.
-
-
-<div class="home-image-wrapper">
-    <img src="immagini/nuova-unita.png" 
-         alt="Prima pagina di Nuova Unità" 
-         class="home-image">
+<div class="banner-full">
+    <div class="banner-overlay"></div>
+    <div class="banner-content">
+        <p>Documenti, periodici, opuscoli e fonti del movimento marxista-leninista italiano (1960-1992)</p>
+        <a href="documenti/" class="banner-button">Esplora l'archivio</a>
+    </div>
 </div>
 
 
-## Aggiunti di recente
+## 📥 Aggiunti di recente
 
 <div class="recent-container">
 
@@ -123,9 +119,6 @@ In particolare, l'archivio raccoglie, descrive e rende consultabili documenti, p
     font-style: italic;
 }
 
-/* ============================================================
-   CONTAINER PER AGGIUNTI DI RECENTE
-   ============================================================ */
 .recent-container {
     background: var(--md-code-bg-color);
     border-radius: 12px;
@@ -153,45 +146,103 @@ In particolare, l'archivio raccoglie, descrive e rende consultabili documenti, p
 }
 
 /* ============================================================
-   IMMAGINE HOME
+   BANNER A LARGHEZZA COMPLETA (corretto)
    ============================================================ */
-.home-image-wrapper {
-    margin: 2rem auto;
-    max-width: 800px;
-    text-align: center;
+.banner-full {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    height: 60vh;
+    min-height: 350px;
+    max-height: 600px;
+    background-image: url('/archivio-maoismo-italiano/immagini/banner.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    padding-top: 0;
 }
 
-.home-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    border: 1px solid var(--md-default-fg-color--lightest);
-    transition: box-shadow 0.3s ease;
-    display: block;
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
 }
 
-.home-image:hover {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+.banner-content {
+    position: relative;
+    z-index: 1;
+    text-align: left;
+    color: #ffffff;
+    padding: 0 2rem;
+    max-width: 700px;
+    margin-left: 3rem;
 }
 
-@media (max-width: 600px) {
-    .doc-row {
-        flex-direction: column;
-        gap: 0.2rem;
-        padding: 0.8rem 0.4rem;
+.banner-content h1 {
+    display: none !important;
+}
+
+.banner-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.5;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+    font-weight: 400;
+}
+
+.banner-button {
+    display: inline-block;
+    padding: 0.7rem 2.2rem;
+    background-color: #ffffff;
+    color: #b71c1c !important;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.banner-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 768px) {
+    .banner-full {
+        height: 40vh;
+        min-height: 250px;
+        margin-bottom: 1.5rem;
     }
-    .doc-data {
-        flex: 0 0 auto;
-        white-space: normal;
+    .banner-content {
+        margin-left: 1.5rem;
+        padding: 0 1rem;
+    }
+    .banner-content p {
+        font-size: 1rem;
+    }
+    .banner-button {
+        padding: 0.6rem 1.5rem;
         font-size: 0.9rem;
     }
-    .recent-container {
-        padding: 0.3rem 0.3rem 0.1rem 0.3rem;
+}
+
+@media (max-width: 480px) {
+    .banner-full {
+        height: 35vh;
+        min-height: 200px;
     }
-    .home-image-wrapper {
-        margin: 1rem auto;
-        padding: 0 0.5rem;
+    .banner-content p {
+        font-size: 0.85rem;
     }
 }
 </style>
