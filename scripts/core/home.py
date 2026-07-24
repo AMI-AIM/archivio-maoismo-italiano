@@ -211,20 +211,19 @@ hide:
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
-    height: 55vh;
-    min-height: 320px;
-    max-height: 550px;
+    height: 1000px;          /* ← fisso */
+    min-height: 1000px;      /* ← fisso */
+    max-height: 1000px;      /* ← fisso */
     background-image: url('/archivio-maoismo-italiano/immagini/banner.png');
     background-size: cover;
     background-position: center;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-top: -2.8rem;        /* Compensa il padding del contenuto */
+    margin-top: -2.8rem;     /* potrebbe andare aumentato a -3.5rem se c'è spazio */
     margin-bottom: 2rem;
     padding-top: 0;
     padding-bottom: 0;
-    transform: translateY(0);
 }
 
 .banner-overlay {
