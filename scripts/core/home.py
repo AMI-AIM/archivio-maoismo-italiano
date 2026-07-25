@@ -56,23 +56,23 @@ def genera_home(df, output_dir):
     schede.sort(key=lambda x: x['num_id'], reverse=True)
     ultime_tre = schede[:3]
     
-    # 🔥 BANNER CON TAG <img> (larghezza 100%, altezza automatica)
+    # 🔥 BANNER CON STILE INLINE PER FORZARE LA POSIZIONE
     banner_html = """
 <div class="banner-full">
     <img src="/archivio-maoismo-italiano/immagini/banner.png" 
          alt="Archivio del Maoismo Italiano" 
          class="banner-image">
     <div class="banner-overlay"></div>
-    <div class="banner-content">
-        <p>Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia </p>
-        <div class="banner-actions">
-            <a href="documenti/" class="banner-button">Esplora l'archivio</a>
-            <form class="banner-search" id="hero-search-form" action="documenti/" method="get">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="banner-search-icon" aria-hidden="true">
+    <div class="banner-content" style="position: absolute; bottom: 0.5rem !important; left: 0.5rem !important; z-index: 1; text-align: left; color: #ffffff; max-width: 650px; padding: 0.5rem 1rem;">
+        <p style="font-size: 1.2rem; opacity: 0.92; margin: 0 0 0.8rem 0; line-height: 1.5; text-shadow: 0 2px 12px rgba(0,0,0,0.4); font-weight: 400;">Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia</p>
+        <div class="banner-actions" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 0.6rem;">
+            <a href="documenti/" class="banner-button" style="display: inline-block; padding: 0.5rem 1.2rem; background-color: #ffffff; color: #b71c1c !important; font-weight: 600; font-size: 0.9rem; border-radius: 6px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.25); white-space: nowrap; flex-shrink: 0;">Esplora l'archivio</a>
+            <form class="banner-search" id="hero-search-form" action="documenti/" method="get" style="display: flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); border-radius: 24px; padding: 0.3rem 0.8rem; backdrop-filter: blur(2px); transition: background 0.2s, border-color 0.2s; position: relative; flex: 1 1 auto; min-width: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="banner-search-icon" aria-hidden="true" style="width: 1.1rem; height: 1.1rem; fill: #ffffff; flex-shrink: 0;">
                     <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/>
                 </svg>
-                <input type="text" id="hero-search-input" name="q" placeholder="Cerca nell'archivio..." aria-label="Cerca nell'archivio" autocomplete="off">
-                <button type="submit" aria-label="Cerca">Cerca</button>
+                <input type="text" id="hero-search-input" name="q" placeholder="Cerca nell'archivio..." aria-label="Cerca nell'archivio" autocomplete="off" style="background: transparent; border: none; outline: none; color: #ffffff; font-size: 0.9rem; width: 100%; min-width: 140px; flex: 1 1 auto;">
+                <button type="submit" aria-label="Cerca" style="background: none; border: none; color: #ffffff; font-weight: 600; font-size: 0.85rem; cursor: pointer; padding: 0.2rem 0.4rem; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; flex-shrink: 0;">Cerca</button>
                 <div class="hero-search-results" id="hero-search-results"></div>
             </form>
         </div>
@@ -217,7 +217,7 @@ hide:
 }
 
 /* ============================================================
-   BANNER A LARGHEZZA COMPLETA (con img)
+   BANNER: stili generali (posizionamento e sfondo)
    ============================================================ */
 .banner-full {
     position: relative;
@@ -225,8 +225,9 @@ hide:
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     overflow: hidden;
-    margin-top: -2.8rem;       /* Compensa il padding del contenuto */
+    margin-top: -2.8rem;
     margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .banner-image {
@@ -244,129 +245,7 @@ hide:
     background: rgba(0, 0, 0, 0.45);
 }
 
-.banner-content {
-    position: absolute;
-    z-index: 1;
-    text-align: left;
-    color: #ffffff;
-    padding: 0 2rem;
-    max-width: 650px;
-    margin-left: 3rem;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.banner-content p {
-    font-size: 1.2rem;
-    opacity: 0.92;
-    margin: 0 0 1.5rem 0;
-    line-height: 1.5;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
-    font-weight: 400;
-}
-
-.banner-content h1 {
-    display: none !important;
-}
-
-.banner-button {
-    display: inline-block;
-    padding: 0.7rem 2.2rem;
-    background-color: #ffffff;
-    color: #b71c1c !important;
-    font-weight: 600;
-    font-size: 1rem;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-}
-
-.banner-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-}
-
-/* ============================================================
-   BARRA DI RICERCA NELLA HERO
-   ============================================================ */
-.banner-actions {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.banner-search {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 24px;
-    padding: 0.5rem 0.9rem;
-    backdrop-filter: blur(2px);
-    transition: background 0.2s, border-color 0.2s;
-    position: relative;
-}
-
-.banner-search:focus-within {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.7);
-}
-
-.banner-search-icon {
-    width: 1.1rem;
-    height: 1.1rem;
-    fill: #ffffff;
-    flex-shrink: 0;
-}
-
-.banner-search input {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #ffffff;
-    font-size: 0.95rem;
-    width: 220px;
-    max-width: 40vw;
-}
-
-.banner-search input::placeholder {
-    color: rgba(255, 255, 255, 0.75);
-}
-
-.banner-search button {
-    background: none;
-    border: none;
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 0.85rem;
-    cursor: pointer;
-    padding: 0.2rem 0.4rem;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-}
-
-.banner-search button:hover {
-    color: rgba(255, 255, 255, 0.8);
-}
-
-@media (max-width: 768px) {
-    .banner-actions {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.8rem;
-    }
-    .banner-search input {
-        width: 60vw;
-        max-width: none;
-    }
-}
-
-/* Dropdown suggerimenti (ricerca istantanea, componente autonomo).
-   Posizione (top/left/width) impostata via JS con position:fixed,
-   per non essere tagliato dall'overflow:hidden del banner. */
+/* Stili per il dropdown dei suggerimenti della ricerca hero */
 .hero-search-results {
     display: none;
     max-height: 60vh;
@@ -437,22 +316,39 @@ hide:
     font-weight: 700;
 }
 
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 @media (max-width: 768px) {
     .banner-full {
         margin-top: -1.8rem;
         margin-bottom: 1.5rem;
     }
-    .banner-content {
-        margin-left: 1.5rem;
-        padding: 0 1rem;
-        max-width: 90%;
+    /* Il contenuto è già forzato con style inline,
+       ma qui possiamo sovrascrivere solo per mobile se serve */
+    .banner-content[style] {
+        bottom: 0.5rem !important;
+        left: 0.5rem !important;
+        right: 0.5rem !important;
+        max-width: none !important;
+        padding: 0.5rem 0.8rem !important;
     }
-    .banner-content p {
-        font-size: 1rem;
+    .banner-content p[style] {
+        font-size: 1rem !important;
     }
-    .banner-button {
-        padding: 0.6rem 1.5rem;
-        font-size: 0.9rem;
+    .banner-actions[style] {
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+    }
+    .banner-search[style] {
+        flex: 1 1 100% !important;
+    }
+    .banner-search input[style] {
+        min-width: 100px !important;
+    }
+    .banner-button[style] {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.85rem !important;
     }
 }
 
@@ -460,8 +356,12 @@ hide:
     .banner-full {
         margin-top: -1.2rem;
     }
-    .banner-content p {
-        font-size: 0.85rem;
+    .banner-content p[style] {
+        font-size: 0.85rem !important;
+    }
+    .banner-search input[style] {
+        font-size: 0.85rem !important;
+        min-width: 80px !important;
     }
 }
 </style>
