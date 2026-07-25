@@ -204,131 +204,188 @@
 }
 
 /* ============================================================
-   CONTENUTO IN BASSO A SINISTRA (FORZATO)
+   5. MENU HAMBURGER - VISIBILE SOLO SU MOBILE
    ============================================================ */
-.banner-full .banner-content {
-    position: absolute;
-    z-index: 1;
-    text-align: left;
-    color: #ffffff;
-    bottom: 0 !important;          /* attaccato al bordo inferiore */
-    left: 0 !important;            /* attaccato al bordo sinistro */
-    transform: none;
-    max-width: 650px;
-    padding: 0.5rem 1rem;          /* piccolo margine interno */
-    /* Nessuna ombra sulla sezione */
+
+/* Il pulsante hamburger è nascosto su desktop */
+.md-header__button[for="__drawer"] {
+    display: none;
 }
 
-.banner-full .banner-content p {
-    font-size: 1.2rem;
-    opacity: 0.92;
-    margin: 0 0 0.8rem 0;
-    line-height: 1.5;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-    font-weight: 400;
+/* Su mobile, mostriamo il pulsante hamburger e nascondiamo la nav orizzontale */
+@media (max-width: 768px) {
+    .md-header__button[for="__drawer"] {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.4rem;
+        margin-right: 0.2rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .md-header__button[for="__drawer"] svg {
+        width: 1.8rem;
+        height: 1.8rem;
+        fill: #ffffff;
+    }
+
+    /* Nascondiamo la navigazione orizzontale su mobile */
+    .md-header__nav {
+        display: none !important;
+    }
+
+    /* Assicuriamo che il logo sia visibile e centrato */
+    .md-header__button.md-logo {
+        margin-right: auto;
+    }
+
+    /* Il drawer (menu laterale) deve essere visibile */
+    .md-sidebar--primary {
+        display: block !important;
+    }
+
+    /* Il contenuto principale deve avere margine sinistro quando il drawer è aperto */
+    .md-main__inner {
+        display: flex;
+    }
 }
 
-.banner-full .banner-content h1 {
-    display: none !important;
+/* Stili per il menu laterale (drawer) su mobile */
+@media (max-width: 768px) {
+    .md-sidebar--primary {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 280px;
+        background: var(--md-default-bg-color);
+        transform: translateX(-100%);
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 100;
+        overflow-y: auto;
+        padding: 1rem 0.5rem;
+        box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .md-sidebar--primary .md-sidebar__scrollwrap {
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .md-sidebar--primary .md-nav {
+        padding: 0 0.5rem;
+    }
+
+    .md-sidebar--primary .md-nav__item {
+        padding: 0.3rem 0;
+    }
+
+    .md-sidebar--primary .md-nav__link {
+        font-size: 1rem;
+        padding: 0.4rem 0.6rem;
+        border-radius: 4px;
+        color: var(--md-default-fg-color);
+        text-decoration: none;
+        display: block;
+        transition: background 0.15s;
+    }
+
+    .md-sidebar--primary .md-nav__link:hover {
+        background: var(--md-code-bg-color);
+    }
+
+    .md-sidebar--primary .md-nav__link--active {
+        color: var(--md-primary-fg-color);
+        font-weight: 600;
+    }
+
+    /* Overlay scuro quando il drawer è aperto */
+    .md-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+        z-index: 99;
+    }
+
+    #__drawer:checked ~ .md-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    #__drawer:checked ~ .md-sidebar--primary {
+        transform: translateX(0);
+    }
 }
 
 /* ============================================================
-   PULSANTE + BARRA DI RICERCA SULLA STESSA RIGA
+   6. MIGLIORAMENTO LEGGIBILITÀ SU MOBILE
    ============================================================ */
-.banner-full .banner-actions {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap !important;
-    gap: 0.6rem;                  /* spazio ridotto */
-}
 
-/* PULSANTE PIÙ PICCOLO PER DARE SPAZIO ALLA SEARCH */
-.banner-full .banner-button {
-    display: inline-block;
-    padding: 0.5rem 1.2rem;        /* ridotto il padding orizzontale */
-    background-color: #ffffff;
-    color: #b71c1c !important;
-    font-weight: 600;
-    font-size: 0.9rem;             /* leggermente più piccolo */
-    border-radius: 6px;
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
-    white-space: nowrap;
-    flex-shrink: 0;                /* non si restringe */
-}
+@media (max-width: 600px) {
+    /* Home - documenti recenti */
+    .doc-row {
+        flex-direction: column;
+        gap: 0.1rem;
+        padding: 0.6rem 0.2rem;
+    }
+    .doc-data {
+        flex: 0 0 auto;
+        white-space: normal;
+        font-size: 0.8rem;
+    }
+    .doc-titolo {
+        font-size: 0.95rem;
+    }
+    .doc-sommario {
+        font-size: 0.8rem;
+    }
+    .doc-keywords {
+        font-size: 0.75rem;
+    }
 
-.banner-full .banner-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-}
+    /* Archivio - risultati */
+    .risultato-card {
+        padding: 0.6rem 0.4rem;
+    }
+    .risultato-titolo {
+        font-size: 0.95rem;
+    }
+    .risultato-meta {
+        font-size: 0.75rem;
+    }
+    .risultato-desc {
+        font-size: 0.8rem;
+    }
+    .risultato-data {
+        font-size: 0.8rem;
+    }
 
-/* BARRA DI RICERCA CHE SI ALLARGA */
-.banner-full .banner-search {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 24px;
-    padding: 0.3rem 0.8rem;
-    backdrop-filter: blur(2px);
-    transition: background 0.2s, border-color 0.2s;
-    position: relative;
-    flex: 1 1 auto;               /* occupa tutto lo spazio rimanente */
-    min-width: 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.banner-full .banner-search:focus-within {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.7);
-}
-
-.banner-full .banner-search-icon {
-    width: 1.1rem;
-    height: 1.1rem;
-    fill: #ffffff;
-    flex-shrink: 0;
-}
-
-.banner-full .banner-search input {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #ffffff;
-    font-size: 0.9rem;
-    width: 100%;                   /* occupa tutto lo spazio disponibile */
-    min-width: 140px;              /* abbastanza largo per il placeholder */
-    flex: 1 1 auto;
-}
-
-.banner-full .banner-search input::placeholder {
-    color: rgba(255, 255, 255, 0.75);
-    white-space: nowrap;
-    overflow: visible;
-}
-
-.banner-full .banner-search button {
-    background: none;
-    border: none;
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 0.85rem;
-    cursor: pointer;
-    padding: 0.2rem 0.4rem;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-
-.banner-full .banner-search button:hover {
-    color: rgba(255, 255, 255, 0.8);
+    /* Persone/Organizzazioni - griglie */
+    .people-grid,
+    .org-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .people-card,
+    .org-card {
+        padding: 0.6rem 0.8rem;
+        min-height: 60px;
+    }
+    .people-name,
+    .org-name {
+        font-size: 0.85rem;
+    }
 }
 
 /* ============================================================
-   CATALOGO (home e archivio)
+   7. CATALOGO (home e archivio)
    ============================================================ */
 .catalogo-lista {
     display: flex;
@@ -421,7 +478,7 @@
 }
 
 /* ============================================================
-   RESPONSIVE
+   8. RESPONSIVE (header + banner)
    ============================================================ */
 @media (max-width: 768px) {
     .md-header {
@@ -436,54 +493,34 @@
         height: 40px;
         max-width: 150px;
     }
-    .md-header__nav {
-        margin-left: 0;
-        order: 3;
-        flex: 1 1 100%;
-        overflow-x: auto;
-        justify-content: flex-start;
-        padding: 0.2rem 0;
-    }
-    .md-header__nav-list {
-        gap: 0.3rem;
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-    }
-    .md-header__nav-item {
-        padding: 0.15rem 0.5rem;
-    }
-    .md-header__nav-link {
-        font-size: 0.85rem;
-        white-space: nowrap;
-    }
 
     .banner-full {
         margin-top: -1.8rem;
         margin-bottom: 1.5rem;
     }
-    .banner-full .banner-content {
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0;
-        max-width: none;
-        padding: 0.5rem 0.8rem;
+    .banner-content[style] {
+        bottom: 0.5rem !important;
+        left: 0.5rem !important;
+        right: 0.5rem !important;
+        max-width: none !important;
+        padding: 0.5rem 0.8rem !important;
     }
-    .banner-full .banner-content p {
-        font-size: 1rem;
+    .banner-content p[style] {
+        font-size: 1rem !important;
     }
-    .banner-full .banner-button {
-        padding: 0.5rem 1rem;
-        font-size: 0.85rem;
-    }
-    .banner-full .banner-actions {
+    .banner-actions[style] {
         flex-wrap: wrap !important;
-        gap: 0.5rem;
+        gap: 0.5rem !important;
     }
-    .banner-full .banner-search {
-        flex: 1 1 100%;
+    .banner-search[style] {
+        flex: 1 1 100% !important;
     }
-    .banner-full .banner-search input {
-        min-width: 100px;
+    .banner-search input[style] {
+        min-width: 100px !important;
+    }
+    .banner-button[style] {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.85rem !important;
     }
 }
 
@@ -498,20 +535,17 @@
         height: 32px;
         max-width: 120px;
     }
-    .md-header__nav-link {
-        font-size: 0.75rem;
-    }
     .md-footer-social__link img {
         height: 35px !important;
     }
     .banner-full {
         margin-top: -1.2rem;
     }
-    .banner-full .banner-content p {
-        font-size: 0.85rem;
+    .banner-content p[style] {
+        font-size: 0.85rem !important;
     }
-    .banner-full .banner-search input {
-        font-size: 0.85rem;
-        min-width: 80px;
+    .banner-search input[style] {
+        font-size: 0.85rem !important;
+        min-width: 80px !important;
     }
 }
