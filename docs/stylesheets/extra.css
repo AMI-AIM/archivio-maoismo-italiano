@@ -254,7 +254,7 @@
 /* INTESTAZIONE ROSSA CON LOGO */
 .md-drawer__header {
     background: var(--md-primary-fg-color);
-    padding: 1rem 1.2rem;
+    padding: 0.8rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -265,14 +265,18 @@
 .md-drawer__logo-link {
     display: block;
     text-decoration: none;
+    max-width: 100%;
 }
 
+/* 🔥 CORREZIONE: logo ridimensionato nel drawer */
 .md-drawer__logo {
-    height: 50px;
+    max-height: 40px;
+    max-width: 160px;
     width: auto;
-    max-width: 180px;
+    height: auto;
     object-fit: contain;
     filter: brightness(0) invert(1);
+    display: block;
 }
 
 /* LISTA VOCI */
@@ -548,8 +552,6 @@
         margin-top: -1.8rem;
         margin-bottom: 1.5rem;
     }
-    /* Il contenuto del banner è già posizionato con style inline in home.py,
-       ma qui aggiungiamo un piccolo margine per sicurezza */
     .banner-content[style] {
         bottom: 0.5rem !important;
         left: 0.5rem !important;
