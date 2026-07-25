@@ -30,12 +30,12 @@
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci",
       "url_ia": "https://archive.org/details/statuto-pcdi/mode/2up",
       "persone": [
-        "Osvaldo Pesce",
-        "Fosco Dinucci"
+        "Fosco Dinucci",
+        "Osvaldo Pesce"
       ],
       "organizzazioni": [
-        "Ufficio Politico del PCd'I (m-l)",
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Ufficio Politico del PCd'I (m-l)"
       ],
       "descrizione": "Opuscolo contenente Dichiarazione di principio e Statuto del Partito Comunista d'Italia (marxista-leninista)."
     },
@@ -124,10 +124,10 @@
       "url_ia": "https://archive.org/details/circolare-16-maggio/mode/2up",
       "persone": [],
       "organizzazioni": [
+        "Renmin Ribao",
         "Partito Comunista Cinese",
         "Hongqi",
-        "Casa editrice in lingue estere",
-        "Renmin Ribao"
+        "Casa editrice in lingue estere"
       ],
       "descrizione": "Opuscolo contente la \"Circolare del Comitato Centrale del Partito ComunistaCinese (16 maggio 1966)\", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo \"Un Grande Documento Storico\", pubblicato su Bandiera Rossa e il Quotidiano del Popolo"
     },
@@ -182,13 +182,13 @@
       "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
       "persone": [
         "Dino Dini",
-        "Mao Zedong",
         "Osvaldo Pesce",
-        "Chen Boda",
+        "Kang Sheng",
         "Yao Wenyuan",
         "Zhou Enlai",
-        "Kang Sheng",
-        "Jiang Qing"
+        "Jiang Qing",
+        "Mao Zedong",
+        "Chen Boda"
       ],
       "organizzazioni": [
         "Renmin Ribao",
@@ -228,9 +228,9 @@
       "url_ia": "https://archive.org/details/la-bussola-che-guida//mode/2up",
       "persone": [],
       "organizzazioni": [
+        "Renmin Ribao",
         "Jiefangjun Bao",
-        "Casa editrice in lingue estere",
-        "Renmin Ribao"
+        "Casa editrice in lingue estere"
       ],
       "descrizione": "La Bussola Che Guida I Popoli Rivoluzionari Di Tutti I Paesi Verso La VittoriaCasa Editrice In Lingue EsterePechino 1968"
     },
@@ -481,12 +481,12 @@
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
       "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
       "persone": [
-        "Mao Zedong",
-        "Chen Boda",
         "Fosco Dinucci",
+        "Kang Sheng",
         "Lin Biao",
         "Zhou Enlai",
-        "Kang Sheng"
+        "Mao Zedong",
+        "Chen Boda"
       ],
       "organizzazioni": [
         "Renmin Ribao",
@@ -526,8 +526,8 @@
       "url_ia": "https://archive.org/details/studenti-ed-intellettuali-ciclostilato-uci-m-l/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Unione dei Comunisti Italiani (marxisti-leninisti)",
-        "Comitato di Partito di Catania (UCI-m.l)"
+        "Comitato di Partito di Catania (UCI-m.l)",
+        "Unione dei Comunisti Italiani (marxisti-leninisti)"
       ],
       "descrizione": "Volantino ciclostilato a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), meglio conosciuta come Servire il Popolo. Il volantino riporta un appello a \"Studenti ed Intellettuali Rivoluzionari\" affinché questi si uniscano all'organizzazione maoista."
     },
