@@ -268,7 +268,6 @@
     max-width: 100%;
 }
 
-/* 🔥 CORREZIONE: logo ridimensionato nel drawer */
 .md-drawer__logo {
     max-height: 40px;
     max-width: 160px;
