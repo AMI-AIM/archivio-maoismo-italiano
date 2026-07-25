@@ -4,7 +4,7 @@ hide:
 ---
 
 
-<div class="banner-full" style="margin-top: -2.8rem; margin-bottom: 2rem;">
+<div class="banner-full" style="margin-bottom: 2rem;">
     <img src="/archivio-maoismo-italiano/immagini/banner.png" 
          alt="Archivio del Maoismo Italiano" 
          class="banner-image">
@@ -271,7 +271,6 @@ hide:
    ============================================================ */
 @media (max-width: 768px) {
     .banner-full {
-        margin-top: -1.5rem !important;
         margin-bottom: 1rem !important;
         height: 240px;
         min-height: 200px;
@@ -324,7 +323,6 @@ hide:
 
 @media (max-width: 480px) {
     .banner-full {
-        margin-top: -1.2rem !important;
         height: 180px;
         min-height: 150px;
     }

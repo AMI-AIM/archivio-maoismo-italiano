@@ -3,6 +3,13 @@
    ============================================================ */
 
 /* ============================================================
+   VARIABILE CONDIVISA: altezza header (usata anche dal banner)
+   ============================================================ */
+:root {
+    --ami-header-height: 80px;
+}
+
+/* ============================================================
    RIMUOVI IL PADDING DEL CONTENUTO PRINCIPALE
    ============================================================ */
 .md-main__inner {
@@ -32,7 +39,7 @@
 .md-header {
     background: var(--md-primary-fg-color);
     color: #ffffff;
-    height: 80px;
+    height: var(--ami-header-height);
     display: flex;
     align-items: center;
 }
@@ -45,7 +52,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
-    height: 80px;
+    height: var(--ami-header-height);
     flex-wrap: nowrap;
 }
 
@@ -194,7 +201,7 @@
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
-    margin-top: -80px;          /* compensa l'altezza dell'header desktop */
+    margin-top: calc(-1 * var(--ami-header-height));   /* sempre sincronizzato con l'header */
     overflow: hidden;
     margin-bottom: 2rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
@@ -388,9 +395,8 @@
         z-index: 1;
     }
 
-    /* 🔥 BANNER MOBILE - margine negativo = altezza header */
+    /* 🔥 BANNER MOBILE - margine sincronizzato via variabile CSS */
     .banner-full {
-        margin-top: -64px;          /* compensa l'altezza dell'header mobile */
         margin-bottom: 1rem;
         height: 240px;
         min-height: 200px;
@@ -605,11 +611,15 @@
    8. RESPONSIVE EXTRA (schermi molto piccoli)
    ============================================================ */
 @media (max-width: 480px) {
+    :root {
+        --ami-header-height: 56px;
+    }
+
     .md-header {
-        height: 56px;
+        height: var(--ami-header-height);
     }
     .md-header__inner {
-        height: 56px;
+        height: var(--ami-header-height);
     }
     .md-header__button.md-logo img {
         height: 32px;
@@ -620,7 +630,6 @@
     }
 
     .banner-full {
-        margin-top: -56px;          /* compensa l'altezza dell'header mobile piccolo */
         height: 180px;
         min-height: 150px;
     }
