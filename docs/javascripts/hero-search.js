@@ -176,15 +176,28 @@
     }
   });
 
-  // Se ci sono suggerimenti e l'utente preme Invio, vai al primo
-  // risultato invece di far partire il submit nativo del form.
+  // === NUOVA MODIFICA: gestione del submit ===
+  // Se il campo di ricerca è vuoto, blocchiamo il submit e restiamo
+  // sulla home. Se invece c'è testo, il form invia a documenti/?q=...
   form.addEventListener("submit", function (event) {
+    const query = input.value.trim();
+    
+    // Se non c'è testo, blocchiamo il submit e usciamo
+    if (!query) {
+      event.preventDefault();
+      return;
+    }
+
+    // Se ci sono suggerimenti e l'utente preme Invio, vai al primo
+    // risultato invece di far partire il submit nativo del form.
     const primoRisultato = resultsBox.querySelector(".hero-search-item");
     if (primoRisultato) {
       event.preventDefault();
       window.location.href = primoRisultato.getAttribute("href");
+      return;
     }
-    // Se non ci sono risultati (o i dati non sono ancora caricati),
+    // Altrimenti, se non ci sono suggerimenti ma c'è testo,
     // lasciamo che il form invii normalmente a documenti/?q=...
+    // (il submit viene eseguito normalmente)
   });
 })();
