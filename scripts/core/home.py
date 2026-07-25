@@ -56,15 +56,15 @@ def genera_home(df, output_dir):
     schede.sort(key=lambda x: x['num_id'], reverse=True)
     ultime_tre = schede[:3]
     
-    # 🔥 BANNER CON STILE INLINE PER FORZARE LA POSIZIONE
+    # 🔥 BANNER CON MARGINE NEGATIVO INLINE
     banner_html = """
-<div class="banner-full">
+<div class="banner-full" style="margin-top: -2.8rem; margin-bottom: 2rem;">
     <img src="/archivio-maoismo-italiano/immagini/banner.png" 
          alt="Archivio del Maoismo Italiano" 
          class="banner-image">
     <div class="banner-overlay"></div>
-    <div class="banner-content" style="position: absolute; bottom: 0.5rem !important; left: 0.5rem !important; z-index: 1; text-align: left; color: #ffffff; max-width: 650px; padding: 0.5rem 1rem;">
-        <p style="font-size: 1.2rem; opacity: 0.92; margin: 0 0 0.8rem 0; line-height: 1.5; text-shadow: 0 2px 8px rgba(0,0,0,0.8); font-weight: 400;">Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia</p>
+    <div class="banner-content" style="position: absolute; bottom: 0.5rem; left: 0.5rem; z-index: 1; text-align: left; color: #ffffff; max-width: 650px; padding: 0.5rem 1rem;">
+        <p style="font-size: 1.2rem; opacity: 0.92; margin: 0 0 0.8rem 0; line-height: 1.5; text-shadow: 0 2px 12px rgba(0,0,0,0.4); font-weight: 400;">Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia</p>
         <div class="banner-actions" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 0.6rem;">
             <a href="documenti/" class="banner-button" style="display: inline-block; padding: 0.5rem 1.2rem; background-color: #ffffff; color: #b71c1c !important; font-weight: 600; font-size: 0.9rem; border-radius: 6px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.25); white-space: nowrap; flex-shrink: 0;">Esplora l'archivio</a>
             <form class="banner-search" id="hero-search-form" action="documenti/" method="get" style="display: flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); border-radius: 24px; padding: 0.3rem 0.8rem; backdrop-filter: blur(2px); transition: background 0.2s, border-color 0.2s; position: relative; flex: 1 1 auto; min-width: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
@@ -225,8 +225,6 @@ hide:
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     overflow: hidden;
-    margin-top: -2.8rem;
-    margin-bottom: 2rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
@@ -317,51 +315,80 @@ hide:
 }
 
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE (mobile)
    ============================================================ */
 @media (max-width: 768px) {
     .banner-full {
-        margin-top: -1.8rem;
-        margin-bottom: 1.5rem;
+        margin-top: -1.5rem !important;
+        margin-bottom: 1rem !important;
+        height: 240px;
+        min-height: 200px;
+        overflow: hidden;
     }
-    /* Il contenuto è già forzato con style inline,
-       ma qui possiamo sovrascrivere solo per mobile se serve */
+    .banner-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
     .banner-content[style] {
-        bottom: 0.5rem !important;
-        left: 0.5rem !important;
-        right: 0.5rem !important;
+        bottom: 0.3rem !important;
+        left: 0.3rem !important;
+        right: 0.3rem !important;
         max-width: none !important;
-        padding: 0.5rem 0.8rem !important;
+        padding: 0.3rem 0.6rem !important;
     }
     .banner-content p[style] {
-        font-size: 1rem !important;
+        font-size: 0.8rem !important;
+        margin: 0 0 0.3rem 0 !important;
+        line-height: 1.3 !important;
     }
     .banner-actions[style] {
         flex-wrap: wrap !important;
-        gap: 0.5rem !important;
+        gap: 0.3rem !important;
+    }
+    .banner-button[style] {
+        padding: 0.3rem 0.8rem !important;
+        font-size: 0.75rem !important;
     }
     .banner-search[style] {
         flex: 1 1 100% !important;
+        padding: 0.2rem 0.6rem !important;
+        gap: 0.3rem !important;
     }
     .banner-search input[style] {
-        min-width: 100px !important;
+        min-width: 80px !important;
+        font-size: 0.75rem !important;
     }
-    .banner-button[style] {
-        padding: 0.5rem 1rem !important;
-        font-size: 0.85rem !important;
+    .banner-search button[style] {
+        font-size: 0.7rem !important;
+        padding: 0.1rem 0.3rem !important;
+    }
+    .banner-search-icon[style] {
+        width: 0.9rem !important;
+        height: 0.9rem !important;
     }
 }
 
 @media (max-width: 480px) {
     .banner-full {
-        margin-top: -1.2rem;
+        margin-top: -1.2rem !important;
+        height: 180px;
+        min-height: 150px;
     }
     .banner-content p[style] {
-        font-size: 0.85rem !important;
+        font-size: 0.7rem !important;
+    }
+    .banner-button[style] {
+        padding: 0.2rem 0.6rem !important;
+        font-size: 0.65rem !important;
     }
     .banner-search input[style] {
-        font-size: 0.85rem !important;
-        min-width: 80px !important;
+        font-size: 0.7rem !important;
+        min-width: 60px !important;
+    }
+    .banner-search button[style] {
+        font-size: 0.65rem !important;
     }
 }
 </style>
