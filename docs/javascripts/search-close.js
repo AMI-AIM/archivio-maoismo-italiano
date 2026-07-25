@@ -1,15 +1,15 @@
-// PASSO 1 di test: solo chiusura al click fuori dalla barra di ricerca.
-(function () {
-  var toggle = document.getElementById("__search");
-  var searchBox = document.querySelector(".md-search");
-
-  if (!toggle || !searchBox) {
-    return;
+// Chiude la ricerca al click fuori dal box, senza affidarsi a riferimenti
+// DOM salvati una volta sola all'avvio: ad ogni click verifica dinamicamente
+// se il toggle di ricerca attivo corrisponde a un box che contiene il click.
+document.addEventListener("click", function (event) {
+  var openToggle = document.querySelector('[data-md-toggle="search"]:checked');
+  if (!openToggle) {
+    return; // la ricerca non è aperta, non c'è nulla da chiudere
   }
-
-  document.addEventListener("click", function (event) {
-    if (toggle.checked && !searchBox.contains(event.target)) {
-      toggle.checked = false;
-    }
-  });
-})();
+ 
+  var clickedInsideSearch = event.target.closest && event.target.closest(".md-search");
+  if (!clickedInsideSearch) {
+    openToggle.checked = false;
+  }
+});
+ 
