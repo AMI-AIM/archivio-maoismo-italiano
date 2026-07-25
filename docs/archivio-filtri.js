@@ -14,10 +14,24 @@ async function caricaDati() {
         annoMin = data.anno_min || 1900;
         annoMax = data.anno_max || 2025;
         inizializzaFiltri();
+        precompilaRicercaDaURL();
         applicaFiltri();
     } catch (error) {
         console.error('Errore nel caricamento dei dati:', error);
         document.getElementById('risultati-container').innerHTML = '<p class="nessun-risultato">Errore nel caricamento dei dati.</p>';
+    }
+}
+
+// Se si arriva da un link tipo documenti/?q=termine (es. dalla barra di
+// ricerca in home), precompila il campo "Cerca nel testo" con quel valore.
+function precompilaRicercaDaURL() {
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get('q');
+    if (query) {
+        const campoTesto = document.getElementById('filtro-testo');
+        if (campoTesto) {
+            campoTesto.value = query;
+        }
     }
 }
 

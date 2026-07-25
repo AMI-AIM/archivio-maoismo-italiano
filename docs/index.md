@@ -11,7 +11,16 @@ hide:
     <div class="banner-overlay"></div>
     <div class="banner-content">
         <p>Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia </p>
-        <a href="documenti/" class="banner-button">Esplora l'archivio</a>
+        <div class="banner-actions">
+            <a href="documenti/" class="banner-button">Esplora l'archivio</a>
+            <form class="banner-search" action="documenti/" method="get">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="banner-search-icon" aria-hidden="true">
+                    <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/>
+                </svg>
+                <input type="text" name="q" placeholder="Cerca nell'archivio..." aria-label="Cerca nell'archivio" autocomplete="off">
+                <button type="submit" aria-label="Cerca">Cerca</button>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -227,6 +236,82 @@ hide:
 .banner-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================================
+   BARRA DI RICERCA NELLA HERO
+   ============================================================ */
+.banner-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.banner-search {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 24px;
+    padding: 0.5rem 0.9rem;
+    backdrop-filter: blur(2px);
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.banner-search:focus-within {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+.banner-search-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: #ffffff;
+    flex-shrink: 0;
+}
+
+.banner-search input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 0.95rem;
+    width: 220px;
+    max-width: 40vw;
+}
+
+.banner-search input::placeholder {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.banner-search button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.banner-search button:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+    .banner-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+    .banner-search input {
+        width: 60vw;
+        max-width: none;
+    }
 }
 
 @media (max-width: 768px) {
