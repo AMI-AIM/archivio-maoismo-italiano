@@ -135,6 +135,24 @@
     color: rgba(255, 255, 255, 0.6) !important;
 }
 
+/* Se Material espande il box di ricerca su sfondo chiaro (es. overlay a
+   larghezza intera su schermi medio-piccoli), il testo deve tornare scuro:
+   altrimenti resta bianco-su-bianco e diventa invisibile. */
+.md-search__scrollwrap ~ .md-search__input,
+.md-search--active .md-search__input,
+[data-md-toggle="search"]:checked ~ * .md-search__input {
+    color: #1a1a1a !important;
+}
+
+@media (max-width: 76.1875em) {
+    .md-search__input {
+        color: #1a1a1a !important;
+    }
+    .md-search__input::placeholder {
+        color: rgba(0, 0, 0, 0.45) !important;
+    }
+}
+
 .md-search__icon svg {
     fill: rgba(255, 255, 255, 0.7) !important;
 }
