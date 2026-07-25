@@ -204,46 +204,44 @@
 }
 
 /* ============================================================
-   CONTENUTO IN BASSO A SINISTRA - SENZA BOX INTORNO
+   CONTENUTO IN BASSO A SINISTRA - SENZA OMBRA SULLA SEZIONE
    ============================================================ */
-.banner-content {
+.banner-full .banner-content {
     position: absolute;
     z-index: 1;
     text-align: left;
     color: #ffffff;
-    bottom: 0.5rem;           /* più vicino al bordo inferiore */
-    left: 0.5rem;             /* più vicino al bordo sinistro */
+    bottom: 0.5rem !important;     /* Forzato per test */
+    left: 0.5rem !important;       /* Forzato per test */
     transform: none;
     max-width: 650px;
-    /* 🔥 RIMOSSO background, backdrop-filter, padding e border-radius */
-    /* Solo l'ombra rimane */
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    /* 🔥 NESSUNA OMBRA QUI - solo sui singoli elementi */
 }
 
-.banner-content p {
+.banner-full .banner-content p {
     font-size: 1.2rem;
     opacity: 0.92;
-    margin: 0 0 1rem 0;       /* ridotto il margine inferiore */
+    margin: 0 0 1rem 0;
     line-height: 1.5;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); /* OMBRA SUL TESTO */
     font-weight: 400;
 }
 
-.banner-content h1 {
+.banner-full .banner-content h1 {
     display: none !important;
 }
 
 /* ============================================================
    PULSANTE E BARRA DI RICERCA SULLA STESSA RIGA
    ============================================================ */
-.banner-actions {
+.banner-full .banner-actions {
     display: flex;
     align-items: center;
-    flex-wrap: nowrap;        /* FORZA la stessa riga */
+    flex-wrap: nowrap !important;   /* FORZA la stessa riga */
     gap: 0.8rem;
 }
 
-.banner-button {
+.banner-full .banner-button {
     display: inline-block;
     padding: 0.7rem 2.2rem;
     background-color: #ffffff;
@@ -253,17 +251,17 @@
     border-radius: 6px;
     text-decoration: none;
     transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25); /* OMBRA SUL PULSANTE */
     white-space: nowrap;
-    flex-shrink: 0;           /* impedisce al pulsante di restringersi */
+    flex-shrink: 0;                 /* impedisce al pulsante di restringersi */
 }
 
-.banner-button:hover {
+.banner-full .banner-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
-.banner-search {
+.banner-full .banner-search {
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -274,39 +272,39 @@
     backdrop-filter: blur(2px);
     transition: background 0.2s, border-color 0.2s;
     position: relative;
-    flex: 1 1 auto;           /* occupa lo spazio rimanente */
+    flex: 1 1 auto;
     min-width: 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* OMBRA SULLA SEARCH BAR */
 }
 
-.banner-search:focus-within {
+.banner-full .banner-search:focus-within {
     background: rgba(255, 255, 255, 0.25);
     border-color: rgba(255, 255, 255, 0.7);
 }
 
-.banner-search-icon {
+.banner-full .banner-search-icon {
     width: 1.1rem;
     height: 1.1rem;
     fill: #ffffff;
     flex-shrink: 0;
 }
 
-.banner-search input {
+.banner-full .banner-search input {
     background: transparent;
     border: none;
     outline: none;
     color: #ffffff;
     font-size: 0.95rem;
-    width: 180px;
-    min-width: 100px;
+    width: auto;                    /* larghezza automatica */
+    min-width: 80px;
     flex: 1 1 auto;
 }
 
-.banner-search input::placeholder {
+.banner-full .banner-search input::placeholder {
     color: rgba(255, 255, 255, 0.75);
 }
 
-.banner-search button {
+.banner-full .banner-search button {
     background: none;
     border: none;
     color: #ffffff;
@@ -317,9 +315,10 @@
     text-decoration: underline;
     text-underline-offset: 2px;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
-.banner-search button:hover {
+.banner-full .banner-search button:hover {
     color: rgba(255, 255, 255, 0.8);
 }
 
@@ -457,29 +456,29 @@
         margin-top: -1.8rem;
         margin-bottom: 1.5rem;
     }
-    .banner-content {
-        bottom: 0.5rem;
-        left: 0.5rem;
+    .banner-full .banner-content {
+        bottom: 0.5rem !important;
+        left: 0.5rem !important;
         right: 0.5rem;
         max-width: none;
     }
-    .banner-content p {
+    .banner-full .banner-content p {
         font-size: 1rem;
     }
-    .banner-button {
+    .banner-full .banner-button {
         padding: 0.6rem 1.5rem;
         font-size: 0.9rem;
     }
-    .banner-actions {
-        flex-wrap: wrap;       /* su mobile vanno a capo */
+    .banner-full .banner-actions {
+        flex-wrap: wrap !important;   /* su mobile vanno a capo */
         gap: 0.6rem;
     }
-    .banner-search {
+    .banner-full .banner-search {
         flex: 1 1 100%;
     }
-    .banner-search input {
+    .banner-full .banner-search input {
         width: auto;
-        min-width: 80px;
+        min-width: 60px;
     }
 }
 
@@ -503,11 +502,11 @@
     .banner-full {
         margin-top: -1.2rem;
     }
-    .banner-content p {
+    .banner-full .banner-content p {
         font-size: 0.85rem;
     }
-    .banner-search input {
+    .banner-full .banner-search input {
         font-size: 0.85rem;
-        min-width: 60px;
+        min-width: 50px;
     }
 }
