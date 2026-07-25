@@ -204,26 +204,27 @@
 }
 
 /* ============================================================
-   CONTENUTO IN BASSO A SINISTRA - SENZA OMBRA SULLA SEZIONE
+   CONTENUTO IN BASSO A SINISTRA (FORZATO)
    ============================================================ */
 .banner-full .banner-content {
     position: absolute;
     z-index: 1;
     text-align: left;
     color: #ffffff;
-    bottom: 0.5rem !important;     /* Forzato per test */
-    left: 0.5rem !important;       /* Forzato per test */
+    bottom: 0 !important;          /* attaccato al bordo inferiore */
+    left: 0 !important;            /* attaccato al bordo sinistro */
     transform: none;
     max-width: 650px;
-    /* 🔥 NESSUNA OMBRA QUI - solo sui singoli elementi */
+    padding: 0.5rem 1rem;          /* piccolo margine interno */
+    /* Nessuna ombra sulla sezione */
 }
 
 .banner-full .banner-content p {
     font-size: 1.2rem;
     opacity: 0.92;
-    margin: 0 0 1rem 0;
+    margin: 0 0 0.8rem 0;
     line-height: 1.5;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); /* OMBRA SUL TESTO */
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
     font-weight: 400;
 }
 
@@ -232,28 +233,29 @@
 }
 
 /* ============================================================
-   PULSANTE E BARRA DI RICERCA SULLA STESSA RIGA
+   PULSANTE + BARRA DI RICERCA SULLA STESSA RIGA
    ============================================================ */
 .banner-full .banner-actions {
     display: flex;
     align-items: center;
-    flex-wrap: nowrap !important;   /* FORZA la stessa riga */
-    gap: 0.8rem;
+    flex-wrap: nowrap !important;
+    gap: 0.6rem;                  /* spazio ridotto */
 }
 
+/* PULSANTE PIÙ PICCOLO PER DARE SPAZIO ALLA SEARCH */
 .banner-full .banner-button {
     display: inline-block;
-    padding: 0.7rem 2.2rem;
+    padding: 0.5rem 1.2rem;        /* ridotto il padding orizzontale */
     background-color: #ffffff;
     color: #b71c1c !important;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.9rem;             /* leggermente più piccolo */
     border-radius: 6px;
     text-decoration: none;
     transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25); /* OMBRA SUL PULSANTE */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
     white-space: nowrap;
-    flex-shrink: 0;                 /* impedisce al pulsante di restringersi */
+    flex-shrink: 0;                /* non si restringe */
 }
 
 .banner-full .banner-button:hover {
@@ -261,6 +263,7 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
+/* BARRA DI RICERCA CHE SI ALLARGA */
 .banner-full .banner-search {
     display: flex;
     align-items: center;
@@ -268,13 +271,13 @@
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 24px;
-    padding: 0.4rem 0.9rem;
+    padding: 0.3rem 0.8rem;
     backdrop-filter: blur(2px);
     transition: background 0.2s, border-color 0.2s;
     position: relative;
-    flex: 1 1 auto;
+    flex: 1 1 auto;               /* occupa tutto lo spazio rimanente */
     min-width: 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* OMBRA SULLA SEARCH BAR */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .banner-full .banner-search:focus-within {
@@ -294,14 +297,16 @@
     border: none;
     outline: none;
     color: #ffffff;
-    font-size: 0.95rem;
-    width: auto;                    /* larghezza automatica */
-    min-width: 80px;
+    font-size: 0.9rem;
+    width: 100%;                   /* occupa tutto lo spazio disponibile */
+    min-width: 140px;              /* abbastanza largo per il placeholder */
     flex: 1 1 auto;
 }
 
 .banner-full .banner-search input::placeholder {
     color: rgba(255, 255, 255, 0.75);
+    white-space: nowrap;
+    overflow: visible;
 }
 
 .banner-full .banner-search button {
@@ -457,28 +462,28 @@
         margin-bottom: 1.5rem;
     }
     .banner-full .banner-content {
-        bottom: 0.5rem !important;
-        left: 0.5rem !important;
-        right: 0.5rem;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0;
         max-width: none;
+        padding: 0.5rem 0.8rem;
     }
     .banner-full .banner-content p {
         font-size: 1rem;
     }
     .banner-full .banner-button {
-        padding: 0.6rem 1.5rem;
-        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
     }
     .banner-full .banner-actions {
-        flex-wrap: wrap !important;   /* su mobile vanno a capo */
-        gap: 0.6rem;
+        flex-wrap: wrap !important;
+        gap: 0.5rem;
     }
     .banner-full .banner-search {
         flex: 1 1 100%;
     }
     .banner-full .banner-search input {
-        width: auto;
-        min-width: 60px;
+        min-width: 100px;
     }
 }
 
@@ -507,6 +512,6 @@
     }
     .banner-full .banner-search input {
         font-size: 0.85rem;
-        min-width: 50px;
+        min-width: 80px;
     }
 }
