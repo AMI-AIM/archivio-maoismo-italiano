@@ -3,6 +3,21 @@
    ============================================================ */
 
 /* ============================================================
+   RIMUOVI IL PADDING DEL CONTENUTO PRINCIPALE
+   ============================================================ */
+.md-main__inner {
+    padding-top: 0 !important;
+}
+
+.md-content {
+    padding-top: 0 !important;
+}
+
+.md-typeset {
+    margin-top: 0 !important;
+}
+
+/* ============================================================
    1. COLORE PRIMARIO
    ============================================================ */
 [data-md-color-primary="red"] {
@@ -97,16 +112,6 @@
     display: none !important;
 }
 
-/* 🔥 RIMOSSO PADDING SUPERIORE DEL CONTENUTO */
-.md-content {
-    padding-top: 0 !important;
-    margin-left: 0 !important;
-}
-
-.md-typeset {
-    margin-top: 0 !important;
-}
-
 /* NASCONDE LA SIDEBAR PRIMARIA IN TUTTI I CASI */
 .md-sidebar--primary {
     display: none !important;
@@ -189,8 +194,8 @@
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
+    margin-top: -80px;          /* compensa l'altezza dell'header desktop */
     overflow: hidden;
-    margin-top: 0;              /* NESSUN MARGINE NEGATIVO */
     margin-bottom: 2rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
@@ -383,9 +388,9 @@
         z-index: 1;
     }
 
-    /* 🔥 BANNER MOBILE - RIDOTTO E SENZA MARGINE NEGATIVO */
+    /* 🔥 BANNER MOBILE - margine negativo = altezza header */
     .banner-full {
-        margin-top: 0;
+        margin-top: -64px;          /* compensa l'altezza dell'header mobile */
         margin-bottom: 1rem;
         height: 240px;
         min-height: 200px;
@@ -615,7 +620,7 @@
     }
 
     .banner-full {
-        margin-top: 0;
+        margin-top: -56px;          /* compensa l'altezza dell'header mobile piccolo */
         height: 180px;
         min-height: 150px;
     }
