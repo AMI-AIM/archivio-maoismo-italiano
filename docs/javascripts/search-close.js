@@ -1,9 +1,8 @@
 // Chiude il pannello di ricerca cliccando fuori dalla barra, o con Esc.
-// Necessario perché la personalizzazione dell'header (layout logo + nav + ricerca
-// sulla stessa riga) rompe il meccanismo CSS-only (:checked ~ ...) usato di
-// default da Material for MkDocs per gestire l'overlay di ricerca.
-document.addEventListener("DOMContentLoaded", function () {
-  try {
+// Versione minimale: non tocca in alcun modo il submit del form né altri
+// eventi già gestiti dal JS nativo di Material, per evitare interferenze.
+(function () {
+  function init() {
     var toggle = document.getElementById("__search");
     var searchBox = document.querySelector(".md-search");
 
@@ -13,26 +12,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Click fuori dalla barra di ricerca -> chiude
     document.addEventListener("click", function (event) {
-      try {
-        if (toggle.checked && !searchBox.contains(event.target)) {
-          toggle.checked = false;
-        }
-      } catch (err) {
-        /* non blocca il resto della pagina in caso di errore */
+      if (toggle.checked && !searchBox.contains(event.target)) {
+        toggle.checked = false;
       }
     });
 
     // Tasto Esc -> chiude
     document.addEventListener("keydown", function (event) {
-      try {
-        if (event.key === "Escape" && toggle.checked) {
-          toggle.checked = false;
-        }
-      } catch (err) {
-        /* non blocca il resto della pagina in caso di errore */
+      if (event.key === "Escape" && toggle.checked) {
+        toggle.checked = false;
       }
     });
-  } catch (err) {
-    /* fallimento silenzioso: la ricerca nativa di Material deve continuare a funzionare */
   }
-});
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    // Il DOM è già pronto (lo script è caricato in coda al body da MkDocs)
+    init();
+  }
+})();
