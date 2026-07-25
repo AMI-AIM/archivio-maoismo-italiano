@@ -13,12 +13,13 @@ hide:
         <p>Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia </p>
         <div class="banner-actions">
             <a href="documenti/" class="banner-button">Esplora l'archivio</a>
-            <form class="banner-search" action="documenti/" method="get">
+            <form class="banner-search" id="hero-search-form" action="documenti/" method="get">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="banner-search-icon" aria-hidden="true">
                     <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/>
                 </svg>
-                <input type="text" name="q" placeholder="Cerca nell'archivio..." aria-label="Cerca nell'archivio" autocomplete="off">
+                <input type="text" id="hero-search-input" name="q" placeholder="Cerca nell'archivio..." aria-label="Cerca nell'archivio" autocomplete="off">
                 <button type="submit" aria-label="Cerca">Cerca</button>
+                <div class="hero-search-results" id="hero-search-results"></div>
             </form>
         </div>
     </div>
@@ -258,6 +259,7 @@ hide:
     padding: 0.5rem 0.9rem;
     backdrop-filter: blur(2px);
     transition: background 0.2s, border-color 0.2s;
+    position: relative;
 }
 
 .banner-search:focus-within {
@@ -310,6 +312,88 @@ hide:
     }
     .banner-search input {
         width: 60vw;
+        max-width: none;
+    }
+}
+
+/* Dropdown suggerimenti (ricerca istantanea, componente autonomo) */
+.hero-search-results {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    left: 0;
+    width: 420px;
+    max-width: 90vw;
+    max-height: 60vh;
+    overflow-y: auto;
+    background: #ffffff;
+    color: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+    z-index: 20;
+}
+
+.hero-search-results.is-open {
+    display: block;
+}
+
+.hero-search-count {
+    padding: 0.6rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #6b6b6b;
+    background: #f5f5f5;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.hero-search-empty {
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #6b6b6b;
+    text-align: center;
+}
+
+.hero-search-item {
+    display: block;
+    padding: 0.7rem 1rem;
+    text-decoration: none;
+    border-bottom: 1px solid #f0f0f0;
+    color: inherit;
+}
+
+.hero-search-item:last-child {
+    border-bottom: none;
+}
+
+.hero-search-item:hover {
+    background: #f7f7f7;
+}
+
+.hero-search-item-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.15rem;
+}
+
+.hero-search-item-snippet {
+    font-size: 0.82rem;
+    color: #666666;
+    line-height: 1.4;
+}
+
+.hero-search-item mark,
+.hero-search-item-snippet mark {
+    background: transparent;
+    color: #b71c1c;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .hero-search-results {
+        width: 100%;
         max-width: none;
     }
 }
