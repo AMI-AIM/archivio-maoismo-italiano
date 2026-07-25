@@ -377,9 +377,9 @@
         z-index: 1;
     }
 
-    /* 🔥 BANNER MOBILE - RIDOTTO E ADATTATO */
+    /* 🔥 BANNER MOBILE - ANCORATO ALL'HEADER */
     .banner-full {
-        margin-top: -1.8rem;
+        margin-top: -3.8rem;      /* compensa l'altezza dell'header su mobile */
         margin-bottom: 1rem;
         height: 240px;
         min-height: 200px;
@@ -608,11 +608,11 @@
         height: 35px !important;
     }
 
-    /* 🔥 BANNER PER SCHERMI PICCOLISSIMI */
+    /* 🔥 BANNER PER SCHERMI PICCOLISSIMI - ANCORATO */
     .banner-full {
+        margin-top: -3.2rem;      /* compensa l'altezza dell'header su mobile piccolo */
         height: 180px;
         min-height: 150px;
-        margin-top: -1.2rem;
     }
 
     .banner-content p[style] {
