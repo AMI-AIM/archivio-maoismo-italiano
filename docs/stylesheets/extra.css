@@ -203,27 +203,27 @@
     background: rgba(0, 0, 0, 0.45);
 }
 
+/* ============================================================
+   CONTENUTO IN BASSO A SINISTRA - SENZA BOX INTORNO
+   ============================================================ */
 .banner-content {
     position: absolute;
     z-index: 1;
     text-align: left;
     color: #ffffff;
-    padding: 0 2rem;
-    max-width: 650px;
-    bottom: 2rem;
-    left: 2rem;
+    bottom: 0.5rem;           /* più vicino al bordo inferiore */
+    left: 0.5rem;             /* più vicino al bordo sinistro */
     transform: none;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
-    border-radius: 8px;
-    padding: 1.5rem 2rem;
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(2px);
+    max-width: 650px;
+    /* 🔥 RIMOSSO background, backdrop-filter, padding e border-radius */
+    /* Solo l'ombra rimane */
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
 .banner-content p {
     font-size: 1.2rem;
     opacity: 0.92;
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 1rem 0;       /* ridotto il margine inferiore */
     line-height: 1.5;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
     font-weight: 400;
@@ -231,6 +231,16 @@
 
 .banner-content h1 {
     display: none !important;
+}
+
+/* ============================================================
+   PULSANTE E BARRA DI RICERCA SULLA STESSA RIGA
+   ============================================================ */
+.banner-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;        /* FORZA la stessa riga */
+    gap: 0.8rem;
 }
 
 .banner-button {
@@ -245,18 +255,12 @@
     transition: transform 0.2s, box-shadow 0.2s;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
     white-space: nowrap;
+    flex-shrink: 0;           /* impedisce al pulsante di restringersi */
 }
 
 .banner-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-}
-
-.banner-actions {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    gap: 0.8rem;
 }
 
 .banner-search {
@@ -270,7 +274,7 @@
     backdrop-filter: blur(2px);
     transition: background 0.2s, border-color 0.2s;
     position: relative;
-    flex: 1 1 auto;
+    flex: 1 1 auto;           /* occupa lo spazio rimanente */
     min-width: 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
@@ -320,7 +324,7 @@
 }
 
 /* ============================================================
-   CATALOGO (home e archivio) - già presente, lo manteniamo
+   CATALOGO (home e archivio)
    ============================================================ */
 .catalogo-lista {
     display: flex;
@@ -413,7 +417,7 @@
 }
 
 /* ============================================================
-   RESPONSIVE (adattato per il nuovo header e banner)
+   RESPONSIVE
    ============================================================ */
 @media (max-width: 768px) {
     .md-header {
@@ -454,10 +458,9 @@
         margin-bottom: 1.5rem;
     }
     .banner-content {
-        bottom: 1rem;
-        left: 1rem;
-        right: 1rem;
-        padding: 1rem 1.2rem;
+        bottom: 0.5rem;
+        left: 0.5rem;
+        right: 0.5rem;
         max-width: none;
     }
     .banner-content p {
@@ -468,7 +471,7 @@
         font-size: 0.9rem;
     }
     .banner-actions {
-        flex-wrap: wrap;
+        flex-wrap: wrap;       /* su mobile vanno a capo */
         gap: 0.6rem;
     }
     .banner-search {
