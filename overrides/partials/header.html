@@ -1,16 +1,16 @@
 <!-- overrides/partials/header.html -->
-<!-- Checkbox per il drawer (menu laterale) - necessario per Material -->
+<!-- Checkbox per il drawer (menu laterale) -->
 <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
 
 <header class="md-header" data-md-component="header">
   <div class="md-header__inner md-grid">
 
     <!-- Pulsante hamburger (visibile solo su mobile) -->
-    <button class="md-header__button md-icon" for="__drawer" aria-label="Menu">
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Menu" id="hamburger-btn">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/>
       </svg>
-    </button>
+    </label>
 
     <!-- LOGO a sinistra -->
     <a href="{{ config.site_url | default(nav.homepage.url, true) | url }}"
@@ -36,3 +36,20 @@
 
   </div>
 </header>
+
+<!-- DRAWER PERSONALIZZATO (menu laterale) -->
+<div class="md-drawer-overlay" id="drawer-overlay"></div>
+<div class="md-drawer" id="custom-drawer" role="navigation" aria-label="Navigazione mobile">
+  <div class="md-drawer__inner">
+    <ul class="md-drawer__list">
+      {% for nav_item in nav %}
+        <li class="md-drawer__item">
+          <a href="{{ nav_item.url | url }}"
+             class="md-drawer__link{% if nav_item.active %} md-drawer__link--active{% endif %}">
+            {{ nav_item.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
