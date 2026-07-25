@@ -316,21 +316,19 @@ hide:
     }
 }
 
-/* Dropdown suggerimenti (ricerca istantanea, componente autonomo) */
+/* Dropdown suggerimenti (ricerca istantanea, componente autonomo).
+   Posizione (top/left/width) impostata via JS con position:fixed,
+   per non essere tagliato dall'overflow:hidden del banner. */
 .hero-search-results {
     display: none;
-    position: absolute;
-    top: calc(100% + 0.6rem);
-    left: 0;
-    width: 420px;
-    max-width: 90vw;
     max-height: 60vh;
+    max-width: 90vw;
     overflow-y: auto;
     background: #ffffff;
     color: #1a1a1a;
     border-radius: 10px;
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
-    z-index: 20;
+    z-index: 9999;
 }
 
 .hero-search-results.is-open {
@@ -389,13 +387,6 @@ hide:
     background: transparent;
     color: #b71c1c;
     font-weight: 700;
-}
-
-@media (max-width: 768px) {
-    .hero-search-results {
-        width: 100%;
-        max-width: none;
-    }
 }
 
 @media (max-width: 768px) {

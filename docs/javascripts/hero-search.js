@@ -16,6 +16,36 @@
     return; // non siamo in home: nessuna azione
   }
 
+  // Il banner della hero ha overflow:hidden (necessario per i bordi
+  // dell'immagine a piena larghezza), che taglierebbe il dropdown dei
+  // risultati. Lo "estraiamo" spostandolo come figlio diretto del body,
+  // posizionato via JS in coordinate fisse calcolate dal form: così può
+  // comparire sopra qualsiasi elemento senza mai essere tagliato.
+  document.body.appendChild(resultsBox);
+  resultsBox.style.position = "fixed";
+
+  function posizionaDropdown() {
+    const rect = form.getBoundingClientRect();
+    resultsBox.style.top = rect.bottom + 8 + "px";
+    resultsBox.style.left = rect.left + "px";
+    resultsBox.style.width = Math.max(rect.width, 320) + "px";
+  }
+
+  window.addEventListener("resize", function () {
+    if (resultsBox.classList.contains("is-open")) {
+      posizionaDropdown();
+    }
+  });
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (resultsBox.classList.contains("is-open")) {
+        posizionaDropdown();
+      }
+    },
+    { passive: true }
+  );
+
   let documenti = [];
   let datiCaricati = false;
 
@@ -98,6 +128,7 @@
     if (risultati.length === 0) {
       resultsBox.innerHTML =
         '<div class="hero-search-empty">Nessun documento trovato.</div>';
+      posizionaDropdown();
       resultsBox.classList.add("is-open");
       return;
     }
@@ -114,6 +145,7 @@
     });
 
     resultsBox.innerHTML = html;
+    posizionaDropdown();
     resultsBox.classList.add("is-open");
   }
 
@@ -129,9 +161,11 @@
   });
 
   // Chiude i suggerimenti cliccando fuori dal box (scoped solo a
-  // questo componente, non interferisce con nient'altro in pagina)
+  // questo componente, non interferisce con nient'altro in pagina).
+  // Il dropdown ora è un figlio del body (non più del form), quindi
+  // controlliamo entrambi.
   document.addEventListener("click", function (event) {
-    if (!form.contains(event.target)) {
+    if (!form.contains(event.target) && !resultsBox.contains(event.target)) {
       resultsBox.classList.remove("is-open");
     }
   });
