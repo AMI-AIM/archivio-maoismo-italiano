@@ -17,7 +17,7 @@
 .md-header {
     background: var(--md-primary-fg-color);
     color: #ffffff;
-    height: 80px;                /* più alto */
+    height: 80px;
     display: flex;
     align-items: center;
 }
@@ -30,11 +30,10 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
-    height: 80px;               /* allineato all'altezza */
+    height: 80px;
     flex-wrap: nowrap;
 }
 
-/* LOGO (ingrandito) */
 .md-header__button.md-logo {
     padding: 0;
     margin: 0;
@@ -44,24 +43,23 @@
 }
 
 .md-header__button.md-logo img {
-    height: 60px;               /* da 50px a 60px */
+    height: 60px;
     width: auto;
     max-width: 220px;
     object-fit: contain;
 }
 
-/* NAVIGAZIONE - allineata a destra */
 .md-header__nav {
     display: flex;
     align-items: center;
-    margin-left: auto;          /* spinge la nav a destra */
+    margin-left: auto;
     overflow: hidden;
 }
 
 .md-header__nav-list {
     display: flex;
     list-style: none;
-    gap: 0.8rem;               /* più spazio tra le voci */
+    gap: 0.8rem;
     margin: 0;
     padding: 0;
     align-items: center;
@@ -69,7 +67,7 @@
 }
 
 .md-header__nav-item {
-    padding: 0.4rem 0.8rem;    /* più padding per area cliccabile */
+    padding: 0.4rem 0.8rem;
     border-radius: 4px;
     transition: background 0.15s;
     white-space: nowrap;
@@ -81,7 +79,7 @@
 
 .md-header__nav-link {
     text-decoration: none;
-    font-size: 1rem;            /* leggermente più grande */
+    font-size: 1rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.85);
     transition: color 0.15s;
@@ -95,12 +93,10 @@
     color: #ffffff !important;
 }
 
-/* NASCONDE IL TITOLO DEL SITO (non serve) */
 .md-header__title {
     display: none !important;
 }
 
-/* SIDEBAR NASCOSTA */
 .md-sidebar--primary {
     display: none !important;
 }
@@ -112,8 +108,6 @@
 /* ============================================================
    3. FOOTER PERSONALIZZATO
    ============================================================ */
-
-/* Nasconde la striscia di navigazione superiore (Precedente/Successivo) */
 .md-footer__inner {
     display: none !important;
 }
@@ -181,7 +175,245 @@
 }
 
 /* ============================================================
-   4. RESPONSIVE (adattato per il nuovo header)
+   4. BANNER A LARGHEZZA COMPLETA (home)
+   ============================================================ */
+.banner-full {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    overflow: hidden;
+    margin-top: -2.8rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.banner-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.banner-content {
+    position: absolute;
+    z-index: 1;
+    text-align: left;
+    color: #ffffff;
+    padding: 0 2rem;
+    max-width: 650px;
+    bottom: 2rem;
+    left: 2rem;
+    transform: none;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
+}
+
+.banner-content p {
+    font-size: 1.2rem;
+    opacity: 0.92;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.5;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+    font-weight: 400;
+}
+
+.banner-content h1 {
+    display: none !important;
+}
+
+.banner-button {
+    display: inline-block;
+    padding: 0.7rem 2.2rem;
+    background-color: #ffffff;
+    color: #b71c1c !important;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+}
+
+.banner-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.banner-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.8rem;
+}
+
+.banner-search {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 24px;
+    padding: 0.4rem 0.9rem;
+    backdrop-filter: blur(2px);
+    transition: background 0.2s, border-color 0.2s;
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.banner-search:focus-within {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+.banner-search-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: #ffffff;
+    flex-shrink: 0;
+}
+
+.banner-search input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 0.95rem;
+    width: 180px;
+    min-width: 100px;
+    flex: 1 1 auto;
+}
+
+.banner-search input::placeholder {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.banner-search button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    white-space: nowrap;
+}
+
+.banner-search button:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ============================================================
+   CATALOGO (home e archivio) - già presente, lo manteniamo
+   ============================================================ */
+.catalogo-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.doc-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
+    transition: background-color 0.15s;
+    gap: 1.5rem;
+}
+
+.doc-row:last-child {
+    border-bottom: none;
+}
+
+.doc-row:hover {
+    background-color: var(--md-code-bg-color);
+}
+
+.doc-data {
+    flex: 0 0 150px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--md-primary-fg-color);
+    white-space: nowrap;
+    padding-top: 0.05rem;
+}
+
+.doc-contenuto {
+    flex: 1;
+    min-width: 0;
+}
+
+.doc-titolo {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.1rem;
+}
+
+.doc-titolo a {
+    text-decoration: none;
+    color: var(--md-default-fg-color);
+}
+
+.doc-titolo a:hover {
+    text-decoration: underline;
+    color: var(--md-primary-fg-color);
+}
+
+.doc-sommario {
+    font-size: 0.9rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.doc-keywords {
+    font-size: 0.8rem;
+    color: var(--md-primary-fg-color--light);
+    font-style: italic;
+}
+
+.recent-container {
+    background: var(--md-code-bg-color);
+    border-radius: 12px;
+    padding: 0.5rem 0.5rem 0.2rem 0.5rem;
+    margin: 1.5rem 0 1rem 0;
+    border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-button {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.md-button--primary {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color) !important;
+}
+
+.md-button--primary:hover {
+    background-color: var(--md-primary-fg-color--dark);
+}
+
+/* ============================================================
+   RESPONSIVE (adattato per il nuovo header e banner)
    ============================================================ */
 @media (max-width: 768px) {
     .md-header {
@@ -190,15 +422,15 @@
     .md-header__inner {
         height: 64px;
         padding: 0 0.6rem;
-        flex-wrap: wrap;        /* consente alla nav di andare a capo su mobile */
+        flex-wrap: wrap;
     }
     .md-header__button.md-logo img {
         height: 40px;
         max-width: 150px;
     }
     .md-header__nav {
-        margin-left: 0;        /* su mobile la nav torna a sinistra (o centrata) */
-        order: 3;              /* la spostiamo sotto il logo */
+        margin-left: 0;
+        order: 3;
         flex: 1 1 100%;
         overflow-x: auto;
         justify-content: flex-start;
@@ -215,6 +447,36 @@
     .md-header__nav-link {
         font-size: 0.85rem;
         white-space: nowrap;
+    }
+
+    .banner-full {
+        margin-top: -1.8rem;
+        margin-bottom: 1.5rem;
+    }
+    .banner-content {
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        padding: 1rem 1.2rem;
+        max-width: none;
+    }
+    .banner-content p {
+        font-size: 1rem;
+    }
+    .banner-button {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    .banner-actions {
+        flex-wrap: wrap;
+        gap: 0.6rem;
+    }
+    .banner-search {
+        flex: 1 1 100%;
+    }
+    .banner-search input {
+        width: auto;
+        min-width: 80px;
     }
 }
 
@@ -234,5 +496,15 @@
     }
     .md-footer-social__link img {
         height: 35px !important;
+    }
+    .banner-full {
+        margin-top: -1.2rem;
+    }
+    .banner-content p {
+        font-size: 0.85rem;
+    }
+    .banner-search input {
+        font-size: 0.85rem;
+        min-width: 60px;
     }
 }
