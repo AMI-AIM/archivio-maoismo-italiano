@@ -97,13 +97,19 @@
     display: none !important;
 }
 
+/* 🔥 RIMOSSO PADDING SUPERIORE DEL CONTENUTO */
+.md-content {
+    padding-top: 0 !important;
+    margin-left: 0 !important;
+}
+
+.md-typeset {
+    margin-top: 0 !important;
+}
+
 /* NASCONDE LA SIDEBAR PRIMARIA IN TUTTI I CASI */
 .md-sidebar--primary {
     display: none !important;
-}
-
-.md-content {
-    margin-left: 0 !important;
 }
 
 /* ============================================================
@@ -184,7 +190,7 @@
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     overflow: hidden;
-    margin-top: -2.8rem;
+    margin-top: 0;              /* NESSUN MARGINE NEGATIVO */
     margin-bottom: 2rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
@@ -377,9 +383,9 @@
         z-index: 1;
     }
 
-    /* 🔥 BANNER MOBILE - RIDOTTO E ANCORATO */
+    /* 🔥 BANNER MOBILE - RIDOTTO E SENZA MARGINE NEGATIVO */
     .banner-full {
-        margin-top: -1rem;          /* compensa il padding del contenuto su mobile */
+        margin-top: 0;
         margin-bottom: 1rem;
         height: 240px;
         min-height: 200px;
@@ -608,9 +614,8 @@
         height: 35px !important;
     }
 
-    /* 🔥 BANNER PER SCHERMI PICCOLISSIMI */
     .banner-full {
-        margin-top: -0.8rem;        /* compensa il padding ridotto su mobile piccolo */
+        margin-top: 0;
         height: 180px;
         min-height: 150px;
     }
