@@ -37,10 +37,25 @@
   </div>
 </header>
 
+<!-- OVERLAY (cliccandolo chiude il drawer) -->
+<label class="md-drawer-overlay" for="__drawer" id="drawer-overlay"></label>
+
 <!-- DRAWER PERSONALIZZATO (menu laterale) -->
-<div class="md-drawer-overlay" id="drawer-overlay"></div>
 <div class="md-drawer" id="custom-drawer" role="navigation" aria-label="Navigazione mobile">
   <div class="md-drawer__inner">
+    
+    <!-- INTESTAZIONE ROSSA CON LOGO -->
+    <div class="md-drawer__header">
+      <a href="{{ config.site_url | default(nav.homepage.url, true) | url }}"
+         class="md-drawer__logo-link"
+         aria-label="{{ config.site_name }}">
+        <img src="{{ config.theme.logo | url }}" 
+             alt="{{ config.site_name }}" 
+             class="md-drawer__logo">
+      </a>
+    </div>
+
+    <!-- VOCI DI NAVIGAZIONE -->
     <ul class="md-drawer__list">
       {% for nav_item in nav %}
         <li class="md-drawer__item">
