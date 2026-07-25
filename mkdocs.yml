@@ -12,12 +12,11 @@ theme:
     - navigation.top
     - search.suggest
     - search.highlight
-    - navigation.tabs
   palette:
     - scheme: default
       primary: red
       accent: red
-          
+
   logo: immagini/logo.png
   favicon: immagini/favicon.png
 

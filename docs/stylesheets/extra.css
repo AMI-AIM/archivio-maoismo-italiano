@@ -102,6 +102,7 @@
     flex: 0 0 auto;      /* non si allarga né si restringe */
     width: 220px;
     margin-left: 0.5rem;
+    position: relative;  /* ancora il dropdown dei risultati a questo box */
 }
 
 .md-search {
@@ -136,6 +137,25 @@
 
 .md-search__icon svg {
     fill: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Pannello risultati: forziamo che si apra sotto la barra di ricerca,
+   allineato a destra, e sopra al resto del contenuto della pagina */
+.md-search__output {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: 380px;
+    max-width: 90vw;
+    z-index: 10;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* Il pannello risultati deve essere visibile solo quando il toggle è attivo */
+.md-search__scrollwrap {
+    background: #ffffff;
 }
 
 /* NASCONDE IL TITOLO DEL SITO (non serve) */
@@ -263,6 +283,12 @@
         flex: 1;            /* occupa lo spazio rimanente */
         min-width: 100px;
         margin-left: 0;
+    }
+    .md-search__output {
+        width: 100vw;
+        right: -0.6rem;
+        max-width: none;
+        border-radius: 0;
     }
 }
 
