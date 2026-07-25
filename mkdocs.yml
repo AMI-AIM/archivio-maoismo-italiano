@@ -22,9 +22,6 @@ theme:
 extra_css:
   - stylesheets/extra.css
 
-extra_javascript:
-  - javascripts/search-close.js
-
 plugins:
   - search
 
