@@ -35,7 +35,7 @@ def main():
     crea_schede(df, persone, organizzazioni, OUTPUT_DIR)
     genera_indice(df, OUTPUT_DIR)
     genera_json(df, persone, organizzazioni, OUTPUT_DIR)
-    genera_home(df, OUTPUT_DIR)
+    genera_home(df, persone, OUTPUT_DIR)
     
     print("\n🎉 Conversione completata con successo!")
 

@@ -1,11 +1,13 @@
 import os
 import re
+from collections import Counter
 from .utils import formatta_data, split_nomi
 
-def genera_home(df, output_dir):
+def genera_home(df, persone, output_dir):
     print("\n🏠 Generazione della Home page...")
     
     schede = []
+    conteggio_persone = Counter()
     
     for index, row in df.iterrows():
         ami_id = str(row.get('id', '')).strip()
@@ -52,9 +54,28 @@ def genera_home(df, output_dir):
             'keywords': keywords,
             'num_id': num_id
         })
+        
+        # 🔥 CONTEGGIO "PERSONE PIÙ MENZIONATE"
+        # Contiamo autore + persone_collegate; usiamo un set per non
+        # contare due volte la stessa persona sullo stesso documento
+        # (es. se compare sia come autore che come persona collegata).
+        autore_raw = str(row.get('autore', '')).strip()
+        persone_collegate_raw = str(row.get('persone_collegate', '')).strip()
+        
+        nomi_da_contare = set()
+        if autore_raw and autore_raw not in ['nan', 'None']:
+            nomi_da_contare.update(split_nomi(autore_raw))
+        if persone_collegate_raw and persone_collegate_raw not in ['nan', 'None']:
+            nomi_da_contare.update(split_nomi(persone_collegate_raw))
+        
+        for nome in nomi_da_contare:
+            if nome in persone:
+                conteggio_persone[nome] += 1
     
     schede.sort(key=lambda x: x['num_id'], reverse=True)
     ultime_tre = schede[:3]
+    
+    persone_top = conteggio_persone.most_common(3)
     
     # 🔥 BANNER CON MARGINE NEGATIVO INLINE
     banner_html = """
@@ -87,6 +108,10 @@ hide:
 
 {banner_html}
 
+<div class="home-columns" markdown="1">
+
+<div class="home-column" markdown="1">
+
 ## 📥 Aggiunti di recente
 
 <div class="recent-container">
@@ -111,10 +136,54 @@ hide:
 </div>
 </div>
 
-<div style="text-align: center; margin-top: 1.5rem;">
+<div style="text-align: center; margin-top: 1rem;">
     <a href="documenti/" class="md-button md-button--primary">📂 Tutti i documenti</a>
 </div>
 
+</div>
+
+<div class="home-column" markdown="1">
+
+## 👤 Persone più menzionate
+
+<div class="recent-container">
+
+<div class="catalogo-lista">
+
+"""
+
+    if persone_top:
+        for nome, conteggio in persone_top:
+            slug = persone.get(nome, {}).get('slug', '')
+            etichetta_conteggio = "1 documento collegato" if conteggio == 1 else f"{conteggio} documenti collegati"
+            home_content += f"""
+<div class="doc-row">
+    <div class="doc-data">{conteggio}</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="persone/{slug}/">{nome}</a></div>
+        <div class="doc-sommario">{etichetta_conteggio}</div>
+    </div>
+</div>
+"""
+    else:
+        home_content += """
+<p style="padding: 0.6rem 0.8rem; color: var(--md-default-fg-color--light);">Nessuna persona ancora collegata ai documenti.</p>
+"""
+
+    home_content += """
+</div>
+</div>
+
+<div style="text-align: center; margin-top: 1rem;">
+    <a href="persone/" class="md-button md-button--primary">👥 Tutte le persone</a>
+</div>
+
+</div>
+
+</div>
+"""
+    
+    home_content += """
 <style>
 /* ============================================================
    NASCONDE IL TITOLO "Home" NELLA PAGINA
@@ -194,8 +263,32 @@ hide:
     background: var(--md-code-bg-color);
     border-radius: 12px;
     padding: 0.5rem 0.5rem 0.2rem 0.5rem;
-    margin: 1.5rem 0 1rem 0;
+    margin: 1rem 0;
     border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* ============================================================
+   LAYOUT A DUE COLONNE (home)
+   ============================================================ */
+.home-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+    margin-top: 0.5rem;
+}
+
+.home-column h2 {
+    margin-top: 0;
+    margin-bottom: 0.6rem;
+    font-size: 1.3rem;
+}
+
+@media (max-width: 768px) {
+    .home-columns {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
 }
 
 .md-button {

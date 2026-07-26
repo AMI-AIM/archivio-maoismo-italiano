@@ -26,6 +26,10 @@ hide:
 </div>
 
 
+<div class="home-columns" markdown="1">
+
+<div class="home-column" markdown="1">
+
 ## 📥 Aggiunti di recente
 
 <div class="recent-container">
@@ -63,8 +67,54 @@ hide:
 </div>
 </div>
 
-<div style="text-align: center; margin-top: 1.5rem;">
+<div style="text-align: center; margin-top: 1rem;">
     <a href="documenti/" class="md-button md-button--primary">📂 Tutti i documenti</a>
+</div>
+
+</div>
+
+<div class="home-column" markdown="1">
+
+## 👤 Persone più menzionate
+
+<div class="recent-container">
+
+<div class="catalogo-lista">
+
+
+<div class="doc-row">
+    <div class="doc-data">16</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="persone/mao-zedong/">Mao Zedong</a></div>
+        <div class="doc-sommario">16 documenti collegati</div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">3</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="persone/osvaldo-pesce/">Osvaldo Pesce</a></div>
+        <div class="doc-sommario">3 documenti collegati</div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">2</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="persone/yao-wenyuan/">Yao Wenyuan</a></div>
+        <div class="doc-sommario">2 documenti collegati</div>
+    </div>
+</div>
+
+</div>
+</div>
+
+<div style="text-align: center; margin-top: 1rem;">
+    <a href="persone/" class="md-button md-button--primary">👥 Tutte le persone</a>
+</div>
+
+</div>
+
 </div>
 
 <style>
@@ -146,8 +196,32 @@ hide:
     background: var(--md-code-bg-color);
     border-radius: 12px;
     padding: 0.5rem 0.5rem 0.2rem 0.5rem;
-    margin: 1.5rem 0 1rem 0;
+    margin: 1rem 0;
     border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* ============================================================
+   LAYOUT A DUE COLONNE (home)
+   ============================================================ */
+.home-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+    margin-top: 0.5rem;
+}
+
+.home-column h2 {
+    margin-top: 0;
+    margin-bottom: 0.6rem;
+    font-size: 1.3rem;
+}
+
+@media (max-width: 768px) {
+    .home-columns {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
 }
 
 .md-button {
