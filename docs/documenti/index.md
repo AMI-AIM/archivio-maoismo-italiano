@@ -120,7 +120,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0021/">Lavoro Politico no. 1</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 1 - ottobre 1967</div>
     </div>
 </div>
@@ -130,7 +130,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0022/">Lavoro Politico no. 2</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 2 - novembre 1967</div>
     </div>
 </div>
@@ -210,7 +210,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0023/">Lavoro Politico no. 3</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 3 - gennaio 1968</div>
     </div>
 </div>
@@ -240,7 +240,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0024/">Lavoro Politico no. 4</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 4 - febbraio 1968</div>
     </div>
 </div>
@@ -250,7 +250,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0025/">Lavoro Politico no. 5/6</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 5 - 6, marzo - aprile 1968</div>
     </div>
 </div>
@@ -260,7 +260,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0026/">Lavoro Politico no. 7</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 7 - maggio 1968</div>
     </div>
 </div>
@@ -270,7 +270,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0027/">Lavoro Politico no. 8/9</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 8 - 9, giugno - luglio 1968</div>
     </div>
 </div>
@@ -298,7 +298,7 @@ hide:
     <div class="risultato-data">31 agosto 1968</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
-            <a href="AMI-0034/">Istruzioni del Presidente Mao sulla relazione di Kang Sheng riguardante la raccolta di materiale sulle elezioni parlamentari nei paesi capitalisti</a>
+            <a href="AMI-0034/">Nota del Presidente Mao sulla relazione di Kang Sheng riguardante la raccolta di materiale sulle elezioni parlamentari nei paesi capitalisti</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · testo</div>
         <div class="risultato-desc">Nota del presidente Mao Zedong riguardante la partecipazione dei partiti comunisti marxisti-leninisti alle elezioni parlamentari dei propri paesi.Dopo aver discusso dell'argomento con Osvaldo Pesce (13/08/1968), il Presidente cinese ha incaricato Kang Sheng di presentare un rapporto sulla questione.Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018.</div>
@@ -320,7 +320,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0028/">Lavoro Politico no. 10</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 10 - settembre 1968</div>
     </div>
 </div>
@@ -330,7 +330,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0029/">Lavoro Politico no. 11/12</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 11 - 12, dicembre 1968 - gennaio 1969</div>
     </div>
 </div>
@@ -375,6 +375,16 @@ hide:
     </div>
 </div>
 <div class="risultato-card">
+    <div class="risultato-data">1 agosto 1969</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="AMI-0035/">Viva il popolo cinese</a>
+        </div>
+        <div class="risultato-meta">Unione dei Comunisti Italiani (marxisti-leninisti) · periodico</div>
+        <div class="risultato-desc">Magazine a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), pubblicata attraverso la casa editrice di partito, Edizioni Servire il Popolo.La rivista illustra gli sviluppi della Grande Rivoluzione Proletaria Culturale in Cina e auspica una sua versione italiana."Da quando l'Unione dei Comunisti è stata fondata, il 2 ottobre 1968, è ripresa la marcia del popolo italiano verso l'instaurazione della dittatura del proletariato. E' il pensiero del presidente Mao che ci ha illuminati, è il libretto rosso delle citazioni che ci ha uniti. L'Unione dei Comunisti ha insegnato ai proletari italiani la massima fondamentale del socialismo: «Servire il popolo»."</div>
+    </div>
+</div>
+<div class="risultato-card">
     <div class="risultato-data">3 ottobre 1969</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
@@ -410,7 +420,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0032/">Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</a>
         </div>
-        <div class="risultato-meta">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista · Stella Rossa - Fronte Rivoluzionario Marxista-Leninista · testo</div>
+        <div class="risultato-meta">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista · testo</div>
         <div class="risultato-desc">Estratto dall'opuscolo "PER LA VITTORIA DEL POTERE ROSSO IN ITALIA-ATTI DEL CONGRESSO NAZIONALE COSTITUTIVO DI STELLA ROSSA FRONTE RIVOLUZIONARIO MARXISTA-LENINISTA".Approvato nel suo testo definitivo dal Congresso Nazionale in seduta plenaria il 4 Novembre 1970.Stella Rossa fu un'organizzazione marxista-leninista (di orientamento maoista), fondata da Vincenzo Calò (già Viva il Leninismo!, Federazione Marxista-Leninista d'Italia, Tribuna Rossa) nel 1969. Nel 1976 si trasforma in Partito della rivoluzione socialista.</div>
     </div>
 </div>

@@ -38,9 +38,17 @@ hide:
 
 
 <div class="doc-row">
+    <div class="doc-data">1 agosto 1969</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="documenti/AMI-0035/">Viva il popolo cinese</a></div>
+        <div class="doc-meta"><span class="doc-type-chip">periodico</span><span class="doc-org">Unione dei Comunisti Italiani (marxisti-leninisti)</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
     <div class="doc-data">31 agosto 1968</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0034/">Istruzioni del Presidente Mao sulla relazione di Kang Sheng riguardante la raccolta di materiale sulle elezioni parlamentari nei paesi capitalisti</a></div>
+        <div class="doc-titolo"><a href="documenti/AMI-0034/">Nota del Presidente Mao sulla relazione di Kang Sheng riguardante la raccolta di materiale sulle elezioni parlamentari nei paesi capitalisti</a></div>
         <div class="doc-meta"><span class="doc-type-chip">testo</span><span class="doc-org">Partito Comunista Cinese</span></div>
     </div>
 </div>
@@ -50,14 +58,6 @@ hide:
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0033/">Verbale della conversazione del Presidente Mao con la delegazione comunista (marxista-leninista) italiana</a></div>
         <div class="doc-meta"><span class="doc-type-chip">testo</span><span class="doc-org">Partito Comunista d'Italia (marxista-leninista)</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">1970</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0032/">Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">testo</span><span class="doc-org">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</span></div>
     </div>
 </div>
 
