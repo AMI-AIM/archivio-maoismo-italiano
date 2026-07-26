@@ -139,25 +139,30 @@
     gap: 1rem;
 }
 
+/* 🔥 FOOTER - COMPATTAZIONE RIGHE */
 .md-footer-copyright {
     display: flex;
     flex-direction: column;
-    gap: 0.05rem;
+    gap: 0.02rem;              /* ridotto da 0.05rem a 0.02rem */
+    line-height: 1.2;          /* compatta ulteriormente il testo */
 }
 
 .md-footer-copyright__text {
     font-size: 0.85rem;
     color: #ffffff !important;
+    line-height: 1.2;
 }
 
 .md-footer-copyright__subtext {
     font-size: 0.75rem;
     color: #ffffff !important;
+    line-height: 1.2;
 }
 
 .md-footer-copyright__email {
     font-size: 0.75rem;
     color: #ffffff !important;
+    line-height: 1.2;
 }
 
 .md-footer-copyright__email a {
