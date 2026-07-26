@@ -47,14 +47,20 @@
   );
 
   let documenti = [];
+  let persone = [];
+  let organizzazioni = [];
   let datiCaricati = false;
 
   function caricaDati() {
     if (datiCaricati) return;
-    fetch("/archivio-maoismo-italiano/documenti.json")
-      .then((res) => res.json())
-      .then((data) => {
-        documenti = data.documenti || [];
+    Promise.all([
+      fetch("/archivio-maoismo-italiano/documenti.json").then((res) => res.json()),
+      fetch("/archivio-maoismo-italiano/soggetti.json").then((res) => res.json())
+    ])
+      .then(([datiDocumenti, datiSoggetti]) => {
+        documenti = datiDocumenti.documenti || [];
+        persone = datiSoggetti.persone || [];
+        organizzazioni = datiSoggetti.organizzazioni || [];
         datiCaricati = true;
       })
       .catch((err) => {
@@ -79,8 +85,7 @@
     );
   }
 
-  function estraiFrammento(doc, query) {
-    const campi = [doc.descrizione, doc.keywords, doc.autore, doc.organizzazione];
+  function estraiFrammento(campi, query) {
     for (const campo of campi) {
       if (campo && campo.toLowerCase().includes(query.toLowerCase())) {
         if (campo.length > 140) {
@@ -95,11 +100,47 @@
     return "";
   }
 
-  function cercaDocumenti(query) {
+  // Restituisce un elenco unificato di risultati (persone, organizzazioni
+  // e documenti), ciascuno con tipo/etichetta/link già pronti per il
+  // rendering. Le persone e organizzazioni vengono prima: un nome cercato
+  // è quasi sempre più specifico e rilevante di un riferimento generico
+  // dentro un documento.
+  function cercaTutti(query) {
     const q = query.toLowerCase().trim();
     if (!q) return [];
 
-    return documenti
+    const risultatiPersone = persone
+      .filter((p) => {
+        const campo = (p.nome || "") + " " + (p.biografia || "");
+        return campo.toLowerCase().includes(q);
+      })
+      .map((p) => {
+        const dateVita = [p.nascita, p.morte].filter(Boolean).join(" – ");
+        return {
+          tipo: "persona",
+          etichetta: "Persona",
+          titolo: p.nome,
+          href: `/archivio-maoismo-italiano/persone/${p.slug}/`,
+          frammento: [dateVita, estraiFrammento([p.biografia], q)].filter(Boolean).join(" · ")
+        };
+      });
+
+    const risultatiOrganizzazioni = organizzazioni
+      .filter((o) => {
+        const campo = (o.nome || "") + " " + (o.storia || "") + " " + (o.categoria || "");
+        return campo.toLowerCase().includes(q);
+      })
+      .map((o) => {
+        return {
+          tipo: "organizzazione",
+          etichetta: "Organizzazione",
+          titolo: o.nome,
+          href: `/archivio-maoismo-italiano/organizzazioni/${o.slug}/`,
+          frammento: [o.categoria, estraiFrammento([o.storia], q)].filter(Boolean).join(" · ")
+        };
+      });
+
+    const risultatiDocumenti = documenti
       .filter((doc) => {
         const campo =
           (doc.titolo || "") +
@@ -113,11 +154,24 @@
           (doc.descrizione || "");
         return campo.toLowerCase().includes(q);
       })
-      .slice(0, 8);
+      .map((doc) => {
+        return {
+          tipo: "documento",
+          etichetta: "Documento",
+          titolo: doc.titolo,
+          href: `/archivio-maoismo-italiano/documenti/${doc.id}/`,
+          frammento: estraiFrammento(
+            [doc.descrizione, doc.keywords, doc.autore, doc.organizzazione],
+            q
+          )
+        };
+      });
+
+    return [...risultatiPersone, ...risultatiOrganizzazioni, ...risultatiDocumenti].slice(0, 8);
   }
 
   function mostraRisultati(query) {
-    const risultati = cercaDocumenti(query);
+    const risultati = cercaTutti(query);
 
     if (!query.trim()) {
       resultsBox.innerHTML = "";
@@ -127,19 +181,21 @@
 
     if (risultati.length === 0) {
       resultsBox.innerHTML =
-        '<div class="hero-search-empty">Nessun documento trovato.</div>';
+        '<div class="hero-search-empty">Nessun risultato trovato.</div>';
       posizionaDropdown();
       resultsBox.classList.add("is-open");
       return;
     }
 
     let html = '<div class="hero-search-count">' + risultati.length + " risultati</div>";
-    risultati.forEach((doc) => {
-      const frammento = estraiFrammento(doc, query);
+    risultati.forEach((r) => {
       html += `
-        <a class="hero-search-item" href="/archivio-maoismo-italiano/documenti/${doc.id}/">
-          <div class="hero-search-item-title">${evidenzia(doc.titolo, query)}</div>
-          ${frammento ? `<div class="hero-search-item-snippet">${frammento}</div>` : ""}
+        <a class="hero-search-item" href="${r.href}">
+          <div class="hero-search-item-title">
+            ${evidenzia(r.titolo, query)}
+            <span class="hero-search-item-tag hero-search-item-tag--${r.tipo}">${r.etichetta}</span>
+          </div>
+          ${r.frammento ? `<div class="hero-search-item-snippet">${r.frammento}</div>` : ""}
         </a>
       `;
     });

@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import json
 from .utils import slugify, split_nomi
 
 def carica_soggetti(data_dir):
@@ -78,3 +79,41 @@ def link_lista(nomi_str, persone, organizzazioni):
     if links:
         return ', '.join(links)
     return 'N/A'
+
+
+def genera_json_soggetti(persone, organizzazioni, output_dir):
+    """Esporta persone e organizzazioni in un JSON, usato dalla ricerca
+    istantanea nella home (hero-search.js) per suggerire anche schede
+    di persone/organizzazioni, non solo documenti."""
+    print("\n👤 Generazione del JSON di persone e organizzazioni (per la ricerca)...")
+
+    persone_json = []
+    for nome, info in persone.items():
+        persone_json.append({
+            'nome': nome,
+            'slug': info.get('slug', ''),
+            'biografia': info.get('biografia', ''),
+            'nascita': info.get('nascita', ''),
+            'morte': info.get('morte', '')
+        })
+
+    organizzazioni_json = []
+    for nome, info in organizzazioni.items():
+        organizzazioni_json.append({
+            'nome': nome,
+            'slug': info.get('slug', ''),
+            'storia': info.get('storia', ''),
+            'categoria': info.get('categoria', ''),
+            'fondazione': info.get('fondazione', '')
+        })
+
+    data = {
+        'persone': persone_json,
+        'organizzazioni': organizzazioni_json
+    }
+
+    json_path = os.path.join(output_dir, 'soggetti.json')
+    with open(json_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+    print(f"   ✅ soggetti.json generato con {len(persone_json)} persone e {len(organizzazioni_json)} organizzazioni.")

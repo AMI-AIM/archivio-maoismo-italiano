@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-from core.soggetti import carica_soggetti
+from core.soggetti import carica_soggetti, genera_json_soggetti
 from core.schede import crea_schede
 from core.archivio import genera_indice
 from core.json_export import genera_json
@@ -17,6 +17,7 @@ def main():
     print(f"📂 Output: {OUTPUT_DIR}")
     
     persone, organizzazioni = carica_soggetti(DATA_DIR)
+    genera_json_soggetti(persone, organizzazioni, OUTPUT_DIR)
     
     try:
         catalogo_path = os.path.join(DATA_DIR, 'catalogo.xlsx')

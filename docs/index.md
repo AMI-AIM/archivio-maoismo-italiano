@@ -251,6 +251,33 @@ hide:
     font-weight: 600;
     color: #1a1a1a;
     margin-bottom: 0.15rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.hero-search-item-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 0.1rem 0.45rem;
+    border-radius: 10px;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+.hero-search-item-tag--persona {
+    background: #6a1b9a;
+}
+
+.hero-search-item-tag--organizzazione {
+    background: #1565c0;
+}
+
+.hero-search-item-tag--documento {
+    background: #b71c1c;
 }
 
 .hero-search-item-snippet {
