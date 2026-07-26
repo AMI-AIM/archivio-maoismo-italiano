@@ -1,5 +1,6 @@
 import os
 import re
+import html
 import pandas as pd
 from .utils import formatta_data, split_nomi, scarica_descrizione_ia, scarica_testo_ia
 from .soggetti import crea_link, link_lista
@@ -62,6 +63,14 @@ def crea_schede(df, persone, organizzazioni, output_dir):
         nome_file = str(row.get('nome_file', '')).strip()
         if nome_file in ['nan', 'None']:
             nome_file = ''
+        
+        # 🔥 NUOVI CAMPI PER ORIGINALE + TRADUZIONE
+        nome_file_originale = str(row.get('nome_file_originale', '')).strip()
+        if nome_file_originale in ['nan', 'None']:
+            nome_file_originale = ''
+        nome_file_traduzione = str(row.get('nome_file_traduzione', '')).strip()
+        if nome_file_traduzione in ['nan', 'None']:
+            nome_file_traduzione = ''
         
         identifier = None
         if url_ia and url_ia != '#':
@@ -128,10 +137,65 @@ hide:
     </div>
 """
         
-        # 🔥 NUOVO: GESTIONE TESTO/TRASCRIZIONE
+        # 🔥 GESTIONE TESTO BILINGUE (originale + traduzione)
+        elif tipo.lower() == 'testo_bilingue' and identifier:
+            # Scarica i due testi
+            testo_originale = scarica_testo_ia(identifier, nome_file_originale) if nome_file_originale else None
+            testo_traduzione = scarica_testo_ia(identifier, nome_file_traduzione) if nome_file_traduzione else None
+            
+            if testo_originale:
+                testo_originale = html.escape(testo_originale)
+            else:
+                testo_originale = 'Testo originale non disponibile.'
+            
+            if testo_traduzione:
+                testo_traduzione = html.escape(testo_traduzione)
+            else:
+                testo_traduzione = 'Traduzione non disponibile.'
+            
+            content += f"""
+    <div class="text-bilingue">
+        <div class="lingua-toggle" data-toggle-container>
+            <button class="lingua-btn lingua-btn--active" data-lingua="originale">Originale</button>
+            <button class="lingua-btn" data-lingua="traduzione">Traduzione</button>
+        </div>
+        <div class="lingua-content lingua-content--originale" data-lingua-content="originale">
+            <pre class="text-preview">{testo_originale}</pre>
+        </div>
+        <div class="lingua-content lingua-content--traduzione" data-lingua-content="traduzione" style="display:none;">
+            <pre class="text-preview">{testo_traduzione}</pre>
+        </div>
+    </div>
+    <div class="embed-footer">
+        <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
+    </div>
+"""
+            # JavaScript per il toggle
+            content += """
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.querySelector('[data-toggle-container]');
+        if (!container) return;
+        const buttons = container.querySelectorAll('.lingua-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lingua = this.dataset.lingua;
+                buttons.forEach(b => b.classList.remove('lingua-btn--active'));
+                this.classList.add('lingua-btn--active');
+                document.querySelectorAll('[data-lingua-content]').forEach(el => {
+                    el.style.display = el.dataset.linguaContent === lingua ? '' : 'none';
+                });
+            });
+        });
+    });
+    </script>
+"""
+        
+        # 🔥 GESTIONE TESTO/TRASCRIZIONE (singola lingua)
         elif tipo.lower() in ['testo', 'trascrizione'] and identifier:
             testo = scarica_testo_ia(identifier, nome_file)
             if testo:
+                testo = html.escape(testo)
                 content += f"""
     <div class="text-content">
         <pre class="text-preview">{testo}</pre>
@@ -372,7 +436,7 @@ hide:
 }}
 
 /* ============================================================
-   VISUALIZZATORE TESTO
+   VISUALIZZATORE TESTO (singola lingua)
    ============================================================ */
 .text-content {{
     margin: 1rem 0;
@@ -412,6 +476,65 @@ hide:
     text-decoration: underline;
 }}
 
+/* ============================================================
+   VISUALIZZATORE TESTO BILINGUE (originale + traduzione)
+   ============================================================ */
+.text-bilingue {{
+    margin: 1rem 0;
+    background: var(--md-code-bg-color);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--md-default-fg-color--lightest);
+}}
+
+.lingua-toggle {{
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background: var(--md-default-fg-color--lightest);
+    border-bottom: 1px solid var(--md-default-fg-color--light);
+}}
+
+.lingua-btn {{
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    padding: 0.3rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--md-default-fg-color--light);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+}}
+
+.lingua-btn:hover {{
+    color: var(--md-default-fg-color);
+}}
+
+.lingua-btn--active {{
+    color: var(--md-primary-fg-color);
+    border-color: var(--md-primary-fg-color);
+    background: rgba(183, 28, 28, 0.08);
+}}
+
+.lingua-content {{
+    padding: 0;
+}}
+
+.lingua-content .text-preview {{
+    max-height: 600px;
+    overflow-y: auto;
+    padding: 1.5rem;
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: inherit;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    background: transparent;
+    color: var(--md-default-fg-color);
+}}
+
 @media (max-width: 600px) {{
     .doc-date-large {{
         font-size: 1.3rem;
@@ -437,6 +560,19 @@ hide:
         font-size: 0.85rem;
         padding: 1rem;
         max-height: 400px;
+    }}
+    .lingua-content .text-preview {{
+        font-size: 0.85rem;
+        padding: 1rem;
+        max-height: 400px;
+    }}
+    .lingua-toggle {{
+        padding: 0.4rem 0.8rem;
+        gap: 0.3rem;
+    }}
+    .lingua-btn {{
+        padding: 0.2rem 0.6rem;
+        font-size: 0.75rem;
     }}
     .metadata-grid {{
         grid-template-columns: 1fr;

@@ -38,6 +38,14 @@ hide:
 
 
 <div class="doc-row">
+    <div class="doc-data">13 agosto 1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="documenti/AMI-0033/">Verbale della conversazione del Presidente Mao con la delegazione comunista (marxista-leninista) italiana</a></div>
+        <div class="doc-meta"><span class="doc-type-chip">Testo_bilingue</span><span class="doc-org">Partito Comunista d'Italia (marxista-leninista)</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
     <div class="doc-data">1970</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0032/">Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</a></div>
@@ -49,14 +57,6 @@ hide:
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0031/">Sulla tattica contro l'imperialismo giapponese</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">Opuscolo</span><span class="doc-org">Casa editrice in lingue estere</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">1968</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0030/">La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria</a></div>
         <div class="doc-meta"><span class="doc-type-chip">Opuscolo</span><span class="doc-org">Casa editrice in lingue estere</span></div>
     </div>
 </div>
@@ -83,7 +83,7 @@ hide:
     <div class="persona-rank persona-rank--1">1</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="persone/mao-zedong/">Mao Zedong</a></div>
-        <div class="doc-sommario">16 documenti collegati</div>
+        <div class="doc-sommario">17 documenti collegati</div>
         <div class="persona-date">1893 – 1976</div>
     </div>
 </div>
@@ -92,7 +92,7 @@ hide:
     <div class="persona-rank persona-rank--2">2</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="persone/osvaldo-pesce/">Osvaldo Pesce</a></div>
-        <div class="doc-sommario">3 documenti collegati</div>
+        <div class="doc-sommario">4 documenti collegati</div>
         <div class="persona-date">193? – 2021</div>
     </div>
 </div>

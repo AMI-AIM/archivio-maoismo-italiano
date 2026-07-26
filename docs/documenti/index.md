@@ -275,6 +275,16 @@ hide:
     </div>
 </div>
 <div class="risultato-card">
+    <div class="risultato-data">13 agosto 1968</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="AMI-0033/">Verbale della conversazione del Presidente Mao con la delegazione comunista (marxista-leninista) italiana</a>
+        </div>
+        <div class="risultato-meta">Partito Comunista d'Italia (marxista-leninista) · Testo_bilingue</div>
+        <div class="risultato-desc">Trascrizione della conversazione tenuta tra il Presidente cinese Mao Zedong e due rappresentanti del Partito Comunista d'Italia (marxista-leninista), Osvaldo Pesce e Dino Dini, il 13 agosto 1968.La conversazione verte sugli sviluppi della Grande Rivoluzione Proletaria Culturale e sulla situazione politica europea. In particolare, Mao consiglia agli italiani di non partecipare alle elezioni, per evitare il pericolo revisionista.Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018.</div>
+    </div>
+</div>
+<div class="risultato-card">
     <div class="risultato-data">14 agosto 1968</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
