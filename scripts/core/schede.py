@@ -1,7 +1,6 @@
 import os
 import re
 import html
-import json
 import pandas as pd
 from .utils import formatta_data, split_nomi, scarica_descrizione_ia, scarica_testo_ia
 from .soggetti import crea_link, link_lista
@@ -102,74 +101,22 @@ def crea_schede(df, persone, organizzazioni, output_dir):
         organizzazioni_collegate_html = link_lista(organizzazioni_collegate, persone, organizzazioni)
         
         # ============================================================
-        # 🔥 APPARATO CITAZIONALE (Chicago, MLA, BibTeX, semplice)
+        # 🔥 CITAZIONE MINIMALE: "Titolo", Data. Archivio del Maoismo
+        # Italiano. URL — nessun autore/luogo/editore, nessuna data di
+        # consultazione: tutto statico, generato in build.
         # ============================================================
-        # Autore per la citazione: usa l'autore se presente, altrimenti
-        # l'organizzazione come autore collettivo, altrimenti l'archivio
-        # stesso come curatore.
-        if autore_raw:
-            autore_citazione = autore_raw
-        elif org_raw:
-            autore_citazione = org_raw
-        else:
-            autore_citazione = 'Archivio del Maoismo Italiano (a cura di)'
-        
         anno_citazione = data_formattata if data_formattata else 's.d.'
         permalink = f"https://ami-aim.github.io/archivio-maoismo-italiano/documenti/{ami_id}/"
-        bibtex_key = ami_id.lower().replace('-', '_')
-        
-        # Luogo: Editore (ordine e punteggiatura corretti per lo stile Chicago
-        # notes-bibliography). Il tipo/genere va tra parentesi quadre subito
-        # dopo il titolo: è un'annotazione descrittiva, non un elemento
-        # bibliografico di pari rango rispetto a editore/luogo/anno.
-        luogo_editore = ''
-        if luogo_raw and org_raw:
-            luogo_editore = f'{luogo_raw}: {org_raw}, '
-        elif org_raw:
-            luogo_editore = f'{org_raw}, '
-        elif luogo_raw:
-            luogo_editore = f'{luogo_raw}, '
-        
-        citazione_chicago = (
-            f'{autore_citazione}. "{titolo}". '
-            f'{luogo_editore}{anno_citazione}. Archivio del Maoismo Italiano ({ami_id}). '
-            f'Consultato il {{DATA_ACCESSO}}. {permalink}.'
-        )
-        
-        citazione_mla = (
-            f'{autore_citazione}. "{titolo}". '
-            f'Archivio del Maoismo Italiano, {anno_citazione}, {permalink}. '
-            f'Consultato il {{DATA_ACCESSO}}.'
-        )
-        
-        citazione_bibtex = (
-            '@misc{' + bibtex_key + ',\n'
-            '  title = {' + titolo + '},\n'
-            '  author = {' + autore_citazione + '},\n'
-            '  year = {' + anno_citazione + '},\n'
-            + (('  publisher = {' + org_raw + '},\n') if org_raw else '')
-            + (('  address = {' + luogo_raw + '},\n') if luogo_raw else '')
-            + '  howpublished = {\\url{' + permalink + '}},\n'
-            '  note = {Archivio del Maoismo Italiano, ' + ami_id + '. Consultato il {DATA_ACCESSO}}\n'
-            '}'
-        )
-        
-        citazione_semplice = (
-            f'{titolo}, {autore_citazione}'
-            + (f', {luogo_raw}: {org_raw}' if luogo_raw and org_raw else (f', {org_raw}' if org_raw else ''))
-            + f', {anno_citazione}. '
-            f'Archivio del Maoismo Italiano ({ami_id}). '
-            f'{permalink} (consultato il {{DATA_ACCESSO}}).'
-        )
-        
-        citazioni_dict = {
-            'chicago': citazione_chicago,
-            'mla': citazione_mla,
-            'bibtex': citazione_bibtex,
-            'semplice': citazione_semplice
-        }
-        citazioni_json = json.dumps(citazioni_dict, ensure_ascii=False)
+        citazione_minima = f'"{titolo}", {anno_citazione}. Archivio del Maoismo Italiano. {permalink}'
+        citazione_minima_html = html.escape(citazione_minima)
         citazione_id = ami_id.lower().replace('-', '_')
+        
+        # Markup del pulsante "Cita questo documento", da affiancare al link
+        # "Apri su Internet Archive" in ogni variante di embed-footer.
+        citazione_bottone_html = (
+            f'<button class="citazione-link" type="button" '
+            f'id="citazione-toggle-{citazione_id}">📑 Cita questo documento</button>'
+        )
         
         frontmatter = f"""---
 title: "{titolo}"
@@ -211,6 +158,7 @@ hide:
             <p>🔗 <a href="{url_ia}" target="_blank">Visualizza la foto su Internet Archive</a></p>
         </div>
         <div class="embed-footer">
+            {citazione_bottone_html}
             <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
         </div>
     </div>
@@ -246,6 +194,7 @@ hide:
         </div>
     </div>
     <div class="embed-footer">
+        {citazione_bottone_html}
         <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
     </div>
 """
@@ -288,6 +237,7 @@ hide:
 """
             content += f"""
     <div class="embed-footer">
+        {citazione_bottone_html}
         <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
     </div>
 """
@@ -305,6 +255,7 @@ hide:
             allowfullscreen>
     </iframe>
     <div class="embed-footer">
+        {citazione_bottone_html}
         <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
     </div>
 """
@@ -313,10 +264,53 @@ hide:
     <div class="no-embed">
         <p>📄 <a href="{url_ia}" target="_blank">Visualizza il documento su Internet Archive</a></p>
     </div>
+    <div class="embed-footer">
+        {citazione_bottone_html}
+    </div>
 """
 
         content += f"""
 </div>
+
+<div class="citazione-pannello" id="citazione-pannello-{citazione_id}" style="display:none;">
+    <textarea class="citazione-testo" id="citazione-testo-{citazione_id}" readonly rows="2">{citazione_minima_html}</textarea>
+    <button class="citazione-copia" id="citazione-copia-{citazione_id}" type="button">📋 Copia</button>
+</div>
+
+<script>
+(function() {{
+    const toggleBtn = document.getElementById('citazione-toggle-{citazione_id}');
+    const pannello = document.getElementById('citazione-pannello-{citazione_id}');
+    const textarea = document.getElementById('citazione-testo-{citazione_id}');
+    const copiaBtn = document.getElementById('citazione-copia-{citazione_id}');
+    if (!toggleBtn || !pannello) return;
+
+    toggleBtn.addEventListener('click', function() {{
+        const aperto = pannello.style.display !== 'none';
+        pannello.style.display = aperto ? 'none' : 'block';
+    }});
+
+    if (copiaBtn && textarea) {{
+        copiaBtn.addEventListener('click', function() {{
+            textarea.select();
+            const testoOriginaleBtn = copiaBtn.textContent;
+            function confermaCopia() {{
+                copiaBtn.textContent = '✅ Copiato!';
+                setTimeout(function() {{ copiaBtn.textContent = testoOriginaleBtn; }}, 1500);
+            }}
+            if (navigator.clipboard && navigator.clipboard.writeText) {{
+                navigator.clipboard.writeText(textarea.value).then(confermaCopia).catch(function() {{
+                    document.execCommand('copy');
+                    confermaCopia();
+                }});
+            }} else {{
+                document.execCommand('copy');
+                confermaCopia();
+            }}
+        }});
+    }}
+}})();
+</script>
 """
 
         if descrizione_ia:
@@ -363,80 +357,6 @@ hide:
         </div>
     </div>
 </div>
-
-<div class="doc-citazione">
-    <button class="citazione-toggle" id="citazione-toggle-{citazione_id}">📑 Cita questo documento</button>
-    <div class="citazione-pannello" id="citazione-pannello-{citazione_id}" style="display:none;">
-        <div class="citazione-tabs">
-            <button class="citazione-tab citazione-tab--active" data-formato="chicago">Chicago</button>
-            <button class="citazione-tab" data-formato="mla">MLA</button>
-            <button class="citazione-tab" data-formato="bibtex">BibTeX</button>
-            <button class="citazione-tab" data-formato="semplice">Semplice</button>
-        </div>
-        <textarea class="citazione-testo" id="citazione-testo-{citazione_id}" readonly rows="4"></textarea>
-        <button class="citazione-copia" id="citazione-copia-{citazione_id}">📋 Copia</button>
-    </div>
-</div>
-
-<script type="application/json" id="citazioni-dati-{citazione_id}">{citazioni_json}</script>
-<script>
-(function() {{
-    const datiEl = document.getElementById('citazioni-dati-{citazione_id}');
-    if (!datiEl) return;
-    const citazioni = JSON.parse(datiEl.textContent);
-
-    const oggi = new Date();
-    const dataAccesso = oggi.toLocaleDateString('it-IT', {{ day: 'numeric', month: 'long', year: 'numeric' }});
-
-    Object.keys(citazioni).forEach(function(formato) {{
-        citazioni[formato] = citazioni[formato].split('{{DATA_ACCESSO}}').join(dataAccesso);
-    }});
-
-    const toggleBtn = document.getElementById('citazione-toggle-{citazione_id}');
-    const pannello = document.getElementById('citazione-pannello-{citazione_id}');
-    const textarea = document.getElementById('citazione-testo-{citazione_id}');
-    const copiaBtn = document.getElementById('citazione-copia-{citazione_id}');
-    const tabs = pannello.querySelectorAll('.citazione-tab');
-
-    function mostraFormato(formato) {{
-        textarea.value = citazioni[formato] || '';
-        tabs.forEach(function(t) {{
-            t.classList.toggle('citazione-tab--active', t.dataset.formato === formato);
-        }});
-    }}
-
-    mostraFormato('chicago');
-
-    toggleBtn.addEventListener('click', function() {{
-        const aperto = pannello.style.display !== 'none';
-        pannello.style.display = aperto ? 'none' : 'block';
-    }});
-
-    tabs.forEach(function(tab) {{
-        tab.addEventListener('click', function() {{
-            mostraFormato(tab.dataset.formato);
-        }});
-    }});
-
-    copiaBtn.addEventListener('click', function() {{
-        textarea.select();
-        const testoOriginaleBtn = copiaBtn.textContent;
-        function confermaCopia() {{
-            copiaBtn.textContent = '✅ Copiato!';
-            setTimeout(function() {{ copiaBtn.textContent = testoOriginaleBtn; }}, 1500);
-        }}
-        if (navigator.clipboard && navigator.clipboard.writeText) {{
-            navigator.clipboard.writeText(textarea.value).then(confermaCopia).catch(function() {{
-                document.execCommand('copy');
-                confermaCopia();
-            }});
-        }} else {{
-            document.execCommand('copy');
-            confermaCopia();
-        }}
-    }});
-}})();
-</script>
 
 <style>
 .doc-date-large {{
@@ -507,9 +427,13 @@ hide:
 }}
 
 .embed-footer {{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 1.2rem;
     padding: 0.5rem 1rem 0.8rem 1rem;
     font-size: 0.9rem;
-    text-align: right;
     background: var(--md-code-bg-color);
     border-top: 1px solid var(--md-default-fg-color--lightest);
 }}
@@ -521,6 +445,22 @@ hide:
 }}
 
 .embed-footer a:hover {{
+    text-decoration: underline;
+}}
+
+.citazione-link {{
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--md-primary-fg-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: inherit;
+}}
+
+.citazione-link:hover {{
     text-decoration: underline;
 }}
 
@@ -689,73 +629,30 @@ hide:
 }}
 
 /* ============================================================
-   APPARATO CITAZIONALE
+   CITAZIONE MINIMALE (sotto il visualizzatore, accanto a "Apri su IA")
    ============================================================ */
-.doc-citazione {{
-    margin-top: 1.5rem;
-}}
-
-.citazione-toggle {{
-    background: var(--md-code-bg-color);
-    border: 1px solid var(--md-default-fg-color--lightest);
-    border-radius: 6px;
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--md-primary-fg-color);
-    cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
-}}
-
-.citazione-toggle:hover {{
-    background: rgba(183, 28, 28, 0.08);
-    border-color: var(--md-primary-fg-color);
-}}
-
 .citazione-pannello {{
-    margin-top: 0.8rem;
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
     background: var(--md-code-bg-color);
     border: 1px solid var(--md-default-fg-color--lightest);
-    border-radius: 8px;
-    padding: 1rem;
-}}
-
-.citazione-tabs {{
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 0.8rem 1rem;
     display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
     flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-bottom: 0.8rem;
-}}
-
-.citazione-tab {{
-    background: transparent;
-    border: 1px solid var(--md-default-fg-color--lightest);
-    border-radius: 20px;
-    padding: 0.25rem 0.9rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--md-default-fg-color--light);
-    cursor: pointer;
-    transition: color 0.15s, border-color 0.15s, background 0.15s;
-}}
-
-.citazione-tab:hover {{
-    color: var(--md-default-fg-color);
-}}
-
-.citazione-tab--active {{
-    color: #ffffff;
-    background: var(--md-primary-fg-color);
-    border-color: var(--md-primary-fg-color);
 }}
 
 .citazione-testo {{
-    width: 100%;
+    flex: 1 1 300px;
+    min-width: 0;
     box-sizing: border-box;
     font-family: 'Roboto Mono', 'Courier New', monospace;
     font-size: 0.85rem;
     line-height: 1.5;
-    padding: 0.8rem;
+    padding: 0.6rem 0.8rem;
     border-radius: 6px;
     border: 1px solid var(--md-default-fg-color--lightest);
     background: var(--md-default-bg-color);
@@ -764,7 +661,6 @@ hide:
 }}
 
 .citazione-copia {{
-    margin-top: 0.6rem;
     background: var(--md-primary-fg-color);
     color: #ffffff;
     border: none;
@@ -774,6 +670,7 @@ hide:
     font-weight: 600;
     cursor: pointer;
     transition: background 0.15s;
+    white-space: nowrap;
 }}
 
 .citazione-copia:hover {{
@@ -781,12 +678,12 @@ hide:
 }}
 
 @media (max-width: 600px) {{
-    .citazione-tab {{
-        font-size: 0.72rem;
-        padding: 0.2rem 0.7rem;
-    }}
     .citazione-testo {{
         font-size: 0.78rem;
+    }}
+    .citazione-pannello {{
+        flex-direction: column;
+        align-items: stretch;
     }}
 }}
 
