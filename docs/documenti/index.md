@@ -298,6 +298,16 @@ hide:
     <div class="risultato-data">31 agosto 1968</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
+            <a href="AMI-0034/">Istruzioni del Presidente Mao sulla relazione di Kang Sheng riguardante la raccolta di materiale sulle elezioni parlamentari nei paesi capitalisti</a>
+        </div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · testo</div>
+        <div class="risultato-desc">Nota del presidente Mao Zedong riguardante la partecipazione dei partiti comunisti marxisti-leninisti alle elezioni parlamentari dei propri paesi.Dopo aver discusso dell'argomento con Osvaldo Pesce (13/08/1968), il Presidente cinese ha incaricato Kang Sheng di presentare un rapporto sulla questione.Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018.</div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">31 agosto 1968</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
             <a href="AMI-0015/">Osvaldo Pesce, Partito Comunista d'Italia (marxista-leninista), incontra il presidente Mao Zedong</a>
         </div>
         <div class="risultato-meta">Nuova Unità · Partito Comunista d'Italia (marxista-leninista) · foto</div>

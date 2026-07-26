@@ -38,6 +38,14 @@ hide:
 
 
 <div class="doc-row">
+    <div class="doc-data">31 agosto 1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="documenti/AMI-0034/">Istruzioni del Presidente Mao sulla relazione di Kang Sheng riguardante la raccolta di materiale sulle elezioni parlamentari nei paesi capitalisti</a></div>
+        <div class="doc-meta"><span class="doc-type-chip">testo</span><span class="doc-org">Partito Comunista Cinese</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
     <div class="doc-data">13 agosto 1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0033/">Verbale della conversazione del Presidente Mao con la delegazione comunista (marxista-leninista) italiana</a></div>
@@ -50,14 +58,6 @@ hide:
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0032/">Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</a></div>
         <div class="doc-meta"><span class="doc-type-chip">testo</span><span class="doc-org">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">1968</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0031/">Sulla tattica contro l'imperialismo giapponese</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">opuscolo</span><span class="doc-org">Casa editrice in lingue estere</span></div>
     </div>
 </div>
 
@@ -83,7 +83,7 @@ hide:
     <div class="persona-rank persona-rank--1">1</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="persone/mao-zedong/">Mao Zedong</a></div>
-        <div class="doc-sommario">17 documenti collegati</div>
+        <div class="doc-sommario">18 documenti collegati</div>
         <div class="persona-date">1893 – 1976</div>
     </div>
 </div>
@@ -92,7 +92,7 @@ hide:
     <div class="persona-rank persona-rank--2">2</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="persone/osvaldo-pesce/">Osvaldo Pesce</a></div>
-        <div class="doc-sommario">4 documenti collegati</div>
+        <div class="doc-sommario">5 documenti collegati</div>
         <div class="persona-date">193? – 2021</div>
     </div>
 </div>
@@ -100,9 +100,9 @@ hide:
 <div class="doc-row">
     <div class="persona-rank persona-rank--3">3</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="persone/yao-wenyuan/">Yao Wenyuan</a></div>
-        <div class="doc-sommario">2 documenti collegati</div>
-        <div class="persona-date">1931 – 2005</div>
+        <div class="doc-titolo"><a href="persone/dino-dini/">Dino Dini</a></div>
+        <div class="doc-sommario">3 documenti collegati</div>
+        
     </div>
 </div>
 
