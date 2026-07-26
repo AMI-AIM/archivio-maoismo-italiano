@@ -46,6 +46,9 @@ def genera_json(df, persone, organizzazioni, output_dir):
         if tipo.lower() == 'fotografia':
             tipo = 'foto'
         
+        # 🔥 PER I FILTRI: "testo_bilingue" viene mostrato come "testo"
+        tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
+        
         serie = str(row.get('serie', '')).strip()
         if serie in ['nan', 'None']:
             serie = ''
@@ -111,7 +114,7 @@ def genera_json(df, persone, organizzazioni, output_dir):
             'organizzazione': org_raw,
             'data': data_formattata,
             'anno': anno,
-            'tipo': tipo,
+            'tipo': tipo_display,  # 🔥 USO tipo_display (testo per bilingue)
             'serie': serie,
             'keywords': keywords,
             'url_ia': url_ia,

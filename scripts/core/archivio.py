@@ -22,9 +22,12 @@ def genera_indice(df, output_dir):
             data_raw = 'n.d.'
         data_formattata, data_ordine = formatta_data(data_raw)
         
-        tipo = str(row.get('tipo', '')).strip()
-        if tipo in ['nan', 'None']:
-            tipo = ''
+        tipo_raw = str(row.get('tipo', '')).strip()
+        if tipo_raw in ['nan', 'None']:
+            tipo_raw = ''
+        # 🔥 tipo_display: "testo_bilingue" diventa "testo"
+        tipo_display = 'testo' if tipo_raw == 'testo_bilingue' else tipo_raw
+        
         org = str(row.get('organizzazione', '')).strip()
         if org in ['nan', 'None']:
             org = ''
@@ -57,7 +60,8 @@ def genera_indice(df, output_dir):
             'titolo': titolo,
             'data': data_formattata,
             'data_ordine': data_ordine,
-            'tipo': tipo,
+            'tipo': tipo_display,          # 🔥 usato per i meta in pagina
+            'tipo_raw': tipo_raw,          # 🔥 per compatibilità futura
             'organizzazione': org,
             'autore': autore_display,
             'descrizione': descrizione
@@ -77,7 +81,7 @@ def genera_indice(df, output_dir):
         if s['organizzazione'] and s['organizzazione'] not in ['nan', 'None', '']:
             meta_parts.append(s['organizzazione'])
         if s['tipo'] and s['tipo'] not in ['nan', 'None', '']:
-            meta_parts.append(s['tipo'])
+            meta_parts.append(s['tipo'])   # 🔥 già convertito a "testo"
         meta_line = ' · '.join(meta_parts) if meta_parts else 'N/A'
         
         risultati_html += f"""

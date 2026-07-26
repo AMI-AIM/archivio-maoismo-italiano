@@ -78,7 +78,6 @@ def scarica_descrizione_ia(identifier):
     
     return None
 
-# 🔥 NUOVA FUNZIONE: scarica file .txt da Internet Archive
 def scarica_testo_ia(identifier, nome_file=None):
     if not identifier:
         return None

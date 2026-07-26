@@ -26,6 +26,9 @@ def genera_home(df, persone, output_dir):
         tipo = str(row.get('tipo', '')).strip()
         if tipo in ['nan', 'None']:
             tipo = ''
+        # 🔥 PER IL BADGE: "testo_bilingue" viene mostrato come "testo"
+        tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
+        
         org = str(row.get('organizzazione', '')).strip()
         if org in ['nan', 'None']:
             org = ''
@@ -44,7 +47,7 @@ def genera_home(df, persone, output_dir):
         # Markup del chip tipologia + editore, usato nella home (due colonne)
         meta_html_parts = []
         if tipo:
-            meta_html_parts.append(f'<span class="doc-type-chip">{tipo}</span>')
+            meta_html_parts.append(f'<span class="doc-type-chip">{tipo_display}</span>')
         if org:
             meta_html_parts.append(f'<span class="doc-org">{org}</span>')
         meta_html = ''.join(meta_html_parts) if meta_html_parts else '<span class="doc-org">Documento storico</span>'
@@ -65,9 +68,6 @@ def genera_home(df, persone, output_dir):
         })
         
         # 🔥 CONTEGGIO "PERSONE PIÙ MENZIONATE"
-        # Contiamo autore + persone_collegate; usiamo un set per non
-        # contare due volte la stessa persona sullo stesso documento
-        # (es. se compare sia come autore che come persona collegata).
         autore_raw = str(row.get('autore', '')).strip()
         persone_collegate_raw = str(row.get('persone_collegate', '')).strip()
         

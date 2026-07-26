@@ -80,7 +80,6 @@ def link_lista(nomi_str, persone, organizzazioni):
         return ', '.join(links)
     return 'N/A'
 
-
 def genera_json_soggetti(persone, organizzazioni, output_dir):
     """Esporta persone e organizzazioni in un JSON, usato dalla ricerca
     istantanea nella home (hero-search.js) per suggerire anche schede

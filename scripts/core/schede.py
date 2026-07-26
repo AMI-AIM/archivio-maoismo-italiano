@@ -48,6 +48,9 @@ def crea_schede(df, persone, organizzazioni, output_dir):
         if tipo.lower() == 'fotografia':
             tipo = 'foto'
         
+        # 🔥 PER IL DISPLAY: "testo_bilingue" viene mostrato come "testo"
+        tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
+        
         serie = str(row.get('serie', '')).strip()
         if serie in ['nan', 'None']:
             serie = ''
@@ -272,7 +275,7 @@ hide:
         </div>
         <div class="metadata-item">
             <span class="metadata-label">Tipologia</span>
-            <span class="metadata-value">{tipo if tipo else 'N/A'}</span>
+            <span class="metadata-value">{tipo_display if tipo_display else 'N/A'}</span>
         </div>
         <div class="metadata-item">
             <span class="metadata-label">Serie</span>

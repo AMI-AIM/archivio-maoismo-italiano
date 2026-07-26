@@ -13,8 +13,8 @@
       "url_ia": "https://archive.org/details/delegazione-edizioni-oriente",
       "persone": [],
       "organizzazioni": [
-        "Nuova Unità",
-        "Edizioni Oriente"
+        "Edizioni Oriente",
+        "Nuova Unità"
       ],
       "descrizione": "\"Il compagno Mao Tse-tung riceve la delegazione delle Edizioni Oriente, guidata dal compagno Dino Frangioni (Livio), Pechino, 17 maggio 1964.\" Da Nuova Unità, no. 4, giugno 1964.Presenti anche rappresentanti dell'organizzazione milanese Gruppo Proletario Luglio 60 (GPL60), come Giacomo (Gino) Montemezzani (alla sinistra di Mao)"
     },
@@ -124,10 +124,10 @@
       "url_ia": "https://archive.org/details/circolare-16-maggio/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Partito Comunista Cinese",
         "Casa editrice in lingue estere",
-        "Hongqi",
-        "Renmin Ribao"
+        "Partito Comunista Cinese",
+        "Renmin Ribao",
+        "Hongqi"
       ],
       "descrizione": "Opuscolo contente la \"Circolare del Comitato Centrale del Partito ComunistaCinese (16 maggio 1966)\", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo \"Un Grande Documento Storico\", pubblicato su Bandiera Rossa e il Quotidiano del Popolo"
     },
@@ -181,14 +181,14 @@
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
       "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
       "persone": [
-        "Dino Dini",
-        "Zhou Enlai",
-        "Yao Wenyuan",
-        "Mao Zedong",
-        "Kang Sheng",
-        "Jiang Qing",
         "Chen Boda",
-        "Osvaldo Pesce"
+        "Osvaldo Pesce",
+        "Jiang Qing",
+        "Zhou Enlai",
+        "Kang Sheng",
+        "Mao Zedong",
+        "Dino Dini",
+        "Yao Wenyuan"
       ],
       "organizzazioni": [
         "Renmin Ribao",
@@ -229,8 +229,8 @@
       "persone": [],
       "organizzazioni": [
         "Casa editrice in lingue estere",
-        "Jiefangjun Bao",
-        "Renmin Ribao"
+        "Renmin Ribao",
+        "Jiefangjun Bao"
       ],
       "descrizione": "La Bussola Che Guida I Popoli Rivoluzionari Di Tutti I Paesi Verso La VittoriaCasa Editrice In Lingue EsterePechino 1968"
     },
@@ -384,8 +384,8 @@
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
       "url_ia": "https://archive.org/details/Pesce-e-Mao",
       "persone": [
-        "Mao Zedong",
-        "Osvaldo Pesce"
+        "Osvaldo Pesce",
+        "Mao Zedong"
       ],
       "organizzazioni": [
         "Nuova Unità",
@@ -443,9 +443,9 @@
       "keywords": "",
       "url_ia": "https://archive.org/details/conversazione-mao-pesce",
       "persone": [
-        "Mao Zedong",
         "Osvaldo Pesce",
-        "Dino Dini"
+        "Dino Dini",
+        "Mao Zedong"
       ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)"
@@ -502,12 +502,12 @@
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
       "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
       "persone": [
-        "Lin Biao",
+        "Chen Boda",
+        "Fosco Dinucci",
+        "Kang Sheng",
         "Zhou Enlai",
         "Mao Zedong",
-        "Kang Sheng",
-        "Fosco Dinucci",
-        "Chen Boda"
+        "Lin Biao"
       ],
       "organizzazioni": [
         "Renmin Ribao",
