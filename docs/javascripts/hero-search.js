@@ -192,7 +192,7 @@
       html += `
         <a class="hero-search-item" href="${r.href}">
           <div class="hero-search-item-title">
-            ${evidenzia(r.titolo, query)}
+            <span class="hero-search-item-title-text">${evidenzia(r.titolo, query)}</span>
             <span class="hero-search-item-tag hero-search-item-tag--${r.tipo}">${r.etichetta}</span>
           </div>
           ${r.frammento ? `<div class="hero-search-item-snippet">${r.frammento}</div>` : ""}

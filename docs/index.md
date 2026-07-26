@@ -251,13 +251,12 @@ hide:
     font-weight: 600;
     color: #1a1a1a;
     margin-bottom: 0.15rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+    line-height: 1.5;
 }
 
 .hero-search-item-tag {
+    display: inline-block;
+    vertical-align: middle;
     font-size: 0.65rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -266,6 +265,7 @@ hide:
     border-radius: 10px;
     color: #ffffff;
     white-space: nowrap;
+    margin-left: 0.4em;
 }
 
 .hero-search-item-tag--persona {
