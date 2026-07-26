@@ -42,10 +42,11 @@ def crea_schede(df, persone, organizzazioni, output_dir):
             data_raw = ''
         data_formattata, _ = formatta_data(data_raw)
         
-        tipo = str(row.get('tipo', '')).strip()
-        if tipo in ['nan', 'None']:
-            tipo = ''
-        if tipo.lower() == 'fotografia':
+        tipo_raw = str(row.get('tipo', '')).strip()
+        if tipo_raw in ['nan', 'None']:
+            tipo_raw = ''
+        tipo = tipo_raw.lower()
+        if tipo == 'fotografia':
             tipo = 'foto'
         
         # 🔥 PER IL DISPLAY: "testo_bilingue" viene mostrato come "testo"
@@ -119,7 +120,7 @@ hide:
 """
 
         # 🔥 GESTIONE FOTO
-        if tipo.lower() == 'foto' and identifier:
+        if tipo == 'foto' and identifier:
             if nome_file:
                 img_url = f"https://archive.org/download/{identifier}/{nome_file}"
             else:
@@ -141,7 +142,7 @@ hide:
 """
         
         # 🔥 GESTIONE TESTO BILINGUE (originale + traduzione)
-        elif tipo.lower() == 'testo_bilingue' and identifier:
+        elif tipo == 'testo_bilingue' and identifier:
             # Scarica i due testi
             testo_originale = scarica_testo_ia(identifier, nome_file_originale) if nome_file_originale else None
             testo_traduzione = scarica_testo_ia(identifier, nome_file_traduzione) if nome_file_traduzione else None
@@ -195,7 +196,7 @@ hide:
 """
         
         # 🔥 GESTIONE TESTO/TRASCRIZIONE (singola lingua)
-        elif tipo.lower() in ['testo', 'trascrizione'] and identifier:
+        elif tipo in ['testo', 'trascrizione'] and identifier:
             testo = scarica_testo_ia(identifier, nome_file)
             if testo:
                 testo = html.escape(testo)
@@ -218,7 +219,7 @@ hide:
         
         # 🔥 GESTIONE AUDIO, PDF, ETC.
         elif identifier:
-            if tipo.lower() == 'audio':
+            if tipo == 'audio':
                 embed_url = f"https://archive.org/embed/{identifier}"
             else:
                 embed_url = f"https://archive.org/embed/{identifier}?ui=embed&nav=0"

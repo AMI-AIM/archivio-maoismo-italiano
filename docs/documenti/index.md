@@ -90,7 +90,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0018/">Delegazione delle Edizioni Oriente accolta dal Presidente Mao Zedong</a>
         </div>
-        <div class="risultato-meta">Nuova Unità · Edizioni Oriente · Foto</div>
+        <div class="risultato-meta">Nuova Unità · Edizioni Oriente · foto</div>
         <div class="risultato-desc">"Il compagno Mao Tse-tung riceve la delegazione delle Edizioni Oriente, guidata dal compagno Dino Frangioni (Livio), Pechino, 17 maggio 1964." Da Nuova Unità, no. 4, giugno 1964.Presenti anche rappresentanti dell'organizzazione milanese Gruppo Proletario Luglio 60 (GPL60), come Giacomo (Gino) Montemezzani (alla sinistra di Mao)</div>
     </div>
 </div>
@@ -100,7 +100,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0013/">Dichiarazione di Principio - Statuto</a>
         </div>
-        <div class="risultato-meta">Ufficio Politico del PCd'I (m-l) · Partito Comunista d'Italia (marxista-leninista) · Opuscolo</div>
+        <div class="risultato-meta">Ufficio Politico del PCd'I (m-l) · Partito Comunista d'Italia (marxista-leninista) · opuscolo</div>
         <div class="risultato-desc">Opuscolo contenente Dichiarazione di principio e Statuto del Partito Comunista d'Italia (marxista-leninista).</div>
     </div>
 </div>
@@ -110,7 +110,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0002/">Sulla giusta soluzione delle contraddizioni in seno al popolo</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · opuscolo</div>
         <div class="risultato-desc">Famoso discorso del Presidente cinese Mao Zedong. Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, 1967.</div>
     </div>
 </div>
@@ -120,7 +120,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0021/">Lavoro Politico no. 1</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 1 - ottobre 1967</div>
     </div>
 </div>
@@ -130,7 +130,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0022/">Lavoro Politico no. 2</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 2 - novembre 1967</div>
     </div>
 </div>
@@ -140,7 +140,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0006/">Al servizio del popolo; In memoria di Norman Bethune; Come Yu Kung rimosse le montagne</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · opuscolo</div>
         <div class="risultato-desc">Collezione dei "tre vecchi articoli" (anche detti tre articoli letti costantemente), tradotta e pubblicata dalla Casa editrice in lingue estere di Pechino, 1968.</div>
     </div>
 </div>
@@ -150,7 +150,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0011/">Circolare del 16 maggio 1966 - Un grande documento storico</a>
         </div>
-        <div class="risultato-meta">Partito Comunista Cinese · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Partito Comunista Cinese · Casa editrice in lingue estere · opuscolo</div>
         <div class="risultato-desc">Opuscolo contente la "Circolare del Comitato Centrale del Partito ComunistaCinese (16 maggio 1966)", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo "Un Grande Documento Storico", pubblicato su Bandiera Rossa e il Quotidiano del Popolo</div>
     </div>
 </div>
@@ -160,7 +160,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0003/">Come correggere le idee errate nel Partito</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · opuscolo</div>
         <div class="risultato-desc">Opuscolo tradotto e pubblicato dalla Casa editrice in lingue estere di Pechino. Testo originale "ON CORRECTING MISTAKEN IDEAS IN THE PARTY (December 1929)"</div>
     </div>
 </div>
@@ -170,7 +170,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0005/">Da dove provengono le idee giuste?</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · opuscolo</div>
         <div class="risultato-desc">Articolo del presidente cinese Mao Zedong, parte della "Risoluzione del Comitato centrale del Partito comunista cinese su alcuni problemi dell'attuale lavoro nelle campagne''La presente traduzione è conforme al testo cinese (Testi scelti dalle opere di Mao Tse-tung, Serie A, Casa Editrice del Popolo; Pechino, Aprile 1965).Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, seconda edizione, 1968.</div>
     </div>
 </div>
@@ -180,7 +180,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0004/">Dichiarazione del compagno Mao Tse-tung, presidente del Comitato Centrale del Partito Comunista Cinese, in appoggio alla lotta degli afroamericani contro la repressione violenta</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · opuscolo</div>
         <div class="risultato-desc">Discorso del Presidente cinese Mao Zedong in supporto alla lotta degli afroamericani, pronunciato in occasione dell'omicidio del Dottor Martin Luther King Jr.Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, 1968.</div>
     </div>
 </div>
@@ -190,7 +190,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0030/">La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria</a>
         </div>
-        <div class="risultato-meta">Renmin Ribao · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Renmin Ribao · Casa editrice in lingue estere · opuscolo</div>
         <div class="risultato-desc">La Bussola Che Guida I Popoli Rivoluzionari Di Tutti I Paesi Verso La VittoriaCasa Editrice In Lingue EsterePechino 1968</div>
     </div>
 </div>
@@ -200,7 +200,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0012/">La classe operaia deve esercitare la sua direzione in ogni campo</a>
         </div>
-        <div class="risultato-meta">Yao Wenyuan · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Yao Wenyuan · Casa editrice in lingue estere · opuscolo</div>
         <div class="risultato-desc">Articolo ad opera di Yao Wenyuan e pubblicato originariamente su Hongqi. Traduzione ufficiale a cura della Casa editrice in lingue estere di Pechino, 1968.</div>
     </div>
 </div>
@@ -210,7 +210,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0023/">Lavoro Politico no. 3</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 3 - gennaio 1968</div>
     </div>
 </div>
@@ -220,7 +220,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0007/">Preoccuparsi delle condizioni di vita delle masse fare attenzione ai metodi di lavoro</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · opuscolo</div>
         <div class="risultato-desc">Opuscolo contenente le conclusioni del presidente cinese Mao Zedong al II Congresso nazionale dei rappresentanti operai e contadini. Tradotto e pubblicato dalla Casa editrice in lingue estere di Pechino, 1968.</div>
     </div>
 </div>
@@ -230,7 +230,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0031/">Sulla tattica contro l'imperialismo giapponese</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · opuscolo</div>
         <div class="risultato-desc">Rapporto del presidente cinese Mao Zedong alla Conferenza degli attivisti del Partito tenutasi il 27 dicembre 1935 a Wayaopao. Traduzione ufficiale dell'opuscolo a cura della Casa editrice in lingue estere di Pechino.Il testo originale compare in Opere Scelte, Vol. 1.</div>
     </div>
 </div>
@@ -240,7 +240,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0024/">Lavoro Politico no. 4</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 4 - febbraio 1968</div>
     </div>
 </div>
@@ -250,7 +250,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0025/">Lavoro Politico no. 5/6</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 5 - 6, marzo - aprile 1968</div>
     </div>
 </div>
@@ -260,7 +260,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0026/">Lavoro Politico no. 7</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 7 - maggio 1968</div>
     </div>
 </div>
@@ -270,7 +270,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0027/">Lavoro Politico no. 8/9</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 8 - 9, giugno - luglio 1968</div>
     </div>
 </div>
@@ -280,7 +280,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0033/">Verbale della conversazione del Presidente Mao con la delegazione comunista (marxista-leninista) italiana</a>
         </div>
-        <div class="risultato-meta">Partito Comunista d'Italia (marxista-leninista) · Testo_bilingue</div>
+        <div class="risultato-meta">Partito Comunista d'Italia (marxista-leninista) · testo</div>
         <div class="risultato-desc">Trascrizione della conversazione tenuta tra il Presidente cinese Mao Zedong e due rappresentanti del Partito Comunista d'Italia (marxista-leninista), Osvaldo Pesce e Dino Dini, il 13 agosto 1968.La conversazione verte sugli sviluppi della Grande Rivoluzione Proletaria Culturale e sulla situazione politica europea. In particolare, Mao consiglia agli italiani di non partecipare alle elezioni, per evitare il pericolo revisionista.Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018.</div>
     </div>
 </div>
@@ -290,7 +290,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0014/">Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta dalla leadership del Partito Comunista Cinese</a>
         </div>
-        <div class="risultato-meta">Renmin Ribao · Partito Comunista d'Italia (marxista-leninista) · Foto</div>
+        <div class="risultato-meta">Renmin Ribao · Partito Comunista d'Italia (marxista-leninista) · foto</div>
         <div class="risultato-desc">Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta a Pechino dalla leadership del Partito Comunista Cinese. In rappresentanza del PCd'I (ml), in ordine, Osvaldo Pesce e Dino Dini. La leadership cinese è composta da, sempre in ordine, Chen Boda, Kang Sheng, Jiang Qing, Mao Zedong, Zhou Enlai, Yao Wenyuan. Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 14 agosto 1968, p. 1), Peking Review (no. 33, 1968, p. 8) e Nuova Unità (31 agosto 1968, p. 1)</div>
     </div>
 </div>
@@ -300,7 +300,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0015/">Osvaldo Pesce, Partito Comunista d'Italia (marxista-leninista), incontra il presidente Mao Zedong</a>
         </div>
-        <div class="risultato-meta">Nuova Unità · Partito Comunista d'Italia (marxista-leninista) · Foto</div>
+        <div class="risultato-meta">Nuova Unità · Partito Comunista d'Italia (marxista-leninista) · foto</div>
         <div class="risultato-desc">Osvaldo Pesce, rappresentante del Partito Comunista d'Italia (marxista-leninista), incontra il presidente del Partito Comunista Cinese Mao Zedong. Foto pubblicata su Nuova Unità (31 agosto 1968, p. 4.)</div>
     </div>
 </div>
@@ -310,7 +310,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0028/">Lavoro Politico no. 10</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 10 - settembre 1968</div>
     </div>
 </div>
@@ -320,7 +320,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0029/">Lavoro Politico no. 11/12</a>
         </div>
-        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Centro di Informazione di Verona · Centro di Informazione di Verona · periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 11 - 12, dicembre 1968 - gennaio 1969</div>
     </div>
 </div>
@@ -330,7 +330,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0001/">Citazioni dalle opere del presidente Mao Tse-tung</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Libro</div>
+        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · libro</div>
         <div class="risultato-desc">Prima edizione italiana del famoso Libretto rosso, contenente le iconiche citazioni del presidente cinese Mao Zedong, stampata a Pechino dalla Casa editrice in lingue estere, 1967. L'indice è stato spostato all'inizio del libro per una consultazione più agevole.Quotations from Chairman Mao Tse-tung (Little red book) in Italian, official translation by the Foreign Languages Press, published in Peking (Beijing) in 1967.​毛主席语录 (Máo Zhǔxí Yǔlù)</div>
     </div>
 </div>
@@ -340,7 +340,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0019/">Citazioni del presidente Mao Tse-tung</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Signal · Audio</div>
+        <div class="risultato-meta">Mao Zedong · Signal · audio</div>
         <div class="risultato-desc">Vinile 33rpm delle dimensioni di un vinile 45rpm con discorsi di Mao Tse-Tung tradotti in italiano con musica popolare cinese in background.</div>
     </div>
 </div>
@@ -350,7 +350,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0009/">Orientamento del movimento giovanile</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · opuscolo</div>
         <div class="risultato-desc">Discorso del Presidente cinese Mao Zedong. Traduzione e pubblicazione a cura della Casa editrice in lingue estere di Pechino, 1969.</div>
     </div>
 </div>
@@ -360,7 +360,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0008/">Sul rafforzamento del sistema dei comitati di partito</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · opuscolo</div>
         <div class="risultato-desc">Opuscolo contenente due testi del Presidente Mao Zedong, "Sul Rafforzamento Del Sistema Dei Comitati Di Partito" e "Metodi Di Lavoro Dei Comitati Di Partito". Traduzione ufficiale a cura della Casa editrice in lingue estere di Pechino</div>
     </div>
 </div>
@@ -370,7 +370,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0016/">Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese</a>
         </div>
-        <div class="risultato-meta">Renmin Ribao · Partito Comunista d'Italia (marxista-leninista) · Foto</div>
+        <div class="risultato-meta">Renmin Ribao · Partito Comunista d'Italia (marxista-leninista) · foto</div>
         <div class="risultato-desc">Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese in occasione dei festeggiamenti del 1° ottobre 1969. Nella foto compaiono, in ordine, Zhou Enlai, Mao Zedong, Lin Biao, Kang Sheng e Chen Boda. Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 3 ottobre 1969, p. 1).</div>
     </div>
 </div>
@@ -380,7 +380,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0017/">Studenti ed intellettuali rivoluzionari</a>
         </div>
-        <div class="risultato-meta">Comitato di Partito di Catania (UCI-m.l) · Unione dei Comunisti Italiani (marxisti-leninisti) · Volantino</div>
+        <div class="risultato-meta">Comitato di Partito di Catania (UCI-m.l) · Unione dei Comunisti Italiani (marxisti-leninisti) · volantino</div>
         <div class="risultato-desc">Volantino ciclostilato a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), meglio conosciuta come Servire il Popolo. Il volantino riporta un appello a "Studenti ed Intellettuali Rivoluzionari" affinché questi si uniscano all'organizzazione maoista.</div>
     </div>
 </div>
@@ -390,7 +390,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0010/">Popoli di tutto il mondo, unitevi per sconfiggere gli aggressori americani e tutti i loro lacché! (Dichiarazione del 20 maggio 1970)</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · opuscolo</div>
         <div class="risultato-desc">Opuscolo contenente la dichiarazione anti-imperialista del presidente cinese Mao Zedong, tradotto e pubblicato dalla Casa editrice in lingue estere di Pechino, 1970.</div>
     </div>
 </div>
@@ -400,7 +400,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0032/">Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</a>
         </div>
-        <div class="risultato-meta">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista · Stella Rossa - Fronte Rivoluzionario Marxista-Leninista · Testo</div>
+        <div class="risultato-meta">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista · Stella Rossa - Fronte Rivoluzionario Marxista-Leninista · testo</div>
         <div class="risultato-desc">Estratto dall'opuscolo "PER LA VITTORIA DEL POTERE ROSSO IN ITALIA-ATTI DEL CONGRESSO NAZIONALE COSTITUTIVO DI STELLA ROSSA FRONTE RIVOLUZIONARIO MARXISTA-LENINISTA".Approvato nel suo testo definitivo dal Congresso Nazionale in seduta plenaria il 4 Novembre 1970.Stella Rossa fu un'organizzazione marxista-leninista (di orientamento maoista), fondata da Vincenzo Calò (già Viva il Leninismo!, Federazione Marxista-Leninista d'Italia, Tribuna Rossa) nel 1969. Nel 1976 si trasforma in Partito della rivoluzione socialista.</div>
     </div>
 </div>
@@ -410,7 +410,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0020/">Ribellarsi è giusto! Antologia</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Libro</div>
+        <div class="risultato-meta">Mao Zedong · libro</div>
         <div class="risultato-desc">Mao Tse Tung Ribellarsi è giustoAntologia a cura di Roberto SassiEditore: SynergonAnno: 1993Numero di pagine: 127</div>
     </div>
 </div>

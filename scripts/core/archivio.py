@@ -25,8 +25,9 @@ def genera_indice(df, output_dir):
         tipo_raw = str(row.get('tipo', '')).strip()
         if tipo_raw in ['nan', 'None']:
             tipo_raw = ''
+        tipo = tipo_raw.lower()  # 🔥 NORMALIZZA in minuscolo
         # 🔥 tipo_display: "testo_bilingue" diventa "testo"
-        tipo_display = 'testo' if tipo_raw == 'testo_bilingue' else tipo_raw
+        tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
         
         org = str(row.get('organizzazione', '')).strip()
         if org in ['nan', 'None']:
@@ -61,7 +62,7 @@ def genera_indice(df, output_dir):
             'data': data_formattata,
             'data_ordine': data_ordine,
             'tipo': tipo_display,          # 🔥 usato per i meta in pagina
-            'tipo_raw': tipo_raw,          # 🔥 per compatibilità futura
+            'tipo_raw': tipo,              # 🔥 per compatibilità futura
             'organizzazione': org,
             'autore': autore_display,
             'descrizione': descrizione

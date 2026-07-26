@@ -23,9 +23,10 @@ def genera_home(df, persone, output_dir):
             data_raw = 'n.d.'
         data_formattata, _ = formatta_data(data_raw)
         
-        tipo = str(row.get('tipo', '')).strip()
-        if tipo in ['nan', 'None']:
-            tipo = ''
+        tipo_raw = str(row.get('tipo', '')).strip()
+        if tipo_raw in ['nan', 'None']:
+            tipo_raw = ''
+        tipo = tipo_raw.lower()
         # 🔥 PER IL BADGE: "testo_bilingue" viene mostrato come "testo"
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
         

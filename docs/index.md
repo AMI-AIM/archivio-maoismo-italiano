@@ -41,7 +41,7 @@ hide:
     <div class="doc-data">13 agosto 1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0033/">Verbale della conversazione del Presidente Mao con la delegazione comunista (marxista-leninista) italiana</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">Testo_bilingue</span><span class="doc-org">Partito Comunista d'Italia (marxista-leninista)</span></div>
+        <div class="doc-meta"><span class="doc-type-chip">testo</span><span class="doc-org">Partito Comunista d'Italia (marxista-leninista)</span></div>
     </div>
 </div>
 
@@ -49,7 +49,7 @@ hide:
     <div class="doc-data">1970</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0032/">Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">Testo</span><span class="doc-org">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</span></div>
+        <div class="doc-meta"><span class="doc-type-chip">testo</span><span class="doc-org">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</span></div>
     </div>
 </div>
 
@@ -57,7 +57,7 @@ hide:
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0031/">Sulla tattica contro l'imperialismo giapponese</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">Opuscolo</span><span class="doc-org">Casa editrice in lingue estere</span></div>
+        <div class="doc-meta"><span class="doc-type-chip">opuscolo</span><span class="doc-org">Casa editrice in lingue estere</span></div>
     </div>
 </div>
 

@@ -40,10 +40,11 @@ def genera_json(df, persone, organizzazioni, output_dir):
             data_raw = ''
         data_formattata, data_ordine = formatta_data(data_raw)
         
-        tipo = str(row.get('tipo', '')).strip()
-        if tipo in ['nan', 'None']:
-            tipo = ''
-        if tipo.lower() == 'fotografia':
+        tipo_raw = str(row.get('tipo', '')).strip()
+        if tipo_raw in ['nan', 'None']:
+            tipo_raw = ''
+        tipo = tipo_raw.lower()
+        if tipo == 'fotografia':
             tipo = 'foto'
         
         # 🔥 PER I FILTRI: "testo_bilingue" viene mostrato come "testo"
