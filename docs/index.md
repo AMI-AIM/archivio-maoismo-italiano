@@ -26,11 +26,11 @@ hide:
 </div>
 
 
-<div class="home-columns" markdown="1">
+<div class="home-columns">
 
-<div class="home-column" markdown="1">
+<div class="home-column">
 
-## 📥 Aggiunti di recente
+<h2>📥 Aggiunti di recente</h2>
 
 <div class="recent-container">
 
@@ -73,9 +73,9 @@ hide:
 
 </div>
 
-<div class="home-column" markdown="1">
+<div class="home-column">
 
-## 👤 Persone più menzionate
+<h2>👤 Persone più menzionate</h2>
 
 <div class="recent-container">
 
