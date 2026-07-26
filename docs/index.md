@@ -83,26 +83,29 @@ hide:
 
 
 <div class="doc-row">
-    <div class="doc-data">16</div>
+    <div class="persona-rank persona-rank--1">1</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="persone/mao-zedong/">Mao Zedong</a></div>
         <div class="doc-sommario">16 documenti collegati</div>
+        <div class="persona-date">1893 – 1976</div>
     </div>
 </div>
 
 <div class="doc-row">
-    <div class="doc-data">3</div>
+    <div class="persona-rank persona-rank--2">2</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="persone/osvaldo-pesce/">Osvaldo Pesce</a></div>
         <div class="doc-sommario">3 documenti collegati</div>
+        <div class="persona-date">193? – 2021</div>
     </div>
 </div>
 
 <div class="doc-row">
-    <div class="doc-data">2</div>
+    <div class="persona-rank persona-rank--3">3</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="persone/yao-wenyuan/">Yao Wenyuan</a></div>
         <div class="doc-sommario">2 documenti collegati</div>
+        <div class="persona-date">1931 – 2005</div>
     </div>
 </div>
 
@@ -207,8 +210,13 @@ hide:
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    align-items: start;
+    align-items: stretch;
     margin-top: 0.5rem;
+}
+
+.home-column {
+    display: flex;
+    flex-direction: column;
 }
 
 .home-column h2 {
@@ -217,11 +225,54 @@ hide:
     font-size: 1.3rem;
 }
 
+.home-column .recent-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-column .catalogo-lista {
+    flex: 1;
+}
+
 @media (max-width: 768px) {
     .home-columns {
         grid-template-columns: 1fr;
         gap: 0.5rem;
     }
+}
+
+/* Badge "medaglia" per la classifica delle persone più menzionate */
+.persona-rank {
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.persona-rank--1 {
+    background: linear-gradient(135deg, #f6d365, #c9911d);
+}
+
+.persona-rank--2 {
+    background: linear-gradient(135deg, #dde3e6, #9aa5ab);
+}
+
+.persona-rank--3 {
+    background: linear-gradient(135deg, #d7a06e, #a05a2c);
+}
+
+.persona-date {
+    font-size: 0.8rem;
+    color: var(--md-default-fg-color--light);
+    font-style: italic;
 }
 
 .md-button {

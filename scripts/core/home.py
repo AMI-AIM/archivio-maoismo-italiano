@@ -153,15 +153,20 @@ hide:
 """
 
     if persone_top:
-        for nome, conteggio in persone_top:
-            slug = persone.get(nome, {}).get('slug', '')
+        for rank, (nome, conteggio) in enumerate(persone_top, start=1):
+            info_persona = persone.get(nome, {})
+            slug = info_persona.get('slug', '')
+            nascita = info_persona.get('nascita', '').strip()
+            morte = info_persona.get('morte', '').strip()
+            date_vita = ' – '.join([d for d in [nascita, morte] if d and d not in ['nan', 'None']])
             etichetta_conteggio = "1 documento collegato" if conteggio == 1 else f"{conteggio} documenti collegati"
             home_content += f"""
 <div class="doc-row">
-    <div class="doc-data">{conteggio}</div>
+    <div class="persona-rank persona-rank--{rank}">{rank}</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="persone/{slug}/">{nome}</a></div>
         <div class="doc-sommario">{etichetta_conteggio}</div>
+        {f'<div class="persona-date">{date_vita}</div>' if date_vita else ''}
     </div>
 </div>
 """
@@ -274,8 +279,13 @@ hide:
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    align-items: start;
+    align-items: stretch;
     margin-top: 0.5rem;
+}
+
+.home-column {
+    display: flex;
+    flex-direction: column;
 }
 
 .home-column h2 {
@@ -284,11 +294,54 @@ hide:
     font-size: 1.3rem;
 }
 
+.home-column .recent-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-column .catalogo-lista {
+    flex: 1;
+}
+
 @media (max-width: 768px) {
     .home-columns {
         grid-template-columns: 1fr;
         gap: 0.5rem;
     }
+}
+
+/* Badge "medaglia" per la classifica delle persone più menzionate */
+.persona-rank {
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.persona-rank--1 {
+    background: linear-gradient(135deg, #f6d365, #c9911d);
+}
+
+.persona-rank--2 {
+    background: linear-gradient(135deg, #dde3e6, #9aa5ab);
+}
+
+.persona-rank--3 {
+    background: linear-gradient(135deg, #d7a06e, #a05a2c);
+}
+
+.persona-date {
+    font-size: 0.8rem;
+    color: var(--md-default-fg-color--light);
+    font-style: italic;
 }
 
 .md-button {
