@@ -30,7 +30,7 @@ hide:
 
 <div class="home-column">
 
-<h2>📥 Aggiunti di recente</h2>
+<h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 12h10v2H7zm0-4h10v2H7zm0 8h6v2H7z"/></svg> Aggiunti di recente</h2>
 
 <div class="recent-container">
 
@@ -41,7 +41,7 @@ hide:
     <div class="doc-data">1970</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0032/">Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</a></div>
-        <div class="doc-sommario">Testo · Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</div>
+        <div class="doc-meta"><span class="doc-type-chip">Testo</span><span class="doc-org">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</span></div>
     </div>
 </div>
 
@@ -49,7 +49,7 @@ hide:
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0031/">Sulla tattica contro l'imperialismo giapponese</a></div>
-        <div class="doc-sommario">Opuscolo · Casa editrice in lingue estere</div>
+        <div class="doc-meta"><span class="doc-type-chip">Opuscolo</span><span class="doc-org">Casa editrice in lingue estere</span></div>
     </div>
 </div>
 
@@ -57,7 +57,7 @@ hide:
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0030/">La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria</a></div>
-        <div class="doc-sommario">Opuscolo · Casa editrice in lingue estere</div>
+        <div class="doc-meta"><span class="doc-type-chip">Opuscolo</span><span class="doc-org">Casa editrice in lingue estere</span></div>
     </div>
 </div>
 
@@ -65,14 +65,14 @@ hide:
 </div>
 
 <div style="text-align: center; margin-top: 1rem;">
-    <a href="documenti/" class="md-button md-button--primary">📂 Tutti i documenti</a>
+    <a href="documenti/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg> Tutti i documenti</a>
 </div>
 
 </div>
 
 <div class="home-column">
 
-<h2>👤 Persone più menzionate</h2>
+<h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> Persone più menzionate</h2>
 
 <div class="recent-container">
 
@@ -110,7 +110,7 @@ hide:
 </div>
 
 <div style="text-align: center; margin-top: 1rem;">
-    <a href="persone/" class="md-button md-button--primary">👥 Tutte le persone</a>
+    <a href="persone/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg> Tutte le persone</a>
 </div>
 
 </div>
@@ -137,9 +137,10 @@ hide:
 .doc-row {
     display: flex;
     align-items: flex-start;
-    padding: 0.6rem 0.8rem;
+    padding: 0.75rem 0.9rem;
     border-bottom: 1px solid var(--md-default-fg-color--lightest);
-    transition: background-color 0.15s;
+    border-left: 3px solid transparent;
+    transition: background-color 0.15s, border-left-color 0.15s;
     gap: 1.5rem;
 }
 
@@ -149,6 +150,7 @@ hide:
 
 .doc-row:hover {
     background-color: var(--md-code-bg-color);
+    border-left-color: var(--md-primary-fg-color);
 }
 
 .doc-data {
@@ -181,6 +183,31 @@ hide:
     color: var(--md-primary-fg-color);
 }
 
+.doc-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.15rem;
+}
+
+.doc-type-chip {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--md-primary-fg-color);
+    background: rgba(183, 28, 28, 0.1);
+    padding: 0.15rem 0.55rem;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.doc-org {
+    font-size: 0.88rem;
+    color: var(--md-default-fg-color--light);
+}
+
 .doc-sommario {
     font-size: 0.9rem;
     color: var(--md-default-fg-color--light);
@@ -194,10 +221,11 @@ hide:
 
 .recent-container {
     background: var(--md-code-bg-color);
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 0.5rem 0.5rem 0.2rem 0.5rem;
     margin: 1rem 0;
     border: 1px solid var(--md-default-fg-color--lightest);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 /* ============================================================
@@ -220,6 +248,24 @@ hide:
     margin-top: 0;
     margin-bottom: 0.6rem;
     font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-icon {
+    width: 1.3rem;
+    height: 1.3rem;
+    fill: var(--md-primary-fg-color);
+    flex-shrink: 0;
+}
+
+.button-icon {
+    width: 1rem;
+    height: 1rem;
+    fill: currentColor;
+    vertical-align: -0.15em;
+    margin-right: 0.3rem;
 }
 
 .home-column .recent-container {
