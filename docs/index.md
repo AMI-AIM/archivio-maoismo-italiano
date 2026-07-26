@@ -42,7 +42,6 @@ hide:
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0032/">Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</a></div>
         <div class="doc-sommario">Testo · Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</div>
-        <div class="doc-keywords">Maoismo; Marxismo-leninismo</div>
     </div>
 </div>
 
@@ -51,7 +50,6 @@ hide:
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0031/">Sulla tattica contro l'imperialismo giapponese</a></div>
         <div class="doc-sommario">Opuscolo · Casa editrice in lingue estere</div>
-        <div class="doc-keywords">Partito comunista cinese; Maoismo; Guerra civile cinese; Lunga marcia</div>
     </div>
 </div>
 
@@ -60,7 +58,6 @@ hide:
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0030/">La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria</a></div>
         <div class="doc-sommario">Opuscolo · Casa editrice in lingue estere</div>
-        <div class="doc-keywords">Partito comunista cinese; Maoismo; Rivoluzione culturale</div>
     </div>
 </div>
 

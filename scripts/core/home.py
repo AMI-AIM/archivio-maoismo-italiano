@@ -127,7 +127,6 @@ hide:
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/{s['id']}/">{s['titolo']}</a></div>
         <div class="doc-sommario">{s['sommario']}</div>
-        <div class="doc-keywords">{s['keywords'] if s['keywords'] else ''}</div>
     </div>
 </div>
 """
