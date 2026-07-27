@@ -366,13 +366,14 @@ hide:
 
 """
     
-    # TOP ROW
+    # TOP ROW - 🔥 CON BADGE DI CATEGORIA
     if org_top:
         index_content += '<div class="top-row">\n'
         for nome, data in org_top:
             slug = data['slug']
             num_doc = data['num_doc']
             date_range = data['data_range']
+            categoria = data['categoria']  # 🔥 PER IL BADGE
             
             if data.get('immagine'):
                 avatar_html = f'<img src="{data["immagine"]}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
@@ -388,6 +389,7 @@ hide:
                 {avatar_html}
             </div>
             <div class="top-card-text">
+                <div class="top-card-tipo">{categoria}</div>  <!-- 🔥 BADGE NELLA TOP 3 -->
                 <div class="top-card-name">{nome}</div>
                 <div class="top-card-dates">{date_range}</div>
                 <div class="top-card-count">{count_text}</div>
@@ -397,18 +399,20 @@ hide:
 '''
         index_content += '</div>\n'
     
-    # LISTA STANDARD (alfabetica)
+    # LISTA STANDARD (alfabetica) - 🔥 CON BADGE
     if org_resto:
         index_content += '<div class="org-grid">\n'
         for nome, data in org_resto:
             slug = data['slug']
             num_doc = data['num_doc']
             date_range = data['data_range']
+            categoria = data['categoria']
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
             
             index_content += f'''
 <div class="org-card">
     <a href="{slug}/" class="org-link">
+        <div class="org-tipo">{categoria}</div>
         <div class="org-name">{nome}</div>
         <div class="org-dates">{date_range}</div>
         <div class="org-count">{count_text}</div>
@@ -474,6 +478,20 @@ hide:
     flex-shrink: 0;
 }
 
+.top-card-tipo {
+    font-size: 0.55rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #ffffff !important;
+    background: var(--md-primary-fg-color);
+    padding: 0.05rem 0.6rem;
+    border-radius: 4px;
+    display: inline-block;
+    width: fit-content;
+    margin-bottom: 0.15rem;
+}
+
 .top-card-name {
     font-size: 1rem;
     font-weight: 600;
@@ -493,7 +511,7 @@ hide:
 }
 
 /* ============================================================
-   LISTA STANDARD (ordinata alfabeticamente)
+   LISTA STANDARD - CON BADGE DI CATEGORIA
    ============================================================ */
 .org-grid {
     display: grid;
@@ -525,6 +543,19 @@ hide:
     flex-direction: column;
     width: 100%;
     gap: 0.05rem;
+}
+
+.org-tipo {
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #ffffff !important;
+    background: var(--md-primary-fg-color);
+    padding: 0.05rem 0.6rem;
+    border-radius: 4px;
+    display: inline-block;
+    width: fit-content;
 }
 
 .org-name {
@@ -588,7 +619,7 @@ hide:
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(index_content)
     
-    print(f"   ✅ Indice organizzazioni generato con {len(organizzazioni)} organizzazioni (top 3 in evidenza, resto alfabetico).")
+    print(f"   ✅ Indice organizzazioni generato con {len(organizzazioni)} organizzazioni (top 3 in evidenza con badge, resto alfabetico con badge).")
 
 
 def main():

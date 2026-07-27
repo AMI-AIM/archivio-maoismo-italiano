@@ -15,6 +15,7 @@ hide:
                 <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.png" alt="Casa editrice in lingue estere" class="top-card-avatar-img" loading="lazy">
             </div>
             <div class="top-card-text">
+                <div class="top-card-tipo">Casa editrice</div>  <!-- 🔥 BADGE NELLA TOP 3 -->
                 <div class="top-card-name">Casa editrice in lingue estere</div>
                 <div class="top-card-dates">1952 – </div>
                 <div class="top-card-count">14 documenti</div>
@@ -28,6 +29,7 @@ hide:
                 <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.png" alt="Centro di Informazione di Verona" class="top-card-avatar-img" loading="lazy">
             </div>
             <div class="top-card-text">
+                <div class="top-card-tipo">Gruppo</div>  <!-- 🔥 BADGE NELLA TOP 3 -->
                 <div class="top-card-name">Centro di Informazione di Verona</div>
                 <div class="top-card-dates"></div>
                 <div class="top-card-count">9 documenti</div>
@@ -41,6 +43,7 @@ hide:
                 <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.png" alt="Lavoro Politico" class="top-card-avatar-img" loading="lazy">
             </div>
             <div class="top-card-text">
+                <div class="top-card-tipo">Rivista</div>  <!-- 🔥 BADGE NELLA TOP 3 -->
                 <div class="top-card-name">Lavoro Politico</div>
                 <div class="top-card-dates">1967 – 1969</div>
                 <div class="top-card-count">9 documenti</div>
@@ -52,6 +55,7 @@ hide:
 
 <div class="org-card">
     <a href="comitato-di-partito-di-catania-uci-m-l/" class="org-link">
+        <div class="org-tipo">Organo di partito</div>
         <div class="org-name">Comitato di Partito di Catania (UCI-m.l)</div>
         <div class="org-dates">1968 – 1972</div>
         <div class="org-count">1 documento</div>
@@ -60,6 +64,7 @@ hide:
 
 <div class="org-card">
     <a href="edizioni-oriente/" class="org-link">
+        <div class="org-tipo">Casa editrice</div>
         <div class="org-name">Edizioni Oriente</div>
         <div class="org-dates">1963 – 1979</div>
         <div class="org-count">1 documento</div>
@@ -68,6 +73,7 @@ hide:
 
 <div class="org-card">
     <a href="hongqi/" class="org-link">
+        <div class="org-tipo">Giornale</div>
         <div class="org-name">Hongqi</div>
         <div class="org-dates">1958 – 1998</div>
         <div class="org-count">1 documento</div>
@@ -76,6 +82,7 @@ hide:
 
 <div class="org-card">
     <a href="jiefangjun-bao/" class="org-link">
+        <div class="org-tipo">Giornale</div>
         <div class="org-name">Jiefangjun Bao</div>
         <div class="org-dates">1956 – </div>
         <div class="org-count">1 documento</div>
@@ -84,6 +91,7 @@ hide:
 
 <div class="org-card">
     <a href="nuova-unita/" class="org-link">
+        <div class="org-tipo">Giornale</div>
         <div class="org-name">Nuova Unità</div>
         <div class="org-dates">1964 – 1991</div>
         <div class="org-count">2 documenti</div>
@@ -92,6 +100,7 @@ hide:
 
 <div class="org-card">
     <a href="partito-comunista-cinese/" class="org-link">
+        <div class="org-tipo">Partito</div>
         <div class="org-name">Partito Comunista Cinese</div>
         <div class="org-dates">1921 – </div>
         <div class="org-count">3 documenti</div>
@@ -100,6 +109,7 @@ hide:
 
 <div class="org-card">
     <a href="partito-comunista-ditalia-marxista-leninista/" class="org-link">
+        <div class="org-tipo">Partito</div>
         <div class="org-name">Partito Comunista d'Italia (marxista-leninista)</div>
         <div class="org-dates">1966 – 1991</div>
         <div class="org-count">7 documenti</div>
@@ -108,6 +118,7 @@ hide:
 
 <div class="org-card">
     <a href="partito-comunista-ditalia-marxista-leninista-linea-rossa/" class="org-link">
+        <div class="org-tipo">Partito</div>
         <div class="org-name">Partito Comunista d'Italia (marxista-leninista) - linea rossa</div>
         <div class="org-dates">1968 – 1969</div>
         <div class="org-count">1 documento</div>
@@ -116,6 +127,7 @@ hide:
 
 <div class="org-card">
     <a href="renmin-ribao/" class="org-link">
+        <div class="org-tipo">Giornale</div>
         <div class="org-name">Renmin Ribao</div>
         <div class="org-dates">1948 – </div>
         <div class="org-count">4 documenti</div>
@@ -124,6 +136,7 @@ hide:
 
 <div class="org-card">
     <a href="stella-rossa-fronte-rivoluzionario-marxista-leninista/" class="org-link">
+        <div class="org-tipo">Partito</div>
         <div class="org-name">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</div>
         <div class="org-dates">1969 – 1976</div>
         <div class="org-count">2 documenti</div>
@@ -132,6 +145,7 @@ hide:
 
 <div class="org-card">
     <a href="ufficio-politico-del-pcdi-m-l/" class="org-link">
+        <div class="org-tipo">Organo di partito</div>
         <div class="org-name">Ufficio Politico del PCd'I (m-l)</div>
         <div class="org-dates">1966 – 1991</div>
         <div class="org-count">1 documento</div>
@@ -140,6 +154,7 @@ hide:
 
 <div class="org-card">
     <a href="unione-dei-comunisti-italiani-marxisti-leninisti/" class="org-link">
+        <div class="org-tipo">Partito</div>
         <div class="org-name">Unione dei Comunisti Italiani (marxisti-leninisti)</div>
         <div class="org-dates">1968 – 1972</div>
         <div class="org-count">2 documenti</div>
@@ -203,6 +218,20 @@ hide:
     flex-shrink: 0;
 }
 
+.top-card-tipo {
+    font-size: 0.55rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #ffffff !important;
+    background: var(--md-primary-fg-color);
+    padding: 0.05rem 0.6rem;
+    border-radius: 4px;
+    display: inline-block;
+    width: fit-content;
+    margin-bottom: 0.15rem;
+}
+
 .top-card-name {
     font-size: 1rem;
     font-weight: 600;
@@ -222,7 +251,7 @@ hide:
 }
 
 /* ============================================================
-   LISTA STANDARD (ordinata alfabeticamente)
+   LISTA STANDARD - CON BADGE DI CATEGORIA
    ============================================================ */
 .org-grid {
     display: grid;
@@ -254,6 +283,19 @@ hide:
     flex-direction: column;
     width: 100%;
     gap: 0.05rem;
+}
+
+.org-tipo {
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #ffffff !important;
+    background: var(--md-primary-fg-color);
+    padding: 0.05rem 0.6rem;
+    border-radius: 4px;
+    display: inline-block;
+    width: fit-content;
 }
 
 .org-name {
