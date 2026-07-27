@@ -27,15 +27,15 @@ def genera_home(df, persone, output_dir):
         if tipo_raw in ['nan', 'None']:
             tipo_raw = ''
         tipo = tipo_raw.lower()
-        # 🔥 PER IL BADGE: "testo_bilingue" viene mostrato come "testo"
+        # 🔥 PER IL BADGE: "testo_bilingue" viene mostrato come "testo" con maiuscola
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
+        tipo_display = tipo_display.capitalize() if tipo_display else ''
         
         org = str(row.get('organizzazione', '')).strip()
         if org in ['nan', 'None']:
             org = ''
-        keywords = str(row.get('keywords', '')).strip()
-        if keywords in ['nan', 'None']:
-            keywords = ''
+        
+        # 🔥 KEYWORDS RIMOSSE
         
         parti_sommario = []
         if tipo:
@@ -47,7 +47,7 @@ def genera_home(df, persone, output_dir):
         
         # Markup del chip tipologia + editore, usato nella home (due colonne)
         meta_html_parts = []
-        if tipo:
+        if tipo_display:
             meta_html_parts.append(f'<span class="doc-type-chip">{tipo_display}</span>')
         if org:
             meta_html_parts.append(f'<span class="doc-org">{org}</span>')
@@ -64,7 +64,6 @@ def genera_home(df, persone, output_dir):
             'data': data_formattata,
             'sommario': sommario,
             'meta_html': meta_html,
-            'keywords': keywords,
             'num_id': num_id
         })
         
@@ -292,12 +291,6 @@ hide:
 .doc-sommario {
     font-size: 0.9rem;
     color: var(--md-default-fg-color--light);
-}
-
-.doc-keywords {
-    font-size: 0.8rem;
-    color: var(--md-primary-fg-color--light);
-    font-style: italic;
 }
 
 .recent-container {

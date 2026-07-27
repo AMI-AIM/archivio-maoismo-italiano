@@ -25,9 +25,10 @@ def genera_indice(df, output_dir):
         tipo_raw = str(row.get('tipo', '')).strip()
         if tipo_raw in ['nan', 'None']:
             tipo_raw = ''
-        tipo = tipo_raw.lower()  # 🔥 NORMALIZZA in minuscolo
-        # 🔥 tipo_display: "testo_bilingue" diventa "testo"
+        tipo = tipo_raw.lower()
+        # 🔥 tipo_display: "testo_bilingue" diventa "testo" con maiuscola
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
+        tipo_display = tipo_display.capitalize() if tipo_display else ''
         
         org = str(row.get('organizzazione', '')).strip()
         if org in ['nan', 'None']:
@@ -35,9 +36,8 @@ def genera_indice(df, output_dir):
         autore_raw = str(row.get('autore', '')).strip()
         if autore_raw in ['nan', 'None']:
             autore_raw = ''
-        keywords = str(row.get('keywords', '')).strip()
-        if keywords in ['nan', 'None']:
-            keywords = ''
+        
+        # 🔥 KEYWORDS RIMOSSE
         
         url_ia = str(row.get('url', '#')).strip()
         descrizione = None
@@ -61,8 +61,7 @@ def genera_indice(df, output_dir):
             'titolo': titolo,
             'data': data_formattata,
             'data_ordine': data_ordine,
-            'tipo': tipo_display,          # 🔥 usato per i meta in pagina
-            'tipo_raw': tipo,              # 🔥 per compatibilità futura
+            'tipo': tipo_display,
             'organizzazione': org,
             'autore': autore_display,
             'descrizione': descrizione
@@ -82,7 +81,7 @@ def genera_indice(df, output_dir):
         if s['organizzazione'] and s['organizzazione'] not in ['nan', 'None', '']:
             meta_parts.append(s['organizzazione'])
         if s['tipo'] and s['tipo'] not in ['nan', 'None', '']:
-            meta_parts.append(s['tipo'])   # 🔥 già convertito a "testo"
+            meta_parts.append(s['tipo'])
         meta_line = ' · '.join(meta_parts) if meta_parts else 'N/A'
         
         risultati_html += f"""
@@ -170,7 +169,7 @@ hide:
         
         <div class="filtro-gruppo">
             <label for="filtro-testo">Cerca nel testo</label>
-            <input type="text" id="filtro-testo" placeholder="Cerca titolo, autore, keywords...">
+            <input type="text" id="filtro-testo" placeholder="Cerca titolo, autore...">
         </div>
         
         <div class="filtri-azioni">

@@ -58,16 +58,15 @@ def crea_schede(df, persone, organizzazioni, output_dir):
         if tipo == 'fotografia':
             tipo = 'foto'
         
-        # 🔥 PER IL DISPLAY: "testo_bilingue" viene mostrato come "testo"
+        # 🔥 PER IL DISPLAY: "testo_bilingue" viene mostrato come "testo" con maiuscola
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
+        tipo_display = tipo_display.capitalize() if tipo_display else ''
         
         serie = str(row.get('serie', '')).strip()
         if serie in ['nan', 'None']:
             serie = ''
         
-        keywords = str(row.get('keywords', '')).strip()
-        if keywords in ['nan', 'None']:
-            keywords = ''
+        # 🔥 KEYWORDS RIMOSSE
         
         url_ia = str(row.get('url', '#')).strip()
         if url_ia in ['nan', 'None', '']:
@@ -77,7 +76,6 @@ def crea_schede(df, persone, organizzazioni, output_dir):
         if nome_file in ['nan', 'None']:
             nome_file = ''
         
-        # 🔥 NUOVI CAMPI PER ORIGINALE + TRADUZIONE
         nome_file_originale = str(row.get('nome_file_originale', '')).strip()
         if nome_file_originale in ['nan', 'None']:
             nome_file_originale = ''
@@ -106,8 +104,7 @@ def crea_schede(df, persone, organizzazioni, output_dir):
         organizzazioni_collegate_html = link_lista(organizzazioni_collegate, persone, organizzazioni)
         
         # ============================================================
-        # 🔥 CITAZIONE: bibliografica (4 stili) per libro/opuscolo,
-        # minimale (Wilson Center-style) per tutti gli altri tipi.
+        # 🔥 CITAZIONE
         # ============================================================
         anno_citazione = data_formattata if data_formattata else 's.d.'
         permalink = f"https://ami-aim.github.io/archivio-maoismo-italiano/documenti/{ami_id}/"
@@ -115,19 +112,12 @@ def crea_schede(df, persone, organizzazioni, output_dir):
         
         is_bibliografico = tipo in ['libro', 'opuscolo']
         
-        # Markup del pulsante "Cita questo documento", da affiancare al link
-        # "Apri su Internet Archive" in ogni variante di embed-footer.
         citazione_bottone_html = (
             f'<button class="citazione-link" type="button" '
             f'id="citazione-toggle-{citazione_id}">📑 Cita questo documento</button>'
         )
         
         if is_bibliografico:
-            # --- Formattazione autore in ordine bibliografico "Cognome, Nome" ---
-            # Usa il campo esplicito "cognome" da persone.xlsx quando la
-            # persona è schedata; altrimenti lascia il nome così com'è
-            # (nessuna inversione automatica, per non rompere i nomi
-            # cinesi, dove il cognome è già il primo elemento).
             def formatta_autore_bibliografico(nome_completo):
                 info = persone.get(nome_completo)
                 if info and info.get('cognome'):
@@ -148,7 +138,6 @@ def crea_schede(df, persone, organizzazioni, output_dir):
             
             editore_citazione = editore_raw if editore_raw else org_raw
             
-            # Luogo: Editore (punteggiatura Chicago notes-bibliography)
             luogo_editore = ''
             if luogo_raw and editore_citazione:
                 luogo_editore = f'{luogo_raw}: {editore_citazione}, '
@@ -199,6 +188,7 @@ def crea_schede(df, persone, organizzazioni, output_dir):
             citazione_minima = f'"{titolo}", {anno_citazione}. Archivio del Maoismo Italiano. {permalink}'
             citazione_minima_html = html.escape(citazione_minima)
         
+        # 🔥 FRONTMATTER SENZA KEYWORDS
         frontmatter = f"""---
 title: "{titolo}"
 ami_id: {ami_id}
@@ -207,7 +197,6 @@ author: "{autore_raw}"
 year: "{data_formattata}"
 type: "{tipo}"
 series: "{serie}"
-keywords: "{keywords}"
 description: "{tipo} su {org_raw} - Documento conservato su Internet Archive."
 hide:
   - navigation
@@ -245,9 +234,8 @@ hide:
     </div>
 """
         
-        # 🔥 GESTIONE TESTO BILINGUE (originale + traduzione)
+        # 🔥 GESTIONE TESTO BILINGUE
         elif tipo == 'testo_bilingue' and identifier:
-            # Scarica i due testi
             testo_originale = scarica_testo_ia(identifier, nome_file_originale) if nome_file_originale else None
             testo_traduzione = scarica_testo_ia(identifier, nome_file_traduzione) if nome_file_traduzione else None
             
@@ -279,7 +267,6 @@ hide:
         <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
     </div>
 """
-            # JavaScript per il toggle
             content += """
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -300,7 +287,7 @@ hide:
     </script>
 """
         
-        # 🔥 GESTIONE TESTO/TRASCRIZIONE (singola lingua)
+        # 🔥 GESTIONE TESTO/TRASCRIZIONE
         elif tipo in ['testo', 'trascrizione'] and identifier:
             testo = scarica_testo_ia(identifier, nome_file)
             if testo:
@@ -350,6 +337,7 @@ hide:
     </div>
 """
 
+        # Pannello citazione
         if is_bibliografico:
             content += f"""
 <div class="citazione-pannello" id="citazione-pannello-{citazione_id}" style="display:none;">
@@ -466,6 +454,7 @@ hide:
 </div>
 """
 
+        # 🔥 METADATI: "Serie" → "Argomenti", "Parole chiave" rimosso
         content += f"""
 <div class="doc-metadata">
     <div class="metadata-grid">
@@ -494,12 +483,8 @@ hide:
             <span class="metadata-value">{tipo_display if tipo_display else 'N/A'}</span>
         </div>
         <div class="metadata-item">
-            <span class="metadata-label">Serie</span>
+            <span class="metadata-label">Argomenti</span>
             <span class="metadata-value">{serie if serie else 'N/A'}</span>
-        </div>
-        <div class="metadata-item">
-            <span class="metadata-label">Parole chiave</span>
-            <span class="metadata-value">{keywords if keywords else 'N/A'}</span>
         </div>
     </div>
 </div>
@@ -674,9 +659,6 @@ hide:
     text-decoration: underline;
 }}
 
-/* ============================================================
-   VISUALIZZATORE TESTO (singola lingua)
-   ============================================================ */
 .text-content {{
     margin: 1rem 0;
     background: var(--md-code-bg-color);
@@ -715,9 +697,6 @@ hide:
     text-decoration: underline;
 }}
 
-/* ============================================================
-   VISUALIZZATORE TESTO BILINGUE (originale + traduzione)
-   ============================================================ */
 .text-bilingue {{
     margin: 1rem 0;
     background: var(--md-code-bg-color);
@@ -774,9 +753,6 @@ hide:
     color: var(--md-default-fg-color);
 }}
 
-/* ============================================================
-   CITAZIONE MINIMALE (dentro embed-container, sotto il footer)
-   ============================================================ */
 .citazione-pannello {{
     background: var(--md-code-bg-color);
     border-top: 1px solid var(--md-default-fg-color--lightest);
@@ -854,9 +830,6 @@ hide:
     .citazione-copia {{
         align-self: stretch;
     }}
-}}
-
-@media (max-width: 600px) {{
     .doc-date-large {{
         font-size: 1.3rem;
     }}

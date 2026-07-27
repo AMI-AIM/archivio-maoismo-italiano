@@ -47,16 +47,14 @@ def genera_json(df, persone, organizzazioni, output_dir):
         if tipo == 'fotografia':
             tipo = 'foto'
         
-        # 🔥 PER I FILTRI: "testo_bilingue" viene mostrato come "testo"
+        # 🔥 PER I FILTRI: "testo_bilingue" viene mostrato come "testo" (minuscolo per i filtri)
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
         
         serie = str(row.get('serie', '')).strip()
         if serie in ['nan', 'None']:
             serie = ''
         
-        keywords = str(row.get('keywords', '')).strip()
-        if keywords in ['nan', 'None']:
-            keywords = ''
+        # 🔥 KEYWORDS RIMOSSE
         
         url_ia = str(row.get('url', '#')).strip()
         if url_ia in ['nan', 'None', '']:
@@ -115,9 +113,8 @@ def genera_json(df, persone, organizzazioni, output_dir):
             'organizzazione': org_raw,
             'data': data_formattata,
             'anno': anno,
-            'tipo': tipo_display,  # 🔥 USO tipo_display (testo per bilingue)
+            'tipo': tipo_display,
             'serie': serie,
-            'keywords': keywords,
             'url_ia': url_ia,
             'persone': persone_lista,
             'organizzazioni': organizzazioni_lista,
