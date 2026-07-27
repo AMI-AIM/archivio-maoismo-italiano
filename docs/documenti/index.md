@@ -425,6 +425,16 @@ hide:
     </div>
 </div>
 <div class="risultato-card">
+    <div class="risultato-data">1975</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="AMI-0036/">In caso di golpe: Manuale teorico-pratico per il cittadino, di resistenza totale e di guerra di popolo, di guerriglia e di controguerriglia</a>
+        </div>
+        <div class="risultato-meta">Vincenzo Calò · Savelli · libro</div>
+        <div class="risultato-desc">Antologia pubblicata dalla casa editrice di Nuova Sinistra Samonà e Savelli, a cura di Vincenzo Calò, fondatore di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista.Il libro, contenente estratti ad argomento militare da scritti di Carl von Clausewitz, Vladimir Lenin e Mao Zedong, si pone di istruire il militante ai principi della lotta armata in caso di golpe (tentato pochi anni prima da Junio Valerio Borghese).La copia qui presente riporta cancellature sulla prefazione a cura di Calò, probabilmente causate da antipatie politiche, vista anche la scritta "VIVA L'ORGANIZZAZIONE COMBATTENTE COMUNISTA PRIMA LINEA" sull'indice in fondo.</div>
+    </div>
+</div>
+<div class="risultato-card">
     <div class="risultato-data">1992</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">

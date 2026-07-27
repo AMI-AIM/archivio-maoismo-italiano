@@ -204,6 +204,13 @@
       "storia": "",
       "categoria": "Partito",
       "fondazione": "1969"
+    },
+    {
+      "nome": "Savelli",
+      "slug": "savelli",
+      "storia": "",
+      "categoria": "Casa editrice",
+      "fondazione": "1963"
     }
   ]
 }
