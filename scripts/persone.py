@@ -11,14 +11,12 @@ PLACEHOLDER_URL = '/archivio-maoismo-italiano/immagini/profili/placeholder.png'
 
 
 def colore_hash(nome):
-    """Genera un colore uniforme basato sul nome."""
     hash_obj = hashlib.md5(nome.encode('utf-8'))
     hex_color = hash_obj.hexdigest()[:6]
     return f'#{hex_color}'
 
 
 def get_iniziali(nome, max_lettere=2):
-    """Estrae le iniziali da un nome."""
     parti = nome.split()
     if not parti:
         return '?'
@@ -156,9 +154,7 @@ def genera_persone():
     persone_dir = os.path.join(OUTPUT_DIR, 'persone')
     os.makedirs(persone_dir, exist_ok=True)
     
-    # ============================================================
     # SCHEDE INDIVIDUALI
-    # ============================================================
     for nome, data in persone.items():
         slug = data['slug']
         file_path = os.path.join(persone_dir, f'{slug}.md')
@@ -179,7 +175,7 @@ hide:
 """
         
         content = f"""
-<h1 class="person-name">{nome}</h1>
+<div class="person-name">{nome}</div>
 
 {f'<div class="person-dates">{data["data_range"]}</div>' if data["data_range"] else ''}
 
@@ -208,101 +204,25 @@ hide:
 </div>
 
 <style>
-.person-name {
-    font-size: 2.4rem;
-    font-weight: 700;
-    margin: 0.5rem 0 0 0;
-    color: var(--md-primary-fg-color);
-}
-.person-dates {
-    font-size: 1rem;
-    color: var(--md-default-fg-color--light);
-    margin: 0 0 1rem 0;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-}
-.person-bio {
-    margin: 1.5rem 0;
-    padding: 1rem;
-    background: var(--md-code-bg-color);
-    border-radius: 8px;
-    border-left: 4px solid var(--md-primary-fg-color);
-}
-.person-bio p {
-    margin: 0.5rem 0;
-}
-.catalogo-lista {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    margin-top: 0.5rem;
-}
-.doc-row {
-    display: flex;
-    align-items: flex-start;
-    padding: 0.4rem 0.6rem;
-    border-bottom: 1px solid var(--md-default-fg-color--lightest);
-    transition: background-color 0.15s;
-    gap: 1.5rem;
-}
-.doc-row:hover {
-    background-color: var(--md-code-bg-color);
-}
-.doc-data {
-    flex: 0 0 140px;
-    font-size: 0.9rem;
-    color: var(--md-primary-fg-color);
-    font-weight: 500;
-    white-space: nowrap;
-    padding-top: 0.05rem;
-}
-.doc-contenuto {
-    flex: 1;
-    min-width: 0;
-}
-.doc-titolo {
-    font-size: 1rem;
-    font-weight: 500;
-}
-.doc-titolo a {
-    text-decoration: none;
-    color: var(--md-default-fg-color);
-}
-.doc-titolo a:hover {
-    text-decoration: underline;
-    color: var(--md-primary-fg-color);
-}
-.doc-ruoli {
-    margin-top: 0.1rem;
-}
-.ruolo-badge {
-    display: inline-block;
-    font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.05rem 0.6rem;
-    border-radius: 4px;
-}
+.person-name { font-size: 2.4rem; font-weight: 700; margin: 0.5rem 0 0 0; color: var(--md-primary-fg-color); }
+.person-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 1rem 0; font-weight: 400; }
+.person-bio { margin: 1.5rem 0; padding: 1rem; background: var(--md-code-bg-color); border-radius: 8px; border-left: 4px solid var(--md-primary-fg-color); }
+.person-bio p { margin: 0.5rem 0; }
+.catalogo-lista { display: flex; flex-direction: column; gap: 0.25rem; margin-top: 0.5rem; }
+.doc-row { display: flex; align-items: flex-start; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--md-default-fg-color--lightest); transition: background-color 0.15s; gap: 1.5rem; }
+.doc-row:hover { background-color: var(--md-code-bg-color); }
+.doc-data { flex: 0 0 140px; font-size: 0.9rem; color: var(--md-primary-fg-color); font-weight: 500; white-space: nowrap; padding-top: 0.05rem; }
+.doc-contenuto { flex: 1; min-width: 0; }
+.doc-titolo { font-size: 1rem; font-weight: 500; }
+.doc-titolo a { text-decoration: none; color: var(--md-default-fg-color); }
+.doc-titolo a:hover { text-decoration: underline; color: var(--md-primary-fg-color); }
+.doc-ruoli { margin-top: 0.1rem; }
+.ruolo-badge { display: inline-block; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff !important; background: var(--md-primary-fg-color); padding: 0.05rem 0.6rem; border-radius: 4px; }
 @media (max-width: 600px) {
-    .doc-row {
-        flex-direction: column;
-        gap: 0.1rem;
-        padding: 0.6rem 0.2rem;
-    }
-    .doc-data {
-        flex: 0 0 auto;
-        white-space: normal;
-        font-size: 0.8rem;
-    }
-    .person-name {
-        font-size: 1.6rem;
-    }
-    .person-dates {
-        font-size: 0.85rem;
-    }
+    .doc-row { flex-direction: column; gap: 0.1rem; padding: 0.6rem 0.2rem; }
+    .doc-data { flex: 0 0 auto; white-space: normal; font-size: 0.8rem; }
+    .person-name { font-size: 1.6rem; }
+    .person-dates { font-size: 0.85rem; }
 }
 </style>
 """
@@ -313,252 +233,176 @@ hide:
         print(f"   ✅ Creata scheda per {nome} → {slug}.md")
     
     # ============================================================
-    # INDICE PERSONE
+    # INDICE PERSONE CON RICERCA + FILTRO ALFABETICO
     # ============================================================
     
-    # TOP 3: ordinate per numero di documenti (decrescente)
+    # TOP 3
     persone_top = sorted(persone.items(), key=lambda x: x[1]['num_doc'], reverse=True)[:3]
-    
-    # RESTO: ordinato alfabeticamente per nome
+    # RESTO alfabetico
     persone_resto = sorted(
         [item for item in persone.items() if item[0] not in [p[0] for p in persone_top]],
         key=lambda x: x[0].lower()
     )
     
-    index_content = """---
-title: "Persone"
-hide:
-  - navigation
-  - toc
----
-
-# Persone
-
-"""
+    lettere_presenti = sorted(set([nome[0].upper() for nome, _ in persone_resto]))
+    tutte_lettere = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
+    
+    lines = []
+    lines.append('---')
+    lines.append('title: "Persone"')
+    lines.append('hide:')
+    lines.append('  - navigation')
+    lines.append('  - toc')
+    lines.append('---')
+    lines.append('')
+    lines.append('# Persone')
+    lines.append('')
     
     # TOP ROW
     if persone_top:
-        index_content += '<div class="top-row">\n'
+        lines.append('<div class="top-row">')
         for nome, data in persone_top:
             slug = data['slug']
             num_doc = data['num_doc']
             date_vita = data['data_range']
-            
             if data.get('immagine'):
                 avatar_html = f'<img src="{data["immagine"]}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
             else:
                 avatar_html = f'<img src="{PLACEHOLDER_URL}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
-            
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
-            
-            index_content += f'''
-    <div class="top-card">
-        <a href="{slug}/" class="top-card-link">
-            <div class="top-card-image-wrapper">
-                {avatar_html}
-            </div>
-            <div class="top-card-text">
-                <div class="top-card-name">{nome}</div>
-                <div class="top-card-dates">{date_vita}</div>
-                <div class="top-card-count">{count_text}</div>
-            </div>
-        </a>
-    </div>
-'''
-        index_content += '</div>\n'
+            lines.append(f'    <div class="top-card">')
+            lines.append(f'        <a href="{slug}/" class="top-card-link">')
+            lines.append(f'            <div class="top-card-image-wrapper">')
+            lines.append(f'                {avatar_html}')
+            lines.append(f'            </div>')
+            lines.append(f'            <div class="top-card-text">')
+            lines.append(f'                <div class="top-card-name">{nome}</div>')
+            lines.append(f'                <div class="top-card-dates">{date_vita}</div>')
+            lines.append(f'                <div class="top-card-count">{count_text}</div>')
+            lines.append(f'            </div>')
+            lines.append(f'        </a>')
+            lines.append(f'    </div>')
+        lines.append('</div>')
     
-    # LISTA STANDARD (alfabetica)
+    # BARRA DI RICERCA + ALFABETO
+    lines.append('<div class="filtri-persone">')
+    lines.append('    <div class="search-bar">')
+    lines.append('        <input type="text" id="search-input" placeholder="🔍 Cerca per nome..." aria-label="Cerca persone">')
+    lines.append('        <span id="search-counter" class="search-counter"></span>')
+    lines.append('    </div>')
+    lines.append('    <div class="alfabeto-bar">')
+    lines.append('        <button class="lettera-btn lettera-btn--active" data-lettera="all">Tutte</button>')
+    for lettera in tutte_lettere:
+        if lettera in lettere_presenti:
+            lines.append(f'        <button class="lettera-btn" data-lettera="{lettera}">{lettera}</button>')
+        else:
+            lines.append(f'        <button class="lettera-btn lettera-btn--disabled" data-lettera="{lettera}" disabled>{lettera}</button>')
+    lines.append('    </div>')
+    lines.append('</div>')
+    
+    # LISTA STANDARD
     if persone_resto:
-        index_content += '<div class="people-grid">\n'
+        lines.append('<div class="people-grid" id="people-grid">')
         for nome, data in persone_resto:
             slug = data['slug']
             num_doc = data['num_doc']
             date_vita = data['data_range']
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
-            
-            index_content += f'''
-<div class="people-card">
-    <a href="{slug}/" class="people-link">
-        <div class="people-name">{nome}</div>
-        <div class="people-dates">{date_vita}</div>
-        <div class="people-count">{count_text}</div>
-    </a>
-</div>
-'''
-        index_content += '</div>\n'
+            lettera = nome[0].upper()
+            lines.append(f'<div class="people-card" data-lettera="{lettera}">')
+            lines.append(f'    <a href="{slug}/" class="people-link">')
+            lines.append(f'        <div class="people-name">{nome}</div>')
+            lines.append(f'        <div class="people-dates">{date_vita}</div>')
+            lines.append(f'        <div class="people-count">{count_text}</div>')
+            lines.append(f'    </a>')
+            lines.append(f'</div>')
+        lines.append('</div>')
+    else:
+        lines.append('<p style="padding: 1rem 0; color: var(--md-default-fg-color--light);">Nessuna persona aggiuntiva.</p>')
     
-    index_content += """
-<style>
-/* ============================================================
-   TOP ROW - Card quadrate, immagine a pieno campo, testo in basso
-   ============================================================ */
-.top-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-bottom: 2.5rem;
-}
-
-.top-card {
-    aspect-ratio: 1 / 1;
-    background: var(--md-code-bg-color);
-    border-radius: 12px;
-    border: 1px solid var(--md-default-fg-color--lightest);
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-    padding: 0;
-}
-
-.top-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-}
-
-.top-card-link {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-}
-
-.top-card-image-wrapper {
-    flex: 1;
-    overflow: hidden;
-    background: var(--md-code-bg-color);
-    display: flex;
-}
-
-.top-card-avatar-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.top-card-text {
-    padding: 0.6rem 1rem 0.8rem 1rem;
-    background: var(--md-code-bg-color);
-    border-top: 1px solid var(--md-default-fg-color--lightest);
-    flex-shrink: 0;
-}
-
-.top-card-name {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--md-default-fg-color);
-    line-height: 1.2;
-}
-
-.top-card-dates {
-    font-size: 0.8rem;
-    color: var(--md-default-fg-color--light);
-}
-
-.top-card-count {
-    font-size: 0.75rem;
-    color: var(--md-default-fg-color--light);
-    font-weight: 400;
-}
-
-/* ============================================================
-   LISTA STANDARD (ordinata alfabeticamente)
-   ============================================================ */
-.people-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.people-card {
-    background: var(--md-code-bg-color);
-    border-radius: 8px;
-    padding: 1rem 1.2rem;
-    transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
-    border: 1px solid var(--md-default-fg-color--lightest);
-    min-height: 80px;
-    display: flex;
-    align-items: center;
-}
-
-.people-card:hover {
-    background: var(--md-default-bg-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.people-link {
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 0.05rem;
-}
-
-.people-name {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--md-default-fg-color);
-    line-height: 1.3;
-}
-
-.people-dates {
-    font-size: 0.7rem;
-    color: var(--md-default-fg-color--light);
-}
-
-.people-count {
-    font-size: 0.75rem;
-    color: var(--md-default-fg-color--light);
-}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 900px) {
-    .people-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .top-row {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    .top-card {
-        aspect-ratio: auto;
-        min-height: 200px;
-    }
-    .top-card-text {
-        padding: 0.4rem 0.8rem 0.6rem 0.8rem;
-    }
-    .top-card-name {
-        font-size: 0.95rem;
-    }
-}
-
-@media (max-width: 600px) {
-    .people-grid {
-        grid-template-columns: 1fr;
-    }
-    .people-name {
-        font-size: 0.9rem;
-    }
-    .people-dates {
-        font-size: 0.65rem;
-    }
-}
-</style>
-"""
+    # JAVASCRIPT e CSS
+    lines.append('')
+    lines.append('<script>')
+    lines.append('(function() {')
+    lines.append('    const searchInput = document.getElementById("search-input");')
+    lines.append('    const searchCounter = document.getElementById("search-counter");')
+    lines.append('    const grid = document.getElementById("people-grid");')
+    lines.append('    const letteraBtns = document.querySelectorAll(".lettera-btn");')
+    lines.append('    if (!grid) return;')
+    lines.append('    const cards = grid.querySelectorAll(".people-card");')
+    lines.append('    function filtra() {')
+    lines.append('        const query = searchInput.value.toLowerCase().trim();')
+    lines.append('        const letteraAttiva = document.querySelector(".lettera-btn--active");')
+    lines.append('        const lettera = letteraAttiva ? letteraAttiva.dataset.lettera : "all";')
+    lines.append('        let visibili = 0;')
+    lines.append('        cards.forEach(card => {')
+    lines.append('            const nome = card.querySelector(".people-name").textContent.toLowerCase();')
+    lines.append('            const cardLettera = card.dataset.lettera;')
+    lines.append('            const matchLettera = (lettera === "all" || cardLettera === lettera);')
+    lines.append('            const matchRicerca = nome.includes(query);')
+    lines.append('            const visibile = matchLettera && matchRicerca;')
+    lines.append('            card.style.display = visibile ? "" : "none";')
+    lines.append('            if (visibile) visibili++;')
+    lines.append('        });')
+    lines.append('        if (searchCounter) {')
+    lines.append('            searchCounter.textContent = visibili + " persone";')
+    lines.append('        }')
+    lines.append('    }')
+    lines.append('    searchInput.addEventListener("input", filtra);')
+    lines.append('    letteraBtns.forEach(btn => {')
+    lines.append('        btn.addEventListener("click", function() {')
+    lines.append('            if (this.disabled) return;')
+    lines.append('            letteraBtns.forEach(b => b.classList.remove("lettera-btn--active"));')
+    lines.append('            this.classList.add("lettera-btn--active");')
+    lines.append('            filtra();')
+    lines.append('        });')
+    lines.append('    });')
+    lines.append('    filtra();')
+    lines.append('})();')
+    lines.append('</script>')
+    lines.append('')
+    
+    # CSS
+    lines.append('<style>')
+    lines.append('.top-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }')
+    lines.append('.top-card { aspect-ratio: 1 / 1; background: var(--md-code-bg-color); border-radius: 12px; border: 1px solid var(--md-default-fg-color--lightest); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; padding: 0; }')
+    lines.append('.top-card:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }')
+    lines.append('.top-card-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; width: 100%; height: 100%; }')
+    lines.append('.top-card-image-wrapper { flex: 1; overflow: hidden; background: var(--md-code-bg-color); display: flex; }')
+    lines.append('.top-card-avatar-img { width: 100%; height: 100%; object-fit: cover; display: block; }')
+    lines.append('.top-card-text { padding: 0.6rem 1rem 0.8rem 1rem; background: var(--md-code-bg-color); border-top: 1px solid var(--md-default-fg-color--lightest); flex-shrink: 0; }')
+    lines.append('.top-card-name { font-size: 1rem; font-weight: 600; color: var(--md-default-fg-color); line-height: 1.2; }')
+    lines.append('.top-card-dates { font-size: 0.8rem; color: var(--md-default-fg-color--light); }')
+    lines.append('.top-card-count { font-size: 0.75rem; color: var(--md-default-fg-color--light); font-weight: 400; }')
+    lines.append('.filtri-persone { margin: 1rem 0 1.5rem 0; padding: 0.8rem 1rem; background: var(--md-code-bg-color); border-radius: 8px; border: 1px solid var(--md-default-fg-color--lightest); }')
+    lines.append('.search-bar { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.6rem; }')
+    lines.append('.search-bar input { flex: 1; padding: 0.5rem 0.8rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 6px; background: var(--md-default-bg-color); color: var(--md-default-fg-color); font-size: 0.95rem; outline: none; transition: border-color 0.2s; }')
+    lines.append('.search-bar input:focus { border-color: var(--md-primary-fg-color); }')
+    lines.append('.search-counter { font-size: 0.8rem; color: var(--md-default-fg-color--light); white-space: nowrap; font-weight: 500; }')
+    lines.append('.alfabeto-bar { display: flex; flex-wrap: wrap; gap: 0.2rem; }')
+    lines.append('.lettera-btn { background: transparent; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 4px; padding: 0.2rem 0.5rem; font-size: 0.75rem; font-weight: 600; color: var(--md-default-fg-color); cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s; min-width: 28px; text-align: center; }')
+    lines.append('.lettera-btn:hover:not(.lettera-btn--disabled) { background: var(--md-primary-fg-color); color: #ffffff; border-color: var(--md-primary-fg-color); }')
+    lines.append('.lettera-btn--active { background: var(--md-primary-fg-color); color: #ffffff !important; border-color: var(--md-primary-fg-color); }')
+    lines.append('.lettera-btn--disabled { opacity: 0.3; cursor: not-allowed; }')
+    lines.append('.people-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 0.5rem; }')
+    lines.append('.people-card { background: var(--md-code-bg-color); border-radius: 8px; padding: 1rem 1.2rem; transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s; border: 1px solid var(--md-default-fg-color--lightest); min-height: 80px; display: flex; align-items: center; }')
+    lines.append('.people-card:hover { background: var(--md-default-bg-color); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }')
+    lines.append('.people-link { text-decoration: none; display: flex; flex-direction: column; width: 100%; gap: 0.05rem; }')
+    lines.append('.people-name { font-size: 0.95rem; font-weight: 600; color: var(--md-default-fg-color); line-height: 1.3; }')
+    lines.append('.people-dates { font-size: 0.7rem; color: var(--md-default-fg-color--light); }')
+    lines.append('.people-count { font-size: 0.75rem; color: var(--md-default-fg-color--light); }')
+    lines.append('@media (max-width: 900px) { .people-grid { grid-template-columns: repeat(2, 1fr); } }')
+    lines.append('@media (max-width: 768px) { .top-row { grid-template-columns: 1fr; gap: 1rem; } .top-card { aspect-ratio: auto; min-height: 200px; } .top-card-text { padding: 0.4rem 0.8rem 0.6rem 0.8rem; } .top-card-name { font-size: 0.95rem; } .search-bar { flex-direction: column; align-items: stretch; gap: 0.4rem; } .search-counter { text-align: right; } .alfabeto-bar { justify-content: center; gap: 0.15rem; } .lettera-btn { font-size: 0.7rem; padding: 0.15rem 0.4rem; min-width: 24px; } }')
+    lines.append('@media (max-width: 600px) { .people-grid { grid-template-columns: 1fr; } .people-name { font-size: 0.9rem; } .people-dates { font-size: 0.65rem; } }')
+    lines.append('</style>')
+    
+    index_content = "\n".join(lines)
     
     index_path = os.path.join(persone_dir, 'index.md')
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(index_content)
     
-    print(f"   ✅ Indice persone generato con {len(persone)} persone (top 3 in evidenza, resto alfabetico).")
+    print(f"   ✅ Indice persone generato con {len(persone)} persone (top 3 in evidenza, resto con filtri).")
 
 
 def main():

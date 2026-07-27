@@ -186,9 +186,7 @@ def genera_organizzazioni():
     org_dir = os.path.join(OUTPUT_DIR, 'organizzazioni')
     os.makedirs(org_dir, exist_ok=True)
     
-    # ============================================================
     # SCHEDE INDIVIDUALI
-    # ============================================================
     for nome, data in organizzazioni.items():
         slug = data['slug']
         file_path = os.path.join(org_dir, f'{slug}.md')
@@ -209,7 +207,7 @@ hide:
 """
         
         content = f"""
-<h1 class="org-name">{nome}</h1>
+<div class="org-name">{nome}</div>
 
 {f'<div class="org-dates">{data["data_range"]}</div>' if data["data_range"] else ''}
 
@@ -238,101 +236,25 @@ hide:
 </div>
 
 <style>
-.org-name {
-    font-size: 2.4rem;
-    font-weight: 700;
-    margin: 0.5rem 0 0 0;
-    color: var(--md-primary-fg-color);
-}
-.org-dates {
-    font-size: 1rem;
-    color: var(--md-default-fg-color--light);
-    margin: 0 0 1rem 0;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-}
-.org-bio {
-    margin: 1.5rem 0;
-    padding: 1rem;
-    background: var(--md-code-bg-color);
-    border-radius: 8px;
-    border-left: 4px solid var(--md-primary-fg-color);
-}
-.org-bio p {
-    margin: 0.5rem 0;
-}
-.catalogo-lista {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    margin-top: 0.5rem;
-}
-.doc-row {
-    display: flex;
-    align-items: flex-start;
-    padding: 0.4rem 0.6rem;
-    border-bottom: 1px solid var(--md-default-fg-color--lightest);
-    transition: background-color 0.15s;
-    gap: 1.5rem;
-}
-.doc-row:hover {
-    background-color: var(--md-code-bg-color);
-}
-.doc-data {
-    flex: 0 0 140px;
-    font-size: 0.9rem;
-    color: var(--md-primary-fg-color);
-    font-weight: 500;
-    white-space: nowrap;
-    padding-top: 0.05rem;
-}
-.doc-contenuto {
-    flex: 1;
-    min-width: 0;
-}
-.doc-titolo {
-    font-size: 1rem;
-    font-weight: 500;
-}
-.doc-titolo a {
-    text-decoration: none;
-    color: var(--md-default-fg-color);
-}
-.doc-titolo a:hover {
-    text-decoration: underline;
-    color: var(--md-primary-fg-color);
-}
-.doc-ruoli {
-    margin-top: 0.1rem;
-}
-.ruolo-badge {
-    display: inline-block;
-    font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.05rem 0.6rem;
-    border-radius: 4px;
-}
+.org-name { font-size: 2.4rem; font-weight: 700; margin: 0.5rem 0 0 0; color: var(--md-primary-fg-color); }
+.org-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 1rem 0; font-weight: 400; }
+.org-bio { margin: 1.5rem 0; padding: 1rem; background: var(--md-code-bg-color); border-radius: 8px; border-left: 4px solid var(--md-primary-fg-color); }
+.org-bio p { margin: 0.5rem 0; }
+.catalogo-lista { display: flex; flex-direction: column; gap: 0.25rem; margin-top: 0.5rem; }
+.doc-row { display: flex; align-items: flex-start; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--md-default-fg-color--lightest); transition: background-color 0.15s; gap: 1.5rem; }
+.doc-row:hover { background-color: var(--md-code-bg-color); }
+.doc-data { flex: 0 0 140px; font-size: 0.9rem; color: var(--md-primary-fg-color); font-weight: 500; white-space: nowrap; padding-top: 0.05rem; }
+.doc-contenuto { flex: 1; min-width: 0; }
+.doc-titolo { font-size: 1rem; font-weight: 500; }
+.doc-titolo a { text-decoration: none; color: var(--md-default-fg-color); }
+.doc-titolo a:hover { text-decoration: underline; color: var(--md-primary-fg-color); }
+.doc-ruoli { margin-top: 0.1rem; }
+.ruolo-badge { display: inline-block; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff !important; background: var(--md-primary-fg-color); padding: 0.05rem 0.6rem; border-radius: 4px; }
 @media (max-width: 600px) {
-    .doc-row {
-        flex-direction: column;
-        gap: 0.1rem;
-        padding: 0.6rem 0.2rem;
-    }
-    .doc-data {
-        flex: 0 0 auto;
-        white-space: normal;
-        font-size: 0.8rem;
-    }
-    .org-name {
-        font-size: 1.6rem;
-    }
-    .org-dates {
-        font-size: 0.85rem;
-    }
+    .doc-row { flex-direction: column; gap: 0.1rem; padding: 0.6rem 0.2rem; }
+    .doc-data { flex: 0 0 auto; white-space: normal; font-size: 0.8rem; }
+    .org-name { font-size: 1.6rem; }
+    .org-dates { font-size: 0.85rem; }
 }
 </style>
 """
@@ -343,283 +265,182 @@ hide:
         print(f"   ✅ Creata scheda per {nome} → {slug}.md")
     
     # ============================================================
-    # INDICE ORGANIZZAZIONI
+    # INDICE ORGANIZZAZIONI CON RICERCA + FILTRO ALFABETICO
     # ============================================================
     
-    # TOP 3: ordinate per numero di documenti (decrescente)
+    # TOP 3
     org_top = sorted(organizzazioni.items(), key=lambda x: x[1]['num_doc'], reverse=True)[:3]
-    
-    # RESTO: ordinato alfabeticamente per nome
+    # RESTO alfabetico
     org_resto = sorted(
         [item for item in organizzazioni.items() if item[0] not in [o[0] for o in org_top]],
         key=lambda x: x[0].lower()
     )
     
-    index_content = """---
-title: "Organizzazioni"
-hide:
-  - navigation
-  - toc
----
-
-# Organizzazioni
-
-"""
+    lettere_presenti = sorted(set([nome[0].upper() for nome, _ in org_resto]))
+    tutte_lettere = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
     
-    # TOP ROW - 🔥 CON BADGE DI CATEGORIA
+    lines = []
+    lines.append('---')
+    lines.append('title: "Organizzazioni"')
+    lines.append('hide:')
+    lines.append('  - navigation')
+    lines.append('  - toc')
+    lines.append('---')
+    lines.append('')
+    lines.append('# Organizzazioni')
+    lines.append('')
+    
+    # TOP ROW
     if org_top:
-        index_content += '<div class="top-row">\n'
+        lines.append('<div class="top-row">')
         for nome, data in org_top:
             slug = data['slug']
             num_doc = data['num_doc']
             date_range = data['data_range']
-            categoria = data['categoria']  # 🔥 PER IL BADGE
-            
+            categoria = data['categoria']
             if data.get('immagine'):
                 avatar_html = f'<img src="{data["immagine"]}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
             else:
                 avatar_html = f'<img src="{PLACEHOLDER_URL}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
-            
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
-            
-            index_content += f'''
-    <div class="top-card">
-        <a href="{slug}/" class="top-card-link">
-            <div class="top-card-image-wrapper">
-                {avatar_html}
-            </div>
-            <div class="top-card-text">
-                <div class="top-card-tipo">{categoria}</div>  <!-- 🔥 BADGE NELLA TOP 3 -->
-                <div class="top-card-name">{nome}</div>
-                <div class="top-card-dates">{date_range}</div>
-                <div class="top-card-count">{count_text}</div>
-            </div>
-        </a>
-    </div>
-'''
-        index_content += '</div>\n'
+            lines.append(f'    <div class="top-card">')
+            lines.append(f'        <a href="{slug}/" class="top-card-link">')
+            lines.append(f'            <div class="top-card-image-wrapper">')
+            lines.append(f'                {avatar_html}')
+            lines.append(f'            </div>')
+            lines.append(f'            <div class="top-card-text">')
+            lines.append(f'                <div class="top-card-tipo">{categoria}</div>')
+            lines.append(f'                <div class="top-card-name">{nome}</div>')
+            lines.append(f'                <div class="top-card-dates">{date_range}</div>')
+            lines.append(f'                <div class="top-card-count">{count_text}</div>')
+            lines.append(f'            </div>')
+            lines.append(f'        </a>')
+            lines.append(f'    </div>')
+        lines.append('</div>')
     
-    # LISTA STANDARD (alfabetica) - 🔥 CON BADGE
+    # BARRA DI RICERCA + ALFABETO
+    lines.append('<div class="filtri-organizzazioni">')
+    lines.append('    <div class="search-bar">')
+    lines.append('        <input type="text" id="search-input" placeholder="🔍 Cerca per nome..." aria-label="Cerca organizzazioni">')
+    lines.append('        <span id="search-counter" class="search-counter"></span>')
+    lines.append('    </div>')
+    lines.append('    <div class="alfabeto-bar">')
+    lines.append('        <button class="lettera-btn lettera-btn--active" data-lettera="all">Tutte</button>')
+    for lettera in tutte_lettere:
+        if lettera in lettere_presenti:
+            lines.append(f'        <button class="lettera-btn" data-lettera="{lettera}">{lettera}</button>')
+        else:
+            lines.append(f'        <button class="lettera-btn lettera-btn--disabled" data-lettera="{lettera}" disabled>{lettera}</button>')
+    lines.append('    </div>')
+    lines.append('</div>')
+    
+    # LISTA STANDARD
     if org_resto:
-        index_content += '<div class="org-grid">\n'
+        lines.append('<div class="org-grid" id="org-grid">')
         for nome, data in org_resto:
             slug = data['slug']
             num_doc = data['num_doc']
             date_range = data['data_range']
             categoria = data['categoria']
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
-            
-            index_content += f'''
-<div class="org-card">
-    <a href="{slug}/" class="org-link">
-        <div class="org-tipo">{categoria}</div>
-        <div class="org-name">{nome}</div>
-        <div class="org-dates">{date_range}</div>
-        <div class="org-count">{count_text}</div>
-    </a>
-</div>
-'''
-        index_content += '</div>\n'
+            lettera = nome[0].upper()
+            lines.append(f'<div class="org-card" data-lettera="{lettera}">')
+            lines.append(f'    <a href="{slug}/" class="org-link">')
+            lines.append(f'        <div class="org-tipo">{categoria}</div>')
+            lines.append(f'        <div class="org-name">{nome}</div>')
+            lines.append(f'        <div class="org-dates">{date_range}</div>')
+            lines.append(f'        <div class="org-count">{count_text}</div>')
+            lines.append(f'    </a>')
+            lines.append(f'</div>')
+        lines.append('</div>')
+    else:
+        lines.append('<p style="padding: 1rem 0; color: var(--md-default-fg-color--light);">Nessuna organizzazione aggiuntiva.</p>')
     
-    index_content += """
-<style>
-/* ============================================================
-   TOP ROW - Card quadrate, immagine a pieno campo, testo in basso
-   ============================================================ */
-.top-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-bottom: 2.5rem;
-}
-
-.top-card {
-    aspect-ratio: 1 / 1;
-    background: var(--md-code-bg-color);
-    border-radius: 12px;
-    border: 1px solid var(--md-default-fg-color--lightest);
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-    padding: 0;
-}
-
-.top-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-}
-
-.top-card-link {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-}
-
-.top-card-image-wrapper {
-    flex: 1;
-    overflow: hidden;
-    background: var(--md-code-bg-color);
-    display: flex;
-}
-
-.top-card-avatar-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.top-card-text {
-    padding: 0.6rem 1rem 0.8rem 1rem;
-    background: var(--md-code-bg-color);
-    border-top: 1px solid var(--md-default-fg-color--lightest);
-    flex-shrink: 0;
-}
-
-.top-card-tipo {
-    font-size: 0.55rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.05rem 0.6rem;
-    border-radius: 4px;
-    display: inline-block;
-    width: fit-content;
-    margin-bottom: 0.15rem;
-}
-
-.top-card-name {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--md-default-fg-color);
-    line-height: 1.2;
-}
-
-.top-card-dates {
-    font-size: 0.8rem;
-    color: var(--md-default-fg-color--light);
-}
-
-.top-card-count {
-    font-size: 0.75rem;
-    color: var(--md-default-fg-color--light);
-    font-weight: 400;
-}
-
-/* ============================================================
-   LISTA STANDARD - CON BADGE DI CATEGORIA
-   ============================================================ */
-.org-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.org-card {
-    background: var(--md-code-bg-color);
-    border-radius: 8px;
-    padding: 1rem 1.2rem;
-    transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
-    border: 1px solid var(--md-default-fg-color--lightest);
-    min-height: 80px;
-    display: flex;
-    align-items: center;
-}
-
-.org-card:hover {
-    background: var(--md-default-bg-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.org-link {
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 0.05rem;
-}
-
-.org-tipo {
-    font-size: 0.6rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.05rem 0.6rem;
-    border-radius: 4px;
-    display: inline-block;
-    width: fit-content;
-}
-
-.org-name {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--md-default-fg-color);
-    line-height: 1.3;
-}
-
-.org-dates {
-    font-size: 0.7rem;
-    color: var(--md-default-fg-color--light);
-}
-
-.org-count {
-    font-size: 0.75rem;
-    color: var(--md-default-fg-color--light);
-}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 900px) {
-    .org-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .top-row {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    .top-card {
-        aspect-ratio: auto;
-        min-height: 200px;
-    }
-    .top-card-text {
-        padding: 0.4rem 0.8rem 0.6rem 0.8rem;
-    }
-    .top-card-name {
-        font-size: 0.95rem;
-    }
-}
-
-@media (max-width: 600px) {
-    .org-grid {
-        grid-template-columns: 1fr;
-    }
-    .org-name {
-        font-size: 0.9rem;
-    }
-    .org-dates {
-        font-size: 0.65rem;
-    }
-}
-</style>
-"""
+    # JAVASCRIPT e CSS
+    lines.append('')
+    lines.append('<script>')
+    lines.append('(function() {')
+    lines.append('    const searchInput = document.getElementById("search-input");')
+    lines.append('    const searchCounter = document.getElementById("search-counter");')
+    lines.append('    const grid = document.getElementById("org-grid");')
+    lines.append('    const letteraBtns = document.querySelectorAll(".lettera-btn");')
+    lines.append('    if (!grid) return;')
+    lines.append('    const cards = grid.querySelectorAll(".org-card");')
+    lines.append('    function filtra() {')
+    lines.append('        const query = searchInput.value.toLowerCase().trim();')
+    lines.append('        const letteraAttiva = document.querySelector(".lettera-btn--active");')
+    lines.append('        const lettera = letteraAttiva ? letteraAttiva.dataset.lettera : "all";')
+    lines.append('        let visibili = 0;')
+    lines.append('        cards.forEach(card => {')
+    lines.append('            const nome = card.querySelector(".org-name").textContent.toLowerCase();')
+    lines.append('            const cardLettera = card.dataset.lettera;')
+    lines.append('            const matchLettera = (lettera === "all" || cardLettera === lettera);')
+    lines.append('            const matchRicerca = nome.includes(query);')
+    lines.append('            const visibile = matchLettera && matchRicerca;')
+    lines.append('            card.style.display = visibile ? "" : "none";')
+    lines.append('            if (visibile) visibili++;')
+    lines.append('        });')
+    lines.append('        if (searchCounter) {')
+    lines.append('            searchCounter.textContent = visibili + " organizzazioni";')
+    lines.append('        }')
+    lines.append('    }')
+    lines.append('    searchInput.addEventListener("input", filtra);')
+    lines.append('    letteraBtns.forEach(btn => {')
+    lines.append('        btn.addEventListener("click", function() {')
+    lines.append('            if (this.disabled) return;')
+    lines.append('            letteraBtns.forEach(b => b.classList.remove("lettera-btn--active"));')
+    lines.append('            this.classList.add("lettera-btn--active");')
+    lines.append('            filtra();')
+    lines.append('        });')
+    lines.append('    });')
+    lines.append('    filtra();')
+    lines.append('})();')
+    lines.append('</script>')
+    lines.append('')
+    
+    # CSS
+    lines.append('<style>')
+    lines.append('.top-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }')
+    lines.append('.top-card { aspect-ratio: 1 / 1; background: var(--md-code-bg-color); border-radius: 12px; border: 1px solid var(--md-default-fg-color--lightest); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; padding: 0; }')
+    lines.append('.top-card:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }')
+    lines.append('.top-card-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; width: 100%; height: 100%; }')
+    lines.append('.top-card-image-wrapper { flex: 1; overflow: hidden; background: var(--md-code-bg-color); display: flex; }')
+    lines.append('.top-card-avatar-img { width: 100%; height: 100%; object-fit: cover; display: block; }')
+    lines.append('.top-card-text { padding: 0.6rem 1rem 0.8rem 1rem; background: var(--md-code-bg-color); border-top: 1px solid var(--md-default-fg-color--lightest); flex-shrink: 0; }')
+    lines.append('.top-card-tipo { font-size: 0.55rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff !important; background: var(--md-primary-fg-color); padding: 0.05rem 0.6rem; border-radius: 4px; display: inline-block; width: fit-content; margin-bottom: 0.15rem; }')
+    lines.append('.top-card-name { font-size: 1rem; font-weight: 600; color: var(--md-default-fg-color); line-height: 1.2; }')
+    lines.append('.top-card-dates { font-size: 0.8rem; color: var(--md-default-fg-color--light); }')
+    lines.append('.top-card-count { font-size: 0.75rem; color: var(--md-default-fg-color--light); font-weight: 400; }')
+    lines.append('.filtri-organizzazioni { margin: 1rem 0 1.5rem 0; padding: 0.8rem 1rem; background: var(--md-code-bg-color); border-radius: 8px; border: 1px solid var(--md-default-fg-color--lightest); }')
+    lines.append('.search-bar { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.6rem; }')
+    lines.append('.search-bar input { flex: 1; padding: 0.5rem 0.8rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 6px; background: var(--md-default-bg-color); color: var(--md-default-fg-color); font-size: 0.95rem; outline: none; transition: border-color 0.2s; }')
+    lines.append('.search-bar input:focus { border-color: var(--md-primary-fg-color); }')
+    lines.append('.search-counter { font-size: 0.8rem; color: var(--md-default-fg-color--light); white-space: nowrap; font-weight: 500; }')
+    lines.append('.alfabeto-bar { display: flex; flex-wrap: wrap; gap: 0.2rem; }')
+    lines.append('.lettera-btn { background: transparent; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 4px; padding: 0.2rem 0.5rem; font-size: 0.75rem; font-weight: 600; color: var(--md-default-fg-color); cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s; min-width: 28px; text-align: center; }')
+    lines.append('.lettera-btn:hover:not(.lettera-btn--disabled) { background: var(--md-primary-fg-color); color: #ffffff; border-color: var(--md-primary-fg-color); }')
+    lines.append('.lettera-btn--active { background: var(--md-primary-fg-color); color: #ffffff !important; border-color: var(--md-primary-fg-color); }')
+    lines.append('.lettera-btn--disabled { opacity: 0.3; cursor: not-allowed; }')
+    lines.append('.org-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 0.5rem; }')
+    lines.append('.org-card { background: var(--md-code-bg-color); border-radius: 8px; padding: 1rem 1.2rem; transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s; border: 1px solid var(--md-default-fg-color--lightest); min-height: 80px; display: flex; align-items: center; }')
+    lines.append('.org-card:hover { background: var(--md-default-bg-color); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }')
+    lines.append('.org-link { text-decoration: none; display: flex; flex-direction: column; width: 100%; gap: 0.05rem; }')
+    lines.append('.org-tipo { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff !important; background: var(--md-primary-fg-color); padding: 0.05rem 0.6rem; border-radius: 4px; display: inline-block; width: fit-content; }')
+    lines.append('.org-name { font-size: 0.95rem; font-weight: 600; color: var(--md-default-fg-color); line-height: 1.3; }')
+    lines.append('.org-dates { font-size: 0.7rem; color: var(--md-default-fg-color--light); }')
+    lines.append('.org-count { font-size: 0.75rem; color: var(--md-default-fg-color--light); }')
+    lines.append('@media (max-width: 900px) { .org-grid { grid-template-columns: repeat(2, 1fr); } }')
+    lines.append('@media (max-width: 768px) { .top-row { grid-template-columns: 1fr; gap: 1rem; } .top-card { aspect-ratio: auto; min-height: 200px; } .top-card-text { padding: 0.4rem 0.8rem 0.6rem 0.8rem; } .top-card-name { font-size: 0.95rem; } .search-bar { flex-direction: column; align-items: stretch; gap: 0.4rem; } .search-counter { text-align: right; } .alfabeto-bar { justify-content: center; gap: 0.15rem; } .lettera-btn { font-size: 0.7rem; padding: 0.15rem 0.4rem; min-width: 24px; } }')
+    lines.append('@media (max-width: 600px) { .org-grid { grid-template-columns: 1fr; } .org-name { font-size: 0.9rem; } .org-dates { font-size: 0.65rem; } }')
+    lines.append('</style>')
+    
+    index_content = "\n".join(lines)
     
     index_path = os.path.join(org_dir, 'index.md')
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(index_content)
     
-    print(f"   ✅ Indice organizzazioni generato con {len(organizzazioni)} organizzazioni (top 3 in evidenza con badge, resto alfabetico con badge).")
+    print(f"   ✅ Indice organizzazioni generato con {len(organizzazioni)} organizzazioni (top 3 in evidenza, resto con filtri).")
 
 
 def main():
