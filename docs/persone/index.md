@@ -11,37 +11,103 @@ hide:
 
     <div class="top-card">
         <a href="mao-zedong/" class="top-card-link">
-            <img src="/archivio-maoismo-italiano/immagini/profili/mao.png" alt="Mao Zedong" class="top-card-avatar-img" loading="lazy">
-            <div class="top-card-name">Mao Zedong</div>
-            <div class="top-card-dates">1893 – 1976</div>
-            <div class="top-card-count">18 documenti</div>
+            <div class="top-card-image-wrapper">
+                <img src="/archivio-maoismo-italiano/immagini/profili/mao.png" alt="Mao Zedong" class="top-card-avatar-img" loading="lazy">
+            </div>
+            <div class="top-card-text">
+                <div class="top-card-name">Mao Zedong</div>
+                <div class="top-card-dates">1893 – 1976</div>
+                <div class="top-card-count">18 documenti</div>
+            </div>
         </a>
     </div>
 
     <div class="top-card">
         <a href="osvaldo-pesce/" class="top-card-link">
-            <div class="top-card-avatar" style="background-color: #6e6217;"><span class="top-card-initials">OP</span></div>
-            <div class="top-card-name">Osvaldo Pesce</div>
-            <div class="top-card-dates">193? – 2021</div>
-            <div class="top-card-count">5 documenti</div>
+            <div class="top-card-image-wrapper">
+                <img src="data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#6e6217"/>
+    <text x="50" y="55" font-family="Arial, sans-serif" font-size="32" font-weight="600" fill="white" text-anchor="middle" dominant-baseline="central">OP</text>
+</svg>" alt="Osvaldo Pesce" class="top-card-avatar-img" loading="lazy">
+            </div>
+            <div class="top-card-text">
+                <div class="top-card-name">Osvaldo Pesce</div>
+                <div class="top-card-dates">193? – 2021</div>
+                <div class="top-card-count">5 documenti</div>
+            </div>
         </a>
     </div>
 
     <div class="top-card">
         <a href="dino-dini/" class="top-card-link">
-            <div class="top-card-avatar" style="background-color: #362a8f;"><span class="top-card-initials">DD</span></div>
-            <div class="top-card-name">Dino Dini</div>
-            <div class="top-card-dates"></div>
-            <div class="top-card-count">3 documenti</div>
+            <div class="top-card-image-wrapper">
+                <img src="data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#362a8f"/>
+    <text x="50" y="55" font-family="Arial, sans-serif" font-size="32" font-weight="600" fill="white" text-anchor="middle" dominant-baseline="central">DD</text>
+</svg>" alt="Dino Dini" class="top-card-avatar-img" loading="lazy">
+            </div>
+            <div class="top-card-text">
+                <div class="top-card-name">Dino Dini</div>
+                <div class="top-card-dates"></div>
+                <div class="top-card-count">3 documenti</div>
+            </div>
         </a>
     </div>
 </div>
 <div class="people-grid">
 
 <div class="people-card">
+    <a href="chen-boda/" class="people-link">
+        <div class="people-name">Chen Boda</div>
+        <div class="people-dates">1904 – 1989</div>
+        <div class="people-count">2 documenti</div>
+    </a>
+</div>
+
+<div class="people-card">
     <a href="fosco-dinucci/" class="people-link">
         <div class="people-name">Fosco Dinucci</div>
         <div class="people-dates">1921 – 1993</div>
+        <div class="people-count">2 documenti</div>
+    </a>
+</div>
+
+<div class="people-card">
+    <a href="jiang-qing/" class="people-link">
+        <div class="people-name">Jiang Qing</div>
+        <div class="people-dates">1914 – 1991</div>
+        <div class="people-count">1 documento</div>
+    </a>
+</div>
+
+<div class="people-card">
+    <a href="kang-sheng/" class="people-link">
+        <div class="people-name">Kang Sheng</div>
+        <div class="people-dates">1898 – 1975</div>
+        <div class="people-count">2 documenti</div>
+    </a>
+</div>
+
+<div class="people-card">
+    <a href="lin-biao/" class="people-link">
+        <div class="people-name">Lin Biao</div>
+        <div class="people-dates">1907 – 1971</div>
+        <div class="people-count">1 documento</div>
+    </a>
+</div>
+
+<div class="people-card">
+    <a href="roberto-sassi/" class="people-link">
+        <div class="people-name">Roberto Sassi</div>
+        <div class="people-dates">1960 – 2023</div>
+        <div class="people-count">1 documento</div>
+    </a>
+</div>
+
+<div class="people-card">
+    <a href="vincenzo-calo/" class="people-link">
+        <div class="people-name">Vincenzo Calò</div>
+        <div class="people-dates"></div>
         <div class="people-count">2 documenti</div>
     </a>
 </div>
@@ -55,65 +121,17 @@ hide:
 </div>
 
 <div class="people-card">
-    <a href="vincenzo-calo/" class="people-link">
-        <div class="people-name">Vincenzo Calò</div>
-        <div class="people-dates"></div>
-        <div class="people-count">2 documenti</div>
-    </a>
-</div>
-
-<div class="people-card">
-    <a href="kang-sheng/" class="people-link">
-        <div class="people-name">Kang Sheng</div>
-        <div class="people-dates">1898 – 1975</div>
-        <div class="people-count">2 documenti</div>
-    </a>
-</div>
-
-<div class="people-card">
     <a href="zhou-enlai/" class="people-link">
         <div class="people-name">Zhou Enlai</div>
         <div class="people-dates">1898 – 1976</div>
         <div class="people-count">2 documenti</div>
     </a>
 </div>
-
-<div class="people-card">
-    <a href="chen-boda/" class="people-link">
-        <div class="people-name">Chen Boda</div>
-        <div class="people-dates">1904 – 1989</div>
-        <div class="people-count">2 documenti</div>
-    </a>
-</div>
-
-<div class="people-card">
-    <a href="roberto-sassi/" class="people-link">
-        <div class="people-name">Roberto Sassi</div>
-        <div class="people-dates">1960 – 2023</div>
-        <div class="people-count">1 documento</div>
-    </a>
-</div>
-
-<div class="people-card">
-    <a href="lin-biao/" class="people-link">
-        <div class="people-name">Lin Biao</div>
-        <div class="people-dates">1907 – 1971</div>
-        <div class="people-count">1 documento</div>
-    </a>
-</div>
-
-<div class="people-card">
-    <a href="jiang-qing/" class="people-link">
-        <div class="people-name">Jiang Qing</div>
-        <div class="people-dates">1914 – 1991</div>
-        <div class="people-count">1 documento</div>
-    </a>
-</div>
 </div>
 
 <style>
 /* ============================================================
-   TOP ROW - Card quadrate, allineamento a sinistra
+   TOP ROW - Card quadrate, immagine a pieno campo, testo in basso
    ============================================================ */
 .top-row {
     display: grid;
@@ -129,10 +147,6 @@ hide:
     border: 1px solid var(--md-default-fg-color--lightest);
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
-    padding: 1.5rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .top-card:hover {
@@ -145,60 +159,53 @@ hide:
     color: inherit;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.2rem;
     width: 100%;
     height: 100%;
-    justify-content: center;
 }
 
-.top-card-avatar {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
+.top-card-image-wrapper {
+    flex: 1;
+    overflow: hidden;
+    background: var(--md-code-bg-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
 }
 
 .top-card-avatar-img {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    display: block;
+}
+
+.top-card-text {
+    padding: 0.6rem 1rem 0.8rem 1rem;
+    background: var(--md-code-bg-color);
+    border-top: 1px solid var(--md-default-fg-color--lightest);
     flex-shrink: 0;
 }
 
-.top-card-initials {
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: #ffffff;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.2);
-    text-transform: uppercase;
-}
-
 .top-card-name {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--md-default-fg-color);
-    line-height: 1.3;
-    margin-top: 0.2rem;
+    line-height: 1.2;
 }
 
 .top-card-dates {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--md-default-fg-color--light);
 }
 
 .top-card-count {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--md-default-fg-color--light);
     font-weight: 400;
 }
 
 /* ============================================================
-   LISTA STANDARD
+   LISTA STANDARD (ordinata alfabeticamente)
    ============================================================ */
 .people-grid {
     display: grid;
@@ -266,15 +273,9 @@ hide:
     .top-card {
         aspect-ratio: auto;
         min-height: 200px;
-        padding: 1rem 0.8rem;
     }
-    .top-card-avatar,
-    .top-card-avatar-img {
-        width: 70px;
-        height: 70px;
-    }
-    .top-card-initials {
-        font-size: 1.8rem;
+    .top-card-text {
+        padding: 0.4rem 0.8rem 0.6rem 0.8rem;
     }
     .top-card-name {
         font-size: 0.95rem;

@@ -11,78 +11,59 @@ hide:
 
     <div class="top-card">
         <a href="casa-editrice-in-lingue-estere/" class="top-card-link">
-            <div class="top-card-avatar" style="background-color: #6ca3c7;"><span class="top-card-initials">CE</span></div>
-            <div class="top-card-name">Casa editrice in lingue estere</div>
-            <div class="top-card-dates">1952 – </div>
-            <div class="top-card-count">14 documenti</div>
+            <div class="top-card-image-wrapper">
+                <img src="data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#6ca3c7"/>
+    <text x="50" y="55" font-family="Arial, sans-serif" font-size="32" font-weight="600" fill="white" text-anchor="middle" dominant-baseline="central">CE</text>
+</svg>" alt="Casa editrice in lingue estere" class="top-card-avatar-img" loading="lazy">
+            </div>
+            <div class="top-card-text">
+                <div class="top-card-name">Casa editrice in lingue estere</div>
+                <div class="top-card-dates">1952 – </div>
+                <div class="top-card-count">14 documenti</div>
+            </div>
         </a>
     </div>
 
     <div class="top-card">
         <a href="centro-di-informazione-di-verona/" class="top-card-link">
-            <div class="top-card-avatar" style="background-color: #e49f04;"><span class="top-card-initials">CD</span></div>
-            <div class="top-card-name">Centro di Informazione di Verona</div>
-            <div class="top-card-dates"></div>
-            <div class="top-card-count">9 documenti</div>
+            <div class="top-card-image-wrapper">
+                <img src="data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#e49f04"/>
+    <text x="50" y="55" font-family="Arial, sans-serif" font-size="32" font-weight="600" fill="white" text-anchor="middle" dominant-baseline="central">CD</text>
+</svg>" alt="Centro di Informazione di Verona" class="top-card-avatar-img" loading="lazy">
+            </div>
+            <div class="top-card-text">
+                <div class="top-card-name">Centro di Informazione di Verona</div>
+                <div class="top-card-dates"></div>
+                <div class="top-card-count">9 documenti</div>
+            </div>
         </a>
     </div>
 
     <div class="top-card">
         <a href="lavoro-politico/" class="top-card-link">
-            <div class="top-card-avatar" style="background-color: #9d5897;"><span class="top-card-initials">LP</span></div>
-            <div class="top-card-name">Lavoro Politico</div>
-            <div class="top-card-dates">1967 – 1969</div>
-            <div class="top-card-count">9 documenti</div>
+            <div class="top-card-image-wrapper">
+                <img src="data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#9d5897"/>
+    <text x="50" y="55" font-family="Arial, sans-serif" font-size="32" font-weight="600" fill="white" text-anchor="middle" dominant-baseline="central">LP</text>
+</svg>" alt="Lavoro Politico" class="top-card-avatar-img" loading="lazy">
+            </div>
+            <div class="top-card-text">
+                <div class="top-card-name">Lavoro Politico</div>
+                <div class="top-card-dates">1967 – 1969</div>
+                <div class="top-card-count">9 documenti</div>
+            </div>
         </a>
     </div>
 </div>
 <div class="org-grid">
 
 <div class="org-card">
-    <a href="partito-comunista-ditalia-marxista-leninista/" class="org-link">
-        <div class="org-name">Partito Comunista d'Italia (marxista-leninista)</div>
-        <div class="org-dates">1966 – 1991</div>
-        <div class="org-count">7 documenti</div>
-    </a>
-</div>
-
-<div class="org-card">
-    <a href="renmin-ribao/" class="org-link">
-        <div class="org-name">Renmin Ribao</div>
-        <div class="org-dates">1948 – </div>
-        <div class="org-count">4 documenti</div>
-    </a>
-</div>
-
-<div class="org-card">
-    <a href="partito-comunista-cinese/" class="org-link">
-        <div class="org-name">Partito Comunista Cinese</div>
-        <div class="org-dates">1921 – </div>
-        <div class="org-count">3 documenti</div>
-    </a>
-</div>
-
-<div class="org-card">
-    <a href="unione-dei-comunisti-italiani-marxisti-leninisti/" class="org-link">
-        <div class="org-name">Unione dei Comunisti Italiani (marxisti-leninisti)</div>
+    <a href="comitato-di-partito-di-catania-uci-m-l/" class="org-link">
+        <div class="org-name">Comitato di Partito di Catania (UCI-m.l)</div>
         <div class="org-dates">1968 – 1972</div>
-        <div class="org-count">2 documenti</div>
-    </a>
-</div>
-
-<div class="org-card">
-    <a href="nuova-unita/" class="org-link">
-        <div class="org-name">Nuova Unità</div>
-        <div class="org-dates">1964 – 1991</div>
-        <div class="org-count">2 documenti</div>
-    </a>
-</div>
-
-<div class="org-card">
-    <a href="stella-rossa-fronte-rivoluzionario-marxista-leninista/" class="org-link">
-        <div class="org-name">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</div>
-        <div class="org-dates">1969 – 1976</div>
-        <div class="org-count">2 documenti</div>
+        <div class="org-count">1 documento</div>
     </a>
 </div>
 
@@ -103,26 +84,34 @@ hide:
 </div>
 
 <div class="org-card">
-    <a href="ufficio-politico-del-pcdi-m-l/" class="org-link">
-        <div class="org-name">Ufficio Politico del PCd'I (m-l)</div>
-        <div class="org-dates">1966 – 1991</div>
-        <div class="org-count">1 documento</div>
-    </a>
-</div>
-
-<div class="org-card">
-    <a href="comitato-di-partito-di-catania-uci-m-l/" class="org-link">
-        <div class="org-name">Comitato di Partito di Catania (UCI-m.l)</div>
-        <div class="org-dates">1968 – 1972</div>
-        <div class="org-count">1 documento</div>
-    </a>
-</div>
-
-<div class="org-card">
     <a href="jiefangjun-bao/" class="org-link">
         <div class="org-name">Jiefangjun Bao</div>
         <div class="org-dates">1956 – </div>
         <div class="org-count">1 documento</div>
+    </a>
+</div>
+
+<div class="org-card">
+    <a href="nuova-unita/" class="org-link">
+        <div class="org-name">Nuova Unità</div>
+        <div class="org-dates">1964 – 1991</div>
+        <div class="org-count">2 documenti</div>
+    </a>
+</div>
+
+<div class="org-card">
+    <a href="partito-comunista-cinese/" class="org-link">
+        <div class="org-name">Partito Comunista Cinese</div>
+        <div class="org-dates">1921 – </div>
+        <div class="org-count">3 documenti</div>
+    </a>
+</div>
+
+<div class="org-card">
+    <a href="partito-comunista-ditalia-marxista-leninista/" class="org-link">
+        <div class="org-name">Partito Comunista d'Italia (marxista-leninista)</div>
+        <div class="org-dates">1966 – 1991</div>
+        <div class="org-count">7 documenti</div>
     </a>
 </div>
 
@@ -133,11 +122,43 @@ hide:
         <div class="org-count">1 documento</div>
     </a>
 </div>
+
+<div class="org-card">
+    <a href="renmin-ribao/" class="org-link">
+        <div class="org-name">Renmin Ribao</div>
+        <div class="org-dates">1948 – </div>
+        <div class="org-count">4 documenti</div>
+    </a>
+</div>
+
+<div class="org-card">
+    <a href="stella-rossa-fronte-rivoluzionario-marxista-leninista/" class="org-link">
+        <div class="org-name">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</div>
+        <div class="org-dates">1969 – 1976</div>
+        <div class="org-count">2 documenti</div>
+    </a>
+</div>
+
+<div class="org-card">
+    <a href="ufficio-politico-del-pcdi-m-l/" class="org-link">
+        <div class="org-name">Ufficio Politico del PCd'I (m-l)</div>
+        <div class="org-dates">1966 – 1991</div>
+        <div class="org-count">1 documento</div>
+    </a>
+</div>
+
+<div class="org-card">
+    <a href="unione-dei-comunisti-italiani-marxisti-leninisti/" class="org-link">
+        <div class="org-name">Unione dei Comunisti Italiani (marxisti-leninisti)</div>
+        <div class="org-dates">1968 – 1972</div>
+        <div class="org-count">2 documenti</div>
+    </a>
+</div>
 </div>
 
 <style>
 /* ============================================================
-   TOP ROW - Card quadrate, allineamento a sinistra
+   TOP ROW - Card quadrate, immagine a pieno campo, testo in basso
    ============================================================ */
 .top-row {
     display: grid;
@@ -153,10 +174,6 @@ hide:
     border: 1px solid var(--md-default-fg-color--lightest);
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
-    padding: 1.5rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .top-card:hover {
@@ -169,60 +186,53 @@ hide:
     color: inherit;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.2rem;
     width: 100%;
     height: 100%;
-    justify-content: center;
 }
 
-.top-card-avatar {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
+.top-card-image-wrapper {
+    flex: 1;
+    overflow: hidden;
+    background: var(--md-code-bg-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
 }
 
 .top-card-avatar-img {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    display: block;
+}
+
+.top-card-text {
+    padding: 0.6rem 1rem 0.8rem 1rem;
+    background: var(--md-code-bg-color);
+    border-top: 1px solid var(--md-default-fg-color--lightest);
     flex-shrink: 0;
 }
 
-.top-card-initials {
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: #ffffff;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.2);
-    text-transform: uppercase;
-}
-
 .top-card-name {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--md-default-fg-color);
-    line-height: 1.3;
-    margin-top: 0.2rem;
+    line-height: 1.2;
 }
 
 .top-card-dates {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--md-default-fg-color--light);
 }
 
 .top-card-count {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--md-default-fg-color--light);
     font-weight: 400;
 }
 
 /* ============================================================
-   LISTA STANDARD
+   LISTA STANDARD (ordinata alfabeticamente)
    ============================================================ */
 .org-grid {
     display: grid;
@@ -290,15 +300,9 @@ hide:
     .top-card {
         aspect-ratio: auto;
         min-height: 200px;
-        padding: 1rem 0.8rem;
     }
-    .top-card-avatar,
-    .top-card-avatar-img {
-        width: 70px;
-        height: 70px;
-    }
-    .top-card-initials {
-        font-size: 1.8rem;
+    .top-card-text {
+        padding: 0.4rem 0.8rem 0.6rem 0.8rem;
     }
     .top-card-name {
         font-size: 0.95rem;

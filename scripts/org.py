@@ -23,6 +23,13 @@ def get_iniziali(nome, max_lettere=2):
     return ''.join(p[0] for p in parti[:max_lettere]).upper()
 
 
+def genera_placeholder_svg(iniziali, colore):
+    return f'''data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="{colore}"/>
+    <text x="50" y="55" font-family="Arial, sans-serif" font-size="32" font-weight="600" fill="white" text-anchor="middle" dominant-baseline="central">{iniziali}</text>
+</svg>'''
+
+
 def get_categoria_automatica(nome):
     nome_lower = nome.lower()
     if 'partito' in nome_lower or 'comunista' in nome_lower:
@@ -341,12 +348,17 @@ hide:
         print(f"   ✅ Creata scheda per {nome} → {slug}.md")
     
     # ============================================================
-    # INDICE ORGANIZZAZIONI CON TOP 3
+    # INDICE ORGANIZZAZIONI
     # ============================================================
     
-    org_ordinate = sorted(organizzazioni.items(), key=lambda x: x[1]['num_doc'], reverse=True)
-    org_top = org_ordinate[:3]
-    org_resto = org_ordinate[3:]
+    # 🔥 TOP 3: ordinate per numero di documenti (decrescente)
+    org_top = sorted(organizzazioni.items(), key=lambda x: x[1]['num_doc'], reverse=True)[:3]
+    
+    # 🔥 RESTO: ordinato alfabeticamente per nome
+    org_resto = sorted(
+        [item for item in organizzazioni.items() if item[0] not in [o[0] for o in org_top]],
+        key=lambda x: x[0].lower()
+    )
     
     index_content = """---
 title: "Organizzazioni"
@@ -359,41 +371,47 @@ hide:
 
 """
     
+    # TOP ROW
     if org_top:
         index_content += '<div class="top-row">\n'
         for nome, data in org_top:
             slug = data['slug']
             num_doc = data['num_doc']
             date_range = data['data_range']
-            iniziali = get_iniziali(nome)
             colore = colore_hash(nome)
+            iniziali = get_iniziali(nome)
             
             if data.get('immagine'):
                 avatar_html = f'<img src="{data["immagine"]}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
             else:
-                avatar_html = f'<div class="top-card-avatar" style="background-color: {colore};"><span class="top-card-initials">{iniziali}</span></div>'
+                placeholder_svg = genera_placeholder_svg(iniziali, colore)
+                avatar_html = f'<img src="{placeholder_svg}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
             
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
             
             index_content += f'''
     <div class="top-card">
         <a href="{slug}/" class="top-card-link">
-            {avatar_html}
-            <div class="top-card-name">{nome}</div>
-            <div class="top-card-dates">{date_range}</div>
-            <div class="top-card-count">{count_text}</div>
+            <div class="top-card-image-wrapper">
+                {avatar_html}
+            </div>
+            <div class="top-card-text">
+                <div class="top-card-name">{nome}</div>
+                <div class="top-card-dates">{date_range}</div>
+                <div class="top-card-count">{count_text}</div>
+            </div>
         </a>
     </div>
 '''
         index_content += '</div>\n'
     
+    # LISTA STANDARD (alfabetica)
     if org_resto:
         index_content += '<div class="org-grid">\n'
         for nome, data in org_resto:
             slug = data['slug']
             num_doc = data['num_doc']
             date_range = data['data_range']
-            categoria = data['categoria']
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
             
             index_content += f'''
@@ -410,7 +428,7 @@ hide:
     index_content += """
 <style>
 /* ============================================================
-   TOP ROW - Card quadrate, allineamento a sinistra
+   TOP ROW - Card quadrate, immagine a pieno campo, testo in basso
    ============================================================ */
 .top-row {
     display: grid;
@@ -426,10 +444,6 @@ hide:
     border: 1px solid var(--md-default-fg-color--lightest);
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
-    padding: 1.5rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .top-card:hover {
@@ -442,60 +456,53 @@ hide:
     color: inherit;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.2rem;
     width: 100%;
     height: 100%;
-    justify-content: center;
 }
 
-.top-card-avatar {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
+.top-card-image-wrapper {
+    flex: 1;
+    overflow: hidden;
+    background: var(--md-code-bg-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
 }
 
 .top-card-avatar-img {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    display: block;
+}
+
+.top-card-text {
+    padding: 0.6rem 1rem 0.8rem 1rem;
+    background: var(--md-code-bg-color);
+    border-top: 1px solid var(--md-default-fg-color--lightest);
     flex-shrink: 0;
 }
 
-.top-card-initials {
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: #ffffff;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.2);
-    text-transform: uppercase;
-}
-
 .top-card-name {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--md-default-fg-color);
-    line-height: 1.3;
-    margin-top: 0.2rem;
+    line-height: 1.2;
 }
 
 .top-card-dates {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--md-default-fg-color--light);
 }
 
 .top-card-count {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--md-default-fg-color--light);
     font-weight: 400;
 }
 
 /* ============================================================
-   LISTA STANDARD
+   LISTA STANDARD (ordinata alfabeticamente)
    ============================================================ */
 .org-grid {
     display: grid;
@@ -563,15 +570,9 @@ hide:
     .top-card {
         aspect-ratio: auto;
         min-height: 200px;
-        padding: 1rem 0.8rem;
     }
-    .top-card-avatar,
-    .top-card-avatar-img {
-        width: 70px;
-        height: 70px;
-    }
-    .top-card-initials {
-        font-size: 1.8rem;
+    .top-card-text {
+        padding: 0.4rem 0.8rem 0.6rem 0.8rem;
     }
     .top-card-name {
         font-size: 0.95rem;
@@ -596,7 +597,7 @@ hide:
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(index_content)
     
-    print(f"   ✅ Indice organizzazioni generato con {len(organizzazioni)} organizzazioni (top 3 in evidenza).")
+    print(f"   ✅ Indice organizzazioni generato con {len(organizzazioni)} organizzazioni (top 3 in evidenza, resto alfabetico).")
 
 
 def main():
