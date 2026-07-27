@@ -281,13 +281,13 @@ hide:
     
     lines = []
     lines.append('---')
-    lines.append('title: "Organizzazioni in evidenza"')
+    lines.append('title: "Organizzazioni"')
     lines.append('hide:')
     lines.append('  - navigation')
     lines.append('  - toc')
     lines.append('---')
     lines.append('')
-    lines.append('# Organizzazioni')
+    lines.append('# Organizzazioni in evidenza')
     lines.append('')
     
     # TOP ROW

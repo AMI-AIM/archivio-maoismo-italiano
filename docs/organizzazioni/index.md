@@ -1,11 +1,11 @@
 ---
-title: "Organizzazioni in evidenza"
+title: "Organizzazioni"
 hide:
   - navigation
   - toc
 ---
 
-# Organizzazioni
+# Organizzazioni in evidenza
 
 <div class="top-row">
     <div class="top-card">

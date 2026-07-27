@@ -1,11 +1,11 @@
 ---
-title: "Persone in evidenza"
+title: "Persone"
 hide:
   - navigation
   - toc
 ---
 
-# Persone
+# Persone in evidenza
 
 <div class="top-row">
     <div class="top-card">

@@ -249,13 +249,13 @@ hide:
     
     lines = []
     lines.append('---')
-    lines.append('title: "Persone in evidenza"')
+    lines.append('title: "Persone"')
     lines.append('hide:')
     lines.append('  - navigation')
     lines.append('  - toc')
     lines.append('---')
     lines.append('')
-    lines.append('# Persone')
+    lines.append('# Persone in evidenza')
     lines.append('')
     
     # TOP ROW
