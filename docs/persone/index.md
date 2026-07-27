@@ -1,5 +1,5 @@
 ---
-title: "Persone"
+title: "Persone in evidenza"
 hide:
   - navigation
   - toc

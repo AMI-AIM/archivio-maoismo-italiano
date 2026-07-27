@@ -281,7 +281,7 @@ hide:
     
     lines = []
     lines.append('---')
-    lines.append('title: "Organizzazioni"')
+    lines.append('title: "Organizzazioni in evidenza"')
     lines.append('hide:')
     lines.append('  - navigation')
     lines.append('  - toc')

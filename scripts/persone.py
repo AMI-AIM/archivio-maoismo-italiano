@@ -249,7 +249,7 @@ hide:
     
     lines = []
     lines.append('---')
-    lines.append('title: "Persone"')
+    lines.append('title: "Persone in evidenza"')
     lines.append('hide:')
     lines.append('  - navigation')
     lines.append('  - toc')

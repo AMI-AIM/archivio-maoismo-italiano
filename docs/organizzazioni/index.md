@@ -1,5 +1,5 @@
 ---
-title: "Organizzazioni"
+title: "Organizzazioni in evidenza"
 hide:
   - navigation
   - toc
