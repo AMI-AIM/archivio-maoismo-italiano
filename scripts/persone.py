@@ -1,6 +1,7 @@
 import os
 import re
 import hashlib
+import pandas as pd
 from collections import Counter
 from core.utils import slugify, formatta_data, split_nomi
 
@@ -23,7 +24,6 @@ def get_iniziali(nome, max_lettere=2):
         return '?'
     if len(parti) == 1:
         return parti[0][0].upper()
-    # Prende le prime lettere delle prime due parole
     return ''.join(p[0] for p in parti[:max_lettere]).upper()
 
 
@@ -77,10 +77,8 @@ def genera_persone():
         if morte in ['nan', 'None']:
             morte = ''
         
-        # 🔥 LEGGI IMMAGINE
         immagine_raw = str(row.get('immagine', '')).strip()
         if immagine_raw and immagine_raw not in ['nan', 'None']:
-            # Se è già un URL, lo usiamo; altrimenti costruiamo il percorso relativo
             if immagine_raw.startswith('http://') or immagine_raw.startswith('https://'):
                 immagine_url = immagine_raw
             else:
@@ -159,7 +157,7 @@ def genera_persone():
     os.makedirs(persone_dir, exist_ok=True)
     
     # ============================================================
-    # 🔥 GENERA SCHEDE INDIVIDUALI (invariate)
+    # GENERA SCHEDE INDIVIDUALI
     # ============================================================
     for nome, data in persone.items():
         slug = data['slug']
@@ -329,10 +327,9 @@ hide:
         print(f"   ✅ Creata scheda per {nome} → {slug}.md")
     
     # ============================================================
-    # 🔥 INDICE PERSONE CON TOP 3
+    # INDICE PERSONE CON TOP 3
     # ============================================================
     
-    # Ordina per numero di documenti (decrescente)
     persone_ordinate = sorted(persone.items(), key=lambda x: x[1]['num_doc'], reverse=True)
     persone_top = persone_ordinate[:3]
     persone_resto = persone_ordinate[3:]
@@ -348,7 +345,6 @@ hide:
 
 """
     
-    # 🔥 TOP 3 ROW
     if persone_top:
         index_content += '<div class="top-row">\n'
         for nome, data in persone_top:
@@ -358,7 +354,6 @@ hide:
             iniziali = get_iniziali(nome)
             colore = colore_hash(nome)
             
-            # Gestione immagine
             if data.get('immagine'):
                 avatar_html = f'<img src="{data["immagine"]}" alt="{nome}" class="top-card-avatar-img">'
             else:
@@ -378,7 +373,6 @@ hide:
 '''
         index_content += '</div>\n'
     
-    # 🔥 LISTA STANDARD (come ora)
     if persone_resto:
         index_content += '<div class="people-grid">\n'
         for nome, data in persone_resto:
@@ -399,11 +393,10 @@ hide:
 '''
         index_content += '</div>\n'
     
-    # 🔥 CSS
     index_content += """
 <style>
 /* ============================================================
-   TOP ROW (3 schede quadrate)
+   TOP ROW
    ============================================================ */
 .top-row {
     display: grid;
@@ -489,9 +482,6 @@ hide:
     display: inline-block;
 }
 
-/* ============================================================
-   LISTA STANDARD (persone rimanenti)
-   ============================================================ */
 .people-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -557,9 +547,6 @@ hide:
     margin-top: 0.1rem;
 }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
 @media (max-width: 900px) {
     .people-grid {
         grid-template-columns: repeat(2, 1fr);

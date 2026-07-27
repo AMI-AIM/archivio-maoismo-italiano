@@ -1,6 +1,7 @@
 import os
 import re
 import hashlib
+import pandas as pd
 from collections import Counter
 from core.utils import slugify, formatta_data, split_nomi
 
@@ -10,14 +11,12 @@ OUTPUT_DIR = os.path.join(ROOT_DIR, 'docs')
 
 
 def colore_hash(nome):
-    """Genera un colore uniforme per le iniziali in base al nome."""
     hash_obj = hashlib.md5(nome.encode('utf-8'))
     hex_color = hash_obj.hexdigest()[:6]
     return f'#{hex_color}'
 
 
 def get_iniziali(nome, max_lettere=2):
-    """Estrae le iniziali da un nome."""
     parti = nome.split()
     if not parti:
         return '?'
@@ -101,7 +100,6 @@ def genera_organizzazioni():
         if scioglimento in ['nan', 'None']:
             scioglimento = ''
         
-        # 🔥 LEGGI IMMAGINE
         immagine_raw = str(row.get('immagine', '')).strip()
         if immagine_raw and immagine_raw not in ['nan', 'None']:
             if immagine_raw.startswith('http://') or immagine_raw.startswith('https://'):
@@ -189,7 +187,7 @@ def genera_organizzazioni():
     os.makedirs(org_dir, exist_ok=True)
     
     # ============================================================
-    # 🔥 GENERA SCHEDE INDIVIDUALI (invariate)
+    # GENERA SCHEDE INDIVIDUALI
     # ============================================================
     for nome, data in organizzazioni.items():
         slug = data['slug']
@@ -359,10 +357,9 @@ hide:
         print(f"   ✅ Creata scheda per {nome} → {slug}.md")
     
     # ============================================================
-    # 🔥 INDICE ORGANIZZAZIONI CON TOP 3
+    # INDICE ORGANIZZAZIONI CON TOP 3
     # ============================================================
     
-    # Ordina per numero di documenti (decrescente)
     org_ordinate = sorted(organizzazioni.items(), key=lambda x: x[1]['num_doc'], reverse=True)
     org_top = org_ordinate[:3]
     org_resto = org_ordinate[3:]
@@ -378,7 +375,6 @@ hide:
 
 """
     
-    # 🔥 TOP 3 ROW
     if org_top:
         index_content += '<div class="top-row">\n'
         for nome, data in org_top:
@@ -407,7 +403,6 @@ hide:
 '''
         index_content += '</div>\n'
     
-    # 🔥 LISTA STANDARD
     if org_resto:
         index_content += '<div class="org-grid">\n'
         for nome, data in org_resto:
@@ -429,11 +424,10 @@ hide:
 '''
         index_content += '</div>\n'
     
-    # 🔥 CSS
     index_content += """
 <style>
 /* ============================================================
-   TOP ROW (3 schede quadrate)
+   TOP ROW
    ============================================================ */
 .top-row {
     display: grid;
@@ -519,9 +513,6 @@ hide:
     display: inline-block;
 }
 
-/* ============================================================
-   LISTA STANDARD (organizzazioni rimanenti)
-   ============================================================ */
 .org-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -587,9 +578,6 @@ hide:
     margin-top: 0.1rem;
 }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
 @media (max-width: 900px) {
     .org-grid {
         grid-template-columns: repeat(2, 1fr);

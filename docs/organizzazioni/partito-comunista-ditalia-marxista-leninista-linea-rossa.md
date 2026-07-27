@@ -1,17 +1,17 @@
 ---
-title: "Unione dei Comunisti Italiani (marxisti-leninisti)"
-description: "Documenti relativi a Unione dei Comunisti Italiani (marxisti-leninisti)"
+title: "Partito Comunista d'Italia (marxista-leninista) - linea rossa"
+description: "Documenti relativi a Partito Comunista d'Italia (marxista-leninista) - linea rossa"
 hide:
   - navigation
   - toc
 ---
 
-<h1 class="org-name">Unione dei Comunisti Italiani (marxisti-leninisti)</h1>
+<h1 class="org-name">Partito Comunista d'Italia (marxista-leninista) - linea rossa</h1>
 
-<div class="org-dates">1968 – 1972</div>
+<div class="org-dates">1968 – 1969</div>
 
 <div class="org-bio">
-    <p><em>Storia in costruzione. Scrivi qui le informazioni su Unione dei Comunisti Italiani (marxisti-leninisti).</em></p>
+    <p><em>Storia in costruzione. Scrivi qui le informazioni su Partito Comunista d'Italia (marxista-leninista) - linea rossa.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI
@@ -19,18 +19,10 @@ hide:
 <div class="catalogo-lista">
 
 <div class="doc-row">
-    <div class="doc-data">1 agosto 1969</div>
+    <div class="doc-data">1 dicembre 1968</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0035/">Viva il popolo cinese</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">9 ottobre 1969</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0017/">Studenti ed intellettuali rivoluzionari</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0029/">Lavoro Politico no. 11/12</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
     </div>
 </div>
 

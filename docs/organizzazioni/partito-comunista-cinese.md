@@ -19,10 +19,26 @@ hide:
 <div class="catalogo-lista">
 
 <div class="doc-row">
+    <div class="doc-data">13 agosto 1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0033/">Verbale della conversazione del Presidente Mao con la delegazione comunista (marxista-leninista) italiana</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0011/">Circolare del 16 maggio 1966 - Un grande documento storico</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">31 agosto 1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0034/">Nota del Presidente Mao sulla relazione di Kang Sheng riguardante la raccolta di materiale sulle elezioni parlamentari nei paesi capitalisti</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
     </div>
 </div>
 

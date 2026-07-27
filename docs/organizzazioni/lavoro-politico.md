@@ -1,17 +1,17 @@
 ---
-title: "Centro di Informazione di Verona"
-description: "Documenti relativi a Centro di Informazione di Verona"
+title: "Lavoro Politico"
+description: "Documenti relativi a Lavoro Politico"
 hide:
   - navigation
   - toc
 ---
 
-<h1 class="org-name">Centro di Informazione di Verona</h1>
+<h1 class="org-name">Lavoro Politico</h1>
 
-
+<div class="org-dates">1967 – 1969</div>
 
 <div class="org-bio">
-    <p><em>Storia in costruzione. Scrivi qui le informazioni su Centro di Informazione di Verona.</em></p>
+    <p><em>Storia in costruzione. Scrivi qui le informazioni su Lavoro Politico.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI
@@ -22,7 +22,7 @@ hide:
     <div class="doc-data">1 dicembre 1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0029/">Lavoro Politico no. 11/12</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
 
@@ -30,7 +30,7 @@ hide:
     <div class="doc-data">1 febbraio 1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0024/">Lavoro Politico no. 4</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
 
@@ -38,7 +38,7 @@ hide:
     <div class="doc-data">1 gennaio 1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0023/">Lavoro Politico no. 3</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
 
@@ -46,7 +46,7 @@ hide:
     <div class="doc-data">1 giugno 1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0027/">Lavoro Politico no. 8/9</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
 
@@ -54,7 +54,7 @@ hide:
     <div class="doc-data">1 maggio 1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0026/">Lavoro Politico no. 7</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
 
@@ -62,7 +62,7 @@ hide:
     <div class="doc-data">1 marzo 1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0025/">Lavoro Politico no. 5/6</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
 
@@ -70,7 +70,7 @@ hide:
     <div class="doc-data">1 novembre 1967</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0022/">Lavoro Politico no. 2</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
 
@@ -78,7 +78,7 @@ hide:
     <div class="doc-data">1 ottobre 1967</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0021/">Lavoro Politico no. 1</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
 
@@ -86,7 +86,7 @@ hide:
     <div class="doc-data">1 settembre 1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0028/">Lavoro Politico no. 10</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
 
