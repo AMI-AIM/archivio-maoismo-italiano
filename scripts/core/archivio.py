@@ -26,7 +26,6 @@ def genera_indice(df, output_dir):
         if tipo_raw in ['nan', 'None']:
             tipo_raw = ''
         tipo = tipo_raw.lower()
-        # 🔥 tipo_display: "testo_bilingue" diventa "testo" con maiuscola
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
         tipo_display = tipo_display.capitalize() if tipo_display else ''
         
@@ -36,8 +35,6 @@ def genera_indice(df, output_dir):
         autore_raw = str(row.get('autore', '')).strip()
         if autore_raw in ['nan', 'None']:
             autore_raw = ''
-        
-        # 🔥 KEYWORDS RIMOSSE
         
         url_ia = str(row.get('url', '#')).strip()
         descrizione = None
@@ -143,6 +140,18 @@ hide:
             <div class="filtro-contenuto" id="filtro-tipo-container">
                 <select id="filtro-tipo" multiple>
                     <option value="all">Tutte</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="filtro-gruppo collapsible">
+            <button class="filtro-toggle" id="toggle-argomento">
+                <span>Argomenti</span>
+                <span class="toggle-icon">▼</span>
+            </button>
+            <div class="filtro-contenuto" id="filtro-argomento-container">
+                <select id="filtro-argomento" multiple>
+                    <option value="all">Tutti</option>
                 </select>
             </div>
         </div>

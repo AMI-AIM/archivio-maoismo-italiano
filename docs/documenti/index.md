@@ -50,6 +50,18 @@ hide:
         </div>
         
         <div class="filtro-gruppo collapsible">
+            <button class="filtro-toggle" id="toggle-argomento">
+                <span>Argomenti</span>
+                <span class="toggle-icon">▼</span>
+            </button>
+            <div class="filtro-contenuto" id="filtro-argomento-container">
+                <select id="filtro-argomento" multiple>
+                    <option value="all">Tutti</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="filtro-gruppo collapsible">
             <button class="filtro-toggle" id="toggle-anno">
                 <span>Anno</span>
                 <span class="toggle-icon">▼</span>

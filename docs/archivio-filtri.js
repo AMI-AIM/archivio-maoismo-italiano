@@ -22,8 +22,6 @@ async function caricaDati() {
     }
 }
 
-// Se si arriva da un link tipo documenti/?q=termine (es. dalla barra di
-// ricerca in home), precompila il campo "Cerca nel testo" con quel valore.
 function precompilaRicercaDaURL() {
     const params = new URLSearchParams(window.location.search);
     const query = params.get('q');
@@ -33,26 +31,42 @@ function precompilaRicercaDaURL() {
             campoTesto.value = query;
         }
     }
+    // 🔥 Leggi il parametro "serie" dall'URL e pre-seleziona il filtro argomento
+    const serie = params.get('serie');
+    if (serie) {
+        const select = document.getElementById('filtro-argomento');
+        if (select) {
+            // Deseleziona tutto
+            Array.from(select.options).forEach(opt => opt.selected = false);
+            // Cerca e seleziona l'opzione corrispondente
+            let found = false;
+            for (let opt of select.options) {
+                if (opt.value === serie) {
+                    opt.selected = true;
+                    found = true;
+                    break;
+                }
+            }
+            // Se non trovata (es. perché il dato non è ancora caricato),
+            // proviamo più tardi – ma il filtro verrà applicato dopo il caricamento
+        }
+    }
 }
 
 // ============================================================
-// INIZIALIZZAZIONE FILTRI (collassabili)
+// INIZIALIZZAZIONE FILTRI
 // ============================================================
 
 function inizializzaFiltri() {
-    // ATTIVA I FILTRI COLLASSABILI
-    const toggleIds = ['toggle-organizzazione', 'toggle-persona', 'toggle-tipo', 'toggle-anno'];
+    const toggleIds = ['toggle-organizzazione', 'toggle-persona', 'toggle-tipo', 'toggle-argomento', 'toggle-anno'];
     
     toggleIds.forEach(id => {
         const button = document.getElementById(id);
         if (!button) return;
-        
         const container = button.nextElementSibling;
         if (!container || !container.classList.contains('filtro-contenuto')) return;
-        
         container.classList.remove('open');
         button.classList.remove('open');
-        
         button.addEventListener('click', function(e) {
             e.stopPropagation();
             const target = this.nextElementSibling;
@@ -67,16 +81,19 @@ function inizializzaFiltri() {
     const organizzazioni = new Set();
     const persone = new Set();
     const tipi = new Set();
+    const argomenti = new Set();  // 🔥 NUOVO
     
     documenti.forEach(doc => {
         doc.organizzazioni.forEach(org => organizzazioni.add(org));
         doc.persone.forEach(persona => persone.add(persona));
         if (doc.tipo) tipi.add(doc.tipo);
+        if (doc.serie) argomenti.add(doc.serie);  // 🔥 NUOVO
     });
     
     popolaSelect('filtro-organizzazione', organizzazioni);
     popolaSelect('filtro-persona', persone);
     popolaSelect('filtro-tipo', tipi);
+    popolaSelect('filtro-argomento', argomenti);  // 🔥 NUOVO
     
     // Imposta lo slider degli anni
     const minSlider = document.getElementById('filtro-anno-min');
@@ -144,6 +161,7 @@ function inizializzaFiltri() {
 
 function popolaSelect(id, items) {
     const select = document.getElementById(id);
+    if (!select) return;
     const sorted = Array.from(items).sort();
     const allOption = select.querySelector('option[value="all"]');
     select.innerHTML = '';
@@ -152,7 +170,7 @@ function popolaSelect(id, items) {
     } else {
         const opt = document.createElement('option');
         opt.value = 'all';
-        opt.textContent = 'Tutte';
+        opt.textContent = id === 'filtro-argomento' ? 'Tutti' : 'Tutte';
         select.appendChild(opt);
     }
     sorted.forEach(item => {
@@ -164,13 +182,14 @@ function popolaSelect(id, items) {
 }
 
 // ============================================================
-// APPLICAZIONE FILTRI (CON ORDINAMENTO CRONOLOGICO)
+// APPLICAZIONE FILTRI
 // ============================================================
 
 function applicaFiltri() {
     const orgSelezionate = getSelectedValues('filtro-organizzazione');
     const personeSelezionate = getSelectedValues('filtro-persona');
     const tipiSelezionati = getSelectedValues('filtro-tipo');
+    const argomentiSelezionati = getSelectedValues('filtro-argomento');  // 🔥 NUOVO
     const annoMinVal = parseInt(document.getElementById('filtro-anno-min').value);
     const annoMaxVal = parseInt(document.getElementById('filtro-anno-max').value);
     const testo = document.getElementById('filtro-testo').value.toLowerCase().trim();
@@ -185,11 +204,15 @@ function applicaFiltri() {
         if (tipiSelezionati.length > 0 && !tipiSelezionati.includes(doc.tipo)) {
             return false;
         }
+        // 🔥 FILTRO ARGOMENTI
+        if (argomentiSelezionati.length > 0 && !argomentiSelezionati.includes(doc.serie)) {
+            return false;
+        }
         if (doc.anno && (doc.anno < annoMinVal || doc.anno > annoMaxVal)) {
             return false;
         }
         if (testo) {
-            const testoDoc = (doc.titolo + ' ' + doc.autore + ' ' + doc.keywords + ' ' + doc.serie).toLowerCase();
+            const testoDoc = (doc.titolo + ' ' + doc.autore + ' ' + doc.serie + ' ' + doc.descrizione || '').toLowerCase();
             if (!testoDoc.includes(testo)) {
                 return false;
             }
@@ -211,6 +234,7 @@ function applicaFiltri() {
 
 function getSelectedValues(id) {
     const select = document.getElementById(id);
+    if (!select) return [];
     const selected = Array.from(select.selectedOptions);
     if (selected.some(opt => opt.value === 'all')) {
         return [];
@@ -219,7 +243,7 @@ function getSelectedValues(id) {
 }
 
 // ============================================================
-// VISUALIZZAZIONE RISULTATI (stile UMD - UNA RIGA)
+// VISUALIZZAZIONE RISULTATI
 // ============================================================
 
 function mostraRisultati(risultati) {
@@ -236,7 +260,6 @@ function mostraRisultati(risultati) {
     
     let html = '';
     risultati.forEach(doc => {
-        // 🔥 UNA SOLA RIGA DI METADATI: Autore · Organizzazione · Tipologia
         let metaParts = [];
         if (doc.autore && doc.autore !== 'N/A' && doc.autore !== '') {
             metaParts.push(doc.autore);
@@ -249,7 +272,6 @@ function mostraRisultati(risultati) {
         }
         let metaLine = metaParts.length > 0 ? metaParts.join(' · ') : 'N/A';
         
-        // 🔥 DESCRIZIONE (se disponibile)
         let descrizione = doc.descrizione || '';
         
         html += `

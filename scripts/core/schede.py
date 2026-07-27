@@ -2,6 +2,7 @@ import os
 import re
 import html
 import json
+import urllib.parse
 import pandas as pd
 from .utils import formatta_data, split_nomi, scarica_descrizione_ia, scarica_testo_ia
 from .soggetti import crea_link, link_lista
@@ -58,15 +59,12 @@ def crea_schede(df, persone, organizzazioni, output_dir):
         if tipo == 'fotografia':
             tipo = 'foto'
         
-        # 🔥 PER IL DISPLAY: "testo_bilingue" viene mostrato come "testo" con maiuscola
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
         tipo_display = tipo_display.capitalize() if tipo_display else ''
         
         serie = str(row.get('serie', '')).strip()
         if serie in ['nan', 'None']:
             serie = ''
-        
-        # 🔥 KEYWORDS RIMOSSE
         
         url_ia = str(row.get('url', '#')).strip()
         if url_ia in ['nan', 'None', '']:
@@ -102,6 +100,13 @@ def crea_schede(df, persone, organizzazioni, output_dir):
         org_html = link_lista(org_raw, persone, organizzazioni)
         persone_collegate_html = link_lista(persone_collegate, persone, organizzazioni)
         organizzazioni_collegate_html = link_lista(organizzazioni_collegate, persone, organizzazioni)
+        
+        # 🔥 GENERA LINK PER ARGOMENTO (serie)
+        if serie:
+            serie_encoded = urllib.parse.quote(serie, safe='')
+            argomento_html = f'<a href="/archivio-maoismo-italiano/documenti/?serie={serie_encoded}">{serie}</a>'
+        else:
+            argomento_html = 'N/A'
         
         # ============================================================
         # 🔥 CITAZIONE
@@ -188,7 +193,6 @@ def crea_schede(df, persone, organizzazioni, output_dir):
             citazione_minima = f'"{titolo}", {anno_citazione}. Archivio del Maoismo Italiano. {permalink}'
             citazione_minima_html = html.escape(citazione_minima)
         
-        # 🔥 FRONTMATTER SENZA KEYWORDS
         frontmatter = f"""---
 title: "{titolo}"
 ami_id: {ami_id}
@@ -454,7 +458,7 @@ hide:
 </div>
 """
 
-        # 🔥 METADATI: "Serie" → "Argomenti", "Parole chiave" rimosso
+        # 🔥 METADATI CON LINK PER ARGOMENTI
         content += f"""
 <div class="doc-metadata">
     <div class="metadata-grid">
@@ -484,7 +488,7 @@ hide:
         </div>
         <div class="metadata-item">
             <span class="metadata-label">Argomenti</span>
-            <span class="metadata-value">{serie if serie else 'N/A'}</span>
+            <span class="metadata-value">{argomento_html}</span>
         </div>
     </div>
 </div>
