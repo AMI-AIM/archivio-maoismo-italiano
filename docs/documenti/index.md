@@ -59,11 +59,11 @@ hide:
                     <div class="slider-track">
                         <div class="slider-track-fill" id="slider-track-fill"></div>
                     </div>
-                    <input type="range" id="filtro-anno-min" min="1964" max="1992" value="1964">
-                    <input type="range" id="filtro-anno-max" min="1964" max="1992" value="1992">
+                    <input type="range" id="filtro-anno-min" min="1964" max="1993" value="1964">
+                    <input type="range" id="filtro-anno-max" min="1964" max="1993" value="1993">
                     <div class="slider-labels">
                         <span id="anno-min-label">1964</span>
-                        <span id="anno-max-label">1992</span>
+                        <span id="anno-max-label">1993</span>
                     </div>
                 </div>
             </div>
@@ -430,12 +430,12 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0036/">In caso di golpe: Manuale teorico-pratico per il cittadino, di resistenza totale e di guerra di popolo, di guerriglia e di controguerriglia</a>
         </div>
-        <div class="risultato-meta">Vincenzo Calò · Savelli · libro</div>
+        <div class="risultato-meta">Vincenzo Calò · Stella Rossa - Fronte Rivoluzionario Marxista-Leninista · libro</div>
         <div class="risultato-desc">Antologia pubblicata dalla casa editrice di Nuova Sinistra Samonà e Savelli, a cura di Vincenzo Calò, fondatore di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista.Il libro, contenente estratti ad argomento militare da scritti di Carl von Clausewitz, Vladimir Lenin e Mao Zedong, si pone di istruire il militante ai principi della lotta armata in caso di golpe (tentato pochi anni prima da Junio Valerio Borghese).La copia qui presente riporta cancellature sulla prefazione a cura di Calò, probabilmente causate da antipatie politiche, vista anche la scritta "VIVA L'ORGANIZZAZIONE COMBATTENTE COMUNISTA PRIMA LINEA" sull'indice in fondo.</div>
     </div>
 </div>
 <div class="risultato-card">
-    <div class="risultato-data">1992</div>
+    <div class="risultato-data">1993</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
             <a href="AMI-0020/">Ribellarsi è giusto! Antologia</a>

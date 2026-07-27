@@ -18,7 +18,8 @@ def carica_soggetti(data_dir):
                     'slug': slugify(nome),
                     'biografia': str(row.get('biografia', '')).strip(),
                     'nascita': str(row.get('nascita', '')).strip(),
-                    'morte': str(row.get('morte', '')).strip()
+                    'morte': str(row.get('morte', '')).strip(),
+                    'cognome': str(row.get('cognome', '')).strip()
                 }
         print(f"   ✅ Caricate {len(persone)} persone da data/persone.xlsx")
     except FileNotFoundError:
@@ -79,6 +80,7 @@ def link_lista(nomi_str, persone, organizzazioni):
     if links:
         return ', '.join(links)
     return 'N/A'
+
 
 def genera_json_soggetti(persone, organizzazioni, output_dir):
     """Esporta persone e organizzazioni in un JSON, usato dalla ricerca

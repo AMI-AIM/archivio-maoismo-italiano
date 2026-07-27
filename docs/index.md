@@ -41,7 +41,7 @@ hide:
     <div class="doc-data">1975</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0036/">In caso di golpe: Manuale teorico-pratico per il cittadino, di resistenza totale e di guerra di popolo, di guerriglia e di controguerriglia</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">libro</span><span class="doc-org">Savelli</span></div>
+        <div class="doc-meta"><span class="doc-type-chip">libro</span><span class="doc-org">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</span></div>
     </div>
 </div>
 
@@ -79,32 +79,7 @@ hide:
 <div class="catalogo-lista">
 
 
-<div class="doc-row">
-    <div class="persona-rank persona-rank--1">1</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="persone/mao-zedong/">Mao Zedong</a></div>
-        <div class="doc-sommario">18 documenti collegati</div>
-        <div class="persona-date">1893 – 1976</div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="persona-rank persona-rank--2">2</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="persone/osvaldo-pesce/">Osvaldo Pesce</a></div>
-        <div class="doc-sommario">5 documenti collegati</div>
-        <div class="persona-date">193? – 2021</div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="persona-rank persona-rank--3">3</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="persone/dino-dini/">Dino Dini</a></div>
-        <div class="doc-sommario">3 documenti collegati</div>
-        
-    </div>
-</div>
+<p style="padding: 0.6rem 0.8rem; color: var(--md-default-fg-color--light);">Nessuna persona ancora collegata ai documenti.</p>
 
 </div>
 </div>
