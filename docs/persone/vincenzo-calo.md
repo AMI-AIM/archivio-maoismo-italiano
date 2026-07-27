@@ -26,6 +26,14 @@ hide:
     </div>
 </div>
 
+<div class="doc-row">
+    <div class="doc-data">1975</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0036/">In caso di golpe: Manuale teorico-pratico per il cittadino, di resistenza totale e di guerra di popolo, di guerriglia e di controguerriglia</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
 </div>
 
 <style>

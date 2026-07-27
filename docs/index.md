@@ -79,7 +79,32 @@ hide:
 <div class="catalogo-lista">
 
 
-<p style="padding: 0.6rem 0.8rem; color: var(--md-default-fg-color--light);">Nessuna persona ancora collegata ai documenti.</p>
+<div class="doc-row">
+    <div class="persona-rank persona-rank--1">1</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="persone/mao-zedong/">Mao Zedong</a></div>
+        <div class="doc-sommario">18 documenti collegati</div>
+        <div class="persona-date">1893 – 1976</div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="persona-rank persona-rank--2">2</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="persone/osvaldo-pesce/">Osvaldo Pesce</a></div>
+        <div class="doc-sommario">5 documenti collegati</div>
+        <div class="persona-date">193? – 2021</div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="persona-rank persona-rank--3">3</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="persone/dino-dini/">Dino Dini</a></div>
+        <div class="doc-sommario">3 documenti collegati</div>
+        
+    </div>
+</div>
 
 </div>
 </div>

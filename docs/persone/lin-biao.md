@@ -8,7 +8,7 @@ hide:
 
 <h1 class="person-name">Lin Biao</h1>
 
-
+<div class="person-dates">1907 – 1971</div>
 
 <div class="person-bio">
     <p><em>Biografia in costruzione. Scrivi qui la storia di Lin Biao.</em></p>

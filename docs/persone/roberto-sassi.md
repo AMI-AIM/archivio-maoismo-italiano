@@ -19,7 +19,7 @@ hide:
 <div class="catalogo-lista">
 
 <div class="doc-row">
-    <div class="doc-data">1992</div>
+    <div class="doc-data">1993</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0020/">Ribellarsi è giusto! Antologia</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>

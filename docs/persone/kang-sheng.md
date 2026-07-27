@@ -8,7 +8,7 @@ hide:
 
 <h1 class="person-name">Kang Sheng</h1>
 
-
+<div class="person-dates">1898 – 1975</div>
 
 <div class="person-bio">
     <p><em>Biografia in costruzione. Scrivi qui la storia di Kang Sheng.</em></p>

@@ -19,6 +19,14 @@ hide:
 <div class="catalogo-lista">
 
 <div class="doc-row">
+    <div class="doc-data">13 agosto 1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0033/">Verbale della conversazione del Presidente Mao con la delegazione comunista (marxista-leninista) italiana</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
     <div class="doc-data">14 agosto 1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0014/">Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta dalla leadership del Partito Comunista Cinese</a></div>
@@ -30,6 +38,14 @@ hide:
     <div class="doc-data">1967</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0013/">Dichiarazione di Principio - Statuto</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">31 agosto 1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0034/">Nota del Presidente Mao sulla relazione di Kang Sheng riguardante la raccolta di materiale sulle elezioni parlamentari nei paesi capitalisti</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
     </div>
 </div>

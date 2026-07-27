@@ -13,8 +13,8 @@
       "url_ia": "https://archive.org/details/delegazione-edizioni-oriente",
       "persone": [],
       "organizzazioni": [
-        "Edizioni Oriente",
-        "Nuova Unità"
+        "Nuova Unità",
+        "Edizioni Oriente"
       ],
       "descrizione": "\"Il compagno Mao Tse-tung riceve la delegazione delle Edizioni Oriente, guidata dal compagno Dino Frangioni (Livio), Pechino, 17 maggio 1964.\" Da Nuova Unità, no. 4, giugno 1964.Presenti anche rappresentanti dell'organizzazione milanese Gruppo Proletario Luglio 60 (GPL60), come Giacomo (Gino) Montemezzani (alla sinistra di Mao)"
     },
@@ -29,7 +29,10 @@
       "serie": "Galassia marxista-leninista",
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci",
       "url_ia": "https://archive.org/details/statuto-pcdi/mode/2up",
-      "persone": [],
+      "persone": [
+        "Osvaldo Pesce",
+        "Fosco Dinucci"
+      ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
         "Ufficio Politico del PCd'I (m-l)"
@@ -83,7 +86,9 @@
       "serie": "Testi del maoismo",
       "keywords": "Partito comunista cinese; Maoismo; Teoria politica",
       "url_ia": "https://archive.org/details/sulla-giusta-soluzione-delle-contraddizioni-in-seno-al-popolo/mode/2up",
-      "persone": [],
+      "persone": [
+        "Mao Zedong"
+      ],
       "organizzazioni": [
         "Casa editrice in lingue estere"
       ],
@@ -100,7 +105,9 @@
       "serie": "Testi del maoismo",
       "keywords": "Partito comunista cinese; Maoismo",
       "url_ia": "https://archive.org/details/tre-vecchi-articoli/mode/2up",
-      "persone": [],
+      "persone": [
+        "Mao Zedong"
+      ],
       "organizzazioni": [
         "Casa editrice in lingue estere"
       ],
@@ -120,9 +127,9 @@
       "persone": [],
       "organizzazioni": [
         "Casa editrice in lingue estere",
+        "Renmin Ribao",
         "Partito Comunista Cinese",
-        "Hongqi",
-        "Renmin Ribao"
+        "Hongqi"
       ],
       "descrizione": "Opuscolo contente la \"Circolare del Comitato Centrale del Partito ComunistaCinese (16 maggio 1966)\", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo \"Un Grande Documento Storico\", pubblicato su Bandiera Rossa e il Quotidiano del Popolo"
     },
@@ -137,7 +144,9 @@
       "serie": "Testi del maoismo",
       "keywords": "Partito comunista cinese; Maoismo; Teoria politica",
       "url_ia": "https://archive.org/details/idee-errate/mode/2up",
-      "persone": [],
+      "persone": [
+        "Mao Zedong"
+      ],
       "organizzazioni": [
         "Casa editrice in lingue estere"
       ],
@@ -154,7 +163,9 @@
       "serie": "Testi del maoismo",
       "keywords": "Partito comunista cinese; Maoismo; Teoria politica; Filosofia",
       "url_ia": "https://archive.org/details/idee-giuste/mode/2up",
-      "persone": [],
+      "persone": [
+        "Mao Zedong"
+      ],
       "organizzazioni": [
         "Casa editrice in lingue estere"
       ],
@@ -171,7 +182,16 @@
       "serie": "Galassia marxista-leninista",
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
       "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
-      "persone": [],
+      "persone": [
+        "Zhou Enlai",
+        "Dino Dini",
+        "Chen Boda",
+        "Yao Wenyuan",
+        "Kang Sheng",
+        "Mao Zedong",
+        "Osvaldo Pesce",
+        "Jiang Qing"
+      ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
         "Renmin Ribao"
@@ -189,7 +209,9 @@
       "serie": "Testi del maoismo",
       "keywords": "Partito comunista cinese; Maoismo; Internazionalismo",
       "url_ia": "https://archive.org/details/dichiarazione-in-supporto-degli-afroamericani/mode/2up",
-      "persone": [],
+      "persone": [
+        "Mao Zedong"
+      ],
       "organizzazioni": [
         "Casa editrice in lingue estere"
       ],
@@ -208,8 +230,8 @@
       "url_ia": "https://archive.org/details/la-bussola-che-guida//mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Casa editrice in lingue estere",
         "Jiefangjun Bao",
+        "Casa editrice in lingue estere",
         "Renmin Ribao"
       ],
       "descrizione": "La Bussola Che Guida I Popoli Rivoluzionari Di Tutti I Paesi Verso La VittoriaCasa Editrice In Lingue EsterePechino 1968"
@@ -225,7 +247,9 @@
       "serie": "Testi del maoismo",
       "keywords": "Partito comunista cinese; Maoismo; Rivoluzione culturale",
       "url_ia": "https://archive.org/details/la-classe-operai-deve-esercitare-la-sua-direzione-in-ogni-cam/mode/2up",
-      "persone": [],
+      "persone": [
+        "Yao Wenyuan"
+      ],
       "organizzazioni": [
         "Casa editrice in lingue estere"
       ],
@@ -262,8 +286,8 @@
       "url_ia": "https://archive.org/details/lavoro-politico-11-12/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
         "Centro di Informazione di Verona",
+        "Partito Comunista d'Italia (marxista-leninista)",
         "Lavoro Politico",
         "Partito Comunista d'Italia (marxista-leninista) - linea rossa"
       ],
@@ -370,10 +394,14 @@
       "serie": "Galassia marxista-leninista",
       "keywords": "",
       "url_ia": "https://archive.org/details/istruzioni-mao-italiano",
-      "persone": [],
+      "persone": [
+        "Osvaldo Pesce",
+        "Dino Dini",
+        "Mao Zedong"
+      ],
       "organizzazioni": [
-        "Partito Comunista Cinese",
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Partito Comunista Cinese"
       ],
       "descrizione": "Nota del presidente Mao Zedong riguardante la partecipazione dei partiti comunisti marxisti-leninisti alle elezioni parlamentari dei propri paesi.Dopo aver discusso dell'argomento con Osvaldo Pesce (13/08/1968), il Presidente cinese ha incaricato Kang Sheng di presentare un rapporto sulla questione.Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018."
     },
@@ -388,7 +416,10 @@
       "serie": "Galassia marxista-leninista",
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
       "url_ia": "https://archive.org/details/Pesce-e-Mao",
-      "persone": [],
+      "persone": [
+        "Osvaldo Pesce",
+        "Mao Zedong"
+      ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
         "Nuova Unità"
@@ -406,7 +437,9 @@
       "serie": "Testi del maoismo",
       "keywords": "Partito comunista cinese; Maoismo",
       "url_ia": "https://archive.org/details/preoccuparsi-delle-condizioni-di-vita-delle-masse-fare-attenzione-ai-metodi-di-lavoro/mode/2up",
-      "persone": [],
+      "persone": [
+        "Mao Zedong"
+      ],
       "organizzazioni": [
         "Casa editrice in lingue estere"
       ],
@@ -423,7 +456,9 @@
       "serie": "Testi del maoismo",
       "keywords": "Partito comunista cinese; Maoismo; Guerra civile cinese; Lunga marcia",
       "url_ia": "https://archive.org/details/sulla-tattica-contro-limperialismo-giapponese/mode/2up",
-      "persone": [],
+      "persone": [
+        "Mao Zedong"
+      ],
       "organizzazioni": [
         "Casa editrice in lingue estere"
       ],
@@ -440,7 +475,11 @@
       "serie": "Galassia marxista-leninista",
       "keywords": "",
       "url_ia": "https://archive.org/details/conversazione-mao-pesce",
-      "persone": [],
+      "persone": [
+        "Osvaldo Pesce",
+        "Dino Dini",
+        "Mao Zedong"
+      ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
         "Partito Comunista Cinese"
@@ -458,7 +497,9 @@
       "serie": "Testi del maoismo",
       "keywords": "Partito comunista cinese; Rivoluzione culturale; Maoismo; Libretto rosso",
       "url_ia": "https://archive.org/details/1967-citazioni-dalle-opere-del-presidente-mao-tse-tung-lingue-estere/mode/2up",
-      "persone": [],
+      "persone": [
+        "Mao Zedong"
+      ],
       "organizzazioni": [
         "Casa editrice in lingue estere"
       ],
@@ -475,7 +516,9 @@
       "serie": "Varie",
       "keywords": "Partito comunista cinese; Rivoluzione culturale; Maoismo; Libretto rosso",
       "url_ia": "https://archive.org/details/mao-tse-tung-citazioni-presidente-vinile",
-      "persone": [],
+      "persone": [
+        "Mao Zedong"
+      ],
       "organizzazioni": [
         "Signal"
       ],
@@ -492,7 +535,14 @@
       "serie": "Galassia marxista-leninista",
       "keywords": "Partito Comunista d'Italia (marxista-leninista); Marxismo-leninismo; Fosco Dinucci; Delegazione",
       "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
-      "persone": [],
+      "persone": [
+        "Zhou Enlai",
+        "Chen Boda",
+        "Fosco Dinucci",
+        "Kang Sheng",
+        "Lin Biao",
+        "Mao Zedong"
+      ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
         "Renmin Ribao"
@@ -510,7 +560,9 @@
       "serie": "Testi del maoismo",
       "keywords": "Partito comunista cinese; Maoismo",
       "url_ia": "https://archive.org/details/movimento-giovanile/mode/2up",
-      "persone": [],
+      "persone": [
+        "Mao Zedong"
+      ],
       "organizzazioni": [
         "Casa editrice in lingue estere"
       ],
@@ -545,7 +597,9 @@
       "serie": "Testi del maoismo",
       "keywords": "Partito comunista cinese; Maoismo",
       "url_ia": "https://archive.org/details/comitati-di-partito/mode/2up",
-      "persone": [],
+      "persone": [
+        "Mao Zedong"
+      ],
       "organizzazioni": [
         "Casa editrice in lingue estere"
       ],
@@ -579,7 +633,9 @@
       "serie": "Testi del maoismo",
       "keywords": "Partito comunista cinese; Maoismo",
       "url_ia": "https://archive.org/details/popoli-di-tutto-il-mondo/mode/2up",
-      "persone": [],
+      "persone": [
+        "Mao Zedong"
+      ],
       "organizzazioni": [
         "Casa editrice in lingue estere"
       ],
@@ -596,7 +652,9 @@
       "serie": "Galassia marxista-leninista",
       "keywords": "Maoismo; Marxismo-leninismo",
       "url_ia": "https://archive.org/details/statuto-stella-rossa",
-      "persone": [],
+      "persone": [
+        "Vincenzo Calò"
+      ],
       "organizzazioni": [
         "Stella Rossa - Fronte Rivoluzionario Marxista-Leninista"
       ],
@@ -613,7 +671,9 @@
       "serie": "Varie",
       "keywords": "",
       "url_ia": "https://archive.org/details/in-caso-di-golpe/mode/2up",
-      "persone": [],
+      "persone": [
+        "Vincenzo Calò"
+      ],
       "organizzazioni": [
         "Stella Rossa - Fronte Rivoluzionario Marxista-Leninista"
       ],
@@ -630,7 +690,10 @@
       "serie": "Varie",
       "keywords": "Maoismo",
       "url_ia": "https://archive.org/details/ribellarsi-e-giusto//mode/2up",
-      "persone": [],
+      "persone": [
+        "Roberto Sassi",
+        "Mao Zedong"
+      ],
       "organizzazioni": [],
       "descrizione": "Mao Tse Tung Ribellarsi è giustoAntologia a cura di Roberto SassiEditore: SynergonAnno: 1993Numero di pagine: 127"
     }

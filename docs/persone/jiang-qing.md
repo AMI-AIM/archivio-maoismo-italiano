@@ -8,7 +8,7 @@ hide:
 
 <h1 class="person-name">Jiang Qing</h1>
 
-
+<div class="person-dates">1914 – 1991</div>
 
 <div class="person-bio">
     <p><em>Biografia in costruzione. Scrivi qui la storia di Jiang Qing.</em></p>
