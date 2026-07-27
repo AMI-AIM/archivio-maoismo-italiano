@@ -10,6 +10,67 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 OUTPUT_DIR = os.path.join(ROOT_DIR, 'docs')
 
+def genera_sitemap(output_dir, df, persone, organizzazioni):
+    """Genera un file sitemap.xml per i motori di ricerca."""
+    print("\n🗺️ Generazione della sitemap...")
+    
+    base_url = "https://ami-aim.github.io/archivio-maoismo-italiano"
+    
+    pagine = [
+        {"loc": f"{base_url}/", "priority": "1.0", "changefreq": "weekly"},
+        {"loc": f"{base_url}/progetto/", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": f"{base_url}/documenti/", "priority": "0.9", "changefreq": "weekly"},
+        {"loc": f"{base_url}/persone/", "priority": "0.8", "changefreq": "monthly"},
+        {"loc": f"{base_url}/organizzazioni/", "priority": "0.8", "changefreq": "monthly"},
+    ]
+    
+    for _, row in df.iterrows():
+        ami_id = str(row.get('id', '')).strip()
+        if ami_id and ami_id not in ['nan', 'None']:
+            pagine.append({
+                "loc": f"{base_url}/documenti/{ami_id}/",
+                "priority": "0.7",
+                "changefreq": "monthly"
+            })
+    
+    for nome in persone.keys():
+        slug = persone[nome]['slug']
+        if slug:
+            pagine.append({
+                "loc": f"{base_url}/persone/{slug}/",
+                "priority": "0.6",
+                "changefreq": "monthly"
+            })
+    
+    for nome in organizzazioni.keys():
+        slug = organizzazioni[nome]['slug']
+        if slug:
+            pagine.append({
+                "loc": f"{base_url}/organizzazioni/{slug}/",
+                "priority": "0.6",
+                "changefreq": "monthly"
+            })
+    
+    xml_lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+    ]
+    
+    for pagina in pagine:
+        xml_lines.append('  <url>')
+        xml_lines.append(f'    <loc>{pagina["loc"]}</loc>')
+        xml_lines.append(f'    <priority>{pagina["priority"]}</priority>')
+        xml_lines.append(f'    <changefreq>{pagina["changefreq"]}</changefreq>')
+        xml_lines.append('  </url>')
+    
+    xml_lines.append('</urlset>')
+    
+    sitemap_path = os.path.join(output_dir, 'sitemap.xml')
+    with open(sitemap_path, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(xml_lines))
+    
+    print(f"   ✅ Sitemap generata con {len(pagine)} pagine.")
+
 def main():
     print("🚀 Avvio del generatore di schede AMI...")
     print(f"📂 Root: {ROOT_DIR}")
@@ -36,6 +97,7 @@ def main():
     genera_indice(df, OUTPUT_DIR)
     genera_json(df, persone, organizzazioni, OUTPUT_DIR)
     genera_home(df, persone, OUTPUT_DIR)
+    genera_sitemap(OUTPUT_DIR, df, persone, organizzazioni)
     
     print("\n🎉 Conversione completata con successo!")
 
