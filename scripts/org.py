@@ -7,6 +7,8 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 OUTPUT_DIR = os.path.join(ROOT_DIR, 'docs')
 
+PLACEHOLDER_URL = '/archivio-maoismo-italiano/immagini/profili/placeholder.png'
+
 
 def colore_hash(nome):
     hash_obj = hashlib.md5(nome.encode('utf-8'))
@@ -21,13 +23,6 @@ def get_iniziali(nome, max_lettere=2):
     if len(parti) == 1:
         return parti[0][0].upper()
     return ''.join(p[0] for p in parti[:max_lettere]).upper()
-
-
-def genera_placeholder_svg(iniziali, colore):
-    return f'''data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-    <rect width="100" height="100" fill="{colore}"/>
-    <text x="50" y="55" font-family="Arial, sans-serif" font-size="32" font-weight="600" fill="white" text-anchor="middle" dominant-baseline="central">{iniziali}</text>
-</svg>'''
 
 
 def get_categoria_automatica(nome):
@@ -378,14 +373,12 @@ hide:
             slug = data['slug']
             num_doc = data['num_doc']
             date_range = data['data_range']
-            colore = colore_hash(nome)
-            iniziali = get_iniziali(nome)
             
+            # 🔥 USO placeholder.png se non c'è immagine
             if data.get('immagine'):
                 avatar_html = f'<img src="{data["immagine"]}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
             else:
-                placeholder_svg = genera_placeholder_svg(iniziali, colore)
-                avatar_html = f'<img src="{placeholder_svg}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
+                avatar_html = f'<img src="{PLACEHOLDER_URL}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
             
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
             

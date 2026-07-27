@@ -12,10 +12,7 @@ hide:
     <div class="top-card">
         <a href="casa-editrice-in-lingue-estere/" class="top-card-link">
             <div class="top-card-image-wrapper">
-                <img src="data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-    <rect width="100" height="100" fill="#6ca3c7"/>
-    <text x="50" y="55" font-family="Arial, sans-serif" font-size="32" font-weight="600" fill="white" text-anchor="middle" dominant-baseline="central">CE</text>
-</svg>" alt="Casa editrice in lingue estere" class="top-card-avatar-img" loading="lazy">
+                <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.png" alt="Casa editrice in lingue estere" class="top-card-avatar-img" loading="lazy">
             </div>
             <div class="top-card-text">
                 <div class="top-card-name">Casa editrice in lingue estere</div>
@@ -28,10 +25,7 @@ hide:
     <div class="top-card">
         <a href="centro-di-informazione-di-verona/" class="top-card-link">
             <div class="top-card-image-wrapper">
-                <img src="data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-    <rect width="100" height="100" fill="#e49f04"/>
-    <text x="50" y="55" font-family="Arial, sans-serif" font-size="32" font-weight="600" fill="white" text-anchor="middle" dominant-baseline="central">CD</text>
-</svg>" alt="Centro di Informazione di Verona" class="top-card-avatar-img" loading="lazy">
+                <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.png" alt="Centro di Informazione di Verona" class="top-card-avatar-img" loading="lazy">
             </div>
             <div class="top-card-text">
                 <div class="top-card-name">Centro di Informazione di Verona</div>
@@ -44,10 +38,7 @@ hide:
     <div class="top-card">
         <a href="lavoro-politico/" class="top-card-link">
             <div class="top-card-image-wrapper">
-                <img src="data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-    <rect width="100" height="100" fill="#9d5897"/>
-    <text x="50" y="55" font-family="Arial, sans-serif" font-size="32" font-weight="600" fill="white" text-anchor="middle" dominant-baseline="central">LP</text>
-</svg>" alt="Lavoro Politico" class="top-card-avatar-img" loading="lazy">
+                <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.png" alt="Lavoro Politico" class="top-card-avatar-img" loading="lazy">
             </div>
             <div class="top-card-text">
                 <div class="top-card-name">Lavoro Politico</div>

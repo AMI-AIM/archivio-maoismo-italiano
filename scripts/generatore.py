@@ -14,7 +14,7 @@ IMMAGINI_DIR = os.path.join(ROOT_DIR, 'immagini', 'profili')
 
 
 def copia_immagini_profili():
-    """Copia le immagini dei profili dalla cartella 'immagini/profili/' a 'docs/immagini/profili/'."""
+    """Copia le immagini dei profili e il placeholder nella cartella docs."""
     src_dir = IMMAGINI_DIR
     dst_dir = os.path.join(OUTPUT_DIR, 'immagini', 'profili')
     
@@ -30,6 +30,27 @@ def copia_immagini_profili():
         if os.path.isfile(src_path):
             shutil.copy2(src_path, dst_path)
             copiate += 1
+    
+    # 🔥 Se placeholder.png non esiste, crea un placeholder di base
+    placeholder_path = os.path.join(dst_dir, 'placeholder.png')
+    if not os.path.exists(placeholder_path):
+        # Crea un placeholder PNG di base (100x100, grigio con testo "?")
+        try:
+            from PIL import Image, ImageDraw, ImageFont
+            img = Image.new('RGB', (100, 100), color='#888888')
+            draw = ImageDraw.Draw(img)
+            try:
+                font = ImageFont.truetype("arial.ttf", 40)
+            except:
+                font = ImageFont.load_default()
+            draw.text((50, 50), "?", fill='white', anchor="mm", font=font)
+            img.save(placeholder_path)
+            print(f"   ✅ Creato placeholder.png in 'docs/immagini/profili/'")
+        except ImportError:
+            print("   ⚠️ Pillow non installato. Assicurati che placeholder.png esista nella cartella immagini/profili/")
+        except Exception as e:
+            print(f"   ⚠️ Impossibile creare placeholder.png: {e}")
+    
     print(f"   ✅ Copiate {copiate} immagini profili in 'docs/immagini/profili/'")
 
 
