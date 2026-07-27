@@ -40,7 +40,6 @@ hide:
 
 <div class="org-card">
     <a href="partito-comunista-ditalia-marxista-leninista/" class="org-link">
-        <div class="org-tipo">Partito</div>
         <div class="org-name">Partito Comunista d'Italia (marxista-leninista)</div>
         <div class="org-dates">1966 – 1991</div>
         <div class="org-count">7 documenti</div>
@@ -49,7 +48,6 @@ hide:
 
 <div class="org-card">
     <a href="renmin-ribao/" class="org-link">
-        <div class="org-tipo">Giornale</div>
         <div class="org-name">Renmin Ribao</div>
         <div class="org-dates">1948 – </div>
         <div class="org-count">4 documenti</div>
@@ -58,7 +56,6 @@ hide:
 
 <div class="org-card">
     <a href="partito-comunista-cinese/" class="org-link">
-        <div class="org-tipo">Partito</div>
         <div class="org-name">Partito Comunista Cinese</div>
         <div class="org-dates">1921 – </div>
         <div class="org-count">3 documenti</div>
@@ -67,7 +64,6 @@ hide:
 
 <div class="org-card">
     <a href="unione-dei-comunisti-italiani-marxisti-leninisti/" class="org-link">
-        <div class="org-tipo">Partito</div>
         <div class="org-name">Unione dei Comunisti Italiani (marxisti-leninisti)</div>
         <div class="org-dates">1968 – 1972</div>
         <div class="org-count">2 documenti</div>
@@ -76,7 +72,6 @@ hide:
 
 <div class="org-card">
     <a href="nuova-unita/" class="org-link">
-        <div class="org-tipo">Giornale</div>
         <div class="org-name">Nuova Unità</div>
         <div class="org-dates">1964 – 1991</div>
         <div class="org-count">2 documenti</div>
@@ -85,7 +80,6 @@ hide:
 
 <div class="org-card">
     <a href="stella-rossa-fronte-rivoluzionario-marxista-leninista/" class="org-link">
-        <div class="org-tipo">Partito</div>
         <div class="org-name">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</div>
         <div class="org-dates">1969 – 1976</div>
         <div class="org-count">2 documenti</div>
@@ -94,7 +88,6 @@ hide:
 
 <div class="org-card">
     <a href="edizioni-oriente/" class="org-link">
-        <div class="org-tipo">Casa editrice</div>
         <div class="org-name">Edizioni Oriente</div>
         <div class="org-dates">1963 – 1979</div>
         <div class="org-count">1 documento</div>
@@ -103,7 +96,6 @@ hide:
 
 <div class="org-card">
     <a href="hongqi/" class="org-link">
-        <div class="org-tipo">Giornale</div>
         <div class="org-name">Hongqi</div>
         <div class="org-dates">1958 – 1998</div>
         <div class="org-count">1 documento</div>
@@ -112,7 +104,6 @@ hide:
 
 <div class="org-card">
     <a href="ufficio-politico-del-pcdi-m-l/" class="org-link">
-        <div class="org-tipo">Organo di partito</div>
         <div class="org-name">Ufficio Politico del PCd'I (m-l)</div>
         <div class="org-dates">1966 – 1991</div>
         <div class="org-count">1 documento</div>
@@ -121,7 +112,6 @@ hide:
 
 <div class="org-card">
     <a href="comitato-di-partito-di-catania-uci-m-l/" class="org-link">
-        <div class="org-tipo">Organo di partito</div>
         <div class="org-name">Comitato di Partito di Catania (UCI-m.l)</div>
         <div class="org-dates">1968 – 1972</div>
         <div class="org-count">1 documento</div>
@@ -130,7 +120,6 @@ hide:
 
 <div class="org-card">
     <a href="jiefangjun-bao/" class="org-link">
-        <div class="org-tipo">Giornale</div>
         <div class="org-name">Jiefangjun Bao</div>
         <div class="org-dates">1956 – </div>
         <div class="org-count">1 documento</div>
@@ -139,7 +128,6 @@ hide:
 
 <div class="org-card">
     <a href="partito-comunista-ditalia-marxista-leninista-linea-rossa/" class="org-link">
-        <div class="org-tipo">Partito</div>
         <div class="org-name">Partito Comunista d'Italia (marxista-leninista) - linea rossa</div>
         <div class="org-dates">1968 – 1969</div>
         <div class="org-count">1 documento</div>
@@ -149,7 +137,7 @@ hide:
 
 <style>
 /* ============================================================
-   TOP ROW
+   TOP ROW - Card quadrate, allineamento a sinistra
    ============================================================ */
 .top-row {
     display: grid;
@@ -159,14 +147,13 @@ hide:
 }
 
 .top-card {
+    aspect-ratio: 1 / 1;
     background: var(--md-code-bg-color);
     border-radius: 12px;
     border: 1px solid var(--md-default-fg-color--lightest);
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
-    text-align: center;
-    padding: 1.5rem 0.5rem;
-    min-height: 220px;
+    padding: 1.5rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -182,9 +169,11 @@ hide:
     color: inherit;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+    align-items: flex-start;
+    gap: 0.2rem;
     width: 100%;
+    height: 100%;
+    justify-content: center;
 }
 
 .top-card-avatar {
@@ -218,6 +207,7 @@ hide:
     font-weight: 600;
     color: var(--md-default-fg-color);
     line-height: 1.3;
+    margin-top: 0.2rem;
 }
 
 .top-card-dates {
@@ -226,15 +216,14 @@ hide:
 }
 
 .top-card-count {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.15rem 0.8rem;
-    border-radius: 20px;
-    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--md-default-fg-color--light);
+    font-weight: 400;
 }
 
+/* ============================================================
+   LISTA STANDARD
+   ============================================================ */
 .org-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -248,7 +237,7 @@ hide:
     padding: 1rem 1.2rem;
     transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
     border: 1px solid var(--md-default-fg-color--lightest);
-    min-height: 100px;
+    min-height: 80px;
     display: flex;
     align-items: center;
 }
@@ -264,20 +253,7 @@ hide:
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 0.1rem;
-}
-
-.org-tipo {
-    font-size: 0.6rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.05rem 0.6rem;
-    border-radius: 4px;
-    display: inline-block;
-    width: fit-content;
+    gap: 0.05rem;
 }
 
 .org-name {
@@ -285,21 +261,21 @@ hide:
     font-weight: 600;
     color: var(--md-default-fg-color);
     line-height: 1.3;
-    word-break: break-word;
 }
 
 .org-dates {
     font-size: 0.7rem;
     color: var(--md-default-fg-color--light);
-    margin-top: 0.05rem;
 }
 
 .org-count {
     font-size: 0.75rem;
     color: var(--md-default-fg-color--light);
-    margin-top: 0.1rem;
 }
 
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 @media (max-width: 900px) {
     .org-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -312,8 +288,9 @@ hide:
         gap: 1rem;
     }
     .top-card {
-        min-height: 180px;
-        padding: 1rem 0.5rem;
+        aspect-ratio: auto;
+        min-height: 200px;
+        padding: 1rem 0.8rem;
     }
     .top-card-avatar,
     .top-card-avatar-img {

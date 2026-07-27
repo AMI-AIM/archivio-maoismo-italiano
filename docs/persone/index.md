@@ -11,7 +11,7 @@ hide:
 
     <div class="top-card">
         <a href="mao-zedong/" class="top-card-link">
-            <div class="top-card-avatar" style="background-color: #882876;"><span class="top-card-initials">MZ</span></div>
+            <img src="/archivio-maoismo-italiano/immagini/profili/mao.png" alt="Mao Zedong" class="top-card-avatar-img" loading="lazy">
             <div class="top-card-name">Mao Zedong</div>
             <div class="top-card-dates">1893 – 1976</div>
             <div class="top-card-count">18 documenti</div>
@@ -40,7 +40,6 @@ hide:
 
 <div class="people-card">
     <a href="fosco-dinucci/" class="people-link">
-        <div class="people-tipo">Persona</div>
         <div class="people-name">Fosco Dinucci</div>
         <div class="people-dates">1921 – 1993</div>
         <div class="people-count">2 documenti</div>
@@ -49,7 +48,6 @@ hide:
 
 <div class="people-card">
     <a href="yao-wenyuan/" class="people-link">
-        <div class="people-tipo">Persona</div>
         <div class="people-name">Yao Wenyuan</div>
         <div class="people-dates">1931 – 2005</div>
         <div class="people-count">2 documenti</div>
@@ -58,7 +56,6 @@ hide:
 
 <div class="people-card">
     <a href="vincenzo-calo/" class="people-link">
-        <div class="people-tipo">Persona</div>
         <div class="people-name">Vincenzo Calò</div>
         <div class="people-dates"></div>
         <div class="people-count">2 documenti</div>
@@ -67,7 +64,6 @@ hide:
 
 <div class="people-card">
     <a href="kang-sheng/" class="people-link">
-        <div class="people-tipo">Persona</div>
         <div class="people-name">Kang Sheng</div>
         <div class="people-dates">1898 – 1975</div>
         <div class="people-count">2 documenti</div>
@@ -76,7 +72,6 @@ hide:
 
 <div class="people-card">
     <a href="zhou-enlai/" class="people-link">
-        <div class="people-tipo">Persona</div>
         <div class="people-name">Zhou Enlai</div>
         <div class="people-dates">1898 – 1976</div>
         <div class="people-count">2 documenti</div>
@@ -85,7 +80,6 @@ hide:
 
 <div class="people-card">
     <a href="chen-boda/" class="people-link">
-        <div class="people-tipo">Persona</div>
         <div class="people-name">Chen Boda</div>
         <div class="people-dates">1904 – 1989</div>
         <div class="people-count">2 documenti</div>
@@ -94,7 +88,6 @@ hide:
 
 <div class="people-card">
     <a href="roberto-sassi/" class="people-link">
-        <div class="people-tipo">Persona</div>
         <div class="people-name">Roberto Sassi</div>
         <div class="people-dates">1960 – 2023</div>
         <div class="people-count">1 documento</div>
@@ -103,7 +96,6 @@ hide:
 
 <div class="people-card">
     <a href="lin-biao/" class="people-link">
-        <div class="people-tipo">Persona</div>
         <div class="people-name">Lin Biao</div>
         <div class="people-dates">1907 – 1971</div>
         <div class="people-count">1 documento</div>
@@ -112,7 +104,6 @@ hide:
 
 <div class="people-card">
     <a href="jiang-qing/" class="people-link">
-        <div class="people-tipo">Persona</div>
         <div class="people-name">Jiang Qing</div>
         <div class="people-dates">1914 – 1991</div>
         <div class="people-count">1 documento</div>
@@ -122,7 +113,7 @@ hide:
 
 <style>
 /* ============================================================
-   TOP ROW
+   TOP ROW - Card quadrate, allineamento a sinistra
    ============================================================ */
 .top-row {
     display: grid;
@@ -132,14 +123,13 @@ hide:
 }
 
 .top-card {
+    aspect-ratio: 1 / 1;
     background: var(--md-code-bg-color);
     border-radius: 12px;
     border: 1px solid var(--md-default-fg-color--lightest);
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
-    text-align: center;
-    padding: 1.5rem 0.5rem;
-    min-height: 220px;
+    padding: 1.5rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -155,9 +145,11 @@ hide:
     color: inherit;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+    align-items: flex-start;
+    gap: 0.2rem;
     width: 100%;
+    height: 100%;
+    justify-content: center;
 }
 
 .top-card-avatar {
@@ -191,6 +183,7 @@ hide:
     font-weight: 600;
     color: var(--md-default-fg-color);
     line-height: 1.3;
+    margin-top: 0.2rem;
 }
 
 .top-card-dates {
@@ -199,15 +192,14 @@ hide:
 }
 
 .top-card-count {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.15rem 0.8rem;
-    border-radius: 20px;
-    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--md-default-fg-color--light);
+    font-weight: 400;
 }
 
+/* ============================================================
+   LISTA STANDARD
+   ============================================================ */
 .people-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -221,7 +213,7 @@ hide:
     padding: 1rem 1.2rem;
     transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
     border: 1px solid var(--md-default-fg-color--lightest);
-    min-height: 100px;
+    min-height: 80px;
     display: flex;
     align-items: center;
 }
@@ -237,20 +229,7 @@ hide:
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 0.1rem;
-}
-
-.people-tipo {
-    font-size: 0.6rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.05rem 0.6rem;
-    border-radius: 4px;
-    display: inline-block;
-    width: fit-content;
+    gap: 0.05rem;
 }
 
 .people-name {
@@ -258,21 +237,21 @@ hide:
     font-weight: 600;
     color: var(--md-default-fg-color);
     line-height: 1.3;
-    word-break: break-word;
 }
 
 .people-dates {
     font-size: 0.7rem;
     color: var(--md-default-fg-color--light);
-    margin-top: 0.05rem;
 }
 
 .people-count {
     font-size: 0.75rem;
     color: var(--md-default-fg-color--light);
-    margin-top: 0.1rem;
 }
 
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 @media (max-width: 900px) {
     .people-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -285,8 +264,9 @@ hide:
         gap: 1rem;
     }
     .top-card {
-        min-height: 180px;
-        padding: 1rem 0.5rem;
+        aspect-ratio: auto;
+        min-height: 200px;
+        padding: 1rem 0.8rem;
     }
     .top-card-avatar,
     .top-card-avatar-img {

@@ -83,7 +83,6 @@ hide:
     margin: 0.5rem 0 0 0;
     color: var(--md-primary-fg-color);
 }
-
 .org-dates {
     font-size: 1rem;
     color: var(--md-default-fg-color--light);
@@ -91,7 +90,6 @@ hide:
     font-weight: 400;
     letter-spacing: 0.02em;
 }
-
 .org-bio {
     margin: 1.5rem 0;
     padding: 1rem;
@@ -99,18 +97,15 @@ hide:
     border-radius: 8px;
     border-left: 4px solid var(--md-primary-fg-color);
 }
-
 .org-bio p {
     margin: 0.5rem 0;
 }
-
 .catalogo-lista {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
     margin-top: 0.5rem;
 }
-
 .doc-row {
     display: flex;
     align-items: flex-start;
@@ -119,11 +114,9 @@ hide:
     transition: background-color 0.15s;
     gap: 1.5rem;
 }
-
 .doc-row:hover {
     background-color: var(--md-code-bg-color);
 }
-
 .doc-data {
     flex: 0 0 140px;
     font-size: 0.9rem;
@@ -132,31 +125,25 @@ hide:
     white-space: nowrap;
     padding-top: 0.05rem;
 }
-
 .doc-contenuto {
     flex: 1;
     min-width: 0;
 }
-
 .doc-titolo {
     font-size: 1rem;
     font-weight: 500;
 }
-
 .doc-titolo a {
     text-decoration: none;
     color: var(--md-default-fg-color);
 }
-
 .doc-titolo a:hover {
     text-decoration: underline;
     color: var(--md-primary-fg-color);
 }
-
 .doc-ruoli {
     margin-top: 0.1rem;
 }
-
 .ruolo-badge {
     display: inline-block;
     font-size: 0.65rem;
@@ -168,7 +155,6 @@ hide:
     padding: 0.05rem 0.6rem;
     border-radius: 4px;
 }
-
 @media (max-width: 600px) {
     .doc-row {
         flex-direction: column;

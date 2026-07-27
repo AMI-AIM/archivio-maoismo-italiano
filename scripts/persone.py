@@ -1,8 +1,6 @@
 import os
-import re
 import hashlib
 import pandas as pd
-from collections import Counter
 from core.utils import slugify, formatta_data, split_nomi
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -11,14 +9,12 @@ OUTPUT_DIR = os.path.join(ROOT_DIR, 'docs')
 
 
 def colore_hash(nome):
-    """Genera un colore uniforme per le iniziali in base al nome."""
     hash_obj = hashlib.md5(nome.encode('utf-8'))
     hex_color = hash_obj.hexdigest()[:6]
     return f'#{hex_color}'
 
 
 def get_iniziali(nome, max_lettere=2):
-    """Estrae le iniziali da un nome."""
     parti = nome.split()
     if not parti:
         return '?'
@@ -157,7 +153,7 @@ def genera_persone():
     os.makedirs(persone_dir, exist_ok=True)
     
     # ============================================================
-    # GENERA SCHEDE INDIVIDUALI
+    # SCHEDE INDIVIDUALI (invariate)
     # ============================================================
     for nome, data in persone.items():
         slug = data['slug']
@@ -214,7 +210,6 @@ hide:
     margin: 0.5rem 0 0 0;
     color: var(--md-primary-fg-color);
 }
-
 .person-dates {
     font-size: 1rem;
     color: var(--md-default-fg-color--light);
@@ -222,7 +217,6 @@ hide:
     font-weight: 400;
     letter-spacing: 0.02em;
 }
-
 .person-bio {
     margin: 1.5rem 0;
     padding: 1rem;
@@ -230,18 +224,15 @@ hide:
     border-radius: 8px;
     border-left: 4px solid var(--md-primary-fg-color);
 }
-
 .person-bio p {
     margin: 0.5rem 0;
 }
-
 .catalogo-lista {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
     margin-top: 0.5rem;
 }
-
 .doc-row {
     display: flex;
     align-items: flex-start;
@@ -250,11 +241,9 @@ hide:
     transition: background-color 0.15s;
     gap: 1.5rem;
 }
-
 .doc-row:hover {
     background-color: var(--md-code-bg-color);
 }
-
 .doc-data {
     flex: 0 0 140px;
     font-size: 0.9rem;
@@ -263,31 +252,25 @@ hide:
     white-space: nowrap;
     padding-top: 0.05rem;
 }
-
 .doc-contenuto {
     flex: 1;
     min-width: 0;
 }
-
 .doc-titolo {
     font-size: 1rem;
     font-weight: 500;
 }
-
 .doc-titolo a {
     text-decoration: none;
     color: var(--md-default-fg-color);
 }
-
 .doc-titolo a:hover {
     text-decoration: underline;
     color: var(--md-primary-fg-color);
 }
-
 .doc-ruoli {
     margin-top: 0.1rem;
 }
-
 .ruolo-badge {
     display: inline-block;
     font-size: 0.65rem;
@@ -299,7 +282,6 @@ hide:
     padding: 0.05rem 0.6rem;
     border-radius: 4px;
 }
-
 @media (max-width: 600px) {
     .doc-row {
         flex-direction: column;
@@ -355,7 +337,7 @@ hide:
             colore = colore_hash(nome)
             
             if data.get('immagine'):
-                avatar_html = f'<img src="{data["immagine"]}" alt="{nome}" class="top-card-avatar-img">'
+                avatar_html = f'<img src="{data["immagine"]}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
             else:
                 avatar_html = f'<div class="top-card-avatar" style="background-color: {colore};"><span class="top-card-initials">{iniziali}</span></div>'
             
@@ -384,7 +366,6 @@ hide:
             index_content += f'''
 <div class="people-card">
     <a href="{slug}/" class="people-link">
-        <div class="people-tipo">Persona</div>
         <div class="people-name">{nome}</div>
         <div class="people-dates">{date_vita}</div>
         <div class="people-count">{count_text}</div>
@@ -396,7 +377,7 @@ hide:
     index_content += """
 <style>
 /* ============================================================
-   TOP ROW
+   TOP ROW - Card quadrate, allineamento a sinistra
    ============================================================ */
 .top-row {
     display: grid;
@@ -406,14 +387,13 @@ hide:
 }
 
 .top-card {
+    aspect-ratio: 1 / 1;
     background: var(--md-code-bg-color);
     border-radius: 12px;
     border: 1px solid var(--md-default-fg-color--lightest);
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
-    text-align: center;
-    padding: 1.5rem 0.5rem;
-    min-height: 220px;
+    padding: 1.5rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -429,9 +409,11 @@ hide:
     color: inherit;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+    align-items: flex-start;
+    gap: 0.2rem;
     width: 100%;
+    height: 100%;
+    justify-content: center;
 }
 
 .top-card-avatar {
@@ -465,6 +447,7 @@ hide:
     font-weight: 600;
     color: var(--md-default-fg-color);
     line-height: 1.3;
+    margin-top: 0.2rem;
 }
 
 .top-card-dates {
@@ -473,15 +456,14 @@ hide:
 }
 
 .top-card-count {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.15rem 0.8rem;
-    border-radius: 20px;
-    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--md-default-fg-color--light);
+    font-weight: 400;
 }
 
+/* ============================================================
+   LISTA STANDARD
+   ============================================================ */
 .people-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -495,7 +477,7 @@ hide:
     padding: 1rem 1.2rem;
     transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
     border: 1px solid var(--md-default-fg-color--lightest);
-    min-height: 100px;
+    min-height: 80px;
     display: flex;
     align-items: center;
 }
@@ -511,20 +493,7 @@ hide:
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 0.1rem;
-}
-
-.people-tipo {
-    font-size: 0.6rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.05rem 0.6rem;
-    border-radius: 4px;
-    display: inline-block;
-    width: fit-content;
+    gap: 0.05rem;
 }
 
 .people-name {
@@ -532,21 +501,21 @@ hide:
     font-weight: 600;
     color: var(--md-default-fg-color);
     line-height: 1.3;
-    word-break: break-word;
 }
 
 .people-dates {
     font-size: 0.7rem;
     color: var(--md-default-fg-color--light);
-    margin-top: 0.05rem;
 }
 
 .people-count {
     font-size: 0.75rem;
     color: var(--md-default-fg-color--light);
-    margin-top: 0.1rem;
 }
 
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 @media (max-width: 900px) {
     .people-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -559,8 +528,9 @@ hide:
         gap: 1rem;
     }
     .top-card {
-        min-height: 180px;
-        padding: 1rem 0.5rem;
+        aspect-ratio: auto;
+        min-height: 200px;
+        padding: 1rem 0.8rem;
     }
     .top-card-avatar,
     .top-card-avatar-img {
