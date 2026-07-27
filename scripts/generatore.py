@@ -1,4 +1,5 @@
 import os
+import shutil
 import pandas as pd
 from core.soggetti import carica_soggetti, genera_json_soggetti
 from core.schede import crea_schede
@@ -9,12 +10,39 @@ from core.home import genera_home
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 OUTPUT_DIR = os.path.join(ROOT_DIR, 'docs')
+IMMAGINI_DIR = os.path.join(ROOT_DIR, 'immagini', 'profili')
+
+
+def copia_immagini_profili():
+    """Copia le immagini dei profili dalla cartella 'immagini/profili/' a 'docs/immagini/profili/'."""
+    src_dir = IMMAGINI_DIR
+    dst_dir = os.path.join(OUTPUT_DIR, 'immagini', 'profili')
+    
+    if not os.path.exists(src_dir):
+        print("   ⚠️ Cartella 'immagini/profili/' non trovata. Nessuna immagine copiata.")
+        return
+    
+    os.makedirs(dst_dir, exist_ok=True)
+    copiate = 0
+    for file in os.listdir(src_dir):
+        src_path = os.path.join(src_dir, file)
+        dst_path = os.path.join(dst_dir, file)
+        if os.path.isfile(src_path):
+            shutil.copy2(src_path, dst_path)
+            copiate += 1
+    print(f"   ✅ Copiate {copiate} immagini profili in 'docs/immagini/profili/'")
+
 
 def genera_sitemap(output_dir, df, persone, organizzazioni):
     """Genera un file sitemap.xml per i motori di ricerca."""
     print("\n🗺️ Generazione della sitemap...")
     
     base_url = "https://ami-aim.github.io/archivio-maoismo-italiano"
+    
+    def escape_xml(text):
+        if not text:
+            return ''
+        return str(text).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;').replace("'", '&apos;')
     
     pagine = [
         {"loc": f"{base_url}/", "priority": "1.0", "changefreq": "weekly"},
@@ -58,7 +86,7 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
     
     for pagina in pagine:
         xml_lines.append('  <url>')
-        xml_lines.append(f'    <loc>{pagina["loc"]}</loc>')
+        xml_lines.append(f'    <loc>{escape_xml(pagina["loc"])}</loc>')
         xml_lines.append(f'    <priority>{pagina["priority"]}</priority>')
         xml_lines.append(f'    <changefreq>{pagina["changefreq"]}</changefreq>')
         xml_lines.append('  </url>')
@@ -71,11 +99,15 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
     
     print(f"   ✅ Sitemap generata con {len(pagine)} pagine.")
 
+
 def main():
     print("🚀 Avvio del generatore di schede AMI...")
     print(f"📂 Root: {ROOT_DIR}")
     print(f"📂 Dati: {DATA_DIR}")
     print(f"📂 Output: {OUTPUT_DIR}")
+    
+    # 🔥 COPIA IMMAGINI PROFILI
+    copia_immagini_profili()
     
     persone, organizzazioni = carica_soggetti(DATA_DIR)
     genera_json_soggetti(persone, organizzazioni, OUTPUT_DIR)
@@ -100,6 +132,7 @@ def main():
     genera_sitemap(OUTPUT_DIR, df, persone, organizzazioni)
     
     print("\n🎉 Conversione completata con successo!")
+
 
 if __name__ == "__main__":
     main()

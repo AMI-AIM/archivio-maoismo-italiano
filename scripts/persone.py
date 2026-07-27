@@ -1,12 +1,31 @@
-import pandas as pd
 import os
 import re
-from collections import defaultdict
+import hashlib
+from collections import Counter
 from core.utils import slugify, formatta_data, split_nomi
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 OUTPUT_DIR = os.path.join(ROOT_DIR, 'docs')
+
+
+def colore_hash(nome):
+    """Genera un colore uniforme per le iniziali in base al nome."""
+    hash_obj = hashlib.md5(nome.encode('utf-8'))
+    hex_color = hash_obj.hexdigest()[:6]
+    return f'#{hex_color}'
+
+
+def get_iniziali(nome, max_lettere=2):
+    """Estrae le iniziali da un nome."""
+    parti = nome.split()
+    if not parti:
+        return '?'
+    if len(parti) == 1:
+        return parti[0][0].upper()
+    # Prende le prime lettere delle prime due parole
+    return ''.join(p[0] for p in parti[:max_lettere]).upper()
+
 
 def genera_persone():
     print("\n👤 Generazione delle pagine delle persone...")
@@ -58,7 +77,17 @@ def genera_persone():
         if morte in ['nan', 'None']:
             morte = ''
         
-        # 🔥 COSTRUISCI IL RIFERIMENTO CRONOLOGICO CON TRATTINO
+        # 🔥 LEGGI IMMAGINE
+        immagine_raw = str(row.get('immagine', '')).strip()
+        if immagine_raw and immagine_raw not in ['nan', 'None']:
+            # Se è già un URL, lo usiamo; altrimenti costruiamo il percorso relativo
+            if immagine_raw.startswith('http://') or immagine_raw.startswith('https://'):
+                immagine_url = immagine_raw
+            else:
+                immagine_url = f'/archivio-maoismo-italiano/immagini/profili/{immagine_raw}'
+        else:
+            immagine_url = None
+        
         if nascita and morte:
             data_range = f"{nascita} – {morte}"
         elif nascita:
@@ -115,7 +144,9 @@ def genera_persone():
                 'nascita': nascita,
                 'morte': morte,
                 'data_range': data_range,
-                'documenti': documenti
+                'documenti': documenti,
+                'immagine': immagine_url,
+                'num_doc': len(documenti)
             }
     
     if not persone:
@@ -127,6 +158,9 @@ def genera_persone():
     persone_dir = os.path.join(OUTPUT_DIR, 'persone')
     os.makedirs(persone_dir, exist_ok=True)
     
+    # ============================================================
+    # 🔥 GENERA SCHEDE INDIVIDUALI (invariate)
+    # ============================================================
     for nome, data in persone.items():
         slug = data['slug']
         file_path = os.path.join(persone_dir, f'{slug}.md')
@@ -294,7 +328,15 @@ hide:
         
         print(f"   ✅ Creata scheda per {nome} → {slug}.md")
     
-    # INDICE PERSONE
+    # ============================================================
+    # 🔥 INDICE PERSONE CON TOP 3
+    # ============================================================
+    
+    # Ordina per numero di documenti (decrescente)
+    persone_ordinate = sorted(persone.items(), key=lambda x: x[1]['num_doc'], reverse=True)
+    persone_top = persone_ordinate[:3]
+    persone_resto = persone_ordinate[3:]
+    
     index_content = """---
 title: "Persone"
 hide:
@@ -304,37 +346,157 @@ hide:
 
 # Persone
 
-<div class="people-grid">
 """
     
-    for nome in sorted(persone.keys()):
-        slug = persone[nome]['slug']
-        num_doc = len(persone[nome]['documenti'])
-        count_text = f"{num_doc} documento" if num_doc == 1 else f"{num_doc} documenti"
-        
-        data_range = persone[nome]['data_range']
-        data_html = f'<div class="people-dates">{data_range}</div>' if data_range else ''
-        
-        index_content += f"""
+    # 🔥 TOP 3 ROW
+    if persone_top:
+        index_content += '<div class="top-row">\n'
+        for nome, data in persone_top:
+            slug = data['slug']
+            num_doc = data['num_doc']
+            date_vita = data['data_range']
+            iniziali = get_iniziali(nome)
+            colore = colore_hash(nome)
+            
+            # Gestione immagine
+            if data.get('immagine'):
+                avatar_html = f'<img src="{data["immagine"]}" alt="{nome}" class="top-card-avatar-img">'
+            else:
+                avatar_html = f'<div class="top-card-avatar" style="background-color: {colore};"><span class="top-card-initials">{iniziali}</span></div>'
+            
+            count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
+            
+            index_content += f'''
+    <div class="top-card">
+        <a href="{slug}/" class="top-card-link">
+            {avatar_html}
+            <div class="top-card-name">{nome}</div>
+            <div class="top-card-dates">{date_vita}</div>
+            <div class="top-card-count">{count_text}</div>
+        </a>
+    </div>
+'''
+        index_content += '</div>\n'
+    
+    # 🔥 LISTA STANDARD (come ora)
+    if persone_resto:
+        index_content += '<div class="people-grid">\n'
+        for nome, data in persone_resto:
+            slug = data['slug']
+            num_doc = data['num_doc']
+            date_vita = data['data_range']
+            count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
+            
+            index_content += f'''
 <div class="people-card">
     <a href="{slug}/" class="people-link">
         <div class="people-tipo">Persona</div>
         <div class="people-name">{nome}</div>
-        {data_html}
+        <div class="people-dates">{date_vita}</div>
         <div class="people-count">{count_text}</div>
     </a>
 </div>
-"""
+'''
+        index_content += '</div>\n'
     
+    # 🔥 CSS
     index_content += """
-</div>
-
 <style>
+/* ============================================================
+   TOP ROW (3 schede quadrate)
+   ============================================================ */
+.top-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.top-card {
+    background: var(--md-code-bg-color);
+    border-radius: 12px;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+    padding: 1.5rem 0.5rem;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+.top-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.top-card-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.top-card-avatar-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.top-card-initials {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    text-transform: uppercase;
+}
+
+.top-card-name {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--md-default-fg-color);
+    line-height: 1.3;
+}
+
+.top-card-dates {
+    font-size: 0.85rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.top-card-count {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #ffffff !important;
+    background: var(--md-primary-fg-color);
+    padding: 0.15rem 0.8rem;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* ============================================================
+   LISTA STANDARD (persone rimanenti)
+   ============================================================ */
 .people-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    margin: 1.5rem 0;
+    margin-top: 1rem;
 }
 
 .people-card {
@@ -395,9 +557,34 @@ hide:
     margin-top: 0.1rem;
 }
 
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 @media (max-width: 900px) {
     .people-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .top-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .top-card {
+        min-height: 180px;
+        padding: 1rem 0.5rem;
+    }
+    .top-card-avatar,
+    .top-card-avatar-img {
+        width: 70px;
+        height: 70px;
+    }
+    .top-card-initials {
+        font-size: 1.8rem;
+    }
+    .top-card-name {
+        font-size: 0.95rem;
     }
 }
 
@@ -419,11 +606,13 @@ hide:
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(index_content)
     
-    print(f"   ✅ Indice persone generato con {len(persone)} persone.")
+    print(f"   ✅ Indice persone generato con {len(persone)} persone (top 3 in evidenza).")
+
 
 def main():
     print("🚀 Avvio del generatore di schede persone...")
     genera_persone()
+
 
 if __name__ == "__main__":
     main()

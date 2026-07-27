@@ -49,8 +49,8 @@
       "url_ia": "https://archive.org/details/lavoro-politico-01/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Centro di Informazione di Verona",
-        "Lavoro Politico"
+        "Lavoro Politico",
+        "Centro di Informazione di Verona"
       ],
       "descrizione": "rivista \"Lavoro politico\", n. 1 - ottobre 1967"
     },
@@ -66,8 +66,8 @@
       "url_ia": "https://archive.org/details/lavoro-politico-02//mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Centro di Informazione di Verona",
-        "Lavoro Politico"
+        "Lavoro Politico",
+        "Centro di Informazione di Verona"
       ],
       "descrizione": "rivista \"Lavoro politico\", n. 2 - novembre 1967"
     },
@@ -119,10 +119,10 @@
       "url_ia": "https://archive.org/details/circolare-16-maggio/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Renmin Ribao",
-        "Casa editrice in lingue estere",
         "Partito Comunista Cinese",
-        "Hongqi"
+        "Hongqi",
+        "Casa editrice in lingue estere",
+        "Renmin Ribao"
       ],
       "descrizione": "Opuscolo contente la \"Circolare del Comitato Centrale del Partito ComunistaCinese (16 maggio 1966)\", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo \"Un Grande Documento Storico\", pubblicato su Bandiera Rossa e il Quotidiano del Popolo"
     },
@@ -173,13 +173,13 @@
       "serie": "Galassia marxista-leninista",
       "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
       "persone": [
-        "Dino Dini",
         "Chen Boda",
+        "Jiang Qing",
+        "Zhou Enlai",
         "Mao Zedong",
         "Kang Sheng",
-        "Zhou Enlai",
         "Yao Wenyuan",
-        "Jiang Qing",
+        "Dino Dini",
         "Osvaldo Pesce"
       ],
       "organizzazioni": [
@@ -218,9 +218,9 @@
       "url_ia": "https://archive.org/details/la-bussola-che-guida//mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Renmin Ribao",
+        "Jiefangjun Bao",
         "Casa editrice in lingue estere",
-        "Jiefangjun Bao"
+        "Renmin Ribao"
       ],
       "descrizione": "La Bussola Che Guida I Popoli Rivoluzionari Di Tutti I Paesi Verso La VittoriaCasa Editrice In Lingue EsterePechino 1968"
     },
@@ -254,8 +254,8 @@
       "url_ia": "https://archive.org/details/lavoro-politico-10/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Centro di Informazione di Verona",
-        "Lavoro Politico"
+        "Lavoro Politico",
+        "Centro di Informazione di Verona"
       ],
       "descrizione": "rivista \"Lavoro politico\", n. 10 - settembre 1968"
     },
@@ -272,9 +272,9 @@
       "persone": [],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
-        "Centro di Informazione di Verona",
+        "Partito Comunista d'Italia (marxista-leninista) - linea rossa",
         "Lavoro Politico",
-        "Partito Comunista d'Italia (marxista-leninista) - linea rossa"
+        "Centro di Informazione di Verona"
       ],
       "descrizione": "rivista \"Lavoro politico\", n. 11 - 12, dicembre 1968 - gennaio 1969"
     },
@@ -290,8 +290,8 @@
       "url_ia": "https://archive.org/details/lavoro-politico-03/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Centro di Informazione di Verona",
-        "Lavoro Politico"
+        "Lavoro Politico",
+        "Centro di Informazione di Verona"
       ],
       "descrizione": "rivista \"Lavoro politico\", n. 3 - gennaio 1968"
     },
@@ -307,8 +307,8 @@
       "url_ia": "https://archive.org/details/lavoro-politico-04/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Centro di Informazione di Verona",
-        "Lavoro Politico"
+        "Lavoro Politico",
+        "Centro di Informazione di Verona"
       ],
       "descrizione": "rivista \"Lavoro politico\", n. 4 - febbraio 1968"
     },
@@ -324,8 +324,8 @@
       "url_ia": "https://archive.org/details/lavoro-politico-05-06/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Centro di Informazione di Verona",
-        "Lavoro Politico"
+        "Lavoro Politico",
+        "Centro di Informazione di Verona"
       ],
       "descrizione": "rivista \"Lavoro politico\", n. 5 - 6, marzo - aprile 1968"
     },
@@ -341,8 +341,8 @@
       "url_ia": "https://archive.org/details/lavoro-politico-07//mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Centro di Informazione di Verona",
-        "Lavoro Politico"
+        "Lavoro Politico",
+        "Centro di Informazione di Verona"
       ],
       "descrizione": "rivista \"Lavoro politico\", n. 7 - maggio 1968"
     },
@@ -358,8 +358,8 @@
       "url_ia": "https://archive.org/details/lavoro-politico-08-09/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Centro di Informazione di Verona",
-        "Lavoro Politico"
+        "Lavoro Politico",
+        "Centro di Informazione di Verona"
       ],
       "descrizione": "rivista \"Lavoro politico\", n. 8 - 9, giugno - luglio 1968"
     },
@@ -374,13 +374,13 @@
       "serie": "Galassia marxista-leninista",
       "url_ia": "https://archive.org/details/istruzioni-mao-italiano",
       "persone": [
+        "Mao Zedong",
         "Dino Dini",
-        "Osvaldo Pesce",
-        "Mao Zedong"
+        "Osvaldo Pesce"
       ],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Partito Comunista Cinese"
+        "Partito Comunista Cinese",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "Nota del presidente Mao Zedong riguardante la partecipazione dei partiti comunisti marxisti-leninisti alle elezioni parlamentari dei propri paesi.Dopo aver discusso dell'argomento con Osvaldo Pesce (13/08/1968), il Presidente cinese ha incaricato Kang Sheng di presentare un rapporto sulla questione.Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018."
     },
@@ -451,8 +451,8 @@
       "serie": "Galassia marxista-leninista",
       "url_ia": "https://archive.org/details/conversazione-mao-pesce",
       "persone": [
-        "Dino Dini",
         "Mao Zedong",
+        "Dino Dini",
         "Osvaldo Pesce"
       ],
       "organizzazioni": [
@@ -507,11 +507,11 @@
       "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
       "persone": [
         "Chen Boda",
+        "Zhou Enlai",
+        "Lin Biao",
         "Mao Zedong",
         "Kang Sheng",
-        "Fosco Dinucci",
-        "Zhou Enlai",
-        "Lin Biao"
+        "Fosco Dinucci"
       ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
@@ -549,8 +549,8 @@
       "url_ia": "https://archive.org/details/studenti-ed-intellettuali-ciclostilato-uci-m-l/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Unione dei Comunisti Italiani (marxisti-leninisti)",
-        "Comitato di Partito di Catania (UCI-m.l)"
+        "Comitato di Partito di Catania (UCI-m.l)",
+        "Unione dei Comunisti Italiani (marxisti-leninisti)"
       ],
       "descrizione": "Volantino ciclostilato a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), meglio conosciuta come Servire il Popolo. Il volantino riporta un appello a \"Studenti ed Intellettuali Rivoluzionari\" affinché questi si uniscano all'organizzazione maoista."
     },
@@ -653,8 +653,8 @@
       "serie": "Varie",
       "url_ia": "https://archive.org/details/ribellarsi-e-giusto//mode/2up",
       "persone": [
-        "Roberto Sassi",
-        "Mao Zedong"
+        "Mao Zedong",
+        "Roberto Sassi"
       ],
       "organizzazioni": [],
       "descrizione": "Mao Tse Tung Ribellarsi è giustoAntologia a cura di Roberto SassiEditore: SynergonAnno: 1993Numero di pagine: 127"
