@@ -31,10 +31,9 @@ def copia_immagini_profili():
             shutil.copy2(src_path, dst_path)
             copiate += 1
     
-    # 🔥 Se placeholder.png non esiste, crea un placeholder di base
+    # Se placeholder.png non esiste, crea un placeholder di base
     placeholder_path = os.path.join(dst_dir, 'placeholder.png')
     if not os.path.exists(placeholder_path):
-        # Crea un placeholder PNG di base (100x100, grigio con testo "?")
         try:
             from PIL import Image, ImageDraw, ImageFont
             img = Image.new('RGB', (100, 100), color='#888888')
@@ -127,7 +126,7 @@ def main():
     print(f"📂 Dati: {DATA_DIR}")
     print(f"📂 Output: {OUTPUT_DIR}")
     
-    # 🔥 COPIA IMMAGINI PROFILI
+    # COPIA IMMAGINI PROFILI
     copia_immagini_profili()
     
     persone, organizzazioni = carica_soggetti(DATA_DIR)

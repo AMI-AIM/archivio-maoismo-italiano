@@ -187,7 +187,7 @@ def genera_organizzazioni():
     os.makedirs(org_dir, exist_ok=True)
     
     # ============================================================
-    # SCHEDE INDIVIDUALI (invariate)
+    # SCHEDE INDIVIDUALI
     # ============================================================
     for nome, data in organizzazioni.items():
         slug = data['slug']
@@ -346,10 +346,10 @@ hide:
     # INDICE ORGANIZZAZIONI
     # ============================================================
     
-    # 🔥 TOP 3: ordinate per numero di documenti (decrescente)
+    # TOP 3: ordinate per numero di documenti (decrescente)
     org_top = sorted(organizzazioni.items(), key=lambda x: x[1]['num_doc'], reverse=True)[:3]
     
-    # 🔥 RESTO: ordinato alfabeticamente per nome
+    # RESTO: ordinato alfabeticamente per nome
     org_resto = sorted(
         [item for item in organizzazioni.items() if item[0] not in [o[0] for o in org_top]],
         key=lambda x: x[0].lower()
@@ -374,7 +374,6 @@ hide:
             num_doc = data['num_doc']
             date_range = data['data_range']
             
-            # 🔥 USO placeholder.png se non c'è immagine
             if data.get('immagine'):
                 avatar_html = f'<img src="{data["immagine"]}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
             else:
@@ -437,6 +436,7 @@ hide:
     border: 1px solid var(--md-default-fg-color--lightest);
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
+    padding: 0;
 }
 
 .top-card:hover {
@@ -458,8 +458,6 @@ hide:
     overflow: hidden;
     background: var(--md-code-bg-color);
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .top-card-avatar-img {

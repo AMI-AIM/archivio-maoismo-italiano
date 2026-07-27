@@ -165,6 +165,7 @@ hide:
     border: 1px solid var(--md-default-fg-color--lightest);
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
+    padding: 0;
 }
 
 .top-card:hover {
@@ -186,8 +187,6 @@ hide:
     overflow: hidden;
     background: var(--md-code-bg-color);
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .top-card-avatar-img {

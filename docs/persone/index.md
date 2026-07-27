@@ -25,10 +25,7 @@ hide:
     <div class="top-card">
         <a href="osvaldo-pesce/" class="top-card-link">
             <div class="top-card-image-wrapper">
-                <img src="data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-    <rect width="100" height="100" fill="#6e6217"/>
-    <text x="50" y="55" font-family="Arial, sans-serif" font-size="32" font-weight="600" fill="white" text-anchor="middle" dominant-baseline="central">OP</text>
-</svg>" alt="Osvaldo Pesce" class="top-card-avatar-img" loading="lazy">
+                <img src="/archivio-maoismo-italiano/immagini/profili/pesce.png" alt="Osvaldo Pesce" class="top-card-avatar-img" loading="lazy">
             </div>
             <div class="top-card-text">
                 <div class="top-card-name">Osvaldo Pesce</div>
@@ -41,10 +38,7 @@ hide:
     <div class="top-card">
         <a href="dino-dini/" class="top-card-link">
             <div class="top-card-image-wrapper">
-                <img src="data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-    <rect width="100" height="100" fill="#362a8f"/>
-    <text x="50" y="55" font-family="Arial, sans-serif" font-size="32" font-weight="600" fill="white" text-anchor="middle" dominant-baseline="central">DD</text>
-</svg>" alt="Dino Dini" class="top-card-avatar-img" loading="lazy">
+                <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.png" alt="Dino Dini" class="top-card-avatar-img" loading="lazy">
             </div>
             <div class="top-card-text">
                 <div class="top-card-name">Dino Dini</div>
@@ -147,6 +141,7 @@ hide:
     border: 1px solid var(--md-default-fg-color--lightest);
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
+    padding: 0;
 }
 
 .top-card:hover {
@@ -168,8 +163,6 @@ hide:
     overflow: hidden;
     background: var(--md-code-bg-color);
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .top-card-avatar-img {

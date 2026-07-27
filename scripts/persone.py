@@ -157,7 +157,7 @@ def genera_persone():
     os.makedirs(persone_dir, exist_ok=True)
     
     # ============================================================
-    # SCHEDE INDIVIDUALI (invariate)
+    # SCHEDE INDIVIDUALI
     # ============================================================
     for nome, data in persone.items():
         slug = data['slug']
@@ -316,10 +316,10 @@ hide:
     # INDICE PERSONE
     # ============================================================
     
-    # 🔥 TOP 3: ordinate per numero di documenti (decrescente)
+    # TOP 3: ordinate per numero di documenti (decrescente)
     persone_top = sorted(persone.items(), key=lambda x: x[1]['num_doc'], reverse=True)[:3]
     
-    # 🔥 RESTO: ordinato alfabeticamente per nome
+    # RESTO: ordinato alfabeticamente per nome
     persone_resto = sorted(
         [item for item in persone.items() if item[0] not in [p[0] for p in persone_top]],
         key=lambda x: x[0].lower()
@@ -344,7 +344,6 @@ hide:
             num_doc = data['num_doc']
             date_vita = data['data_range']
             
-            # 🔥 USO placeholder.png se non c'è immagine
             if data.get('immagine'):
                 avatar_html = f'<img src="{data["immagine"]}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
             else:
@@ -407,6 +406,7 @@ hide:
     border: 1px solid var(--md-default-fg-color--lightest);
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
+    padding: 0;
 }
 
 .top-card:hover {
@@ -428,8 +428,6 @@ hide:
     overflow: hidden;
     background: var(--md-code-bg-color);
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .top-card-avatar-img {
