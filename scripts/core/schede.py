@@ -321,15 +321,39 @@ hide:
             else:
                 embed_url = f"https://archive.org/embed/{identifier}?ui=embed&nav=0"
             
+            # 🔥 ID UNIVOCO PER L'IFRAME E IL PULSANTE FULLSCREEN
+            fs_id = f"ia-embed-{ami_id}"
+            
             content += f"""
-    <iframe src="{embed_url}" 
+    <iframe id="{fs_id}" src="{embed_url}" 
             class="universal-embed" 
             allowfullscreen>
     </iframe>
     <div class="embed-footer">
         {citazione_bottone_html}
+        <button class="fullscreen-btn" data-target="{fs_id}" type="button">⛶ Schermo intero</button>
         <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
     </div>
+"""
+            # 🔥 SCRIPT PER IL FULLSCREEN
+            content += f"""
+<script>
+(function() {{
+    const btn = document.querySelector('[data-target="{fs_id}"]');
+    const iframe = document.getElementById("{fs_id}");
+    if (btn && iframe) {{
+        btn.addEventListener('click', function() {{
+            if (iframe.requestFullscreen) {{
+                iframe.requestFullscreen();
+            }} else if (iframe.webkitRequestFullscreen) {{
+                iframe.webkitRequestFullscreen();
+            }} else if (iframe.msRequestFullscreen) {{
+                iframe.msRequestFullscreen();
+            }}
+        }});
+    }}
+}})();
+</script>
 """
         else:
             content += f"""
@@ -596,6 +620,21 @@ hide:
 }}
 
 .citazione-link:hover {{
+    text-decoration: underline;
+}}
+
+.fullscreen-btn {{
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--md-primary-fg-color);
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: inherit;
+}}
+
+.fullscreen-btn:hover {{
     text-decoration: underline;
 }}
 
