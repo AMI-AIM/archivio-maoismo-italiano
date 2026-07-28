@@ -11,7 +11,7 @@ hide:
 <div class="org-dates">1968 – 1972</div>
 
 <div class="org-bio">
-    <p><em>Storia in costruzione. Scrivi qui le informazioni su Comitato di Partito di Catania (UCI-m.l).</em></p>
+    <p><em>Scheda in fase di redazione. Nel frattempo, consulta i documenti collegati a Comitato di Partito di Catania (UCI-m.l) qui sotto.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI

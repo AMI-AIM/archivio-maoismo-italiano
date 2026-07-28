@@ -11,7 +11,7 @@ hide:
     <div class="top-card">
         <a href="partito-comunista-cinese/" class="top-card-link">
             <div class="top-card-image-wrapper">
-                <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.webp" alt="Partito Comunista Cinese" class="top-card-avatar-img" loading="lazy">
+                <img src="/archivio-maoismo-italiano/immagini/profili/logo-pcc.svg" alt="Partito Comunista Cinese" class="top-card-avatar-img" loading="lazy">
             </div>
             <div class="top-card-text">
                 <div class="top-card-tipo">Partito</div>

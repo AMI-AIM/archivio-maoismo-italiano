@@ -11,7 +11,7 @@ hide:
 <div class="org-dates">1967 – 1969</div>
 
 <div class="org-bio">
-    <p><em>Storia in costruzione. Scrivi qui le informazioni su Lavoro Politico.</em></p>
+    <p><em>Scheda in fase di redazione. Nel frattempo, consulta i documenti collegati a Lavoro Politico qui sotto.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI

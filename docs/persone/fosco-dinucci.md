@@ -11,7 +11,7 @@ hide:
 <div class="person-dates">1921 – 1993</div>
 
 <div class="person-bio">
-    <p><em>Biografia in costruzione. Scrivi qui la storia di Fosco Dinucci.</em></p>
+    <p><em>Scheda biografica in fase di redazione. Nel frattempo, consulta i documenti collegati a Fosco Dinucci qui sotto.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI

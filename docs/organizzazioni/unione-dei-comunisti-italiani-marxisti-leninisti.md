@@ -11,7 +11,7 @@ hide:
 <div class="org-dates">1968 – 1972</div>
 
 <div class="org-bio">
-    <p><em>Storia in costruzione. Scrivi qui le informazioni su Unione dei Comunisti Italiani (marxisti-leninisti).</em></p>
+    <p><em>Scheda in fase di redazione. Nel frattempo, consulta i documenti collegati a Unione dei Comunisti Italiani (marxisti-leninisti) qui sotto.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI

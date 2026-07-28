@@ -11,7 +11,7 @@ hide:
 <div class="org-dates">1968 – 1969</div>
 
 <div class="org-bio">
-    <p><em>Storia in costruzione. Scrivi qui le informazioni su Partito Comunista d'Italia (marxista-leninista) - linea rossa.</em></p>
+    <p><em>Scheda in fase di redazione. Nel frattempo, consulta i documenti collegati a Partito Comunista d'Italia (marxista-leninista) - linea rossa qui sotto.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI

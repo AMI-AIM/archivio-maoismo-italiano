@@ -161,7 +161,7 @@ def genera_persone():
         
         bio_text = data['biografia']
         if not bio_text:
-            bio_text = f'<p><em>Biografia in costruzione. Scrivi qui la storia di {nome}.</em></p>'
+            bio_text = f'<p><em>Scheda biografica in fase di redazione. Nel frattempo, consulta i documenti collegati a {nome} qui sotto.</em></p>'
         elif '\n' in bio_text:
             bio_text = '<p>' + '</p><p>'.join(bio_text.split('\n')) + '</p>'
         

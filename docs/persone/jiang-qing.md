@@ -11,7 +11,7 @@ hide:
 <div class="person-dates">1914 – 1991</div>
 
 <div class="person-bio">
-    <p><em>Biografia in costruzione. Scrivi qui la storia di Jiang Qing.</em></p>
+    <p><em>Scheda biografica in fase di redazione. Nel frattempo, consulta i documenti collegati a Jiang Qing qui sotto.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI

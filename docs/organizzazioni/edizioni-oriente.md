@@ -11,7 +11,7 @@ hide:
 <div class="org-dates">1963 – 1979</div>
 
 <div class="org-bio">
-    <p><em>Storia in costruzione. Scrivi qui le informazioni su Edizioni Oriente.</em></p>
+    <p><em>Scheda in fase di redazione. Nel frattempo, consulta i documenti collegati a Edizioni Oriente qui sotto.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI

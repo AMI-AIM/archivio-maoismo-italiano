@@ -11,7 +11,7 @@ hide:
 <div class="person-dates">1904 – 1989</div>
 
 <div class="person-bio">
-    <p><em>Biografia in costruzione. Scrivi qui la storia di Chen Boda.</em></p>
+    <p><em>Scheda biografica in fase di redazione. Nel frattempo, consulta i documenti collegati a Chen Boda qui sotto.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI

@@ -11,7 +11,7 @@ hide:
 
 
 <div class="person-bio">
-    <p><em>Biografia in costruzione. Scrivi qui la storia di Dino Dini.</em></p>
+    <p><em>Scheda biografica in fase di redazione. Nel frattempo, consulta i documenti collegati a Dino Dini qui sotto.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI

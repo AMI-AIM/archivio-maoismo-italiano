@@ -193,7 +193,7 @@ def genera_organizzazioni():
         
         storia_text = data['storia']
         if not storia_text:
-            storia_text = f'<p><em>Storia in costruzione. Scrivi qui le informazioni su {nome}.</em></p>'
+            storia_text = f'<p><em>Scheda in fase di redazione. Nel frattempo, consulta i documenti collegati a {nome} qui sotto.</em></p>'
         elif '\n' in storia_text:
             storia_text = '<p>' + '</p><p>'.join(storia_text.split('\n')) + '</p>'
         

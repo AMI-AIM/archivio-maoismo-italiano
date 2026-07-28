@@ -11,7 +11,7 @@ hide:
 <div class="org-dates">1966 – 1991</div>
 
 <div class="org-bio">
-    <p><em>Storia in costruzione. Scrivi qui le informazioni su Unione della gioventù comunista d’Italia (marxista-leninista).</em></p>
+    <p><em>Scheda in fase di redazione. Nel frattempo, consulta i documenti collegati a Unione della gioventù comunista d’Italia (marxista-leninista) qui sotto.</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI
