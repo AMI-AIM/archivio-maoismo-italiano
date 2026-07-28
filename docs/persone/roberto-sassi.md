@@ -32,14 +32,14 @@ hide:
 </div>
 
 <style>
-.person-name { font-size: 2.4rem; font-weight: 700; margin: 0.5rem 0 0 0; color: var(--md-primary-fg-color); }
-.person-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 1rem 0; font-weight: 400; }
+.person-name { font-size: 2.4rem; font-weight: 700; margin: 0 0 0.2rem 0; color: var(--md-primary-fg-color); }
+.person-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 0.8rem 0; font-weight: 400; }
 
 /* BIOGRAFIA CON FOTO (testo a sinistra, foto a destra) */
 .person-bio-with-image {
     display: flex;
     gap: 1.5rem;
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem 0;
     padding: 1rem;
     background: var(--md-code-bg-color);
     border-radius: 8px;
@@ -75,7 +75,7 @@ hide:
 
 /* BIOGRAFIA SENZA FOTO (tutta larghezza) */
 .person-bio-full {
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem 0;
     padding: 1rem;
     background: var(--md-code-bg-color);
     border-radius: 8px;

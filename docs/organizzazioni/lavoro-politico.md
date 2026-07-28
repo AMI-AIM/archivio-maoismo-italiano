@@ -96,14 +96,14 @@ hide:
 </div>
 
 <style>
-.org-name { font-size: 2.4rem; font-weight: 700; margin: 0.5rem 0 0 0; color: var(--md-primary-fg-color); }
-.org-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 1rem 0; font-weight: 400; }
+.org-name { font-size: 2.4rem; font-weight: 700; margin: 0 0 0.2rem 0; color: var(--md-primary-fg-color); }
+.org-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 0.8rem 0; font-weight: 400; }
 
 /* STORIA CON FOTO (testo a sinistra, foto a destra) */
 .org-bio-with-image {
     display: flex;
     gap: 1.5rem;
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem 0;
     padding: 1rem;
     background: var(--md-code-bg-color);
     border-radius: 8px;
@@ -139,7 +139,7 @@ hide:
 
 /* STORIA SENZA FOTO (tutta larghezza) */
 .org-bio-full {
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem 0;
     padding: 1rem;
     background: var(--md-code-bg-color);
     border-radius: 8px;

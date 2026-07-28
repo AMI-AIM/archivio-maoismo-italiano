@@ -179,7 +179,6 @@ hide:
 ---
 """
         
-        # 🔥 SEZIONE SUPERIORE UNIFICATA (foto a destra)
         if data.get('immagine'):
             bio_section = f'''
 <div class="person-bio-with-image">
@@ -226,14 +225,14 @@ hide:
 </div>
 
 <style>
-.person-name { font-size: 2.4rem; font-weight: 700; margin: 0.5rem 0 0 0; color: var(--md-primary-fg-color); }
-.person-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 1rem 0; font-weight: 400; }
+.person-name { font-size: 2.4rem; font-weight: 700; margin: 0 0 0.2rem 0; color: var(--md-primary-fg-color); }
+.person-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 0.8rem 0; font-weight: 400; }
 
 /* BIOGRAFIA CON FOTO (testo a sinistra, foto a destra) */
 .person-bio-with-image {
     display: flex;
     gap: 1.5rem;
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem 0;
     padding: 1rem;
     background: var(--md-code-bg-color);
     border-radius: 8px;
@@ -269,7 +268,7 @@ hide:
 
 /* BIOGRAFIA SENZA FOTO (tutta larghezza) */
 .person-bio-full {
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem 0;
     padding: 1rem;
     background: var(--md-code-bg-color);
     border-radius: 8px;
@@ -319,9 +318,7 @@ hide:
     # INDICE PERSONE CON RICERCA + FILTRO ALFABETICO
     # ============================================================
     
-    # TOP 3
     persone_top = sorted(persone.items(), key=lambda x: x[1]['num_doc'], reverse=True)[:3]
-    # RESTO alfabetico
     persone_resto = sorted(
         [item for item in persone.items() if item[0] not in [p[0] for p in persone_top]],
         key=lambda x: x[0].lower()
@@ -341,7 +338,6 @@ hide:
     lines.append('# Persone in evidenza')
     lines.append('')
     
-    # TOP ROW
     if persone_top:
         lines.append('<div class="top-row">')
         for nome, data in persone_top:
@@ -367,7 +363,6 @@ hide:
             lines.append(f'    </div>')
         lines.append('</div>')
     
-    # BARRA DI RICERCA + ALFABETO
     lines.append('<div class="filtri-persone">')
     lines.append('    <div class="search-bar">')
     lines.append('        <input type="text" id="search-input" placeholder="🔍 Cerca per nome..." aria-label="Cerca persone">')
@@ -383,7 +378,6 @@ hide:
     lines.append('    </div>')
     lines.append('</div>')
     
-    # LISTA STANDARD
     if persone_resto:
         lines.append('<div class="people-grid" id="people-grid">')
         for nome, data in persone_resto:
@@ -403,7 +397,6 @@ hide:
     else:
         lines.append('<p style="padding: 1rem 0; color: var(--md-default-fg-color--light);">Nessuna persona aggiuntiva.</p>')
     
-    # JAVASCRIPT e CSS
     lines.append('')
     lines.append('<script>')
     lines.append('(function() {')
@@ -445,7 +438,6 @@ hide:
     lines.append('</script>')
     lines.append('')
     
-    # CSS
     lines.append('<style>')
     lines.append('.top-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }')
     lines.append('.top-card { aspect-ratio: 1 / 1; background: var(--md-code-bg-color); border-radius: 12px; border: 1px solid var(--md-default-fg-color--lightest); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; padding: 0; }')

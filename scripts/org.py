@@ -211,7 +211,6 @@ hide:
 ---
 """
         
-        # 🔥 SEZIONE SUPERIORE UNIFICATA (foto a destra)
         if data.get('immagine'):
             bio_section = f'''
 <div class="org-bio-with-image">
@@ -258,14 +257,14 @@ hide:
 </div>
 
 <style>
-.org-name { font-size: 2.4rem; font-weight: 700; margin: 0.5rem 0 0 0; color: var(--md-primary-fg-color); }
-.org-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 1rem 0; font-weight: 400; }
+.org-name { font-size: 2.4rem; font-weight: 700; margin: 0 0 0.2rem 0; color: var(--md-primary-fg-color); }
+.org-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 0.8rem 0; font-weight: 400; }
 
 /* STORIA CON FOTO (testo a sinistra, foto a destra) */
 .org-bio-with-image {
     display: flex;
     gap: 1.5rem;
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem 0;
     padding: 1rem;
     background: var(--md-code-bg-color);
     border-radius: 8px;
@@ -301,7 +300,7 @@ hide:
 
 /* STORIA SENZA FOTO (tutta larghezza) */
 .org-bio-full {
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem 0;
     padding: 1rem;
     background: var(--md-code-bg-color);
     border-radius: 8px;
@@ -351,9 +350,7 @@ hide:
     # INDICE ORGANIZZAZIONI CON RICERCA + FILTRO ALFABETICO
     # ============================================================
     
-    # TOP 3
     org_top = sorted(organizzazioni.items(), key=lambda x: x[1]['num_doc'], reverse=True)[:3]
-    # RESTO alfabetico
     org_resto = sorted(
         [item for item in organizzazioni.items() if item[0] not in [o[0] for o in org_top]],
         key=lambda x: x[0].lower()
@@ -373,7 +370,6 @@ hide:
     lines.append('# Organizzazioni in evidenza')
     lines.append('')
     
-    # TOP ROW
     if org_top:
         lines.append('<div class="top-row">')
         for nome, data in org_top:
@@ -401,7 +397,6 @@ hide:
             lines.append(f'    </div>')
         lines.append('</div>')
     
-    # BARRA DI RICERCA + ALFABETO
     lines.append('<div class="filtri-organizzazioni">')
     lines.append('    <div class="search-bar">')
     lines.append('        <input type="text" id="search-input" placeholder="🔍 Cerca per nome..." aria-label="Cerca organizzazioni">')
@@ -417,7 +412,6 @@ hide:
     lines.append('    </div>')
     lines.append('</div>')
     
-    # LISTA STANDARD
     if org_resto:
         lines.append('<div class="org-grid" id="org-grid">')
         for nome, data in org_resto:
@@ -439,7 +433,6 @@ hide:
     else:
         lines.append('<p style="padding: 1rem 0; color: var(--md-default-fg-color--light);">Nessuna organizzazione aggiuntiva.</p>')
     
-    # JAVASCRIPT e CSS
     lines.append('')
     lines.append('<script>')
     lines.append('(function() {')
@@ -481,7 +474,6 @@ hide:
     lines.append('</script>')
     lines.append('')
     
-    # CSS
     lines.append('<style>')
     lines.append('.top-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }')
     lines.append('.top-card { aspect-ratio: 1 / 1; background: var(--md-code-bg-color); border-radius: 12px; border: 1px solid var(--md-default-fg-color--lightest); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; padding: 0; }')
