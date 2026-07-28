@@ -70,7 +70,8 @@ def scarica_descrizione_ia(identifier):
             data = response.json()
             desc = data.get('metadata', {}).get('description', '')
             if desc:
-                desc = re.sub(r'<[^>]+>', '', desc)
+                # 🔥 RIMOSSO il re.sub che toglieva i tag HTML
+                # Ora manteniamo la formattazione originale (paragrafi, elenchi, grassetti, ecc.)
                 desc = desc.strip()
                 return desc
     except Exception as e:

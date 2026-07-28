@@ -103,7 +103,7 @@ hide:
             <a href="AMI-0018/">Delegazione delle Edizioni Oriente accolta dal Presidente Mao Zedong</a>
         </div>
         <div class="risultato-meta">Nuova Unità · Edizioni Oriente · Foto</div>
-        <div class="risultato-desc">"Il compagno Mao Tse-tung riceve la delegazione delle Edizioni Oriente, guidata dal compagno Dino Frangioni (Livio), Pechino, 17 maggio 1964." Da Nuova Unità, no. 4, giugno 1964.Presenti anche rappresentanti dell'organizzazione milanese Gruppo Proletario Luglio 60 (GPL60), come Giacomo (Gino) Montemezzani (alla sinistra di Mao)</div>
+        <div class="risultato-desc">"Il compagno Mao Tse-tung riceve la delegazione delle Edizioni Oriente, guidata dal compagno Dino Frangioni (Livio), Pechino, 17 maggio 1964." Da Nuova Unità, no. 4, giugno 1964.<div><br /></div><div>Presenti anche rappresentanti dell'organizzazione milanese Gruppo Proletario Luglio 60 (GPL60), come Giacomo (Gino) Montemezzani (alla sinistra di Mao)</div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -163,7 +163,7 @@ hide:
             <a href="AMI-0011/">Circolare del 16 maggio 1966 - Un grande documento storico</a>
         </div>
         <div class="risultato-meta">Partito Comunista Cinese · Partito Comunista Cinese · Opuscolo</div>
-        <div class="risultato-desc">Opuscolo contente la "Circolare del Comitato Centrale del Partito ComunistaCinese (16 maggio 1966)", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo "Un Grande Documento Storico", pubblicato su Bandiera Rossa e il Quotidiano del Popolo</div>
+        <div class="risultato-desc"><div>Opuscolo contente la "Circolare del Comitato Centrale del Partito Comunista</div><div>Cinese (16 maggio 1966)", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo "Un Grande Documento Storico", pubblicato su Bandiera Rossa e il Quotidiano del Popolo</div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -183,7 +183,7 @@ hide:
             <a href="AMI-0005/">Da dove provengono le idee giuste?</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
-        <div class="risultato-desc">Articolo del presidente cinese Mao Zedong, parte della "Risoluzione del Comitato centrale del Partito comunista cinese su alcuni problemi dell'attuale lavoro nelle campagne''La presente traduzione è conforme al testo cinese (Testi scelti dalle opere di Mao Tse-tung, Serie A, Casa Editrice del Popolo; Pechino, Aprile 1965).Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, seconda edizione, 1968.</div>
+        <div class="risultato-desc"><div>Articolo del presidente cinese Mao Zedong, parte della "Risoluzione del Comitato centrale del Partito comunista cinese su alcuni problemi dell'attuale lavoro nelle campagne''</div><div><br /></div><div>La presente traduzione è conforme al testo cinese (Testi scelti dalle opere di Mao Tse-tung, Serie A, Casa Editrice del Popolo; Pechino, Aprile 1965).</div><div><br /></div><div>Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, seconda edizione, 1968.</div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -193,7 +193,7 @@ hide:
             <a href="AMI-0004/">Dichiarazione del compagno Mao Tse-tung, presidente del Comitato Centrale del Partito Comunista Cinese, in appoggio alla lotta degli afroamericani contro la repressione violenta</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
-        <div class="risultato-desc">Discorso del Presidente cinese Mao Zedong in supporto alla lotta degli afroamericani, pronunciato in occasione dell'omicidio del Dottor Martin Luther King Jr.Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, 1968.</div>
+        <div class="risultato-desc">Discorso del Presidente cinese Mao Zedong in supporto alla lotta degli afroamericani, pronunciato in occasione dell'omicidio del Dottor Martin Luther King Jr.<div><br /></div><div><span style="color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);">Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, 1968.</span></div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -203,7 +203,7 @@ hide:
             <a href="AMI-0030/">La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria</a>
         </div>
         <div class="risultato-meta">Renmin Ribao · Partito Comunista Cinese · Opuscolo</div>
-        <div class="risultato-desc">La Bussola Che Guida I Popoli Rivoluzionari Di Tutti I Paesi Verso La VittoriaCasa Editrice In Lingue EsterePechino 1968</div>
+        <div class="risultato-desc"><div>La Bussola Che Guida I Popoli Rivoluzionari Di Tutti I Paesi Verso La Vittoria</div><div>Casa Editrice In Lingue Estere</div><div>Pechino 1968</div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -243,7 +243,7 @@ hide:
             <a href="AMI-0031/">Sulla tattica contro l'imperialismo giapponese</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
-        <div class="risultato-desc">Rapporto del presidente cinese Mao Zedong alla Conferenza degli attivisti del Partito tenutasi il 27 dicembre 1935 a Wayaopao. Traduzione ufficiale dell'opuscolo a cura della Casa editrice in lingue estere di Pechino.Il testo originale compare in Opere Scelte, Vol. 1.</div>
+        <div class="risultato-desc">Rapporto del presidente cinese Mao Zedong alla Conferenza degli attivisti del Partito tenutasi il 27 dicembre 1935 a Wayaopao. <div><br /></div><div>Traduzione ufficiale dell'opuscolo a cura della Casa editrice in lingue estere di Pechino.</div><div><br /></div><div>Il testo originale compare in Opere Scelte, Vol. 1.</div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -293,7 +293,7 @@ hide:
             <a href="AMI-0033/">Verbale della conversazione del Presidente Mao con la delegazione comunista (marxista-leninista) italiana</a>
         </div>
         <div class="risultato-meta">Partito Comunista d'Italia (marxista-leninista) · Testo</div>
-        <div class="risultato-desc">Trascrizione della conversazione tenuta tra il Presidente cinese Mao Zedong e due rappresentanti del Partito Comunista d'Italia (marxista-leninista), Osvaldo Pesce e Dino Dini, il 13 agosto 1968.La conversazione verte sugli sviluppi della Grande Rivoluzione Proletaria Culturale e sulla situazione politica europea. In particolare, Mao consiglia agli italiani di non partecipare alle elezioni, per evitare il pericolo revisionista.Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018.</div>
+        <div class="risultato-desc"><font color="#444444" face="Tahoma, Helvetica, Microsoft Yahei, sans-serif" size="5"><span style="background-color:rgb(255,255,255);">Trascrizione della conversazione tenuta tra il Presidente cinese Mao Zedong e due rappresentanti del Partito Comunista d'Italia (marxista-leninista), Osvaldo Pesce e Dino Dini, il 13 agosto 1968.<br /><br />La conversazione verte sugli sviluppi della Grande Rivoluzione Proletaria Culturale e sulla situazione politica europea. In particolare, Mao consiglia agli italiani di non partecipare alle elezioni, per evitare il pericolo revisionista.<br /><br />Testo riprodotto in 宋永毅</span>《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati]</font><span style="color:rgb(68,68,68);font-family:Tahoma, Helvetica, 'Microsoft Yahei', sans-serif;font-size:x-large;background-color:rgb(255,255,255);">, 国史出版社, 2018. </span><font color="#444444" face="Tahoma, Helvetica, Microsoft Yahei, sans-serif" size="5"> </font></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -303,7 +303,7 @@ hide:
             <a href="AMI-0014/">Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta dalla leadership del Partito Comunista Cinese</a>
         </div>
         <div class="risultato-meta">Renmin Ribao · Partito Comunista d'Italia (marxista-leninista) · Foto</div>
-        <div class="risultato-desc">Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta a Pechino dalla leadership del Partito Comunista Cinese. In rappresentanza del PCd'I (ml), in ordine, Osvaldo Pesce e Dino Dini. La leadership cinese è composta da, sempre in ordine, Chen Boda, Kang Sheng, Jiang Qing, Mao Zedong, Zhou Enlai, Yao Wenyuan. Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 14 agosto 1968, p. 1), Peking Review (no. 33, 1968, p. 8) e Nuova Unità (31 agosto 1968, p. 1)</div>
+        <div class="risultato-desc">Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta a Pechino dalla leadership del Partito Comunista Cinese. In rappresentanza del PCd'I (ml), in ordine, Osvaldo Pesce e Dino Dini. La leadership cinese è composta da, sempre in ordine, Chen Boda, Kang Sheng, Jiang Qing, Mao Zedong, Zhou Enlai, Yao Wenyuan. <div><br /></div><div>Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 14 agosto 1968, p. 1), Peking Review (<span style="text-indent:0cm;">no. 33, 1968, p. 8) e Nuova Unità (31 agosto 1968, p. 1)</span></div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -313,7 +313,7 @@ hide:
             <a href="AMI-0034/">Nota del Presidente Mao sulla relazione di Kang Sheng riguardante la raccolta di materiale sulle elezioni parlamentari nei paesi capitalisti</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Testo</div>
-        <div class="risultato-desc">Nota del presidente Mao Zedong riguardante la partecipazione dei partiti comunisti marxisti-leninisti alle elezioni parlamentari dei propri paesi.Dopo aver discusso dell'argomento con Osvaldo Pesce (13/08/1968), il Presidente cinese ha incaricato Kang Sheng di presentare un rapporto sulla questione.Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018.</div>
+        <div class="risultato-desc">Nota del presidente Mao Zedong riguardante la partecipazione dei partiti comunisti marxisti-leninisti alle elezioni parlamentari dei propri paesi.<br /><br />Dopo aver discusso dell'argomento con Osvaldo Pesce (13/08/1968), il Presidente cinese ha incaricato Kang Sheng di presentare un rapporto sulla questione.<br /><br /><div>Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018.  </div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -353,7 +353,7 @@ hide:
             <a href="AMI-0001/">Citazioni dalle opere del presidente Mao Tse-tung</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Libro</div>
-        <div class="risultato-desc">Prima edizione italiana del famoso Libretto rosso, contenente le iconiche citazioni del presidente cinese Mao Zedong, stampata a Pechino dalla Casa editrice in lingue estere, 1967. L'indice è stato spostato all'inizio del libro per una consultazione più agevole.Quotations from Chairman Mao Tse-tung (Little red book) in Italian, official translation by the Foreign Languages Press, published in Peking (Beijing) in 1967.​毛主席语录 (Máo Zhǔxí Yǔlù)</div>
+        <div class="risultato-desc">Prima edizione italiana del famoso Libretto rosso, contenente le iconiche citazioni del presidente cinese Mao Zedong, stampata a Pechino dalla Casa editrice in lingue estere, 1967. L'indice è stato spostato all'inizio del libro per una consultazione più agevole.<div><br /></div><div><br /></div><div><span style="color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);">Quotations from Chairman Mao Tse-tung (Little red book) in Italian, official translation by the Foreign Languages Press, published in Peking (Beijing) in 1967.</span></div><div><span style="color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);"><br /></span></div><div><span style="color:rgb(32,33,34);font-family:sans-serif;font-size:13.3px;background-color:rgb(248,249,250);">​毛主席语录 </span><span style="background-color:rgb(255,255,255);color:rgb(32,33,34);font-family:sans-serif;">(</span><span style="background-color:rgb(255,255,255);color:rgb(32,33,34);font-family:sans-serif;">Máo Zhǔxí Yǔlù)</span></div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -363,7 +363,7 @@ hide:
             <a href="AMI-0019/">Citazioni del presidente Mao Tse-tung</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Audio</div>
-        <div class="risultato-desc">Vinile 33rpm delle dimensioni di un vinile 45rpm con discorsi di Mao Tse-Tung tradotti in italiano con musica popolare cinese in background.</div>
+        <div class="risultato-desc">Vinile 33rpm delle dimensioni di un vinile 45rpm con discorsi di Mao Tse-Tung tradotti in italiano con musica popolare cinese in background.<br /></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -393,7 +393,7 @@ hide:
             <a href="AMI-0035/">Viva il popolo cinese</a>
         </div>
         <div class="risultato-meta">Unione dei Comunisti Italiani (marxisti-leninisti) · Periodico</div>
-        <div class="risultato-desc">Magazine a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), pubblicata attraverso la casa editrice di partito, Edizioni Servire il Popolo.La rivista illustra gli sviluppi della Grande Rivoluzione Proletaria Culturale in Cina e auspica una sua versione italiana."Da quando l'Unione dei Comunisti è stata fondata, il 2 ottobre 1968, è ripresa la marcia del popolo italiano verso l'instaurazione della dittatura del proletariato. E' il pensiero del presidente Mao che ci ha illuminati, è il libretto rosso delle citazioni che ci ha uniti. L'Unione dei Comunisti ha insegnato ai proletari italiani la massima fondamentale del socialismo: «Servire il popolo»."</div>
+        <div class="risultato-desc">Magazine a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), pubblicata attraverso la casa editrice di partito, Edizioni Servire il Popolo.<br /><br />La rivista illustra gli sviluppi della Grande Rivoluzione Proletaria Culturale in Cina e auspica una sua versione italiana.<div><br /></div><div>"Da quando l'Unione dei Comunisti è stata fondata, il 2 ottobre 1968, è ripresa la marcia del popolo italiano verso l'instaurazione della dittatura del proletariato. E' il pensiero del presidente Mao che ci ha illuminati, è il libretto rosso delle citazioni che ci ha uniti. L'Unione dei Comunisti ha insegnato ai proletari italiani la massima fondamentale del socialismo: «Servire il popolo»."</div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -403,7 +403,7 @@ hide:
             <a href="AMI-0016/">Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese</a>
         </div>
         <div class="risultato-meta">Renmin Ribao · Partito Comunista d'Italia (marxista-leninista) · Foto</div>
-        <div class="risultato-desc">Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese in occasione dei festeggiamenti del 1° ottobre 1969. Nella foto compaiono, in ordine, Zhou Enlai, Mao Zedong, Lin Biao, Kang Sheng e Chen Boda. Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 3 ottobre 1969, p. 1).</div>
+        <div class="risultato-desc"><span style="font-size:12pt;line-height:150%;font-family:'Times New Roman', serif;letter-spacing:0.75pt;">Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese in occasione dei festeggiamenti del 1° ottobre 1969. Nella foto compaiono, in ordine, Zhou Enlai, Mao Zedong, Lin Biao, Kang Sheng e Chen Boda. Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 3 ottobre 1969, p. 1).</span></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -433,7 +433,7 @@ hide:
             <a href="AMI-0032/">Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</a>
         </div>
         <div class="risultato-meta">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista · Testo</div>
-        <div class="risultato-desc">Estratto dall'opuscolo "PER LA VITTORIA DEL POTERE ROSSO IN ITALIA-ATTI DEL CONGRESSO NAZIONALE COSTITUTIVO DI STELLA ROSSA FRONTE RIVOLUZIONARIO MARXISTA-LENINISTA".Approvato nel suo testo definitivo dal Congresso Nazionale in seduta plenaria il 4 Novembre 1970.Stella Rossa fu un'organizzazione marxista-leninista (di orientamento maoista), fondata da Vincenzo Calò (già Viva il Leninismo!, Federazione Marxista-Leninista d'Italia, Tribuna Rossa) nel 1969. Nel 1976 si trasforma in Partito della rivoluzione socialista.</div>
+        <div class="risultato-desc"><div>Estratto dall'opuscolo "<i>PER LA VITTORIA DEL POTERE ROSSO IN ITALIA-ATTI DEL CONGRESSO NAZIONALE COSTITUTIVO DI STELLA ROSSA FRONTE RIVOLUZIONARIO MARXISTA-LENINISTA</i>".</div><div>Approvato nel suo testo definitivo dal Congresso Nazionale in seduta plenaria il 4 Novembre 1970.</div><div><br /></div><div>Stella Rossa fu un'organizzazione marxista-leninista (di orientamento maoista), fondata da Vincenzo Calò (già <i>Viva il Leninismo!</i>, Federazione Marxista-Leninista d'Italia, Tribuna Rossa) nel 1969. Nel 1976 si trasforma in Partito della rivoluzione socialista.</div><div><br /></div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -443,7 +443,7 @@ hide:
             <a href="AMI-0036/">In caso di golpe: Manuale teorico-pratico per il cittadino, di resistenza totale e di guerra di popolo, di guerriglia e di controguerriglia</a>
         </div>
         <div class="risultato-meta">Vincenzo Calò · Stella Rossa - Fronte Rivoluzionario Marxista-Leninista · Libro</div>
-        <div class="risultato-desc">Antologia pubblicata dalla casa editrice di Nuova Sinistra Samonà e Savelli, a cura di Vincenzo Calò, fondatore di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista.Il libro, contenente estratti ad argomento militare da scritti di Carl von Clausewitz, Vladimir Lenin e Mao Zedong, si pone di istruire il militante ai principi della lotta armata in caso di golpe (tentato pochi anni prima da Junio Valerio Borghese).La copia qui presente riporta cancellature sulla prefazione a cura di Calò, probabilmente causate da antipatie politiche, vista anche la scritta "VIVA L'ORGANIZZAZIONE COMBATTENTE COMUNISTA PRIMA LINEA" sull'indice in fondo.</div>
+        <div class="risultato-desc">Antologia pubblicata dalla casa editrice di Nuova Sinistra Samonà e Savelli, a cura di Vincenzo Calò, fondatore di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista.<div><br /></div><div>Il libro, contenente estratti ad argomento militare da scritti di Carl von Clausewitz, Vladimir Lenin e Mao Zedong, si pone di istruire il militante ai principi della lotta armata in caso di golpe (tentato pochi anni prima da Junio Valerio Borghese).</div><div><br /></div><div>La copia qui presente riporta cancellature sulla prefazione a cura di Calò, probabilmente causate da antipatie politiche, vista anche la scritta "VIVA L'ORGANIZZAZIONE COMBATTENTE COMUNISTA PRIMA LINEA" sull'indice in fondo.</div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -453,7 +453,7 @@ hide:
             <a href="AMI-0020/">Ribellarsi è giusto! Antologia</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Libro</div>
-        <div class="risultato-desc">Mao Tse Tung Ribellarsi è giustoAntologia a cura di Roberto SassiEditore: SynergonAnno: 1993Numero di pagine: 127</div>
+        <div class="risultato-desc"><b>Mao Tse Tung Ribellarsi è giusto<br />Antologia a cura di Roberto Sassi</b><br /><br />Editore: Synergon<br />Anno: 1993<br />Numero di pagine: 127 <br /></div>
     </div>
 </div>
         </div>
