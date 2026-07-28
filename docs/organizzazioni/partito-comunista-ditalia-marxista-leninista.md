@@ -1,9 +1,10 @@
 ---
-title: "Partito Comunista d'Italia (marxista-leninista)"
+title: " "
 description: "Documenti relativi a Partito Comunista d'Italia (marxista-leninista)"
 hide:
   - navigation
   - toc
+  - title
 ---
 
 <div class="org-name">Partito Comunista d'Italia (marxista-leninista)</div>
@@ -12,16 +13,16 @@ hide:
 
 
 <div class="org-bio-with-image">
-    <div class="org-bio-image">
-        <img src="/archivio-maoismo-italiano/immagini/profili/logo-pcdi.svg" alt="Partito Comunista d'Italia (marxista-leninista)" class="org-bio-img">
-    </div>
     <div class="org-bio-text">
         <p><em>Scheda in fase di redazione. Nel frattempo, consulta i documenti collegati a Partito Comunista d'Italia (marxista-leninista) qui sotto.</em></p>
+    </div>
+    <div class="org-bio-image">
+        <img src="/archivio-maoismo-italiano/immagini/profili/logo-pcdi.svg" alt="Partito Comunista d'Italia (marxista-leninista)" class="org-bio-img">
     </div>
 </div>
 
 
-<h2>Documenti</h2>
+<h3 style="font-weight: bold; font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0;">Documenti</h3>
 
 <div class="catalogo-lista">
 
@@ -95,7 +96,7 @@ hide:
 .org-name { font-size: 2.4rem; font-weight: 700; margin: 0.5rem 0 0 0; color: var(--md-primary-fg-color); }
 .org-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 1rem 0; font-weight: 400; }
 
-/* STORIA CON FOTO (layout affiancato) */
+/* STORIA CON FOTO (testo a sinistra, foto a destra) */
 .org-bio-with-image {
     display: flex;
     gap: 1.5rem;
@@ -107,10 +108,20 @@ hide:
     align-items: flex-start;
 }
 
+.org-bio-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.org-bio-text p {
+    margin: 0.5rem 0;
+}
+
 .org-bio-image {
-    flex: 0 0 120px;
-    width: 120px;
-    height: 120px;
+    flex: 0 0 360px;
+    width: 360px;
+    height: auto;
+    max-height: 400px;
     overflow: hidden;
     border-radius: 8px;
     flex-shrink: 0;
@@ -121,15 +132,6 @@ hide:
     height: 100%;
     object-fit: cover;
     display: block;
-}
-
-.org-bio-text {
-    flex: 1;
-    min-width: 0;
-}
-
-.org-bio-text p {
-    margin: 0.5rem 0;
 }
 
 /* STORIA SENZA FOTO (tutta larghezza) */
@@ -156,15 +158,16 @@ hide:
 .doc-ruoli { margin-top: 0.1rem; }
 .ruolo-badge { display: inline-block; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff !important; background: var(--md-primary-fg-color); padding: 0.05rem 0.6rem; border-radius: 4px; }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .org-bio-with-image {
         flex-direction: column;
         align-items: center;
     }
     .org-bio-image {
         flex: 0 0 auto;
-        width: 100px;
-        height: 100px;
+        width: 100%;
+        max-width: 360px;
+        max-height: 300px;
     }
     .doc-row { flex-direction: column; gap: 0.1rem; padding: 0.6rem 0.2rem; }
     .doc-data { flex: 0 0 auto; white-space: normal; font-size: 0.8rem; }

@@ -1,9 +1,10 @@
 ---
-title: "Mao Zedong"
+title: " "
 description: "Scheda biografica e documenti di Mao Zedong"
 hide:
   - navigation
   - toc
+  - title
 ---
 
 <div class="person-name">Mao Zedong</div>
@@ -12,16 +13,16 @@ hide:
 
 
 <div class="person-bio-with-image">
-    <div class="person-bio-image">
-        <img src="/archivio-maoismo-italiano/immagini/profili/mao.webp" alt="Mao Zedong" class="person-bio-img">
-    </div>
     <div class="person-bio-text">
         <p><em>Scheda biografica in fase di redazione. Nel frattempo, consulta i documenti collegati a Mao Zedong qui sotto.</em></p>
+    </div>
+    <div class="person-bio-image">
+        <img src="/archivio-maoismo-italiano/immagini/profili/mao.webp" alt="Mao Zedong" class="person-bio-img">
     </div>
 </div>
 
 
-<h2>Documenti</h2>
+<h3 style="font-weight: bold; font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0;">Documenti</h3>
 
 <div class="catalogo-lista">
 
@@ -175,7 +176,7 @@ hide:
 .person-name { font-size: 2.4rem; font-weight: 700; margin: 0.5rem 0 0 0; color: var(--md-primary-fg-color); }
 .person-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 1rem 0; font-weight: 400; }
 
-/* BIOGRAFIA CON FOTO (layout affiancato) */
+/* BIOGRAFIA CON FOTO (testo a sinistra, foto a destra) */
 .person-bio-with-image {
     display: flex;
     gap: 1.5rem;
@@ -187,10 +188,20 @@ hide:
     align-items: flex-start;
 }
 
+.person-bio-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.person-bio-text p {
+    margin: 0.5rem 0;
+}
+
 .person-bio-image {
-    flex: 0 0 120px;
-    width: 120px;
-    height: 120px;
+    flex: 0 0 360px;
+    width: 360px;
+    height: auto;
+    max-height: 400px;
     overflow: hidden;
     border-radius: 8px;
     flex-shrink: 0;
@@ -201,15 +212,6 @@ hide:
     height: 100%;
     object-fit: cover;
     display: block;
-}
-
-.person-bio-text {
-    flex: 1;
-    min-width: 0;
-}
-
-.person-bio-text p {
-    margin: 0.5rem 0;
 }
 
 /* BIOGRAFIA SENZA FOTO (tutta larghezza) */
@@ -236,15 +238,16 @@ hide:
 .doc-ruoli { margin-top: 0.1rem; }
 .ruolo-badge { display: inline-block; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff !important; background: var(--md-primary-fg-color); padding: 0.05rem 0.6rem; border-radius: 4px; }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .person-bio-with-image {
         flex-direction: column;
         align-items: center;
     }
     .person-bio-image {
         flex: 0 0 auto;
-        width: 100px;
-        height: 100px;
+        width: 100%;
+        max-width: 360px;
+        max-height: 300px;
     }
     .doc-row { flex-direction: column; gap: 0.1rem; padding: 0.6rem 0.2rem; }
     .doc-data { flex: 0 0 auto; white-space: normal; font-size: 0.8rem; }

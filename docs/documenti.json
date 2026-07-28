@@ -32,10 +32,10 @@
         "Fosco Dinucci"
       ],
       "organizzazioni": [
-        "Unione della gioventù comunista d’Italia (marxista-leninista)",
+        "Ufficio Politico del PCd'I (m-l)",
         "Nuova Unità",
         "Partito Comunista d'Italia (marxista-leninista)",
-        "Ufficio Politico del PCd'I (m-l)"
+        "Unione della gioventù comunista d’Italia (marxista-leninista)"
       ],
       "descrizione": "Opuscolo contenente Dichiarazione di principio e Statuto del Partito Comunista d'Italia (marxista-leninista)."
     },
@@ -120,8 +120,8 @@
       "persone": [],
       "organizzazioni": [
         "Renmin Ribao",
-        "Partito Comunista Cinese",
-        "Hongqi"
+        "Hongqi",
+        "Partito Comunista Cinese"
       ],
       "descrizione": "<div>Opuscolo contente la \"Circolare del Comitato Centrale del Partito Comunista</div><div>Cinese (16 maggio 1966)\", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo \"Un Grande Documento Storico\", pubblicato su Bandiera Rossa e il Quotidiano del Popolo</div>"
     },
@@ -172,14 +172,14 @@
       "serie": "Galassia marxista-leninista",
       "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
       "persone": [
-        "Yao Wenyuan",
-        "Jiang Qing",
         "Dino Dini",
-        "Osvaldo Pesce",
         "Chen Boda",
+        "Mao Zedong",
         "Zhou Enlai",
+        "Osvaldo Pesce",
         "Kang Sheng",
-        "Mao Zedong"
+        "Jiang Qing",
+        "Yao Wenyuan"
       ],
       "organizzazioni": [
         "Renmin Ribao",
@@ -218,8 +218,8 @@
       "persone": [],
       "organizzazioni": [
         "Renmin Ribao",
-        "Jiefangjun Bao",
-        "Partito Comunista Cinese"
+        "Partito Comunista Cinese",
+        "Jiefangjun Bao"
       ],
       "descrizione": "<div>La Bussola Che Guida I Popoli Rivoluzionari Di Tutti I Paesi Verso La Vittoria</div><div>Casa Editrice In Lingue Estere</div><div>Pechino 1968</div>"
     },
@@ -449,8 +449,8 @@
         "Mao Zedong"
       ],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Partito Comunista Cinese"
+        "Partito Comunista Cinese",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "<font color=\"#444444\" face=\"Tahoma, Helvetica, Microsoft Yahei, sans-serif\" size=\"5\"><span style=\"background-color:rgb(255,255,255);\">Trascrizione della conversazione tenuta tra il Presidente cinese Mao Zedong e due rappresentanti del Partito Comunista d'Italia (marxista-leninista), Osvaldo Pesce e Dino Dini, il 13 agosto 1968.<br /><br />La conversazione verte sugli sviluppi della Grande Rivoluzione Proletaria Culturale e sulla situazione politica europea. In particolare, Mao consiglia agli italiani di non partecipare alle elezioni, per evitare il pericolo revisionista.<br /><br />Testo riprodotto in 宋永毅</span>《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati]</font><span style=\"color:rgb(68,68,68);font-family:Tahoma, Helvetica, 'Microsoft Yahei', sans-serif;font-size:x-large;background-color:rgb(255,255,255);\">, 国史出版社, 2018. </span><font color=\"#444444\" face=\"Tahoma, Helvetica, Microsoft Yahei, sans-serif\" size=\"5\"> </font>"
     },
@@ -499,12 +499,12 @@
       "serie": "Galassia marxista-leninista",
       "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
       "persone": [
-        "Lin Biao",
         "Chen Boda",
+        "Mao Zedong",
         "Zhou Enlai",
         "Kang Sheng",
         "Fosco Dinucci",
-        "Mao Zedong"
+        "Lin Biao"
       ],
       "organizzazioni": [
         "Renmin Ribao",
@@ -542,8 +542,8 @@
       "url_ia": "https://archive.org/details/studenti-ed-intellettuali-ciclostilato-uci-m-l/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Comitato di Partito di Catania (UCI-m.l)",
-        "Unione dei Comunisti Italiani (marxisti-leninisti)"
+        "Unione dei Comunisti Italiani (marxisti-leninisti)",
+        "Comitato di Partito di Catania (UCI-m.l)"
       ],
       "descrizione": "Volantino ciclostilato a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), meglio conosciuta come Servire il Popolo. Il volantino riporta un appello a \"Studenti ed Intellettuali Rivoluzionari\" affinché questi si uniscano all'organizzazione maoista."
     },
