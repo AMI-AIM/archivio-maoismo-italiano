@@ -355,4 +355,9 @@
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/unione-della-gioventu-comunista-ditalia-marxista-leninista/</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>

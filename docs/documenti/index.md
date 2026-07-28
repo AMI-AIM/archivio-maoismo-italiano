@@ -122,7 +122,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0002/">Sulla giusta soluzione delle contraddizioni in seno al popolo</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc">Famoso discorso del Presidente cinese Mao Zedong. Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, 1967.</div>
     </div>
 </div>
@@ -132,7 +132,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0021/">Lavoro Politico no. 1</a>
         </div>
-        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 1 - ottobre 1967</div>
     </div>
 </div>
@@ -142,7 +142,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0022/">Lavoro Politico no. 2</a>
         </div>
-        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 2 - novembre 1967</div>
     </div>
 </div>
@@ -152,7 +152,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0006/">Al servizio del popolo; In memoria di Norman Bethune; Come Yu Kung rimosse le montagne</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc">Collezione dei "tre vecchi articoli" (anche detti tre articoli letti costantemente), tradotta e pubblicata dalla Casa editrice in lingue estere di Pechino, 1968.</div>
     </div>
 </div>
@@ -162,7 +162,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0011/">Circolare del 16 maggio 1966 - Un grande documento storico</a>
         </div>
-        <div class="risultato-meta">Partito Comunista Cinese · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Partito Comunista Cinese · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc">Opuscolo contente la "Circolare del Comitato Centrale del Partito ComunistaCinese (16 maggio 1966)", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo "Un Grande Documento Storico", pubblicato su Bandiera Rossa e il Quotidiano del Popolo</div>
     </div>
 </div>
@@ -172,7 +172,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0003/">Come correggere le idee errate nel Partito</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc">Opuscolo tradotto e pubblicato dalla Casa editrice in lingue estere di Pechino. Testo originale "ON CORRECTING MISTAKEN IDEAS IN THE PARTY (December 1929)"</div>
     </div>
 </div>
@@ -182,7 +182,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0005/">Da dove provengono le idee giuste?</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc">Articolo del presidente cinese Mao Zedong, parte della "Risoluzione del Comitato centrale del Partito comunista cinese su alcuni problemi dell'attuale lavoro nelle campagne''La presente traduzione è conforme al testo cinese (Testi scelti dalle opere di Mao Tse-tung, Serie A, Casa Editrice del Popolo; Pechino, Aprile 1965).Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, seconda edizione, 1968.</div>
     </div>
 </div>
@@ -192,7 +192,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0004/">Dichiarazione del compagno Mao Tse-tung, presidente del Comitato Centrale del Partito Comunista Cinese, in appoggio alla lotta degli afroamericani contro la repressione violenta</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc">Discorso del Presidente cinese Mao Zedong in supporto alla lotta degli afroamericani, pronunciato in occasione dell'omicidio del Dottor Martin Luther King Jr.Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, 1968.</div>
     </div>
 </div>
@@ -202,7 +202,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0030/">La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria</a>
         </div>
-        <div class="risultato-meta">Renmin Ribao · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Renmin Ribao · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc">La Bussola Che Guida I Popoli Rivoluzionari Di Tutti I Paesi Verso La VittoriaCasa Editrice In Lingue EsterePechino 1968</div>
     </div>
 </div>
@@ -212,7 +212,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0012/">La classe operaia deve esercitare la sua direzione in ogni campo</a>
         </div>
-        <div class="risultato-meta">Yao Wenyuan · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Yao Wenyuan · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc">Articolo ad opera di Yao Wenyuan e pubblicato originariamente su Hongqi. Traduzione ufficiale a cura della Casa editrice in lingue estere di Pechino, 1968.</div>
     </div>
 </div>
@@ -222,7 +222,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0023/">Lavoro Politico no. 3</a>
         </div>
-        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 3 - gennaio 1968</div>
     </div>
 </div>
@@ -232,7 +232,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0007/">Preoccuparsi delle condizioni di vita delle masse fare attenzione ai metodi di lavoro</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc">Opuscolo contenente le conclusioni del presidente cinese Mao Zedong al II Congresso nazionale dei rappresentanti operai e contadini. Tradotto e pubblicato dalla Casa editrice in lingue estere di Pechino, 1968.</div>
     </div>
 </div>
@@ -242,7 +242,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0031/">Sulla tattica contro l'imperialismo giapponese</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc">Rapporto del presidente cinese Mao Zedong alla Conferenza degli attivisti del Partito tenutasi il 27 dicembre 1935 a Wayaopao. Traduzione ufficiale dell'opuscolo a cura della Casa editrice in lingue estere di Pechino.Il testo originale compare in Opere Scelte, Vol. 1.</div>
     </div>
 </div>
@@ -252,7 +252,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0024/">Lavoro Politico no. 4</a>
         </div>
-        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 4 - febbraio 1968</div>
     </div>
 </div>
@@ -262,7 +262,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0025/">Lavoro Politico no. 5/6</a>
         </div>
-        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 5 - 6, marzo - aprile 1968</div>
     </div>
 </div>
@@ -272,7 +272,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0026/">Lavoro Politico no. 7</a>
         </div>
-        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 7 - maggio 1968</div>
     </div>
 </div>
@@ -282,7 +282,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0027/">Lavoro Politico no. 8/9</a>
         </div>
-        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 8 - 9, giugno - luglio 1968</div>
     </div>
 </div>
@@ -332,7 +332,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0028/">Lavoro Politico no. 10</a>
         </div>
-        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 10 - settembre 1968</div>
     </div>
 </div>
@@ -342,7 +342,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0029/">Lavoro Politico no. 11/12</a>
         </div>
-        <div class="risultato-meta">Lavoro Politico · Centro di Informazione di Verona · Periodico</div>
+        <div class="risultato-meta">Lavoro Politico · Periodico</div>
         <div class="risultato-desc">rivista "Lavoro politico", n. 11 - 12, dicembre 1968 - gennaio 1969</div>
     </div>
 </div>
@@ -352,7 +352,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0001/">Citazioni dalle opere del presidente Mao Tse-tung</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Libro</div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Libro</div>
         <div class="risultato-desc">Prima edizione italiana del famoso Libretto rosso, contenente le iconiche citazioni del presidente cinese Mao Zedong, stampata a Pechino dalla Casa editrice in lingue estere, 1967. L'indice è stato spostato all'inizio del libro per una consultazione più agevole.Quotations from Chairman Mao Tse-tung (Little red book) in Italian, official translation by the Foreign Languages Press, published in Peking (Beijing) in 1967.​毛主席语录 (Máo Zhǔxí Yǔlù)</div>
     </div>
 </div>
@@ -372,7 +372,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0009/">Orientamento del movimento giovanile</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc">Discorso del Presidente cinese Mao Zedong. Traduzione e pubblicazione a cura della Casa editrice in lingue estere di Pechino, 1969.</div>
     </div>
 </div>
@@ -382,7 +382,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0008/">Sul rafforzamento del sistema dei comitati di partito</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc">Opuscolo contenente due testi del Presidente Mao Zedong, "Sul Rafforzamento Del Sistema Dei Comitati Di Partito" e "Metodi Di Lavoro Dei Comitati Di Partito". Traduzione ufficiale a cura della Casa editrice in lingue estere di Pechino</div>
     </div>
 </div>
@@ -422,7 +422,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0010/">Popoli di tutto il mondo, unitevi per sconfiggere gli aggressori americani e tutti i loro lacché! (Dichiarazione del 20 maggio 1970)</a>
         </div>
-        <div class="risultato-meta">Mao Zedong · Casa editrice in lingue estere · Opuscolo</div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc">Opuscolo contenente la dichiarazione anti-imperialista del presidente cinese Mao Zedong, tradotto e pubblicato dalla Casa editrice in lingue estere di Pechino, 1970.</div>
     </div>
 </div>
