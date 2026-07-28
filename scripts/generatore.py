@@ -1,5 +1,4 @@
 import os
-import shutil
 import pandas as pd
 from core.soggetti import carica_soggetti, genera_json_soggetti
 from core.schede import crea_schede
@@ -10,29 +9,18 @@ from core.home import genera_home
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 OUTPUT_DIR = os.path.join(ROOT_DIR, 'docs')
-IMMAGINI_DIR = os.path.join(ROOT_DIR, 'immagini', 'profili')
 
 
 def copia_immagini_profili():
-    """Copia le immagini dei profili e il placeholder nella cartella docs."""
-    src_dir = IMMAGINI_DIR
+    """Garantisce che placeholder.webp esista in docs/immagini/profili/, generandolo
+    con Pillow se manca. Le immagini dei profili (foto reali) vivono direttamente in
+    docs/immagini/profili/ e vengono gestite a mano tramite data/persone.xlsx /
+    data/organizzazioni.xlsx: non c'è più una cartella sorgente separata da cui copiarle."""
     dst_dir = os.path.join(OUTPUT_DIR, 'immagini', 'profili')
-    
-    if not os.path.exists(src_dir):
-        print("   ⚠️ Cartella 'immagini/profili/' non trovata. Nessuna immagine copiata.")
-        return
-    
     os.makedirs(dst_dir, exist_ok=True)
-    copiate = 0
-    for file in os.listdir(src_dir):
-        src_path = os.path.join(src_dir, file)
-        dst_path = os.path.join(dst_dir, file)
-        if os.path.isfile(src_path):
-            shutil.copy2(src_path, dst_path)
-            copiate += 1
-    
-    # Se placeholder.png non esiste, crea un placeholder di base
-    placeholder_path = os.path.join(dst_dir, 'placeholder.png')
+
+    # Se placeholder.webp non esiste, crea un placeholder di base
+    placeholder_path = os.path.join(dst_dir, 'placeholder.webp')
     if not os.path.exists(placeholder_path):
         try:
             from PIL import Image, ImageDraw, ImageFont
@@ -43,14 +31,14 @@ def copia_immagini_profili():
             except:
                 font = ImageFont.load_default()
             draw.text((50, 50), "?", fill='white', anchor="mm", font=font)
-            img.save(placeholder_path)
-            print(f"   ✅ Creato placeholder.png in 'docs/immagini/profili/'")
+            img.save(placeholder_path, 'WEBP')
+            print(f"   ✅ Creato placeholder.webp in 'docs/immagini/profili/'")
         except ImportError:
-            print("   ⚠️ Pillow non installato. Assicurati che placeholder.png esista nella cartella immagini/profili/")
+            print("   ⚠️ Pillow non installato. Assicurati che placeholder.webp esista già in 'docs/immagini/profili/'")
         except Exception as e:
-            print(f"   ⚠️ Impossibile creare placeholder.png: {e}")
-    
-    print(f"   ✅ Copiate {copiate} immagini profili in 'docs/immagini/profili/'")
+            print(f"   ⚠️ Impossibile creare placeholder.webp: {e}")
+    else:
+        print("   ✅ placeholder.webp già presente in 'docs/immagini/profili/'")
 
 
 def genera_sitemap(output_dir, df, persone, organizzazioni):

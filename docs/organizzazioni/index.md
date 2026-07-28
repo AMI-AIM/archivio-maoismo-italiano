@@ -9,41 +9,41 @@ hide:
 
 <div class="top-row">
     <div class="top-card">
-        <a href="casa-editrice-in-lingue-estere/" class="top-card-link">
+        <a href="partito-comunista-cinese/" class="top-card-link">
             <div class="top-card-image-wrapper">
-                <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.png" alt="Casa editrice in lingue estere" class="top-card-avatar-img" loading="lazy">
+                <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.webp" alt="Partito Comunista Cinese" class="top-card-avatar-img" loading="lazy">
             </div>
             <div class="top-card-text">
-                <div class="top-card-tipo">Casa editrice</div>
-                <div class="top-card-name">Casa editrice in lingue estere</div>
-                <div class="top-card-dates">1952 – </div>
-                <div class="top-card-count">14 documenti</div>
-            </div>
-        </a>
-    </div>
-    <div class="top-card">
-        <a href="centro-di-informazione-di-verona/" class="top-card-link">
-            <div class="top-card-image-wrapper">
-                <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.png" alt="Centro di Informazione di Verona" class="top-card-avatar-img" loading="lazy">
-            </div>
-            <div class="top-card-text">
-                <div class="top-card-tipo">Gruppo</div>
-                <div class="top-card-name">Centro di Informazione di Verona</div>
-                <div class="top-card-dates"></div>
-                <div class="top-card-count">9 documenti</div>
+                <div class="top-card-tipo">Partito</div>
+                <div class="top-card-name">Partito Comunista Cinese</div>
+                <div class="top-card-dates">1921 – </div>
+                <div class="top-card-count">16 documenti</div>
             </div>
         </a>
     </div>
     <div class="top-card">
         <a href="lavoro-politico/" class="top-card-link">
             <div class="top-card-image-wrapper">
-                <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.png" alt="Lavoro Politico" class="top-card-avatar-img" loading="lazy">
+                <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.webp" alt="Lavoro Politico" class="top-card-avatar-img" loading="lazy">
             </div>
             <div class="top-card-text">
                 <div class="top-card-tipo">Rivista</div>
                 <div class="top-card-name">Lavoro Politico</div>
                 <div class="top-card-dates">1967 – 1969</div>
                 <div class="top-card-count">9 documenti</div>
+            </div>
+        </a>
+    </div>
+    <div class="top-card">
+        <a href="partito-comunista-ditalia-marxista-leninista/" class="top-card-link">
+            <div class="top-card-image-wrapper">
+                <img src="/archivio-maoismo-italiano/immagini/profili/logo-pcdi.svg" alt="Partito Comunista d'Italia (marxista-leninista)" class="top-card-avatar-img" loading="lazy">
+            </div>
+            <div class="top-card-text">
+                <div class="top-card-tipo">Partito</div>
+                <div class="top-card-name">Partito Comunista d'Italia (marxista-leninista)</div>
+                <div class="top-card-dates">1966 – 1991</div>
+                <div class="top-card-count">8 documenti</div>
             </div>
         </a>
     </div>
@@ -121,23 +121,7 @@ hide:
         <div class="org-tipo">Giornale</div>
         <div class="org-name">Nuova Unità</div>
         <div class="org-dates">1964 – 1991</div>
-        <div class="org-count">2 documenti</div>
-    </a>
-</div>
-<div class="org-card" data-lettera="P">
-    <a href="partito-comunista-cinese/" class="org-link">
-        <div class="org-tipo">Partito</div>
-        <div class="org-name">Partito Comunista Cinese</div>
-        <div class="org-dates">1921 – </div>
         <div class="org-count">3 documenti</div>
-    </a>
-</div>
-<div class="org-card" data-lettera="P">
-    <a href="partito-comunista-ditalia-marxista-leninista/" class="org-link">
-        <div class="org-tipo">Partito</div>
-        <div class="org-name">Partito Comunista d'Italia (marxista-leninista)</div>
-        <div class="org-dates">1966 – 1991</div>
-        <div class="org-count">7 documenti</div>
     </a>
 </div>
 <div class="org-card" data-lettera="P">
@@ -178,6 +162,14 @@ hide:
         <div class="org-name">Unione dei Comunisti Italiani (marxisti-leninisti)</div>
         <div class="org-dates">1968 – 1972</div>
         <div class="org-count">2 documenti</div>
+    </a>
+</div>
+<div class="org-card" data-lettera="U">
+    <a href="unione-della-gioventu-comunista-ditalia-marxista-leninista/" class="org-link">
+        <div class="org-tipo">Organo di partito</div>
+        <div class="org-name">Unione della gioventù comunista d’Italia (marxista-leninista)</div>
+        <div class="org-dates">1966 – 1991</div>
+        <div class="org-count">1 documento</div>
     </a>
 </div>
 </div>

@@ -16,7 +16,7 @@ theme:
       primary: red
       accent: red
 
-  logo: immagini/logo.png
+  logo: immagini/logo.webp
   favicon: immagini/favicon.png
 
 extra_css:

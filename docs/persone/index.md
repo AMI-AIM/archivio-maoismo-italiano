@@ -11,7 +11,7 @@ hide:
     <div class="top-card">
         <a href="mao-zedong/" class="top-card-link">
             <div class="top-card-image-wrapper">
-                <img src="/archivio-maoismo-italiano/immagini/profili/mao.png" alt="Mao Zedong" class="top-card-avatar-img" loading="lazy">
+                <img src="/archivio-maoismo-italiano/immagini/profili/mao.webp" alt="Mao Zedong" class="top-card-avatar-img" loading="lazy">
             </div>
             <div class="top-card-text">
                 <div class="top-card-name">Mao Zedong</div>
@@ -23,7 +23,7 @@ hide:
     <div class="top-card">
         <a href="osvaldo-pesce/" class="top-card-link">
             <div class="top-card-image-wrapper">
-                <img src="/archivio-maoismo-italiano/immagini/profili/pesce.png" alt="Osvaldo Pesce" class="top-card-avatar-img" loading="lazy">
+                <img src="/archivio-maoismo-italiano/immagini/profili/pesce.webp" alt="Osvaldo Pesce" class="top-card-avatar-img" loading="lazy">
             </div>
             <div class="top-card-text">
                 <div class="top-card-name">Osvaldo Pesce</div>
@@ -35,7 +35,7 @@ hide:
     <div class="top-card">
         <a href="dino-dini/" class="top-card-link">
             <div class="top-card-image-wrapper">
-                <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.png" alt="Dino Dini" class="top-card-avatar-img" loading="lazy">
+                <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.webp" alt="Dino Dini" class="top-card-avatar-img" loading="lazy">
             </div>
             <div class="top-card-text">
                 <div class="top-card-name">Dino Dini</div>

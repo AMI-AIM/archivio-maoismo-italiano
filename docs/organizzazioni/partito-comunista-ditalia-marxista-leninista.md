@@ -27,6 +27,14 @@ hide:
 </div>
 
 <div class="doc-row">
+    <div class="doc-data">1 settembre 1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0028/">Lavoro Politico no. 10</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
     <div class="doc-data">13 agosto 1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0033/">Verbale della conversazione del Presidente Mao con la delegazione comunista (marxista-leninista) italiana</a></div>

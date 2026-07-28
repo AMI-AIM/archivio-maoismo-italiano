@@ -7,7 +7,7 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 OUTPUT_DIR = os.path.join(ROOT_DIR, 'docs')
 
-PLACEHOLDER_URL = '/archivio-maoismo-italiano/immagini/profili/placeholder.png'
+PLACEHOLDER_URL = '/archivio-maoismo-italiano/immagini/profili/placeholder.webp'
 
 
 def colore_hash(nome):

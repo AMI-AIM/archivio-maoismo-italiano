@@ -1,17 +1,17 @@
 ---
-title: "Nuova Unità"
-description: "Documenti relativi a Nuova Unità"
+title: "Unione della gioventù comunista d’Italia (marxista-leninista)"
+description: "Documenti relativi a Unione della gioventù comunista d’Italia (marxista-leninista)"
 hide:
   - navigation
   - toc
 ---
 
-<div class="org-name">Nuova Unità</div>
+<div class="org-name">Unione della gioventù comunista d’Italia (marxista-leninista)</div>
 
-<div class="org-dates">1964 – 1991</div>
+<div class="org-dates">1966 – 1991</div>
 
 <div class="org-bio">
-    <p><em>Storia in costruzione. Scrivi qui le informazioni su Nuova Unità.</em></p>
+    <p><em>Storia in costruzione. Scrivi qui le informazioni su Unione della gioventù comunista d’Italia (marxista-leninista).</em></p>
 </div>
 
 ## 📄 Documenti presenti nell'AMI
@@ -19,26 +19,10 @@ hide:
 <div class="catalogo-lista">
 
 <div class="doc-row">
-    <div class="doc-data">14 maggio 1964</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0018/">Delegazione delle Edizioni Oriente accolta dal Presidente Mao Zedong</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
     <div class="doc-data">1967</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0013/">Dichiarazione di Principio - Statuto</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">31 agosto 1968</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0015/">Osvaldo Pesce, Partito Comunista d'Italia (marxista-leninista), incontra il presidente Mao Zedong</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
 
