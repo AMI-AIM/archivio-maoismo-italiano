@@ -131,9 +131,10 @@ def genera_organizzazioni():
             
             data_raw = str(doc.get('data', doc.get('anno', ''))).strip()
             if data_raw and data_raw not in ['nan', 'None']:
-                data_form, _ = formatta_data(data_raw)
+                data_form, data_ordine = formatta_data(data_raw)
             else:
                 data_form = 'n.d.'
+                data_ordine = (9999, 1, 1)
             
             ruoli = []
             
@@ -160,11 +161,13 @@ def genera_organizzazioni():
                     'id': ami_id,
                     'titolo': titolo,
                     'data': data_form,
+                    'data_ordine': data_ordine,
                     'ruoli': ruoli
                 })
         
         if documenti:
-            documenti.sort(key=lambda x: (x['data'] == 'n.d.', x['data'], x['titolo']))
+            # 🔥 ORDINAMENTO CRONOLOGICO
+            documenti.sort(key=lambda x: (x['data_ordine'], x['titolo']))
             organizzazioni[nome] = {
                 'slug': slug,
                 'storia': storia,
@@ -186,7 +189,9 @@ def genera_organizzazioni():
     org_dir = os.path.join(OUTPUT_DIR, 'organizzazioni')
     os.makedirs(org_dir, exist_ok=True)
     
-    # SCHEDE INDIVIDUALI
+    # ============================================================
+    # SCHEDE INDIVIDUALI (aggiornate)
+    # ============================================================
     for nome, data in organizzazioni.items():
         slug = data['slug']
         file_path = os.path.join(org_dir, f'{slug}.md')
@@ -206,16 +211,33 @@ hide:
 ---
 """
         
+        # 🔥 NUOVA SEZIONE SUPERIORE UNIFICATA (foto + storia)
+        if data.get('immagine'):
+            bio_section = f'''
+<div class="org-bio-with-image">
+    <div class="org-bio-image">
+        <img src="{data['immagine']}" alt="{nome}" class="org-bio-img">
+    </div>
+    <div class="org-bio-text">
+        {storia_text}
+    </div>
+</div>
+'''
+        else:
+            bio_section = f'''
+<div class="org-bio-full">
+    {storia_text}
+</div>
+'''
+        
         content = f"""
 <div class="org-name">{nome}</div>
 
 {f'<div class="org-dates">{data["data_range"]}</div>' if data["data_range"] else ''}
 
-<div class="org-bio">
-    {storia_text}
-</div>
+{bio_section}
 
-## 📄 Documenti presenti nell'AMI
+<h2>Documenti</h2>
 
 <div class="catalogo-lista">
 """
@@ -238,8 +260,57 @@ hide:
 <style>
 .org-name { font-size: 2.4rem; font-weight: 700; margin: 0.5rem 0 0 0; color: var(--md-primary-fg-color); }
 .org-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 1rem 0; font-weight: 400; }
-.org-bio { margin: 1.5rem 0; padding: 1rem; background: var(--md-code-bg-color); border-radius: 8px; border-left: 4px solid var(--md-primary-fg-color); }
-.org-bio p { margin: 0.5rem 0; }
+
+/* STORIA CON FOTO (layout affiancato) */
+.org-bio-with-image {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: var(--md-code-bg-color);
+    border-radius: 8px;
+    border-left: 4px solid var(--md-primary-fg-color);
+    align-items: flex-start;
+}
+
+.org-bio-image {
+    flex: 0 0 120px;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.org-bio-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.org-bio-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.org-bio-text p {
+    margin: 0.5rem 0;
+}
+
+/* STORIA SENZA FOTO (tutta larghezza) */
+.org-bio-full {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: var(--md-code-bg-color);
+    border-radius: 8px;
+    border-left: 4px solid var(--md-primary-fg-color);
+}
+
+.org-bio-full p {
+    margin: 0.5rem 0;
+}
+
 .catalogo-lista { display: flex; flex-direction: column; gap: 0.25rem; margin-top: 0.5rem; }
 .doc-row { display: flex; align-items: flex-start; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--md-default-fg-color--lightest); transition: background-color 0.15s; gap: 1.5rem; }
 .doc-row:hover { background-color: var(--md-code-bg-color); }
@@ -250,7 +321,17 @@ hide:
 .doc-titolo a:hover { text-decoration: underline; color: var(--md-primary-fg-color); }
 .doc-ruoli { margin-top: 0.1rem; }
 .ruolo-badge { display: inline-block; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff !important; background: var(--md-primary-fg-color); padding: 0.05rem 0.6rem; border-radius: 4px; }
+
 @media (max-width: 600px) {
+    .org-bio-with-image {
+        flex-direction: column;
+        align-items: center;
+    }
+    .org-bio-image {
+        flex: 0 0 auto;
+        width: 100px;
+        height: 100px;
+    }
     .doc-row { flex-direction: column; gap: 0.1rem; padding: 0.6rem 0.2rem; }
     .doc-data { flex: 0 0 auto; white-space: normal; font-size: 0.8rem; }
     .org-name { font-size: 1.6rem; }
