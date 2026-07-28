@@ -89,7 +89,7 @@ def genera_home(df, persone, output_dir):
     # 🔥 BANNER CON MARGINE NEGATIVO INLINE
     banner_html = """
 <div class="banner-full" style="margin-bottom: 2rem;">
-    <img src="/archivio-maoismo-italiano/immagini/banner.png" 
+    <img src="/archivio-maoismo-italiano/immagini/banner.webp" 
          alt="Archivio del Maoismo Italiano" 
          class="banner-image">
     <div class="banner-overlay"></div>
