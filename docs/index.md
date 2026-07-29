@@ -38,26 +38,26 @@ hide:
 
 
 <div class="doc-row">
+    <div class="doc-data">1970</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="documenti/AMI-0038/">Comunicato della seconda sessione plenaria del IX Comitato Centrale del Partito Comunista Cinese</a></div>
+        <div class="doc-meta"><span class="doc-type-chip">Opuscolo</span><span class="doc-org">Partito Comunista Cinese</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="documenti/AMI-0037/">I compiti del Partito Comunista Cinese nel periodo della resistenza al Giappone</a></div>
+        <div class="doc-meta"><span class="doc-type-chip">Opuscolo</span><span class="doc-org">Partito Comunista Cinese</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
     <div class="doc-data">1975</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0036/">In caso di golpe: Manuale teorico-pratico per il cittadino, di resistenza totale e di guerra di popolo, di guerriglia e di controguerriglia</a></div>
         <div class="doc-meta"><span class="doc-type-chip">Libro</span><span class="doc-org">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">1 agosto 1969</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0035/">Viva il popolo cinese</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">Periodico</span><span class="doc-org">Unione dei Comunisti Italiani (marxisti-leninisti)</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">31 agosto 1968</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0034/">Nota del Presidente Mao sulla relazione di Kang Sheng riguardante la raccolta di materiale sulle elezioni parlamentari nei paesi capitalisti</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">Testo</span><span class="doc-org">Partito Comunista Cinese</span></div>
     </div>
 </div>
 
@@ -83,7 +83,7 @@ hide:
     <div class="persona-rank persona-rank--1">1</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="persone/mao-zedong/">Mao Zedong</a></div>
-        <div class="doc-sommario">18 documenti collegati</div>
+        <div class="doc-sommario">20 documenti collegati</div>
         <div class="persona-date">1893 – 1976</div>
     </div>
 </div>

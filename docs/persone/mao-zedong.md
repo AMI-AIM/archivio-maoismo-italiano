@@ -69,6 +69,14 @@ hide:
 <div class="doc-row">
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0037/">I compiti del Partito Comunista Cinese nel periodo della resistenza al Giappone</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1968</div>
+    <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0007/">Preoccuparsi delle condizioni di vita delle masse fare attenzione ai metodi di lavoro</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
@@ -150,6 +158,14 @@ hide:
     <div class="doc-data">3 ottobre 1969</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0016/">Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1970</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0038/">Comunicato della seconda sessione plenaria del IX Comitato Centrale del Partito Comunista Cinese</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
     </div>
 </div>

@@ -46,7 +46,7 @@ hide:
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0011/">Circolare del 16 maggio 1966 - Un grande documento storico</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da, autore</span></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da, menzionato</span></div>
     </div>
 </div>
 
@@ -70,6 +70,14 @@ hide:
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0004/">Dichiarazione del compagno Mao Tse-tung, presidente del Comitato Centrale del Partito Comunista Cinese, in appoggio alla lotta degli afroamericani contro la repressione violenta</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0037/">I compiti del Partito Comunista Cinese nel periodo della resistenza al Giappone</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
     </div>
 </div>
@@ -142,6 +150,14 @@ hide:
     <div class="doc-data">1969</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0008/">Sul rafforzamento del sistema dei comitati di partito</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1970</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0038/">Comunicato della seconda sessione plenaria del IX Comitato Centrale del Partito Comunista Cinese</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
     </div>
 </div>

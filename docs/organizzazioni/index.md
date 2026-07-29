@@ -17,7 +17,7 @@ hide:
                 <div class="top-card-tipo">Partito</div>
                 <div class="top-card-name">Partito Comunista Cinese</div>
                 <div class="top-card-dates">1921 – </div>
-                <div class="top-card-count">16 documenti</div>
+                <div class="top-card-count">18 documenti</div>
             </div>
         </a>
     </div>
@@ -84,6 +84,14 @@ hide:
     </div>
 </div>
 <div class="org-grid" id="org-grid">
+<div class="org-card" data-lettera="C">
+    <a href="comitato-centrale-del-pcc/" class="org-link">
+        <div class="org-tipo">Organo di partito</div>
+        <div class="org-name">Comitato Centrale del PCC</div>
+        <div class="org-dates">1921 – </div>
+        <div class="org-count">2 documenti</div>
+    </a>
+</div>
 <div class="org-card" data-lettera="C">
     <a href="comitato-di-partito-di-catania-uci-m-l/" class="org-link">
         <div class="org-tipo">Organo di partito</div>

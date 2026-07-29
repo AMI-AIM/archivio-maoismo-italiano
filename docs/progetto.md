@@ -4,7 +4,7 @@ L’AMI nasce dal progressivo accumulo di materiale documentario relativo al mov
 
 Ad oggi, il patrimonio dell’AMI è composto da:
 
-\-	**Opere del presidente cinese Mao Zedong**, nella loro traduzione italiana ufficiale, a cura dalla Casa editrice di Pechino
+\-	**Opere del presidente cinese Mao Zedong**, nella loro traduzione italiana ufficiale, a cura dalla Casa editrice in lingue estere di Pechino
 
 \-	Altre pubblicazioni ufficiali del Partito Comunista Cinese, curate sempre dalla Casa editrice in lingue estere di Pechino
 

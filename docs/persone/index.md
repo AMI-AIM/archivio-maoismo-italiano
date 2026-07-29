@@ -16,7 +16,7 @@ hide:
             <div class="top-card-text">
                 <div class="top-card-name">Mao Zedong</div>
                 <div class="top-card-dates">1893 – 1976</div>
-                <div class="top-card-count">18 documenti</div>
+                <div class="top-card-count">20 documenti</div>
             </div>
         </a>
     </div>
@@ -113,7 +113,7 @@ hide:
     <a href="lin-biao/" class="people-link">
         <div class="people-name">Lin Biao</div>
         <div class="people-dates">1907 – 1971</div>
-        <div class="people-count">1 documento</div>
+        <div class="people-count">2 documenti</div>
     </a>
 </div>
 <div class="people-card" data-lettera="R">

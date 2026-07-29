@@ -162,7 +162,7 @@ hide:
         <div class="risultato-titolo">
             <a href="AMI-0011/">Circolare del 16 maggio 1966 - Un grande documento storico</a>
         </div>
-        <div class="risultato-meta">Partito Comunista Cinese · Partito Comunista Cinese · Opuscolo</div>
+        <div class="risultato-meta">Comitato Centrale del PCC · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc"><div>Opuscolo contente la "Circolare del Comitato Centrale del Partito Comunista</div><div>Cinese (16 maggio 1966)", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo "Un Grande Documento Storico", pubblicato su Bandiera Rossa e il Quotidiano del Popolo</div></div>
     </div>
 </div>
@@ -194,6 +194,16 @@ hide:
         </div>
         <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc">Discorso del Presidente cinese Mao Zedong in supporto alla lotta degli afroamericani, pronunciato in occasione dell'omicidio del Dottor Martin Luther King Jr.<div><br /></div><div><span style="color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);">Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, 1968.</span></div></div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1968</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="AMI-0037/">I compiti del Partito Comunista Cinese nel periodo della resistenza al Giappone</a>
+        </div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
+        <div class="risultato-desc"><div>"Questo rapporto fu presentato dal compagno Mao Tse-tung alla conferenza nazionale del Partito comunista cinese tenutasi a Yenan il 3 maggio 1937."<br /><br /></div><div>Nel contesto dell'invasione giapponese della Manciuria, Mao Zedong - allora presidente della commissione militare centrale del PCC - affronta il tema del fronte unito nazionale antigiapponese con il Guomindang (KMT)<br /><br /></div><div>Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 66, 1968.</div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -420,6 +430,16 @@ hide:
     <div class="risultato-data">1970</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
+            <a href="AMI-0038/">Comunicato della seconda sessione plenaria del IX Comitato Centrale del Partito Comunista Cinese</a>
+        </div>
+        <div class="risultato-meta">Comitato Centrale del PCC · Partito Comunista Cinese · Opuscolo</div>
+        <div class="risultato-desc"><div>Sommario della seconda sessione plenaria del CC del PCC, tenutasi in seguito al IX Congresso (1969). </div><div><br /></div><div><div>"Il Partito del Lavoro d'Albania e i partiti e le organizzazioni autenticamente marxisti-leninisti del mondo conseguono di continuo enormi successi nella lotta contro l'imperialismo capeggiato dagli Stati Uniti, contro il revisionismo moderno con al centro il revisionismo sovietico e contro la reazione dei vari paesi."</div></div><div><br /></div>Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 15, 1970.</div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1970</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
             <a href="AMI-0010/">Popoli di tutto il mondo, unitevi per sconfiggere gli aggressori americani e tutti i loro lacché! (Dichiarazione del 20 maggio 1970)</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
@@ -443,7 +463,7 @@ hide:
             <a href="AMI-0036/">In caso di golpe: Manuale teorico-pratico per il cittadino, di resistenza totale e di guerra di popolo, di guerriglia e di controguerriglia</a>
         </div>
         <div class="risultato-meta">Vincenzo Calò · Stella Rossa - Fronte Rivoluzionario Marxista-Leninista · Libro</div>
-        <div class="risultato-desc">Antologia pubblicata dalla casa editrice di Nuova Sinistra Samonà e Savelli, a cura di Vincenzo Calò, fondatore di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista.<div><br /></div><div>Il libro, contenente estratti ad argomento militare da scritti di Carl von Clausewitz, Vladimir Lenin e Mao Zedong, si pone di istruire il militante ai principi della lotta armata in caso di golpe (tentato pochi anni prima da Junio Valerio Borghese).</div><div><br /></div><div>La copia qui presente riporta cancellature sulla prefazione a cura di Calò, probabilmente causate da antipatie politiche, vista anche la scritta "VIVA L'ORGANIZZAZIONE COMBATTENTE COMUNISTA PRIMA LINEA" sull'indice in fondo.</div></div>
+        <div class="risultato-desc"><div>Antologia pubblicata dalla casa editrice di Nuova Sinistra Savelli, a cura di Vincenzo Calò, fondatore di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista.</div><div><br /></div><div>Il libro, contenente estratti ad argomento militare da scritti di Carl von Clausewitz, Vladimir Lenin e Mao Zedong, si pone di istruire il militante ai principi della lotta armata in caso di golpe militare (effettivamente tentato pochi anni prima da Junio Valerio Borghese).</div><div><br /></div><div>La copia qui presente riporta cancellature sulla prefazione a cura di Calò, probabilmente causate da antipatie politiche, vista anche la scritta "VIVA L'ORGANIZZAZIONE COMBATTENTE COMUNISTA PRIMA LINEA" sull'indice in fondo.</div></div>
     </div>
 </div>
 <div class="risultato-card">

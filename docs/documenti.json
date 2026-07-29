@@ -28,14 +28,14 @@
       "serie": "Galassia marxista-leninista",
       "url_ia": "https://archive.org/details/statuto-pcdi/mode/2up",
       "persone": [
-        "Osvaldo Pesce",
-        "Fosco Dinucci"
+        "Fosco Dinucci",
+        "Osvaldo Pesce"
       ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
-        "Unione della gioventù comunista d’Italia (marxista-leninista)",
+        "Nuova Unità",
         "Ufficio Politico del PCd'I (m-l)",
-        "Nuova Unità"
+        "Unione della gioventù comunista d’Italia (marxista-leninista)"
       ],
       "descrizione": "Opuscolo contenente Dichiarazione di principio e Statuto del Partito Comunista d'Italia (marxista-leninista)."
     },
@@ -110,7 +110,7 @@
     {
       "id": "AMI-0011",
       "titolo": "Circolare del 16 maggio 1966 - Un grande documento storico",
-      "autore": "Partito Comunista Cinese; Renmin Ribao; Hongqi",
+      "autore": "Comitato Centrale del PCC; Renmin Ribao; Hongqi",
       "organizzazione": "Partito Comunista Cinese",
       "data": "1968",
       "anno": 1968,
@@ -119,9 +119,10 @@
       "url_ia": "https://archive.org/details/circolare-16-maggio/mode/2up",
       "persone": [],
       "organizzazioni": [
+        "Comitato Centrale del PCC",
         "Renmin Ribao",
-        "Partito Comunista Cinese",
-        "Hongqi"
+        "Hongqi",
+        "Partito Comunista Cinese"
       ],
       "descrizione": "<div>Opuscolo contente la \"Circolare del Comitato Centrale del Partito Comunista</div><div>Cinese (16 maggio 1966)\", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo \"Un Grande Documento Storico\", pubblicato su Bandiera Rossa e il Quotidiano del Popolo</div>"
     },
@@ -172,18 +173,18 @@
       "serie": "Galassia marxista-leninista",
       "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
       "persone": [
-        "Yao Wenyuan",
-        "Mao Zedong",
-        "Jiang Qing",
-        "Kang Sheng",
-        "Dino Dini",
-        "Chen Boda",
         "Zhou Enlai",
-        "Osvaldo Pesce"
+        "Kang Sheng",
+        "Osvaldo Pesce",
+        "Mao Zedong",
+        "Dino Dini",
+        "Jiang Qing",
+        "Yao Wenyuan",
+        "Chen Boda"
       ],
       "organizzazioni": [
-        "Renmin Ribao",
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Renmin Ribao"
       ],
       "descrizione": "Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta a Pechino dalla leadership del Partito Comunista Cinese. In rappresentanza del PCd'I (ml), in ordine, Osvaldo Pesce e Dino Dini. La leadership cinese è composta da, sempre in ordine, Chen Boda, Kang Sheng, Jiang Qing, Mao Zedong, Zhou Enlai, Yao Wenyuan. <div><br /></div><div>Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 14 agosto 1968, p. 1), Peking Review (<span style=\"text-indent:0cm;\">no. 33, 1968, p. 8) e Nuova Unità (31 agosto 1968, p. 1)</span></div>"
     },
@@ -206,6 +207,24 @@
       "descrizione": "Discorso del Presidente cinese Mao Zedong in supporto alla lotta degli afroamericani, pronunciato in occasione dell'omicidio del Dottor Martin Luther King Jr.<div><br /></div><div><span style=\"color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\">Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, 1968.</span></div>"
     },
     {
+      "id": "AMI-0037",
+      "titolo": "I compiti del Partito Comunista Cinese nel periodo della resistenza al Giappone",
+      "autore": "Mao Zedong",
+      "organizzazione": "Partito Comunista Cinese",
+      "data": "1968",
+      "anno": 1968,
+      "tipo": "opuscolo",
+      "serie": "Testi del maoismo",
+      "url_ia": "https://archive.org/details/compiti-guerra-giapponese/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Partito Comunista Cinese"
+      ],
+      "descrizione": "<div>\"Questo rapporto fu presentato dal compagno Mao Tse-tung alla conferenza nazionale del Partito comunista cinese tenutasi a Yenan il 3 maggio 1937.\"<br /><br /></div><div>Nel contesto dell'invasione giapponese della Manciuria, Mao Zedong - allora presidente della commissione militare centrale del PCC - affronta il tema del fronte unito nazionale antigiapponese con il Guomindang (KMT)<br /><br /></div><div>Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 66, 1968.</div>"
+    },
+    {
       "id": "AMI-0030",
       "titolo": "La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria",
       "autore": "Renmin Ribao; Jiefangjun Bao",
@@ -217,9 +236,9 @@
       "url_ia": "https://archive.org/details/la-bussola-che-guida//mode/2up",
       "persone": [],
       "organizzazioni": [
+        "Jiefangjun Bao",
         "Renmin Ribao",
-        "Partito Comunista Cinese",
-        "Jiefangjun Bao"
+        "Partito Comunista Cinese"
       ],
       "descrizione": "<div>La Bussola Che Guida I Popoli Rivoluzionari Di Tutti I Paesi Verso La Vittoria</div><div>Casa Editrice In Lingue Estere</div><div>Pechino 1968</div>"
     },
@@ -368,8 +387,8 @@
       "url_ia": "https://archive.org/details/istruzioni-mao-italiano",
       "persone": [
         "Dino Dini",
-        "Osvaldo Pesce",
-        "Mao Zedong"
+        "Mao Zedong",
+        "Osvaldo Pesce"
       ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
@@ -499,16 +518,16 @@
       "serie": "Galassia marxista-leninista",
       "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
       "persone": [
-        "Lin Biao",
-        "Mao Zedong",
         "Kang Sheng",
-        "Chen Boda",
         "Zhou Enlai",
-        "Fosco Dinucci"
+        "Chen Boda",
+        "Mao Zedong",
+        "Fosco Dinucci",
+        "Lin Biao"
       ],
       "organizzazioni": [
-        "Renmin Ribao",
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Renmin Ribao"
       ],
       "descrizione": "<span style=\"font-size:12pt;line-height:150%;font-family:'Times New Roman', serif;letter-spacing:0.75pt;\">Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese in occasione dei festeggiamenti del 1° ottobre 1969. Nella foto compaiono, in ordine, Zhou Enlai, Mao Zedong, Lin Biao, Kang Sheng e Chen Boda. Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 3 ottobre 1969, p. 1).</span>"
     },
@@ -542,8 +561,8 @@
       "url_ia": "https://archive.org/details/studenti-ed-intellettuali-ciclostilato-uci-m-l/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Unione dei Comunisti Italiani (marxisti-leninisti)",
-        "Comitato di Partito di Catania (UCI-m.l)"
+        "Comitato di Partito di Catania (UCI-m.l)",
+        "Unione dei Comunisti Italiani (marxisti-leninisti)"
       ],
       "descrizione": "Volantino ciclostilato a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), meglio conosciuta come Servire il Popolo. Il volantino riporta un appello a \"Studenti ed Intellettuali Rivoluzionari\" affinché questi si uniscano all'organizzazione maoista."
     },
@@ -580,6 +599,26 @@
         "Unione dei Comunisti Italiani (marxisti-leninisti)"
       ],
       "descrizione": "Magazine a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), pubblicata attraverso la casa editrice di partito, Edizioni Servire il Popolo.<br /><br />La rivista illustra gli sviluppi della Grande Rivoluzione Proletaria Culturale in Cina e auspica una sua versione italiana.<div><br /></div><div>\"Da quando l'Unione dei Comunisti è stata fondata, il 2 ottobre 1968, è ripresa la marcia del popolo italiano verso l'instaurazione della dittatura del proletariato. E' il pensiero del presidente Mao che ci ha illuminati, è il libretto rosso delle citazioni che ci ha uniti. L'Unione dei Comunisti ha insegnato ai proletari italiani la massima fondamentale del socialismo: «Servire il popolo».\"</div>"
+    },
+    {
+      "id": "AMI-0038",
+      "titolo": "Comunicato della seconda sessione plenaria del IX Comitato Centrale del Partito Comunista Cinese",
+      "autore": "Comitato Centrale del PCC",
+      "organizzazione": "Partito Comunista Cinese",
+      "data": "1970",
+      "anno": 1970,
+      "tipo": "opuscolo",
+      "serie": "Testi del maoismo",
+      "url_ia": "https://archive.org/details/comunicato-ix-cc/mode/2up",
+      "persone": [
+        "Lin Biao",
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Comitato Centrale del PCC",
+        "Partito Comunista Cinese"
+      ],
+      "descrizione": "<div>Sommario della seconda sessione plenaria del CC del PCC, tenutasi in seguito al IX Congresso (1969). </div><div><br /></div><div><div>\"Il Partito del Lavoro d'Albania e i partiti e le organizzazioni autenticamente marxisti-leninisti del mondo conseguono di continuo enormi successi nella lotta contro l'imperialismo capeggiato dagli Stati Uniti, contro il revisionismo moderno con al centro il revisionismo sovietico e contro la reazione dei vari paesi.\"</div></div><div><br /></div>Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 15, 1970."
     },
     {
       "id": "AMI-0010",
@@ -626,14 +665,14 @@
       "anno": 1975,
       "tipo": "libro",
       "serie": "Varie",
-      "url_ia": "https://archive.org/details/in-caso-di-golpe/mode/2up",
+      "url_ia": "https://archive.org/details/in-caso-di-golpe-AMI/mode/2up",
       "persone": [
         "Vincenzo Calò"
       ],
       "organizzazioni": [
         "Stella Rossa - Fronte Rivoluzionario Marxista-Leninista"
       ],
-      "descrizione": "Antologia pubblicata dalla casa editrice di Nuova Sinistra Samonà e Savelli, a cura di Vincenzo Calò, fondatore di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista.<div><br /></div><div>Il libro, contenente estratti ad argomento militare da scritti di Carl von Clausewitz, Vladimir Lenin e Mao Zedong, si pone di istruire il militante ai principi della lotta armata in caso di golpe (tentato pochi anni prima da Junio Valerio Borghese).</div><div><br /></div><div>La copia qui presente riporta cancellature sulla prefazione a cura di Calò, probabilmente causate da antipatie politiche, vista anche la scritta \"VIVA L'ORGANIZZAZIONE COMBATTENTE COMUNISTA PRIMA LINEA\" sull'indice in fondo.</div>"
+      "descrizione": "<div>Antologia pubblicata dalla casa editrice di Nuova Sinistra Savelli, a cura di Vincenzo Calò, fondatore di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista.</div><div><br /></div><div>Il libro, contenente estratti ad argomento militare da scritti di Carl von Clausewitz, Vladimir Lenin e Mao Zedong, si pone di istruire il militante ai principi della lotta armata in caso di golpe militare (effettivamente tentato pochi anni prima da Junio Valerio Borghese).</div><div><br /></div><div>La copia qui presente riporta cancellature sulla prefazione a cura di Calò, probabilmente causate da antipatie politiche, vista anche la scritta \"VIVA L'ORGANIZZAZIONE COMBATTENTE COMUNISTA PRIMA LINEA\" sull'indice in fondo.</div>"
     },
     {
       "id": "AMI-0020",
