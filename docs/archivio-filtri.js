@@ -220,12 +220,13 @@ function applicaFiltri() {
         return true;
     });
     
-    // ORDINA CRONOLOGICAMENTE
+    // ORDINA CRONOLOGICAMENTE (anno, mese, giorno — non solo l'anno)
     risultati.sort((a, b) => {
-        if (a.anno === null && b.anno === null) return a.titolo.localeCompare(b.titolo);
-        if (a.anno === null) return 1;
-        if (b.anno === null) return -1;
-        if (a.anno !== b.anno) return a.anno - b.anno;
+        const da = a.data_ordine || [9999, 1, 1];
+        const db = b.data_ordine || [9999, 1, 1];
+        if (da[0] !== db[0]) return da[0] - db[0];
+        if (da[1] !== db[1]) return da[1] - db[1];
+        if (da[2] !== db[2]) return da[2] - db[2];
         return a.titolo.localeCompare(b.titolo);
     });
     
@@ -245,6 +246,11 @@ function getSelectedValues(id) {
 // ============================================================
 // VISUALIZZAZIONE RISULTATI
 // ============================================================
+
+function capitalizza(s) {
+    if (!s) return s;
+    return s.charAt(0).toUpperCase() + s.slice(1);
+}
 
 function mostraRisultati(risultati) {
     const container = document.getElementById('risultati-container');
@@ -268,7 +274,7 @@ function mostraRisultati(risultati) {
             metaParts.push(doc.organizzazione);
         }
         if (doc.tipo && doc.tipo !== '') {
-            metaParts.push(doc.tipo);
+            metaParts.push(capitalizza(doc.tipo));
         }
         let metaLine = metaParts.length > 0 ? metaParts.join(' · ') : 'N/A';
         

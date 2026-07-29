@@ -7,6 +7,11 @@
       "organizzazione": "Edizioni Oriente",
       "data": "14 maggio 1964",
       "anno": 1964,
+      "data_ordine": [
+        1964,
+        5,
+        14
+      ],
       "tipo": "foto",
       "serie": "Galassia marxista-leninista",
       "url_ia": "https://archive.org/details/delegazione-edizioni-oriente",
@@ -24,20 +29,48 @@
       "organizzazione": "Partito Comunista d'Italia (marxista-leninista)",
       "data": "1967",
       "anno": 1967,
+      "data_ordine": [
+        1967,
+        1,
+        1
+      ],
       "tipo": "opuscolo",
       "serie": "Galassia marxista-leninista",
       "url_ia": "https://archive.org/details/statuto-pcdi/mode/2up",
       "persone": [
-        "Fosco Dinucci",
-        "Osvaldo Pesce"
+        "Osvaldo Pesce",
+        "Fosco Dinucci"
       ],
       "organizzazioni": [
+        "Ufficio Politico del PCd'I (m-l)",
         "Partito Comunista d'Italia (marxista-leninista)",
         "Nuova Unità",
-        "Ufficio Politico del PCd'I (m-l)",
         "Unione della gioventù comunista d’Italia (marxista-leninista)"
       ],
       "descrizione": "Opuscolo contenente Dichiarazione di principio e Statuto del Partito Comunista d'Italia (marxista-leninista)."
+    },
+    {
+      "id": "AMI-0002",
+      "titolo": "Sulla giusta soluzione delle contraddizioni in seno al popolo",
+      "autore": "Mao Zedong",
+      "organizzazione": "Partito Comunista Cinese",
+      "data": "1967",
+      "anno": 1967,
+      "data_ordine": [
+        1967,
+        1,
+        1
+      ],
+      "tipo": "opuscolo",
+      "serie": "Testi del maoismo",
+      "url_ia": "https://archive.org/details/sulla-giusta-soluzione-delle-contraddizioni-in-seno-al-popolo/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Partito Comunista Cinese"
+      ],
+      "descrizione": "Famoso discorso del Presidente cinese Mao Zedong. Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, 1967."
     },
     {
       "id": "AMI-0021",
@@ -46,6 +79,11 @@
       "organizzazione": "Lavoro Politico",
       "data": "1 ottobre 1967",
       "anno": 1967,
+      "data_ordine": [
+        1967,
+        10,
+        1
+      ],
       "tipo": "periodico",
       "serie": "Riviste marxiste-leniniste",
       "url_ia": "https://archive.org/details/lavoro-politico-01/mode/2up",
@@ -62,6 +100,11 @@
       "organizzazione": "Lavoro Politico",
       "data": "1 novembre 1967",
       "anno": 1967,
+      "data_ordine": [
+        1967,
+        11,
+        1
+      ],
       "tipo": "periodico",
       "serie": "Riviste marxiste-leniniste",
       "url_ia": "https://archive.org/details/lavoro-politico-02//mode/2up",
@@ -72,30 +115,17 @@
       "descrizione": "rivista \"Lavoro politico\", n. 2 - novembre 1967"
     },
     {
-      "id": "AMI-0002",
-      "titolo": "Sulla giusta soluzione delle contraddizioni in seno al popolo",
-      "autore": "Mao Zedong",
-      "organizzazione": "Partito Comunista Cinese",
-      "data": "1967",
-      "anno": 1967,
-      "tipo": "opuscolo",
-      "serie": "Testi del maoismo",
-      "url_ia": "https://archive.org/details/sulla-giusta-soluzione-delle-contraddizioni-in-seno-al-popolo/mode/2up",
-      "persone": [
-        "Mao Zedong"
-      ],
-      "organizzazioni": [
-        "Partito Comunista Cinese"
-      ],
-      "descrizione": "Famoso discorso del Presidente cinese Mao Zedong. Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, 1967."
-    },
-    {
       "id": "AMI-0006",
       "titolo": "Al servizio del popolo; In memoria di Norman Bethune; Come Yu Kung rimosse le montagne",
       "autore": "Mao Zedong",
       "organizzazione": "Partito Comunista Cinese",
       "data": "1968",
       "anno": 1968,
+      "data_ordine": [
+        1968,
+        1,
+        1
+      ],
       "tipo": "opuscolo",
       "serie": "Testi del maoismo",
       "url_ia": "https://archive.org/details/tre-vecchi-articoli/mode/2up",
@@ -114,15 +144,20 @@
       "organizzazione": "Partito Comunista Cinese",
       "data": "1968",
       "anno": 1968,
+      "data_ordine": [
+        1968,
+        1,
+        1
+      ],
       "tipo": "opuscolo",
       "serie": "Testi del maoismo",
       "url_ia": "https://archive.org/details/circolare-16-maggio/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Comitato Centrale del PCC",
         "Renmin Ribao",
         "Hongqi",
-        "Partito Comunista Cinese"
+        "Partito Comunista Cinese",
+        "Comitato Centrale del PCC"
       ],
       "descrizione": "<div>Opuscolo contente la \"Circolare del Comitato Centrale del Partito Comunista</div><div>Cinese (16 maggio 1966)\", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo \"Un Grande Documento Storico\", pubblicato su Bandiera Rossa e il Quotidiano del Popolo</div>"
     },
@@ -133,6 +168,11 @@
       "organizzazione": "Partito Comunista Cinese",
       "data": "1968",
       "anno": 1968,
+      "data_ordine": [
+        1968,
+        1,
+        1
+      ],
       "tipo": "opuscolo",
       "serie": "Testi del maoismo",
       "url_ia": "https://archive.org/details/idee-errate/mode/2up",
@@ -151,6 +191,11 @@
       "organizzazione": "Partito Comunista Cinese",
       "data": "1968",
       "anno": 1968,
+      "data_ordine": [
+        1968,
+        1,
+        1
+      ],
       "tipo": "opuscolo",
       "serie": "Testi del maoismo",
       "url_ia": "https://archive.org/details/idee-giuste/mode/2up",
@@ -163,38 +208,17 @@
       "descrizione": "<div>Articolo del presidente cinese Mao Zedong, parte della \"Risoluzione del Comitato centrale del Partito comunista cinese su alcuni problemi dell'attuale lavoro nelle campagne''</div><div><br /></div><div>La presente traduzione è conforme al testo cinese (Testi scelti dalle opere di Mao Tse-tung, Serie A, Casa Editrice del Popolo; Pechino, Aprile 1965).</div><div><br /></div><div>Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, seconda edizione, 1968.</div>"
     },
     {
-      "id": "AMI-0014",
-      "titolo": "Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta dalla leadership del Partito Comunista Cinese",
-      "autore": "Renmin Ribao",
-      "organizzazione": "Partito Comunista d'Italia (marxista-leninista)",
-      "data": "14 agosto 1968",
-      "anno": 1968,
-      "tipo": "foto",
-      "serie": "Galassia marxista-leninista",
-      "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
-      "persone": [
-        "Zhou Enlai",
-        "Kang Sheng",
-        "Osvaldo Pesce",
-        "Mao Zedong",
-        "Dino Dini",
-        "Jiang Qing",
-        "Yao Wenyuan",
-        "Chen Boda"
-      ],
-      "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Renmin Ribao"
-      ],
-      "descrizione": "Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta a Pechino dalla leadership del Partito Comunista Cinese. In rappresentanza del PCd'I (ml), in ordine, Osvaldo Pesce e Dino Dini. La leadership cinese è composta da, sempre in ordine, Chen Boda, Kang Sheng, Jiang Qing, Mao Zedong, Zhou Enlai, Yao Wenyuan. <div><br /></div><div>Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 14 agosto 1968, p. 1), Peking Review (<span style=\"text-indent:0cm;\">no. 33, 1968, p. 8) e Nuova Unità (31 agosto 1968, p. 1)</span></div>"
-    },
-    {
       "id": "AMI-0004",
       "titolo": "Dichiarazione del compagno Mao Tse-tung, presidente del Comitato Centrale del Partito Comunista Cinese, in appoggio alla lotta degli afroamericani contro la repressione violenta",
       "autore": "Mao Zedong",
       "organizzazione": "Partito Comunista Cinese",
       "data": "1968",
       "anno": 1968,
+      "data_ordine": [
+        1968,
+        1,
+        1
+      ],
       "tipo": "opuscolo",
       "serie": "Testi del maoismo",
       "url_ia": "https://archive.org/details/dichiarazione-in-supporto-degli-afroamericani/mode/2up",
@@ -213,6 +237,11 @@
       "organizzazione": "Partito Comunista Cinese",
       "data": "1968",
       "anno": 1968,
+      "data_ordine": [
+        1968,
+        1,
+        1
+      ],
       "tipo": "opuscolo",
       "serie": "Testi del maoismo",
       "url_ia": "https://archive.org/details/compiti-guerra-giapponese/mode/2up",
@@ -231,13 +260,18 @@
       "organizzazione": "Partito Comunista Cinese",
       "data": "1968",
       "anno": 1968,
+      "data_ordine": [
+        1968,
+        1,
+        1
+      ],
       "tipo": "opuscolo",
       "serie": "Testi del maoismo",
       "url_ia": "https://archive.org/details/la-bussola-che-guida//mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Jiefangjun Bao",
         "Renmin Ribao",
+        "Jiefangjun Bao",
         "Partito Comunista Cinese"
       ],
       "descrizione": "<div>La Bussola Che Guida I Popoli Rivoluzionari Di Tutti I Paesi Verso La Vittoria</div><div>Casa Editrice In Lingue Estere</div><div>Pechino 1968</div>"
@@ -249,6 +283,11 @@
       "organizzazione": "Partito Comunista Cinese",
       "data": "1968",
       "anno": 1968,
+      "data_ordine": [
+        1968,
+        1,
+        1
+      ],
       "tipo": "opuscolo",
       "serie": "Testi del maoismo",
       "url_ia": "https://archive.org/details/la-classe-operai-deve-esercitare-la-sua-direzione-in-ogni-cam/mode/2up",
@@ -261,47 +300,17 @@
       "descrizione": "Articolo ad opera di Yao Wenyuan e pubblicato originariamente su Hongqi. Traduzione ufficiale a cura della Casa editrice in lingue estere di Pechino, 1968."
     },
     {
-      "id": "AMI-0028",
-      "titolo": "Lavoro Politico no. 10",
-      "autore": "",
-      "organizzazione": "Lavoro Politico",
-      "data": "1 settembre 1968",
-      "anno": 1968,
-      "tipo": "periodico",
-      "serie": "Riviste marxiste-leniniste",
-      "url_ia": "https://archive.org/details/lavoro-politico-10/mode/2up",
-      "persone": [],
-      "organizzazioni": [
-        "Lavoro Politico",
-        "Partito Comunista d'Italia (marxista-leninista)"
-      ],
-      "descrizione": "rivista \"Lavoro politico\", n. 10 - settembre 1968"
-    },
-    {
-      "id": "AMI-0029",
-      "titolo": "Lavoro Politico no. 11/12",
-      "autore": "",
-      "organizzazione": "Lavoro Politico",
-      "data": "1 dicembre 1968",
-      "anno": 1968,
-      "tipo": "periodico",
-      "serie": "Riviste marxiste-leniniste",
-      "url_ia": "https://archive.org/details/lavoro-politico-11-12/mode/2up",
-      "persone": [],
-      "organizzazioni": [
-        "Lavoro Politico",
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Partito Comunista d'Italia (marxista-leninista) - linea rossa"
-      ],
-      "descrizione": "rivista \"Lavoro politico\", n. 11 - 12, dicembre 1968 - gennaio 1969"
-    },
-    {
       "id": "AMI-0023",
       "titolo": "Lavoro Politico no. 3",
       "autore": "",
       "organizzazione": "Lavoro Politico",
       "data": "1 gennaio 1968",
       "anno": 1968,
+      "data_ordine": [
+        1968,
+        1,
+        1
+      ],
       "tipo": "periodico",
       "serie": "Riviste marxiste-leniniste",
       "url_ia": "https://archive.org/details/lavoro-politico-03/mode/2up",
@@ -312,117 +321,17 @@
       "descrizione": "rivista \"Lavoro politico\", n. 3 - gennaio 1968"
     },
     {
-      "id": "AMI-0024",
-      "titolo": "Lavoro Politico no. 4",
-      "autore": "",
-      "organizzazione": "Lavoro Politico",
-      "data": "1 febbraio 1968",
-      "anno": 1968,
-      "tipo": "periodico",
-      "serie": "Riviste marxiste-leniniste",
-      "url_ia": "https://archive.org/details/lavoro-politico-04/mode/2up",
-      "persone": [],
-      "organizzazioni": [
-        "Lavoro Politico"
-      ],
-      "descrizione": "rivista \"Lavoro politico\", n. 4 - febbraio 1968"
-    },
-    {
-      "id": "AMI-0025",
-      "titolo": "Lavoro Politico no. 5/6",
-      "autore": "",
-      "organizzazione": "Lavoro Politico",
-      "data": "1 marzo 1968",
-      "anno": 1968,
-      "tipo": "periodico",
-      "serie": "Riviste marxiste-leniniste",
-      "url_ia": "https://archive.org/details/lavoro-politico-05-06/mode/2up",
-      "persone": [],
-      "organizzazioni": [
-        "Lavoro Politico"
-      ],
-      "descrizione": "rivista \"Lavoro politico\", n. 5 - 6, marzo - aprile 1968"
-    },
-    {
-      "id": "AMI-0026",
-      "titolo": "Lavoro Politico no. 7",
-      "autore": "",
-      "organizzazione": "Lavoro Politico",
-      "data": "1 maggio 1968",
-      "anno": 1968,
-      "tipo": "periodico",
-      "serie": "Riviste marxiste-leniniste",
-      "url_ia": "https://archive.org/details/lavoro-politico-07//mode/2up",
-      "persone": [],
-      "organizzazioni": [
-        "Lavoro Politico"
-      ],
-      "descrizione": "rivista \"Lavoro politico\", n. 7 - maggio 1968"
-    },
-    {
-      "id": "AMI-0027",
-      "titolo": "Lavoro Politico no. 8/9",
-      "autore": "",
-      "organizzazione": "Lavoro Politico",
-      "data": "1 giugno 1968",
-      "anno": 1968,
-      "tipo": "periodico",
-      "serie": "Riviste marxiste-leniniste",
-      "url_ia": "https://archive.org/details/lavoro-politico-08-09/mode/2up",
-      "persone": [],
-      "organizzazioni": [
-        "Lavoro Politico"
-      ],
-      "descrizione": "rivista \"Lavoro politico\", n. 8 - 9, giugno - luglio 1968"
-    },
-    {
-      "id": "AMI-0034",
-      "titolo": "Nota del Presidente Mao sulla relazione di Kang Sheng riguardante la raccolta di materiale sulle elezioni parlamentari nei paesi capitalisti",
-      "autore": "Mao Zedong",
-      "organizzazione": "Partito Comunista Cinese",
-      "data": "31 agosto 1968",
-      "anno": 1968,
-      "tipo": "testo",
-      "serie": "Galassia marxista-leninista",
-      "url_ia": "https://archive.org/details/istruzioni-mao-italiano",
-      "persone": [
-        "Dino Dini",
-        "Mao Zedong",
-        "Osvaldo Pesce"
-      ],
-      "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Partito Comunista Cinese"
-      ],
-      "descrizione": "Nota del presidente Mao Zedong riguardante la partecipazione dei partiti comunisti marxisti-leninisti alle elezioni parlamentari dei propri paesi.<br /><br />Dopo aver discusso dell'argomento con Osvaldo Pesce (13/08/1968), il Presidente cinese ha incaricato Kang Sheng di presentare un rapporto sulla questione.<br /><br /><div>Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018.  </div>"
-    },
-    {
-      "id": "AMI-0015",
-      "titolo": "Osvaldo Pesce, Partito Comunista d'Italia (marxista-leninista), incontra il presidente Mao Zedong",
-      "autore": "Nuova Unità",
-      "organizzazione": "Partito Comunista d'Italia (marxista-leninista)",
-      "data": "31 agosto 1968",
-      "anno": 1968,
-      "tipo": "foto",
-      "serie": "Galassia marxista-leninista",
-      "url_ia": "https://archive.org/details/Pesce-e-Mao",
-      "persone": [
-        "Osvaldo Pesce",
-        "Mao Zedong"
-      ],
-      "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Nuova Unità"
-      ],
-      "descrizione": "Osvaldo Pesce, rappresentante del Partito Comunista d'Italia (marxista-leninista), incontra il presidente del Partito Comunista Cinese Mao Zedong. Foto pubblicata su Nuova Unità (31 agosto 1968, p. 4.)"
-    },
-    {
       "id": "AMI-0007",
       "titolo": "Preoccuparsi delle condizioni di vita delle masse fare attenzione ai metodi di lavoro",
       "autore": "Mao Zedong",
       "organizzazione": "Partito Comunista Cinese",
       "data": "1968",
       "anno": 1968,
+      "data_ordine": [
+        1968,
+        1,
+        1
+      ],
       "tipo": "opuscolo",
       "serie": "Testi del maoismo",
       "url_ia": "https://archive.org/details/preoccuparsi-delle-condizioni-di-vita-delle-masse-fare-attenzione-ai-metodi-di-lavoro/mode/2up",
@@ -441,6 +350,11 @@
       "organizzazione": "Partito Comunista Cinese",
       "data": "1968",
       "anno": 1968,
+      "data_ordine": [
+        1968,
+        1,
+        1
+      ],
       "tipo": "opuscolo",
       "serie": "Testi del maoismo",
       "url_ia": "https://archive.org/details/sulla-tattica-contro-limperialismo-giapponese/mode/2up",
@@ -453,19 +367,108 @@
       "descrizione": "Rapporto del presidente cinese Mao Zedong alla Conferenza degli attivisti del Partito tenutasi il 27 dicembre 1935 a Wayaopao. <div><br /></div><div>Traduzione ufficiale dell'opuscolo a cura della Casa editrice in lingue estere di Pechino.</div><div><br /></div><div>Il testo originale compare in Opere Scelte, Vol. 1.</div>"
     },
     {
+      "id": "AMI-0024",
+      "titolo": "Lavoro Politico no. 4",
+      "autore": "",
+      "organizzazione": "Lavoro Politico",
+      "data": "1 febbraio 1968",
+      "anno": 1968,
+      "data_ordine": [
+        1968,
+        2,
+        1
+      ],
+      "tipo": "periodico",
+      "serie": "Riviste marxiste-leniniste",
+      "url_ia": "https://archive.org/details/lavoro-politico-04/mode/2up",
+      "persone": [],
+      "organizzazioni": [
+        "Lavoro Politico"
+      ],
+      "descrizione": "rivista \"Lavoro politico\", n. 4 - febbraio 1968"
+    },
+    {
+      "id": "AMI-0025",
+      "titolo": "Lavoro Politico no. 5/6",
+      "autore": "",
+      "organizzazione": "Lavoro Politico",
+      "data": "1 marzo 1968",
+      "anno": 1968,
+      "data_ordine": [
+        1968,
+        3,
+        1
+      ],
+      "tipo": "periodico",
+      "serie": "Riviste marxiste-leniniste",
+      "url_ia": "https://archive.org/details/lavoro-politico-05-06/mode/2up",
+      "persone": [],
+      "organizzazioni": [
+        "Lavoro Politico"
+      ],
+      "descrizione": "rivista \"Lavoro politico\", n. 5 - 6, marzo - aprile 1968"
+    },
+    {
+      "id": "AMI-0026",
+      "titolo": "Lavoro Politico no. 7",
+      "autore": "",
+      "organizzazione": "Lavoro Politico",
+      "data": "1 maggio 1968",
+      "anno": 1968,
+      "data_ordine": [
+        1968,
+        5,
+        1
+      ],
+      "tipo": "periodico",
+      "serie": "Riviste marxiste-leniniste",
+      "url_ia": "https://archive.org/details/lavoro-politico-07//mode/2up",
+      "persone": [],
+      "organizzazioni": [
+        "Lavoro Politico"
+      ],
+      "descrizione": "rivista \"Lavoro politico\", n. 7 - maggio 1968"
+    },
+    {
+      "id": "AMI-0027",
+      "titolo": "Lavoro Politico no. 8/9",
+      "autore": "",
+      "organizzazione": "Lavoro Politico",
+      "data": "1 giugno 1968",
+      "anno": 1968,
+      "data_ordine": [
+        1968,
+        6,
+        1
+      ],
+      "tipo": "periodico",
+      "serie": "Riviste marxiste-leniniste",
+      "url_ia": "https://archive.org/details/lavoro-politico-08-09/mode/2up",
+      "persone": [],
+      "organizzazioni": [
+        "Lavoro Politico"
+      ],
+      "descrizione": "rivista \"Lavoro politico\", n. 8 - 9, giugno - luglio 1968"
+    },
+    {
       "id": "AMI-0033",
       "titolo": "Verbale della conversazione del Presidente Mao con la delegazione comunista (marxista-leninista) italiana",
       "autore": "",
       "organizzazione": "Partito Comunista d'Italia (marxista-leninista)",
       "data": "13 agosto 1968",
       "anno": 1968,
+      "data_ordine": [
+        1968,
+        8,
+        13
+      ],
       "tipo": "testo",
       "serie": "Galassia marxista-leninista",
       "url_ia": "https://archive.org/details/conversazione-mao-pesce",
       "persone": [
-        "Dino Dini",
+        "Mao Zedong",
         "Osvaldo Pesce",
-        "Mao Zedong"
+        "Dino Dini"
       ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
@@ -474,12 +477,144 @@
       "descrizione": "<font color=\"#444444\" face=\"Tahoma, Helvetica, Microsoft Yahei, sans-serif\" size=\"5\"><span style=\"background-color:rgb(255,255,255);\">Trascrizione della conversazione tenuta tra il Presidente cinese Mao Zedong e due rappresentanti del Partito Comunista d'Italia (marxista-leninista), Osvaldo Pesce e Dino Dini, il 13 agosto 1968.<br /><br />La conversazione verte sugli sviluppi della Grande Rivoluzione Proletaria Culturale e sulla situazione politica europea. In particolare, Mao consiglia agli italiani di non partecipare alle elezioni, per evitare il pericolo revisionista.<br /><br />Testo riprodotto in 宋永毅</span>《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati]</font><span style=\"color:rgb(68,68,68);font-family:Tahoma, Helvetica, 'Microsoft Yahei', sans-serif;font-size:x-large;background-color:rgb(255,255,255);\">, 国史出版社, 2018. </span><font color=\"#444444\" face=\"Tahoma, Helvetica, Microsoft Yahei, sans-serif\" size=\"5\"> </font>"
     },
     {
+      "id": "AMI-0014",
+      "titolo": "Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta dalla leadership del Partito Comunista Cinese",
+      "autore": "Renmin Ribao",
+      "organizzazione": "Partito Comunista d'Italia (marxista-leninista)",
+      "data": "14 agosto 1968",
+      "anno": 1968,
+      "data_ordine": [
+        1968,
+        8,
+        14
+      ],
+      "tipo": "foto",
+      "serie": "Galassia marxista-leninista",
+      "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
+      "persone": [
+        "Chen Boda",
+        "Zhou Enlai",
+        "Mao Zedong",
+        "Osvaldo Pesce",
+        "Kang Sheng",
+        "Yao Wenyuan",
+        "Dino Dini",
+        "Jiang Qing"
+      ],
+      "organizzazioni": [
+        "Renmin Ribao",
+        "Partito Comunista d'Italia (marxista-leninista)"
+      ],
+      "descrizione": "Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta a Pechino dalla leadership del Partito Comunista Cinese. In rappresentanza del PCd'I (ml), in ordine, Osvaldo Pesce e Dino Dini. La leadership cinese è composta da, sempre in ordine, Chen Boda, Kang Sheng, Jiang Qing, Mao Zedong, Zhou Enlai, Yao Wenyuan. <div><br /></div><div>Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 14 agosto 1968, p. 1), Peking Review (<span style=\"text-indent:0cm;\">no. 33, 1968, p. 8) e Nuova Unità (31 agosto 1968, p. 1)</span></div>"
+    },
+    {
+      "id": "AMI-0034",
+      "titolo": "Nota del Presidente Mao sulla relazione di Kang Sheng riguardante la raccolta di materiale sulle elezioni parlamentari nei paesi capitalisti",
+      "autore": "Mao Zedong",
+      "organizzazione": "Partito Comunista Cinese",
+      "data": "31 agosto 1968",
+      "anno": 1968,
+      "data_ordine": [
+        1968,
+        8,
+        31
+      ],
+      "tipo": "testo",
+      "serie": "Galassia marxista-leninista",
+      "url_ia": "https://archive.org/details/istruzioni-mao-italiano",
+      "persone": [
+        "Mao Zedong",
+        "Osvaldo Pesce",
+        "Dino Dini"
+      ],
+      "organizzazioni": [
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Partito Comunista Cinese"
+      ],
+      "descrizione": "Nota del presidente Mao Zedong riguardante la partecipazione dei partiti comunisti marxisti-leninisti alle elezioni parlamentari dei propri paesi.<br /><br />Dopo aver discusso dell'argomento con Osvaldo Pesce (13/08/1968), il Presidente cinese ha incaricato Kang Sheng di presentare un rapporto sulla questione.<br /><br /><div>Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018.  </div>"
+    },
+    {
+      "id": "AMI-0015",
+      "titolo": "Osvaldo Pesce, Partito Comunista d'Italia (marxista-leninista), incontra il presidente Mao Zedong",
+      "autore": "Nuova Unità",
+      "organizzazione": "Partito Comunista d'Italia (marxista-leninista)",
+      "data": "31 agosto 1968",
+      "anno": 1968,
+      "data_ordine": [
+        1968,
+        8,
+        31
+      ],
+      "tipo": "foto",
+      "serie": "Galassia marxista-leninista",
+      "url_ia": "https://archive.org/details/Pesce-e-Mao",
+      "persone": [
+        "Mao Zedong",
+        "Osvaldo Pesce"
+      ],
+      "organizzazioni": [
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Nuova Unità"
+      ],
+      "descrizione": "Osvaldo Pesce, rappresentante del Partito Comunista d'Italia (marxista-leninista), incontra il presidente del Partito Comunista Cinese Mao Zedong. Foto pubblicata su Nuova Unità (31 agosto 1968, p. 4.)"
+    },
+    {
+      "id": "AMI-0028",
+      "titolo": "Lavoro Politico no. 10",
+      "autore": "",
+      "organizzazione": "Lavoro Politico",
+      "data": "1 settembre 1968",
+      "anno": 1968,
+      "data_ordine": [
+        1968,
+        9,
+        1
+      ],
+      "tipo": "periodico",
+      "serie": "Riviste marxiste-leniniste",
+      "url_ia": "https://archive.org/details/lavoro-politico-10/mode/2up",
+      "persone": [],
+      "organizzazioni": [
+        "Lavoro Politico",
+        "Partito Comunista d'Italia (marxista-leninista)"
+      ],
+      "descrizione": "rivista \"Lavoro politico\", n. 10 - settembre 1968"
+    },
+    {
+      "id": "AMI-0029",
+      "titolo": "Lavoro Politico no. 11/12",
+      "autore": "",
+      "organizzazione": "Lavoro Politico",
+      "data": "1 dicembre 1968",
+      "anno": 1968,
+      "data_ordine": [
+        1968,
+        12,
+        1
+      ],
+      "tipo": "periodico",
+      "serie": "Riviste marxiste-leniniste",
+      "url_ia": "https://archive.org/details/lavoro-politico-11-12/mode/2up",
+      "persone": [],
+      "organizzazioni": [
+        "Lavoro Politico",
+        "Partito Comunista d'Italia (marxista-leninista) - linea rossa",
+        "Partito Comunista d'Italia (marxista-leninista)"
+      ],
+      "descrizione": "rivista \"Lavoro politico\", n. 11 - 12, dicembre 1968 - gennaio 1969"
+    },
+    {
       "id": "AMI-0001",
       "titolo": "Citazioni dalle opere del presidente Mao Tse-tung",
       "autore": "Mao Zedong",
       "organizzazione": "Partito Comunista Cinese",
       "data": "1969",
       "anno": 1969,
+      "data_ordine": [
+        1969,
+        1,
+        1
+      ],
       "tipo": "libro",
       "serie": "Testi del maoismo",
       "url_ia": "https://archive.org/details/1967-citazioni-dalle-opere-del-presidente-mao-tse-tung-lingue-estere/mode/2up",
@@ -498,6 +633,11 @@
       "organizzazione": "",
       "data": "1969",
       "anno": 1969,
+      "data_ordine": [
+        1969,
+        1,
+        1
+      ],
       "tipo": "audio",
       "serie": "Varie",
       "url_ia": "https://archive.org/details/mao-tse-tung-citazioni-presidente-vinile",
@@ -508,36 +648,17 @@
       "descrizione": "Vinile 33rpm delle dimensioni di un vinile 45rpm con discorsi di Mao Tse-Tung tradotti in italiano con musica popolare cinese in background.<br />"
     },
     {
-      "id": "AMI-0016",
-      "titolo": "Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese",
-      "autore": "Renmin Ribao",
-      "organizzazione": "Partito Comunista d'Italia (marxista-leninista)",
-      "data": "3 ottobre 1969",
-      "anno": 1969,
-      "tipo": "foto",
-      "serie": "Galassia marxista-leninista",
-      "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
-      "persone": [
-        "Kang Sheng",
-        "Zhou Enlai",
-        "Chen Boda",
-        "Mao Zedong",
-        "Fosco Dinucci",
-        "Lin Biao"
-      ],
-      "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Renmin Ribao"
-      ],
-      "descrizione": "<span style=\"font-size:12pt;line-height:150%;font-family:'Times New Roman', serif;letter-spacing:0.75pt;\">Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese in occasione dei festeggiamenti del 1° ottobre 1969. Nella foto compaiono, in ordine, Zhou Enlai, Mao Zedong, Lin Biao, Kang Sheng e Chen Boda. Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 3 ottobre 1969, p. 1).</span>"
-    },
-    {
       "id": "AMI-0009",
       "titolo": "Orientamento del movimento giovanile",
       "autore": "Mao Zedong",
       "organizzazione": "Partito Comunista Cinese",
       "data": "1969",
       "anno": 1969,
+      "data_ordine": [
+        1969,
+        1,
+        1
+      ],
       "tipo": "opuscolo",
       "serie": "Testi del maoismo",
       "url_ia": "https://archive.org/details/movimento-giovanile/mode/2up",
@@ -550,29 +671,17 @@
       "descrizione": "Discorso del Presidente cinese Mao Zedong. Traduzione e pubblicazione a cura della Casa editrice in lingue estere di Pechino, 1969."
     },
     {
-      "id": "AMI-0017",
-      "titolo": "Studenti ed intellettuali rivoluzionari",
-      "autore": "Comitato di Partito di Catania (UCI-m.l)",
-      "organizzazione": "Unione dei Comunisti Italiani (marxisti-leninisti)",
-      "data": "9 ottobre 1969",
-      "anno": 1969,
-      "tipo": "volantino",
-      "serie": "Galassia marxista-leninista",
-      "url_ia": "https://archive.org/details/studenti-ed-intellettuali-ciclostilato-uci-m-l/mode/2up",
-      "persone": [],
-      "organizzazioni": [
-        "Comitato di Partito di Catania (UCI-m.l)",
-        "Unione dei Comunisti Italiani (marxisti-leninisti)"
-      ],
-      "descrizione": "Volantino ciclostilato a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), meglio conosciuta come Servire il Popolo. Il volantino riporta un appello a \"Studenti ed Intellettuali Rivoluzionari\" affinché questi si uniscano all'organizzazione maoista."
-    },
-    {
       "id": "AMI-0008",
       "titolo": "Sul rafforzamento del sistema dei comitati di partito",
       "autore": "Mao Zedong",
       "organizzazione": "Partito Comunista Cinese",
       "data": "1969",
       "anno": 1969,
+      "data_ordine": [
+        1969,
+        1,
+        1
+      ],
       "tipo": "opuscolo",
       "serie": "Testi del maoismo",
       "url_ia": "https://archive.org/details/comitati-di-partito/mode/2up",
@@ -591,6 +700,11 @@
       "organizzazione": "Unione dei Comunisti Italiani (marxisti-leninisti)",
       "data": "1 agosto 1969",
       "anno": 1969,
+      "data_ordine": [
+        1969,
+        8,
+        1
+      ],
       "tipo": "periodico",
       "serie": "Galassia marxista-leninista",
       "url_ia": "https://archive.org/details/viva-il-popolo-cinese/mode/2up",
@@ -601,22 +715,78 @@
       "descrizione": "Magazine a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), pubblicata attraverso la casa editrice di partito, Edizioni Servire il Popolo.<br /><br />La rivista illustra gli sviluppi della Grande Rivoluzione Proletaria Culturale in Cina e auspica una sua versione italiana.<div><br /></div><div>\"Da quando l'Unione dei Comunisti è stata fondata, il 2 ottobre 1968, è ripresa la marcia del popolo italiano verso l'instaurazione della dittatura del proletariato. E' il pensiero del presidente Mao che ci ha illuminati, è il libretto rosso delle citazioni che ci ha uniti. L'Unione dei Comunisti ha insegnato ai proletari italiani la massima fondamentale del socialismo: «Servire il popolo».\"</div>"
     },
     {
+      "id": "AMI-0016",
+      "titolo": "Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese",
+      "autore": "Renmin Ribao",
+      "organizzazione": "Partito Comunista d'Italia (marxista-leninista)",
+      "data": "3 ottobre 1969",
+      "anno": 1969,
+      "data_ordine": [
+        1969,
+        10,
+        3
+      ],
+      "tipo": "foto",
+      "serie": "Galassia marxista-leninista",
+      "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
+      "persone": [
+        "Chen Boda",
+        "Zhou Enlai",
+        "Mao Zedong",
+        "Fosco Dinucci",
+        "Kang Sheng",
+        "Lin Biao"
+      ],
+      "organizzazioni": [
+        "Renmin Ribao",
+        "Partito Comunista d'Italia (marxista-leninista)"
+      ],
+      "descrizione": "<span style=\"font-size:12pt;line-height:150%;font-family:'Times New Roman', serif;letter-spacing:0.75pt;\">Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese in occasione dei festeggiamenti del 1° ottobre 1969. Nella foto compaiono, in ordine, Zhou Enlai, Mao Zedong, Lin Biao, Kang Sheng e Chen Boda. Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 3 ottobre 1969, p. 1).</span>"
+    },
+    {
+      "id": "AMI-0017",
+      "titolo": "Studenti ed intellettuali rivoluzionari",
+      "autore": "Comitato di Partito di Catania (UCI-m.l)",
+      "organizzazione": "Unione dei Comunisti Italiani (marxisti-leninisti)",
+      "data": "9 ottobre 1969",
+      "anno": 1969,
+      "data_ordine": [
+        1969,
+        10,
+        9
+      ],
+      "tipo": "volantino",
+      "serie": "Galassia marxista-leninista",
+      "url_ia": "https://archive.org/details/studenti-ed-intellettuali-ciclostilato-uci-m-l/mode/2up",
+      "persone": [],
+      "organizzazioni": [
+        "Comitato di Partito di Catania (UCI-m.l)",
+        "Unione dei Comunisti Italiani (marxisti-leninisti)"
+      ],
+      "descrizione": "Volantino ciclostilato a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), meglio conosciuta come Servire il Popolo. Il volantino riporta un appello a \"Studenti ed Intellettuali Rivoluzionari\" affinché questi si uniscano all'organizzazione maoista."
+    },
+    {
       "id": "AMI-0038",
       "titolo": "Comunicato della seconda sessione plenaria del IX Comitato Centrale del Partito Comunista Cinese",
       "autore": "Comitato Centrale del PCC",
       "organizzazione": "Partito Comunista Cinese",
       "data": "1970",
       "anno": 1970,
+      "data_ordine": [
+        1970,
+        1,
+        1
+      ],
       "tipo": "opuscolo",
       "serie": "Testi del maoismo",
       "url_ia": "https://archive.org/details/comunicato-ix-cc/mode/2up",
       "persone": [
-        "Lin Biao",
-        "Mao Zedong"
+        "Mao Zedong",
+        "Lin Biao"
       ],
       "organizzazioni": [
-        "Comitato Centrale del PCC",
-        "Partito Comunista Cinese"
+        "Partito Comunista Cinese",
+        "Comitato Centrale del PCC"
       ],
       "descrizione": "<div>Sommario della seconda sessione plenaria del CC del PCC, tenutasi in seguito al IX Congresso (1969). </div><div><br /></div><div><div>\"Il Partito del Lavoro d'Albania e i partiti e le organizzazioni autenticamente marxisti-leninisti del mondo conseguono di continuo enormi successi nella lotta contro l'imperialismo capeggiato dagli Stati Uniti, contro il revisionismo moderno con al centro il revisionismo sovietico e contro la reazione dei vari paesi.\"</div></div><div><br /></div>Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 15, 1970."
     },
@@ -627,6 +797,11 @@
       "organizzazione": "Partito Comunista Cinese",
       "data": "1970",
       "anno": 1970,
+      "data_ordine": [
+        1970,
+        1,
+        1
+      ],
       "tipo": "opuscolo",
       "serie": "Testi del maoismo",
       "url_ia": "https://archive.org/details/popoli-di-tutto-il-mondo/mode/2up",
@@ -645,6 +820,11 @@
       "organizzazione": "Stella Rossa - Fronte Rivoluzionario Marxista-Leninista",
       "data": "1970",
       "anno": 1970,
+      "data_ordine": [
+        1970,
+        1,
+        1
+      ],
       "tipo": "testo",
       "serie": "Galassia marxista-leninista",
       "url_ia": "https://archive.org/details/statuto-stella-rossa",
@@ -663,6 +843,11 @@
       "organizzazione": "Stella Rossa - Fronte Rivoluzionario Marxista-Leninista",
       "data": "1975",
       "anno": 1975,
+      "data_ordine": [
+        1975,
+        1,
+        1
+      ],
       "tipo": "libro",
       "serie": "Varie",
       "url_ia": "https://archive.org/details/in-caso-di-golpe-AMI/mode/2up",
@@ -681,6 +866,11 @@
       "organizzazione": "",
       "data": "1993",
       "anno": 1993,
+      "data_ordine": [
+        1993,
+        1,
+        1
+      ],
       "tipo": "libro",
       "serie": "Varie",
       "url_ia": "https://archive.org/details/ribellarsi-e-giusto//mode/2up",

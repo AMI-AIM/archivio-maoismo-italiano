@@ -113,6 +113,7 @@ def genera_json(df, persone, organizzazioni, output_dir):
             'organizzazione': org_raw,
             'data': data_formattata,
             'anno': anno,
+            'data_ordine': list(data_ordine) if data_ordine else [9999, 1, 1],
             'tipo': tipo_display,
             'serie': serie,
             'url_ia': url_ia,
@@ -122,7 +123,7 @@ def genera_json(df, persone, organizzazioni, output_dir):
         }
         documenti_json.append(doc_obj)
     
-    documenti_json.sort(key=lambda x: (x['anno'] is None, x['anno'] if x['anno'] else 9999, x['titolo']))
+    documenti_json.sort(key=lambda x: (x['data_ordine'], x['titolo']))
     
     json_data = {
         'documenti': documenti_json,
