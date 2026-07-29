@@ -68,14 +68,14 @@
       ],
       "url_ia": "https://archive.org/details/statuto-pcdi/mode/2up",
       "persone": [
-        "Osvaldo Pesce",
-        "Fosco Dinucci"
+        "Fosco Dinucci",
+        "Osvaldo Pesce"
       ],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Unione della gioventù comunista d’Italia (marxista-leninista)",
         "Nuova Unità",
-        "Ufficio Politico del PCd'I (m-l)"
+        "Unione della gioventù comunista d’Italia (marxista-leninista)",
+        "Ufficio Politico del PCd'I (m-l)",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "Opuscolo contenente Dichiarazione di principio e Statuto del Partito Comunista d'Italia (marxista-leninista)."
     },
@@ -194,10 +194,10 @@
       "url_ia": "https://archive.org/details/circolare-16-maggio/mode/2up",
       "persone": [],
       "organizzazioni": [
+        "Hongqi",
         "Renmin Ribao",
-        "Comitato Centrale del PCC",
         "Partito Comunista Cinese",
-        "Hongqi"
+        "Comitato Centrale del PCC"
       ],
       "descrizione": "<div>Opuscolo contente la \"Circolare del Comitato Centrale del Partito Comunista</div><div>Cinese (16 maggio 1966)\", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo \"Un Grande Documento Storico\", pubblicato su Bandiera Rossa e il Quotidiano del Popolo</div>"
     },
@@ -369,8 +369,8 @@
       "url_ia": "https://archive.org/details/la-bussola-che-guida//mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Renmin Ribao",
         "Jiefangjun Bao",
+        "Renmin Ribao",
         "Partito Comunista Cinese"
       ],
       "descrizione": "<div>La Bussola Che Guida I Popoli Rivoluzionari Di Tutti I Paesi Verso La Vittoria</div><div>Casa Editrice In Lingue Estere</div><div>Pechino 1968</div>"
@@ -588,8 +588,8 @@
         "Dino Dini"
       ],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Partito Comunista Cinese"
+        "Partito Comunista Cinese",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "<font color=\"#444444\" face=\"Tahoma, Helvetica, Microsoft Yahei, sans-serif\" size=\"5\"><span style=\"background-color:rgb(255,255,255);\">Trascrizione della conversazione tenuta tra il Presidente cinese Mao Zedong e due rappresentanti del Partito Comunista d'Italia (marxista-leninista), Osvaldo Pesce e Dino Dini, il 13 agosto 1968.<br /><br />La conversazione verte sugli sviluppi della Grande Rivoluzione Proletaria Culturale e sulla situazione politica europea. In particolare, Mao consiglia agli italiani di non partecipare alle elezioni, per evitare il pericolo revisionista.<br /><br />Testo riprodotto in 宋永毅</span>《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati]</font><span style=\"color:rgb(68,68,68);font-family:Tahoma, Helvetica, 'Microsoft Yahei', sans-serif;font-size:x-large;background-color:rgb(255,255,255);\">, 国史出版社, 2018. </span><font color=\"#444444\" face=\"Tahoma, Helvetica, Microsoft Yahei, sans-serif\" size=\"5\"> </font>"
     },
@@ -611,14 +611,14 @@
       ],
       "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
       "persone": [
-        "Mao Zedong",
-        "Dino Dini",
-        "Chen Boda",
-        "Yao Wenyuan",
         "Jiang Qing",
-        "Zhou Enlai",
+        "Dino Dini",
+        "Kang Sheng",
+        "Yao Wenyuan",
         "Osvaldo Pesce",
-        "Kang Sheng"
+        "Zhou Enlai",
+        "Chen Boda",
+        "Mao Zedong"
       ],
       "organizzazioni": [
         "Renmin Ribao",
@@ -649,8 +649,8 @@
         "Dino Dini"
       ],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Partito Comunista Cinese"
+        "Partito Comunista Cinese",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "Nota del presidente Mao Zedong riguardante la partecipazione dei partiti comunisti marxisti-leninisti alle elezioni parlamentari dei propri paesi.<br /><br />Dopo aver discusso dell'argomento con Osvaldo Pesce (13/08/1968), il Presidente cinese ha incaricato Kang Sheng di presentare un rapporto sulla questione.<br /><br /><div>Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018.  </div>"
     },
@@ -676,8 +676,8 @@
         "Osvaldo Pesce"
       ],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Nuova Unità"
+        "Nuova Unità",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "Osvaldo Pesce, rappresentante del Partito Comunista d'Italia (marxista-leninista), incontra il presidente del Partito Comunista Cinese Mao Zedong. Foto pubblicata su Nuova Unità (31 agosto 1968, p. 4.)"
     },
@@ -725,8 +725,8 @@
       "persone": [],
       "organizzazioni": [
         "Lavoro Politico",
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Partito Comunista d'Italia (marxista-leninista) - linea rossa"
+        "Partito Comunista d'Italia (marxista-leninista) - linea rossa",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "rivista \"Lavoro politico\", n. 11 - 12, dicembre 1968 - gennaio 1969"
     },
@@ -870,12 +870,12 @@
       ],
       "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
       "persone": [
-        "Mao Zedong",
-        "Lin Biao",
         "Chen Boda",
-        "Zhou Enlai",
+        "Lin Biao",
         "Kang Sheng",
-        "Fosco Dinucci"
+        "Zhou Enlai",
+        "Fosco Dinucci",
+        "Mao Zedong"
       ],
       "organizzazioni": [
         "Renmin Ribao",
@@ -902,8 +902,8 @@
       "url_ia": "https://archive.org/details/studenti-ed-intellettuali-ciclostilato-uci-m-l/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Unione dei Comunisti Italiani (marxisti-leninisti)",
-        "Comitato di Partito di Catania (UCI-m.l)"
+        "Comitato di Partito di Catania (UCI-m.l)",
+        "Unione dei Comunisti Italiani (marxisti-leninisti)"
       ],
       "descrizione": "Volantino ciclostilato a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), meglio conosciuta come Servire il Popolo. Il volantino riporta un appello a \"Studenti ed Intellettuali Rivoluzionari\" affinché questi si uniscano all'organizzazione maoista."
     },
@@ -929,8 +929,8 @@
         "Lin Biao"
       ],
       "organizzazioni": [
-        "Comitato Centrale del PCC",
-        "Partito Comunista Cinese"
+        "Partito Comunista Cinese",
+        "Comitato Centrale del PCC"
       ],
       "descrizione": "<div>Sommario della seconda sessione plenaria del CC del PCC, tenutasi in seguito al IX Congresso (1969). </div><div><br /></div><div><div>\"Il Partito del Lavoro d'Albania e i partiti e le organizzazioni autenticamente marxisti-leninisti del mondo conseguono di continuo enormi successi nella lotta contro l'imperialismo capeggiato dagli Stati Uniti, contro il revisionismo moderno con al centro il revisionismo sovietico e contro la reazione dei vari paesi.\"</div></div><div><br /></div>Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 15, 1970."
     },
@@ -953,9 +953,9 @@
       "url_ia": "https://archive.org/details/membri-del-partito-avanzati/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Hongqi",
-        "Renmin Ribao",
         "Jiefangjun Bao",
+        "Renmin Ribao",
+        "Hongqi",
         "Partito Comunista Cinese"
       ],
       "descrizione": "<div style=\"margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\"><div style=\"margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;\">L'opuscolo contiene un editoriale condiviso tra Renmin Ribao (Quotidiano del Popolo), Hongqi (Bandiera Rossa) e Jiefangjun Bao (Quotidiano dell'EPL), pubblicato il 1 luglio 1970, in commemorazione del 49° anniversario della fondazione del Partito Comunista Cinese</div></div><div style=\"margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\">Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 12, 1970.</div><div class=\"metadata-expandable-list row\" style=\"margin:1.43em -15px;width:715.2px;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\"></div>"

@@ -101,10 +101,17 @@ def crea_schede(df, persone, organizzazioni, output_dir):
         persone_collegate_html = link_lista(persone_collegate, persone, organizzazioni)
         organizzazioni_collegate_html = link_lista(organizzazioni_collegate, persone, organizzazioni)
         
-        # 🔥 GENERA LINK PER ARGOMENTO (serie)
+        # 🔥 GENERA LINK PER ARGOMENTI (serie splittata su ;)
         if serie:
-            serie_encoded = urllib.parse.quote(serie, safe='')
-            argomento_html = f'<a href="/archivio-maoismo-italiano/documenti/?serie={serie_encoded}">{serie}</a>'
+            tags = [s.strip() for s in serie.split(';') if s.strip()]
+            if tags:
+                link_tags = []
+                for tag in tags:
+                    tag_encoded = urllib.parse.quote(tag, safe='')
+                    link_tags.append(f'<a href="/archivio-maoismo-italiano/documenti/?serie={tag_encoded}">{tag}</a>')
+                argomento_html = ', '.join(link_tags)
+            else:
+                argomento_html = 'N/A'
         else:
             argomento_html = 'N/A'
         
