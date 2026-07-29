@@ -1,12 +1,9 @@
-L'\*\*Archivio del Maoismo Italiano\*\* (AMI) è un progetto di catalogazione e conservazione digitale dedicato alla documentazione relativa alla diffusione del maoismo e dell'influenza politico-culturale della Repubblica Popolare Cinese in Italia nella seconda metà del Novecento.
+L'**Archivio del Maoismo Italiano** (AMI) è un progetto di catalogazione e conservazione digitale dedicato alla documentazione relativa alla diffusione del maoismo e dell'influenza politico-culturale della Repubblica Popolare Cinese in Italia nella seconda metà del Novecento.
 
 
 
 L'AMI nasce dal progressivo accumulo di materiale documentario relativo al movimento "filo-cinese", con l'obiettivo di raccogliere e rendere liberamente consultabile in un'unica piattaforma un patrimonio storico-politico-culturale disperso tra collezioni private, biblioteche ed archivi. Il progetto mira, infine, a facilitare la ricerca sull'argomento, svantaggiata dall'attuale mancanza di poli stabili ed efficienti.
 
-
-
-<h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 12h10v2H7zm0-4h10v2H7zm0 8h6v2H7z"/></svg> Il patrimonio dell'archivio</h2>
 
 
 
@@ -36,7 +33,7 @@ Ad oggi, il patrimonio dell'AMI è composto da:
 
 &#x20;       <div class="progetto-card-titolo">Organizzazioni marxiste-leniniste italiane</div>
 
-&#x20;       <div class="progetto-card-testo">Pubblicazioni, opuscoli, volantini e foto delle principali ricettrici del "Pensiero di Mao Tse-tung": Partito Comunista d'Italia (m-l), Unione dei Comunisti Italiani (m-l) — meglio nota come Servire il popolo —, Edizioni Oriente.</div>
+&#x20;       <div class="progetto-card-testo">Pubblicazioni, opuscoli, volantini e foto delle principali organizzazioni ricettrici del "Pensiero di Mao Tse-tung" come: Partito Comunista d'Italia (m-l), Unione dei Comunisti Italiani (m-l) / Servire il popolo, Edizioni Oriente...</div>
 
 &#x20;   </div>
 
@@ -54,19 +51,19 @@ Ogni documento è descritto mediante un insieme uniforme di metadati:
 
 <div class="progetto-badge-list">
 
+&#x20;   <span class="progetto-badge">Tipologia</span>
+
 &#x20;   <span class="progetto-badge">Titolo</span>
 
 &#x20;   <span class="progetto-badge">Autore</span>
 
-&#x20;   <span class="progetto-badge">Organizzazione</span>
-
 &#x20;   <span class="progetto-badge">Anno</span>
-
-&#x20;   <span class="progetto-badge">Tipologia</span>
 
 &#x20;   <span class="progetto-badge">Luogo</span>
 
-&#x20;   <span class="progetto-badge">Parole chiave</span>
+&#x20;   <span class="progetto-badge">Organizzazioni collegate</span>
+
+&#x20;   <span class="progetto-badge">Persone collegate</span>
 
 &#x20;   <span class="progetto-badge">ID univoco</span>
 
@@ -98,13 +95,13 @@ L'AMI è concepito come un archivio in costante accrescimento. Nuove acquisizion
 
 <div class="progetto-bibliografia">
 
-&#x20;   <p>DE GIORGI, LAURA \&amp; ZAZZARA, GILDA (a cura di), <em>Giuseppe Regis, Diario cinese 1957-1961</em>, Venezia: Edizioni Ca' Foscari, 2025.</p>
+&#x20;   <p>DE GIORGI, LAURA &amp; ZAZZARA, GILDA (a cura di), <em>Giuseppe Regis, Diario cinese 1957-1961</em>, Venezia: Edizioni Ca' Foscari, 2025.</p>
 
 &#x20;   <p>FERRANTE, STEFANO, <em>La Cina non era vicina: Servire il popolo e il maoismo all'italiana</em>, Milano: Sperling \&amp; Kupfer, 2008.</p>
 
 &#x20;   <p>FRANCESCANGELI, EROS, <em>«Un mondo meglio di così»: La sinistra rivoluzionaria in Italia (1943-1978)</em>, Roma: Viella, 2023.</p>
 
-&#x20;   <p>GABBAS, MARCO \&amp; CAPISANI, LORENZO, <em>Maoism with Italian characteristics: China's global influence and the Italian left, 1956-1976</em>, Singapore: Springer, 2025.</p>
+&#x20;   <p>GABBAS, MARCO &amp; CAPISANI, LORENZO, <em>Maoism with Italian characteristics: China's global influence and the Italian left, 1956-1976</em>, Singapore: Springer, 2025.</p>
 
 &#x20;   <p>GRAZIANI, SOFIA, <em>L'interesse politico-ideologico per la Cina di Mao sulla scia del contrasto sino-sovietico: Alcune considerazioni sulla nascita dell'Associazione Italia-Cina (1962-1963)</em>, in MENEGUZZI ROSTAGNI, CARLA \&amp; SAMARANI, GUIDO (a cura di), <em>La Cina di Mao, l'Italia e l'Europa negli anni della Guerra fredda</em>, Bologna: il Mulino, 2014, pp. 147-173.</p>
 
