@@ -90,6 +90,13 @@
       "biografia": "",
       "nascita": "1920",
       "morte": "2004"
+    },
+    {
+      "nome": "Giorgio Zucchetti",
+      "slug": "giorgio-zucchetti",
+      "biografia": "",
+      "nascita": "1920",
+      "morte": "1997"
     }
   ],
   "organizzazioni": [
@@ -120,13 +127,6 @@
       "storia": "",
       "categoria": "Casa editrice",
       "fondazione": "1963"
-    },
-    {
-      "nome": "Signal",
-      "slug": "signal",
-      "storia": "",
-      "categoria": "Casa discografica",
-      "fondazione": ""
     },
     {
       "nome": "Centro di Informazione di Verona",
@@ -206,11 +206,11 @@
       "fondazione": "1969"
     },
     {
-      "nome": "Savelli",
-      "slug": "savelli",
+      "nome": "Associazione Italia-Cina",
+      "slug": "associazione-italia-cina",
       "storia": "",
-      "categoria": "Casa editrice",
-      "fondazione": "1963"
+      "categoria": "Associazione di massa",
+      "fondazione": "1962"
     },
     {
       "nome": "Unione della gioventù comunista d’Italia (marxista-leninista)",

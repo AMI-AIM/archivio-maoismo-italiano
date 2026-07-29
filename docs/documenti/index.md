@@ -110,6 +110,16 @@ hide:
     <div class="risultato-data">1967</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
+            <a href="AMI-0042/">Citazioni: Il breviario delle guardie rosse</a>
+        </div>
+        <div class="risultato-meta">Mao Zedong · Libro</div>
+        
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1967</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
             <a href="AMI-0013/">Dichiarazione di Principio - Statuto</a>
         </div>
         <div class="risultato-meta">Ufficio Politico del PCd'I (m-l) · Partito Comunista d'Italia (marxista-leninista) · Opuscolo</div>
@@ -164,6 +174,16 @@ hide:
         </div>
         <div class="risultato-meta">Comitato Centrale del PCC · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc"><div>Opuscolo contente la "Circolare del Comitato Centrale del Partito Comunista</div><div>Cinese (16 maggio 1966)", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo "Un Grande Documento Storico", pubblicato su Bandiera Rossa e il Quotidiano del Popolo</div></div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1968</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="AMI-0041/">Citazioni del presidente Mao Tse-tung</a>
+        </div>
+        <div class="risultato-meta">Mao Zedong · Libro</div>
+        <div class="risultato-desc"><div>Edizione italiana del famoso Libretto rosso [originale ​毛主席语录 (Máo Zhǔxí Yǔlù)] a cura della casa editrice milanese Feltrinelli. L'edizione si distingue per la mancanza della prefazione del Maresciallo Lin Biao e per l'anonimità del processo di traduzione.</div><div><br /></div>III edizione (settembre 1968), pp. 198.</div>
     </div>
 </div>
 <div class="risultato-card">

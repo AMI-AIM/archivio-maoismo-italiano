@@ -226,6 +226,16 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0041/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0042/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://ami-aim.github.io/archivio-maoismo-italiano/persone/mao-zedong/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
@@ -291,6 +301,11 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/persone/giorgio-zucchetti/</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/casa-editrice-in-lingue-estere/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
@@ -307,11 +322,6 @@
   </url>
   <url>
     <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/edizioni-oriente/</loc>
-    <priority>0.6</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/signal/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>
@@ -371,7 +381,7 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/savelli/</loc>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/associazione-italia-cina/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>

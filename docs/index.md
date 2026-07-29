@@ -38,25 +38,25 @@ hide:
 
 
 <div class="doc-row">
-    <div class="doc-data">1970</div>
+    <div class="doc-data">1967</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0040/">I membri del Partito Comunista devono essere elementi avanzati del proletariato</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">Opuscolo</span><span class="doc-org">Partito Comunista Cinese</span></div>
+        <div class="doc-titolo"><a href="documenti/AMI-0042/">Citazioni: Il breviario delle guardie rosse</a></div>
+        <div class="doc-meta"><span class="doc-type-chip">Libro</span></div>
     </div>
 </div>
 
 <div class="doc-row">
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0039/">Il Presidente Mao Tse-tung sulla Guerra Popolare</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">Libro</span><span class="doc-org">Partito Comunista Cinese</span></div>
+        <div class="doc-titolo"><a href="documenti/AMI-0041/">Citazioni del presidente Mao Tse-tung</a></div>
+        <div class="doc-meta"><span class="doc-type-chip">Libro</span></div>
     </div>
 </div>
 
 <div class="doc-row">
     <div class="doc-data">1970</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0038/">Comunicato della seconda sessione plenaria del IX Comitato Centrale del Partito Comunista Cinese</a></div>
+        <div class="doc-titolo"><a href="documenti/AMI-0040/">I membri del Partito Comunista devono essere elementi avanzati del proletariato</a></div>
         <div class="doc-meta"><span class="doc-type-chip">Opuscolo</span><span class="doc-org">Partito Comunista Cinese</span></div>
     </div>
 </div>
@@ -83,7 +83,7 @@ hide:
     <div class="persona-rank persona-rank--1">1</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="persone/mao-zedong/">Mao Zedong</a></div>
-        <div class="doc-sommario">21 documenti collegati</div>
+        <div class="doc-sommario">23 documenti collegati</div>
         <div class="persona-date">1893 – 1976</div>
     </div>
 </div>
