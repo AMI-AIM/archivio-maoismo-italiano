@@ -81,7 +81,7 @@ L'AMI è concepito come un archivio in costante accrescimento. Nuove acquisizion
 
 <div class="progetto-info-box">
 
-&#x20;   <p>L'AMI è un archivio digitale ad accesso libero: i suoi documenti sono conservati e consultabili attraverso la piattaforma <a href="https://archive.org/details/@ivan\_masci/lists/1/archivio-del-maoismo-italiano">Internet Archive</a>.</p>
+&#x20;   <p>L'AMI è un archivio digitale ad accesso libero: i suoi documenti sono conservati e consultabili attraverso la piattaforma <a href="https://archive.org/details/@ivan_masci/lists/1/archivio-del-maoismo-italiano">Internet Archive</a>.</p>
 
 &#x20;   <p>L'inventario completo dei documenti, con filtri per persona, organizzazione, tipologia e periodo, è consultabile nella sezione <a href="/archivio-maoismo-italiano/documenti/">Archivio</a>.</p>
 
