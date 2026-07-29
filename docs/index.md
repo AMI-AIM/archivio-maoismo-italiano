@@ -48,7 +48,7 @@ hide:
 <div class="doc-row">
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0041/">Citazioni del presidente Mao Tse-tung</a></div>
+        <div class="doc-titolo"><a href="documenti/AMI-0041/">Citazioni del presidente Mao Tse-tung: Il libro delle guardie rosse</a></div>
         <div class="doc-meta"><span class="doc-type-chip">Libro</span></div>
     </div>
 </div>

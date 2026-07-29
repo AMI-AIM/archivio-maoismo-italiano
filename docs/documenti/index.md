@@ -113,7 +113,7 @@ hide:
             <a href="AMI-0042/">Citazioni: Il breviario delle guardie rosse</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Libro</div>
-        
+        <div class="risultato-desc"><div style="color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);">Edizione italiana del famoso Libretto rosso [originale ​毛主席语录 (Máo Zhǔxí Yǔlù)] a cura della casa editrice milanese Longanesi &amp; C. L'edizione si distingue per il colore bianco della copertina e per l'utilizzo della prefazione firmata dal "Dipartimento Politico dell'Esercito Popolare di Liberazione" ( ) antecedente a quella del Maresciallo Lin Biao ( )</div><div style="color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);"><br /></div><div style="color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);">La traduzione del libro è stata curata da Giorgio Zucchetti, presidente dell'Associazione Italia-Cina e collaboratore di Radio Pechino.</div><div style="color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);"><br /></div><span style="color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);">II edizione/ristampa (1967), pp. 263</span></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -180,7 +180,7 @@ hide:
     <div class="risultato-data">1968</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
-            <a href="AMI-0041/">Citazioni del presidente Mao Tse-tung</a>
+            <a href="AMI-0041/">Citazioni del presidente Mao Tse-tung: Il libro delle guardie rosse</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Libro</div>
         <div class="risultato-desc"><div>Edizione italiana del famoso Libretto rosso [originale ​毛主席语录 (Máo Zhǔxí Yǔlù)] a cura della casa editrice milanese Feltrinelli. L'edizione si distingue per la mancanza della prefazione del Maresciallo Lin Biao e per l'anonimità del processo di traduzione.</div><div><br /></div>III edizione (settembre 1968), pp. 198.</div>

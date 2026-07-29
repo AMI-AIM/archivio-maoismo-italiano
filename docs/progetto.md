@@ -57,7 +57,7 @@ Ogni documento è descritto mediante un insieme uniforme di metadati:
 
 &#x20;   <span class="progetto-badge">Autore</span>
 
-&#x20;   <span class="progetto-badge">Anno</span>
+&#x20;   <span class="progetto-badge">Data</span>
 
 &#x20;   <span class="progetto-badge">Luogo</span>
 
