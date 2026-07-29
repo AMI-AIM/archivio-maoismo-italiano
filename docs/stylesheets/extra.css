@@ -32,6 +32,10 @@
     display: none !important;
 }
 
+.md-typeset > *:first-child {
+    margin-top: 0.5rem !important;
+}
+
 /* ============================================================
    1. COLORE PRIMARIO
    ============================================================ */
