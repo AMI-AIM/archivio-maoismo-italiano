@@ -210,6 +210,16 @@ hide:
     <div class="risultato-data">1968</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
+            <a href="AMI-0039/">Il Presidente Mao Tse-tung sulla Guerra Popolare</a>
+        </div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Libro</div>
+        <div class="risultato-desc"><div>Raccolta antologica di citazioni a tema militare (in particolare sulla "Guerra popolare di lunga durata" maoista) del Presidente cinese Mao Zedong. Segue lo stile delle più famose Citazioni dalle opere del Presidente Mao Tse-tung, meglio conosciuto come Libretto rosso, e ne fornisce una sorta di appendice tematica.</div><div><br /></div><div>Libro tradotto e pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, 1968. Copertina in vinile rosso, 18 x 11 cm, pp. 54.</div></div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1968</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
             <a href="AMI-0030/">La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria</a>
         </div>
         <div class="risultato-meta">Renmin Ribao · Partito Comunista Cinese · Opuscolo</div>
@@ -434,6 +444,16 @@ hide:
         </div>
         <div class="risultato-meta">Comitato Centrale del PCC · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc"><div>Sommario della seconda sessione plenaria del CC del PCC, tenutasi in seguito al IX Congresso (1969). </div><div><br /></div><div><div>"Il Partito del Lavoro d'Albania e i partiti e le organizzazioni autenticamente marxisti-leninisti del mondo conseguono di continuo enormi successi nella lotta contro l'imperialismo capeggiato dagli Stati Uniti, contro il revisionismo moderno con al centro il revisionismo sovietico e contro la reazione dei vari paesi."</div></div><div><br /></div>Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 15, 1970.</div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1970</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="AMI-0040/">I membri del Partito Comunista devono essere elementi avanzati del proletariato</a>
+        </div>
+        <div class="risultato-meta">Renmin Ribao · Partito Comunista Cinese · Opuscolo</div>
+        <div class="risultato-desc"><div style="margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);"><div style="margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;">L'opuscolo contiene un editoriale condiviso tra Renmin Ribao (Quotidiano del Popolo), Hongqi (Bandiera Rossa) e Jiefangjun Bao (Quotidiano dell'EPL), pubblicato il 1 luglio 1970, in commemorazione del 49° anniversario della fondazione del Partito Comunista Cinese</div></div><div style="margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);">Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 12, 1970.</div><div class="metadata-expandable-list row" style="margin:1.43em -15px;width:715.2px;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);"></div></div>
     </div>
 </div>
 <div class="risultato-card">

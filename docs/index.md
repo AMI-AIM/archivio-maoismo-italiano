@@ -40,7 +40,7 @@ hide:
 <div class="doc-row">
     <div class="doc-data">1970</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0038/">Comunicato della seconda sessione plenaria del IX Comitato Centrale del Partito Comunista Cinese</a></div>
+        <div class="doc-titolo"><a href="documenti/AMI-0040/">I membri del Partito Comunista devono essere elementi avanzati del proletariato</a></div>
         <div class="doc-meta"><span class="doc-type-chip">Opuscolo</span><span class="doc-org">Partito Comunista Cinese</span></div>
     </div>
 </div>
@@ -48,16 +48,16 @@ hide:
 <div class="doc-row">
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0037/">I compiti del Partito Comunista Cinese nel periodo della resistenza al Giappone</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">Opuscolo</span><span class="doc-org">Partito Comunista Cinese</span></div>
+        <div class="doc-titolo"><a href="documenti/AMI-0039/">Il Presidente Mao Tse-tung sulla Guerra Popolare</a></div>
+        <div class="doc-meta"><span class="doc-type-chip">Libro</span><span class="doc-org">Partito Comunista Cinese</span></div>
     </div>
 </div>
 
 <div class="doc-row">
-    <div class="doc-data">1975</div>
+    <div class="doc-data">1970</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0036/">In caso di golpe: Manuale teorico-pratico per il cittadino, di resistenza totale e di guerra di popolo, di guerriglia e di controguerriglia</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">Libro</span><span class="doc-org">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</span></div>
+        <div class="doc-titolo"><a href="documenti/AMI-0038/">Comunicato della seconda sessione plenaria del IX Comitato Centrale del Partito Comunista Cinese</a></div>
+        <div class="doc-meta"><span class="doc-type-chip">Opuscolo</span><span class="doc-org">Partito Comunista Cinese</span></div>
     </div>
 </div>
 
@@ -83,7 +83,7 @@ hide:
     <div class="persona-rank persona-rank--1">1</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="persone/mao-zedong/">Mao Zedong</a></div>
-        <div class="doc-sommario">20 documenti collegati</div>
+        <div class="doc-sommario">21 documenti collegati</div>
         <div class="persona-date">1893 – 1976</div>
     </div>
 </div>
