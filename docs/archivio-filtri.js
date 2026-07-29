@@ -31,14 +31,11 @@ function precompilaRicercaDaURL() {
             campoTesto.value = query;
         }
     }
-    // 🔥 Leggi il parametro "serie" dall'URL e pre-seleziona il filtro argomento
     const serie = params.get('serie');
     if (serie) {
         const select = document.getElementById('filtro-argomento');
         if (select) {
-            // Deseleziona tutto
             Array.from(select.options).forEach(opt => opt.selected = false);
-            // Cerca e seleziona l'opzione corrispondente
             let found = false;
             for (let opt of select.options) {
                 if (opt.value === serie) {
@@ -47,8 +44,6 @@ function precompilaRicercaDaURL() {
                     break;
                 }
             }
-            // Se non trovata (es. perché il dato non è ancora caricato),
-            // proviamo più tardi – ma il filtro verrà applicato dopo il caricamento
         }
     }
 }
@@ -77,25 +72,26 @@ function inizializzaFiltri() {
         });
     });
     
-    // Popola i dropdown
     const organizzazioni = new Set();
     const persone = new Set();
     const tipi = new Set();
-    const argomenti = new Set();  // 🔥 NUOVO
+    const argomenti = new Set();
     
     documenti.forEach(doc => {
         doc.organizzazioni.forEach(org => organizzazioni.add(org));
         doc.persone.forEach(persona => persone.add(persona));
         if (doc.tipo) tipi.add(doc.tipo);
-        if (doc.serie) argomenti.add(doc.serie);  // 🔥 NUOVO
+        // 🔥 doc.serie ora è un array; aggiungiamo ogni tag singolarmente
+        if (doc.serie && Array.isArray(doc.serie)) {
+            doc.serie.forEach(tag => argomenti.add(tag));
+        }
     });
     
     popolaSelect('filtro-organizzazione', organizzazioni);
     popolaSelect('filtro-persona', persone);
     popolaSelect('filtro-tipo', tipi);
-    popolaSelect('filtro-argomento', argomenti);  // 🔥 NUOVO
+    popolaSelect('filtro-argomento', argomenti);
     
-    // Imposta lo slider degli anni
     const minSlider = document.getElementById('filtro-anno-min');
     const maxSlider = document.getElementById('filtro-anno-max');
     const minLabel = document.getElementById('anno-min-label');
@@ -189,7 +185,7 @@ function applicaFiltri() {
     const orgSelezionate = getSelectedValues('filtro-organizzazione');
     const personeSelezionate = getSelectedValues('filtro-persona');
     const tipiSelezionati = getSelectedValues('filtro-tipo');
-    const argomentiSelezionati = getSelectedValues('filtro-argomento');  // 🔥 NUOVO
+    const argomentiSelezionati = getSelectedValues('filtro-argomento');
     const annoMinVal = parseInt(document.getElementById('filtro-anno-min').value);
     const annoMaxVal = parseInt(document.getElementById('filtro-anno-max').value);
     const testo = document.getElementById('filtro-testo').value.toLowerCase().trim();
@@ -204,15 +200,21 @@ function applicaFiltri() {
         if (tipiSelezionati.length > 0 && !tipiSelezionati.includes(doc.tipo)) {
             return false;
         }
-        // 🔥 FILTRO ARGOMENTI
-        if (argomentiSelezionati.length > 0 && !argomentiSelezionati.includes(doc.serie)) {
-            return false;
+        // 🔥 FILTRO ARGOMENTI - doc.serie è un array
+        if (argomentiSelezionati.length > 0) {
+            if (!doc.serie || !Array.isArray(doc.serie)) {
+                return false;
+            }
+            if (!argomentiSelezionati.some(arg => doc.serie.includes(arg))) {
+                return false;
+            }
         }
         if (doc.anno && (doc.anno < annoMinVal || doc.anno > annoMaxVal)) {
             return false;
         }
         if (testo) {
-            const testoDoc = (doc.titolo + ' ' + doc.autore + ' ' + doc.serie + ' ' + doc.descrizione || '').toLowerCase();
+            const serieText = (doc.serie && Array.isArray(doc.serie)) ? doc.serie.join(' ') : '';
+            const testoDoc = (doc.titolo + ' ' + doc.autore + ' ' + serieText + ' ' + (doc.descrizione || '')).toLowerCase();
             if (!testoDoc.includes(testo)) {
                 return false;
             }
@@ -220,7 +222,7 @@ function applicaFiltri() {
         return true;
     });
     
-    // ORDINA CRONOLOGICAMENTE (anno, mese, giorno — non solo l'anno)
+    // ORDINA CRONOLOGICAMENTE (data_ordine)
     risultati.sort((a, b) => {
         const da = a.data_ordine || [9999, 1, 1];
         const db = b.data_ordine || [9999, 1, 1];

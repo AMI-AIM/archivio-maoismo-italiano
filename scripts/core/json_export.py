@@ -47,14 +47,17 @@ def genera_json(df, persone, organizzazioni, output_dir):
         if tipo == 'fotografia':
             tipo = 'foto'
         
-        # 🔥 PER I FILTRI: "testo_bilingue" viene mostrato come "testo" (minuscolo per i filtri)
+        # 🔥 PER I FILTRI: "testo_bilingue" viene mostrato come "testo"
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
+        # 🔥 METTE LA MAIUSCOLA INIZIALE PER I FILTRI
+        tipo_display = tipo_display.capitalize() if tipo_display else ''
         
-        serie = str(row.get('serie', '')).strip()
-        if serie in ['nan', 'None']:
-            serie = ''
-        
-        # 🔥 KEYWORDS RIMOSSE
+        # 🔥 SPLITTA LA SERIE PER ";" E PULISCE GLI SPAZI
+        serie_raw = str(row.get('serie', '')).strip()
+        if serie_raw and serie_raw not in ['nan', 'None']:
+            serie_tags = [s.strip() for s in serie_raw.split(';') if s.strip()]
+        else:
+            serie_tags = []
         
         url_ia = str(row.get('url', '#')).strip()
         if url_ia in ['nan', 'None', '']:
@@ -114,8 +117,8 @@ def genera_json(df, persone, organizzazioni, output_dir):
             'data': data_formattata,
             'anno': anno,
             'data_ordine': list(data_ordine) if data_ordine else [9999, 1, 1],
-            'tipo': tipo_display,
-            'serie': serie,
+            'tipo': tipo_display,      # 🔥 ORA CON MAIUSCOLA
+            'serie': serie_tags,       # 🔥 ORA È UNA LISTA DI TAG
             'url_ia': url_ia,
             'persone': persone_lista,
             'organizzazioni': organizzazioni_lista,
