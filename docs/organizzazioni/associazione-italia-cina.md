@@ -1,19 +1,19 @@
 ---
 title: " "
-description: "Documenti relativi a Hongqi"
+description: "Documenti relativi a Associazione Italia-Cina"
 hide:
   - navigation
   - toc
   - title
 ---
 
-<div class="org-name">Hongqi</div>
+<div class="org-name">Associazione Italia-Cina</div>
 
-<div class="org-dates">1958 – 1998</div>
+<div class="org-dates">1962 – 201?</div>
 
 
 <div class="org-bio-full">
-    <p><em>Scheda in fase di redazione. Nel frattempo, consulta i documenti collegati a Hongqi qui sotto.</em></p>
+    <p><em>Scheda in fase di redazione. Nel frattempo, consulta i documenti collegati a Associazione Italia-Cina qui sotto.</em></p>
 </div>
 
 
@@ -22,18 +22,10 @@ hide:
 <div class="catalogo-lista">
 
 <div class="doc-row">
-    <div class="doc-data">1968</div>
+    <div class="doc-data">1967</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0011/">Circolare del 16 maggio 1966 - Un grande documento storico</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">1970</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0040/">I membri del Partito Comunista devono essere elementi avanzati del proletariato</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0042/">Citazioni: Il breviario delle guardie rosse</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
     </div>
 </div>
 

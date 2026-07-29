@@ -16,7 +16,7 @@ hide:
             <div class="top-card-text">
                 <div class="top-card-name">Mao Zedong</div>
                 <div class="top-card-dates">1893 – 1976</div>
-                <div class="top-card-count">20 documenti</div>
+                <div class="top-card-count">23 documenti</div>
             </div>
         </a>
     </div>
@@ -58,7 +58,7 @@ hide:
         <button class="lettera-btn lettera-btn--disabled" data-lettera="D" disabled>D</button>
         <button class="lettera-btn lettera-btn--disabled" data-lettera="E" disabled>E</button>
         <button class="lettera-btn" data-lettera="F">F</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="G" disabled>G</button>
+        <button class="lettera-btn" data-lettera="G">G</button>
         <button class="lettera-btn lettera-btn--disabled" data-lettera="H" disabled>H</button>
         <button class="lettera-btn lettera-btn--disabled" data-lettera="I" disabled>I</button>
         <button class="lettera-btn" data-lettera="J">J</button>
@@ -93,6 +93,13 @@ hide:
         <div class="people-name">Fosco Dinucci</div>
         <div class="people-dates">1921 – 1993</div>
         <div class="people-count">2 documenti</div>
+    </a>
+</div>
+<div class="people-card" data-lettera="G">
+    <a href="giorgio-zucchetti/" class="people-link">
+        <div class="people-name">Giorgio Zucchetti</div>
+        <div class="people-dates">1920 – 1997</div>
+        <div class="people-count">1 documento</div>
     </a>
 </div>
 <div class="people-card" data-lettera="J">

@@ -85,6 +85,14 @@ hide:
 <div class="doc-row">
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0039/">Il Presidente Mao Tse-tung sulla Guerra Popolare</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1968</div>
+    <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0030/">La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
     </div>
@@ -158,6 +166,14 @@ hide:
     <div class="doc-data">1970</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0038/">Comunicato della seconda sessione plenaria del IX Comitato Centrale del Partito Comunista Cinese</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1970</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0040/">I membri del Partito Comunista devono essere elementi avanzati del proletariato</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
     </div>
 </div>

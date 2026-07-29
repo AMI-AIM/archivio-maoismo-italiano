@@ -29,6 +29,14 @@ hide:
     </div>
 </div>
 
+<div class="doc-row">
+    <div class="doc-data">1970</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0040/">I membri del Partito Comunista devono essere elementi avanzati del proletariato</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
 </div>
 
 <style>

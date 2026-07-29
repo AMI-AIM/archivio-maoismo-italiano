@@ -17,7 +17,7 @@ hide:
                 <div class="top-card-tipo">Partito</div>
                 <div class="top-card-name">Partito Comunista Cinese</div>
                 <div class="top-card-dates">1921 – </div>
-                <div class="top-card-count">18 documenti</div>
+                <div class="top-card-count">20 documenti</div>
             </div>
         </a>
     </div>
@@ -55,7 +55,7 @@ hide:
     </div>
     <div class="alfabeto-bar">
         <button class="lettera-btn lettera-btn--active" data-lettera="all">Tutte</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="A" disabled>A</button>
+        <button class="lettera-btn" data-lettera="A">A</button>
         <button class="lettera-btn lettera-btn--disabled" data-lettera="B" disabled>B</button>
         <button class="lettera-btn" data-lettera="C">C</button>
         <button class="lettera-btn lettera-btn--disabled" data-lettera="D" disabled>D</button>
@@ -84,6 +84,14 @@ hide:
     </div>
 </div>
 <div class="org-grid" id="org-grid">
+<div class="org-card" data-lettera="A">
+    <a href="associazione-italia-cina/" class="org-link">
+        <div class="org-tipo">Associazione di massa</div>
+        <div class="org-name">Associazione Italia-Cina</div>
+        <div class="org-dates">1962 – 201?</div>
+        <div class="org-count">1 documento</div>
+    </a>
+</div>
 <div class="org-card" data-lettera="C">
     <a href="comitato-centrale-del-pcc/" class="org-link">
         <div class="org-tipo">Organo di partito</div>
@@ -113,7 +121,7 @@ hide:
         <div class="org-tipo">Giornale</div>
         <div class="org-name">Hongqi</div>
         <div class="org-dates">1958 – 1998</div>
-        <div class="org-count">1 documento</div>
+        <div class="org-count">2 documenti</div>
     </a>
 </div>
 <div class="org-card" data-lettera="J">
@@ -121,7 +129,7 @@ hide:
         <div class="org-tipo">Giornale</div>
         <div class="org-name">Jiefangjun Bao</div>
         <div class="org-dates">1956 – </div>
-        <div class="org-count">1 documento</div>
+        <div class="org-count">2 documenti</div>
     </a>
 </div>
 <div class="org-card" data-lettera="N">
@@ -145,7 +153,7 @@ hide:
         <div class="org-tipo">Giornale</div>
         <div class="org-name">Renmin Ribao</div>
         <div class="org-dates">1948 – </div>
-        <div class="org-count">4 documenti</div>
+        <div class="org-count">5 documenti</div>
     </a>
 </div>
 <div class="org-card" data-lettera="S">

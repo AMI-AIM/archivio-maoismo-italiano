@@ -29,6 +29,14 @@ hide:
 <div class="doc-row">
     <div class="doc-data">1967</div>
     <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0042/">Citazioni: Il breviario delle guardie rosse</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1967</div>
+    <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0002/">Sulla giusta soluzione delle contraddizioni in seno al popolo</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
@@ -38,6 +46,14 @@ hide:
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0006/">Al servizio del popolo; In memoria di Norman Bethune; Come Yu Kung rimosse le montagne</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0041/">Citazioni del presidente Mao Tse-tung</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
@@ -70,6 +86,14 @@ hide:
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0037/">I compiti del Partito Comunista Cinese nel periodo della resistenza al Giappone</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0039/">Il Presidente Mao Tse-tung sulla Guerra Popolare</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
