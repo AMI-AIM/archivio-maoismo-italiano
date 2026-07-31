@@ -110,6 +110,16 @@ hide:
     <div class="risultato-data">1967</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
+            <a href="AMI-0044/">Analisi delle classi nella società cinese</a>
+        </div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
+        <div class="risultato-desc"><div>In questo articolo del 1926 Mao Zedong, allora Segretario della Commissione del Movimento Contadino, polemizza con due ali distinte del Partito, l'una esclusivamente concentrata sull'alleanza con il Guomindang (KMT), l'altra sul lavoro tra il numericamente esiguo proletariato industriale cinese. Mao divide la popolazione cinese in nemici e alleati della rivoluzione, individuando nel proletariato la forza guida, nei contadini il principale alleato e nella borghesia terriera il nemico.</div><div><br /></div><div>Copia annotata e recante il timbro delle "Nuove Edizioni Oriente", frazione autodefinitasi "linea rossa" delle Edizioni Oriente, politicamente allineata al Partito Comunista d'Italia (marxista-leninista) di Fosco Dinucci.</div><div><br /></div><div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 14, 1967.</div><div><br /></div></div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1967</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
             <a href="AMI-0042/">Citazioni: Il breviario delle guardie rosse</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Libro</div>
@@ -123,7 +133,7 @@ hide:
             <a href="AMI-0013/">Dichiarazione di Principio - Statuto</a>
         </div>
         <div class="risultato-meta">Ufficio Politico del PCd'I (m-l) · Partito Comunista d'Italia (marxista-leninista) · Opuscolo</div>
-        <div class="risultato-desc">Opuscolo contenente Dichiarazione di principio e Statuto del Partito Comunista d'Italia (marxista-leninista).</div>
+        <div class="risultato-desc"><div style="color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);">Opuscolo contenente Dichiarazione di principio e Statuto del Partito Comunista d'Italia (marxista-leninista), fondato nell'ottobre del 1966 a Livorno.<br /><br />L'opuscolo è composto dalle seguenti sezioni:</div><div style="color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);"><ul style="margin-top:0px;margin-bottom:10px;"><li>Dichiarazione di principio</li><li>Statuto del Partito</li><li>Alla classe operaia, ai contadini, alle masse popolari italiane</li><li>Saluto ai partiti fratelli</li><li>Due documenti sulla vigilanza rivoluzionaria</li><li>Due scritti di Fosco Dinucci, segretario del Partito</li></ul><div>Stampato da Periodici Operai, Livorno, pp. 32, 1967.</div></div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -243,7 +253,7 @@ hide:
             <a href="AMI-0030/">La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria</a>
         </div>
         <div class="risultato-meta">Renmin Ribao · Partito Comunista Cinese · Opuscolo</div>
-        <div class="risultato-desc"><div>La Bussola Che Guida I Popoli Rivoluzionari Di Tutti I Paesi Verso La Vittoria</div><div>Casa Editrice In Lingue Estere</div><div>Pechino 1968</div></div>
+        <div class="risultato-desc">Opuscolo contenente un editoriale del Renmin Ribao (Quotidiano del Popolo) del 18 settembre 1968 e uno del Jiefangjun Bao dello stesso giorno.<div><br /></div><div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 16, 1968.</div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -274,6 +284,16 @@ hide:
         </div>
         <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc">Opuscolo contenente le conclusioni del presidente cinese Mao Zedong al II Congresso nazionale dei rappresentanti operai e contadini. Tradotto e pubblicato dalla Casa editrice in lingue estere di Pechino, 1968.</div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1968</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="AMI-0043/">Sulla Nuova Democrazia</a>
+        </div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
+        <div class="risultato-desc"><div>Questo saggio, scritto da Mao Zedong nel 1940, è trai testi fondativi del maoismo e del sistema di governance della Repubblica Popolare Cinese. Esso immagina la società di "Nuova Democrazia", applicazione cinese di una transizione graduale al socialismo. Questo periodo si caratterizza per la collaborazione del Partito Comunista Cinese con le "classi patriottiche", cioè tutte le persone anti-imperialiste e anti-feudali.</div><div><br /></div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 73, 1968.</div>
     </div>
 </div>
 <div class="risultato-card">
