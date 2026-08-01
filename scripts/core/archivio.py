@@ -493,6 +493,22 @@ hide:
     margin: 0.1rem 0 0 0;
 }}
 
+/* Normalizza qualunque markup grezzo importato dalle descrizioni di Internet Archive
+   (font-size, colore, grassetto, ecc. variano da un item all'altro a seconda di come
+   l'utente originale li ha caricati su IA) forzando l'ereditarietà dal contenitore. */
+.risultato-desc * {{
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    font-style: inherit !important;
+    font-family: inherit !important;
+    color: inherit !important;
+    line-height: inherit !important;
+    background: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: inline !important;
+}}
+
 .nessun-risultato {{
     text-align: center;
     padding: 2rem;
