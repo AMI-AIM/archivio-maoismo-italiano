@@ -290,6 +290,26 @@ hide:
     <div class="risultato-data">1968</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
+            <a href="AMI-0050/">Problemi strategici della guerra rivoluzionaria in Cina</a>
+        </div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
+        <div class="risultato-desc"><div>Testo prodotto, nel 1936, come bilancio dell'esperienza militare acquisita nel corso della Seconda guerra civile con il Guomindang (KMT) e successivamente utilizzato come materiale per un ciclo di conferenze tenuto all'Accademia dell'Esercito rosso. Nell'opera emergono esplicitamente la teoria della guerriglia contadina e della guerra prolungata.</div><div><br /></div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 1968.</div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1968</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="AMI-0051/">Rapporto alla seconda sessione plenaria del settimo Comitato Centrale del Partito Comunista Cinese</a>
+        </div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
+        <div class="risultato-desc"><div>Rapporto presentato dal Presidente Mao Zedong il 1 marzo 1949, alla sessione del settimo Comitato Centrale del PCC antecedente alla vittoria della guerra rivoluzionaria contro i nazionalisti del Guomindang (KMT). Nel rapporto Mao anticipa la svolta politica che il partito dovrà attuare una volta al potere. </div><div><br /></div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 35, 1968.</div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1968</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
             <a href="AMI-0048/">Rapporto d'inchiesta sul movimento contadino nello Hunan</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
@@ -454,6 +474,16 @@ hide:
         </div>
         <div class="risultato-meta">Mao Zedong · Audio</div>
         <div class="risultato-desc">Vinile 33rpm delle dimensioni di un vinile 45rpm con discorsi di Mao Tse-Tung tradotti in italiano con musica popolare cinese in background.<br /></div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1969</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="AMI-0052/">Gli studenti alleati del proletariato nella lotta rivoluzionaria in Italia</a>
+        </div>
+        <div class="risultato-meta">Avanguardia Proletaria Maoista · Avanguardia Proletaria Maoista · Libro</div>
+        <div class="risultato-desc"><div>Opera di riflessione sulla condizione dello studente universitario italiano nel contesto dei movimenti di contestazione del Sessantotto. Il testo espone il punto di vista specifico dell'organizzazione/partito Avanguardia Proletaria Maoista, organismo animato da Michele Semeraro, emerso dalla disgregazione della Federazione Marxista-Leninista d'Italia (1968) e trasformatosi in Partito Comunista Marxista-Leninista Maoista Italiano l'anno seguente (1969).</div><div><br /></div><div>Libro pubblicato da Biblioteca dell'Avanguardia Proletaria, pp. 42, 1969.</div></div>
     </div>
 </div>
 <div class="risultato-card">

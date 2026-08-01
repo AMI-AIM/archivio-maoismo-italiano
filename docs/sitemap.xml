@@ -271,6 +271,21 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0050/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0051/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0052/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://ami-aim.github.io/archivio-maoismo-italiano/persone/mao-zedong/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
@@ -427,6 +442,11 @@
   </url>
   <url>
     <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/comitato-centrale-del-pcc/</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/avanguardia-proletaria-maoista/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>

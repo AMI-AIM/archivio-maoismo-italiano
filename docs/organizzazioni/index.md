@@ -17,7 +17,7 @@ hide:
                 <div class="top-card-tipo">Partito</div>
                 <div class="top-card-name">Partito Comunista Cinese</div>
                 <div class="top-card-dates">1921 – </div>
-                <div class="top-card-count">20 documenti</div>
+                <div class="top-card-count">29 documenti</div>
             </div>
         </a>
     </div>
@@ -89,6 +89,14 @@ hide:
         <div class="org-tipo">Associazione di massa</div>
         <div class="org-name">Associazione Italia-Cina</div>
         <div class="org-dates">1962 – 201?</div>
+        <div class="org-count">1 documento</div>
+    </a>
+</div>
+<div class="org-card" data-lettera="A">
+    <a href="avanguardia-proletaria-maoista/" class="org-link">
+        <div class="org-tipo">Partito</div>
+        <div class="org-name">Avanguardia Proletaria Maoista</div>
+        <div class="org-dates">1968 – 1969</div>
         <div class="org-count">1 documento</div>
     </a>
 </div>
