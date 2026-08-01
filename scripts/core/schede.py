@@ -87,6 +87,7 @@ def crea_schede(df, persone, organizzazioni, output_dir):
             if match:
                 identifier = match.group(1)
         
+        # 🔥 DESCRIZIONE DA IA - SENZA NORMALIZZAZIONE
         descrizione_ia = scarica_descrizione_ia(identifier) if identifier else None
         
         autore_links = []
@@ -480,10 +481,11 @@ hide:
 </script>
 """
 
+        # 🔥 DESCRIZIONE - SENZA NORMALIZZAZIONE
         if descrizione_ia:
             content += f"""
 <div class="doc-abstract">
-    <p>{descrizione_ia}</p>
+    {descrizione_ia}
 </div>
 """
 
