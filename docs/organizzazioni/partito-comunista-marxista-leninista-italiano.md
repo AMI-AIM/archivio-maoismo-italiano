@@ -1,24 +1,19 @@
 ---
 title: " "
-description: "Documenti relativi a Unione dei Comunisti Italiani (marxisti-leninisti)"
+description: "Documenti relativi a Partito Comunista (marxista-leninista) Italiano"
 hide:
   - navigation
   - toc
   - title
 ---
 
-<div class="org-name">Unione dei Comunisti Italiani (marxisti-leninisti)</div>
+<div class="org-name">Partito Comunista (marxista-leninista) Italiano</div>
 
-<div class="org-dates">1968 – 1972</div>
+<div class="org-dates">1972 – 1977</div>
 
 
-<div class="org-bio-with-image">
-    <div class="org-bio-text">
-        <p><em>Scheda in fase di redazione. Nel frattempo, consulta i documenti collegati a Unione dei Comunisti Italiani (marxisti-leninisti) qui sotto.</em></p>
-    </div>
-    <div class="org-bio-image">
-        <img src="/archivio-maoismo-italiano/immagini/profili/logo-UCI.svg" alt="Unione dei Comunisti Italiani (marxisti-leninisti)" class="org-bio-img">
-    </div>
+<div class="org-bio-full">
+    <p><em>Scheda in fase di redazione. Nel frattempo, consulta i documenti collegati a Partito Comunista (marxista-leninista) Italiano qui sotto.</em></p>
 </div>
 
 
@@ -27,26 +22,10 @@ hide:
 <div class="catalogo-lista">
 
 <div class="doc-row">
-    <div class="doc-data">1 agosto 1969</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0035/">Viva il popolo cinese</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">9 ottobre 1969</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0017/">Studenti ed intellettuali rivoluzionari</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
     <div class="doc-data">1972</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0053/">Sosteniamo il Congresso di fondazione del PARTITO COMUNISTA (marxista-leninista) ITALIANO per fare l'Italia rossa e socialista come la Cina di Mao</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
     </div>
 </div>
 

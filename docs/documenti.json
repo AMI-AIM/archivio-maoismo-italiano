@@ -99,8 +99,8 @@
       ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
-        "Unione della gioventù comunista d’Italia (marxista-leninista)",
         "Ufficio Politico del PCd'I (m-l)",
+        "Unione della gioventù comunista d’Italia (marxista-leninista)",
         "Nuova Unità"
       ],
       "descrizione": "<div style=\"color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\">Opuscolo contenente Dichiarazione di principio e Statuto del Partito Comunista d'Italia (marxista-leninista), fondato nell'ottobre del 1966 a Livorno.<br /><br />L'opuscolo è composto dalle seguenti sezioni:</div><div style=\"color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\"><ul style=\"margin-top:0px;margin-bottom:10px;\"><li>Dichiarazione di principio</li><li>Statuto del Partito</li><li>Alla classe operaia, ai contadini, alle masse popolari italiane</li><li>Saluto ai partiti fratelli</li><li>Due documenti sulla vigilanza rivoluzionaria</li><li>Due scritti di Fosco Dinucci, segretario del Partito</li></ul><div>Stampato da Periodici Operai, Livorno, pp. 32, 1967.</div></div>"
@@ -223,9 +223,9 @@
       "persone": [],
       "organizzazioni": [
         "Partito Comunista Cinese",
-        "Comitato Centrale del PCC",
         "Renmin Ribao",
-        "Hongqi"
+        "Hongqi",
+        "Comitato Centrale del PCC"
       ],
       "descrizione": "<div>Opuscolo contente la \"Circolare del Comitato Centrale del Partito Comunista</div><div>Cinese (16 maggio 1966)\", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo \"Un Grande Documento Storico\", pubblicato su Bandiera Rossa e il Quotidiano del Popolo</div>"
     },
@@ -398,9 +398,9 @@
       "url_ia": "https://archive.org/details/bussola-popoli-rivoluzionari/mode/2up",
       "persone": [],
       "organizzazioni": [
+        "Jiefangjun Bao",
         "Partito Comunista Cinese",
-        "Renmin Ribao",
-        "Jiefangjun Bao"
+        "Renmin Ribao"
       ],
       "descrizione": "Opuscolo contenente un editoriale del Renmin Ribao (Quotidiano del Popolo) del 18 settembre 1968 e uno del Jiefangjun Bao dello stesso giorno.<div><br /></div><div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 16, 1968.</div>"
     },
@@ -767,9 +767,9 @@
       ],
       "url_ia": "https://archive.org/details/conversazione-mao-pesce",
       "persone": [
-        "Osvaldo Pesce",
         "Dino Dini",
-        "Mao Zedong"
+        "Mao Zedong",
+        "Osvaldo Pesce"
       ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
@@ -795,14 +795,14 @@
       ],
       "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
       "persone": [
-        "Zhou Enlai",
+        "Chen Boda",
         "Osvaldo Pesce",
         "Kang Sheng",
-        "Dino Dini",
-        "Yao Wenyuan",
         "Jiang Qing",
+        "Dino Dini",
         "Mao Zedong",
-        "Chen Boda"
+        "Zhou Enlai",
+        "Yao Wenyuan"
       ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
@@ -828,9 +828,9 @@
       ],
       "url_ia": "https://archive.org/details/istruzioni-mao-italiano",
       "persone": [
-        "Osvaldo Pesce",
+        "Dino Dini",
         "Mao Zedong",
-        "Dino Dini"
+        "Osvaldo Pesce"
       ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
@@ -856,8 +856,8 @@
       ],
       "url_ia": "https://archive.org/details/Pesce-e-Mao",
       "persone": [
-        "Osvaldo Pesce",
-        "Mao Zedong"
+        "Mao Zedong",
+        "Osvaldo Pesce"
       ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
@@ -1103,12 +1103,12 @@
       ],
       "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
       "persone": [
-        "Fosco Dinucci",
-        "Zhou Enlai",
-        "Kang Sheng",
+        "Chen Boda",
         "Lin Biao",
+        "Fosco Dinucci",
+        "Kang Sheng",
         "Mao Zedong",
-        "Chen Boda"
+        "Zhou Enlai"
       ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
@@ -1135,8 +1135,8 @@
       "url_ia": "https://archive.org/details/studenti-ed-intellettuali-ciclostilato-uci-m-l/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Unione dei Comunisti Italiani (marxisti-leninisti)",
-        "Comitato di Partito di Catania (UCI-m.l)"
+        "Comitato di Partito di Catania (UCI-m.l)",
+        "Unione dei Comunisti Italiani (marxisti-leninisti)"
       ],
       "descrizione": "Volantino ciclostilato a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), meglio conosciuta come Servire il Popolo. Il volantino riporta un appello a \"Studenti ed Intellettuali Rivoluzionari\" affinché questi si uniscano all'organizzazione maoista."
     },
@@ -1158,8 +1158,8 @@
       ],
       "url_ia": "https://archive.org/details/comunicato-ix-cc/mode/2up",
       "persone": [
-        "Lin Biao",
-        "Mao Zedong"
+        "Mao Zedong",
+        "Lin Biao"
       ],
       "organizzazioni": [
         "Partito Comunista Cinese",
@@ -1186,9 +1186,9 @@
       "url_ia": "https://archive.org/details/membri-del-partito-avanzati/mode/2up",
       "persone": [],
       "organizzazioni": [
+        "Jiefangjun Bao",
         "Partito Comunista Cinese",
         "Renmin Ribao",
-        "Jiefangjun Bao",
         "Hongqi"
       ],
       "descrizione": "<div style=\"margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\"><div style=\"margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;\">L'opuscolo contiene un editoriale condiviso tra Renmin Ribao (Quotidiano del Popolo), Hongqi (Bandiera Rossa) e Jiefangjun Bao (Quotidiano dell'EPL), pubblicato il 1 luglio 1970, in commemorazione del 49° anniversario della fondazione del Partito Comunista Cinese</div></div><div style=\"margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\">Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 12, 1970.</div><div class=\"metadata-expandable-list row\" style=\"margin:1.43em -15px;width:715.2px;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\"></div>"
@@ -1287,8 +1287,8 @@
       "url_ia": "https://archive.org/details/volantino-congresso-di-fondazione-pcm-l-i/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Unione dei Comunisti Italiani (marxisti-leninisti)",
-        "Partito Comunista (marxista-leninista) Italiano"
+        "Partito Comunista (marxista-leninista) Italiano",
+        "Unione dei Comunisti Italiani (marxisti-leninisti)"
       ],
       "descrizione": "Volantino dell'Unione dei Comunisti Italiani (marxisti-leninisti) / Servire il popolo che annuncia l'imminente congresso di fondazione del Partito Comunista (marxista-leninista) Italiano (PC(m-l)I), il 16 aprile 1972. Coloro che ricevono il volantino - nelle intenzioni dell'UCI \"Operai, lavoratori e democratici che avete a cuore la causa della fondazione del PC(m-l)I\" - sono invitati ad inviare un saluta al congresso tramite l'apposito modulo sul retro."
     },

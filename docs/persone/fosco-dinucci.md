@@ -12,8 +12,13 @@ hide:
 <div class="person-dates">1921 – 1993</div>
 
 
-<div class="person-bio-full">
-    <p><em>Scheda biografica in fase di redazione. Nel frattempo, consulta i documenti collegati a Fosco Dinucci qui sotto.</em></p>
+<div class="person-bio-with-image">
+    <div class="person-bio-text">
+        <p><em>Scheda biografica in fase di redazione. Nel frattempo, consulta i documenti collegati a Fosco Dinucci qui sotto.</em></p>
+    </div>
+    <div class="person-bio-image">
+        <img src="/archivio-maoismo-italiano/immagini/profili/dinucci.webp" alt="Fosco Dinucci" class="person-bio-img">
+    </div>
 </div>
 
 

@@ -149,6 +149,14 @@ hide:
     </a>
 </div>
 <div class="org-card" data-lettera="P">
+    <a href="partito-comunista-marxista-leninista-italiano/" class="org-link">
+        <div class="org-tipo">Partito</div>
+        <div class="org-name">Partito Comunista (marxista-leninista) Italiano</div>
+        <div class="org-dates">1972 – 1977</div>
+        <div class="org-count">1 documento</div>
+    </a>
+</div>
+<div class="org-card" data-lettera="P">
     <a href="partito-comunista-ditalia-marxista-leninista-linea-rossa/" class="org-link">
         <div class="org-tipo">Partito</div>
         <div class="org-name">Partito Comunista d'Italia (marxista-leninista) - linea rossa</div>
@@ -185,7 +193,7 @@ hide:
         <div class="org-tipo">Partito</div>
         <div class="org-name">Unione dei Comunisti Italiani (marxisti-leninisti)</div>
         <div class="org-dates">1968 – 1972</div>
-        <div class="org-count">2 documenti</div>
+        <div class="org-count">3 documenti</div>
     </a>
 </div>
 <div class="org-card" data-lettera="U">

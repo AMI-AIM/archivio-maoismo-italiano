@@ -29,6 +29,14 @@ hide:
 <div class="doc-row">
     <div class="doc-data">1967</div>
     <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0044/">Analisi delle classi nella società cinese</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1967</div>
+    <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0042/">Citazioni: Il breviario delle guardie rosse</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
@@ -53,7 +61,7 @@ hide:
 <div class="doc-row">
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0041/">Citazioni del presidente Mao Tse-tung</a></div>
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0041/">Citazioni del presidente Mao Tse-tung: Il libro delle guardie rosse</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
@@ -102,6 +110,54 @@ hide:
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0007/">Preoccuparsi delle condizioni di vita delle masse fare attenzione ai metodi di lavoro</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0050/">Problemi strategici della guerra rivoluzionaria in Cina</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0051/">Rapporto alla seconda sessione plenaria del settimo Comitato Centrale del Partito Comunista Cinese</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0048/">Rapporto d'inchiesta sul movimento contadino nello Hunan</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0043/">Sulla Nuova Democrazia</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0049/">Sulla contraddizione</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1968</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0045/">Sulla pratica</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
@@ -165,6 +221,14 @@ hide:
 <div class="doc-row">
     <div class="doc-data">1969</div>
     <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0046/">La lotta sui monti Chingkang</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1969</div>
+    <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0009/">Orientamento del movimento giovanile</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
@@ -198,6 +262,14 @@ hide:
     <div class="doc-data">1970</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0010/">Popoli di tutto il mondo, unitevi per sconfiggere gli aggressori americani e tutti i loro lacché! (Dichiarazione del 20 maggio 1970)</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1971</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0047/">La questione dell'indipendenza e dell'autonomia nel Fronte Unito</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>
 </div>
