@@ -101,17 +101,10 @@ def crea_schede(df, persone, organizzazioni, output_dir):
         persone_collegate_html = link_lista(persone_collegate, persone, organizzazioni)
         organizzazioni_collegate_html = link_lista(organizzazioni_collegate, persone, organizzazioni)
         
-        # 🔥 GENERA LINK PER ARGOMENTI (serie splittata su ;)
+        # 🔥 GENERA LINK PER ARGOMENTO (serie)
         if serie:
-            tags = [s.strip() for s in serie.split(';') if s.strip()]
-            if tags:
-                link_tags = []
-                for tag in tags:
-                    tag_encoded = urllib.parse.quote(tag, safe='')
-                    link_tags.append(f'<a href="/archivio-maoismo-italiano/documenti/?serie={tag_encoded}">{tag}</a>')
-                argomento_html = ', '.join(link_tags)
-            else:
-                argomento_html = 'N/A'
+            serie_encoded = urllib.parse.quote(serie, safe='')
+            argomento_html = f'<a href="/archivio-maoismo-italiano/documenti/?serie={serie_encoded}">{serie}</a>'
         else:
             argomento_html = 'N/A'
         
@@ -485,7 +478,7 @@ hide:
         if descrizione_ia:
             content += f"""
 <div class="doc-abstract">
-    <p>{descrizione_ia}</p>
+    {descrizione_ia}
 </div>
 """
 
@@ -664,6 +657,31 @@ hide:
 
 .doc-abstract p {{
     margin: 0;
+}}
+
+/* Normalizza il markup grezzo importato da Internet Archive (font-size, colore,
+   grassetto ecc. variano da un item all'altro a seconda di come l'utente originale
+   li ha caricati su IA), mantenendo però la struttura a paragrafi/elenchi. */
+.doc-abstract * {{
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    font-style: inherit !important;
+    font-family: inherit !important;
+    color: inherit !important;
+    line-height: inherit !important;
+    background: none !important;
+}}
+
+.doc-abstract p,
+.doc-abstract ul,
+.doc-abstract ol {{
+    margin: 0 0 0.8rem 0 !important;
+}}
+
+.doc-abstract p:last-child,
+.doc-abstract ul:last-child,
+.doc-abstract ol:last-child {{
+    margin-bottom: 0 !important;
 }}
 
 .doc-metadata {{
