@@ -290,10 +290,40 @@ hide:
     <div class="risultato-data">1968</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
+            <a href="AMI-0048/">Rapporto d'inchiesta sul movimento contadino nello Hunan</a>
+        </div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
+        <div class="risultato-desc"><div>Nel rapporto, scritto nel 1927, Mao Zedong polemizza con la linea dell'attuale leader del Partito Comunista Cinese, Chen Duxiu, esclusivamente concentrata sul proletariato industriale urbano ed opposta ai contadini, che nel frattempo mostravano segnali insurrezionali o rivoluzionari. In questo testo, quindi, emerge la centralità dei contadini nel pensiero di Mao Zedong.</div><div><br /></div><div><div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 55, 1968.</div></div></div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1968</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
             <a href="AMI-0043/">Sulla Nuova Democrazia</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
         <div class="risultato-desc"><div>Questo saggio, scritto da Mao Zedong nel 1940, è trai testi fondativi del maoismo e del sistema di governance della Repubblica Popolare Cinese. Esso immagina la società di "Nuova Democrazia", applicazione cinese di una transizione graduale al socialismo. Questo periodo si caratterizza per la collaborazione del Partito Comunista Cinese con le "classi patriottiche", cioè tutte le persone anti-imperialiste e anti-feudali.</div><div><br /></div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 73, 1968.</div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1968</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="AMI-0049/">Sulla contraddizione</a>
+        </div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
+        <div class="risultato-desc"><div>Il seguente testo rappresenta il fondamento filosofico del maoismo. Il saggio, scritto dopo <i>Sulla pratica</i> (1937), mira allo stesso scopo: la correzione del "dogmatismo" all'interno del Partito Comunista Cinese. Nell'analisi della contraddizione, intesa come qualcosa di universale - insita in ogni cosa, Mao esplicita per la prima volta il rapporto tra contraddizioni principali e secondarie.</div><div><br /></div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 95, 1968.</div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1968</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="AMI-0045/">Sulla pratica</a>
+        </div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
+        <div class="risultato-desc"><div>Saggio fondamentale del maoismo, scritto dal Presidente Mao Zedong nel 1937 "per denunciare, basandosi sulla teoria marxista della conoscenza, gli errori di carattere soggettivo del dogmatismo e dell'empirismo [...] in seno al nostro Partito".</div><div><br /></div>Opuscolo pubblicato dalla Casa editrice in lingue estere, Pechino, Cina, pp. 22, 1968.</div>
     </div>
 </div>
 <div class="risultato-card">
@@ -430,6 +460,16 @@ hide:
     <div class="risultato-data">1969</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
+            <a href="AMI-0046/">La lotta sui monti Chingkang</a>
+        </div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
+        <div class="risultato-desc"><div>L'opuscolo contiene il rapporto, scritto da Mao Zedong il 25 novembre 1928,  riguardante l'esperienza della prima base rivoluzionaria dell'Esercito rosso cinese.</div><div><br /></div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 50, 1969.</div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1969</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
             <a href="AMI-0009/">Orientamento del movimento giovanile</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
@@ -514,6 +554,16 @@ hide:
         </div>
         <div class="risultato-meta">Stella Rossa - Fronte Rivoluzionario Marxista-Leninista · Testo</div>
         <div class="risultato-desc"><div>Estratto dall'opuscolo "<i>PER LA VITTORIA DEL POTERE ROSSO IN ITALIA-ATTI DEL CONGRESSO NAZIONALE COSTITUTIVO DI STELLA ROSSA FRONTE RIVOLUZIONARIO MARXISTA-LENINISTA</i>".</div><div>Approvato nel suo testo definitivo dal Congresso Nazionale in seduta plenaria il 4 Novembre 1970.</div><div><br /></div><div>Stella Rossa fu un'organizzazione marxista-leninista (di orientamento maoista), fondata da Vincenzo Calò (già <i>Viva il Leninismo!</i>, Federazione Marxista-Leninista d'Italia, Tribuna Rossa) nel 1969. Nel 1976 si trasforma in Partito della rivoluzione socialista.</div><div><br /></div></div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1971</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="AMI-0047/">La questione dell'indipendenza e dell'autonomia nel Fronte Unito</a>
+        </div>
+        <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
+        <div class="risultato-desc"><div>Saggio presentato durante la sesta sessione plenaria del VI Comitato Centrale del Partito Comunista Cinese (1938). In esso il Presidente Mao Zedong illustra la politica seguita dal Partito nel periodo del Fronte Unito con i nazionalisti del Guomindang (KMT)<br /></div><div><br /></div><div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 7, 1971.</div><div><br /></div></div>
     </div>
 </div>
 <div class="risultato-card">

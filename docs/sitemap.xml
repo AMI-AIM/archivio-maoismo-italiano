@@ -246,6 +246,31 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0045/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0046/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0047/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0048/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0049/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://ami-aim.github.io/archivio-maoismo-italiano/persone/mao-zedong/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>

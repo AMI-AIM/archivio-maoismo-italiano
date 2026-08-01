@@ -38,7 +38,8 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi",
+        "Fondamenti del maoismo"
       ],
       "url_ia": "https://archive.org/details/analisi-delle-classi/mode/2up",
       "persone": [
@@ -67,8 +68,8 @@
       ],
       "url_ia": "https://archive.org/details/breviario-delle-guardie-rosse/mode/2up",
       "persone": [
-        "Giorgio Zucchetti",
-        "Mao Zedong"
+        "Mao Zedong",
+        "Giorgio Zucchetti"
       ],
       "organizzazioni": [
         "Associazione Italia-Cina"
@@ -97,10 +98,10 @@
         "Osvaldo Pesce"
       ],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
         "Nuova Unità",
         "Ufficio Politico del PCd'I (m-l)",
-        "Unione della gioventù comunista d’Italia (marxista-leninista)"
+        "Unione della gioventù comunista d’Italia (marxista-leninista)",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "<div style=\"color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\">Opuscolo contenente Dichiarazione di principio e Statuto del Partito Comunista d'Italia (marxista-leninista), fondato nell'ottobre del 1966 a Livorno.<br /><br />L'opuscolo è composto dalle seguenti sezioni:</div><div style=\"color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\"><ul style=\"margin-top:0px;margin-bottom:10px;\"><li>Dichiarazione di principio</li><li>Statuto del Partito</li><li>Alla classe operaia, ai contadini, alle masse popolari italiane</li><li>Saluto ai partiti fratelli</li><li>Due documenti sulla vigilanza rivoluzionaria</li><li>Due scritti di Fosco Dinucci, segretario del Partito</li></ul><div>Stampato da Periodici Operai, Livorno, pp. 32, 1967.</div></div>"
     },
@@ -118,7 +119,8 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi",
+        "Fondamenti del maoismo"
       ],
       "url_ia": "https://archive.org/details/sulla-giusta-soluzione-delle-contraddizioni-in-seno-al-popolo/mode/2up",
       "persone": [
@@ -189,7 +191,8 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi",
+        "Fondamenti del maoismo"
       ],
       "url_ia": "https://archive.org/details/tre-vecchi-articoli/mode/2up",
       "persone": [
@@ -214,15 +217,15 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi"
       ],
       "url_ia": "https://archive.org/details/circolare-16-maggio/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Comitato Centrale del PCC",
-        "Renmin Ribao",
+        "Partito Comunista Cinese",
         "Hongqi",
-        "Partito Comunista Cinese"
+        "Comitato Centrale del PCC",
+        "Renmin Ribao"
       ],
       "descrizione": "<div>Opuscolo contente la \"Circolare del Comitato Centrale del Partito Comunista</div><div>Cinese (16 maggio 1966)\", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo \"Un Grande Documento Storico\", pubblicato su Bandiera Rossa e il Quotidiano del Popolo</div>"
     },
@@ -263,7 +266,8 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi",
+        "Fondamenti del maoismo"
       ],
       "url_ia": "https://archive.org/details/idee-errate/mode/2up",
       "persone": [
@@ -288,7 +292,7 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi"
       ],
       "url_ia": "https://archive.org/details/idee-giuste/mode/2up",
       "persone": [
@@ -313,7 +317,7 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi"
       ],
       "url_ia": "https://archive.org/details/dichiarazione-in-supporto-degli-afroamericani/mode/2up",
       "persone": [
@@ -338,7 +342,7 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi"
       ],
       "url_ia": "https://archive.org/details/compiti-guerra-giapponese/mode/2up",
       "persone": [
@@ -363,7 +367,7 @@
       ],
       "tipo": "Libro",
       "serie": [
-        "Testi del maoismo",
+        "Materiali cinesi",
         "Libretti rossi"
       ],
       "url_ia": "https://archive.org/details/sulla-guerra-popolare/mode/2up",
@@ -389,14 +393,14 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi"
       ],
       "url_ia": "https://archive.org/details/bussola-popoli-rivoluzionari/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Renmin Ribao",
         "Partito Comunista Cinese",
-        "Jiefangjun Bao"
+        "Jiefangjun Bao",
+        "Renmin Ribao"
       ],
       "descrizione": "Opuscolo contenente un editoriale del Renmin Ribao (Quotidiano del Popolo) del 18 settembre 1968 e uno del Jiefangjun Bao dello stesso giorno.<div><br /></div><div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 16, 1968.</div>"
     },
@@ -414,7 +418,7 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi"
       ],
       "url_ia": "https://archive.org/details/la-classe-operai-deve-esercitare-la-sua-direzione-in-ogni-cam/mode/2up",
       "persone": [
@@ -462,7 +466,7 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi"
       ],
       "url_ia": "https://archive.org/details/preoccuparsi-delle-condizioni-di-vita-delle-masse-fare-attenzione-ai-metodi-di-lavoro/mode/2up",
       "persone": [
@@ -472,6 +476,32 @@
         "Partito Comunista Cinese"
       ],
       "descrizione": "Opuscolo contenente le conclusioni del presidente cinese Mao Zedong al II Congresso nazionale dei rappresentanti operai e contadini. Tradotto e pubblicato dalla Casa editrice in lingue estere di Pechino, 1968."
+    },
+    {
+      "id": "AMI-0048",
+      "titolo": "Rapporto d'inchiesta sul movimento contadino nello Hunan",
+      "autore": "Mao Zedong",
+      "organizzazione": "Partito Comunista Cinese",
+      "data": "1968",
+      "anno": 1968,
+      "data_ordine": [
+        1968,
+        1,
+        1
+      ],
+      "tipo": "Opuscolo",
+      "serie": [
+        "Materiali cinesi",
+        "Fondamenti del maoismo"
+      ],
+      "url_ia": "https://archive.org/details/inchiesta-movimento-contadino-hunan/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Partito Comunista Cinese"
+      ],
+      "descrizione": "<div>Nel rapporto, scritto nel 1927, Mao Zedong polemizza con la linea dell'attuale leader del Partito Comunista Cinese, Chen Duxiu, esclusivamente concentrata sul proletariato industriale urbano ed opposta ai contadini, che nel frattempo mostravano segnali insurrezionali o rivoluzionari. In questo testo, quindi, emerge la centralità dei contadini nel pensiero di Mao Zedong.</div><div><br /></div><div><div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 55, 1968.</div></div>"
     },
     {
       "id": "AMI-0043",
@@ -487,7 +517,8 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi",
+        "Fondamenti del maoismo"
       ],
       "url_ia": "https://archive.org/details/sulla-nuova-democrazia/mode/2up",
       "persone": [
@@ -497,6 +528,58 @@
         "Partito Comunista Cinese"
       ],
       "descrizione": "<div>Questo saggio, scritto da Mao Zedong nel 1940, è trai testi fondativi del maoismo e del sistema di governance della Repubblica Popolare Cinese. Esso immagina la società di \"Nuova Democrazia\", applicazione cinese di una transizione graduale al socialismo. Questo periodo si caratterizza per la collaborazione del Partito Comunista Cinese con le \"classi patriottiche\", cioè tutte le persone anti-imperialiste e anti-feudali.</div><div><br /></div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 73, 1968."
+    },
+    {
+      "id": "AMI-0049",
+      "titolo": "Sulla contraddizione",
+      "autore": "Mao Zedong",
+      "organizzazione": "Partito Comunista Cinese",
+      "data": "1968",
+      "anno": 1968,
+      "data_ordine": [
+        1968,
+        1,
+        1
+      ],
+      "tipo": "Opuscolo",
+      "serie": [
+        "Materiali cinesi",
+        "Fondamenti del maoismo"
+      ],
+      "url_ia": "https://archive.org/details/sulla-contraddizione/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Partito Comunista Cinese"
+      ],
+      "descrizione": "<div>Il seguente testo rappresenta il fondamento filosofico del maoismo. Il saggio, scritto dopo <i>Sulla pratica</i> (1937), mira allo stesso scopo: la correzione del \"dogmatismo\" all'interno del Partito Comunista Cinese. Nell'analisi della contraddizione, intesa come qualcosa di universale - insita in ogni cosa, Mao esplicita per la prima volta il rapporto tra contraddizioni principali e secondarie.</div><div><br /></div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 95, 1968."
+    },
+    {
+      "id": "AMI-0045",
+      "titolo": "Sulla pratica",
+      "autore": "Mao Zedong",
+      "organizzazione": "Partito Comunista Cinese",
+      "data": "1968",
+      "anno": 1968,
+      "data_ordine": [
+        1968,
+        1,
+        1
+      ],
+      "tipo": "Opuscolo",
+      "serie": [
+        "Materiali cinesi",
+        "Fondamenti del maoismo"
+      ],
+      "url_ia": "https://archive.org/details/sulla-pratica/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Partito Comunista Cinese"
+      ],
+      "descrizione": "<div>Saggio fondamentale del maoismo, scritto dal Presidente Mao Zedong nel 1937 \"per denunciare, basandosi sulla teoria marxista della conoscenza, gli errori di carattere soggettivo del dogmatismo e dell'empirismo [...] in seno al nostro Partito\".</div><div><br /></div>Opuscolo pubblicato dalla Casa editrice in lingue estere, Pechino, Cina, pp. 22, 1968."
     },
     {
       "id": "AMI-0031",
@@ -512,7 +595,7 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi"
       ],
       "url_ia": "https://archive.org/details/sulla-tattica-contro-limperialismo-giapponese/mode/2up",
       "persone": [
@@ -634,12 +717,12 @@
       "url_ia": "https://archive.org/details/conversazione-mao-pesce",
       "persone": [
         "Dino Dini",
-        "Mao Zedong",
-        "Osvaldo Pesce"
+        "Osvaldo Pesce",
+        "Mao Zedong"
       ],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Partito Comunista Cinese"
+        "Partito Comunista Cinese",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "<font color=\"#444444\" face=\"Tahoma, Helvetica, Microsoft Yahei, sans-serif\" size=\"5\"><span style=\"background-color:rgb(255,255,255);\">Trascrizione della conversazione tenuta tra il Presidente cinese Mao Zedong e due rappresentanti del Partito Comunista d'Italia (marxista-leninista), Osvaldo Pesce e Dino Dini, il 13 agosto 1968.<br /><br />La conversazione verte sugli sviluppi della Grande Rivoluzione Proletaria Culturale e sulla situazione politica europea. In particolare, Mao consiglia agli italiani di non partecipare alle elezioni, per evitare il pericolo revisionista.<br /><br />Testo riprodotto in 宋永毅</span>《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati]</font><span style=\"color:rgb(68,68,68);font-family:Tahoma, Helvetica, 'Microsoft Yahei', sans-serif;font-size:x-large;background-color:rgb(255,255,255);\">, 国史出版社, 2018. </span><font color=\"#444444\" face=\"Tahoma, Helvetica, Microsoft Yahei, sans-serif\" size=\"5\"> </font>"
     },
@@ -661,18 +744,18 @@
       ],
       "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
       "persone": [
-        "Dino Dini",
+        "Zhou Enlai",
         "Kang Sheng",
+        "Dino Dini",
         "Osvaldo Pesce",
         "Jiang Qing",
         "Chen Boda",
-        "Mao Zedong",
         "Yao Wenyuan",
-        "Zhou Enlai"
+        "Mao Zedong"
       ],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Renmin Ribao"
+        "Renmin Ribao",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta a Pechino dalla leadership del Partito Comunista Cinese. In rappresentanza del PCd'I (ml), in ordine, Osvaldo Pesce e Dino Dini. La leadership cinese è composta da, sempre in ordine, Chen Boda, Kang Sheng, Jiang Qing, Mao Zedong, Zhou Enlai, Yao Wenyuan. <div><br /></div><div>Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 14 agosto 1968, p. 1), Peking Review (<span style=\"text-indent:0cm;\">no. 33, 1968, p. 8) e Nuova Unità (31 agosto 1968, p. 1)</span></div>"
     },
@@ -695,12 +778,12 @@
       "url_ia": "https://archive.org/details/istruzioni-mao-italiano",
       "persone": [
         "Dino Dini",
-        "Mao Zedong",
-        "Osvaldo Pesce"
+        "Osvaldo Pesce",
+        "Mao Zedong"
       ],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Partito Comunista Cinese"
+        "Partito Comunista Cinese",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "Nota del presidente Mao Zedong riguardante la partecipazione dei partiti comunisti marxisti-leninisti alle elezioni parlamentari dei propri paesi.<br /><br />Dopo aver discusso dell'argomento con Osvaldo Pesce (13/08/1968), il Presidente cinese ha incaricato Kang Sheng di presentare un rapporto sulla questione.<br /><br /><div>Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018.  </div>"
     },
@@ -722,12 +805,12 @@
       ],
       "url_ia": "https://archive.org/details/Pesce-e-Mao",
       "persone": [
-        "Mao Zedong",
-        "Osvaldo Pesce"
+        "Osvaldo Pesce",
+        "Mao Zedong"
       ],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Nuova Unità"
+        "Nuova Unità",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "Osvaldo Pesce, rappresentante del Partito Comunista d'Italia (marxista-leninista), incontra il presidente del Partito Comunista Cinese Mao Zedong. Foto pubblicata su Nuova Unità (31 agosto 1968, p. 4.)"
     },
@@ -750,8 +833,8 @@
       "url_ia": "https://archive.org/details/lavoro-politico-10/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Lavoro Politico"
+        "Lavoro Politico",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "rivista \"Lavoro politico\", n. 10 - settembre 1968"
     },
@@ -774,9 +857,9 @@
       "url_ia": "https://archive.org/details/lavoro-politico-11-12/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
         "Lavoro Politico",
-        "Partito Comunista d'Italia (marxista-leninista) - linea rossa"
+        "Partito Comunista d'Italia (marxista-leninista) - linea rossa",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "rivista \"Lavoro politico\", n. 11 - 12, dicembre 1968 - gennaio 1969"
     },
@@ -794,7 +877,8 @@
       ],
       "tipo": "Libro",
       "serie": [
-        "Testi del maoismo",
+        "Materiali cinesi",
+        "Fondamenti del maoismo",
         "Libretti rossi"
       ],
       "url_ia": "https://archive.org/details/1967-citazioni-dalle-opere-del-presidente-mao-tse-tung-lingue-estere/mode/2up",
@@ -830,6 +914,31 @@
       "descrizione": "Vinile 33rpm delle dimensioni di un vinile 45rpm con discorsi di Mao Tse-Tung tradotti in italiano con musica popolare cinese in background.<br />"
     },
     {
+      "id": "AMI-0046",
+      "titolo": "La lotta sui monti Chingkang",
+      "autore": "Mao Zedong",
+      "organizzazione": "Partito Comunista Cinese",
+      "data": "1969",
+      "anno": 1969,
+      "data_ordine": [
+        1969,
+        1,
+        1
+      ],
+      "tipo": "Opuscolo",
+      "serie": [
+        "Materiali cinesi"
+      ],
+      "url_ia": "https://archive.org/details/lotta-monti-chingkang/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Partito Comunista Cinese"
+      ],
+      "descrizione": "<div>L'opuscolo contiene il rapporto, scritto da Mao Zedong il 25 novembre 1928,  riguardante l'esperienza della prima base rivoluzionaria dell'Esercito rosso cinese.</div><div><br /></div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 50, 1969."
+    },
+    {
       "id": "AMI-0009",
       "titolo": "Orientamento del movimento giovanile",
       "autore": "Mao Zedong",
@@ -843,7 +952,7 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi"
       ],
       "url_ia": "https://archive.org/details/movimento-giovanile/mode/2up",
       "persone": [
@@ -868,7 +977,7 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi"
       ],
       "url_ia": "https://archive.org/details/comitati-di-partito/mode/2up",
       "persone": [
@@ -920,16 +1029,16 @@
       ],
       "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
       "persone": [
+        "Fosco Dinucci",
+        "Lin Biao",
+        "Zhou Enlai",
         "Kang Sheng",
         "Chen Boda",
-        "Lin Biao",
-        "Mao Zedong",
-        "Fosco Dinucci",
-        "Zhou Enlai"
+        "Mao Zedong"
       ],
       "organizzazioni": [
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Renmin Ribao"
+        "Renmin Ribao",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "<span style=\"font-size:12pt;line-height:150%;font-family:'Times New Roman', serif;letter-spacing:0.75pt;\">Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese in occasione dei festeggiamenti del 1° ottobre 1969. Nella foto compaiono, in ordine, Zhou Enlai, Mao Zedong, Lin Biao, Kang Sheng e Chen Boda. Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 3 ottobre 1969, p. 1).</span>"
     },
@@ -952,8 +1061,8 @@
       "url_ia": "https://archive.org/details/studenti-ed-intellettuali-ciclostilato-uci-m-l/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Unione dei Comunisti Italiani (marxisti-leninisti)",
-        "Comitato di Partito di Catania (UCI-m.l)"
+        "Comitato di Partito di Catania (UCI-m.l)",
+        "Unione dei Comunisti Italiani (marxisti-leninisti)"
       ],
       "descrizione": "Volantino ciclostilato a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), meglio conosciuta come Servire il Popolo. Il volantino riporta un appello a \"Studenti ed Intellettuali Rivoluzionari\" affinché questi si uniscano all'organizzazione maoista."
     },
@@ -971,7 +1080,7 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi"
       ],
       "url_ia": "https://archive.org/details/comunicato-ix-cc/mode/2up",
       "persone": [
@@ -979,8 +1088,8 @@
         "Mao Zedong"
       ],
       "organizzazioni": [
-        "Comitato Centrale del PCC",
-        "Partito Comunista Cinese"
+        "Partito Comunista Cinese",
+        "Comitato Centrale del PCC"
       ],
       "descrizione": "<div>Sommario della seconda sessione plenaria del CC del PCC, tenutasi in seguito al IX Congresso (1969). </div><div><br /></div><div><div>\"Il Partito del Lavoro d'Albania e i partiti e le organizzazioni autenticamente marxisti-leninisti del mondo conseguono di continuo enormi successi nella lotta contro l'imperialismo capeggiato dagli Stati Uniti, contro il revisionismo moderno con al centro il revisionismo sovietico e contro la reazione dei vari paesi.\"</div></div><div><br /></div>Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 15, 1970."
     },
@@ -998,15 +1107,15 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi"
       ],
       "url_ia": "https://archive.org/details/membri-del-partito-avanzati/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Renmin Ribao",
-        "Hongqi",
         "Partito Comunista Cinese",
-        "Jiefangjun Bao"
+        "Hongqi",
+        "Jiefangjun Bao",
+        "Renmin Ribao"
       ],
       "descrizione": "<div style=\"margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\"><div style=\"margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;\">L'opuscolo contiene un editoriale condiviso tra Renmin Ribao (Quotidiano del Popolo), Hongqi (Bandiera Rossa) e Jiefangjun Bao (Quotidiano dell'EPL), pubblicato il 1 luglio 1970, in commemorazione del 49° anniversario della fondazione del Partito Comunista Cinese</div></div><div style=\"margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\">Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 12, 1970.</div><div class=\"metadata-expandable-list row\" style=\"margin:1.43em -15px;width:715.2px;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\"></div>"
     },
@@ -1024,7 +1133,7 @@
       ],
       "tipo": "Opuscolo",
       "serie": [
-        "Testi del maoismo"
+        "Materiali cinesi"
       ],
       "url_ia": "https://archive.org/details/popoli-di-tutto-il-mondo/mode/2up",
       "persone": [
@@ -1059,6 +1168,31 @@
         "Stella Rossa - Fronte Rivoluzionario Marxista-Leninista"
       ],
       "descrizione": "<div>Estratto dall'opuscolo \"<i>PER LA VITTORIA DEL POTERE ROSSO IN ITALIA-ATTI DEL CONGRESSO NAZIONALE COSTITUTIVO DI STELLA ROSSA FRONTE RIVOLUZIONARIO MARXISTA-LENINISTA</i>\".</div><div>Approvato nel suo testo definitivo dal Congresso Nazionale in seduta plenaria il 4 Novembre 1970.</div><div><br /></div><div>Stella Rossa fu un'organizzazione marxista-leninista (di orientamento maoista), fondata da Vincenzo Calò (già <i>Viva il Leninismo!</i>, Federazione Marxista-Leninista d'Italia, Tribuna Rossa) nel 1969. Nel 1976 si trasforma in Partito della rivoluzione socialista.</div><div><br /></div>"
+    },
+    {
+      "id": "AMI-0047",
+      "titolo": "La questione dell'indipendenza e dell'autonomia nel Fronte Unito",
+      "autore": "Mao Zedong",
+      "organizzazione": "Partito Comunista Cinese",
+      "data": "1971",
+      "anno": 1971,
+      "data_ordine": [
+        1971,
+        1,
+        1
+      ],
+      "tipo": "Opuscolo",
+      "serie": [
+        "Materiali cinesi"
+      ],
+      "url_ia": "https://archive.org/details/questione-dellindipendenza/mode/2up",
+      "persone": [
+        "Mao Zedong"
+      ],
+      "organizzazioni": [
+        "Partito Comunista Cinese"
+      ],
+      "descrizione": "<div>Saggio presentato durante la sesta sessione plenaria del VI Comitato Centrale del Partito Comunista Cinese (1938). In esso il Presidente Mao Zedong illustra la politica seguita dal Partito nel periodo del Fronte Unito con i nazionalisti del Guomindang (KMT)<br /></div><div><br /></div><div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 7, 1971.</div><div><br /></div>"
     },
     {
       "id": "AMI-0036",
