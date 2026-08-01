@@ -597,6 +597,16 @@ hide:
     </div>
 </div>
 <div class="risultato-card">
+    <div class="risultato-data">1972</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="AMI-0053/">Sosteniamo il Congresso di fondazione del PARTITO COMUNISTA (marxista-leninista) ITALIANO per fare l'Italia rossa e socialista come la Cina di Mao</a>
+        </div>
+        <div class="risultato-meta">Unione dei Comunisti Italiani (marxisti-leninisti) · Volantino</div>
+        <div class="risultato-desc">Volantino dell'Unione dei Comunisti Italiani (marxisti-leninisti) / Servire il popolo che annuncia l'imminente congresso di fondazione del Partito Comunista (marxista-leninista) Italiano (PC(m-l)I), il 16 aprile 1972. Coloro che ricevono il volantino - nelle intenzioni dell'UCI "Operai, lavoratori e democratici che avete a cuore la causa della fondazione del PC(m-l)I" - sono invitati ad inviare un saluta al congresso tramite l'apposito modulo sul retro.</div>
+    </div>
+</div>
+<div class="risultato-card">
     <div class="risultato-data">1975</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
@@ -900,20 +910,12 @@ hide:
     margin: 0.1rem 0;
 }
 
-.risultato-meta .separator {
-    margin: 0 0.3rem;
-    color: var(--md-default-fg-color--lightest);
-}
-
 .risultato-desc {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 0.9rem;
-    color: var(--md-default-fg-color--light);
-    line-height: 1.5;
     max-height: 4.5em;
     margin: 0.1rem 0 0 0;
 }

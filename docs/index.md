@@ -38,6 +38,14 @@ hide:
 
 
 <div class="doc-row">
+    <div class="doc-data">1972</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="documenti/AMI-0053/">Sosteniamo il Congresso di fondazione del PARTITO COMUNISTA (marxista-leninista) ITALIANO per fare l'Italia rossa e socialista come la Cina di Mao</a></div>
+        <div class="doc-meta"><span class="doc-type-chip">Volantino</span><span class="doc-org">Unione dei Comunisti Italiani (marxisti-leninisti)</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
     <div class="doc-data">1969</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0052/">Gli studenti alleati del proletariato nella lotta rivoluzionaria in Italia</a></div>
@@ -49,14 +57,6 @@ hide:
     <div class="doc-data">1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0051/">Rapporto alla seconda sessione plenaria del settimo Comitato Centrale del Partito Comunista Cinese</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">Opuscolo</span><span class="doc-org">Partito Comunista Cinese</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">1968</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0050/">Problemi strategici della guerra rivoluzionaria in Cina</a></div>
         <div class="doc-meta"><span class="doc-type-chip">Opuscolo</span><span class="doc-org">Partito Comunista Cinese</span></div>
     </div>
 </div>

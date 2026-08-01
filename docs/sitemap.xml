@@ -286,6 +286,11 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0053/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://ami-aim.github.io/archivio-maoismo-italiano/persone/mao-zedong/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
@@ -356,32 +361,17 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/associazione-italia-cina/</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/casa-editrice-in-lingue-estere/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/partito-comunista-ditalia-marxista-leninista/</loc>
-    <priority>0.6</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/unione-dei-comunisti-italiani-marxisti-leninisti/</loc>
-    <priority>0.6</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
     <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/edizioni-oriente/</loc>
-    <priority>0.6</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/centro-di-informazione-di-verona/</loc>
-    <priority>0.6</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/partito-comunista-cinese/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>
@@ -396,17 +386,7 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/ufficio-politico-del-pcdi-m-l/</loc>
-    <priority>0.6</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
     <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/nuova-unita/</loc>
-    <priority>0.6</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/comitato-di-partito-di-catania-uci-m-l/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>
@@ -416,22 +396,17 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/lavoro-politico/</loc>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/centro-di-informazione-di-verona/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/partito-comunista-ditalia-marxista-leninista-linea-rossa/</loc>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/ufficio-politico-del-pcdi-m-l/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/stella-rossa-fronte-rivoluzionario-marxista-leninista/</loc>
-    <priority>0.6</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/associazione-italia-cina/</loc>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/comitato-di-partito-di-catania-uci-m-l/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>
@@ -446,7 +421,42 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/partito-comunista-ditalia-marxista-leninista/</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/unione-dei-comunisti-italiani-marxisti-leninisti/</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/partito-comunista-cinese/</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/partito-comunista-ditalia-marxista-leninista-linea-rossa/</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/stella-rossa-fronte-rivoluzionario-marxista-leninista/</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/avanguardia-proletaria-maoista/</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/partito-comunista-marxista-leninista-italiano/</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/lavoro-politico/</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>

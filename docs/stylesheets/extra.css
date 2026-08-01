@@ -24,18 +24,6 @@
     margin-top: 0 !important;
 }
 
-.md-content__inner {
-    padding-top: 0 !important;
-}
-
-.md-content__inner::before {
-    display: none !important;
-}
-
-.md-typeset > *:first-child {
-    margin-top: 0.5rem !important;
-}
-
 /* ============================================================
    1. COLORE PRIMARIO
    ============================================================ */
@@ -151,12 +139,11 @@
     gap: 1rem;
 }
 
-/* 🔥 FOOTER - COMPATTAZIONE RIGHE */
 .md-footer-copyright {
     display: flex;
     flex-direction: column;
-    gap: 0.02rem;              /* ridotto da 0.05rem a 0.02rem */
-    line-height: 1.2;          /* compatta ulteriormente il testo */
+    gap: 0.02rem;
+    line-height: 1.2;
 }
 
 .md-footer-copyright__text {
@@ -218,7 +205,7 @@
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
-    margin-top: calc(-1 * var(--ami-header-height));   /* sempre sincronizzato con l'header */
+    margin-top: calc(-1 * var(--ami-header-height));
     overflow: hidden;
     margin-bottom: 2rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
@@ -534,12 +521,6 @@
     color: var(--md-default-fg-color--light);
 }
 
-.doc-keywords {
-    font-size: 0.8rem;
-    color: var(--md-primary-fg-color--light);
-    font-style: italic;
-}
-
 .recent-container {
     background: var(--md-code-bg-color);
     border-radius: 12px;
@@ -567,7 +548,63 @@
 }
 
 /* ============================================================
-   7. MIGLIORAMENTO LEGGIBILITÀ SU MOBILE
+   7. DESCRIZIONI (uniformi in tutto il sito)
+   ============================================================ */
+
+.doc-abstract,
+.risultato-desc {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--md-default-fg-color--light);
+}
+
+.doc-abstract p,
+.risultato-desc p {
+    margin: 0.6rem 0;
+}
+
+.doc-abstract p:first-child,
+.risultato-desc p:first-child {
+    margin-top: 0;
+}
+
+.doc-abstract p:last-child,
+.risultato-desc p:last-child {
+    margin-bottom: 0;
+}
+
+.doc-abstract strong,
+.doc-abstract b,
+.risultato-desc strong,
+.risultato-desc b {
+    color: var(--md-default-fg-color);
+    font-weight: 600;
+}
+
+.doc-abstract em,
+.doc-abstract i,
+.risultato-desc em,
+.risultato-desc i {
+    color: var(--md-default-fg-color--light);
+    font-style: italic;
+}
+
+.doc-abstract ul,
+.doc-abstract ol,
+.risultato-desc ul,
+.risultato-desc ol {
+    padding-left: 1.5rem;
+    margin: 0.6rem 0;
+}
+
+.doc-abstract li,
+.risultato-desc li {
+    margin: 0.2rem 0;
+}
+
+/* ============================================================
+   8. MIGLIORAMENTO LEGGIBILITÀ SU MOBILE
    ============================================================ */
 @media (max-width: 600px) {
     /* Home - documenti recenti */
@@ -587,9 +624,6 @@
     .doc-sommario {
         font-size: 0.8rem;
     }
-    .doc-keywords {
-        font-size: 0.75rem;
-    }
 
     /* Archivio - risultati */
     .risultato-card {
@@ -602,7 +636,7 @@
         font-size: 0.75rem;
     }
     .risultato-desc {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
     .risultato-data {
         font-size: 0.8rem;
@@ -625,7 +659,7 @@
 }
 
 /* ============================================================
-   8. RESPONSIVE EXTRA (schermi molto piccoli)
+   9. RESPONSIVE EXTRA (schermi molto piccoli)
    ============================================================ */
 @media (max-width: 480px) {
     :root {
