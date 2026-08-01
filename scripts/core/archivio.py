@@ -26,7 +26,6 @@ def genera_indice(df, output_dir):
         if tipo_raw in ['nan', 'None']:
             tipo_raw = ''
         tipo = tipo_raw.lower()
-        # 🔥 tipo_display: "testo_bilingue" diventa "testo" con maiuscola
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
         tipo_display = tipo_display.capitalize() if tipo_display else ''
         
@@ -476,12 +475,20 @@ hide:
     margin: 0.1rem 0;
 }}
 
+.risultato-meta .separator {{
+    margin: 0 0.3rem;
+    color: var(--md-default-fg-color--lightest);
+}}
+
 .risultato-desc {{
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 0.9rem;
+    color: var(--md-default-fg-color--light);
+    line-height: 1.5;
     max-height: 4.5em;
     margin: 0.1rem 0 0 0;
 }}

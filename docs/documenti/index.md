@@ -910,12 +910,20 @@ hide:
     margin: 0.1rem 0;
 }
 
+.risultato-meta .separator {
+    margin: 0 0.3rem;
+    color: var(--md-default-fg-color--lightest);
+}
+
 .risultato-desc {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 0.9rem;
+    color: var(--md-default-fg-color--light);
+    line-height: 1.5;
     max-height: 4.5em;
     margin: 0.1rem 0 0 0;
 }

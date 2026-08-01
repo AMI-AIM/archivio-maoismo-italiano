@@ -87,7 +87,6 @@ def crea_schede(df, persone, organizzazioni, output_dir):
             if match:
                 identifier = match.group(1)
         
-        # 🔥 DESCRIZIONE DA IA - SENZA NORMALIZZAZIONE
         descrizione_ia = scarica_descrizione_ia(identifier) if identifier else None
         
         autore_links = []
@@ -329,6 +328,7 @@ hide:
             else:
                 embed_url = f"https://archive.org/embed/{identifier}?ui=embed&nav=0"
             
+            # 🔥 ID UNIVOCO PER L'IFRAME E IL PULSANTE FULLSCREEN
             fs_id = f"ia-embed-{ami_id}"
             
             content += f"""
@@ -342,6 +342,7 @@ hide:
         <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
     </div>
 """
+            # 🔥 SCRIPT PER IL FULLSCREEN
             content += f"""
 <script>
 (function() {{
@@ -481,11 +482,10 @@ hide:
 </script>
 """
 
-        # 🔥 DESCRIZIONE - SENZA NORMALIZZAZIONE
         if descrizione_ia:
             content += f"""
 <div class="doc-abstract">
-    {descrizione_ia}
+    <p>{descrizione_ia}</p>
 </div>
 """
 
@@ -657,6 +657,13 @@ hide:
     background: var(--md-code-bg-color);
     border-left: 4px solid var(--md-primary-fg-color);
     border-radius: 4px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--md-default-fg-color--light);
+}}
+
+.doc-abstract p {{
+    margin: 0;
 }}
 
 .doc-metadata {{
