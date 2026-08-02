@@ -140,6 +140,16 @@ hide:
     <div class="risultato-data">1967</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
+            <a href="AMI-0055/">Osare pensare, osare parlare, osare agire, osare fare la rivoluzione - Manifesto PCd'I (m-l)</a>
+        </div>
+        <div class="risultato-meta">Partito Comunista d'Italia (marxista-leninista) · Partito Comunista d'Italia (marxista-leninista) · Manifesto</div>
+        <div class="risultato-desc">Manifesto prodotto dal Partito Comunista d'Italia (marxista-leninista) nell'ottobre 1967. Sotto il grande logo del partito si legge l'appello all'internazionalismo di Mao Zedong, proveniente dalla "Dichiarazione in appoggio al popolo del Congo (Leopoldville) contro l'aggressione degli Stati Uniti" del 28 novembre 1964.</div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1967</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
             <a href="AMI-0002/">Sulla giusta soluzione delle contraddizioni in seno al popolo</a>
         </div>
         <div class="risultato-meta">Mao Zedong · Partito Comunista Cinese · Opuscolo</div>
@@ -614,6 +624,16 @@ hide:
         </div>
         <div class="risultato-meta">Vincenzo Calò · Stella Rossa - Fronte Rivoluzionario Marxista-Leninista · Libro</div>
         <div class="risultato-desc"><div>Antologia pubblicata dalla casa editrice di Nuova Sinistra Savelli, a cura di Vincenzo Calò, fondatore di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista.</div><div><br /></div><div>Il libro, contenente estratti ad argomento militare da scritti di Carl von Clausewitz, Vladimir Lenin e Mao Zedong, si pone di istruire il militante ai principi della lotta armata in caso di golpe militare (effettivamente tentato pochi anni prima da Junio Valerio Borghese).</div><div><br /></div><div>La copia qui presente riporta cancellature sulla prefazione a cura di Calò, probabilmente causate da antipatie politiche, vista anche la scritta "VIVA L'ORGANIZZAZIONE COMBATTENTE COMUNISTA PRIMA LINEA" sull'indice in fondo.</div></div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1978</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="AMI-0054/">RICERCATO: Leonida Breznev - Manifesto del Partito Comunista Unificato d'Italia</a>
+        </div>
+        <div class="risultato-meta">Partito Comunista Unificato d'Italia · Partito Comunista Unificato d'Italia · Manifesto</div>
+        <div class="risultato-desc">Manifesto polemico prodotto dal Partito Comunista Unificato d'Italia di Osvaldo Pesce nel marzo 1978, poco dopo il sequestro di Aldo Moro (16 marzo). Il poster mostra il leader sovietico "Leonida Breznev" come un ricercato latitante ed elenca i suoi "crimini". Questi, oltre il succitato rapimento Moro, includono l'omicidio di Carlo Casalegno e le aggressioni militari contro Cecoslovacchia, Angola e Somalia.</div>
     </div>
 </div>
 <div class="risultato-card">

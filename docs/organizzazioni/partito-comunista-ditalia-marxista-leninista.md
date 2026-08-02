@@ -35,6 +35,14 @@ hide:
 </div>
 
 <div class="doc-row">
+    <div class="doc-data">1967</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0055/">Osare pensare, osare parlare, osare agire, osare fare la rivoluzione - Manifesto PCd'I (m-l)</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da, autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
     <div class="doc-data">13 agosto 1968</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0033/">Verbale della conversazione del Presidente Mao con la delegazione comunista (marxista-leninista) italiana</a></div>

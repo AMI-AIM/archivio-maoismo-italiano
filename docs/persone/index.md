@@ -28,7 +28,7 @@ hide:
             <div class="top-card-text">
                 <div class="top-card-name">Osvaldo Pesce</div>
                 <div class="top-card-dates">193? – 2021</div>
-                <div class="top-card-count">5 documenti</div>
+                <div class="top-card-count">6 documenti</div>
             </div>
         </a>
     </div>

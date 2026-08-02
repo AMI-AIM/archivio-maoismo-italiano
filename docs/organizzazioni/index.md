@@ -22,6 +22,19 @@ hide:
         </a>
     </div>
     <div class="top-card">
+        <a href="partito-comunista-ditalia-marxista-leninista/" class="top-card-link">
+            <div class="top-card-image-wrapper">
+                <img src="/archivio-maoismo-italiano/immagini/profili/logo-pcdi.svg" alt="Partito Comunista d'Italia (marxista-leninista)" class="top-card-avatar-img" loading="lazy">
+            </div>
+            <div class="top-card-text">
+                <div class="top-card-tipo">Partito</div>
+                <div class="top-card-name">Partito Comunista d'Italia (marxista-leninista)</div>
+                <div class="top-card-dates">1966 – 1991</div>
+                <div class="top-card-count">9 documenti</div>
+            </div>
+        </a>
+    </div>
+    <div class="top-card">
         <a href="lavoro-politico/" class="top-card-link">
             <div class="top-card-image-wrapper">
                 <img src="/archivio-maoismo-italiano/immagini/profili/placeholder.webp" alt="Lavoro Politico" class="top-card-avatar-img" loading="lazy">
@@ -31,19 +44,6 @@ hide:
                 <div class="top-card-name">Lavoro Politico</div>
                 <div class="top-card-dates">1967 – 1969</div>
                 <div class="top-card-count">9 documenti</div>
-            </div>
-        </a>
-    </div>
-    <div class="top-card">
-        <a href="partito-comunista-ditalia-marxista-leninista/" class="top-card-link">
-            <div class="top-card-image-wrapper">
-                <img src="/archivio-maoismo-italiano/immagini/profili/logo-pcdi.svg" alt="Partito Comunista d'Italia (marxista-leninista)" class="top-card-avatar-img" loading="lazy">
-            </div>
-            <div class="top-card-text">
-                <div class="top-card-tipo">Partito</div>
-                <div class="top-card-name">Partito Comunista d'Italia (marxista-leninista)</div>
-                <div class="top-card-dates">1966 – 1991</div>
-                <div class="top-card-count">8 documenti</div>
             </div>
         </a>
     </div>

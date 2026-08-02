@@ -68,8 +68,8 @@
       ],
       "url_ia": "https://archive.org/details/breviario-delle-guardie-rosse/mode/2up",
       "persone": [
-        "Giorgio Zucchetti",
-        "Mao Zedong"
+        "Mao Zedong",
+        "Giorgio Zucchetti"
       ],
       "organizzazioni": [
         "Associazione Italia-Cina"
@@ -94,16 +94,39 @@
       ],
       "url_ia": "https://archive.org/details/statuto-pcdiml/mode/2up",
       "persone": [
-        "Fosco Dinucci",
-        "Osvaldo Pesce"
+        "Osvaldo Pesce",
+        "Fosco Dinucci"
       ],
       "organizzazioni": [
-        "Ufficio Politico del PCd'I (m-l)",
         "Nuova Unità",
-        "Partito Comunista d'Italia (marxista-leninista)",
-        "Unione della gioventù comunista d’Italia (marxista-leninista)"
+        "Ufficio Politico del PCd'I (m-l)",
+        "Unione della gioventù comunista d’Italia (marxista-leninista)",
+        "Partito Comunista d'Italia (marxista-leninista)"
       ],
       "descrizione": "<div style=\"color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\">Opuscolo contenente Dichiarazione di principio e Statuto del Partito Comunista d'Italia (marxista-leninista), fondato nell'ottobre del 1966 a Livorno.<br /><br />L'opuscolo è composto dalle seguenti sezioni:</div><div style=\"color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\"><ul style=\"margin-top:0px;margin-bottom:10px;\"><li>Dichiarazione di principio</li><li>Statuto del Partito</li><li>Alla classe operaia, ai contadini, alle masse popolari italiane</li><li>Saluto ai partiti fratelli</li><li>Due documenti sulla vigilanza rivoluzionaria</li><li>Due scritti di Fosco Dinucci, segretario del Partito</li></ul><div>Stampato da Periodici Operai, Livorno, pp. 32, 1967.</div></div>"
+    },
+    {
+      "id": "AMI-0055",
+      "titolo": "Osare pensare, osare parlare, osare agire, osare fare la rivoluzione - Manifesto PCd'I (m-l)",
+      "autore": "Partito Comunista d'Italia (marxista-leninista)",
+      "organizzazione": "Partito Comunista d'Italia (marxista-leninista)",
+      "data": "1967",
+      "anno": 1967,
+      "data_ordine": [
+        1967,
+        1,
+        1
+      ],
+      "tipo": "Manifesto",
+      "serie": [
+        "Galassia marxista-leninista"
+      ],
+      "url_ia": "https://archive.org/details/osare-poster-pcdi",
+      "persone": [],
+      "organizzazioni": [
+        "Partito Comunista d'Italia (marxista-leninista)"
+      ],
+      "descrizione": "Manifesto prodotto dal Partito Comunista d'Italia (marxista-leninista) nell'ottobre 1967. Sotto il grande logo del partito si legge l'appello all'internazionalismo di Mao Zedong, proveniente dalla \"Dichiarazione in appoggio al popolo del Congo (Leopoldville) contro l'aggressione degli Stati Uniti\" del 28 novembre 1964."
     },
     {
       "id": "AMI-0002",
@@ -222,10 +245,10 @@
       "url_ia": "https://archive.org/details/circolare-16-maggio/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Partito Comunista Cinese",
+        "Renmin Ribao",
         "Hongqi",
-        "Comitato Centrale del PCC",
-        "Renmin Ribao"
+        "Partito Comunista Cinese",
+        "Comitato Centrale del PCC"
       ],
       "descrizione": "<div>Opuscolo contente la \"Circolare del Comitato Centrale del Partito Comunista</div><div>Cinese (16 maggio 1966)\", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo \"Un Grande Documento Storico\", pubblicato su Bandiera Rossa e il Quotidiano del Popolo</div>"
     },
@@ -398,9 +421,9 @@
       "url_ia": "https://archive.org/details/bussola-popoli-rivoluzionari/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Partito Comunista Cinese",
         "Renmin Ribao",
-        "Jiefangjun Bao"
+        "Jiefangjun Bao",
+        "Partito Comunista Cinese"
       ],
       "descrizione": "Opuscolo contenente un editoriale del Renmin Ribao (Quotidiano del Popolo) del 18 settembre 1968 e uno del Jiefangjun Bao dello stesso giorno.<div><br /></div><div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 16, 1968.</div>"
     },
@@ -767,13 +790,13 @@
       ],
       "url_ia": "https://archive.org/details/conversazione-mao-pesce",
       "persone": [
-        "Mao Zedong",
+        "Dino Dini",
         "Osvaldo Pesce",
-        "Dino Dini"
+        "Mao Zedong"
       ],
       "organizzazioni": [
-        "Partito Comunista Cinese",
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Partito Comunista Cinese"
       ],
       "descrizione": "<font color=\"#444444\" face=\"Tahoma, Helvetica, Microsoft Yahei, sans-serif\" size=\"5\"><span style=\"background-color:rgb(255,255,255);\">Trascrizione della conversazione tenuta tra il Presidente cinese Mao Zedong e due rappresentanti del Partito Comunista d'Italia (marxista-leninista), Osvaldo Pesce e Dino Dini, il 13 agosto 1968.<br /><br />La conversazione verte sugli sviluppi della Grande Rivoluzione Proletaria Culturale e sulla situazione politica europea. In particolare, Mao consiglia agli italiani di non partecipare alle elezioni, per evitare il pericolo revisionista.<br /><br />Testo riprodotto in 宋永毅</span>《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati]</font><span style=\"color:rgb(68,68,68);font-family:Tahoma, Helvetica, 'Microsoft Yahei', sans-serif;font-size:x-large;background-color:rgb(255,255,255);\">, 国史出版社, 2018. </span><font color=\"#444444\" face=\"Tahoma, Helvetica, Microsoft Yahei, sans-serif\" size=\"5\"> </font>"
     },
@@ -795,14 +818,14 @@
       ],
       "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
       "persone": [
-        "Jiang Qing",
-        "Yao Wenyuan",
         "Zhou Enlai",
-        "Kang Sheng",
-        "Chen Boda",
         "Dino Dini",
         "Osvaldo Pesce",
-        "Mao Zedong"
+        "Jiang Qing",
+        "Kang Sheng",
+        "Yao Wenyuan",
+        "Mao Zedong",
+        "Chen Boda"
       ],
       "organizzazioni": [
         "Renmin Ribao",
@@ -833,8 +856,8 @@
         "Mao Zedong"
       ],
       "organizzazioni": [
-        "Partito Comunista Cinese",
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Partito Comunista Cinese"
       ],
       "descrizione": "Nota del presidente Mao Zedong riguardante la partecipazione dei partiti comunisti marxisti-leninisti alle elezioni parlamentari dei propri paesi.<br /><br />Dopo aver discusso dell'argomento con Osvaldo Pesce (13/08/1968), il Presidente cinese ha incaricato Kang Sheng di presentare un rapporto sulla questione.<br /><br /><div>Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018.  </div>"
     },
@@ -909,8 +932,8 @@
       "persone": [],
       "organizzazioni": [
         "Lavoro Politico",
-        "Partito Comunista d'Italia (marxista-leninista) - linea rossa",
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Partito Comunista d'Italia (marxista-leninista) - linea rossa"
       ],
       "descrizione": "rivista \"Lavoro politico\", n. 11 - 12, dicembre 1968 - gennaio 1969"
     },
@@ -1104,11 +1127,11 @@
       "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
       "persone": [
         "Zhou Enlai",
-        "Chen Boda",
-        "Fosco Dinucci",
-        "Mao Zedong",
         "Lin Biao",
-        "Kang Sheng"
+        "Fosco Dinucci",
+        "Kang Sheng",
+        "Mao Zedong",
+        "Chen Boda"
       ],
       "organizzazioni": [
         "Renmin Ribao",
@@ -1135,8 +1158,8 @@
       "url_ia": "https://archive.org/details/studenti-ed-intellettuali-ciclostilato-uci-m-l/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Unione dei Comunisti Italiani (marxisti-leninisti)",
-        "Comitato di Partito di Catania (UCI-m.l)"
+        "Comitato di Partito di Catania (UCI-m.l)",
+        "Unione dei Comunisti Italiani (marxisti-leninisti)"
       ],
       "descrizione": "Volantino ciclostilato a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), meglio conosciuta come Servire il Popolo. Il volantino riporta un appello a \"Studenti ed Intellettuali Rivoluzionari\" affinché questi si uniscano all'organizzazione maoista."
     },
@@ -1186,10 +1209,10 @@
       "url_ia": "https://archive.org/details/membri-del-partito-avanzati/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Partito Comunista Cinese",
-        "Hongqi",
         "Renmin Ribao",
-        "Jiefangjun Bao"
+        "Jiefangjun Bao",
+        "Partito Comunista Cinese",
+        "Hongqi"
       ],
       "descrizione": "<div style=\"margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\"><div style=\"margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;\">L'opuscolo contiene un editoriale condiviso tra Renmin Ribao (Quotidiano del Popolo), Hongqi (Bandiera Rossa) e Jiefangjun Bao (Quotidiano dell'EPL), pubblicato il 1 luglio 1970, in commemorazione del 49° anniversario della fondazione del Partito Comunista Cinese</div></div><div style=\"margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\">Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 12, 1970.</div><div class=\"metadata-expandable-list row\" style=\"margin:1.43em -15px;width:715.2px;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\"></div>"
     },
@@ -1287,8 +1310,8 @@
       "url_ia": "https://archive.org/details/volantino-congresso-di-fondazione-pcm-l-i/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Unione dei Comunisti Italiani (marxisti-leninisti)",
-        "Partito Comunista (marxista-leninista) Italiano"
+        "Partito Comunista (marxista-leninista) Italiano",
+        "Unione dei Comunisti Italiani (marxisti-leninisti)"
       ],
       "descrizione": "Volantino dell'Unione dei Comunisti Italiani (marxisti-leninisti) / Servire il popolo che annuncia l'imminente congresso di fondazione del Partito Comunista (marxista-leninista) Italiano (PC(m-l)I), il 16 aprile 1972. Coloro che ricevono il volantino - nelle intenzioni dell'UCI \"Operai, lavoratori e democratici che avete a cuore la causa della fondazione del PC(m-l)I\" - sono invitati ad inviare un saluta al congresso tramite l'apposito modulo sul retro."
     },
@@ -1316,6 +1339,29 @@
         "Stella Rossa - Fronte Rivoluzionario Marxista-Leninista"
       ],
       "descrizione": "<div>Antologia pubblicata dalla casa editrice di Nuova Sinistra Savelli, a cura di Vincenzo Calò, fondatore di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista.</div><div><br /></div><div>Il libro, contenente estratti ad argomento militare da scritti di Carl von Clausewitz, Vladimir Lenin e Mao Zedong, si pone di istruire il militante ai principi della lotta armata in caso di golpe militare (effettivamente tentato pochi anni prima da Junio Valerio Borghese).</div><div><br /></div><div>La copia qui presente riporta cancellature sulla prefazione a cura di Calò, probabilmente causate da antipatie politiche, vista anche la scritta \"VIVA L'ORGANIZZAZIONE COMBATTENTE COMUNISTA PRIMA LINEA\" sull'indice in fondo.</div>"
+    },
+    {
+      "id": "AMI-0054",
+      "titolo": "RICERCATO: Leonida Breznev - Manifesto del Partito Comunista Unificato d'Italia",
+      "autore": "Partito Comunista Unificato d'Italia",
+      "organizzazione": "Partito Comunista Unificato d'Italia",
+      "data": "1978",
+      "anno": 1978,
+      "data_ordine": [
+        1978,
+        1,
+        1
+      ],
+      "tipo": "Manifesto",
+      "serie": [
+        "Galassia marxista-leninista"
+      ],
+      "url_ia": "https://archive.org/details/manifesto-pcudi-breznev",
+      "persone": [
+        "Osvaldo Pesce"
+      ],
+      "organizzazioni": [],
+      "descrizione": "Manifesto polemico prodotto dal Partito Comunista Unificato d'Italia di Osvaldo Pesce nel marzo 1978, poco dopo il sequestro di Aldo Moro (16 marzo). Il poster mostra il leader sovietico \"Leonida Breznev\" come un ricercato latitante ed elenca i suoi \"crimini\". Questi, oltre il succitato rapimento Moro, includono l'omicidio di Carlo Casalegno e le aggressioni militari contro Cecoslovacchia, Angola e Somalia."
     },
     {
       "id": "AMI-0020",

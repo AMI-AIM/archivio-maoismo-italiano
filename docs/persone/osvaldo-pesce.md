@@ -66,6 +66,14 @@ hide:
     </div>
 </div>
 
+<div class="doc-row">
+    <div class="doc-data">1978</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0054/">RICERCATO: Leonida Breznev - Manifesto del Partito Comunista Unificato d'Italia</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
+    </div>
+</div>
+
 </div>
 
 <style>
