@@ -445,6 +445,15 @@ hide:
     margin: 0.2rem 0;
 }
 
+/* Rete di sicurezza: qualunque tag o stile inline importato pari pari dall'HTML
+   grezzo di Internet Archive (es. <font size="5">, style="font-size:...") non deve
+   mai alterare la dimensione o il tipo di carattere rispetto al contenitore — solo
+   grassetto/corsivo/colore restano personalizzabili dalle regole sopra. */
+.risultato-desc * {
+    font-size: inherit !important;
+    font-family: inherit !important;
+}
+
 .nessun-risultato {
     text-align: center;
     padding: 2rem;
