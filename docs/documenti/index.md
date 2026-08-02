@@ -430,7 +430,6 @@ hide:
 
 .risultato-desc em,
 .risultato-desc i {
-    color: var(--md-default-fg-color--light);
     font-style: italic;
 }
 
@@ -451,6 +450,7 @@ hide:
 .risultato-desc * {
     font-size: inherit !important;
     font-family: inherit !important;
+    color: inherit !important;
 }
 
 .nessun-risultato {

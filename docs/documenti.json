@@ -19,8 +19,8 @@
       "url_ia": "https://archive.org/details/delegazione-edizioni-oriente",
       "persone": [],
       "organizzazioni": [
-        "Edizioni Oriente",
-        "Nuova Unità"
+        "Nuova Unità",
+        "Edizioni Oriente"
       ],
       "descrizione": "\"Il compagno Mao Tse-tung riceve la delegazione delle Edizioni Oriente, guidata dal compagno Dino Frangioni (Livio), Pechino, 17 maggio 1964.\" Da Nuova Unità, no. 4, giugno 1964.<div><br /></div><div>Presenti anche rappresentanti dell'organizzazione milanese Gruppo Proletario Luglio 60 (GPL60), come Giacomo (Gino) Montemezzani (alla sinistra di Mao)</div>"
     },
@@ -94,14 +94,14 @@
       ],
       "url_ia": "https://archive.org/details/statuto-pcdiml/mode/2up",
       "persone": [
-        "Osvaldo Pesce",
-        "Fosco Dinucci"
+        "Fosco Dinucci",
+        "Osvaldo Pesce"
       ],
       "organizzazioni": [
         "Partito Comunista d'Italia (marxista-leninista)",
         "Ufficio Politico del PCd'I (m-l)",
-        "Unione della gioventù comunista d’Italia (marxista-leninista)",
-        "Nuova Unità"
+        "Nuova Unità",
+        "Unione della gioventù comunista d’Italia (marxista-leninista)"
       ],
       "descrizione": "<div style=\"color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\">Opuscolo contenente Dichiarazione di principio e Statuto del Partito Comunista d'Italia (marxista-leninista), fondato nell'ottobre del 1966 a Livorno.<br /><br />L'opuscolo è composto dalle seguenti sezioni:</div><div style=\"color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\"><ul style=\"margin-top:0px;margin-bottom:10px;\"><li>Dichiarazione di principio</li><li>Statuto del Partito</li><li>Alla classe operaia, ai contadini, alle masse popolari italiane</li><li>Saluto ai partiti fratelli</li><li>Due documenti sulla vigilanza rivoluzionaria</li><li>Due scritti di Fosco Dinucci, segretario del Partito</li></ul><div>Stampato da Periodici Operai, Livorno, pp. 32, 1967.</div></div>"
     },
@@ -270,10 +270,10 @@
       "url_ia": "https://archive.org/details/circolare-16-maggio/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Renmin Ribao",
+        "Comitato Centrale del PCC",
         "Hongqi",
         "Partito Comunista Cinese",
-        "Comitato Centrale del PCC"
+        "Renmin Ribao"
       ],
       "descrizione": "<div>Opuscolo contente la \"Circolare del Comitato Centrale del Partito Comunista</div><div>Cinese (16 maggio 1966)\", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo \"Un Grande Documento Storico\", pubblicato su Bandiera Rossa e il Quotidiano del Popolo</div>"
     },
@@ -446,9 +446,9 @@
       "url_ia": "https://archive.org/details/bussola-popoli-rivoluzionari/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Renmin Ribao",
         "Partito Comunista Cinese",
-        "Jiefangjun Bao"
+        "Jiefangjun Bao",
+        "Renmin Ribao"
       ],
       "descrizione": "Opuscolo contenente un editoriale del Renmin Ribao (Quotidiano del Popolo) del 18 settembre 1968 e uno del Jiefangjun Bao dello stesso giorno.<div><br /></div><div>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 16, 1968.</div>"
     },
@@ -815,8 +815,8 @@
       ],
       "url_ia": "https://archive.org/details/conversazione-mao-pesce",
       "persone": [
-        "Osvaldo Pesce",
         "Dino Dini",
+        "Osvaldo Pesce",
         "Mao Zedong"
       ],
       "organizzazioni": [
@@ -843,18 +843,18 @@
       ],
       "url_ia": "https://archive.org/details/delegazione-pcd-i-pcc/mode/2up",
       "persone": [
-        "Kang Sheng",
-        "Zhou Enlai",
         "Dino Dini",
-        "Mao Zedong",
         "Yao Wenyuan",
+        "Kang Sheng",
+        "Osvaldo Pesce",
         "Jiang Qing",
         "Chen Boda",
-        "Osvaldo Pesce"
+        "Zhou Enlai",
+        "Mao Zedong"
       ],
       "organizzazioni": [
-        "Renmin Ribao",
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Renmin Ribao"
       ],
       "descrizione": "Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta a Pechino dalla leadership del Partito Comunista Cinese. In rappresentanza del PCd'I (ml), in ordine, Osvaldo Pesce e Dino Dini. La leadership cinese è composta da, sempre in ordine, Chen Boda, Kang Sheng, Jiang Qing, Mao Zedong, Zhou Enlai, Yao Wenyuan. <div><br /></div><div>Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 14 agosto 1968, p. 1), Peking Review (<span style=\"text-indent:0cm;\">no. 33, 1968, p. 8) e Nuova Unità (31 agosto 1968, p. 1)</span></div>"
     },
@@ -876,8 +876,8 @@
       ],
       "url_ia": "https://archive.org/details/istruzioni-mao-italiano",
       "persone": [
-        "Osvaldo Pesce",
         "Dino Dini",
+        "Osvaldo Pesce",
         "Mao Zedong"
       ],
       "organizzazioni": [
@@ -932,8 +932,8 @@
       "url_ia": "https://archive.org/details/lavoro-politico-10/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Lavoro Politico",
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Lavoro Politico"
       ],
       "descrizione": "rivista \"Lavoro politico\", n. 10 - settembre 1968"
     },
@@ -956,9 +956,9 @@
       "url_ia": "https://archive.org/details/lavoro-politico-11-12/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Lavoro Politico",
         "Partito Comunista d'Italia (marxista-leninista)",
-        "Partito Comunista d'Italia (marxista-leninista) - linea rossa"
+        "Partito Comunista d'Italia (marxista-leninista) - linea rossa",
+        "Lavoro Politico"
       ],
       "descrizione": "rivista \"Lavoro politico\", n. 11 - 12, dicembre 1968 - gennaio 1969"
     },
@@ -1152,15 +1152,15 @@
       "url_ia": "https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc",
       "persone": [
         "Kang Sheng",
+        "Fosco Dinucci",
+        "Chen Boda",
         "Zhou Enlai",
         "Lin Biao",
-        "Fosco Dinucci",
-        "Mao Zedong",
-        "Chen Boda"
+        "Mao Zedong"
       ],
       "organizzazioni": [
-        "Renmin Ribao",
-        "Partito Comunista d'Italia (marxista-leninista)"
+        "Partito Comunista d'Italia (marxista-leninista)",
+        "Renmin Ribao"
       ],
       "descrizione": "<span style=\"font-size:12pt;line-height:150%;font-family:'Times New Roman', serif;letter-spacing:0.75pt;\">Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese in occasione dei festeggiamenti del 1° ottobre 1969. Nella foto compaiono, in ordine, Zhou Enlai, Mao Zedong, Lin Biao, Kang Sheng e Chen Boda. Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 3 ottobre 1969, p. 1).</span>"
     },
@@ -1210,8 +1210,8 @@
         "Mao Zedong"
       ],
       "organizzazioni": [
-        "Partito Comunista Cinese",
-        "Comitato Centrale del PCC"
+        "Comitato Centrale del PCC",
+        "Partito Comunista Cinese"
       ],
       "descrizione": "<div>Sommario della seconda sessione plenaria del CC del PCC, tenutasi in seguito al IX Congresso (1969). </div><div><br /></div><div><div>\"Il Partito del Lavoro d'Albania e i partiti e le organizzazioni autenticamente marxisti-leninisti del mondo conseguono di continuo enormi successi nella lotta contro l'imperialismo capeggiato dagli Stati Uniti, contro il revisionismo moderno con al centro il revisionismo sovietico e contro la reazione dei vari paesi.\"</div></div><div><br /></div>Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 15, 1970."
     },
@@ -1234,10 +1234,10 @@
       "url_ia": "https://archive.org/details/membri-del-partito-avanzati/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Renmin Ribao",
         "Hongqi",
         "Partito Comunista Cinese",
-        "Jiefangjun Bao"
+        "Jiefangjun Bao",
+        "Renmin Ribao"
       ],
       "descrizione": "<div style=\"margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\"><div style=\"margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;\">L'opuscolo contiene un editoriale condiviso tra Renmin Ribao (Quotidiano del Popolo), Hongqi (Bandiera Rossa) e Jiefangjun Bao (Quotidiano dell'EPL), pubblicato il 1 luglio 1970, in commemorazione del 49° anniversario della fondazione del Partito Comunista Cinese</div></div><div style=\"margin-top:1.43em;margin-bottom:1.43em;margin-right:5rem;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\">Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 12, 1970.</div><div class=\"metadata-expandable-list row\" style=\"margin:1.43em -15px;width:715.2px;color:rgb(44,44,44);font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:14px;background-color:rgb(255,255,255);\"></div>"
     },
@@ -1335,8 +1335,8 @@
       "url_ia": "https://archive.org/details/volantino-congresso-di-fondazione-pcm-l-i/mode/2up",
       "persone": [],
       "organizzazioni": [
-        "Unione dei Comunisti Italiani (marxisti-leninisti)",
-        "Partito Comunista (marxista-leninista) Italiano"
+        "Partito Comunista (marxista-leninista) Italiano",
+        "Unione dei Comunisti Italiani (marxisti-leninisti)"
       ],
       "descrizione": "Volantino dell'Unione dei Comunisti Italiani (marxisti-leninisti) / Servire il popolo che annuncia l'imminente congresso di fondazione del Partito Comunista (marxista-leninista) Italiano (PC(m-l)I), il 16 aprile 1972. Coloro che ricevono il volantino - nelle intenzioni dell'UCI \"Operai, lavoratori e democratici che avete a cuore la causa della fondazione del PC(m-l)I\" - sono invitati ad inviare un saluta al congresso tramite l'apposito modulo sul retro."
     },
@@ -1388,7 +1388,7 @@
       "organizzazioni": [
         "Partito Comunista Unificato d'Italia"
       ],
-      "descrizione": "Foto dal \"Congresso di ricostruzione del Partito Comunista Unificato della classe operaia - Roma, 6-7-8 Maggio 1977\", che sancirà la fondazione del Partito Comunista Unificato d'Italia, guidato da Osvaldo Pesce. Confluiscono nel PCUd'I: <br /><ul><li>L'Organizzazione dei Comunisti (marxisti-leninisti) d'Italia di Pesce (nata nel 1970)</li><li>L'Organizzazione Comunista (marxista-leninista) - Fronte Unito di Giuseppe Burgani (nata nel 1973)</li><li>Il Partito Comunista d'Italia (marxista-leninista) - Lotta di lunga durata di Gustavo Hermann (nato nel 1969)</li><li>Il Partito Marxista-Leninista-Maoista Italiano di Michele Semeraro (nato nel 1969 come scissione di Avanguardia Proletaria Maoista)</li></ul><div>Il partito pubblica il giornale \"Linea Proletaria\", ereditato dall'organizzazione di Pesce.</div>"
+      "descrizione": "Foto dal \"Congresso di ricostruzione del Partito Comunista Unificato della classe operaia - Roma, 6-7-8 Maggio 1977\", che sancirà la fondazione del Partito Comunista Unificato d'Italia, guidato da Osvaldo Pesce. Confluiscono nel PCUd'I: <br /><ul><li>L'Organizzazione dei Comunisti (marxisti-leninisti) d'Italia di Pesce (nata nel 1970)</li><li>L'Organizzazione Comunista (marxista-leninista) - Fronte Unito di Giuseppe Burgani (nata nel 1973)</li><li>Il Partito Comunista d'Italia (marxista-leninista) - Lotta di lunga durata di Gustavo Hermann (nato nel 1969)</li><li>Il Partito Marxista-Leninista-Maoista Italiano di Michele Semeraro (nato nel 1969 come scissione di Avanguardia Proletaria Maoista)</li><li>I gruppi minori di \"Coscienza Operaia\" e \"Ideologia Proletaria\"</li></ul><div>Il partito pubblica il giornale \"Linea Proletaria\", ereditato dall'organizzazione di Pesce.</div>"
     },
     {
       "id": "AMI-0054",
@@ -1433,8 +1433,8 @@
       ],
       "url_ia": "https://archive.org/details/ribellarsi-e-giusto//mode/2up",
       "persone": [
-        "Mao Zedong",
-        "Roberto Sassi"
+        "Roberto Sassi",
+        "Mao Zedong"
       ],
       "organizzazioni": [],
       "descrizione": "<b>Mao Tse Tung Ribellarsi è giusto<br />Antologia a cura di Roberto Sassi</b><br /><br />Editore: Synergon<br />Anno: 1993<br />Numero di pagine: 127 <br />"
