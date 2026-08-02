@@ -215,21 +215,24 @@ hide:
 <div class="embed-container">
 """
 
-        # 🔥 GESTIONE FOTO
-        if tipo == 'foto' and identifier:
+        # 🔥 GESTIONE FOTO / MANIFESTO (con fallback .jpg -> .png)
+        if tipo in ['foto', 'manifesto'] and identifier:
             if nome_file:
                 img_url = f"https://archive.org/download/{identifier}/{nome_file}"
+                # Se nome_file è specificato, non abbiamo un fallback automatico
+                img_tag = f'<img src="{img_url}" alt="{titolo}" class="photo-embed" onerror="this.style.display=\'none\'; this.parentElement.querySelector(\'.photo-fallback\').style.display=\'block\';">'
             else:
-                img_url = f"https://archive.org/download/{identifier}/{identifier}.jpg"
+                # Prima prova .jpg, poi .png
+                img_url_jpg = f"https://archive.org/download/{identifier}/{identifier}.jpg"
+                img_url_png = f"https://archive.org/download/{identifier}/{identifier}.png"
+                # Costruisci il tag con onerror che tenta il png se jpg fallisce, e se fallisce ancora mostra fallback
+                img_tag = f'<img src="{img_url_jpg}" alt="{titolo}" class="photo-embed" onerror="if(this.src.indexOf(\'.jpg\')!=-1){{this.src=this.src.replace(\'.jpg\',\'.png\');}}else{{this.style.display=\'none\';this.parentElement.querySelector(\'.photo-fallback\').style.display=\'block\';}}">'
             
             content += f"""
     <div class="photo-viewer">
-        <img src="{img_url}" 
-             alt="{titolo}" 
-             class="photo-embed"
-             onerror="this.style.display='none'; this.parentElement.querySelector('.photo-fallback').style.display='block';">
+        {img_tag}
         <div class="photo-fallback" style="display:none; padding:1rem; text-align:center;">
-            <p>🔗 <a href="{url_ia}" target="_blank">Visualizza la foto su Internet Archive</a></p>
+            <p>🔗 <a href="{url_ia}" target="_blank">Visualizza {'il manifesto' if tipo == 'manifesto' else 'la foto'} su Internet Archive</a></p>
         </div>
         <div class="embed-footer">
             {citazione_bottone_html}
