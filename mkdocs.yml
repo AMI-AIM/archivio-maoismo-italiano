@@ -21,9 +21,11 @@ theme:
 
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/documenti.css
 
 extra_javascript:
   - javascripts/hero-search.js
+  - javascripts/documenti.js
 
 plugins:
   - search

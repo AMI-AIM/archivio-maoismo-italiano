@@ -119,7 +119,7 @@ def crea_schede(df, persone, organizzazioni, output_dir):
         
         citazione_bottone_html = (
             f'<button class="citazione-link" type="button" '
-            f'id="citazione-toggle-{citazione_id}">📑 Cita questo documento</button>'
+            f'id="citazione-toggle-{citazione_id}" data-citazioni-id="{citazione_id}">📑 Cita questo documento</button>'
         )
         
         if is_bibliografico:
@@ -963,6 +963,10 @@ hide:
 """
         
         file_path = os.path.join(documenti_dir, f'{ami_id}.md')
+        # Gli asset di presentazione e comportamento vivono in docs/stylesheets/
+        # e docs/javascripts/: le schede restano composte solo da contenuto e dati.
+        content = re.sub(r'\n<script>.*?</script>\s*', '\n', content, flags=re.DOTALL)
+        content = re.sub(r'\n<style>.*?</style>\s*', '\n', content, flags=re.DOTALL)
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(frontmatter + content)
         
