@@ -318,7 +318,9 @@ function mostraRisultati(risultati) {
         if (doc.autore && doc.autore !== 'N/A' && doc.autore !== '') {
             metaParts.push(doc.autore);
         }
-        if (doc.organizzazione && doc.organizzazione !== '') {
+        const autoreNormalizzato = (doc.autore || '').trim().toLowerCase();
+        const orgNormalizzata = (doc.organizzazione || '').trim().toLowerCase();
+        if (doc.organizzazione && doc.organizzazione !== '' && orgNormalizzata !== autoreNormalizzato) {
             metaParts.push(doc.organizzazione);
         }
         if (doc.tipo && doc.tipo !== '') {
@@ -358,7 +360,7 @@ function generaIterfacciaPaginazione(container, current, total) {
     let html = '';
     
     // Pulsante "Precedente"
-    html += `<button class="pag-btn pag-btn--nav" data-page="${current - 1}" ${current <= 1 ? 'disabled' : ''}>‹</button>`;
+    html += `<button class="pag-btn pag-btn--nav" data-page="${current - 1}" aria-label="Pagina precedente" ${current <= 1 ? 'disabled' : ''}>‹</button>`;
     
     // Numeri di pagina
     const maxVisible = 7;
@@ -384,7 +386,7 @@ function generaIterfacciaPaginazione(container, current, total) {
     }
     
     // Pulsante "Successivo"
-    html += `<button class="pag-btn pag-btn--nav" data-page="${current + 1}" ${current >= total ? 'disabled' : ''}>›</button>`;
+    html += `<button class="pag-btn pag-btn--nav" data-page="${current + 1}" aria-label="Pagina successiva" ${current >= total ? 'disabled' : ''}>›</button>`;
     
     container.innerHTML = html;
     
