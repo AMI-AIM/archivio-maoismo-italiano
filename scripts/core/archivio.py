@@ -26,6 +26,7 @@ def genera_indice(df, output_dir):
         if tipo_raw in ['nan', 'None']:
             tipo_raw = ''
         tipo = tipo_raw.lower()
+        # 🔥 tipo_display: "testo_bilingue" diventa "testo" con maiuscola
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
         tipo_display = tipo_display.capitalize() if tipo_display else ''
         
@@ -69,8 +70,7 @@ def genera_indice(df, output_dir):
     anno_min = min(anni_valori) if anni_valori else 1900
     anno_max = max(anni_valori) if anni_valori else 2025
     
-    # Costruisci i risultati (vuoti perché generati da JS)
-    # Ma manteniamo un placeholder per il caricamento
+    # 🔥 I risultati saranno generati da JavaScript (paginazione)
     risultati_html = '<div id="risultati-loading" class="loading">Caricamento in corso...</div>'
     
     index_content = f"""---
@@ -172,7 +172,7 @@ hide:
         <div id="risultati-container">
             {risultati_html}
         </div>
-        <!-- PAGINAZIONE -->
+        <!-- 🔥 PAGINAZIONE -->
         <div id="paginazione" class="paginazione-container"></div>
     </main>
 
@@ -315,7 +315,8 @@ hide:
 
 .slider-value-pill {{
     position: absolute;
-    top: 0;
+    bottom: 50%;
+    margin-bottom: 14px;
     transform: translateX(-50%);
     background: var(--md-default-bg-color);
     border: 1.5px solid var(--md-primary-fg-color);
@@ -479,6 +480,7 @@ hide:
     margin: 0.1rem 0;
 }}
 
+/* 🔥 RISULTATO-DESC: NORMALIZZAZIONE COMPLETA */
 .risultato-desc {{
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -490,6 +492,32 @@ hide:
     font-size: 0.9rem;
     color: var(--md-default-fg-color--light);
     line-height: 1.5;
+}}
+
+.risultato-desc p {{
+    margin: 0;
+}}
+
+.risultato-desc strong,
+.risultato-desc b {{
+    color: var(--md-default-fg-color);
+    font-weight: 600;
+}}
+
+.risultato-desc em,
+.risultato-desc i {{
+    color: var(--md-default-fg-color--light);
+    font-style: italic;
+}}
+
+.risultato-desc ul,
+.risultato-desc ol {{
+    padding-left: 1.5rem;
+    margin: 0.6rem 0;
+}}
+
+.risultato-desc li {{
+    margin: 0.2rem 0;
 }}
 
 .nessun-risultato {{
