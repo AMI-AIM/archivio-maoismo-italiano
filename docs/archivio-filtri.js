@@ -444,6 +444,14 @@ function generaIterfacciaPaginazione(container, current, total) {
                 });
                 
                 mostraRisultati(risultati);
+
+                // Riporta la vista in cima ai risultati: i pulsanti di paginazione
+                // sono in fondo alla lista, senza questo l'utente resterebbe
+                // scrollato in basso senza vedere i nuovi risultati.
+                const risultatiContainer = document.getElementById('risultati-container');
+                if (risultatiContainer) {
+                    risultatiContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
         });
     });

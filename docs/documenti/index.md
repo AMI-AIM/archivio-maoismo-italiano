@@ -425,7 +425,6 @@ hide:
 
 .risultato-desc strong,
 .risultato-desc b {
-    color: var(--md-default-fg-color);
     font-weight: 600;
 }
 
