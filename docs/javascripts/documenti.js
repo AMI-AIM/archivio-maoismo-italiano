@@ -1,4 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Compatibilità con le schede già generate: trasforma un vecchio link che
+    // contiene più serie in un link distinto per ciascun argomento.
+    document.querySelectorAll('.metadata-item').forEach((item) => {
+        const label = item.querySelector('.metadata-label');
+        const value = item.querySelector('.metadata-value');
+        const links = value?.querySelectorAll('a');
+        if (label?.textContent.trim() !== 'Argomenti' || !links || links.length !== 1) return;
+
+        const tags = links[0].textContent.split(';').map((tag) => tag.trim()).filter(Boolean);
+        if (tags.length < 2) return;
+
+        const fragment = document.createDocumentFragment();
+        tags.forEach((tag, index) => {
+            if (index) fragment.append(', ');
+            const link = document.createElement('a');
+            link.href = `/archivio-maoismo-italiano/documenti/?serie=${encodeURIComponent(tag)}`;
+            link.textContent = tag;
+            fragment.append(link);
+        });
+        value.replaceChildren(fragment);
+    });
+
     document.querySelectorAll('.fullscreen-btn').forEach((button) => {
         button.addEventListener('click', () => {
             const iframe = document.getElementById(button.dataset.target);
