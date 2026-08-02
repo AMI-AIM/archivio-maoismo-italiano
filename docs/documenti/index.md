@@ -762,27 +762,47 @@ hide:
 .slider-container {
     position: relative;
     width: 100%;
-    height: 36px;
-    margin: 0.5rem 0;
+    margin-top: 1.7rem;
+    margin-bottom: 0.5rem;
+    height: 50px;
 }
 
 .slider-track {
     position: absolute;
     width: 100%;
-    height: 4px;
+    height: 6px;
     top: 50%;
     transform: translateY(-50%);
     background: var(--md-default-fg-color--lightest);
-    border-radius: 2px;
+    border-radius: 3px;
 }
 
 .slider-track-fill {
     position: absolute;
     height: 100%;
     background: var(--md-primary-fg-color);
-    border-radius: 2px;
+    border-radius: 3px;
     left: 0%;
     right: 0%;
+}
+
+.slider-value-pill {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    background: var(--md-default-bg-color);
+    border: 1.5px solid var(--md-primary-fg-color);
+    border-radius: 20px;
+    padding: 0.1rem 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--md-primary-fg-color);
+    white-space: nowrap;
+    pointer-events: none;
+    transition: left 0.05s ease;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    z-index: 5;
+    line-height: 1.4;
 }
 
 .slider-container input[type="range"] {
@@ -797,60 +817,62 @@ hide:
     pointer-events: none;
     margin: 0;
     padding: 0;
+    z-index: 10;
 }
 
 .slider-container input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: var(--md-primary-fg-color);
     cursor: pointer;
     pointer-events: auto;
     border: 2px solid var(--md-default-bg-color);
     box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-    z-index: 2;
-    margin-top: -6px;
+    z-index: 12;
+    margin-top: -7px;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 
 .slider-container input[type="range"]::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: var(--md-primary-fg-color);
     cursor: pointer;
     pointer-events: auto;
     border: 2px solid var(--md-default-bg-color);
     box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-    z-index: 2;
+    z-index: 12;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.slider-container input[type="range"]::-moz-range-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 
 .slider-container input[type="range"]::-webkit-slider-runnable-track {
-    height: 4px;
+    height: 6px;
     background: transparent;
-    border-radius: 2px;
+    border-radius: 3px;
 }
 
 .slider-container input[type="range"]::-moz-range-track {
-    height: 4px;
+    height: 6px;
     background: transparent;
-    border-radius: 2px;
+    border-radius: 3px;
 }
 
 .slider-labels {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.8rem;
-    font-size: 0.75rem;
-    color: var(--md-default-fg-color--light);
-}
-
-.slider-labels span {
-    background: var(--md-code-bg-color);
-    padding: 0.05rem 0.5rem;
-    border-radius: 4px;
-    font-weight: 500;
+    display: none;
 }
 
 .filtri-azioni {
@@ -930,38 +952,14 @@ hide:
     margin: 0.1rem 0;
 }
 
-.risultato-meta .separator {
-    margin: 0 0.3rem;
-    color: var(--md-default-fg-color--lightest);
-}
-
 .risultato-desc {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 0.9rem;
-    color: var(--md-default-fg-color--light);
-    line-height: 1.5;
     max-height: 4.5em;
     margin: 0.1rem 0 0 0;
-}
-
-/* Normalizza qualunque markup grezzo importato dalle descrizioni di Internet Archive
-   (font-size, colore, grassetto, ecc. variano da un item all'altro a seconda di come
-   l'utente originale li ha caricati su IA) forzando l'ereditarietà dal contenitore. */
-.risultato-desc * {
-    font-size: inherit !important;
-    font-weight: inherit !important;
-    font-style: inherit !important;
-    font-family: inherit !important;
-    color: inherit !important;
-    line-height: inherit !important;
-    background: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    display: inline !important;
 }
 
 .nessun-risultato {

@@ -470,4 +470,9 @@
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/partito-comunista-unificato-ditalia/</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>

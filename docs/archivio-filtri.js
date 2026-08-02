@@ -81,7 +81,6 @@ function inizializzaFiltri() {
         doc.organizzazioni.forEach(org => organizzazioni.add(org));
         doc.persone.forEach(persona => persone.add(persona));
         if (doc.tipo) tipi.add(doc.tipo);
-        // 🔥 doc.serie ora è un array; aggiungiamo ogni tag singolarmente
         if (doc.serie && Array.isArray(doc.serie)) {
             doc.serie.forEach(tag => argomenti.add(tag));
         }
@@ -106,6 +105,19 @@ function inizializzaFiltri() {
     minLabel.textContent = annoMin;
     maxLabel.textContent = annoMax;
     
+    // 🔥 CREA LE PILLOLE PER I VALORI DEGLI ANNI (sopra i cursori)
+    const minPill = document.createElement('span');
+    minPill.className = 'slider-value-pill';
+    minPill.id = 'anno-min-pill';
+    minPill.textContent = annoMin;
+    minSlider.parentNode.appendChild(minPill);
+
+    const maxPill = document.createElement('span');
+    maxPill.className = 'slider-value-pill';
+    maxPill.id = 'anno-max-pill';
+    maxPill.textContent = annoMax;
+    maxSlider.parentNode.appendChild(maxPill);
+    
     function aggiornaTrack() {
         const min = parseInt(minSlider.value);
         const max = parseInt(maxSlider.value);
@@ -120,6 +132,18 @@ function inizializzaFiltri() {
         if (track) {
             track.style.left = leftPercent + '%';
             track.style.right = rightPercent + '%';
+        }
+        
+        // 🔥 POSIZIONA LE PILLOLE SOPRA I CURSORI
+        const minPillEl = document.getElementById('anno-min-pill');
+        const maxPillEl = document.getElementById('anno-max-pill');
+        if (minPillEl) {
+            minPillEl.style.left = leftPercent + '%';
+            minPillEl.textContent = min;
+        }
+        if (maxPillEl) {
+            maxPillEl.style.left = (100 - rightPercent) + '%';
+            maxPillEl.textContent = max;
         }
     }
     
@@ -200,7 +224,6 @@ function applicaFiltri() {
         if (tipiSelezionati.length > 0 && !tipiSelezionati.includes(doc.tipo)) {
             return false;
         }
-        // 🔥 FILTRO ARGOMENTI - doc.serie è un array
         if (argomentiSelezionati.length > 0) {
             if (!doc.serie || !Array.isArray(doc.serie)) {
                 return false;
@@ -222,7 +245,6 @@ function applicaFiltri() {
         return true;
     });
     
-    // ORDINA CRONOLOGICAMENTE (data_ordine)
     risultati.sort((a, b) => {
         const da = a.data_ordine || [9999, 1, 1];
         const db = b.data_ordine || [9999, 1, 1];
@@ -317,6 +339,12 @@ function resetFiltri() {
     document.getElementById('anno-min-label').textContent = annoMin;
     document.getElementById('anno-max-label').textContent = annoMax;
     
+    // 🔥 AGGIORNA PILLOLE NEL RESET
+    const minPillReset = document.getElementById('anno-min-pill');
+    const maxPillReset = document.getElementById('anno-max-pill');
+    if (minPillReset) minPillReset.textContent = annoMin;
+    if (maxPillReset) maxPillReset.textContent = annoMax;
+    
     const minSlider = document.getElementById('filtro-anno-min');
     const maxSlider = document.getElementById('filtro-anno-max');
     const min = parseInt(minSlider.value);
@@ -331,6 +359,8 @@ function resetFiltri() {
         track.style.left = leftPercent + '%';
         track.style.right = rightPercent + '%';
     }
+    if (minPillReset) minPillReset.style.left = leftPercent + '%';
+    if (maxPillReset) maxPillReset.style.left = (100 - rightPercent) + '%';
     
     applicaFiltri();
 }
