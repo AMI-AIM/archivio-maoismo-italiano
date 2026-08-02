@@ -482,7 +482,7 @@ hide:
     lines.append('.top-card-image-wrapper { flex: 1; overflow: hidden; background: var(--md-code-bg-color); display: flex; }')
     lines.append('.top-card-avatar-img { width: 100%; height: 100%; object-fit: cover; display: block; }')
     lines.append('.top-card-text { padding: 0.6rem 1rem 0.8rem 1rem; background: var(--md-code-bg-color); border-top: 1px solid var(--md-default-fg-color--lightest); flex-shrink: 0; }')
-    lines.append('.top-card-tipo { font-size: 0.55rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff !important; background: var(--md-primary-fg-color); padding: 0.05rem 0.6rem; border-radius: 4px; display: inline-block; width: fit-content; margin-bottom: 0.15rem; }')
+    lines.append('.top-card-tipo { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff !important; background: var(--md-primary-fg-color); padding: 0.05rem 0.6rem; border-radius: 4px; display: inline-block; width: fit-content; margin-bottom: 0.15rem; }')
     lines.append('.top-card-name { font-size: 1rem; font-weight: 600; color: var(--md-default-fg-color); line-height: 1.2; }')
     lines.append('.top-card-dates { font-size: 0.8rem; color: var(--md-default-fg-color--light); }')
     lines.append('.top-card-count { font-size: 0.75rem; color: var(--md-default-fg-color--light); font-weight: 400; }')
