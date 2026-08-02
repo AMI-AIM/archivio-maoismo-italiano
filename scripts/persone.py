@@ -29,33 +29,33 @@ def genera_persone():
     print("\n👤 Generazione delle pagine delle persone...")
     
     try:
-        persone_path = os.path.join(DATA_DIR, 'persone.xlsx')
-        df_persone = pd.read_excel(persone_path, dtype=str).fillna('')
+        persone_path = os.path.join(DATA_DIR, 'dati.xlsx')
+        df_persone = pd.read_excel(persone_path, sheet_name='Persone', dtype=str).fillna('')
         df_persone.columns = df_persone.columns.str.strip().str.lower()
     except FileNotFoundError:
         print(f"   ❌ ERRORE: Non trovo '{persone_path}'.")
         return
     except Exception as e:
-        print(f"   ❌ ERRORE durante la lettura di persone.xlsx: {e}")
+        print(f"   ❌ ERRORE durante la lettura del foglio 'Persone' in dati.xlsx: {e}")
         return
     
     if df_persone.empty:
-        print("   ⚠️ Il file persone.xlsx è vuoto.")
+        print("   ⚠️ Il foglio 'Persone' in dati.xlsx è vuoto.")
         return
     
     try:
-        catalogo_path = os.path.join(DATA_DIR, 'catalogo.xlsx')
-        df_catalogo = pd.read_excel(catalogo_path, dtype=str).fillna('')
+        catalogo_path = os.path.join(DATA_DIR, 'dati.xlsx')
+        df_catalogo = pd.read_excel(catalogo_path, sheet_name='Catalogo', dtype=str).fillna('')
         df_catalogo.columns = df_catalogo.columns.str.strip().str.lower()
     except FileNotFoundError:
         print(f"   ❌ ERRORE: Non trovo '{catalogo_path}'.")
         return
     except Exception as e:
-        print(f"   ❌ ERRORE durante la lettura di catalogo.xlsx: {e}")
+        print(f"   ❌ ERRORE durante la lettura del foglio 'Catalogo' in dati.xlsx: {e}")
         return
     
-    print(f"   📊 Caricate {len(df_persone)} persone da data/persone.xlsx")
-    print(f"   📊 Caricati {len(df_catalogo)} documenti da data/catalogo.xlsx")
+    print(f"   📊 Caricate {len(df_persone)} persone dal foglio 'Persone' di dati.xlsx")
+    print(f"   📊 Caricati {len(df_catalogo)} documenti dal foglio 'Catalogo' di dati.xlsx")
     
     persone = {}
     

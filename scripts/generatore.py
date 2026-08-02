@@ -121,13 +121,13 @@ def main():
     genera_json_soggetti(persone, organizzazioni, OUTPUT_DIR)
     
     try:
-        catalogo_path = os.path.join(DATA_DIR, 'catalogo.xlsx')
-        df = pd.read_excel(catalogo_path, dtype=str).fillna('')
+        catalogo_path = os.path.join(DATA_DIR, 'dati.xlsx')
+        df = pd.read_excel(catalogo_path, sheet_name='Catalogo', dtype=str).fillna('')
     except FileNotFoundError:
         print(f"❌ ERRORE: Non trovo '{catalogo_path}'.")
         return
     except Exception as e:
-        print(f"❌ ERRORE durante la lettura di catalogo.xlsx: {e}")
+        print(f"❌ ERRORE durante la lettura del foglio 'Catalogo' in dati.xlsx: {e}")
         return
     
     df.columns = df.columns.str.strip().str.lower()

@@ -51,33 +51,33 @@ def genera_organizzazioni():
     print("\n🏛️ Generazione delle pagine delle organizzazioni...")
     
     try:
-        org_path = os.path.join(DATA_DIR, 'organizzazioni.xlsx')
-        df_org = pd.read_excel(org_path, dtype=str).fillna('')
+        org_path = os.path.join(DATA_DIR, 'dati.xlsx')
+        df_org = pd.read_excel(org_path, sheet_name='Organizzazioni', dtype=str).fillna('')
         df_org.columns = df_org.columns.str.strip().str.lower()
     except FileNotFoundError:
         print(f"   ❌ ERRORE: Non trovo '{org_path}'.")
         return
     except Exception as e:
-        print(f"   ❌ ERRORE durante la lettura di organizzazioni.xlsx: {e}")
+        print(f"   ❌ ERRORE durante la lettura del foglio 'Organizzazioni' in dati.xlsx: {e}")
         return
     
     if df_org.empty:
-        print("   ⚠️ Il file organizzazioni.xlsx è vuoto.")
+        print("   ⚠️ Il foglio 'Organizzazioni' in dati.xlsx è vuoto.")
         return
     
     try:
-        catalogo_path = os.path.join(DATA_DIR, 'catalogo.xlsx')
-        df_catalogo = pd.read_excel(catalogo_path, dtype=str).fillna('')
+        catalogo_path = os.path.join(DATA_DIR, 'dati.xlsx')
+        df_catalogo = pd.read_excel(catalogo_path, sheet_name='Catalogo', dtype=str).fillna('')
         df_catalogo.columns = df_catalogo.columns.str.strip().str.lower()
     except FileNotFoundError:
         print(f"   ❌ ERRORE: Non trovo '{catalogo_path}'.")
         return
     except Exception as e:
-        print(f"   ❌ ERRORE durante la lettura di catalogo.xlsx: {e}")
+        print(f"   ❌ ERRORE durante la lettura del foglio 'Catalogo' in dati.xlsx: {e}")
         return
     
-    print(f"   📊 Caricate {len(df_org)} organizzazioni da data/organizzazioni.xlsx")
-    print(f"   📊 Caricati {len(df_catalogo)} documenti da data/catalogo.xlsx")
+    print(f"   📊 Caricate {len(df_org)} organizzazioni dal foglio 'Organizzazioni' di dati.xlsx")
+    print(f"   📊 Caricati {len(df_catalogo)} documenti dal foglio 'Catalogo' di dati.xlsx")
     
     organizzazioni = {}
     
