@@ -67,7 +67,15 @@ hide:
 </div>
 
 <div class="doc-row">
-    <div class="doc-data">1978</div>
+    <div class="doc-data">8 maggio 1977</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0057/">Congresso di fondazione del Partito Comunista d'Italia</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1 marzo 1978</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0054/">RICERCATO: Leonida Breznev - Manifesto del Partito Comunista Unificato d'Italia</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">menzionato</span></div>

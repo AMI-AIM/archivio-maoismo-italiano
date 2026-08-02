@@ -9,7 +9,7 @@ hide:
 
 <div class="org-name">Avanguardia Proletaria Maoista</div>
 
-<div class="org-dates">1968 – 1969</div>
+<div class="org-dates">1968 – ????</div>
 
 
 <div class="org-bio-full">

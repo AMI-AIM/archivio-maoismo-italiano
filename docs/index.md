@@ -38,26 +38,26 @@ hide:
 
 
 <div class="doc-row">
+    <div class="doc-data">8 maggio 1977</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="documenti/AMI-0057/">Congresso di fondazione del Partito Comunista d'Italia</a></div>
+        <div class="doc-meta"><span class="doc-type-chip">Foto</span><span class="doc-org">Partito Comunista Unificato d'Italia</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1967</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="documenti/AMI-0056/">Il Presidente Mao Tse-tung sulla Guerra di popolo</a></div>
+        <div class="doc-meta"><span class="doc-type-chip">Libro</span><span class="doc-org">Edizioni Oriente</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
     <div class="doc-data">1967</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="documenti/AMI-0055/">Osare pensare, osare parlare, osare agire, osare fare la rivoluzione - Manifesto PCd'I (m-l)</a></div>
         <div class="doc-meta"><span class="doc-type-chip">Manifesto</span><span class="doc-org">Partito Comunista d'Italia (marxista-leninista)</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">1978</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0054/">RICERCATO: Leonida Breznev - Manifesto del Partito Comunista Unificato d'Italia</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">Manifesto</span><span class="doc-org">Partito Comunista Unificato d'Italia</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">1972</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0053/">Sosteniamo il Congresso di fondazione del PARTITO COMUNISTA (marxista-leninista) ITALIANO per fare l'Italia rossa e socialista come la Cina di Mao</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">Volantino</span><span class="doc-org">Unione dei Comunisti Italiani (marxisti-leninisti)</span></div>
     </div>
 </div>
 
@@ -83,7 +83,7 @@ hide:
     <div class="persona-rank persona-rank--1">1</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="persone/mao-zedong/">Mao Zedong</a></div>
-        <div class="doc-sommario">32 documenti collegati</div>
+        <div class="doc-sommario">33 documenti collegati</div>
         <div class="persona-date">1893 – 1976</div>
     </div>
 </div>
@@ -92,7 +92,7 @@ hide:
     <div class="persona-rank persona-rank--2">2</div>
     <div class="doc-contenuto">
         <div class="doc-titolo"><a href="persone/osvaldo-pesce/">Osvaldo Pesce</a></div>
-        <div class="doc-sommario">6 documenti collegati</div>
+        <div class="doc-sommario">7 documenti collegati</div>
         <div class="persona-date">193? – 2021</div>
     </div>
 </div>

@@ -16,7 +16,7 @@ hide:
             <div class="top-card-text">
                 <div class="top-card-name">Mao Zedong</div>
                 <div class="top-card-dates">1893 – 1976</div>
-                <div class="top-card-count">32 documenti</div>
+                <div class="top-card-count">33 documenti</div>
             </div>
         </a>
     </div>
@@ -28,7 +28,7 @@ hide:
             <div class="top-card-text">
                 <div class="top-card-name">Osvaldo Pesce</div>
                 <div class="top-card-dates">193? – 2021</div>
-                <div class="top-card-count">6 documenti</div>
+                <div class="top-card-count">7 documenti</div>
             </div>
         </a>
     </div>

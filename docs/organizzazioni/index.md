@@ -96,7 +96,7 @@ hide:
     <a href="avanguardia-proletaria-maoista/" class="org-link">
         <div class="org-tipo">Partito</div>
         <div class="org-name">Avanguardia Proletaria Maoista</div>
-        <div class="org-dates">1968 – 1969</div>
+        <div class="org-dates">1968 – ????</div>
         <div class="org-count">1 documento</div>
     </a>
 </div>
@@ -121,7 +121,7 @@ hide:
         <div class="org-tipo">Casa editrice</div>
         <div class="org-name">Edizioni Oriente</div>
         <div class="org-dates">1963 – 1979</div>
-        <div class="org-count">1 documento</div>
+        <div class="org-count">2 documenti</div>
     </a>
 </div>
 <div class="org-card" data-lettera="H">
@@ -168,8 +168,8 @@ hide:
     <a href="partito-comunista-unificato-ditalia/" class="org-link">
         <div class="org-tipo">Partito</div>
         <div class="org-name">Partito Comunista Unificato d'Italia</div>
-        <div class="org-dates">1977 – ???</div>
-        <div class="org-count">1 documento</div>
+        <div class="org-dates">1977 – 1984</div>
+        <div class="org-count">2 documenti</div>
     </a>
 </div>
 <div class="org-card" data-lettera="R">

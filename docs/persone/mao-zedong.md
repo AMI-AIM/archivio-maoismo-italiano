@@ -45,6 +45,14 @@ hide:
 <div class="doc-row">
     <div class="doc-data">1967</div>
     <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0056/">Il Presidente Mao Tse-tung sulla Guerra di popolo</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1967</div>
+    <div class="doc-contenuto">
         <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0002/">Sulla giusta soluzione delle contraddizioni in seno al popolo</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">autore</span></div>
     </div>

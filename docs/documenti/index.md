@@ -140,6 +140,16 @@ hide:
     <div class="risultato-data">1967</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
+            <a href="AMI-0056/">Il Presidente Mao Tse-tung sulla Guerra di popolo</a>
+        </div>
+        <div class="risultato-meta">Mao Zedong · Edizioni Oriente · Libro</div>
+        <div class="risultato-desc">Traduzione a cura della casa editrice militante Edizioni Oriente della raccolta antologica di citazioni a tema militare del Presidente cinese Mao Zedong "毛主席论人民战争". Segue lo stile delle più famose Citazioni dalle opere del Presidente Mao Tse-tung, meglio conosciuto come Libretto rosso, e ne fornisce una sorta di appendice tematica.<div><div><div><br /></div><div>Libro tradotto e pubblicato dalle Edizioni Oriente, Milano, pp. 38, 1967.</div></div></div></div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1967</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
             <a href="AMI-0055/">Osare pensare, osare parlare, osare agire, osare fare la rivoluzione - Manifesto PCd'I (m-l)</a>
         </div>
         <div class="risultato-meta">Partito Comunista d'Italia (marxista-leninista) · Partito Comunista d'Italia (marxista-leninista) · Manifesto</div>
@@ -493,7 +503,7 @@ hide:
             <a href="AMI-0052/">Gli studenti alleati del proletariato nella lotta rivoluzionaria in Italia</a>
         </div>
         <div class="risultato-meta">Avanguardia Proletaria Maoista · Avanguardia Proletaria Maoista · Libro</div>
-        <div class="risultato-desc"><div>Opera di riflessione sulla condizione dello studente universitario italiano nel contesto dei movimenti di contestazione del Sessantotto. Il testo espone il punto di vista specifico dell'organizzazione/partito Avanguardia Proletaria Maoista, organismo animato da Michele Semeraro, emerso dalla disgregazione della Federazione Marxista-Leninista d'Italia (1968) e trasformatosi in Partito Comunista Marxista-Leninista Maoista Italiano l'anno seguente (1969).</div><div><br /></div><div>Libro pubblicato da Biblioteca dell'Avanguardia Proletaria, pp. 42, 1969.</div></div>
+        <div class="risultato-desc"><div>Opera di riflessione sulla condizione dello studente universitario italiano nel contesto dei movimenti di contestazione del Sessantotto. Il testo espone il punto di vista specifico dell'organizzazione/partito Avanguardia Proletaria Maoista, organismo animato da Giuliano Spazzali e Michele Semeraro, emerso dalla disgregazione della Federazione Marxista-Leninista d'Italia (1968).</div><div><br /></div><div>Libro pubblicato da Biblioteca dell'Avanguardia Proletaria, pp. 42, 1969.</div></div>
     </div>
 </div>
 <div class="risultato-card">
@@ -627,7 +637,17 @@ hide:
     </div>
 </div>
 <div class="risultato-card">
-    <div class="risultato-data">1978</div>
+    <div class="risultato-data">8 maggio 1977</div>
+    <div class="risultato-contenuto">
+        <div class="risultato-titolo">
+            <a href="AMI-0057/">Congresso di fondazione del Partito Comunista d'Italia</a>
+        </div>
+        <div class="risultato-meta">Partito Comunista Unificato d'Italia · Partito Comunista Unificato d'Italia · Foto</div>
+        <div class="risultato-desc">Foto dal "Congresso di ricostruzione del Partito Comunista Unificato della classe operaia - Roma, 6-7-8 Maggio 1977", che sancirà la fondazione del Partito Comunista Unificato d'Italia, guidato da Osvaldo Pesce. Confluiscono nel PCUd'I: <br /><ul><li>L'Organizzazione dei Comunisti (marxisti-leninisti) d'Italia di Pesce (nata nel 1970)</li><li>L'Organizzazione Comunista (marxista-leninista) - Fronte Unito di Giuseppe Burgani (nata nel 1973)</li><li>Il Partito Comunista d'Italia (marxista-leninista) - Lotta di lunga durata di Gustavo Hermann (nato nel 1969)</li><li>Il Partito Marxista-Leninista-Maoista Italiano di Michele Semeraro (nato nel 1969 come scissione di Avanguardia Proletaria Maoista)</li></ul><div>Il partito pubblica il giornale "Linea Proletaria", ereditato dall'organizzazione di Pesce.</div></div>
+    </div>
+</div>
+<div class="risultato-card">
+    <div class="risultato-data">1 marzo 1978</div>
     <div class="risultato-contenuto">
         <div class="risultato-titolo">
             <a href="AMI-0054/">RICERCATO: Leonida Breznev - Manifesto del Partito Comunista Unificato d'Italia</a>
