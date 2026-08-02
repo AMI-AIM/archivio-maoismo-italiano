@@ -26,7 +26,6 @@ def genera_indice(df, output_dir):
         if tipo_raw in ['nan', 'None']:
             tipo_raw = ''
         tipo = tipo_raw.lower()
-        # 🔥 tipo_display: "testo_bilingue" diventa "testo" con maiuscola
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
         tipo_display = tipo_display.capitalize() if tipo_display else ''
         
@@ -70,29 +69,9 @@ def genera_indice(df, output_dir):
     anno_min = min(anni_valori) if anni_valori else 1900
     anno_max = max(anni_valori) if anni_valori else 2025
     
-    # Costruisci i risultati
-    risultati_html = ""
-    for s in schede:
-        meta_parts = []
-        if s['autore'] and s['autore'] != 'N/A':
-            meta_parts.append(s['autore'])
-        if s['organizzazione'] and s['organizzazione'] not in ['nan', 'None', '']:
-            meta_parts.append(s['organizzazione'])
-        if s['tipo'] and s['tipo'] not in ['nan', 'None', '']:
-            meta_parts.append(s['tipo'])
-        meta_line = ' · '.join(meta_parts) if meta_parts else 'N/A'
-        
-        risultati_html += f"""
-<div class="risultato-card">
-    <div class="risultato-data">{s['data']}</div>
-    <div class="risultato-contenuto">
-        <div class="risultato-titolo">
-            <a href="{s['id']}/">{s['titolo']}</a>
-        </div>
-        <div class="risultato-meta">{meta_line}</div>
-        {f'<div class="risultato-desc">{s["descrizione"]}</div>' if s.get("descrizione") else ''}
-    </div>
-</div>"""
+    # Costruisci i risultati (vuoti perché generati da JS)
+    # Ma manteniamo un placeholder per il caricamento
+    risultati_html = '<div id="risultati-loading" class="loading">Caricamento in corso...</div>'
     
     index_content = f"""---
 title: "Archivio"
@@ -191,8 +170,10 @@ hide:
     <!-- RISULTATI -->
     <main class="risultati-main">
         <div id="risultati-container">
-            {risultati_html if risultati_html else '<p class="loading">Nessun documento trovato.</p>'}
+            {risultati_html}
         </div>
+        <!-- PAGINAZIONE -->
+        <div id="paginazione" class="paginazione-container"></div>
     </main>
 
 </div>
@@ -506,6 +487,9 @@ hide:
     text-overflow: ellipsis;
     max-height: 4.5em;
     margin: 0.1rem 0 0 0;
+    font-size: 0.9rem;
+    color: var(--md-default-fg-color--light);
+    line-height: 1.5;
 }}
 
 .nessun-risultato {{
@@ -518,6 +502,62 @@ hide:
     text-align: center;
     padding: 2rem;
     color: var(--md-default-fg-color--light);
+}}
+
+/* ============================================================
+   PAGINAZIONE
+   ============================================================ */
+.paginazione-container {{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.5rem;
+    padding: 0.5rem 0;
+    flex-wrap: wrap;
+}}
+
+.pag-btn {{
+    background: var(--md-code-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 4px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--md-default-fg-color);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    min-width: 36px;
+    text-align: center;
+}}
+
+.pag-btn:hover:not(.pag-btn--disabled) {{
+    background: var(--md-primary-fg-color);
+    color: #ffffff;
+    border-color: var(--md-primary-fg-color);
+}}
+
+.pag-btn--active {{
+    background: var(--md-primary-fg-color);
+    color: #ffffff !important;
+    border-color: var(--md-primary-fg-color);
+}}
+
+.pag-btn--disabled {{
+    opacity: 0.3;
+    cursor: not-allowed;
+}}
+
+.pag-btn--nav {{
+    background: transparent;
+    border: none;
+    font-size: 0.9rem;
+    color: var(--md-default-fg-color--light);
+}}
+
+.pag-btn--nav:hover:not(.pag-btn--disabled) {{
+    color: var(--md-primary-fg-color);
+    background: transparent;
 }}
 
 @media (max-width: 768px) {{
@@ -541,6 +581,11 @@ hide:
     }}
     .risultato-desc {{
         font-size: 0.85rem;
+    }}
+    .pag-btn {{
+        padding: 0.2rem 0.5rem;
+        font-size: 0.75rem;
+        min-width: 30px;
     }}
 }}
 </style>

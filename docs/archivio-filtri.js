@@ -5,6 +5,8 @@
 let documenti = [];
 let annoMin = 1950;
 let annoMax = 2025;
+let currentPage = 1;
+const DOCS_PER_PAGE = 20;
 
 async function caricaDati() {
     try {
@@ -18,7 +20,10 @@ async function caricaDati() {
         applicaFiltri();
     } catch (error) {
         console.error('Errore nel caricamento dei dati:', error);
-        document.getElementById('risultati-container').innerHTML = '<p class="nessun-risultato">Errore nel caricamento dei dati.</p>';
+        const container = document.getElementById('risultati-container');
+        if (container) {
+            container.innerHTML = '<p class="nessun-risultato">Errore nel caricamento dei dati.</p>';
+        }
     }
 }
 
@@ -105,7 +110,7 @@ function inizializzaFiltri() {
     minLabel.textContent = annoMin;
     maxLabel.textContent = annoMax;
     
-    // 🔥 CREA LE PILLOLE PER I VALORI DEGLI ANNI (sopra i cursori)
+    // 🔥 CREA LE PILLOLE PER I VALORI DEGLI ANNI
     const minPill = document.createElement('span');
     minPill.className = 'slider-value-pill';
     minPill.id = 'anno-min-pill';
@@ -134,7 +139,6 @@ function inizializzaFiltri() {
             track.style.right = rightPercent + '%';
         }
         
-        // 🔥 POSIZIONA LE PILLOLE SOPRA I CURSORI
         const minPillEl = document.getElementById('anno-min-pill');
         const maxPillEl = document.getElementById('anno-max-pill');
         if (minPillEl) {
@@ -245,6 +249,7 @@ function applicaFiltri() {
         return true;
     });
     
+    // ORDINA CRONOLOGICAMENTE (data_ordine)
     risultati.sort((a, b) => {
         const da = a.data_ordine || [9999, 1, 1];
         const db = b.data_ordine || [9999, 1, 1];
@@ -254,6 +259,8 @@ function applicaFiltri() {
         return a.titolo.localeCompare(b.titolo);
     });
     
+    // 🔥 Reset pagina alla prima quando i filtri cambiano
+    currentPage = 1;
     mostraRisultati(risultati);
 }
 
@@ -268,7 +275,7 @@ function getSelectedValues(id) {
 }
 
 // ============================================================
-// VISUALIZZAZIONE RISULTATI
+// VISUALIZZAZIONE RISULTATI (CON PAGINAZIONE)
 // ============================================================
 
 function capitalizza(s) {
@@ -279,17 +286,34 @@ function capitalizza(s) {
 function mostraRisultati(risultati) {
     const container = document.getElementById('risultati-container');
     const conteggio = document.getElementById('risultati-conteggio');
+    const paginazioneContainer = document.getElementById('paginazione');
     
-    if (risultati.length === 0) {
+    if (!container) return;
+    
+    const totale = risultati.length;
+    
+    if (totale === 0) {
         container.innerHTML = '<p class="nessun-risultato">Nessun documento trovato con i filtri selezionati.</p>';
-        conteggio.textContent = '0 documenti';
+        if (conteggio) conteggio.textContent = '0 documenti';
+        if (paginazioneContainer) paginazioneContainer.innerHTML = '';
         return;
     }
     
-    conteggio.textContent = `${risultati.length} documenti`;
+    // Calcola pagine
+    const totalPages = Math.ceil(totale / DOCS_PER_PAGE);
+    if (currentPage > totalPages) currentPage = totalPages;
+    const start = (currentPage - 1) * DOCS_PER_PAGE;
+    const end = Math.min(start + DOCS_PER_PAGE, totale);
+    const paginaCorrente = risultati.slice(start, end);
     
+    // Aggiorna conteggio
+    if (conteggio) {
+        conteggio.textContent = `${totale} documenti (pagina ${currentPage} di ${totalPages})`;
+    }
+    
+    // Costruisci HTML dei risultati
     let html = '';
-    risultati.forEach(doc => {
+    paginaCorrente.forEach(doc => {
         let metaParts = [];
         if (doc.autore && doc.autore !== 'N/A' && doc.autore !== '') {
             metaParts.push(doc.autore);
@@ -301,7 +325,6 @@ function mostraRisultati(risultati) {
             metaParts.push(capitalizza(doc.tipo));
         }
         let metaLine = metaParts.length > 0 ? metaParts.join(' · ') : 'N/A';
-        
         let descrizione = doc.descrizione || '';
         
         html += `
@@ -319,6 +342,111 @@ function mostraRisultati(risultati) {
     });
     
     container.innerHTML = html;
+    
+    // Genera paginazione
+    if (paginazioneContainer) {
+        generaIterfacciaPaginazione(paginazioneContainer, currentPage, totalPages);
+    }
+}
+
+function generaIterfacciaPaginazione(container, current, total) {
+    if (total <= 1) {
+        container.innerHTML = '';
+        return;
+    }
+    
+    let html = '';
+    
+    // Pulsante "Precedente"
+    html += `<button class="pag-btn pag-btn--nav" data-page="${current - 1}" ${current <= 1 ? 'disabled' : ''}>‹</button>`;
+    
+    // Numeri di pagina
+    const maxVisible = 7;
+    let startPage = Math.max(1, current - Math.floor(maxVisible / 2));
+    let endPage = Math.min(total, startPage + maxVisible - 1);
+    if (endPage - startPage < maxVisible - 1) {
+        startPage = Math.max(1, endPage - maxVisible + 1);
+    }
+    
+    if (startPage > 1) {
+        html += `<button class="pag-btn" data-page="1">1</button>`;
+        if (startPage > 2) html += `<span class="pag-btn pag-btn--disabled" style="border:none; background:transparent;">…</span>`;
+    }
+    
+    for (let i = startPage; i <= endPage; i++) {
+        const active = i === current ? 'pag-btn--active' : '';
+        html += `<button class="pag-btn ${active}" data-page="${i}">${i}</button>`;
+    }
+    
+    if (endPage < total) {
+        if (endPage < total - 1) html += `<span class="pag-btn pag-btn--disabled" style="border:none; background:transparent;">…</span>`;
+        html += `<button class="pag-btn" data-page="${total}">${total}</button>`;
+    }
+    
+    // Pulsante "Successivo"
+    html += `<button class="pag-btn pag-btn--nav" data-page="${current + 1}" ${current >= total ? 'disabled' : ''}>›</button>`;
+    
+    container.innerHTML = html;
+    
+    // Aggiungi event listener ai pulsanti
+    container.querySelectorAll('.pag-btn:not([disabled])').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const page = parseInt(this.dataset.page);
+            if (!isNaN(page) && page !== current) {
+                currentPage = page;
+                // Riapplica i filtri con la nuova pagina (ma non resetta i risultati)
+                const orgSelezionate = getSelectedValues('filtro-organizzazione');
+                const personeSelezionate = getSelectedValues('filtro-persona');
+                const tipiSelezionati = getSelectedValues('filtro-tipo');
+                const argomentiSelezionati = getSelectedValues('filtro-argomento');
+                const annoMinVal = parseInt(document.getElementById('filtro-anno-min').value);
+                const annoMaxVal = parseInt(document.getElementById('filtro-anno-max').value);
+                const testo = document.getElementById('filtro-testo').value.toLowerCase().trim();
+                
+                let risultati = documenti.filter(doc => {
+                    if (orgSelezionate.length > 0 && !orgSelezionate.some(o => doc.organizzazioni.includes(o))) {
+                        return false;
+                    }
+                    if (personeSelezionate.length > 0 && !personeSelezionate.some(p => doc.persone.includes(p))) {
+                        return false;
+                    }
+                    if (tipiSelezionati.length > 0 && !tipiSelezionati.includes(doc.tipo)) {
+                        return false;
+                    }
+                    if (argomentiSelezionati.length > 0) {
+                        if (!doc.serie || !Array.isArray(doc.serie)) {
+                            return false;
+                        }
+                        if (!argomentiSelezionati.some(arg => doc.serie.includes(arg))) {
+                            return false;
+                        }
+                    }
+                    if (doc.anno && (doc.anno < annoMinVal || doc.anno > annoMaxVal)) {
+                        return false;
+                    }
+                    if (testo) {
+                        const serieText = (doc.serie && Array.isArray(doc.serie)) ? doc.serie.join(' ') : '';
+                        const testoDoc = (doc.titolo + ' ' + doc.autore + ' ' + serieText + ' ' + (doc.descrizione || '')).toLowerCase();
+                        if (!testoDoc.includes(testo)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                });
+                
+                risultati.sort((a, b) => {
+                    const da = a.data_ordine || [9999, 1, 1];
+                    const db = b.data_ordine || [9999, 1, 1];
+                    if (da[0] !== db[0]) return da[0] - db[0];
+                    if (da[1] !== db[1]) return da[1] - db[1];
+                    if (da[2] !== db[2]) return da[2] - db[2];
+                    return a.titolo.localeCompare(b.titolo);
+                });
+                
+                mostraRisultati(risultati);
+            }
+        });
+    });
 }
 
 // ============================================================
@@ -339,7 +467,6 @@ function resetFiltri() {
     document.getElementById('anno-min-label').textContent = annoMin;
     document.getElementById('anno-max-label').textContent = annoMax;
     
-    // 🔥 AGGIORNA PILLOLE NEL RESET
     const minPillReset = document.getElementById('anno-min-pill');
     const maxPillReset = document.getElementById('anno-max-pill');
     if (minPillReset) minPillReset.textContent = annoMin;
@@ -362,6 +489,7 @@ function resetFiltri() {
     if (minPillReset) minPillReset.style.left = leftPercent + '%';
     if (maxPillReset) maxPillReset.style.left = (100 - rightPercent) + '%';
     
+    currentPage = 1;
     applicaFiltri();
 }
 
