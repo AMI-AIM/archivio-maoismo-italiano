@@ -41,7 +41,6 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
         if cache_manager and os.path.exists(file_path):
             cached_data = cache_manager.get_doc_metadata(ami_id)
             if cached_data:
-                # Cache valido: salta generazione
                 contatore_saltati += 1
                 print(f"   ⏭️ Saltato {ami_id} (cache valido)")
                 continue
@@ -136,6 +135,8 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
                     descrizione_ia = cached_metadata.get('metadata', {}).get('description')
                     if descrizione_ia:
                         print(f"   💾 Descrizione {identifier} da cache")
+                    else:
+                        print(f"   ⚠️ Descrizione cache vuota per {identifier}")
                 else:
                     # Fallback: scarica direttamente
                     print(f"   📡 Descrizione {identifier} scaricata da IA (cache vuota)")
@@ -188,7 +189,7 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
         
         citazione_bottone_html = (
             f'<button class="citazione-link" type="button" '
-            f'id="citazione-toggle-{citazione_id}" data-citazioni-id="{citazione_id}">📑 Cita questo documento</button>'
+            f'data-citazioni-id="{citazione_id}">📑 Cita questo documento</button>'
         )
         
         citazioni_json = None
@@ -200,7 +201,6 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
             # ================================================================
             
             def formatta_autore_bibliografico(nome_completo):
-                """Formatta nome per citazioni (Cognome, Nome)."""
                 info = persone.get(nome_completo)
                 if info and info.get('cognome'):
                     cognome = info['cognome'].strip()
@@ -318,7 +318,6 @@ hide:
                 img_url = f"https://archive.org/download/{identifier}/{nome_file}"
                 img_tag = f'<img src="{img_url}" alt="{titolo}" class="photo-embed" onerror="this.style.display=\'none\'; this.parentElement.querySelector(\'.photo-fallback\').style.display=\'block\';">'
             else:
-                # Fallback automatico da jpg a png
                 img_url_jpg = f"https://archive.org/download/{identifier}/{identifier}.jpg"
                 img_url_png = f"https://archive.org/download/{identifier}/{identifier}.png"
                 img_tag = (
@@ -372,25 +371,6 @@ hide:
         <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
     </div>
 """
-            content += """
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const container = document.querySelector('[data-toggle-container]');
-        if (!container) return;
-        const buttons = container.querySelectorAll('.lingua-btn');
-        buttons.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const lingua = this.dataset.lingua;
-                buttons.forEach(b => b.classList.remove('lingua-btn--active'));
-                this.classList.add('lingua-btn--active');
-                document.querySelectorAll('[data-lingua-content]').forEach(el => {
-                    el.style.display = el.dataset.linguaContent === lingua ? '' : 'none';
-                });
-            });
-        });
-    });
-    </script>
-"""
         
         # 🔥 GESTIONE TESTO/TRASCRIZIONE
         elif tipo in ['testo', 'trascrizione'] and identifier:
@@ -435,25 +415,6 @@ hide:
         <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
     </div>
 """
-            content += f"""
-<script>
-(function() {{
-    const btn = document.querySelector('[data-target="{fs_id}"]');
-    const iframe = document.getElementById("{fs_id}");
-    if (btn && iframe) {{
-        btn.addEventListener('click', function() {{
-            if (iframe.requestFullscreen) {{
-                iframe.requestFullscreen();
-            }} else if (iframe.webkitRequestFullscreen) {{
-                iframe.webkitRequestFullscreen();
-            }} else if (iframe.msRequestFullscreen) {{
-                iframe.msRequestFullscreen();
-            }}
-        }});
-    }}
-}})();
-</script>
-"""
         
         # Fallback: nessun embed disponibile
         else:
@@ -485,55 +446,6 @@ hide:
 </div>
 
 <script type="application/json" id="citazioni-dati-{citazione_id}">{citazioni_json}</script>
-<script>
-(function() {{
-    const datiEl = document.getElementById('citazioni-dati-{citazione_id}');
-    const toggleBtn = document.getElementById('citazione-toggle-{citazione_id}');
-    const pannello = document.getElementById('citazione-pannello-{citazione_id}');
-    const textarea = document.getElementById('citazione-testo-{citazione_id}');
-    const copiaBtn = document.getElementById('citazione-copia-{citazione_id}');
-    if (!datiEl || !toggleBtn || !pannello) return;
-    const citazioni = JSON.parse(datiEl.textContent);
-    const tabs = pannello.querySelectorAll('.citazione-tab');
-
-    function mostraFormato(formato) {{
-        textarea.value = citazioni[formato] || '';
-        tabs.forEach(function(t) {{
-            t.classList.toggle('citazione-tab--active', t.dataset.formato === formato);
-        }});
-    }}
-    mostraFormato('chicago');
-
-    toggleBtn.addEventListener('click', function() {{
-        const aperto = pannello.style.display !== 'none';
-        pannello.style.display = aperto ? 'none' : 'block';
-    }});
-
-    tabs.forEach(function(tab) {{
-        tab.addEventListener('click', function() {{ mostraFormato(tab.dataset.formato); }});
-    }});
-
-    if (copiaBtn && textarea) {{
-        copiaBtn.addEventListener('click', function() {{
-            textarea.select();
-            const testoOriginaleBtn = copiaBtn.textContent;
-            function confermaCopia() {{
-                copiaBtn.textContent = '✅ Copiato!';
-                setTimeout(function() {{ copiaBtn.textContent = testoOriginaleBtn; }}, 1500);
-            }}
-            if (navigator.clipboard && navigator.clipboard.writeText) {{
-                navigator.clipboard.writeText(textarea.value).then(confermaCopia).catch(function() {{
-                    document.execCommand('copy');
-                    confermaCopia();
-                }});
-            }} else {{
-                document.execCommand('copy');
-                confermaCopia();
-            }}
-        }});
-    }}
-}})();
-</script>
 """
         else:
             content += f"""
@@ -542,45 +454,10 @@ hide:
     <button class="citazione-copia" id="citazione-copia-{citazione_id}" type="button">📋 Copia</button>
 </div>
 </div>
-
-<script>
-(function() {{
-    const toggleBtn = document.getElementById('citazione-toggle-{citazione_id}');
-    const pannello = document.getElementById('citazione-pannello-{citazione_id}');
-    const textarea = document.getElementById('citazione-testo-{citazione_id}');
-    const copiaBtn = document.getElementById('citazione-copia-{citazione_id}');
-    if (!toggleBtn || !pannello) return;
-
-    toggleBtn.addEventListener('click', function() {{
-        const aperto = pannello.style.display !== 'none';
-        pannello.style.display = aperto ? 'none' : 'block';
-    }});
-
-    if (copiaBtn && textarea) {{
-        copiaBtn.addEventListener('click', function() {{
-            textarea.select();
-            const testoOriginaleBtn = copiaBtn.textContent;
-            function confermaCopia() {{
-                copiaBtn.textContent = '✅ Copiato!';
-                setTimeout(function() {{ copiaBtn.textContent = testoOriginaleBtn; }}, 1500);
-            }}
-            if (navigator.clipboard && navigator.clipboard.writeText) {{
-                navigator.clipboard.writeText(textarea.value).then(confermaCopia).catch(function() {{
-                    document.execCommand('copy');
-                    confermaCopia();
-                }});
-            }} else {{
-                document.execCommand('copy');
-                confermaCopia();
-            }}
-        }});
-    }}
-}})();
-</script>
 """
         
         # ========================================================================
-        # 🔥 DESCRIZIONE IA (ora con fallback)
+        # 🔥 DESCRIZIONE IA
         # ========================================================================
         
         if descrizione_ia:
