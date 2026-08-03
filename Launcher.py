@@ -6,16 +6,15 @@ Esegue, nell'ordine:
   1. scripts/persone.py
   2. scripts/org.py
   3. scripts/generatore.py
-  4. git add / commit / push (pubblica su GitHub -> GitHub Actions fa il deploy)
+  4. git add / commit / push
 
-Si ferma subito al primo errore, senza chiedere conferme in nessun altro caso.
+NUOVO: Supporta opzioni cache da CLI.
 
 Uso:
-    python aggiorna_sito.py
-    python aggiorna_sito.py "messaggio di commit personalizzato"
-
-Su Windows è pensato anche per il doppio click diretto sul file (senza .bat):
-i file .py sono associati a Python di default dall'installer ufficiale.
+    python Launcher.py
+    python Launcher.py "messaggio commit"
+    python Launcher.py --clear-cache          # Svuota cache
+    python Launcher.py --cache-stats          # Mostra statistiche
 """
 
 import subprocess
@@ -23,6 +22,7 @@ import sys
 import shutil
 from datetime import datetime
 from pathlib import Path
+from scripts.core.cache_manager import CacheManager
 
 ROOT_DIR = Path(__file__).resolve().parent
 SCRIPTS_DIR = ROOT_DIR / "scripts"
@@ -109,7 +109,7 @@ def aggiorna():
         stampa_titolo("✅ Completato (nessuna modifica)")
         return
 
-    if len(sys.argv) > 1:
+    if len(sys.argv) > 1 and not sys.argv[1].startswith('--'):
         messaggio = sys.argv[1]
     else:
         messaggio = f"Aggiornamento automatico del sito — {datetime.now().strftime('%d/%m/%Y %H:%M')}"
@@ -123,9 +123,36 @@ def aggiorna():
     print("   (di solito ci vuole qualche minuto prima che sia visibile online).")
 
 
+def mostra_cache_stats():
+    """Mostra statistiche cache."""
+    stampa_titolo("📊 Statistiche Cache")
+    cache_mgr = CacheManager()
+    cache_mgr.print_stats()
+
+
+def svuota_cache():
+    """Svuota cache."""
+    stampa_titolo("🗑️ Pulizia Cache")
+    cache_mgr = CacheManager()
+    cache_mgr.clear_all()
+    print("   ✅ Cache completamente svuotato")
+
+
 def main():
     codice_uscita = 0
     try:
+        # ✨ NUOVO: Gestisci opzioni CLI
+        if len(sys.argv) > 1:
+            if sys.argv[1] == '--clear-cache':
+                svuota_cache()
+                return
+            elif sys.argv[1] == '--cache-stats':
+                mostra_cache_stats()
+                return
+            elif sys.argv[1] == '--help':
+                print(__doc__)
+                return
+        
         aggiorna()
     except ErroreComando as e:
         print(f"\n❌ ERRORE: {e}")
@@ -135,8 +162,6 @@ def main():
         print("\n\n⏹️  Interrotto manualmente.")
         codice_uscita = 1
     finally:
-        # Pausa finale: senza, su Windows la finestra aperta con il doppio click
-        # si chiuderebbe di scatto (successo o errore) prima di poter leggere l'output.
         print()
         try:
             input("Premi INVIO per chiudere...")
@@ -147,4 +172,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

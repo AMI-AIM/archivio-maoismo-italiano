@@ -5,6 +5,7 @@ from core.schede import crea_schede
 from core.archivio import genera_indice
 from core.json_export import genera_json
 from core.home import genera_home
+from core.cache_manager import CacheManager
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
@@ -12,14 +13,10 @@ OUTPUT_DIR = os.path.join(ROOT_DIR, 'docs')
 
 
 def copia_immagini_profili():
-    """Garantisce che placeholder.webp esista in docs/immagini/profili/, generandolo
-    con Pillow se manca. Le immagini dei profili (foto reali) vivono direttamente in
-    docs/immagini/profili/ e vengono gestite a mano tramite data/persone.xlsx /
-    data/organizzazioni.xlsx: non c'è più una cartella sorgente separata da cui copiarle."""
+    """Garantisce che placeholder.webp esista in docs/immagini/profili/"""
     dst_dir = os.path.join(OUTPUT_DIR, 'immagini', 'profili')
     os.makedirs(dst_dir, exist_ok=True)
 
-    # Se placeholder.webp non esiste, crea un placeholder di base
     placeholder_path = os.path.join(dst_dir, 'placeholder.webp')
     if not os.path.exists(placeholder_path):
         try:
@@ -114,6 +111,18 @@ def main():
     print(f"📂 Dati: {DATA_DIR}")
     print(f"📂 Output: {OUTPUT_DIR}")
     
+    # ✨ NUOVO: Inizializza cache e controlla file
+    cache_mgr = CacheManager()
+    catalogo_path = os.path.join(DATA_DIR, 'dati.xlsx')
+    
+    print("\n🔍 Controllo cache file sorgente...")
+    excel_changed = cache_mgr.is_file_changed(catalogo_path)
+    
+    if not excel_changed:
+        print("   ℹ️ Excel invariato - generazione ridotta")
+    else:
+        print("   ✏️ Excel cambiato o prima generazione - rigenerazione completa")
+    
     # COPIA IMMAGINI PROFILI
     copia_immagini_profili()
     
@@ -121,7 +130,6 @@ def main():
     genera_json_soggetti(persone, organizzazioni, OUTPUT_DIR)
     
     try:
-        catalogo_path = os.path.join(DATA_DIR, 'dati.xlsx')
         df = pd.read_excel(catalogo_path, sheet_name='Catalogo', dtype=str).fillna('')
     except FileNotFoundError:
         print(f"❌ ERRORE: Non trovo '{catalogo_path}'.")
@@ -133,11 +141,18 @@ def main():
     df.columns = df.columns.str.strip().str.lower()
     print(f"📊 Trovate {len(df)} righe e le seguenti colonne: {list(df.columns)}")
     
-    crea_schede(df, persone, organizzazioni, OUTPUT_DIR)
+    # ✨ Passa cache a schede
+    crea_schede(df, persone, organizzazioni, OUTPUT_DIR, cache_manager=cache_mgr)
     genera_indice(df, OUTPUT_DIR)
     genera_json(df, persone, organizzazioni, OUTPUT_DIR)
     genera_home(df, persone, OUTPUT_DIR)
     genera_sitemap(OUTPUT_DIR, df, persone, organizzazioni)
+    
+    # ✨ Salva hash file dopo generazione completata
+    cache_mgr.set_file_hash(catalogo_path, cache_mgr._hash_file(catalogo_path))
+    
+    # ✨ Mostra statistiche
+    cache_mgr.print_stats()
     
     print("\n🎉 Conversione completata con successo!")
 

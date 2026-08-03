@@ -1,5 +1,17 @@
 import re
 from datetime import datetime
+from .cache_manager import CacheManager
+
+# ✨ Inizializza cache globale
+_cache_manager = None
+
+def get_cache_manager():
+    """Singleton per CacheManager."""
+    global _cache_manager
+    if _cache_manager is None:
+        _cache_manager = CacheManager()
+    return _cache_manager
+
 
 def slugify(name):
     if not name or name in ['nan', 'None']:
@@ -59,39 +71,82 @@ def split_nomi(nomi_str):
     return [n.strip() for n in re.split(r'[;,]+', nomi_str) if n.strip()]
 
 def scarica_descrizione_ia(identifier):
+    """
+    Scarica descrizione da Internet Archive, con cache.
+    
+    ✨ NUOVO: Usa CacheManager per evitare download ripetuti
+    """
     if not identifier:
         return None
     
+    cache_mgr = get_cache_manager()
+    
+    # 1. Controlla cache
+    cached_metadata = cache_mgr.get_ia_metadata(identifier)
+    if cached_metadata:
+        desc = cached_metadata.get('metadata', {}).get('description', '')
+        if desc:
+            return desc.strip()
+        else:
+            return None
+    
+    # 2. Download da IA
     try:
         import requests
         url = f"https://archive.org/metadata/{identifier}"
         response = requests.get(url, timeout=10)
         if response.status_code == 200:
             data = response.json()
+            
+            # 3. Salva in cache
+            cache_mgr.set_ia_metadata(identifier, data)
+            
+            # 4. Estrai descrizione
             desc = data.get('metadata', {}).get('description', '')
             if desc:
-                # 🔥 RIMOSSO il re.sub che toglieva i tag HTML
-                # Ora manteniamo la formattazione originale (paragrafi, elenchi, grassetti, ecc.)
-                desc = desc.strip()
-                return desc
+                return desc.strip()
     except Exception as e:
         print(f"   ⚠️ Errore scaricando descrizione per {identifier}: {e}")
     
     return None
 
 def scarica_testo_ia(identifier, nome_file=None):
+    """
+    Scarica testo da Internet Archive, con cache.
+    
+    ✨ NUOVO: Cache dei download testuali
+    """
     if not identifier:
         return None
     
     if not nome_file:
         nome_file = f"{identifier}.txt"
     
+    cache_mgr = get_cache_manager()
+    cache_key = f"{identifier}_{nome_file}"
+    
+    # 1. Controlla cache
+    cached_text = cache_mgr.ia_cache.get(f"ia_text_{cache_key}")
+    if cached_text:
+        print(f"   💾 Cache: testo {identifier}/{nome_file}")
+        return cached_text.get('data')
+    
+    # 2. Download
     try:
         import requests
         url = f"https://archive.org/download/{identifier}/{nome_file}"
         response = requests.get(url, timeout=15)
         if response.status_code == 200:
-            return response.text
+            testo = response.text
+            
+            # 3. Salva in cache
+            cache_mgr.ia_cache[f"ia_text_{cache_key}"] = {
+                'data': testo,
+                'timestamp': datetime.now().isoformat()
+            }
+            cache_mgr._save_json(cache_mgr.ia_cache_file, cache_mgr.ia_cache)
+            
+            return testo
         else:
             print(f"   ⚠️ Testo non trovato per {identifier} ({response.status_code})")
     except Exception as e:

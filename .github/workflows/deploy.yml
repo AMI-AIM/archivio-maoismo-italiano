@@ -18,13 +18,26 @@ jobs:
         with:
           python-version: '3.12'
       
+      - name: Setup cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      
+      - name: Setup cache AMI
+        uses: actions/cache@v3
+        with:
+          path: scripts/.cache
+          key: ${{ runner.os }}-ami-cache-${{ hashFiles('**/data/dati.xlsx') }}
+          restore-keys: |
+            ${{ runner.os }}-ami-cache-
+      
       - name: Install dependencies
         run: |
           pip install mkdocs-material
           pip install pandas openpyxl
-      
-      - name: Generate document schede
-        run: python scripts/generatore.py
       
       - name: Generate people pages
         run: python scripts/persone.py
@@ -32,11 +45,15 @@ jobs:
       - name: Generate organization pages
         run: python scripts/org.py
       
+      - name: Generate document schede
+        run: python scripts/generatore.py
+      
       - name: Copy static files to site
         run: |
           mkdocs build
           if [ -f docs/documenti.json ]; then cp docs/documenti.json site/; fi
           if [ -f docs/archivio-filtri.js ]; then cp docs/archivio-filtri.js site/; fi
+          if [ -f docs/soggetti.json ]; then cp docs/soggetti.json site/; fi
       
       - name: Deploy to gh-pages
         run: mkdocs gh-deploy --force
