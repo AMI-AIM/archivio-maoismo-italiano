@@ -24,7 +24,7 @@ hide:
 <div class="doc-row">
     <div class="doc-data">8 maggio 1977</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0057/">Congresso di fondazione del Partito Comunista d'Italia</a></div>
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0057/">Congresso di fondazione del Partito Comunista Unificato d'Italia</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da, autore</span></div>
     </div>
 </div>

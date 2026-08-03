@@ -91,7 +91,7 @@ hide:
 <div class="doc-row">
     <div class="doc-data">8 maggio 1977</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0057/">Congresso di fondazione del Partito Comunista d'Italia</a></div>
+        <div class="doc-titolo"><a href="documenti/AMI-0057/">Congresso di fondazione del Partito Comunista Unificato d'Italia</a></div>
         <div class="doc-meta"><span class="doc-type-chip">Foto</span><span class="doc-org">Partito Comunista Unificato d'Italia</span></div>
     </div>
 </div>
