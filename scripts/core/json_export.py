@@ -2,67 +2,68 @@ import os
 import json
 import re
 import pandas as pd
-from .utils import formatta_data, split_nomi, scarica_descrizione_ia
+from scripts.config import BUILD_DIR
+from scripts.core.utils import formatta_data, split_nomi, scarica_descrizione_ia
 
-def genera_json(df, persone, organizzazioni, output_dir):
+def genera_json(df, persone, organizzazioni, output_dir=None):
+    if output_dir is None:
+        output_dir = BUILD_DIR
+
     print("\n📊 Generazione del file JSON per i filtri...")
-    
+
     documenti_json = []
     anni_valori = []
-    
+
     for index, row in df.iterrows():
         ami_id = str(row.get('id', '')).strip()
         if not ami_id or pd.isna(row.get('id')):
             continue
-        
+
         titolo = str(row.get('titolo', 'Senza titolo')).strip()
         if titolo in ['nan', 'None', '']:
             titolo = 'Senza titolo'
-        
+
         autore_raw = str(row.get('autore', '')).strip()
         if autore_raw in ['nan', 'None']:
             autore_raw = ''
-        
+
         org_raw = str(row.get('organizzazione', '')).strip()
         if org_raw in ['nan', 'None']:
             org_raw = ''
-        
+
         persone_collegate = str(row.get('persone_collegate', '')).strip()
         if persone_collegate in ['nan', 'None']:
             persone_collegate = ''
-        
+
         organizzazioni_collegate = str(row.get('organizzazioni_collegate', '')).strip()
         if organizzazioni_collegate in ['nan', 'None']:
             organizzazioni_collegate = ''
-        
+
         data_raw = str(row.get('data', row.get('anno', ''))).strip()
         if data_raw in ['nan', 'None', '']:
             data_raw = ''
         data_formattata, data_ordine = formatta_data(data_raw)
-        
+
         tipo_raw = str(row.get('tipo', '')).strip()
         if tipo_raw in ['nan', 'None']:
             tipo_raw = ''
         tipo = tipo_raw.lower()
         if tipo == 'fotografia':
             tipo = 'foto'
-        
-        # 🔥 PER I FILTRI: "testo_bilingue" viene mostrato come "testo"
+
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
-        # 🔥 METTE LA MAIUSCOLA INIZIALE PER I FILTRI
         tipo_display = tipo_display.capitalize() if tipo_display else ''
-        
-        # 🔥 SPLITTA LA SERIE PER ";" E PULISCE GLI SPAZI
+
         serie_raw = str(row.get('serie', '')).strip()
         if serie_raw and serie_raw not in ['nan', 'None']:
             serie_tags = [s.strip() for s in serie_raw.split(';') if s.strip()]
         else:
             serie_tags = []
-        
+
         url_ia = str(row.get('url', '#')).strip()
         if url_ia in ['nan', 'None', '']:
             url_ia = '#'
-        
+
         anno = None
         if data_ordine and data_ordine[0] != 9999:
             anno = data_ordine[0]
@@ -70,14 +71,14 @@ def genera_json(df, persone, organizzazioni, output_dir):
         elif data_raw and data_raw.isdigit():
             anno = int(data_raw)
             anni_valori.append(anno)
-        
+
         descrizione = None
         if url_ia and url_ia != '#':
             match = re.search(r'/details/([^/?#]+)', url_ia)
             if match:
                 identifier = match.group(1)
                 descrizione = scarica_descrizione_ia(identifier)
-        
+
         persone_lista = []
         if autore_raw and autore_raw not in ['nan', 'None']:
             autori = split_nomi(autore_raw)
@@ -90,7 +91,7 @@ def genera_json(df, persone, organizzazioni, output_dir):
                 if collegato in persone:
                     persone_lista.append(collegato)
         persone_lista = list(set(persone_lista))
-        
+
         organizzazioni_lista = []
         if org_raw and org_raw not in ['nan', 'None']:
             orgs = split_nomi(org_raw)
@@ -108,7 +109,7 @@ def genera_json(df, persone, organizzazioni, output_dir):
                 if autore in organizzazioni:
                     organizzazioni_lista.append(autore)
         organizzazioni_lista = list(set(organizzazioni_lista))
-        
+
         doc_obj = {
             'id': ami_id,
             'titolo': titolo,
@@ -117,26 +118,26 @@ def genera_json(df, persone, organizzazioni, output_dir):
             'data': data_formattata,
             'anno': anno,
             'data_ordine': list(data_ordine) if data_ordine else [9999, 1, 1],
-            'tipo': tipo_display,      # 🔥 ORA CON MAIUSCOLA
-            'serie': serie_tags,       # 🔥 ORA È UNA LISTA DI TAG
+            'tipo': tipo_display,
+            'serie': serie_tags,
             'url_ia': url_ia,
             'persone': persone_lista,
             'organizzazioni': organizzazioni_lista,
             'descrizione': descrizione if descrizione else ''
         }
         documenti_json.append(doc_obj)
-    
+
     documenti_json.sort(key=lambda x: (x['data_ordine'], x['titolo']))
-    
+
     json_data = {
         'documenti': documenti_json,
         'anno_min': min(anni_valori) if anni_valori else 1900,
         'anno_max': max(anni_valori) if anni_valori else 2025
     }
-    
-    json_path = os.path.join(output_dir, 'documenti.json')
+
+    json_path = output_dir / "documenti.json"
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(json_data, f, ensure_ascii=False, indent=2)
-    
+
     print(f"   ✅ JSON generato con {len(documenti_json)} documenti (incluse descrizioni)")
     print(f"   📅 Intervallo anni: {json_data['anno_min']} - {json_data['anno_max']}")

@@ -1,42 +1,45 @@
 import os
 import re
-from .utils import formatta_data, split_nomi, scarica_descrizione_ia
+from scripts.config import BUILD_DIR
+from scripts.core.utils import formatta_data, split_nomi, scarica_descrizione_ia
 
-def genera_indice(df, output_dir):
+def genera_indice(df, output_dir=None):
+    if output_dir is None:
+        output_dir = BUILD_DIR
+
     print("\n📑 Generazione della pagina Archivio con filtri...")
-    
+
     schede = []
     anni_valori = []
-    
+
     for index, row in df.iterrows():
         ami_id = str(row.get('id', '')).strip()
         if not ami_id:
             continue
-        
+
         titolo = str(row.get('titolo', 'Senza titolo')).strip()
         if titolo in ['nan', 'None', '']:
             titolo = 'Senza titolo'
-        
+
         data_raw = str(row.get('data', row.get('anno', ''))).strip()
         if data_raw in ['nan', 'None', '']:
             data_raw = 'n.d.'
         data_formattata, data_ordine = formatta_data(data_raw)
-        
+
         tipo_raw = str(row.get('tipo', '')).strip()
         if tipo_raw in ['nan', 'None']:
             tipo_raw = ''
         tipo = tipo_raw.lower()
-        # 🔥 tipo_display: "testo_bilingue" diventa "testo" con maiuscola
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
         tipo_display = tipo_display.capitalize() if tipo_display else ''
-        
+
         org = str(row.get('organizzazione', '')).strip()
         if org in ['nan', 'None']:
             org = ''
         autore_raw = str(row.get('autore', '')).strip()
         if autore_raw in ['nan', 'None']:
             autore_raw = ''
-        
+
         url_ia = str(row.get('url', '#')).strip()
         descrizione = None
         if url_ia and url_ia != '#':
@@ -44,16 +47,16 @@ def genera_indice(df, output_dir):
             if match:
                 identifier = match.group(1)
                 descrizione = scarica_descrizione_ia(identifier)
-        
+
         if autore_raw and autore_raw not in ['nan', 'None']:
             autori = split_nomi(autore_raw)
             autore_display = autori[0] if autori else 'N/A'
         else:
             autore_display = 'N/A'
-        
+
         if data_ordine[0] != 9999:
             anni_valori.append(data_ordine[0])
-        
+
         schede.append({
             'id': ami_id,
             'titolo': titolo,
@@ -64,15 +67,15 @@ def genera_indice(df, output_dir):
             'autore': autore_display,
             'descrizione': descrizione
         })
-    
+
     schede.sort(key=lambda x: (x['data_ordine'], x['titolo']))
-    
+
     anno_min = min(anni_valori) if anni_valori else 1900
     anno_max = max(anni_valori) if anni_valori else 2025
-    
-    # 🔥 I risultati saranno generati da JavaScript (paginazione)
+
+    # I risultati saranno generati da JavaScript
     risultati_html = '<div id="risultati-loading" class="loading">Caricamento in corso...</div>'
-    
+
     index_content = f"""---
 title: "Archivio"
 hide:
@@ -172,13 +175,12 @@ hide:
         <div id="risultati-container">
             {risultati_html}
         </div>
-        <!-- 🔥 PAGINAZIONE -->
         <div id="paginazione" class="paginazione-container"></div>
     </main>
 
 </div>
 
-<script src="/archivio-maoismo-italiano/archivio-filtri.js"></script>
+<script src="/archivio-maoismo-italiano/javascripts/archivio-filtri.js"></script>
 
 <style>
 .archivio-layout {{
@@ -480,7 +482,6 @@ hide:
     margin: 0.1rem 0;
 }}
 
-/* 🔥 RISULTATO-DESC: NORMALIZZAZIONE COMPLETA */
 .risultato-desc {{
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -518,10 +519,6 @@ hide:
     margin: 0.2rem 0;
 }}
 
-/* Rete di sicurezza: qualunque tag o stile inline importato pari pari dall'HTML
-   grezzo di Internet Archive (es. <font size="5">, style="font-size:...") non deve
-   mai alterare la dimensione o il tipo di carattere rispetto al contenitore — solo
-   grassetto/corsivo/colore restano personalizzabili dalle regole sopra. */
 .risultato-desc * {{
     font-size: inherit !important;
     font-family: inherit !important;
@@ -540,9 +537,6 @@ hide:
     color: var(--md-default-fg-color--light);
 }}
 
-/* ============================================================
-   PAGINAZIONE
-   ============================================================ */
 .paginazione-container {{
     display: flex;
     justify-content: center;
@@ -626,10 +620,10 @@ hide:
 }}
 </style>
 """
-    
-    index_path = os.path.join(output_dir, 'documenti', 'index.md')
+
+    index_path = output_dir / "documenti" / "index.md"
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(index_content)
-    
+
     print(f"   ✅ Pagina Archivio generata con {len(schede)} schede.")
     print(f"   📅 Intervallo anni: {anno_min} - {anno_max}")

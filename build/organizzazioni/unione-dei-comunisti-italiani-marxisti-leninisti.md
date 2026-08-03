@@ -1,0 +1,137 @@
+---
+title: " "
+description: "Documenti relativi a Unione dei Comunisti Italiani (marxisti-leninisti)"
+hide:
+  - navigation
+  - toc
+  - title
+---
+
+<div class="org-name">Unione dei Comunisti Italiani (marxisti-leninisti)</div>
+
+<div class="org-dates">1968 – 1972</div>
+
+
+<div class="org-bio-with-image">
+    <div class="org-bio-text">
+        <p><em>Scheda in fase di redazione. Nel frattempo, consulta i documenti collegati a Unione dei Comunisti Italiani (marxisti-leninisti) qui sotto.</em></p>
+    </div>
+    <div class="org-bio-image">
+        <img src="/archivio-maoismo-italiano/immagini/profili/logo-UCI.svg" alt="Unione dei Comunisti Italiani (marxisti-leninisti)" class="org-bio-img">
+    </div>
+</div>
+
+
+<h3 style="font-weight: bold; font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0;">Documenti</h3>
+
+<div class="catalogo-lista">
+
+<div class="doc-row">
+    <div class="doc-data">1 agosto 1969</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0035/">Viva il popolo cinese</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">9 ottobre 1969</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0017/">Studenti ed intellettuali rivoluzionari</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1972</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0053/">Sosteniamo il Congresso di fondazione del PARTITO COMUNISTA (marxista-leninista) ITALIANO per fare l'Italia rossa e socialista come la Cina di Mao</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+    </div>
+</div>
+
+</div>
+
+<style>
+.org-name { font-size: 2.4rem; font-weight: 700; margin: 0 0 0.2rem 0; color: var(--md-primary-fg-color); }
+.org-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 0.8rem 0; font-weight: 400; }
+
+/* STORIA CON FOTO (testo a sinistra, foto a destra) */
+.org-bio-with-image {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1rem 0 1.5rem 0;
+    padding: 1rem;
+    background: var(--md-code-bg-color);
+    border-radius: 8px;
+    border-left: 4px solid var(--md-primary-fg-color);
+    align-items: flex-start;
+}
+
+.org-bio-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.org-bio-text p {
+    margin: 0.5rem 0;
+}
+
+.org-bio-image {
+    flex: 0 0 360px;
+    width: 360px;
+    height: auto;
+    max-height: 400px;
+    overflow: hidden;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.org-bio-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* STORIA SENZA FOTO (tutta larghezza) */
+.org-bio-full {
+    margin: 1rem 0 1.5rem 0;
+    padding: 1rem;
+    background: var(--md-code-bg-color);
+    border-radius: 8px;
+    border-left: 4px solid var(--md-primary-fg-color);
+}
+
+.org-bio-full p {
+    margin: 0.5rem 0;
+}
+
+.catalogo-lista { display: flex; flex-direction: column; gap: 0.25rem; margin-top: 0.5rem; }
+.doc-row { display: flex; align-items: flex-start; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--md-default-fg-color--lightest); transition: background-color 0.15s; gap: 1.5rem; }
+.doc-row:hover { background-color: var(--md-code-bg-color); }
+.doc-data { flex: 0 0 140px; font-size: 0.9rem; color: var(--md-primary-fg-color); font-weight: 500; white-space: nowrap; padding-top: 0.05rem; }
+.doc-contenuto { flex: 1; min-width: 0; }
+.doc-titolo { font-size: 1rem; font-weight: 500; }
+.doc-titolo a { text-decoration: none; color: var(--md-default-fg-color); }
+.doc-titolo a:hover { text-decoration: underline; color: var(--md-primary-fg-color); }
+.doc-ruoli { margin-top: 0.1rem; }
+.ruolo-badge { display: inline-block; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff !important; background: var(--md-primary-fg-color); padding: 0.05rem 0.6rem; border-radius: 4px; }
+
+@media (max-width: 768px) {
+    .org-bio-with-image {
+        flex-direction: column;
+        align-items: center;
+    }
+    .org-bio-image {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 360px;
+        max-height: 300px;
+    }
+    .doc-row { flex-direction: column; gap: 0.1rem; padding: 0.6rem 0.2rem; }
+    .doc-data { flex: 0 0 auto; white-space: normal; font-size: 0.8rem; }
+    .org-name { font-size: 1.6rem; }
+    .org-dates { font-size: 0.85rem; }
+}
+</style>

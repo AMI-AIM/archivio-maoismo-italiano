@@ -1,14 +1,15 @@
 import pandas as pd
 import os
 import json
-from .utils import slugify, split_nomi
+from scripts.config import BUILD_DIR
+from scripts.core.utils import slugify, split_nomi
 
 def carica_soggetti(data_dir):
     persone = {}
     organizzazioni = {}
-    
+
     try:
-        persone_path = os.path.join(data_dir, 'dati.xlsx')
+        persone_path = data_dir / "dati.xlsx"
         df_persone = pd.read_excel(persone_path, sheet_name='Persone', dtype=str).fillna('')
         df_persone.columns = df_persone.columns.str.strip().str.lower()
         for _, row in df_persone.iterrows():
@@ -26,9 +27,9 @@ def carica_soggetti(data_dir):
         print("   ⚠️ File data/dati.xlsx non trovato. Le persone non saranno linkate.")
     except Exception as e:
         print(f"   ⚠️ Errore durante il caricamento del foglio 'Persone' in dati.xlsx: {e}")
-    
+
     try:
-        org_path = os.path.join(data_dir, 'dati.xlsx')
+        org_path = data_dir / "dati.xlsx"
         df_org = pd.read_excel(org_path, sheet_name='Organizzazioni', dtype=str).fillna('')
         df_org.columns = df_org.columns.str.strip().str.lower()
         for _, row in df_org.iterrows():
@@ -45,13 +46,13 @@ def carica_soggetti(data_dir):
         print("   ⚠️ File data/dati.xlsx non trovato. Le organizzazioni non saranno linkate.")
     except Exception as e:
         print(f"   ⚠️ Errore durante il caricamento del foglio 'Organizzazioni' in dati.xlsx: {e}")
-    
+
     return persone, organizzazioni
 
 def trova_soggetto(nome, persone, organizzazioni):
     if not nome or nome in ['nan', 'None']:
         return None, None
-    
+
     if nome in persone:
         return 'persone', persone[nome]['slug']
     elif nome in organizzazioni:
@@ -81,11 +82,10 @@ def link_lista(nomi_str, persone, organizzazioni):
         return ', '.join(links)
     return 'N/A'
 
+def genera_json_soggetti(persone, organizzazioni, output_dir=None):
+    if output_dir is None:
+        output_dir = BUILD_DIR
 
-def genera_json_soggetti(persone, organizzazioni, output_dir):
-    """Esporta persone e organizzazioni in un JSON, usato dalla ricerca
-    istantanea nella home (hero-search.js) per suggerire anche schede
-    di persone/organizzazioni, non solo documenti."""
     print("\n👤 Generazione del JSON di persone e organizzazioni (per la ricerca)...")
 
     persone_json = []
@@ -113,7 +113,7 @@ def genera_json_soggetti(persone, organizzazioni, output_dir):
         'organizzazioni': organizzazioni_json
     }
 
-    json_path = os.path.join(output_dir, 'soggetti.json')
+    json_path = output_dir / "soggetti.json"
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 

@@ -1,20 +1,15 @@
 import os
 import hashlib
 import pandas as pd
-from core.utils import slugify, formatta_data, split_nomi
-
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_DIR = os.path.join(ROOT_DIR, 'data')
-OUTPUT_DIR = os.path.join(ROOT_DIR, 'docs')
+from scripts.config import DATA_DIR, BUILD_DIR
+from scripts.core.utils import slugify, formatta_data, split_nomi
 
 PLACEHOLDER_URL = '/archivio-maoismo-italiano/immagini/profili/placeholder.webp'
-
 
 def colore_hash(nome):
     hash_obj = hashlib.md5(nome.encode('utf-8'))
     hex_color = hash_obj.hexdigest()[:6]
     return f'#{hex_color}'
-
 
 def get_iniziali(nome, max_lettere=2):
     parti = nome.split()
@@ -23,7 +18,6 @@ def get_iniziali(nome, max_lettere=2):
     if len(parti) == 1:
         return parti[0][0].upper()
     return ''.join(p[0] for p in parti[:max_lettere]).upper()
-
 
 def get_categoria_automatica(nome):
     nome_lower = nome.lower()
@@ -46,12 +40,11 @@ def get_categoria_automatica(nome):
     else:
         return 'Organizzazione'
 
-
 def genera_organizzazioni():
     print("\n🏛️ Generazione delle pagine delle organizzazioni...")
-    
+
     try:
-        org_path = os.path.join(DATA_DIR, 'dati.xlsx')
+        org_path = DATA_DIR / 'dati.xlsx'
         df_org = pd.read_excel(org_path, sheet_name='Organizzazioni', dtype=str).fillna('')
         df_org.columns = df_org.columns.str.strip().str.lower()
     except FileNotFoundError:
@@ -60,13 +53,13 @@ def genera_organizzazioni():
     except Exception as e:
         print(f"   ❌ ERRORE durante la lettura del foglio 'Organizzazioni' in dati.xlsx: {e}")
         return
-    
+
     if df_org.empty:
         print("   ⚠️ Il foglio 'Organizzazioni' in dati.xlsx è vuoto.")
         return
-    
+
     try:
-        catalogo_path = os.path.join(DATA_DIR, 'dati.xlsx')
+        catalogo_path = DATA_DIR / 'dati.xlsx'
         df_catalogo = pd.read_excel(catalogo_path, sheet_name='Catalogo', dtype=str).fillna('')
         df_catalogo.columns = df_catalogo.columns.str.strip().str.lower()
     except FileNotFoundError:
@@ -75,17 +68,17 @@ def genera_organizzazioni():
     except Exception as e:
         print(f"   ❌ ERRORE durante la lettura del foglio 'Catalogo' in dati.xlsx: {e}")
         return
-    
+
     print(f"   📊 Caricate {len(df_org)} organizzazioni dal foglio 'Organizzazioni' di dati.xlsx")
     print(f"   📊 Caricati {len(df_catalogo)} documenti dal foglio 'Catalogo' di dati.xlsx")
-    
+
     organizzazioni = {}
-    
+
     for _, row in df_org.iterrows():
         nome = str(row.get('nome', '')).strip()
         if not nome or nome in ['nan', 'None']:
             continue
-        
+
         slug = slugify(nome)
         storia = str(row.get('storia', '')).strip()
         if storia in ['nan', 'None']:
@@ -99,7 +92,7 @@ def genera_organizzazioni():
         scioglimento = str(row.get('scioglimento', '')).strip()
         if scioglimento in ['nan', 'None']:
             scioglimento = ''
-        
+
         immagine_raw = str(row.get('immagine', '')).strip()
         if immagine_raw and immagine_raw not in ['nan', 'None']:
             if immagine_raw.startswith('http://') or immagine_raw.startswith('https://'):
@@ -108,7 +101,7 @@ def genera_organizzazioni():
                 immagine_url = f'/archivio-maoismo-italiano/immagini/profili/{immagine_raw}'
         else:
             immagine_url = None
-        
+
         if fondazione and scioglimento:
             data_range = f"{fondazione} – {scioglimento}"
         elif fondazione:
@@ -117,45 +110,45 @@ def genera_organizzazioni():
             data_range = f"? – {scioglimento}"
         else:
             data_range = ''
-        
+
         documenti = []
-        
+
         for _, doc in df_catalogo.iterrows():
             ami_id = str(doc.get('id', '')).strip()
             if not ami_id or ami_id in ['nan', 'None']:
                 continue
-            
+
             titolo = str(doc.get('titolo', 'Senza titolo')).strip()
             if titolo in ['nan', 'None']:
                 titolo = 'Senza titolo'
-            
+
             data_raw = str(doc.get('data', doc.get('anno', ''))).strip()
             if data_raw and data_raw not in ['nan', 'None']:
                 data_form, data_ordine = formatta_data(data_raw)
             else:
                 data_form = 'n.d.'
                 data_ordine = (9999, 1, 1)
-            
+
             ruoli = []
-            
+
             org_raw = str(doc.get('organizzazione', '')).strip()
             if org_raw and org_raw not in ['nan', 'None']:
                 orgs = split_nomi(org_raw)
                 if nome in orgs:
                     ruoli.append('pubblicato da')
-            
+
             autore_raw = str(doc.get('autore', '')).strip()
             if autore_raw and autore_raw not in ['nan', 'None']:
                 autori = split_nomi(autore_raw)
                 if nome in autori:
                     ruoli.append('autore')
-            
+
             org_collegate = str(doc.get('organizzazioni_collegate', '')).strip()
             if org_collegate and org_collegate not in ['nan', 'None']:
                 collegati = split_nomi(org_collegate)
                 if nome in collegati:
                     ruoli.append('menzionato')
-            
+
             if ruoli:
                 documenti.append({
                     'id': ami_id,
@@ -164,7 +157,7 @@ def genera_organizzazioni():
                     'data_ordine': data_ordine,
                     'ruoli': ruoli
                 })
-        
+
         if documenti:
             documenti.sort(key=lambda x: (x['data_ordine'], x['titolo']))
             organizzazioni[nome] = {
@@ -178,29 +171,29 @@ def genera_organizzazioni():
                 'immagine': immagine_url,
                 'num_doc': len(documenti)
             }
-    
+
     if not organizzazioni:
         print("   ⚠️ Nessuna organizzazione ha documenti associati nel catalogo.")
         return
-    
+
     print(f"   📊 Trovate {len(organizzazioni)} organizzazioni con documenti associati.")
-    
-    org_dir = os.path.join(OUTPUT_DIR, 'organizzazioni')
-    os.makedirs(org_dir, exist_ok=True)
-    
+
+    org_dir = BUILD_DIR / 'organizzazioni'
+    org_dir.mkdir(parents=True, exist_ok=True)
+
     # ============================================================
     # SCHEDE INDIVIDUALI
     # ============================================================
     for nome, data in organizzazioni.items():
         slug = data['slug']
-        file_path = os.path.join(org_dir, f'{slug}.md')
-        
+        file_path = org_dir / f'{slug}.md'
+
         storia_text = data['storia']
         if not storia_text:
             storia_text = f'<p><em>Scheda in fase di redazione. Nel frattempo, consulta i documenti collegati a {nome} qui sotto.</em></p>'
         elif '\n' in storia_text:
             storia_text = '<p>' + '</p><p>'.join(storia_text.split('\n')) + '</p>'
-        
+
         frontmatter = f"""---
 title: " "
 description: "Documenti relativi a {nome}"
@@ -210,7 +203,7 @@ hide:
   - title
 ---
 """
-        
+
         if data.get('immagine'):
             bio_section = f'''
 <div class="org-bio-with-image">
@@ -228,7 +221,7 @@ hide:
     {storia_text}
 </div>
 '''
-        
+
         content = f"""
 <div class="org-name">{nome}</div>
 
@@ -240,7 +233,7 @@ hide:
 
 <div class="catalogo-lista">
 """
-        
+
         for doc in data['documenti']:
             ruoli_text = ", ".join(doc['ruoli'])
             content += f"""
@@ -252,7 +245,7 @@ hide:
     </div>
 </div>
 """
-        
+
         content += """
 </div>
 
@@ -340,25 +333,24 @@ hide:
 }
 </style>
 """
-        
+
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(frontmatter + content)
-        
+
         print(f"   ✅ Creata scheda per {nome} → {slug}.md")
-    
+
     # ============================================================
-    # INDICE ORGANIZZAZIONI CON RICERCA + FILTRO ALFABETICO
+    # INDICE ORGANIZZAZIONI
     # ============================================================
-    
     org_top = sorted(organizzazioni.items(), key=lambda x: x[1]['num_doc'], reverse=True)[:3]
     org_resto = sorted(
         [item for item in organizzazioni.items() if item[0] not in [o[0] for o in org_top]],
         key=lambda x: x[0].lower()
     )
-    
+
     lettere_presenti = sorted(set([nome[0].upper() for nome, _ in org_resto]))
     tutte_lettere = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
-    
+
     lines = []
     lines.append('---')
     lines.append('title: "Organizzazioni"')
@@ -369,7 +361,7 @@ hide:
     lines.append('')
     lines.append('# Organizzazioni in evidenza')
     lines.append('')
-    
+
     if org_top:
         lines.append('<div class="top-row">')
         for nome, data in org_top:
@@ -396,7 +388,7 @@ hide:
             lines.append(f'        </a>')
             lines.append(f'    </div>')
         lines.append('</div>')
-    
+
     lines.append('<div class="filtri-organizzazioni">')
     lines.append('    <div class="search-bar">')
     lines.append('        <input type="text" id="search-input" placeholder="🔍 Cerca per nome..." aria-label="Cerca organizzazioni">')
@@ -411,7 +403,7 @@ hide:
             lines.append(f'        <button class="lettera-btn lettera-btn--disabled" data-lettera="{lettera}" disabled>{lettera}</button>')
     lines.append('    </div>')
     lines.append('</div>')
-    
+
     if org_resto:
         lines.append('<div class="org-grid" id="org-grid">')
         for nome, data in org_resto:
@@ -432,7 +424,7 @@ hide:
         lines.append('</div>')
     else:
         lines.append('<p style="padding: 1rem 0; color: var(--md-default-fg-color--light);">Nessuna organizzazione aggiuntiva.</p>')
-    
+
     lines.append('')
     lines.append('<script>')
     lines.append('(function() {')
@@ -473,7 +465,7 @@ hide:
     lines.append('})();')
     lines.append('</script>')
     lines.append('')
-    
+
     lines.append('<style>')
     lines.append('.top-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }')
     lines.append('.top-card { aspect-ratio: 1 / 1; background: var(--md-code-bg-color); border-radius: 12px; border: 1px solid var(--md-default-fg-color--lightest); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; padding: 0; }')
@@ -508,20 +500,18 @@ hide:
     lines.append('@media (max-width: 768px) { .top-row { grid-template-columns: 1fr; gap: 1rem; } .top-card { aspect-ratio: auto; min-height: 200px; } .top-card-text { padding: 0.4rem 0.8rem 0.6rem 0.8rem; } .top-card-name { font-size: 0.95rem; } .search-bar { flex-direction: column; align-items: stretch; gap: 0.4rem; } .search-counter { text-align: right; } .alfabeto-bar { justify-content: center; gap: 0.15rem; } .lettera-btn { font-size: 0.7rem; padding: 0.15rem 0.4rem; min-width: 24px; } }')
     lines.append('@media (max-width: 600px) { .org-grid { grid-template-columns: 1fr; } .org-name { font-size: 0.9rem; } .org-dates { font-size: 0.65rem; } }')
     lines.append('</style>')
-    
+
     index_content = "\n".join(lines)
-    
-    index_path = os.path.join(org_dir, 'index.md')
+
+    index_path = org_dir / 'index.md'
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(index_content)
-    
-    print(f"   ✅ Indice organizzazioni generato con {len(organizzazioni)} organizzazioni (top 3 in evidenza, resto con filtri).")
 
+    print(f"   ✅ Indice organizzazioni generato con {len(organizzazioni)} organizzazioni (top 3 in evidenza, resto con filtri).")
 
 def main():
     print("🚀 Avvio del generatore di schede organizzazioni...")
     genera_organizzazioni()
-
 
 if __name__ == "__main__":
     main()

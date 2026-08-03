@@ -3,6 +3,8 @@ site_description: Risorsa digitale per la ricerca storica sul maoismo in Italia
 site_author: Ivan Masci
 site_url: https://ami-aim.github.io/archivio-maoismo-italiano/
 
+docs_dir: build
+
 theme:
   name: material
   custom_dir: overrides
