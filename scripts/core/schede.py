@@ -4,108 +4,132 @@ import html
 import json
 import urllib.parse
 import pandas as pd
-from scripts.config import BUILD_DIR
-from scripts.core.utils import formatta_data, split_nomi, scarica_descrizione_ia, scarica_testo_ia
-from scripts.core.soggetti import crea_link, link_lista
+from .utils import formatta_data, split_nomi, scarica_descrizione_ia, scarica_testo_ia
+from .soggetti import crea_link, link_lista
 
-def crea_schede(df, persone, organizzazioni, cache_manager=None):
+
+def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
+    """
+    Crea schede documento con cache opzionale per velocizzare rigenerazione.
+    
+    Args:
+        df: DataFrame catalogo con colonne id, titolo, autore, etc.
+        persone: dict persone caricate
+        organizzazioni: dict organizzazioni caricate
+        output_dir: directory output (docs/)
+        cache_manager: CacheManager opzionale per caching IA e metadati
+    
+    Returns:
+        tuple: (contatore_generati, contatore_saltati_da_cache)
+    """
     print("📄 Creazione delle schede dei documenti...")
-
-    documenti_dir = BUILD_DIR / "documenti"
-    documenti_dir.mkdir(parents=True, exist_ok=True)
-
+    
+    documenti_dir = os.path.join(output_dir, 'documenti')
+    os.makedirs(documenti_dir, exist_ok=True)
+    
     contatore_generati = 0
     contatore_saltati = 0
-
+    
     for index, row in df.iterrows():
         ami_id = str(row.get('id', '')).strip()
         if not ami_id or pd.isna(row.get('id')):
             continue
-
-        file_path = documenti_dir / f'{ami_id}.md'
-
-        if cache_manager and file_path.exists():
+        
+        file_path = os.path.join(documenti_dir, f'{ami_id}.md')
+        
+        # ✨ CACHE CHECK: Se documento esiste in cache e file esiste, salta
+        if cache_manager and os.path.exists(file_path):
             cached_data = cache_manager.get_doc_metadata(ami_id)
             if cached_data:
                 contatore_saltati += 1
                 print(f"   ⏭️ Saltato {ami_id} (cache valido)")
                 continue
-
-        # --- PARSING DATI ---
+        
+        # ========================================================================
+        # PARSING DATI DALLA RIGA EXCEL
+        # ========================================================================
+        
         titolo = str(row.get('titolo', 'Senza titolo')).strip()
         if titolo in ['nan', 'None', '']:
             titolo = 'Senza titolo'
-
+        
         autore_raw = str(row.get('autore', '')).strip()
         if autore_raw in ['nan', 'None']:
             autore_raw = ''
-
+        
         org_raw = str(row.get('organizzazione', '')).strip()
         if org_raw in ['nan', 'None']:
             org_raw = ''
-
+        
         luogo_raw = str(row.get('luogo', '')).strip()
         if luogo_raw in ['nan', 'None']:
             luogo_raw = ''
-
+        
         editore_raw = str(row.get('editore', '')).strip()
         if editore_raw in ['nan', 'None']:
             editore_raw = ''
-
+        
         persone_collegate = str(row.get('persone_collegate', '')).strip()
         if persone_collegate in ['nan', 'None']:
             persone_collegate = ''
-
+        
         organizzazioni_collegate = str(row.get('organizzazioni_collegate', '')).strip()
         if organizzazioni_collegate in ['nan', 'None']:
             organizzazioni_collegate = ''
-
+        
         data_raw = str(row.get('data', row.get('anno', ''))).strip()
         if data_raw in ['nan', 'None', '']:
             data_raw = ''
         data_formattata, _ = formatta_data(data_raw)
-
+        
         tipo_raw = str(row.get('tipo', '')).strip()
         if tipo_raw in ['nan', 'None']:
             tipo_raw = ''
         tipo = tipo_raw.lower()
         if tipo == 'fotografia':
             tipo = 'foto'
-
+        
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
         tipo_display = tipo_display.capitalize() if tipo_display else ''
-
+        
         serie = str(row.get('serie', '')).strip()
         if serie in ['nan', 'None']:
             serie = ''
-
+        
         url_ia = str(row.get('url', '#')).strip()
         if url_ia in ['nan', 'None', '']:
             url_ia = '#'
-
+        
         nome_file = str(row.get('nome_file', '')).strip()
         if nome_file in ['nan', 'None']:
             nome_file = ''
-
+        
         nome_file_originale = str(row.get('nome_file_originale', '')).strip()
         if nome_file_originale in ['nan', 'None']:
             nome_file_originale = ''
-
+        
         nome_file_traduzione = str(row.get('nome_file_traduzione', '')).strip()
         if nome_file_traduzione in ['nan', 'None']:
             nome_file_traduzione = ''
-
-        # --- Estrai identifier da URL IA ---
+        
+        # ========================================================================
+        # ESTRAI IDENTIFIER DA URL INTERNET ARCHIVE
+        # ========================================================================
+        
         identifier = None
         if url_ia and url_ia != '#':
             match = re.search(r'/details/([^/?#]+)', url_ia)
             if match:
                 identifier = match.group(1)
-
-        # --- Descrizione IA con cache ---
+        
+        # ========================================================================
+        # 🔥 DESCRIZIONE: cache + fallback
+        # ========================================================================
         descrizione_ia = None
+        
         if identifier:
             if cache_manager:
+                # Prova a leggere dalla cache
                 cached_metadata = cache_manager.get_ia_metadata(identifier)
                 if cached_metadata:
                     descrizione_ia = cached_metadata.get('metadata', {}).get('description')
@@ -114,14 +138,20 @@ def crea_schede(df, persone, organizzazioni, cache_manager=None):
                     else:
                         print(f"   ⚠️ Descrizione cache vuota per {identifier}")
                 else:
+                    # Fallback: scarica direttamente
                     print(f"   📡 Descrizione {identifier} scaricata da IA (cache vuota)")
                     descrizione_ia = scarica_descrizione_ia(identifier)
+                    # Salva in cache per le prossime volte
                     if descrizione_ia and cache_manager:
                         cache_manager.set_ia_metadata(identifier, {'metadata': {'description': descrizione_ia}})
             else:
+                # Senza cache: scarica direttamente
                 descrizione_ia = scarica_descrizione_ia(identifier)
-
-        # --- Link HTML per persone/org ---
+        
+        # ========================================================================
+        # GENERAZIONE LINK HTML PER PERSONE/ORG
+        # ========================================================================
+        
         autore_links = []
         if autore_raw and autore_raw not in ['nan', 'None']:
             autori = split_nomi(autore_raw)
@@ -129,12 +159,15 @@ def crea_schede(df, persone, organizzazioni, cache_manager=None):
                 link = crea_link(autore, persone, organizzazioni)
                 autore_links.append(link)
         autore_html = ', '.join(autore_links) if autore_links else 'N/A'
-
+        
         org_html = link_lista(org_raw, persone, organizzazioni)
         persone_collegate_html = link_lista(persone_collegate, persone, organizzazioni)
         organizzazioni_collegate_html = link_lista(organizzazioni_collegate, persone, organizzazioni)
-
-        # --- Serie/Argomenti ---
+        
+        # ========================================================================
+        # GESTIONE SERIE/ARGOMENTI
+        # ========================================================================
+        
         serie_tags = [tag.strip() for tag in serie.split(';') if tag.strip()]
         if serie_tags:
             argomento_html = ', '.join(
@@ -143,22 +176,30 @@ def crea_schede(df, persone, organizzazioni, cache_manager=None):
             )
         else:
             argomento_html = 'N/A'
-
-        # --- Citazioni ---
+        
+        # ========================================================================
+        # GESTIONE CITAZIONI
+        # ========================================================================
+        
         anno_citazione = data_formattata if data_formattata else 's.d.'
         permalink = f"https://ami-aim.github.io/archivio-maoismo-italiano/documenti/{ami_id}/"
         citazione_id = ami_id.lower().replace('-', '_')
+        
         is_bibliografico = tipo in ['libro', 'opuscolo']
-
+        
         citazione_bottone_html = (
             f'<button class="citazione-link" type="button" '
             f'data-citazioni-id="{citazione_id}">📑 Cita questo documento</button>'
         )
-
+        
         citazioni_json = None
         citazione_minima_html = None
-
+        
         if is_bibliografico:
+            # ================================================================
+            # GENERAZIONE CITAZIONI BIBLIOGRAFICHE (CHICAGO, MLA, BIBTEX)
+            # ================================================================
+            
             def formatta_autore_bibliografico(nome_completo):
                 info = persone.get(nome_completo)
                 if info and info.get('cognome'):
@@ -166,7 +207,7 @@ def crea_schede(df, persone, organizzazioni, cache_manager=None):
                     resto = nome_completo.replace(cognome, '', 1).strip(' ,')
                     return f'{cognome}, {resto}' if resto else cognome
                 return nome_completo
-
+            
             if autore_raw:
                 autori_lista = split_nomi(autore_raw)
                 autore_citazione = '; '.join(formatta_autore_bibliografico(a) for a in autori_lista)
@@ -176,8 +217,9 @@ def crea_schede(df, persone, organizzazioni, cache_manager=None):
                 autore_citazione = org_raw
             else:
                 autore_citazione = 'Archivio del Maoismo Italiano (a cura di)'
-
+            
             editore_citazione = editore_raw if editore_raw else org_raw
+            
             luogo_editore = ''
             if luogo_raw and editore_citazione:
                 luogo_editore = f'{luogo_raw}: {editore_citazione}, '
@@ -185,19 +227,22 @@ def crea_schede(df, persone, organizzazioni, cache_manager=None):
                 luogo_editore = f'{editore_citazione}, '
             elif luogo_raw:
                 luogo_editore = f'{luogo_raw}, '
-
+            
+            # Chicago style
             citazione_chicago = (
                 f'{autore_citazione}. "{titolo}". '
                 f'{luogo_editore}{anno_citazione}. Archivio del Maoismo Italiano ({ami_id}). '
                 f'{permalink}.'
             )
-
+            
+            # MLA style
             citazione_mla = (
                 f'{autore_citazione}. "{titolo}". '
                 + (f'{editore_citazione}, ' if editore_citazione else '')
                 + f'{anno_citazione}. Archivio del Maoismo Italiano ({ami_id}), {permalink}.'
             )
-
+            
+            # BibTeX style
             bibtex_key = citazione_id
             bibtex_type = 'book' if tipo == 'libro' else 'booklet'
             citazione_bibtex = (
@@ -210,13 +255,14 @@ def crea_schede(df, persone, organizzazioni, cache_manager=None):
                 + '  note = {Archivio del Maoismo Italiano, ' + ami_id + '. ' + permalink + '}\n'
                 '}'
             )
-
+            
+            # Citazione semplice
             citazione_semplice = (
                 f'{autore_citazione}, {titolo}'
                 + (f', {luogo_raw}: {editore_citazione}' if luogo_raw and editore_citazione else (f', {editore_citazione}' if editore_citazione else ''))
                 + f', {anno_citazione}. Archivio del Maoismo Italiano ({ami_id}). {permalink}'
             )
-
+            
             citazioni_dict = {
                 'chicago': citazione_chicago,
                 'mla': citazione_mla,
@@ -225,10 +271,17 @@ def crea_schede(df, persone, organizzazioni, cache_manager=None):
             }
             citazioni_json = json.dumps(citazioni_dict, ensure_ascii=False)
         else:
+            # ================================================================
+            # CITAZIONE SEMPLICE (non bibliografico)
+            # ================================================================
+            
             citazione_minima = f'"{titolo}", {anno_citazione}. Archivio del Maoismo Italiano. {permalink}'
             citazione_minima_html = html.escape(citazione_minima)
-
-        # --- Frontmatter ---
+        
+        # ========================================================================
+        # COSTRUZIONE FRONTMATTER
+        # ========================================================================
+        
         frontmatter = f"""---
 title: "{titolo}"
 ami_id: {ami_id}
@@ -243,16 +296,23 @@ hide:
   - toc
 ---
 """
-
-        # --- Content ---
+        
+        # ========================================================================
+        # COSTRUZIONE CONTENT - INTESTAZIONE
+        # ========================================================================
+        
         content = f"""
 <div class="doc-date-large">{data_formattata if data_formattata else 'Data non disponibile'}</div>
 <h1 class="doc-title-large">{titolo}</h1>
 
 <div class="embed-container">
 """
-
-        # GESTIONE EMBED (foto, testo bilingue, testo, audio/pdf)
+        
+        # ========================================================================
+        # EMBED MULTIMEDIALE
+        # ========================================================================
+        
+        # 🔥 GESTIONE FOTO / MANIFESTO
         if tipo in ['foto', 'manifesto'] and identifier:
             if nome_file:
                 img_url = f"https://archive.org/download/{identifier}/{nome_file}"
@@ -264,7 +324,7 @@ hide:
                     f'<img src="{img_url_jpg}" alt="{titolo}" class="photo-embed" '
                     f'onerror="if(this.src.indexOf(\'.jpg\')!=-1){{this.src=this.src.replace(\'.jpg\',\'.png\');}}else{{this.style.display=\'none\'; this.parentElement.querySelector(\'.photo-fallback\').style.display=\'block\';}};">'
                 )
-
+            
             content += f"""
     <div class="photo-viewer">
         {img_tag}
@@ -277,21 +337,22 @@ hide:
         </div>
     </div>
 """
-
+        
+        # 🔥 GESTIONE TESTO BILINGUE
         elif tipo == 'testo_bilingue' and identifier:
             testo_originale = scarica_testo_ia(identifier, nome_file_originale) if nome_file_originale else None
             testo_traduzione = scarica_testo_ia(identifier, nome_file_traduzione) if nome_file_traduzione else None
-
+            
             if testo_originale:
                 testo_originale = html.escape(testo_originale)
             else:
                 testo_originale = 'Testo originale non disponibile.'
-
+            
             if testo_traduzione:
                 testo_traduzione = html.escape(testo_traduzione)
             else:
                 testo_traduzione = 'Traduzione non disponibile.'
-
+            
             content += f"""
     <div class="text-bilingue">
         <div class="lingua-toggle" data-toggle-container>
@@ -310,7 +371,8 @@ hide:
         <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
     </div>
 """
-
+        
+        # 🔥 GESTIONE TESTO/TRASCRIZIONE
         elif tipo in ['testo', 'trascrizione'] and identifier:
             testo = scarica_testo_ia(identifier, nome_file)
             if testo:
@@ -332,15 +394,16 @@ hide:
         <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
     </div>
 """
-
+        
+        # 🔥 GESTIONE AUDIO, PDF, ETC.
         elif identifier:
             if tipo == 'audio':
                 embed_url = f"https://archive.org/embed/{identifier}"
             else:
                 embed_url = f"https://archive.org/embed/{identifier}?ui=embed&nav=0"
-
+            
             fs_id = f"ia-embed-{ami_id}"
-
+            
             content += f"""
     <iframe id="{fs_id}" src="{embed_url}" 
             class="universal-embed" 
@@ -352,7 +415,8 @@ hide:
         <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
     </div>
 """
-
+        
+        # Fallback: nessun embed disponibile
         else:
             content += f"""
     <div class="no-embed">
@@ -362,8 +426,11 @@ hide:
         {citazione_bottone_html}
     </div>
 """
-
-        # --- Pannello citazioni ---
+        
+        # ========================================================================
+        # PANNELLO CITAZIONI
+        # ========================================================================
+        
         if is_bibliografico:
             content += f"""
 <div class="citazione-pannello" id="citazione-pannello-{citazione_id}" style="display:none;">
@@ -388,16 +455,22 @@ hide:
 </div>
 </div>
 """
-
-        # --- Descrizione IA ---
+        
+        # ========================================================================
+        # 🔥 DESCRIZIONE IA
+        # ========================================================================
+        
         if descrizione_ia:
             content += f"""
 <div class="doc-abstract">
     {descrizione_ia}
 </div>
 """
-
-        # --- Metadati ---
+        
+        # ========================================================================
+        # METADATI CON LINK
+        # ========================================================================
+        
         content += f"""
 <div class="doc-metadata">
     <div class="metadata-grid">
@@ -870,11 +943,15 @@ hide:
 }}
 </style>
 """
-
-        # --- Salvataggio ---
+        
+        # ========================================================================
+        # SALVATAGGIO FILE
+        # ========================================================================
+        
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(frontmatter + content)
-
+        
+        # ✨ CACHE: Salva metadati del documento
         if cache_manager:
             cache_manager.set_doc_metadata(ami_id, {
                 'titolo': titolo,
@@ -882,9 +959,11 @@ hide:
                 'tipo': tipo,
                 'stato': 'generato'
             })
-
+        
         contatore_generati += 1
         print(f"   ✅ Creata scheda per {ami_id} (tipo: {tipo})")
-
+    
+    # Report finale
     print(f"\n✅ Schede documento: {contatore_generati} generate, {contatore_saltati} saltate (da cache)")
+    
     return contatore_generati, contatore_saltati

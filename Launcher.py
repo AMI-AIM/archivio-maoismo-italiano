@@ -1,25 +1,24 @@
-#!/usr/bin/env python3
 import subprocess
 import sys
 import shutil
 from datetime import datetime
 from pathlib import Path
-
-# Import dai moduli scripts
-from scripts.config import ROOT_DIR, BUILD_DIR
 from scripts.core.cache_manager import CacheManager
-import scripts.copy_assets as copy_assets
 
+ROOT_DIR = Path(__file__).resolve().parent
 SCRIPTS_DIR = ROOT_DIR / "scripts"
+
 
 class ErroreComando(Exception):
     pass
+
 
 def stampa_titolo(testo):
     print()
     print("=" * 60)
     print(testo)
     print("=" * 60)
+
 
 def esegui(comando, cwd=None, descrizione=None):
     """Esegue un comando, mostra l'output in tempo reale, interrompe la sequenza se fallisce."""
@@ -33,16 +32,12 @@ def esegui(comando, cwd=None, descrizione=None):
             f"il comando '{' '.join(comando)}' è fallito (codice {risultato.returncode})."
         )
 
+
 def verifica_dipendenze():
     stampa_titolo("🔎 Verifica dipendenze")
     mancanti = []
-    for pacchetto, modulo in [
-        ("pandas", "pandas"),
-        ("openpyxl", "openpyxl"),
-        ("mkdocs-material", "mkdocs"),
-        ("requests", "requests"),
-        ("Pillow", "PIL")
-    ]:
+    for pacchetto, modulo in [("pandas", "pandas"), ("openpyxl", "openpyxl"),
+                              ("mkdocs-material", "mkdocs")]:
         try:
             __import__(modulo)
             print(f"   ✅ {pacchetto}")
@@ -65,6 +60,7 @@ def verifica_dipendenze():
             msg += f"\n   Installa il resto con: pip install {' '.join(pacchetti_pip)}"
         raise ErroreComando(msg)
 
+
 def git_ci_sono_modifiche():
     risultato = subprocess.run(
         ["git", "status", "--porcelain"],
@@ -72,22 +68,18 @@ def git_ci_sono_modifiche():
     )
     return bool(risultato.stdout.strip())
 
+
 def aggiorna():
     stampa_titolo("🚀 Aggiornamento del sito AMI")
 
     verifica_dipendenze()
 
-    # 0. COPIA ASSET STATICI
-    stampa_titolo("📁 Copia asset statici")
-    if not copy_assets.copy_assets():
-        raise ErroreComando("Copia asset fallita.")
-
-    # 1-3. Rigenerazione contenuti usando -m per eseguire i moduli come package
-    esegui([sys.executable, "-m", "scripts.persone"], cwd=ROOT_DIR,
+    # 1-3. Rigenerazione contenuti (ordine: persone/org PRIMA di generatore)
+    esegui([sys.executable, "persone.py"], cwd=SCRIPTS_DIR,
            descrizione="👤 Generazione schede persone")
-    esegui([sys.executable, "-m", "scripts.org"], cwd=ROOT_DIR,
+    esegui([sys.executable, "org.py"], cwd=SCRIPTS_DIR,
            descrizione="🏛️  Generazione schede organizzazioni")
-    esegui([sys.executable, "-m", "scripts.generatore"], cwd=ROOT_DIR,
+    esegui([sys.executable, "generatore.py"], cwd=SCRIPTS_DIR,
            descrizione="📑 Generazione documenti, archivio, home, sitemap")
 
     # 4. Pubblicazione
@@ -111,22 +103,26 @@ def aggiorna():
     print("   GitHub Actions builderà e pubblicherà automaticamente su GitHub Pages")
     print("   (di solito ci vuole qualche minuto prima che sia visibile online).")
 
+
 def mostra_cache_stats():
     """Mostra statistiche cache."""
     stampa_titolo("📊 Statistiche Cache")
     cache_mgr = CacheManager()
     cache_mgr.print_stats()
 
+
 def svuota_cache():
     """Svuota cache."""
     stampa_titolo("🗑️ Pulizia Cache")
     cache_mgr = CacheManager()
     cache_mgr.clear_all()
-    print("   ✅ Cache completamente svuotata")
+    print("   ✅ Cache completamente svuotato")
+
 
 def main():
     codice_uscita = 0
     try:
+        # ✨ NUOVO: Gestisci opzioni CLI
         if len(sys.argv) > 1:
             if sys.argv[1] == '--clear-cache':
                 svuota_cache()
@@ -137,19 +133,7 @@ def main():
             elif sys.argv[1] == '--help':
                 print(__doc__)
                 return
-            elif sys.argv[1] == '--no-publish':
-                # Opzione per GitHub Actions: genera senza commit/push
-                print("🔧 Modalità 'no-publish': generazione senza pubblicazione.")
-                verifica_dipendenze()
-                if not copy_assets.copy_assets():
-                    raise ErroreComando("Copia asset fallita.")
-                # Usa -m anche qui
-                esegui([sys.executable, "-m", "scripts.persone"], cwd=ROOT_DIR)
-                esegui([sys.executable, "-m", "scripts.org"], cwd=ROOT_DIR)
-                esegui([sys.executable, "-m", "scripts.generatore"], cwd=ROOT_DIR)
-                print("✅ Generazione completata in modalità no-publish.")
-                return
-
+        
         aggiorna()
     except ErroreComando as e:
         print(f"\n❌ ERRORE: {e}")
@@ -165,6 +149,7 @@ def main():
         except EOFError:
             pass
     sys.exit(codice_uscita)
+
 
 if __name__ == "__main__":
     main()
