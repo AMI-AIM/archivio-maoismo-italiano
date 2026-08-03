@@ -4,11 +4,10 @@ from collections import Counter
 from .utils import formatta_data, split_nomi
 
 # 🔥 DOCUMENTI IN EVIDENZA: inserisci qui gli ID dei documenti che vuoi mostrare
-# (modifica questa lista per cambiare i documenti in evidenza)
 EVIDENZA_IDS = [
-    'AMI-0049',
-    'AMI-0043',
+    'AMI-0049',  # Sostituisci con i tuoi ID
     'AMI-0045',
+    'AMI-0043',
     'AMI-0013',
     'AMI-0035'
 ]
@@ -54,9 +53,8 @@ def genera_home(df, persone, output_dir):
             if match:
                 identifier = match.group(1)
         
-        # 🔥 URL COPERTINA DA INTERNET ARCHIVE
+        # 🔥 URL COPERTINA DA INTERNET ARCHIVE (servizio thumbnail)
         if identifier:
-            # Usa l'API di thumbnail di IA
             copertina_url = f"https://archive.org/services/img/{identifier}"
         else:
             copertina_url = None
@@ -155,7 +153,7 @@ def genera_home(df, persone, output_dir):
 """
     
     # ============================================================
-    # 🔥 SEZIONE DOCUMENTI IN EVIDENZA (CON COPERTINE REALI)
+    # 🔥 SEZIONE DOCUMENTI IN EVIDENZA
     # ============================================================
     
     if evidenza_ordinati:
@@ -171,7 +169,6 @@ hide:
 <div class="evidenza-grid">
 """
         for doc in evidenza_ordinati:
-            # 🔥 IMMAGINE COPERTINA REALE DA INTERNET ARCHIVE
             if doc.get('copertina'):
                 img_html = f'<img src="{doc["copertina"]}" alt="{doc["titolo"]}" class="evidenza-thumbnail-img" loading="lazy">'
             else:
@@ -352,20 +349,22 @@ hide:
     flex-direction: column;
 }
 
+/* 🔥 THUMBNAIL: altezza fissa, immagine completa senza tagli */
 .evidenza-thumbnail {
-    aspect-ratio: 16 / 9;
+    height: 200px;
     background: #1a1a1a;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     flex-shrink: 0;
+    padding: 4px;
 }
 
 .evidenza-thumbnail-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;      /* 🔥 mostra l'immagine completa, non taglia */
     display: block;
 }
 
@@ -550,6 +549,10 @@ hide:
         min-height: 2.2rem;
         padding: 0.4rem 0.5rem 0.5rem 0.5rem;
     }
+    /* 🔥 Altezza ridotta per mobile */
+    .evidenza-thumbnail {
+        height: 140px;
+    }
     .doc-row {
         flex-direction: column;
         gap: 0.1rem;
@@ -575,6 +578,9 @@ hide:
     }
     .section-title {
         font-size: 1.2rem;
+    }
+    .evidenza-thumbnail {
+        height: 120px;
     }
 }
 

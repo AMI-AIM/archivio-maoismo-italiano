@@ -40,20 +40,20 @@ hide:
 </div>
 
 <div class="evidenza-card">
-    <a href="documenti/AMI-0043/" class="evidenza-link">
-        <div class="evidenza-thumbnail">
-            <img src="https://archive.org/services/img/sulla-nuova-democrazia" alt="Sulla Nuova Democrazia" class="evidenza-thumbnail-img" loading="lazy">
-        </div>
-        <div class="evidenza-titolo">Sulla Nuova Democrazia</div>
-    </a>
-</div>
-
-<div class="evidenza-card">
     <a href="documenti/AMI-0045/" class="evidenza-link">
         <div class="evidenza-thumbnail">
             <img src="https://archive.org/services/img/sulla-pratica" alt="Sulla pratica" class="evidenza-thumbnail-img" loading="lazy">
         </div>
         <div class="evidenza-titolo">Sulla pratica</div>
+    </a>
+</div>
+
+<div class="evidenza-card">
+    <a href="documenti/AMI-0043/" class="evidenza-link">
+        <div class="evidenza-thumbnail">
+            <img src="https://archive.org/services/img/sulla-nuova-democrazia" alt="Sulla Nuova Democrazia" class="evidenza-thumbnail-img" loading="lazy">
+        </div>
+        <div class="evidenza-titolo">Sulla Nuova Democrazia</div>
     </a>
 </div>
 
@@ -224,20 +224,22 @@ hide:
     flex-direction: column;
 }
 
+/* 🔥 THUMBNAIL: altezza fissa, immagine completa senza tagli */
 .evidenza-thumbnail {
-    aspect-ratio: 16 / 9;
+    height: 200px;
     background: #1a1a1a;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     flex-shrink: 0;
+    padding: 4px;
 }
 
 .evidenza-thumbnail-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;      /* 🔥 mostra l'immagine completa, non taglia */
     display: block;
 }
 
@@ -422,6 +424,10 @@ hide:
         min-height: 2.2rem;
         padding: 0.4rem 0.5rem 0.5rem 0.5rem;
     }
+    /* 🔥 Altezza ridotta per mobile */
+    .evidenza-thumbnail {
+        height: 140px;
+    }
     .doc-row {
         flex-direction: column;
         gap: 0.1rem;
@@ -447,6 +453,9 @@ hide:
     }
     .section-title {
         font-size: 1.2rem;
+    }
+    .evidenza-thumbnail {
+        height: 120px;
     }
 }
 
