@@ -6,7 +6,7 @@
       "tipo": "libro",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.236184"
+    "timestamp": "2026-08-03T10:55:23.831500"
   },
   "doc_AMI-0002": {
     "data": {
@@ -15,7 +15,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.238316"
+    "timestamp": "2026-08-03T10:55:24.855842"
   },
   "doc_AMI-0003": {
     "data": {
@@ -24,7 +24,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.239928"
+    "timestamp": "2026-08-03T10:55:25.880044"
   },
   "doc_AMI-0004": {
     "data": {
@@ -33,7 +33,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.241250"
+    "timestamp": "2026-08-03T10:55:27.242354"
   },
   "doc_AMI-0005": {
     "data": {
@@ -42,7 +42,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.243054"
+    "timestamp": "2026-08-03T10:55:28.336391"
   },
   "doc_AMI-0006": {
     "data": {
@@ -51,7 +51,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.244966"
+    "timestamp": "2026-08-03T10:55:29.004036"
   },
   "doc_AMI-0007": {
     "data": {
@@ -60,7 +60,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.246315"
+    "timestamp": "2026-08-03T10:55:30.257370"
   },
   "doc_AMI-0008": {
     "data": {
@@ -69,7 +69,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.247831"
+    "timestamp": "2026-08-03T10:55:30.937621"
   },
   "doc_AMI-0009": {
     "data": {
@@ -78,7 +78,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.249085"
+    "timestamp": "2026-08-03T10:55:31.559126"
   },
   "doc_AMI-0010": {
     "data": {
@@ -87,7 +87,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.250304"
+    "timestamp": "2026-08-03T10:55:32.172190"
   },
   "doc_AMI-0011": {
     "data": {
@@ -96,7 +96,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.251442"
+    "timestamp": "2026-08-03T10:55:32.814204"
   },
   "doc_AMI-0012": {
     "data": {
@@ -105,7 +105,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.252602"
+    "timestamp": "2026-08-03T10:55:33.850075"
   },
   "doc_AMI-0013": {
     "data": {
@@ -114,7 +114,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.253723"
+    "timestamp": "2026-08-03T10:55:34.490283"
   },
   "doc_AMI-0014": {
     "data": {
@@ -123,7 +123,7 @@
       "tipo": "foto",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.255190"
+    "timestamp": "2026-08-03T10:55:35.562343"
   },
   "doc_AMI-0015": {
     "data": {
@@ -132,7 +132,7 @@
       "tipo": "foto",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.256325"
+    "timestamp": "2026-08-03T10:55:36.648908"
   },
   "doc_AMI-0016": {
     "data": {
@@ -141,7 +141,7 @@
       "tipo": "foto",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.257582"
+    "timestamp": "2026-08-03T10:55:37.661611"
   },
   "doc_AMI-0017": {
     "data": {
@@ -150,7 +150,7 @@
       "tipo": "volantino",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.259649"
+    "timestamp": "2026-08-03T10:55:40.931201"
   },
   "doc_AMI-0018": {
     "data": {
@@ -159,7 +159,7 @@
       "tipo": "foto",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.261733"
+    "timestamp": "2026-08-03T10:55:41.704317"
   },
   "doc_AMI-0019": {
     "data": {
@@ -168,7 +168,7 @@
       "tipo": "audio",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.263027"
+    "timestamp": "2026-08-03T10:55:42.898227"
   },
   "doc_AMI-0020": {
     "data": {
@@ -177,7 +177,7 @@
       "tipo": "libro",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.264307"
+    "timestamp": "2026-08-03T10:55:44.053305"
   },
   "doc_AMI-0021": {
     "data": {
@@ -186,7 +186,7 @@
       "tipo": "periodico",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.265617"
+    "timestamp": "2026-08-03T10:55:45.596056"
   },
   "doc_AMI-0022": {
     "data": {
@@ -195,7 +195,7 @@
       "tipo": "periodico",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.266860"
+    "timestamp": "2026-08-03T10:55:46.898392"
   },
   "doc_AMI-0023": {
     "data": {
@@ -204,7 +204,7 @@
       "tipo": "periodico",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.268232"
+    "timestamp": "2026-08-03T10:55:47.625905"
   },
   "doc_AMI-0024": {
     "data": {
@@ -213,7 +213,7 @@
       "tipo": "periodico",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.269439"
+    "timestamp": "2026-08-03T10:55:48.217043"
   },
   "doc_AMI-0025": {
     "data": {
@@ -222,7 +222,7 @@
       "tipo": "periodico",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.270547"
+    "timestamp": "2026-08-03T10:55:49.583407"
   },
   "doc_AMI-0026": {
     "data": {
@@ -231,7 +231,7 @@
       "tipo": "periodico",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.271951"
+    "timestamp": "2026-08-03T10:55:50.216238"
   },
   "doc_AMI-0027": {
     "data": {
@@ -240,7 +240,7 @@
       "tipo": "periodico",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.273529"
+    "timestamp": "2026-08-03T10:55:54.059488"
   },
   "doc_AMI-0028": {
     "data": {
@@ -249,7 +249,7 @@
       "tipo": "periodico",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.277059"
+    "timestamp": "2026-08-03T10:55:55.381691"
   },
   "doc_AMI-0029": {
     "data": {
@@ -258,7 +258,7 @@
       "tipo": "periodico",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.280039"
+    "timestamp": "2026-08-03T10:55:56.988597"
   },
   "doc_AMI-0030": {
     "data": {
@@ -267,7 +267,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.281794"
+    "timestamp": "2026-08-03T10:55:57.680157"
   },
   "doc_AMI-0031": {
     "data": {
@@ -276,7 +276,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:39.283285"
+    "timestamp": "2026-08-03T10:55:58.731110"
   },
   "doc_AMI-0032": {
     "data": {
@@ -285,7 +285,7 @@
       "tipo": "testo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:43.167220"
+    "timestamp": "2026-08-03T10:56:01.606812"
   },
   "doc_AMI-0033": {
     "data": {
@@ -294,7 +294,7 @@
       "tipo": "testo_bilingue",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:47.392464"
+    "timestamp": "2026-08-03T10:56:07.664492"
   },
   "doc_AMI-0034": {
     "data": {
@@ -303,7 +303,7 @@
       "tipo": "testo_bilingue",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.928727"
+    "timestamp": "2026-08-03T10:56:11.969716"
   },
   "doc_AMI-0035": {
     "data": {
@@ -312,7 +312,7 @@
       "tipo": "periodico",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.931294"
+    "timestamp": "2026-08-03T10:56:12.923486"
   },
   "doc_AMI-0036": {
     "data": {
@@ -321,7 +321,7 @@
       "tipo": "libro",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.934546"
+    "timestamp": "2026-08-03T10:56:14.215847"
   },
   "doc_AMI-0037": {
     "data": {
@@ -330,7 +330,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.936126"
+    "timestamp": "2026-08-03T10:56:15.216599"
   },
   "doc_AMI-0038": {
     "data": {
@@ -339,7 +339,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.937598"
+    "timestamp": "2026-08-03T10:56:16.218649"
   },
   "doc_AMI-0039": {
     "data": {
@@ -348,7 +348,7 @@
       "tipo": "libro",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.939019"
+    "timestamp": "2026-08-03T10:56:17.611438"
   },
   "doc_AMI-0040": {
     "data": {
@@ -357,7 +357,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.941436"
+    "timestamp": "2026-08-03T10:56:18.769301"
   },
   "doc_AMI-0041": {
     "data": {
@@ -366,7 +366,7 @@
       "tipo": "libro",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.943659"
+    "timestamp": "2026-08-03T10:56:19.863659"
   },
   "doc_AMI-0042": {
     "data": {
@@ -375,7 +375,7 @@
       "tipo": "libro",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.945465"
+    "timestamp": "2026-08-03T10:56:20.616303"
   },
   "doc_AMI-0043": {
     "data": {
@@ -384,7 +384,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.947324"
+    "timestamp": "2026-08-03T10:56:21.695736"
   },
   "doc_AMI-0044": {
     "data": {
@@ -393,7 +393,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.948999"
+    "timestamp": "2026-08-03T10:56:22.846108"
   },
   "doc_AMI-0045": {
     "data": {
@@ -402,7 +402,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.951014"
+    "timestamp": "2026-08-03T10:56:23.462632"
   },
   "doc_AMI-0046": {
     "data": {
@@ -411,7 +411,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.952551"
+    "timestamp": "2026-08-03T10:56:24.912732"
   },
   "doc_AMI-0047": {
     "data": {
@@ -420,7 +420,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.954168"
+    "timestamp": "2026-08-03T10:56:25.918756"
   },
   "doc_AMI-0048": {
     "data": {
@@ -429,7 +429,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.955714"
+    "timestamp": "2026-08-03T10:56:26.917146"
   },
   "doc_AMI-0049": {
     "data": {
@@ -438,7 +438,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.959206"
+    "timestamp": "2026-08-03T10:56:27.789973"
   },
   "doc_AMI-0050": {
     "data": {
@@ -447,7 +447,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.960660"
+    "timestamp": "2026-08-03T10:56:28.425034"
   },
   "doc_AMI-0051": {
     "data": {
@@ -456,7 +456,7 @@
       "tipo": "opuscolo",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.962269"
+    "timestamp": "2026-08-03T10:56:29.270957"
   },
   "doc_AMI-0052": {
     "data": {
@@ -465,7 +465,7 @@
       "tipo": "libro",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.964432"
+    "timestamp": "2026-08-03T10:56:30.390636"
   },
   "doc_AMI-0053": {
     "data": {
@@ -474,7 +474,7 @@
       "tipo": "volantino",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.965750"
+    "timestamp": "2026-08-03T10:56:31.114073"
   },
   "doc_AMI-0054": {
     "data": {
@@ -483,7 +483,7 @@
       "tipo": "manifesto",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.967326"
+    "timestamp": "2026-08-03T10:56:31.760551"
   },
   "doc_AMI-0055": {
     "data": {
@@ -492,7 +492,7 @@
       "tipo": "manifesto",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.968655"
+    "timestamp": "2026-08-03T10:56:32.400846"
   },
   "doc_AMI-0056": {
     "data": {
@@ -501,7 +501,7 @@
       "tipo": "libro",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.970270"
+    "timestamp": "2026-08-03T10:56:33.106312"
   },
   "doc_AMI-0057": {
     "data": {
@@ -510,6 +510,6 @@
       "tipo": "foto",
       "stato": "generato"
     },
-    "timestamp": "2026-08-03T09:35:50.971672"
+    "timestamp": "2026-08-03T10:56:33.769988"
   }
 }
