@@ -8,14 +8,16 @@ from datetime import datetime, timedelta
 
 class CacheManager:
     """Gestisce cache per velocizzare rigenerazione."""
-    
-    def __init__(self, cache_dir="scripts/.cache"):
+    # scripts/core/cache_manager.py → parents[1] = scripts/
+    _SCRIPTS_DIR = Path(__file__).resolve().parents[1]
+    def __init__(self, cache_dir=None):
         """
         Inizializza il manager cache.
-        
         Args:
-            cache_dir (str): Directory dove salvare cache. Default: scripts/.cache
+            cache_dir: Directory cache. Default: scripts/.cache (relativo al repo, non al cwd)
         """
+        if cache_dir is None:
+            cache_dir = self._SCRIPTS_DIR / ".cache"
         self.cache_dir = Path(cache_dir)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.metadata_cache_file = self.cache_dir / "metadata_cache.json"
