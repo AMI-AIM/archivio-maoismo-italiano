@@ -1,12 +1,3 @@
-"""
-Cache Manager per ottimizzazione generazione sito.
-
-Gestisce:
-- Cache download da Internet Archive
-- Cache hash Excel per rilevare cambiamenti
-- Cache dati intermedi (persone, organizzazioni)
-"""
-
 import os
 import json
 import hashlib

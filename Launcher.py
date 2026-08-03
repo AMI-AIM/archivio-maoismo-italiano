@@ -1,22 +1,3 @@
-#!/usr/bin/env python3
-"""
-Aggiorna il sito AMI in un solo comando.
-
-Esegue, nell'ordine:
-  1. scripts/persone.py
-  2. scripts/org.py
-  3. scripts/generatore.py
-  4. git add / commit / push
-
-NUOVO: Supporta opzioni cache da CLI.
-
-Uso:
-    python Launcher.py
-    python Launcher.py "messaggio commit"
-    python Launcher.py --clear-cache          # Svuota cache
-    python Launcher.py --cache-stats          # Mostra statistiche
-"""
-
 import subprocess
 import sys
 import shutil

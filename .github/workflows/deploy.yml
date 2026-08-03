@@ -48,12 +48,15 @@ jobs:
       - name: Generate document schede
         run: python scripts/generatore.py
       
-      - name: Copy static files to site
+      - name: Copy and compress static files
         run: |
           mkdocs build
           if [ -f docs/documenti.json ]; then cp docs/documenti.json site/; fi
-          if [ -f docs/archivio-filtri.js ]; then cp docs/archivio-filtri.js site/; fi
           if [ -f docs/soggetti.json ]; then cp docs/soggetti.json site/; fi
+          if [ -f docs/archivio-filtri.js ]; then cp docs/archivio-filtri.js site/; fi
+          if [ -f docs/javascripts/lazy-load.js ]; then cp docs/javascripts/lazy-load.js site/; fi
+          # Gzip per CDN
+          find site -type f \( -name "*.json" -o -name "*.js" -o -name "*.css" \) -exec gzip -9 {} +
       
       - name: Deploy to gh-pages
         run: mkdocs gh-deploy --force
