@@ -123,13 +123,29 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
             if match:
                 identifier = match.group(1)
         
-        # ✨ CACHE: Scarica descrizione (con cache se disponibile)
-        if cache_manager:
-            descrizione_ia = cache_manager.get_ia_metadata(identifier) if identifier else None
-            if descrizione_ia:
-                descrizione_ia = descrizione_ia.get('metadata', {}).get('description')
-        else:
-            descrizione_ia = scarica_descrizione_ia(identifier) if identifier else None
+        # ========================================================================
+        # 🔥 DESCRIZIONE: cache + fallback
+        # ========================================================================
+        descrizione_ia = None
+        
+        if identifier:
+            if cache_manager:
+                # Prova a leggere dalla cache
+                cached_metadata = cache_manager.get_ia_metadata(identifier)
+                if cached_metadata:
+                    descrizione_ia = cached_metadata.get('metadata', {}).get('description')
+                    if descrizione_ia:
+                        print(f"   💾 Descrizione {identifier} da cache")
+                else:
+                    # Fallback: scarica direttamente
+                    print(f"   📡 Descrizione {identifier} scaricata da IA (cache vuota)")
+                    descrizione_ia = scarica_descrizione_ia(identifier)
+                    # Salva in cache per le prossime volte
+                    if descrizione_ia and cache_manager:
+                        cache_manager.set_ia_metadata(identifier, {'metadata': {'description': descrizione_ia}})
+            else:
+                # Senza cache: scarica direttamente
+                descrizione_ia = scarica_descrizione_ia(identifier)
         
         # ========================================================================
         # GENERAZIONE LINK HTML PER PERSONE/ORG
@@ -564,7 +580,7 @@ hide:
 """
         
         # ========================================================================
-        # DESCRIZIONE IA
+        # 🔥 DESCRIZIONE IA (ora con fallback)
         # ========================================================================
         
         if descrizione_ia:
