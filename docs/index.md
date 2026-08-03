@@ -224,22 +224,24 @@ hide:
     flex-direction: column;
 }
 
-/* 🔥 THUMBNAIL: altezza fissa, immagine completa senza tagli */
+/* 🔥 CONTAINER PIÙ ALTO PER MOSTRARE LE COPERTINE COMPLETE */
 .evidenza-thumbnail {
-    height: 200px;
+    min-height: 280px;           /* 🔥 ALTEZZA MINIMA PIÙ ALTA */
+    height: auto;                /* 🔥 SI ADATTA ALL'IMMAGINE */
     background: #1a1a1a;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     flex-shrink: 0;
-    padding: 4px;
+    padding: 8px;
 }
 
 .evidenza-thumbnail-img {
     width: 100%;
     height: 100%;
-    object-fit: contain;      /* 🔥 mostra l'immagine completa, non taglia */
+    min-height: 260px;           /* 🔥 ALTEZZA MINIMA PER L'IMMAGINE */
+    object-fit: contain;         /* 🔥 MOSTRA L'IMMAGINE COMPLETA */
     display: block;
 }
 
@@ -412,6 +414,13 @@ hide:
         grid-template-columns: repeat(2, 1fr);
         gap: 0.8rem;
     }
+    /* 🔥 ALTEZZA RIDOTTA PER TABLET */
+    .evidenza-thumbnail {
+        min-height: 200px;
+    }
+    .evidenza-thumbnail-img {
+        min-height: 180px;
+    }
 }
 
 @media (max-width: 600px) {
@@ -424,9 +433,11 @@ hide:
         min-height: 2.2rem;
         padding: 0.4rem 0.5rem 0.5rem 0.5rem;
     }
-    /* 🔥 Altezza ridotta per mobile */
     .evidenza-thumbnail {
-        height: 140px;
+        min-height: 160px;
+    }
+    .evidenza-thumbnail-img {
+        min-height: 140px;
     }
     .doc-row {
         flex-direction: column;
@@ -455,7 +466,10 @@ hide:
         font-size: 1.2rem;
     }
     .evidenza-thumbnail {
-        height: 120px;
+        min-height: 140px;
+    }
+    .evidenza-thumbnail-img {
+        min-height: 120px;
     }
 }
 
