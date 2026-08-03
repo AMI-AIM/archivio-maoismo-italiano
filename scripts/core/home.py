@@ -3,11 +3,22 @@ import re
 from collections import Counter
 from .utils import formatta_data, split_nomi
 
+# 🔥 DOCUMENTI IN EVIDENZA: inserisci qui gli ID dei documenti che vuoi mostrare
+# (modifica questa lista per cambiare i documenti in evidenza)
+EVIDENZA_IDS = [
+    'AMI-0049',
+    'AMI-0043',
+    'AMI-0045',
+    'AMI-0013',
+    'AMI-0035'
+]
+
 def genera_home(df, persone, output_dir):
     print("\n🏠 Generazione della Home page...")
     
     schede = []
     conteggio_persone = Counter()
+    documenti_evidenza = []
     
     for index, row in df.iterrows():
         ami_id = str(row.get('id', '')).strip()
@@ -27,7 +38,6 @@ def genera_home(df, persone, output_dir):
         if tipo_raw in ['nan', 'None']:
             tipo_raw = ''
         tipo = tipo_raw.lower()
-        # 🔥 PER IL BADGE: "testo_bilingue" viene mostrato come "testo" con maiuscola
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
         tipo_display = tipo_display.capitalize() if tipo_display else ''
         
@@ -35,7 +45,21 @@ def genera_home(df, persone, output_dir):
         if org in ['nan', 'None']:
             org = ''
         
-        # 🔥 KEYWORDS RIMOSSE
+        url_ia = str(row.get('url', '#')).strip()
+        
+        # 🔥 ESTRAI IDENTIFIER PER LA COPERTINA
+        identifier = None
+        if url_ia and url_ia != '#':
+            match = re.search(r'/details/([^/?#]+)', url_ia)
+            if match:
+                identifier = match.group(1)
+        
+        # 🔥 URL COPERTINA DA INTERNET ARCHIVE
+        if identifier:
+            # Usa l'API di thumbnail di IA
+            copertina_url = f"https://archive.org/services/img/{identifier}"
+        else:
+            copertina_url = None
         
         parti_sommario = []
         if tipo:
@@ -45,7 +69,6 @@ def genera_home(df, persone, output_dir):
         
         sommario = ' · '.join(parti_sommario) if parti_sommario else 'Documento storico'
         
-        # Markup del chip tipologia + editore, usato nella home (due colonne)
         meta_html_parts = []
         if tipo_display:
             meta_html_parts.append(f'<span class="doc-type-chip">{tipo_display}</span>')
@@ -58,6 +81,7 @@ def genera_home(df, persone, output_dir):
         except:
             num_id = 0
         
+        # 🔥 RACCOLTA PER SCHEDE RECENTI
         schede.append({
             'id': ami_id,
             'titolo': titolo,
@@ -67,7 +91,19 @@ def genera_home(df, persone, output_dir):
             'num_id': num_id
         })
         
-        # 🔥 CONTEGGIO "PERSONE PIÙ MENZIONATE"
+        # 🔥 RACCOLTA PER DOCUMENTI IN EVIDENZA
+        if ami_id in EVIDENZA_IDS:
+            documenti_evidenza.append({
+                'id': ami_id,
+                'titolo': titolo,
+                'data': data_formattata,
+                'sommario': sommario,
+                'meta_html': meta_html,
+                'num_id': num_id,
+                'copertina': copertina_url
+            })
+        
+        # 🔥 CONTEGGIO PERSONE PIÙ MENZIONATE
         autore_raw = str(row.get('autore', '')).strip()
         persone_collegate_raw = str(row.get('persone_collegate', '')).strip()
         
@@ -84,9 +120,17 @@ def genera_home(df, persone, output_dir):
     schede.sort(key=lambda x: x['num_id'], reverse=True)
     ultime_tre = schede[:3]
     
+    # 🔥 ORDINA I DOCUMENTI IN EVIDENZA secondo l'ordine della lista
+    evidenza_ordinati = []
+    for id_target in EVIDENZA_IDS:
+        for doc in documenti_evidenza:
+            if doc['id'] == id_target:
+                evidenza_ordinati.append(doc)
+                break
+    
     persone_top = conteggio_persone.most_common(3)
     
-    # 🔥 BANNER CON MARGINE NEGATIVO INLINE
+    # 🔥 BANNER
     banner_html = """
 <div class="banner-full" style="margin-bottom: 2rem;">
     <img src="/archivio-maoismo-italiano/immagini/banner.webp" 
@@ -110,7 +154,46 @@ def genera_home(df, persone, output_dir):
 </div>
 """
     
-    home_content = f"""---
+    # ============================================================
+    # 🔥 SEZIONE DOCUMENTI IN EVIDENZA (CON COPERTINE REALI)
+    # ============================================================
+    
+    if evidenza_ordinati:
+        home_content = f"""---
+hide:
+  - toc
+---
+
+{banner_html}
+
+<h2 class="section-title"><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg> Documenti in evidenza</h2>
+
+<div class="evidenza-grid">
+"""
+        for doc in evidenza_ordinati:
+            # 🔥 IMMAGINE COPERTINA REALE DA INTERNET ARCHIVE
+            if doc.get('copertina'):
+                img_html = f'<img src="{doc["copertina"]}" alt="{doc["titolo"]}" class="evidenza-thumbnail-img" loading="lazy">'
+            else:
+                img_html = '<span class="evidenza-placeholder">📄</span>'
+            
+            home_content += f"""
+<div class="evidenza-card">
+    <a href="documenti/{doc['id']}/" class="evidenza-link">
+        <div class="evidenza-thumbnail">
+            {img_html}
+        </div>
+        <div class="evidenza-titolo">{doc['titolo']}</div>
+    </a>
+</div>
+"""
+        home_content += """
+</div>
+
+<div class="home-columns">
+"""
+    else:
+        home_content = f"""---
 hide:
   - toc
 ---
@@ -118,7 +201,13 @@ hide:
 {banner_html}
 
 <div class="home-columns">
-
+"""
+    
+    # ============================================================
+    # COLONNA SINISTRA: Aggiunti di recente
+    # ============================================================
+    
+    home_content += """
 <div class="home-column">
 
 <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 12h10v2H7zm0-4h10v2H7zm0 8h6v2H7z"/></svg> Aggiunti di recente</h2>
@@ -150,6 +239,13 @@ hide:
 
 </div>
 
+"""
+    
+    # ============================================================
+    # COLONNA DESTRA: Persone più menzionate
+    # ============================================================
+    
+    home_content += """
 <div class="home-column">
 
 <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> Persone più menzionate</h2>
@@ -196,6 +292,10 @@ hide:
 </div>
 """
     
+    # ============================================================
+    # STILI
+    # ============================================================
+    
     home_content += """
 <style>
 /* ============================================================
@@ -203,6 +303,90 @@ hide:
    ============================================================ */
 .md-content article h1:first-of-type {
     display: none !important;
+}
+
+/* ============================================================
+   SEZIONE DOCUMENTI IN EVIDENZA
+   ============================================================ */
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 1.5rem 0 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--md-default-fg-color);
+}
+
+.section-icon {
+    width: 1.4rem;
+    height: 1.4rem;
+    fill: var(--md-primary-fg-color);
+    flex-shrink: 0;
+}
+
+.evidenza-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.evidenza-card {
+    background: var(--md-code-bg-color);
+    border-radius: 8px;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.evidenza-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.evidenza-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+.evidenza-thumbnail {
+    aspect-ratio: 16 / 9;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.evidenza-thumbnail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.evidenza-placeholder {
+    color: #ffffff;
+    font-size: 2.5rem;
+    opacity: 0.5;
+}
+
+.evidenza-titolo {
+    padding: 0.5rem 0.7rem 0.7rem 0.7rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--md-default-fg-color);
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.6rem;
 }
 
 /* ============================================================
@@ -327,13 +511,6 @@ hide:
     gap: 0.5rem;
 }
 
-.section-icon {
-    width: 1.3rem;
-    height: 1.3rem;
-    fill: var(--md-primary-fg-color);
-    flex-shrink: 0;
-}
-
 .button-icon {
     width: 1rem;
     height: 1rem;
@@ -357,6 +534,75 @@ hide:
         grid-template-columns: 1fr;
         gap: 0.5rem;
     }
+    .evidenza-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .evidenza-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.6rem;
+    }
+    .evidenza-titolo {
+        font-size: 0.8rem;
+        min-height: 2.2rem;
+        padding: 0.4rem 0.5rem 0.5rem 0.5rem;
+    }
+    .doc-row {
+        flex-direction: column;
+        gap: 0.1rem;
+        padding: 0.6rem 0.2rem;
+    }
+    .doc-data {
+        flex: 0 0 auto;
+        white-space: normal;
+        font-size: 0.8rem;
+    }
+    .doc-titolo {
+        font-size: 0.95rem;
+    }
+    .doc-sommario {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .evidenza-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+    .section-title {
+        font-size: 1.2rem;
+    }
+}
+
+/* ============================================================
+   BANNER
+   ============================================================ */
+.banner-full {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.banner-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
 }
 
 /* Badge "medaglia" per la classifica delle persone più menzionate */
@@ -408,33 +654,6 @@ hide:
 
 .md-button--primary:hover {
     background-color: var(--md-primary-fg-color--dark);
-}
-
-/* ============================================================
-   BANNER: stili generali (posizionamento e sfondo)
-   ============================================================ */
-.banner-full {
-    position: relative;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
-
-.banner-image {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.banner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.45);
 }
 
 /* Stili per il dropdown dei suggerimenti della ricerca hero */

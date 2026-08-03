@@ -26,6 +26,57 @@ hide:
 </div>
 
 
+<h2 class="section-title"><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg> Documenti in evidenza</h2>
+
+<div class="evidenza-grid">
+
+<div class="evidenza-card">
+    <a href="documenti/AMI-0049/" class="evidenza-link">
+        <div class="evidenza-thumbnail">
+            <img src="https://archive.org/services/img/sulla-contraddizione" alt="Sulla contraddizione" class="evidenza-thumbnail-img" loading="lazy">
+        </div>
+        <div class="evidenza-titolo">Sulla contraddizione</div>
+    </a>
+</div>
+
+<div class="evidenza-card">
+    <a href="documenti/AMI-0043/" class="evidenza-link">
+        <div class="evidenza-thumbnail">
+            <img src="https://archive.org/services/img/sulla-nuova-democrazia" alt="Sulla Nuova Democrazia" class="evidenza-thumbnail-img" loading="lazy">
+        </div>
+        <div class="evidenza-titolo">Sulla Nuova Democrazia</div>
+    </a>
+</div>
+
+<div class="evidenza-card">
+    <a href="documenti/AMI-0045/" class="evidenza-link">
+        <div class="evidenza-thumbnail">
+            <img src="https://archive.org/services/img/sulla-pratica" alt="Sulla pratica" class="evidenza-thumbnail-img" loading="lazy">
+        </div>
+        <div class="evidenza-titolo">Sulla pratica</div>
+    </a>
+</div>
+
+<div class="evidenza-card">
+    <a href="documenti/AMI-0013/" class="evidenza-link">
+        <div class="evidenza-thumbnail">
+            <img src="https://archive.org/services/img/statuto-pcdiml" alt="Dichiarazione di Principio - Statuto" class="evidenza-thumbnail-img" loading="lazy">
+        </div>
+        <div class="evidenza-titolo">Dichiarazione di Principio - Statuto</div>
+    </a>
+</div>
+
+<div class="evidenza-card">
+    <a href="documenti/AMI-0035/" class="evidenza-link">
+        <div class="evidenza-thumbnail">
+            <img src="https://archive.org/services/img/viva-il-popolo-cinese" alt="Viva il popolo cinese" class="evidenza-thumbnail-img" loading="lazy">
+        </div>
+        <div class="evidenza-titolo">Viva il popolo cinese</div>
+    </a>
+</div>
+
+</div>
+
 <div class="home-columns">
 
 <div class="home-column">
@@ -69,6 +120,7 @@ hide:
 </div>
 
 </div>
+
 
 <div class="home-column">
 
@@ -123,6 +175,90 @@ hide:
    ============================================================ */
 .md-content article h1:first-of-type {
     display: none !important;
+}
+
+/* ============================================================
+   SEZIONE DOCUMENTI IN EVIDENZA
+   ============================================================ */
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 1.5rem 0 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--md-default-fg-color);
+}
+
+.section-icon {
+    width: 1.4rem;
+    height: 1.4rem;
+    fill: var(--md-primary-fg-color);
+    flex-shrink: 0;
+}
+
+.evidenza-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.evidenza-card {
+    background: var(--md-code-bg-color);
+    border-radius: 8px;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.evidenza-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.evidenza-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+.evidenza-thumbnail {
+    aspect-ratio: 16 / 9;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.evidenza-thumbnail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.evidenza-placeholder {
+    color: #ffffff;
+    font-size: 2.5rem;
+    opacity: 0.5;
+}
+
+.evidenza-titolo {
+    padding: 0.5rem 0.7rem 0.7rem 0.7rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--md-default-fg-color);
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.6rem;
 }
 
 /* ============================================================
@@ -247,13 +383,6 @@ hide:
     gap: 0.5rem;
 }
 
-.section-icon {
-    width: 1.3rem;
-    height: 1.3rem;
-    fill: var(--md-primary-fg-color);
-    flex-shrink: 0;
-}
-
 .button-icon {
     width: 1rem;
     height: 1rem;
@@ -277,6 +406,75 @@ hide:
         grid-template-columns: 1fr;
         gap: 0.5rem;
     }
+    .evidenza-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .evidenza-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.6rem;
+    }
+    .evidenza-titolo {
+        font-size: 0.8rem;
+        min-height: 2.2rem;
+        padding: 0.4rem 0.5rem 0.5rem 0.5rem;
+    }
+    .doc-row {
+        flex-direction: column;
+        gap: 0.1rem;
+        padding: 0.6rem 0.2rem;
+    }
+    .doc-data {
+        flex: 0 0 auto;
+        white-space: normal;
+        font-size: 0.8rem;
+    }
+    .doc-titolo {
+        font-size: 0.95rem;
+    }
+    .doc-sommario {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .evidenza-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+    .section-title {
+        font-size: 1.2rem;
+    }
+}
+
+/* ============================================================
+   BANNER
+   ============================================================ */
+.banner-full {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.banner-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
 }
 
 /* Badge "medaglia" per la classifica delle persone più menzionate */
@@ -328,33 +526,6 @@ hide:
 
 .md-button--primary:hover {
     background-color: var(--md-primary-fg-color--dark);
-}
-
-/* ============================================================
-   BANNER: stili generali (posizionamento e sfondo)
-   ============================================================ */
-.banner-full {
-    position: relative;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
-
-.banner-image {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.banner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.45);
 }
 
 /* Stili per il dropdown dei suggerimenti della ricerca hero */
