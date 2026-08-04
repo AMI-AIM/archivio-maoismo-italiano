@@ -70,7 +70,7 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
             editore_raw = ''
         
         # 🔥 NUOVO CAMPO: PROVENIENZA (maiuscolo come da richiesta)
-        provenienza_raw = str(row.get('Provenienza', '')).strip()
+        provenienza_raw = str(row.get('provenienza', '')).strip()
         if provenienza_raw in ['nan', 'None']:
             provenienza_raw = ''
         
