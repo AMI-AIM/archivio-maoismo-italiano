@@ -37,6 +37,22 @@ hide:
     </div>
 </div>
 
+<div class="doc-row">
+    <div class="doc-data">1970</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0058/">Proletari senza rivoluzione: Storia delle classi subalterne italiane dal 1860 al 1950, Vol. 1</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">1970</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/AMI-0059/">Proletari senza rivoluzione: Storia delle classi subalterne italiane dal 1860 al 1950, Vol. 2</a></div>
+        <div class="doc-ruoli"><span class="ruolo-badge">pubblicato da</span></div>
+    </div>
+</div>
+
 </div>
 
 <style>

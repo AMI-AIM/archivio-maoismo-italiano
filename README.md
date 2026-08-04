@@ -1,6 +1,6 @@
 # AMI — Archivio del Maoismo Italiano
 
-![AMI - Archivio del Maoismo Italiano](https://ami-aim.github.io/archivio-maoismo-italiano/)
+
 
 ## Descrizione
 
@@ -110,7 +110,8 @@ Per informazioni, collaborazioni o segnalazioni:
 * Repository: https://github.com/ami-aim/archivio-maoismo-italiano
 * Sito web: https://ami-aim.github.io/archivio-maoismo-italiano/
 
----
+\---
 
 **AMI — Archivio del Maoismo Italiano**
 Un progetto di storia digitale per la conservazione e lo studio delle fonti del maoismo in Italia.
+

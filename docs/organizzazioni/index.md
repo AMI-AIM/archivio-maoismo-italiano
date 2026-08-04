@@ -121,7 +121,7 @@ hide:
         <div class="org-tipo">Casa editrice</div>
         <div class="org-name">Edizioni Oriente</div>
         <div class="org-dates">1963 – 1979</div>
-        <div class="org-count">2 documenti</div>
+        <div class="org-count">4 documenti</div>
     </a>
 </div>
 <div class="org-card" data-lettera="H">

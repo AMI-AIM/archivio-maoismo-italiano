@@ -69,6 +69,11 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
         if editore_raw in ['nan', 'None']:
             editore_raw = ''
         
+        # 🔥 NUOVO CAMPO: PROVENIENZA (maiuscolo come da richiesta)
+        provenienza_raw = str(row.get('Provenienza', '')).strip()
+        if provenienza_raw in ['nan', 'None']:
+            provenienza_raw = ''
+        
         persone_collegate = str(row.get('persone_collegate', '')).strip()
         if persone_collegate in ['nan', 'None']:
             persone_collegate = ''
@@ -468,7 +473,7 @@ hide:
 """
         
         # ========================================================================
-        # METADATI CON LINK
+        # METADATI CON LINK (INCLUSA PROVENIENZA)
         # ========================================================================
         
         content += f"""
@@ -493,6 +498,10 @@ hide:
         <div class="metadata-item">
             <span class="metadata-label">Data</span>
             <span class="metadata-value">{data_formattata if data_formattata else 'N/A'}</span>
+        </div>
+        <div class="metadata-item">
+            <span class="metadata-label">Provenienza</span>
+            <span class="metadata-value">{provenienza_raw if provenienza_raw else 'N/A'}</span>
         </div>
         <div class="metadata-item">
             <span class="metadata-label">Tipologia</span>

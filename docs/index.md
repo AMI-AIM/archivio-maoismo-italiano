@@ -89,26 +89,26 @@ hide:
 
 
 <div class="doc-row">
-    <div class="doc-data">8 maggio 1977</div>
+    <div class="doc-data">1970</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0057/">Congresso di fondazione del Partito Comunista Unificato d'Italia</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">Foto</span><span class="doc-org">Partito Comunista Unificato d'Italia</span></div>
-    </div>
-</div>
-
-<div class="doc-row">
-    <div class="doc-data">1967</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0056/">Il Presidente Mao Tse-tung sulla Guerra di popolo</a></div>
+        <div class="doc-titolo"><a href="documenti/AMI-0059/">Proletari senza rivoluzione: Storia delle classi subalterne italiane dal 1860 al 1950, Vol. 2</a></div>
         <div class="doc-meta"><span class="doc-type-chip">Libro</span><span class="doc-org">Edizioni Oriente</span></div>
     </div>
 </div>
 
 <div class="doc-row">
-    <div class="doc-data">1967</div>
+    <div class="doc-data">1970</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/AMI-0055/">Osare pensare, osare parlare, osare agire, osare fare la rivoluzione - Manifesto PCd'I (m-l)</a></div>
-        <div class="doc-meta"><span class="doc-type-chip">Manifesto</span><span class="doc-org">Partito Comunista d'Italia (marxista-leninista)</span></div>
+        <div class="doc-titolo"><a href="documenti/AMI-0058/">Proletari senza rivoluzione: Storia delle classi subalterne italiane dal 1860 al 1950, Vol. 1</a></div>
+        <div class="doc-meta"><span class="doc-type-chip">Libro</span><span class="doc-org">Edizioni Oriente</span></div>
+    </div>
+</div>
+
+<div class="doc-row">
+    <div class="doc-data">8 maggio 1977</div>
+    <div class="doc-contenuto">
+        <div class="doc-titolo"><a href="documenti/AMI-0057/">Congresso di fondazione del Partito Comunista Unificato d'Italia</a></div>
+        <div class="doc-meta"><span class="doc-type-chip">Foto</span><span class="doc-org">Partito Comunista Unificato d'Italia</span></div>
     </div>
 </div>
 

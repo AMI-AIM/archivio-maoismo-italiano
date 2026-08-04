@@ -1,5 +1,5 @@
 {
-  "totale": 57,
+  "totale": 59,
   "chunk_size": 50,
   "chunks": [
     {
@@ -11,8 +11,8 @@
     {
       "numero": 1,
       "file": "C:\\Users\\ivan_\\Desktop\\AMI\\GitHub\\docs\\documenti_chunk_1.json",
-      "count": 7,
-      "range": "51-57"
+      "count": 9,
+      "range": "51-59"
     }
   ]
 }
