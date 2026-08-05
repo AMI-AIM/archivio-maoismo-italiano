@@ -1,13 +1,19 @@
-# Cache
-.cache/
+# Output di build 
+build/
+
+# Excel lock file
+data/~$*.xlsx
+
+# Cache interna del generatore (metadati IA, hash file, ecc.)
 scripts/.cache/
 
 # Python
 scripts/__pycache__/
+scripts/core/__pycache__/
 *.pyc
 *.pyo
 *.pyd
 .Python
 
-# MkDocs
+# MkDocs (output finale prodotto da "mkdocs build")
 site/
