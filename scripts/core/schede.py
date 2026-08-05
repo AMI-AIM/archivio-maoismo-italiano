@@ -415,7 +415,7 @@ hide:
         # 🔥 GESTIONE AUDIO, PDF, ETC.
         elif identifier:
             if tipo == 'audio':
-                embed_url = f"https://archive.org/embed/{identifier}?ui=webamp"
+                embed_url = f"https://archive.org/embed/{identifier}?ui=embed&nav=0&show_covers=1&playlist=1"
             else:
                 embed_url = f"https://archive.org/embed/{identifier}?ui=embed&nav=0"
             
