@@ -230,7 +230,7 @@ hide:
 '''
         
         content = f"""
-<div class="org-name">{nome}</div>
+<h1 class="org-name">{nome}</h1>
 
 {f'<div class="org-dates">{data["data_range"]}</div>' if data["data_range"] else ''}
 
@@ -257,7 +257,7 @@ hide:
 </div>
 
 <style>
-.org-name { font-size: 2.4rem; font-weight: 700; margin: 0 0 0.2rem 0; color: var(--md-primary-fg-color); }
+.md-typeset h1.org-name { font-size: 2.4rem; font-weight: 700; margin: 0 0 0.2rem 0; color: var(--md-primary-fg-color); }
 .org-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 0.8rem 0; font-weight: 400; }
 
 /* STORIA CON FOTO (testo a sinistra, foto a destra) */

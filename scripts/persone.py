@@ -198,7 +198,7 @@ hide:
 '''
         
         content = f"""
-<div class="person-name">{nome}</div>
+<h1 class="person-name">{nome}</h1>
 
 {f'<div class="person-dates">{data["data_range"]}</div>' if data["data_range"] else ''}
 
@@ -225,7 +225,7 @@ hide:
 </div>
 
 <style>
-.person-name { font-size: 2.4rem; font-weight: 700; margin: 0 0 0.2rem 0; color: var(--md-primary-fg-color); }
+.md-typeset h1.person-name { font-size: 2.4rem; font-weight: 700; margin: 0 0 0.2rem 0; color: var(--md-primary-fg-color); }
 .person-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 0.8rem 0; font-weight: 400; }
 
 /* BIOGRAFIA CON FOTO (testo a sinistra, foto a destra) */
