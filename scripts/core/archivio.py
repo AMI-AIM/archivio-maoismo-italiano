@@ -178,8 +178,6 @@ hide:
 
 </div>
 
-<script src="/archivio-maoismo-italiano/archivio-filtri.js"></script>
-
 <style>
 .archivio-layout {{
     display: flex;
