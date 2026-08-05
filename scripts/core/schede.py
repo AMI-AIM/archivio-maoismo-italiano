@@ -4,7 +4,7 @@ import html
 import json
 import urllib.parse
 import pandas as pd
-from .utils import formatta_data, split_nomi, scarica_descrizione_ia, scarica_testo_ia
+from .utils import formatta_data, split_nomi, scarica_descrizione_ia, scarica_testo_ia, pulisci_per_meta_description, escape_yaml_string
 from .soggetti import crea_link, link_lista
 
 
@@ -152,7 +152,19 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
             else:
                 # Senza cache: scarica direttamente
                 descrizione_ia = scarica_descrizione_ia(identifier)
-        
+        # ========================================================================
+        # META DESCRIPTION (SEO): usa la descrizione IA se disponibile,
+        # altrimenti il fallback generico precedente
+        # ========================================================================
+
+        meta_description = pulisci_per_meta_description(descrizione_ia) if descrizione_ia else ''
+        if not meta_description:
+            if org_raw:
+                meta_description = f"{tipo_display or tipo} su {org_raw}. Documento conservato su Internet Archive."
+            else:
+                meta_description = f"{tipo_display or tipo} conservato su Internet Archive."
+        meta_description_escaped = escape_yaml_string(meta_description)
+
         # ========================================================================
         # GENERAZIONE LINK HTML PER PERSONE/ORG
         # ========================================================================
@@ -295,7 +307,7 @@ author: "{autore_raw}"
 year: "{data_formattata}"
 type: "{tipo}"
 series: "{serie}"
-description: "{tipo} su {org_raw} - Documento conservato su Internet Archive."
+description: "{meta_description_escaped}"
 hide:
   - navigation
   - toc

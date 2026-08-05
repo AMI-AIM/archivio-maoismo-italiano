@@ -202,7 +202,7 @@ def genera_organizzazioni():
             storia_text = '<p>' + '</p><p>'.join(storia_text.split('\n')) + '</p>'
         
         frontmatter = f"""---
-title: " "
+title: "{nome}"
 description: "Documenti relativi a {nome}"
 hide:
   - navigation

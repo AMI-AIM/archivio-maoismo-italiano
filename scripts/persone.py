@@ -170,7 +170,7 @@ def genera_persone():
             bio_text = '<p>' + '</p><p>'.join(bio_text.split('\n')) + '</p>'
         
         frontmatter = f"""---
-title: " "
+title: "{nome}"
 description: "Scheda biografica e documenti di {nome}"
 hide:
   - navigation

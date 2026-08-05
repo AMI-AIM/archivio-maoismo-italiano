@@ -1,4 +1,5 @@
 import re
+import html as html_lib
 from datetime import datetime
 from .cache_manager import CacheManager
 
@@ -153,3 +154,24 @@ def scarica_testo_ia(identifier, nome_file=None):
         print(f"   ⚠️ Errore scaricando testo per {identifier}: {e}")
     
     return None
+
+def pulisci_per_meta_description(testo_html, max_len=155):
+    """Converte una descrizione HTML in testo semplice troncato,
+    adatto al tag <meta description> per la SEO."""
+    if not testo_html:
+        return ''
+    testo = re.sub(r'<[^>]+>', ' ', testo_html)
+    testo = html_lib.unescape(testo)
+    testo = re.sub(r'\s+', ' ', testo).strip()
+    if len(testo) <= max_len:
+        return testo
+    troncato = testo[:max_len].rsplit(' ', 1)[0]
+    return troncato.rstrip(',.;:') + '…'
+
+
+def escape_yaml_string(testo):
+    """Escape minimo per inserire una stringa in un valore YAML
+    tra doppi apici (frontmatter)."""
+    if not testo:
+        return ''
+    return testo.replace('\\', '\\\\').replace('"', '\\"')
