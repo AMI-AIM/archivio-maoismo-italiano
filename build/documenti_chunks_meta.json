@@ -4,13 +4,13 @@
   "chunks": [
     {
       "numero": 0,
-      "file": "C:\\Users\\ivan_\\Desktop\\AMI\\GitHub\\docs\\documenti_chunk_0.json",
+      "file": "C:\\Users\\ivan_\\Desktop\\AMI\\GitHub\\build\\documenti_chunk_0.json",
       "count": 50,
       "range": "1-50"
     },
     {
       "numero": 1,
-      "file": "C:\\Users\\ivan_\\Desktop\\AMI\\GitHub\\docs\\documenti_chunk_1.json",
+      "file": "C:\\Users\\ivan_\\Desktop\\AMI\\GitHub\\build\\documenti_chunk_1.json",
       "count": 9,
       "range": "51-59"
     }

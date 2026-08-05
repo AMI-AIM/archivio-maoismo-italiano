@@ -39,6 +39,9 @@ jobs:
           pip install mkdocs-material
           pip install pandas openpyxl
       
+      - name: Sync static assets
+        run: python scripts/sync_assets.py
+      
       - name: Generate people pages
         run: python scripts/persone.py
       
@@ -51,10 +54,10 @@ jobs:
       - name: Copy and compress static files
         run: |
           mkdocs build
-          if [ -f docs/documenti.json ]; then cp docs/documenti.json site/; fi
-          if [ -f docs/soggetti.json ]; then cp docs/soggetti.json site/; fi
-          if [ -f docs/archivio-filtri.js ]; then cp docs/archivio-filtri.js site/; fi
-          if [ -f docs/javascripts/lazy-load.js ]; then cp docs/javascripts/lazy-load.js site/; fi
+          if [ -f build/documenti.json ]; then cp build/documenti.json site/; fi
+          if [ -f build/soggetti.json ]; then cp build/soggetti.json site/; fi
+          if [ -f build/archivio-filtri.js ]; then cp build/archivio-filtri.js site/; fi
+          if [ -f build/javascripts/lazy-load.js ]; then cp build/javascripts/lazy-load.js site/; fi
           # Gzip per CDN (mantiene gli originali: senza -k, gzip cancella
           # il file sorgente e lascia solo il .gz, rompendo ogni fetch/link
           # che punta al nome file originale, es. documenti.json, extra.css)

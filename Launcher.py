@@ -74,6 +74,10 @@ def aggiorna():
 
     verifica_dipendenze()
 
+    # 0. Sincronizzazione file statici (NUOVO — deve girare per primo)
+    esegui([sys.executable, "sync_assets.py"], cwd=SCRIPTS_DIR,
+           descrizione="🔄 Sincronizzazione file statici (assets/ → build/)")
+
     # 1-3. Rigenerazione contenuti (ordine: persone/org PRIMA di generatore)
     esegui([sys.executable, "persone.py"], cwd=SCRIPTS_DIR,
            descrizione="👤 Generazione schede persone")
