@@ -35,9 +35,7 @@ jobs:
             ${{ runner.os }}-ami-cache-
       
       - name: Install dependencies
-        run: |
-          pip install mkdocs-material
-          pip install pandas openpyxl
+        run: pip install -r requirements.txt
       
       - name: Sync static assets
         run: python scripts/sync_assets.py

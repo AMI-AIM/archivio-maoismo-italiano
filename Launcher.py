@@ -36,8 +36,25 @@ def esegui(comando, cwd=None, descrizione=None):
 def verifica_dipendenze():
     stampa_titolo("🔎 Verifica dipendenze")
     mancanti = []
-    for pacchetto, modulo in [("pandas", "pandas"), ("openpyxl", "openpyxl"),
-                              ("mkdocs-material", "mkdocs")]:
+
+    requirements_path = ROOT_DIR / "requirements.txt"
+    mappa_moduli = {
+        "pandas": "pandas",
+        "openpyxl": "openpyxl",
+        "mkdocs-material": "mkdocs",
+    }
+
+    if requirements_path.exists():
+        pacchetti = [
+            riga.strip() for riga in requirements_path.read_text(encoding="utf-8").splitlines()
+            if riga.strip() and not riga.strip().startswith("#")
+        ]
+    else:
+        print(f"   ⚠️ '{requirements_path.name}' non trovato, uso elenco di fallback.")
+        pacchetti = list(mappa_moduli.keys())
+
+    for pacchetto in pacchetti:
+        modulo = mappa_moduli.get(pacchetto, pacchetto.replace("-", "_"))
         try:
             __import__(modulo)
             print(f"   ✅ {pacchetto}")
@@ -57,9 +74,8 @@ def verifica_dipendenze():
             msg += "\n   Installa git dal sito ufficiale per il tuo sistema operativo."
         pacchetti_pip = [m for m in mancanti if m != "git"]
         if pacchetti_pip:
-            msg += f"\n   Installa il resto con: pip install {' '.join(pacchetti_pip)}"
+            msg += f"\n   Installa il resto con: pip install -r requirements.txt"
         raise ErroreComando(msg)
-
 
 def git_ci_sono_modifiche():
     risultato = subprocess.run(
