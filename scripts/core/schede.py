@@ -131,27 +131,29 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
         # 🔥 DESCRIZIONE: cache + fallback
         # ========================================================================
         descrizione_ia = None
-        
         if identifier:
             if cache_manager:
                 # Prova a leggere dalla cache
                 cached_metadata = cache_manager.get_ia_metadata(identifier)
                 if cached_metadata:
                     descrizione_ia = cached_metadata.get('metadata', {}).get('description')
-                    if descrizione_ia:
-                        print(f"   💾 Descrizione {identifier} da cache")
-                    else:
-                        print(f"   ⚠️ Descrizione cache vuota per {identifier}")
-                else:
-                    # Fallback: scarica direttamente
-                    print(f"   📡 Descrizione {identifier} scaricata da IA (cache vuota)")
+        
+                # Se non trovato in cache, scarica da IA
+                if not descrizione_ia:
+                    print(f" 📡 Descrizione {identifier} scaricata da IA (cache vuota)")
                     descrizione_ia = scarica_descrizione_ia(identifier)
-                    # Salva in cache per le prossime volte
-                    if descrizione_ia and cache_manager:
-                        cache_manager.set_ia_metadata(identifier, {'metadata': {'description': descrizione_ia}})
             else:
-                # Senza cache: scarica direttamente
+                # Nessun cache manager: scarica direttamente
+                print(f" 📡 Descrizione {identifier} scaricata da IA (nessun cache manager)")
                 descrizione_ia = scarica_descrizione_ia(identifier)
+
+            # Salva in cache per le prossime volte
+            if descrizione_ia and cache_manager:
+                cache_manager.set_ia_metadata(identifier, {'metadata': {'description': descrizione_ia}})
+        else:
+            # Senza identifier: scarica direttamente
+            descrizione_ia = scarica_descrizione_ia(identifier)
+
         # ========================================================================
         # META DESCRIPTION (SEO): usa la descrizione IA se disponibile,
         # altrimenti il fallback generico precedente
