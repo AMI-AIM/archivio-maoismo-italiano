@@ -38,13 +38,26 @@ def formatta_data(data_str):
     if re.match(r'^\d{4}$', data_str):
         return data_str, (int(data_str), 1, 1)
     
+    mesi = {1: 'gennaio', 2: 'febbraio', 3: 'marzo', 4: 'aprile',
+            5: 'maggio', 6: 'giugno', 7: 'luglio', 8: 'agosto',
+            9: 'settembre', 10: 'ottobre', 11: 'novembre', 12: 'dicembre'}
+
+    # 🔥 SOLO MESE/ANNO scritto come testo puro (es. "10/1967" o "1967-10"):
+    # va riconosciuto ESPLICITAMENTE prima del parsing con strptime, perche'
+    # altrimenti nessun formato della lista sottostante corrisponde e il
+    # valore verrebbe mostrato grezzo senza essere formattato ne' ordinato
+    # correttamente. Corrisponde solo se non c'e' alcuna informazione sul
+    # giorno nella stringa originale, quindi non inventa mai un giorno.
+    match_mese_anno = re.match(r'^(\d{1,2})/(\d{4})$', data_str)
+    if match_mese_anno:
+        mese, anno = int(match_mese_anno.group(1)), int(match_mese_anno.group(2))
+        if 1 <= mese <= 12:
+            return f"{mesi[mese]} {anno}", (anno, mese, 1)
+
     try:
         for fmt in ['%Y-%m-%d %H:%M:%S', '%Y-%m-%d', '%Y-%m', '%d/%m/%Y %H:%M:%S', '%d/%m/%Y', '%m/%d/%Y']:
             try:
                 dt = datetime.strptime(data_str, fmt)
-                mesi = {1: 'gennaio', 2: 'febbraio', 3: 'marzo', 4: 'aprile',
-                        5: 'maggio', 6: 'giugno', 7: 'luglio', 8: 'agosto',
-                        9: 'settembre', 10: 'ottobre', 11: 'novembre', 12: 'dicembre'}
                 if fmt in ['%Y-%m-%d %H:%M:%S', '%Y-%m-%d', '%d/%m/%Y %H:%M:%S', '%d/%m/%Y', '%m/%d/%Y']:
                     return f"{dt.day} {mesi[dt.month]} {dt.year}", (dt.year, dt.month, dt.day)
                 else:
@@ -57,9 +70,6 @@ def formatta_data(data_str):
     try:
         if isinstance(data_str, (int, float)):
             dt = datetime.fromordinal(datetime(1900, 1, 1).toordinal() + int(data_str) - 2)
-            mesi = {1: 'gennaio', 2: 'febbraio', 3: 'marzo', 4: 'aprile',
-                    5: 'maggio', 6: 'giugno', 7: 'luglio', 8: 'agosto',
-                    9: 'settembre', 10: 'ottobre', 11: 'novembre', 12: 'dicembre'}
             return f"{dt.day} {mesi[dt.month]} {dt.year}", (dt.year, dt.month, dt.day)
     except:
         pass
