@@ -177,6 +177,40 @@ class CacheManager:
         self.ia_cache = {}
         self._save_json(self.ia_cache_file, self.ia_cache)
         print("   [CLEAN] Cache IA svuotato")
+
+    def clear_ia_metadata(self, identifiers=None):
+        """
+        Invalida la cache dei metadati/testi Internet Archive.
+
+        Args:
+            identifiers: None per svuotare TUTTA la cache IA (equivalente a
+                clear_ia_cache). Altrimenti una lista di identifier IA
+                (es. ["ami_0001", "ami_0002"]) da invalidare singolarmente,
+                cosi' alla prossima generazione solo quei documenti vengono
+                ri-scaricati da archive.org.
+        """
+        if identifiers is None:
+            self.clear_ia_cache()
+            return
+
+        rimossi = 0
+        for identifier in identifiers:
+            meta_key = f"ia_meta_{identifier}"
+            if meta_key in self.ia_cache:
+                del self.ia_cache[meta_key]
+                rimossi += 1
+
+            # Rimuove anche eventuali testi cachati per lo stesso identifier
+            testo_keys = [
+                k for k in self.ia_cache
+                if k.startswith(f"ia_text_{identifier}_")
+            ]
+            for k in testo_keys:
+                del self.ia_cache[k]
+                rimossi += 1
+
+        self._save_json(self.ia_cache_file, self.ia_cache)
+        print(f"   [CLEAN] Invalidate {rimossi} voci di cache per {len(identifiers)} identifier IA")
     
     def clear_all(self):
         """Svuota tutto il cache."""

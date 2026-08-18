@@ -1,3 +1,18 @@
+"""
+Launcher AMI — aggiorna e pubblica il sito.
+
+Uso:
+    python Launcher.py                          Rigenera e pubblica (con messaggio commit automatico)
+    python Launcher.py "messaggio commit"       Rigenera e pubblica con messaggio custom
+    python Launcher.py --refresh-ia ID1,ID2     Invalida la cache IA solo per gli identifier indicati,
+                                                 poi rigenera e pubblica
+    python Launcher.py --force-refresh-ia       Invalida TUTTA la cache IA (metadati + testi),
+                                                 poi rigenera e pubblica
+    python Launcher.py --clear-cache            Svuota tutta la cache (IA, hash file, metadati doc)
+    python Launcher.py --cache-stats            Mostra statistiche cache
+    python Launcher.py --help                   Mostra questo messaggio
+"""
+
 import subprocess
 import sys
 import shutil
@@ -85,10 +100,21 @@ def git_ci_sono_modifiche():
     return bool(risultato.stdout.strip())
 
 
-def aggiorna():
+def aggiorna(messaggio=None, refresh_ia=None):
     stampa_titolo("🚀 Aggiornamento del sito AMI")
 
     verifica_dipendenze()
+
+    # -1. Invalidazione mirata/globale cache IA, se richiesta
+    if refresh_ia:
+        stampa_titolo("♻️  Invalidazione cache Internet Archive")
+        cache_mgr = CacheManager()
+        if refresh_ia == 'all':
+            cache_mgr.clear_ia_metadata()
+            print("   Tutti i documenti verranno ri-scaricati da Internet Archive.")
+        else:
+            cache_mgr.clear_ia_metadata(refresh_ia)
+            print(f"   Verranno ri-scaricati solo: {', '.join(refresh_ia)}")
 
     # 0. Sincronizzazione file statici (NUOVO — deve girare per primo)
     esegui([sys.executable, "sync_assets.py"], cwd=SCRIPTS_DIR,
@@ -110,9 +136,7 @@ def aggiorna():
         stampa_titolo("✅ Completato (nessuna modifica)")
         return
 
-    if len(sys.argv) > 1 and not sys.argv[1].startswith('--'):
-        messaggio = sys.argv[1]
-    else:
+    if not messaggio:
         messaggio = f"Aggiornamento automatico del sito — {datetime.now().strftime('%d/%m/%Y %H:%M')}"
 
     esegui(["git", "add", "-A"], descrizione="Git add")
@@ -142,19 +166,35 @@ def svuota_cache():
 def main():
     codice_uscita = 0
     try:
-        # ✨ NUOVO: Gestisci opzioni CLI
-        if len(sys.argv) > 1:
-            if sys.argv[1] == '--clear-cache':
+        # ✨ Gestisci opzioni CLI
+        args = sys.argv[1:]
+        refresh_ia = None
+        messaggio = None
+
+        if args:
+            if args[0] == '--clear-cache':
                 svuota_cache()
                 return
-            elif sys.argv[1] == '--cache-stats':
+            elif args[0] == '--cache-stats':
                 mostra_cache_stats()
                 return
-            elif sys.argv[1] == '--help':
+            elif args[0] == '--help':
                 print(__doc__)
                 return
-        
-        aggiorna()
+            elif args[0] == '--force-refresh-ia':
+                refresh_ia = 'all'
+                args = args[1:]
+            elif args[0] == '--refresh-ia':
+                if len(args) < 2:
+                    print("Uso: python Launcher.py --refresh-ia <identifier1,identifier2,...>")
+                    return
+                refresh_ia = [i.strip() for i in args[1].split(',') if i.strip()]
+                args = args[2:]
+
+            if args and not args[0].startswith('--'):
+                messaggio = args[0]
+
+        aggiorna(messaggio=messaggio, refresh_ia=refresh_ia)
     except ErroreComando as e:
         print(f"\n❌ ERRORE: {e}")
         print("   Il sito NON è stato pubblicato: correggi l'errore sopra e rilancia lo script.")
