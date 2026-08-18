@@ -4,6 +4,8 @@ Launcher AMI — aggiorna e pubblica il sito.
 Uso:
     python Launcher.py                          Rigenera e pubblica (con messaggio commit automatico)
     python Launcher.py "messaggio commit"       Rigenera e pubblica con messaggio custom
+    python Launcher.py --only AMI-0034          Rigenera SOLO le schede indicate (invalida cache
+                                                 metadati documento + cache IA collegata), poi pubblica
     python Launcher.py --refresh-ia ID1,ID2     Invalida la cache IA solo per gli identifier indicati,
                                                  poi rigenera e pubblica
     python Launcher.py --force-refresh-ia       Invalida TUTTA la cache IA (metadati + testi),
@@ -13,6 +15,7 @@ Uso:
     python Launcher.py --help                   Mostra questo messaggio
 """
 
+import re
 import subprocess
 import sys
 import shutil
@@ -100,12 +103,49 @@ def git_ci_sono_modifiche():
     return bool(risultato.stdout.strip())
 
 
-def aggiorna(messaggio=None, refresh_ia=None):
+def identifier_ia_per_documento(ami_id):
+    """
+    Cerca nell'Excel del catalogo l'identifier Internet Archive collegato
+    a un documento AMI, per poter invalidare anche la cache IA in --only.
+
+    Returns:
+        str o None se non trovato / url mancante.
+    """
+    try:
+        import pandas as pd
+        catalogo_path = ROOT_DIR / "data" / "dati.xlsx"
+        df = pd.read_excel(catalogo_path, sheet_name='Catalogo', dtype=str).fillna('')
+        df.columns = df.columns.str.strip().str.lower()
+        riga = df[df['id'].astype(str).str.strip() == ami_id]
+        if riga.empty:
+            return None
+        url = str(riga.iloc[0].get('url', '')).strip()
+        match = re.search(r'/details/([^/?#]+)', url)
+        return match.group(1) if match else None
+    except Exception as e:
+        print(f"   ⚠️ Impossibile leggere l'identifier IA per {ami_id}: {e}")
+        return None
+
+
+def aggiorna(messaggio=None, refresh_ia=None, only=None):
     stampa_titolo("🚀 Aggiornamento del sito AMI")
 
     verifica_dipendenze()
 
-    # -1. Invalidazione mirata/globale cache IA, se richiesta
+    # -1. Rigenerazione mirata di specifiche schede documento
+    if only:
+        stampa_titolo("🎯 Rigenerazione mirata")
+        cache_mgr = CacheManager()
+        cache_mgr.clear_doc_metadata(only)
+
+        identifiers = [i for i in (identifier_ia_per_documento(d) for d in only) if i]
+        if identifiers:
+            cache_mgr.clear_ia_metadata(identifiers)
+            print(f"   Verranno rigenerate: {', '.join(only)} (IA: {', '.join(identifiers)})")
+        else:
+            print(f"   Verranno rigenerate: {', '.join(only)} (nessun identifier IA trovato/collegato)")
+
+    # -1bis. Invalidazione mirata/globale cache IA, se richiesta a parte
     if refresh_ia:
         stampa_titolo("♻️  Invalidazione cache Internet Archive")
         cache_mgr = CacheManager()
@@ -169,6 +209,7 @@ def main():
         # ✨ Gestisci opzioni CLI
         args = sys.argv[1:]
         refresh_ia = None
+        only = None
         messaggio = None
 
         if args:
@@ -190,11 +231,17 @@ def main():
                     return
                 refresh_ia = [i.strip() for i in args[1].split(',') if i.strip()]
                 args = args[2:]
+            elif args[0] == '--only':
+                if len(args) < 2:
+                    print("Uso: python Launcher.py --only <AMI-0001,AMI-0002,...>")
+                    return
+                only = [i.strip() for i in args[1].split(',') if i.strip()]
+                args = args[2:]
 
             if args and not args[0].startswith('--'):
                 messaggio = args[0]
 
-        aggiorna(messaggio=messaggio, refresh_ia=refresh_ia)
+        aggiorna(messaggio=messaggio, refresh_ia=refresh_ia, only=only)
     except ErroreComando as e:
         print(f"\n❌ ERRORE: {e}")
         print("   Il sito NON è stato pubblicato: correggi l'errore sopra e rilancia lo script.")

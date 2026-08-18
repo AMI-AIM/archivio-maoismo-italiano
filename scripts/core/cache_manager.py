@@ -167,6 +167,34 @@ class CacheManager:
             'timestamp': datetime.now().isoformat()
         }
         self._save_json(self.metadata_cache_file, self.metadata_cache)
+
+    def clear_doc_metadata(self, doc_ids=None):
+        """
+        Invalida la cache metadati-documento, forzando la rigenerazione
+        della scheda .md alla prossima esecuzione (bypassa lo skip-cache
+        in crea_schede, che altrimenti salta qualsiasi documento gia'
+        presente in cache indipendentemente da modifiche successive).
+
+        Args:
+            doc_ids: None per svuotare tutta la cache metadati documento,
+                oppure lista di ID (es. ["AMI-0034"]) da invalidare
+                singolarmente.
+        """
+        if doc_ids is None:
+            self.metadata_cache = {}
+            self._save_json(self.metadata_cache_file, self.metadata_cache)
+            print("   [CLEAN] Cache metadati documenti svuotata")
+            return
+
+        rimossi = 0
+        for doc_id in doc_ids:
+            key = f"doc_{doc_id}"
+            if key in self.metadata_cache:
+                del self.metadata_cache[key]
+                rimossi += 1
+
+        self._save_json(self.metadata_cache_file, self.metadata_cache)
+        print(f"   [CLEAN] Invalidati metadati per {rimossi}/{len(doc_ids)} documenti")
     
     # ============================================================
     # CACHE PULIZIA
