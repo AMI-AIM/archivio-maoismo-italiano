@@ -53,13 +53,9 @@
 </footer>
 
 <style>
-  /* ------------------------------------------------------------
-     RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
-     di base su .md-footer e i suoi discendenti, inclusi eventuali
-     pseudo-elementi ::before/::after (i due reset mirati precedenti
-     su .md-footer e .md-footer-meta non erano bastati, quindi il
-     bordo probabilmente viene da uno pseudo-elemento non coperto).
-     ------------------------------------------------------------ */
+  .ami-footer.md-typeset > *:first-child {
+    margin-top: 0 !important;
+  }
   .md-footer,
   .md-footer *,
   .md-footer::before,
