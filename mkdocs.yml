@@ -9,6 +9,7 @@ theme:
   name: material
   custom_dir: overrides
   language: it
+  font: false
   features:
     - header.autohide
     - navigation.top
@@ -17,7 +18,6 @@ theme:
     - scheme: default
       primary: red
       accent: red
-
   logo: immagini/logo.webp
   favicon: immagini/favicon.png
 

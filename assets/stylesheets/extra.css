@@ -647,3 +647,91 @@ STILE PERSONALIZZATO — TEMA MATERIAL
         max-height: 150px !important;
     }
 }
+
+/* ------------------------------------------------------------
+13. TIPOGRAFIA — SISTEMA FONT D'ARCHIVIO
+Anton         → titoli e intestazioni (voce del manifesto)
+Literata      → corpo del testo (lettura da libro storico)
+Oswald        → etichette, nav, bottoni (stampa politica)
+Courier Prime → date e metadati (macchina da scrivere)
+------------------------------------------------------------ */
+:root {
+    --ami-font-display: "Anton", "Arial Narrow", Impact, sans-serif;
+    --ami-font-text: "Literata", Georgia, "Times New Roman", serif;
+    --ami-font-label: "Oswald", "Arial Narrow", sans-serif;
+    --ami-font-mono: "Courier Prime", "Courier New", monospace;
+    --md-text-font-family: "Literata", Georgia, "Times New Roman", serif;
+    --md-code-font-family: "Courier Prime", "Courier New", monospace;
+}
+
+/* Corpo: Literata */
+body,
+.md-typeset {
+    font-family: var(--ami-font-text) !important;
+}
+
+/* Titoli: Anton (peso unico 400, niente bold sintetico) */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.section-title,
+.home-column h2 {
+    font-family: var(--ami-font-display) !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.015em;
+}
+
+/* Etichette e UI: Oswald */
+.md-header__nav-link,
+.md-drawer__link,
+.md-button,
+.banner-button,
+.doc-titolo,
+.doc-titolo a,
+.evidenza-titolo,
+.doc-type-chip,
+.ami-footer__links-title,
+.ami-footer__links-list a,
+.banner-search button,
+.hero-search-count {
+    font-family: var(--ami-font-label);
+}
+.md-header__nav-link {
+    font-weight: 600;
+}
+.md-drawer__link {
+    font-weight: 500;
+}
+.md-button,
+.banner-button {
+    font-weight: 600 !important;
+}
+/* Oswald BOLD per le etichette */
+.doc-type-chip {
+    font-weight: 700;
+}
+.ami-footer__links-title {
+    font-weight: 700;
+}
+.doc-titolo,
+.doc-titolo a {
+    font-weight: 600 !important;
+}
+.evidenza-titolo {
+    font-weight: 500;
+}
+
+/* Metadati: Courier Prime (effetto dattiloscritto) */
+.doc-data,
+.persona-date,
+.doc-keywords,
+.md-typeset code,
+.md-typeset kbd,
+.md-typeset pre {
+    font-family: var(--ami-font-mono) !important;
+}
+.doc-data {
+    font-weight: 700 !important;
+    letter-spacing: 0.02em;
+}
