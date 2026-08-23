@@ -4,7 +4,6 @@ from collections import Counter
 from .utils import formatta_data, split_nomi
 
 # 🔥 DOCUMENTI IN EVIDENZA: inserisci qui gli ID dei documenti che vuoi mostrare
-# (modifica questa lista per cambiare i documenti in evidenza)
 EVIDENZA_IDS = [
     'AMI-0049',
     'AMI-0045',
@@ -47,14 +46,12 @@ def genera_home(df, persone, output_dir):
 
         url_ia = str(row.get('url', '#')).strip()
 
-        # 🔥 ESTRAI IDENTIFIER PER LA COPERTINA
         identifier = None
         if url_ia and url_ia != '#':
             match = re.search(r'/details/([^/?#]+)', url_ia)
             if match:
                 identifier = match.group(1)
 
-        # 🔥 URL COPERTINA DA INTERNET ARCHIVE (servizio thumbnail)
         if identifier:
             copertina_url = f"https://archive.org/services/img/{identifier}"
         else:
@@ -79,7 +76,6 @@ def genera_home(df, persone, output_dir):
         except Exception:
             num_id = 0
 
-        # 🔥 RACCOLTA PER SCHEDE RECENTI
         schede.append({
             'id': ami_id,
             'titolo': titolo,
@@ -89,7 +85,6 @@ def genera_home(df, persone, output_dir):
             'num_id': num_id
         })
 
-        # 🔥 RACCOLTA PER DOCUMENTI IN EVIDENZA
         if ami_id in EVIDENZA_IDS:
             documenti_evidenza.append({
                 'id': ami_id,
@@ -101,7 +96,6 @@ def genera_home(df, persone, output_dir):
                 'copertina': copertina_url
             })
 
-        # 🔥 CONTEGGIO PERSONE PIÙ MENZIONATE
         autore_raw = str(row.get('autore', '')).strip()
         persone_collegate_raw = str(row.get('persone_collegate', '')).strip()
         nomi_da_contare = set()
@@ -116,7 +110,6 @@ def genera_home(df, persone, output_dir):
     schede.sort(key=lambda x: x['num_id'], reverse=True)
     ultime_tre = schede[:3]
 
-    # 🔥 ORDINA I DOCUMENTI IN EVIDENZA secondo l'ordine della lista
     evidenza_ordinati = []
     for id_target in EVIDENZA_IDS:
         for doc in documenti_evidenza:
@@ -126,7 +119,7 @@ def genera_home(df, persone, output_dir):
 
     persone_top = conteggio_persone.most_common(3)
 
-    # 🔥 BANNER (margin-bottom 0: la fascia scura della sezione evidenza è aderente)
+    # 🔥 BANNER (margin-bottom 0: la fascia scura è aderente)
     banner_html = """
 <div class="banner-full" style="margin-bottom: 0;">
     <img src="/archivio-maoismo-italiano/immagini/banner.webp"
@@ -266,24 +259,47 @@ hide:
     # ============================================================
     home_content += """
 <style>
-/* ============================================================
-NASCONDE IL TITOLO "Home" NELLA PAGINA
-============================================================ */
+/* Nasconde il titolo "Home" nella pagina */
 .md-content article h1:first-of-type {
     display: none !important;
 }
 
-/* ============================================================
-SEZIONE DOCUMENTI IN EVIDENZA — fascia scura full-bleed
-Il contenuto resta allineato alla colonna di testo: è solo lo
-sfondo (::before) a estendersi a tutta larghezza.
-============================================================ */
-.evidenza-band {
+/* ------------------------------------------------------------
+BANNER (regole base: valgono anche se extra.css non è aggiornato)
+------------------------------------------------------------ */
+.banner-full {
     position: relative;
-    padding: 1.1rem 0 1.3rem;   /* padding ridotto sopra/sotto */
-    margin: 0 0 2rem 0;         /* margin-top 0 => aderente al banner */
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+.banner-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+.banner-full {
+    margin-bottom: 0 !important;
 }
 
+/* ------------------------------------------------------------
+SEZIONE DOCUMENTI IN EVIDENZA — fascia scura full-bleed
+------------------------------------------------------------ */
+.evidenza-band {
+    position: relative;
+    padding: 1.1rem 0 1.3rem;
+    margin: 0 0 2rem 0;
+}
 .evidenza-band::before {
     content: "";
     position: absolute;
@@ -294,12 +310,9 @@ sfondo (::before) a estendersi a tutta larghezza.
     background: #0d0d0d;
     z-index: -1;
 }
-
-/* neutralizza i margini di default del tema sull'h2 dentro la fascia */
 .evidenza-band .section-title {
     margin: 0 0 1rem 0;
 }
-
 .section-title {
     font-size: 1.5rem;
     font-weight: 600;
@@ -308,41 +321,33 @@ sfondo (::before) a estendersi a tutta larghezza.
     gap: 0.5rem;
     color: #ffffff;
 }
-
 .section-icon {
     width: 1.4rem;
     height: 1.4rem;
     fill: var(--md-primary-fg-color);
     flex-shrink: 0;
 }
-
 .evidenza-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
-    margin-bottom: 0; /* lo spazio sotto lo dà la fascia */
+    margin-bottom: 0;
 }
-
-/* Card trasparente sul nero: niente sfondo, niente bordo, niente cornice */
 .evidenza-card {
     background: transparent;
     border: none;
     overflow: visible;
     transition: transform 0.2s;
 }
-
 .evidenza-card:hover {
     transform: translateY(-4px);
 }
-
 .evidenza-link {
     text-decoration: none;
     color: inherit;
     display: flex;
     flex-direction: column;
 }
-
-/* ALTEZZA FISSA del contenitore; niente overflow hidden: niente tagli */
 .evidenza-thumbnail {
     height: 280px;
     display: flex;
@@ -350,23 +355,18 @@ sfondo (::before) a estendersi a tutta larghezza.
     justify-content: center;
     flex-shrink: 0;
 }
-
-/* COPERTINA COMPLETA: altezza fissa, larghezza libera in base
-   alle proporzioni originali di ciascuna immagine */
+/* Copertina completa: altezza fissa, larghezza in proporzione */
 .evidenza-thumbnail-img {
     height: 100%;
     width: auto;
-    max-width: 100%;   /* valvola di sicurezza nelle celle molto strette */
+    max-width: 100%;
     display: block;
 }
-
 .evidenza-placeholder {
     color: #ffffff;
     font-size: 2.5rem;
     opacity: 0.5;
 }
-
-/* Titolo sotto la copertina: grandezza attuale, colore chiaro */
 .evidenza-titolo {
     padding: 0.5rem 0.7rem 0.7rem 0.7rem;
     font-size: 0.85rem;
@@ -381,22 +381,14 @@ sfondo (::before) a estendersi a tutta larghezza.
     min-height: 2.6rem;
 }
 
-/* ============================================================
-BANNER: aderente alla fascia scura (solo home)
-============================================================ */
-.banner-full {
-    margin-bottom: 0 !important;
-}
-
-/* ============================================================
+/* ------------------------------------------------------------
 CATALOGO
-============================================================ */
+------------------------------------------------------------ */
 .catalogo-lista {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
 }
-
 .doc-row {
     display: flex;
     align-items: flex-start;
@@ -406,16 +398,13 @@ CATALOGO
     transition: background-color 0.15s, border-left-color 0.15s;
     gap: 1.5rem;
 }
-
 .doc-row:last-child {
     border-bottom: none;
 }
-
 .doc-row:hover {
     background-color: var(--md-code-bg-color);
     border-left-color: var(--md-primary-fg-color);
 }
-
 .doc-data {
     flex: 0 0 150px;
     font-size: 0.9rem;
@@ -424,28 +413,23 @@ CATALOGO
     white-space: nowrap;
     padding-top: 0.05rem;
 }
-
 .doc-contenuto {
     flex: 1;
     min-width: 0;
 }
-
 .doc-titolo {
     font-size: 1.05rem;
     font-weight: 600;
     margin-bottom: 0.1rem;
 }
-
 .doc-titolo a {
     text-decoration: none;
     color: var(--md-default-fg-color);
 }
-
 .doc-titolo a:hover {
     text-decoration: underline;
     color: var(--md-primary-fg-color);
 }
-
 .doc-meta {
     display: flex;
     align-items: center;
@@ -453,7 +437,6 @@ CATALOGO
     gap: 0.4rem;
     margin-top: 0.15rem;
 }
-
 .doc-type-chip {
     font-size: 0.68rem;
     font-weight: 700;
@@ -465,17 +448,14 @@ CATALOGO
     border-radius: 20px;
     white-space: nowrap;
 }
-
 .doc-org {
     font-size: 0.88rem;
     color: var(--md-default-fg-color--light);
 }
-
 .doc-sommario {
     font-size: 0.9rem;
     color: var(--md-default-fg-color--light);
 }
-
 .recent-container {
     background: var(--md-code-bg-color);
     border-radius: 14px;
@@ -485,9 +465,9 @@ CATALOGO
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* ============================================================
+/* ------------------------------------------------------------
 LAYOUT A DUE COLONNE (home)
-============================================================ */
+------------------------------------------------------------ */
 .home-columns {
     display: grid;
     grid-template-columns: 3fr 2fr;
@@ -495,12 +475,10 @@ LAYOUT A DUE COLONNE (home)
     align-items: stretch;
     margin-top: 0.5rem;
 }
-
 .home-column {
     display: flex;
     flex-direction: column;
 }
-
 .home-column h2 {
     margin-top: 0;
     margin-bottom: 0.6rem;
@@ -509,7 +487,6 @@ LAYOUT A DUE COLONNE (home)
     align-items: center;
     gap: 0.5rem;
 }
-
 .button-icon {
     width: 1rem;
     height: 1rem;
@@ -517,20 +494,18 @@ LAYOUT A DUE COLONNE (home)
     vertical-align: -0.15em;
     margin-right: 0.3rem;
 }
-
 .home-column .recent-container {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
-
 .home-column .catalogo-lista {
     flex: 1;
 }
 
-/* ============================================================
+/* ------------------------------------------------------------
 RESPONSIVE
-============================================================ */
+------------------------------------------------------------ */
 @media (max-width: 768px) {
     .home-columns {
         grid-template-columns: 1fr;
@@ -607,7 +582,7 @@ RESPONSIVE
         padding: 0.4rem 0.5rem 0.5rem 0.5rem;
     }
     .evidenza-thumbnail {
-        height: 160px;
+        height: 170px;
     }
     .doc-row {
         flex-direction: column;
@@ -636,7 +611,7 @@ RESPONSIVE
         font-size: 1.2rem;
     }
     .evidenza-thumbnail {
-        height: 140px;
+        height: 150px;
     }
     .banner-full {
         height: 180px;
@@ -658,9 +633,9 @@ RESPONSIVE
     }
 }
 
-/* ============================================================
+/* ------------------------------------------------------------
 PERSONE PIÙ MENZIONATE (medaglie)
-============================================================ */
+------------------------------------------------------------ */
 .persona-rank {
     flex: 0 0 42px;
     width: 42px;
@@ -674,25 +649,20 @@ PERSONE PIÙ MENZIONATE (medaglie)
     color: #ffffff;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
-
 .persona-rank--1 {
     background: linear-gradient(135deg, #f6d365, #c9911d);
 }
-
 .persona-rank--2 {
     background: linear-gradient(135deg, #dde3e6, #9aa5ab);
 }
-
 .persona-rank--3 {
     background: linear-gradient(135deg, #d7a06e, #a05a2c);
 }
-
 .persona-date {
     font-size: 0.8rem;
     color: var(--md-default-fg-color--light);
     font-style: italic;
 }
-
 .md-button {
     display: inline-block;
     padding: 0.6rem 1.5rem;
@@ -701,19 +671,17 @@ PERSONE PIÙ MENZIONATE (medaglie)
     text-decoration: none;
     transition: background-color 0.2s;
 }
-
 .md-button--primary {
     background-color: var(--md-primary-fg-color);
     color: var(--md-primary-bg-color) !important;
 }
-
 .md-button--primary:hover {
     background-color: var(--md-primary-fg-color--dark);
 }
 
-/* ============================================================
+/* ------------------------------------------------------------
 DROPDOWN SUGGERIMENTI RICERCA HERO
-============================================================ */
+------------------------------------------------------------ */
 .hero-search-results {
     display: none;
     max-height: 60vh;
@@ -725,11 +693,9 @@ DROPDOWN SUGGERIMENTI RICERCA HERO
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
     z-index: 9999;
 }
-
 .hero-search-results.is-open {
     display: block;
 }
-
 .hero-search-count {
     padding: 0.6rem 1rem;
     font-size: 0.75rem;
@@ -740,14 +706,12 @@ DROPDOWN SUGGERIMENTI RICERCA HERO
     background: #f5f5f5;
     border-bottom: 1px solid #eaeaea;
 }
-
 .hero-search-empty {
     padding: 1rem;
     font-size: 0.9rem;
     color: #6b6b6b;
     text-align: center;
 }
-
 .hero-search-item {
     display: block;
     padding: 0.7rem 1rem;
@@ -755,15 +719,12 @@ DROPDOWN SUGGERIMENTI RICERCA HERO
     border-bottom: 1px solid #f0f0f0;
     color: inherit;
 }
-
 .hero-search-item:last-child {
     border-bottom: none;
 }
-
 .hero-search-item:hover {
     background: #f7f7f7;
 }
-
 .hero-search-item-title {
     font-size: 0.95rem;
     font-weight: 600;
@@ -771,7 +732,6 @@ DROPDOWN SUGGERIMENTI RICERCA HERO
     margin-bottom: 0.15rem;
     line-height: 1.5;
 }
-
 .hero-search-item-tag {
     display: inline-block;
     vertical-align: middle;
@@ -785,25 +745,20 @@ DROPDOWN SUGGERIMENTI RICERCA HERO
     white-space: nowrap;
     margin-left: 0.4em;
 }
-
 .hero-search-item-tag--persona {
     background: #6a1b9a;
 }
-
 .hero-search-item-tag--organizzazione {
     background: #1565c0;
 }
-
 .hero-search-item-tag--documento {
     background: #b71c1c;
 }
-
 .hero-search-item-snippet {
     font-size: 0.82rem;
     color: #666666;
     line-height: 1.4;
 }
-
 .hero-search-item mark,
 .hero-search-item-snippet mark {
     background: transparent;

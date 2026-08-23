@@ -1,10 +1,8 @@
 <!-- overrides/partials/footer.html -->
 <footer class="md-footer">
-
   <div class="md-footer-meta md-typeset ami-footer">
     <div class="md-footer-meta__inner md-grid ami-footer__grid">
-
-      <!-- Blocco principale: testo + icona Internet Archive (equivalente a logo + descrizione + social icons di footer-2) -->
+      <!-- Blocco principale: testo + icona Internet Archive -->
       <div class="ami-footer__brand">
         <div class="md-footer-copyright__text">
           Progetto a cura di <strong>Ivan Masci</strong>
@@ -15,7 +13,6 @@
         <div class="md-footer-copyright__email">
           <a href="mailto:ivan.masci@outlook.com">ivan.masci@outlook.com</a>
         </div>
-
         <div class="ami-footer__social">
           <a href="https://archive.org/details/@ivan_masci/lists/1/archivio-del-maoismo-italiano"
              target="_blank"
@@ -28,8 +25,7 @@
           </a>
         </div>
       </div>
-
-      <!-- Colonna link: unica sezione con le pagine del sito -->
+      <!-- Colonna link: sezioni del sito -->
       <nav class="ami-footer__links" aria-label="Sezioni del sito">
         <span class="ami-footer__links-title">Sezioni</span>
         <div class="ami-footer__links-list">
@@ -40,93 +36,81 @@
           <a href="{{ base_url }}/organizzazioni/">Organizzazioni</a>
         </div>
       </nav>
-
     </div>
-
-    <!-- Divisore + barra finale centrata, come in footer-2 -->
+    <!-- Divisore + barra finale centrata -->
     <div class="ami-footer__divider"></div>
     <div class="ami-footer__bottom">
       <span>&copy; {{ build_date_utc.strftime("%Y") if build_date_utc else "" }} Archivio del Maoismo Italiano</span>
     </div>
   </div>
-
 </footer>
-
 <style>
-  .ami-footer.md-typeset > *:first-child {
-    margin-top: 0 !important;
-  }
-  .md-footer,
-  .md-footer *,
-  .md-footer::before,
-  .md-footer::after,
-  .md-footer *::before,
-  .md-footer *::after {
+/* ------------------------------------------------------------
+RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
+------------------------------------------------------------ */
+.md-footer,
+.md-footer *,
+.md-footer::before,
+.md-footer::after,
+.md-footer *::before,
+.md-footer *::after {
     box-shadow: none !important;
     outline: none !important;
-  }
-
-  .md-footer,
-  .md-footer > *,
-  .ami-footer,
-  .ami-footer > * {
+}
+.md-footer,
+.md-footer > *,
+.ami-footer,
+.ami-footer > * {
     border-top: none !important;
-  }
-
-  /* Uso le variabili DEDICATE del footer di Material (sfondo scuro / testo chiaro di default),
-     non quelle della pagina — sono due coppie di variabili distinte nel tema. */
-  .ami-footer {
+}
+/* [FIX] elimina la linea grigia: azzera il margin-top che
+   .md-typeset > *:first-child darebbe alla griglia (il margine
+   collassava fuori dallo sfondo della meta, lasciando una striscia
+   dipinta solo dal fondo semitrasparente di .md-footer) */
+.ami-footer.md-typeset > *:first-child {
+    margin-top: 0 !important;
+}
+.ami-footer {
     background-color: var(--md-footer-bg-color);
     color: var(--md-footer-fg-color);
-  }
-
-  .ami-footer__grid {
+}
+.ami-footer__grid {
     display: grid;
     grid-template-columns: 4fr 1fr;
     gap: 1.25rem;
     padding: 0.9rem 0 0.75rem;
     align-items: start;
-  }
-
-  .ami-footer__brand {
+}
+.ami-footer__brand {
     max-width: 26rem;
-  }
-
-  /* Riportato alla dimensione leggibile originale su richiesta */
-  .md-footer-copyright__text {
+}
+.md-footer-copyright__text {
     font-weight: 700;
     font-size: 0.9rem;
     color: var(--md-footer-fg-color);
     margin-bottom: 0.2rem;
-  }
-
-  .md-footer-copyright__subtext {
+}
+.md-footer-copyright__subtext {
     font-size: 0.65rem;
     color: var(--md-footer-fg-color--light);
     margin-bottom: 0.2rem;
-  }
-
-  .md-footer-copyright__email a {
+}
+.md-footer-copyright__email a {
     font-size: 0.65rem;
     color: var(--md-footer-fg-color);
     text-decoration: underline;
     opacity: 0.85;
-  }
-
-  .md-footer-copyright__email a:hover {
+}
+.md-footer-copyright__email a:hover {
     opacity: 1;
-  }
-
-  .ami-footer__social {
+}
+.ami-footer__social {
     margin-top: 0.6rem;
-  }
-
-  .ami-footer__social-link {
+}
+.ami-footer__social-link {
     display: inline-flex;
-  }
-
-  /* Icona IA riportata a 40-50px su richiesta (qui 44px) */
-  .ami-footer__ia-logo {
+}
+.ami-footer__ia-logo {
     height: 44px !important;
     width: auto !important;
     max-width: 130px !important;
@@ -134,16 +118,11 @@
     display: block;
     opacity: 0.9;
     transition: opacity 0.15s ease;
-    /* se il PNG originale ha tratti scuri su sfondo trasparente, decommentare per renderlo
-       leggibile su sfondo scuro del footer */
-    /* filter: brightness(0) invert(1); */
-  }
-
-  .ami-footer__social-link:hover .ami-footer__ia-logo {
+}
+.ami-footer__social-link:hover .ami-footer__ia-logo {
     opacity: 1;
-  }
-
-  .ami-footer__links-title {
+}
+.ami-footer__links-title {
     display: block;
     font-weight: 700;
     font-size: 0.6rem;
@@ -151,49 +130,41 @@
     letter-spacing: 0.03em;
     color: var(--md-footer-fg-color--light);
     margin-bottom: 0.5rem;
-  }
-
-  .ami-footer__links-list {
+}
+.ami-footer__links-list {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
-  }
-
-  .ami-footer__links-list a {
+}
+.ami-footer__links-list a {
     font-size: 0.68rem;
     color: var(--md-footer-fg-color);
     text-decoration: none;
     width: max-content;
     opacity: 0.85;
-  }
-
-  .ami-footer__links-list a:hover {
+}
+.ami-footer__links-list a:hover {
     opacity: 1;
     text-decoration: underline;
-  }
-
-  /* Unico divisore intenzionale del footer, dichiarato DOPO il reset esteso
-     così da poter comparire nonostante border-top:none sopra */
-  .ami-footer__divider {
+}
+.ami-footer__divider {
     height: 1px;
     background-color: var(--md-footer-fg-color--lighter);
     opacity: 0.3;
     border: none;
-  }
-
-  .ami-footer__bottom {
+}
+.ami-footer__bottom {
     display: flex;
     justify-content: center;
     padding: 0.5rem 0;
     font-size: 0.65rem;
     font-weight: 300;
     color: var(--md-footer-fg-color--light);
-  }
-
-  @media (max-width: 44rem) {
+}
+@media (max-width: 44rem) {
     .ami-footer__grid {
-      grid-template-columns: 1fr;
-      gap: 1rem;
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
-  }
+}
 </style>
