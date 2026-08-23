@@ -714,3 +714,73 @@
         transition: none;
     }
 }
+/* ============================================================
+MOBILE FIX — ottimizzazione viewport ≤768px
+============================================================ */
+@media (max-width: 768px) {
+    /* Header: logo sempre visibile accanto all'hamburger */
+    .md-header__button.md-logo {
+        display: inline-flex !important;
+        margin-right: auto;
+    }
+    .md-header__button.md-logo img {
+        height: 40px !important;
+        width: auto !important;
+        max-width: 160px !important;
+    }
+
+    /* Banner aderente alla fascia scura anche su mobile */
+    .banner-full {
+        margin-bottom: 0 !important;
+    }
+
+    /* Evidenza: griglia 2 colonne, box fisso, NIENTE overflow.
+       object-fit: contain => copertina completa, mai sovrapposizioni */
+    .evidenza-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.8rem !important;
+    }
+    .evidenza-card {
+        min-width: 0;
+    }
+    .evidenza-thumbnail {
+        height: 200px !important;
+        min-height: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        overflow: hidden !important;
+    }
+    .evidenza-thumbnail-img {
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 0 !important;
+        max-width: none !important;
+        object-fit: contain !important;
+    }
+    .evidenza-band .section-title {
+        margin: 0 0 0.8rem 0 !important;
+        font-size: 1.25rem;
+    }
+    .evidenza-band {
+        padding: 0.9rem 0.8rem 1.2rem !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .evidenza-thumbnail {
+        height: 170px !important;
+    }
+    .evidenza-titolo {
+        font-size: 0.8rem;
+        min-height: 2.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .md-header__button.md-logo img {
+        height: 32px !important;
+    }
+    .evidenza-thumbnail {
+        height: 150px !important;
+    }
+}
