@@ -649,28 +649,34 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 
 /* ------------------------------------------------------------
-13. TIPOGRAFIA — SISTEMA FONT D'ARCHIVIO (SOLUZIONE A)
-Anton         → titoli e intestazioni (voce del manifesto)
-Literata      → corpo del testo e lettura (libro storico)
-Oswald        → etichette, nav, bottoni, date delle liste
-Courier Prime → RISERVATO a codice e schede documento (dettaglio)
+13. TIPOGRAFIA — SISTEMA FONT D'ARCHIVIO (kit armonizzato)
+Fraunces      → titoli E corpo: stessa famiglia, cambia solo peso
+                e dimensione ottica (riduce il contrasto rispetto
+                alla precedente coppia Anton/Literata)
+Archivo       → etichette, nav, bottoni, badge — unico accento
+                grottesco ammesso, un solo "accento" per riga
+Courier Prime → RISERVATO a codice e blocchi isolati (mai in riga
+                con altro testo)
 ------------------------------------------------------------ */
 :root {
-    --ami-font-display: "Anton", "Arial Narrow", Impact, sans-serif;
-    --ami-font-text: "Literata", Georgia, "Times New Roman", serif;
-    --ami-font-label: "Oswald", "Arial Narrow", sans-serif;
+    --ami-font-display: "Fraunces", Georgia, "Times New Roman", serif;
+    --ami-font-text: "Fraunces", Georgia, "Times New Roman", serif;
+    --ami-font-label: "Archivo", "Arial Narrow", sans-serif;
     --ami-font-mono: "Courier Prime", "Courier New", monospace;
-    --md-text-font-family: "Literata", Georgia, "Times New Roman", serif;
+    --md-text-font-family: "Fraunces", Georgia, "Times New Roman", serif;
     --md-code-font-family: "Courier Prime", "Courier New", monospace;
 }
 
-/* Corpo: Literata */
+/* Corpo: Fraunces regolare, con ottimizzazione automatica della
+   dimensione ottica del disegno (variable font) */
 body,
 .md-typeset {
     font-family: var(--ami-font-text) !important;
+    font-optical-sizing: auto;
 }
 
-/* Titoli: Anton (peso unico 400, niente bold sintetico) */
+/* Titoli di sezione: Fraunces peso 900 — stessa famiglia del corpo,
+   cambia solo il peso: zero salto di "scheletro" tra titolo e testo */
 .md-typeset h1,
 .md-typeset h2,
 .md-typeset h3,
@@ -678,24 +684,46 @@ body,
 .section-title,
 .home-column h2 {
     font-family: var(--ami-font-display) !important;
-    font-weight: 400 !important;
-    letter-spacing: 0.015em;
+    font-weight: 900 !important;
+    letter-spacing: -0.01em;
 }
 
-/* Etichette e UI: Oswald */
+/* Titoli di riga (schede, elenchi, card): Fraunces peso 600 —
+   restano nella stessa famiglia del corpo, non nel font etichette */
+.doc-titolo,
+.doc-titolo a,
+.evidenza-titolo,
+.people-name,
+.org-name,
+.top-card-name,
+.person-name,
+.risultato-titolo,
+.hero-search-item-title-text {
+    font-family: var(--ami-font-text) !important;
+    font-weight: 600 !important;
+}
+
+/* Date delle liste: stessa famiglia del corpo. Il colore rosso resta
+   l'unico segnale distintivo — niente cambio di famiglia in riga */
+.doc-data,
+.persona-date {
+    font-family: var(--ami-font-text) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0;
+}
+
+/* Etichette e UI: Archivo — riservato a nav, bottoni e badge/chip,
+   che restano l'UNICO accento tipografico ammesso per riga */
 .md-header__nav-link,
 .md-drawer__link,
 .md-button,
 .banner-button,
-.doc-titolo,
-.doc-titolo a,
-.doc-data,
-.evidenza-titolo,
 .doc-type-chip,
 .ami-footer__links-title,
 .ami-footer__links-list a,
 .banner-search button,
-.hero-search-count {
+.hero-search-count,
+.hero-search-item-tag {
     font-family: var(--ami-font-label);
 }
 .md-header__nav-link {
@@ -708,36 +736,24 @@ body,
 .banner-button {
     font-weight: 600 !important;
 }
-/* Oswald BOLD per le etichette */
 .doc-type-chip {
     font-weight: 700;
+    letter-spacing: 0.03em;
 }
 .ami-footer__links-title {
     font-weight: 700;
 }
-.doc-titolo,
-.doc-titolo a {
-    font-weight: 600 !important;
-}
-/* Date delle liste: Oswald 600 rosso (pulito, non dattiloscritto) */
-.doc-data {
-    font-weight: 600 !important;
-    letter-spacing: 0.01em;
-}
-.evidenza-titolo {
-    font-weight: 500;
-}
 
-/* Date di vita e parole chiave: Literata italic (elegante, da libro) */
+/* Date di vita e parole chiave: Fraunces italic (elegante, da libro) */
 .persona-date,
 .doc-keywords {
     font-family: var(--ami-font-text);
     font-style: italic;
+    font-weight: 400;
 }
 
-/* Courier Prime: solo codice. Per le schede documento (pagine di
-   dettaglio) applicare var(--ami-font-mono) in documenti.css alle
-   classi dei metadati, es. .doc-scheda__meta { font-family: var(--ami-font-mono); } */
+/* Courier Prime: solo codice e blocchi isolati (mai in riga con
+   altro testo, es. pannello citazioni — vedi documenti.css) */
 .md-typeset code,
 .md-typeset kbd,
 .md-typeset pre {
