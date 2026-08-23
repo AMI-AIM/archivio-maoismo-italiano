@@ -137,17 +137,77 @@
 }
 
 /* ============================================================
-   3. FOOTER
-   ============================================================
-   Il footer è ora interamente gestito da overrides/partials/footer.html
-   (markup + <style> inline). Le vecchie regole qui sotto sono state
-   rimosse perché duplicavano/confliggevano con quello stile (in
-   particolare .md-footer-meta__inner era targettizzato da entrambi
-   i file con display diversi: flex qui, grid in footer.html).
-   Manteniamo solo questa, come rete di sicurezza nel caso il tema
-   di base torni a renderizzare la vecchia nav prev/next del footer: */
+   3. FOOTER PERSONALIZZATO
+   ============================================================ */
 .md-footer__inner {
     display: none !important;
+}
+
+.md-footer-meta__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* 🔥 FOOTER - COMPATTAZIONE RIGHE */
+.md-footer-copyright {
+    display: flex;
+    flex-direction: column;
+    gap: 0.02rem;              /* ridotto da 0.05rem a 0.02rem */
+    line-height: 1.2;          /* compatta ulteriormente il testo */
+}
+
+.md-footer-copyright__text {
+    font-size: 0.85rem;
+    color: #ffffff !important;
+    line-height: 1.2;
+}
+
+.md-footer-copyright__subtext {
+    font-size: 0.75rem;
+    color: #ffffff !important;
+    line-height: 1.2;
+}
+
+.md-footer-copyright__email {
+    font-size: 0.75rem;
+    color: #ffffff !important;
+    line-height: 1.2;
+}
+
+.md-footer-copyright__email a {
+    color: #ffffff !important;
+    text-decoration: none;
+}
+
+.md-footer-copyright__email a:hover {
+    text-decoration: underline;
+    color: var(--md-primary-fg-color) !important;
+}
+
+.md-footer-social {
+    display: flex;
+    align-items: center;
+}
+
+.md-footer-social__link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.md-footer-social__link img {
+    height: 60px !important;
+    width: auto !important;
+    max-height: none !important;
+    filter: brightness(0) invert(1);
+    transition: filter 0.2s;
+}
+
+.md-footer-social__link:hover img {
+    filter: brightness(0) invert(0.7);
 }
 
 /* ============================================================
