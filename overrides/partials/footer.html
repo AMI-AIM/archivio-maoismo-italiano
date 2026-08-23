@@ -64,7 +64,7 @@
     display: grid;
     grid-template-columns: 4fr 1fr;
     gap: 1.25rem;
-    padding: 1.1rem 0 0.9rem;
+    padding: 0.9rem 0 0.75rem;
     align-items: start;
   }
 
@@ -72,11 +72,12 @@
     max-width: 26rem;
   }
 
+  /* Riportato alla dimensione leggibile originale su richiesta */
   .md-footer-copyright__text {
     font-weight: 700;
-    font-size: 0.78rem;
+    font-size: 0.9rem;
     color: var(--md-footer-fg-color);
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.2rem;
   }
 
   .md-footer-copyright__subtext {
@@ -97,25 +98,24 @@
   }
 
   .ami-footer__social {
-    margin-top: 0.5rem;
+    margin-top: 0.6rem;
   }
 
   .ami-footer__social-link {
     display: inline-flex;
   }
 
-  /* !important per vincere sulle regole generiche img{} del tema (es. max-width:100%
-     applicato alla larghezza naturale dell'immagine, che qui è grande) */
+  /* Icona IA riportata a 40-50px su richiesta (qui 44px) */
   .ami-footer__ia-logo {
-    height: 18px !important;
+    height: 44px !important;
     width: auto !important;
-    max-width: 60px !important;
+    max-width: 130px !important;
     object-fit: contain;
     display: block;
     opacity: 0.9;
     transition: opacity 0.15s ease;
-    /* se il PNG originale ha sfondo trasparente su testo scuro, decommentare la riga sotto
-       per renderlo leggibile su sfondo scuro del footer */
+    /* se il PNG originale ha tratti scuri su sfondo trasparente, decommentare per renderlo
+       leggibile su sfondo scuro del footer */
     /* filter: brightness(0) invert(1); */
   }
 
@@ -161,7 +161,7 @@
   .ami-footer__bottom {
     display: flex;
     justify-content: center;
-    padding: 0.6rem 0;
+    padding: 0.5rem 0;
     font-size: 0.65rem;
     font-weight: 300;
     color: var(--md-footer-fg-color--light);
