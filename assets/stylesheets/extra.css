@@ -1,11 +1,6 @@
 /* ============================================================
 STILE PERSONALIZZATO — TEMA MATERIAL
-Versione pulita: commenti corretti, regole banner riattivate,
-animazioni header, fix striscia bianca e fix mobile integrati.
 ============================================================ */
-/* ------------------------------------------------------------
-VARIABILE CONDIVISA: altezza header (usata anche dal banner)
------------------------------------------------------------- */
 :root {
     --ami-header-height: 80px;
 }
@@ -31,11 +26,6 @@ VARIABILE CONDIVISA: altezza header (usata anche dal banner)
 .md-typeset > :first-child {
     margin-top: 0.5rem !important;
 }
-
-/* [FIX STRISCIA BIANCA] Il banner in home è il primo figlio ma deve
-restare incollato all'header. Specificità (0,3,0) > (0,2,0),
-entrambi !important => vince questa. Le regole sotto azzerano la
-catena del margin collapsing fino a md-main__inner. */
 .md-typeset > .banner-full:first-child {
     margin-top: 0 !important;
 }
@@ -57,7 +47,7 @@ catena del margin collapsing fino a md-main__inner. */
 }
 
 /* ------------------------------------------------------------
-4. HEADER PIÙ GRANDE CON NAV A DESTRA + ANIMAZIONI
+4. HEADER
 ------------------------------------------------------------ */
 .md-header {
     background: var(--md-primary-fg-color);
@@ -91,12 +81,9 @@ catena del margin collapsing fino a md-main__inner. */
     object-fit: contain;
     transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-/* Micro-zoom del logo al passaggio del mouse */
 .md-header__button.md-logo:hover img {
     transform: scale(1.03);
 }
-
 .md-header__nav {
     display: flex;
     align-items: center;
@@ -135,8 +122,6 @@ catena del margin collapsing fino a md-main__inner. */
 .md-header__nav-link--active {
     color: #ffffff !important;
 }
-
-/* Underline animato: entra da sinistra al hover; la voce attiva resta sottolineata */
 .md-header__nav-link::after {
     content: "";
     position: absolute;
@@ -154,34 +139,28 @@ catena del margin collapsing fino a md-main__inner. */
 .md-header__nav-link--active::after {
     transform: scaleX(1);
 }
-
-/* Accessibilità: niente animazioni se l'utente le riduce nel sistema */
 @media (prefers-reduced-motion: reduce) {
     .md-header__nav-link::after,
     .md-header__button.md-logo img {
         transition: none;
     }
 }
-
 .md-header__title {
     display: none !important;
 }
-
-/* NASCONDE LA SIDEBAR PRIMARIA IN TUTTI I CASI */
 .md-sidebar--primary {
     display: none !important;
 }
 
 /* ------------------------------------------------------------
-5. FOOTER — rete di sicurezza (il footer è gestito interamente
-da overrides/partials/footer.html)
+5. FOOTER
 ------------------------------------------------------------ */
 .md-footer__inner {
     display: none !important;
 }
 
 /* ------------------------------------------------------------
-6. BANNER A LARGHEZZA COMPLETA (home)
+6. BANNER
 ------------------------------------------------------------ */
 .banner-full {
     position: relative;
@@ -189,7 +168,7 @@ da overrides/partials/footer.html)
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     overflow: hidden;
-    margin-bottom: 0; /* la fascia scura della home è aderente */
+    margin-bottom: 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 .banner-image {
@@ -206,14 +185,14 @@ da overrides/partials/footer.html)
     background: rgba(0, 0, 0, 0.45);
 }
 
-/* Placeholder ricerca: colore più leggibile */
+/* Placeholder ricerca più leggibile */
 #hero-search-input::placeholder {
     color: #e0e0e0 !important;
     opacity: 1 !important;
 }
 
 /* ------------------------------------------------------------
-7. DRAWER PERSONALIZZATO (solo mobile)
+7. DRAWER
 ------------------------------------------------------------ */
 #__drawer {
     display: none;
@@ -309,7 +288,7 @@ da overrides/partials/footer.html)
 }
 
 /* ------------------------------------------------------------
-8. VISIBILITÀ DESKTOP vs MOBILE + BANNER MOBILE
+8. VISIBILITÀ DESKTOP vs MOBILE
 ------------------------------------------------------------ */
 @media (min-width: 769px) {
     .md-drawer-overlay,
@@ -351,7 +330,6 @@ da overrides/partials/footer.html)
         z-index: 1;
     }
 
-    /* Banner mobile */
     .banner-full {
         margin-bottom: 0;
         height: 240px;
@@ -404,7 +382,7 @@ da overrides/partials/footer.html)
 }
 
 /* ------------------------------------------------------------
-9. CATALOGO (home e archivio)
+9. CATALOGO
 ------------------------------------------------------------ */
 .catalogo-lista {
     display: flex;
@@ -486,7 +464,6 @@ da overrides/partials/footer.html)
 10. LEGGIBILITÀ SU MOBILE
 ------------------------------------------------------------ */
 @media (max-width: 600px) {
-    /* Home - documenti recenti */
     .doc-row {
         flex-direction: column;
         gap: 0.1rem;
@@ -506,7 +483,6 @@ da overrides/partials/footer.html)
     .doc-keywords {
         font-size: 0.75rem;
     }
-    /* Archivio - risultati */
     .risultato-card {
         padding: 0.6rem 0.4rem;
     }
@@ -522,7 +498,6 @@ da overrides/partials/footer.html)
     .risultato-data {
         font-size: 0.8rem;
     }
-    /* Persone/Organizzazioni - griglie */
     .people-grid,
     .org-grid {
         grid-template-columns: 1fr !important;
@@ -539,7 +514,7 @@ da overrides/partials/footer.html)
 }
 
 /* ------------------------------------------------------------
-11. RESPONSIVE EXTRA (schermi molto piccoli)
+11. RESPONSIVE EXTRA
 ------------------------------------------------------------ */
 @media (max-width: 480px) {
     :root {
@@ -577,10 +552,8 @@ da overrides/partials/footer.html)
 
 /* ------------------------------------------------------------
 12. OVERRIDE MOBILE PER LA HOME
-(!important: vincono sullo <style> generato in index.md)
 ------------------------------------------------------------ */
 @media (max-width: 768px) {
-    /* Logo sempre visibile accanto all'hamburger */
     .md-header__button.md-logo {
         display: inline-flex !important;
         margin-right: auto;
@@ -590,15 +563,10 @@ da overrides/partials/footer.html)
         width: auto !important;
         max-width: 160px !important;
     }
-
-    /* Banner: niente margine e niente ombra (evita aloni/grigio) */
     .banner-full {
         margin-bottom: 0 !important;
         box-shadow: none !important;
     }
-
-    /* L'immagine DEVE riempire il box: niente striscia vuota
-    (il velo scuro sul bianco la renderebbe grigia) */
     .banner-image {
         width: 100% !important;
         height: 100% !important;
@@ -663,7 +631,6 @@ da overrides/partials/footer.html)
     }
     .evidenza-titolo {
         font-size: 0.8rem;
-        min-height: 2.2rem;
     }
 }
 

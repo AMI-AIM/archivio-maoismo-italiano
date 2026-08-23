@@ -4,7 +4,7 @@ from collections import Counter
 from .utils import formatta_data, split_nomi
 
 
-# 🔥 DOCUMENTI IN EVIDENZA: inserisci qui gli ID dei documenti che vuoi mostrare
+# DOCUMENTI IN EVIDENZA: inserisci qui gli ID dei documenti che vuoi mostrare
 EVIDENZA_IDS = [
     'AMI-0049',
     'AMI-0045',
@@ -15,7 +15,7 @@ EVIDENZA_IDS = [
 
 
 def estrai_iniziali(nome):
-    """Estrae le iniziali da un nome (es. 'Mao Zedong' → 'MZ')."""
+    """Estrae le iniziali da un nome (es. 'Mao Zedong' -> 'MZ')."""
     parti = nome.strip().split()
     if not parti:
         return '?'
@@ -25,7 +25,7 @@ def estrai_iniziali(nome):
 
 
 def genera_home(df, persone, output_dir):
-    print("\n🏠 Generazione della Home page...")
+    print("\nGenerazione della Home page...")
 
     schede = []
     conteggio_persone = Counter()
@@ -73,7 +73,7 @@ def genera_home(df, persone, output_dir):
             parti_sommario.append(tipo)
         if org:
             parti_sommario.append(org)
-        sommario = ' · '.join(parti_sommario) if parti_sommario else 'Documento storico'
+        sommario = ' \u00b7 '.join(parti_sommario) if parti_sommario else 'Documento storico'
 
         meta_html_parts = []
         if tipo_display:
@@ -131,7 +131,7 @@ def genera_home(df, persone, output_dir):
 
     persone_top = conteggio_persone.most_common(3)
 
-    # 🔥 BANNER (margin-bottom 0: la fascia scura è aderente)
+    # BANNER
     banner_html = """
 <div class="banner-full" style="margin-bottom: 0;">
     <img src="/archivio-maoismo-italiano/immagini/banner.webp"
@@ -144,7 +144,7 @@ def genera_home(df, persone, output_dir):
             <a href="documenti/" class="banner-button" style="display: inline-block; padding: 0.5rem 1.2rem; background-color: #ffffff; color: #b71c1c !important; font-weight: 600; font-size: 0.9rem; border-radius: 6px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.25); white-space: nowrap; flex-shrink: 0;">Esplora l'archivio</a>
             <form class="banner-search" id="hero-search-form" action="documenti/" method="get" style="display: flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); border-radius: 24px; padding: 0.3rem 0.8rem; backdrop-filter: blur(2px); transition: background 0.2s, border-color 0.2s; position: relative; flex: 1 1 auto; min-width: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="banner-search-icon" aria-hidden="true" style="width: 1.1rem; height: 1.1rem; fill: #ffffff; flex-shrink: 0;">
-                    <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 5 9.5 5z"/>
+                    <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/>
                 </svg>
                 <input type="text" id="hero-search-input" name="q" placeholder="Cerca nell'archivio..." aria-label="Cerca nell'archivio" autocomplete="off" style="background: transparent; border: none; outline: none; color: #ffffff; font-size: 0.9rem; width: 100%; min-width: 140px; flex: 1 1 auto;">
                 <button type="submit" aria-label="Cerca" style="background: none; border: none; color: #ffffff; font-weight: 600; font-size: 0.85rem; cursor: pointer; padding: 0.2rem 0.4rem; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; flex-shrink: 0;">Cerca</button>
@@ -155,9 +155,7 @@ def genera_home(df, persone, output_dir):
 </div>
 """
 
-    # ============================================================
-    # 🔥 SEZIONE DOCUMENTI IN EVIDENZA (fascia scura full-bleed)
-    # ============================================================
+    # SEZIONE DOCUMENTI IN EVIDENZA
     if evidenza_ordinati:
         home_content = f"""---
 hide:
@@ -172,7 +170,7 @@ hide:
             if doc.get('copertina'):
                 img_html = f'            <img src="{doc["copertina"]}" alt="{doc["titolo"]}" class="evidenza-thumbnail-img" loading="lazy">'
             else:
-                img_html = '            <span class="evidenza-placeholder">📄</span>'
+                img_html = '            <span class="evidenza-placeholder"></span>'
 
             home_content += f"""
         <div class="evidenza-card">
@@ -198,9 +196,7 @@ hide:
 <div class="home-columns">
 """
 
-    # ============================================================
     # COLONNA SINISTRA: Aggiunti di recente
-    # ============================================================
     home_content += """
 <div class="home-column">
     <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 12h10v2H7zm0-4h10v2H7zm0 8h6v2H7z"/></svg> Aggiunti di recente</h2>
@@ -226,9 +222,7 @@ hide:
 </div>
 """
 
-    # ============================================================
-    # COLONNA DESTRA: Persone più menzionate
-    # ============================================================
+    # COLONNA DESTRA: Persone più menzionate (con avatar iniziali)
     home_content += """
 <div class="home-column">
     <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> Persone più menzionate</h2>
@@ -241,11 +235,16 @@ hide:
             slug = info_persona.get('slug', '')
             nascita = info_persona.get('nascita', '').strip()
             morte = info_persona.get('morte', '').strip()
-            date_vita = ' – '.join([d for d in [nascita, morte] if d and d not in ['nan', 'None']])
+            date_vita = ' \u2013 '.join([d for d in [nascita, morte] if d and d not in ['nan', 'None']])
             etichetta_conteggio = "1 documento collegato" if conteggio == 1 else f"{conteggio} documenti collegati"
+            iniziali = estrai_iniziali(nome)
+
             home_content += f"""
-            <div class="doc-row">
-                <div class="persona-rank persona-rank--{rank}">{rank}</div>
+            <div class="doc-row doc-row-persona">
+                <div class="persona-avatar persona-avatar--{rank}">
+                    <span class="persona-iniziali">{iniziali}</span>
+                    <span class="persona-rank-badge persona-rank-badge--{rank}">{rank}</span>
+                </div>
                 <div class="doc-contenuto">
                     <div class="doc-titolo"><a href="persone/{slug}/">{nome}</a></div>
                     <div class="doc-sommario">{etichetta_conteggio}</div>
@@ -267,9 +266,7 @@ hide:
 </div>
 """
 
-    # ============================================================
     # STILI
-    # ============================================================
     home_content += """
 <style>
 /* Nasconde il titolo "Home" nella pagina */
@@ -278,7 +275,7 @@ hide:
 }
 
 /* ------------------------------------------------------------
-BANNER (regole base: valgono anche se extra.css non è aggiornato)
+BANNER
 ------------------------------------------------------------ */
 .banner-full {
     position: relative;
@@ -287,6 +284,7 @@ BANNER (regole base: valgono anche se extra.css non è aggiornato)
     margin-right: calc(-50vw + 50%);
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    margin-bottom: 0 !important;
 }
 .banner-image {
     width: 100%;
@@ -301,16 +299,19 @@ BANNER (regole base: valgono anche se extra.css non è aggiornato)
     bottom: 0;
     background: rgba(0, 0, 0, 0.45);
 }
-.banner-full {
-    margin-bottom: 0 !important;
+
+/* Placeholder ricerca più leggibile */
+#hero-search-input::placeholder {
+    color: #e0e0e0 !important;
+    opacity: 1 !important;
 }
 
 /* ------------------------------------------------------------
-SEZIONE DOCUMENTI IN EVIDENZA — fascia scura full-bleed
+SEZIONE DOCUMENTI IN EVIDENZA
 ------------------------------------------------------------ */
 .evidenza-band {
     position: relative;
-    padding: 1.1rem 0 1.3rem;
+    padding: 1.5rem 0 2rem;
     margin: 0 0 2rem 0;
 }
 .evidenza-band::before {
@@ -349,6 +350,8 @@ SEZIONE DOCUMENTI IN EVIDENZA — fascia scura full-bleed
     fill: var(--md-primary-fg-color);
     flex-shrink: 0;
 }
+
+/* Griglia flex: card con larghezza naturale, proporzioni preservate */
 .evidenza-grid {
     display: flex;
     flex-wrap: wrap;
@@ -374,6 +377,7 @@ SEZIONE DOCUMENTI IN EVIDENZA — fascia scura full-bleed
     color: inherit;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 .evidenza-thumbnail {
     flex: 1;
@@ -383,8 +387,9 @@ SEZIONE DOCUMENTI IN EVIDENZA — fascia scura full-bleed
     flex-shrink: 0;
     padding: 0;
     min-height: 0;
+    overflow: hidden;
 }
-/* Copertina completa: altezza fissa, larghezza in proporzione */
+/* Copertina: altezza fissa, larghezza automatica, proporzioni originali */
 .evidenza-thumbnail-img {
     height: 100%;
     width: auto;
@@ -408,6 +413,7 @@ SEZIONE DOCUMENTI IN EVIDENZA — fascia scura full-bleed
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
+    flex-shrink: 0;
 }
 
 /* ------------------------------------------------------------
@@ -433,6 +439,9 @@ CATALOGO
 .doc-row:hover {
     background-color: var(--md-code-bg-color);
     border-left-color: var(--md-primary-fg-color);
+}
+.doc-row-persona {
+    gap: 1rem;
 }
 .doc-data {
     flex: 0 0 150px;
@@ -495,7 +504,7 @@ CATALOGO
 }
 
 /* ------------------------------------------------------------
-LAYOUT A DUE COLONNE (home)
+LAYOUT A DUE COLONNE
 ------------------------------------------------------------ */
 .home-columns {
     display: grid;
@@ -542,175 +551,49 @@ LAYOUT A DUE COLONNE (home)
 }
 
 /* ------------------------------------------------------------
-RESPONSIVE
+PERSONE PIÙ MENZIONATE (avatar con iniziali + badge rank)
 ------------------------------------------------------------ */
-@media (max-width: 768px) {
-    .home-columns {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-    }
-    .evidenza-grid {
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        padding: 0 1rem 0.8rem 1rem;
-        margin: 0 -1rem;
-        gap: 1rem;
-    }
-    .evidenza-grid::-webkit-scrollbar {
-        display: none;
-    }
-    .evidenza-grid {
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-    .evidenza-card {
-        flex: 0 0 auto;
-        scroll-snap-align: start;
-        height: 200px;
-    }
-    .evidenza-band {
-        padding: 0.9rem 0.8rem 1.1rem;
-    }
-    .evidenza-band .section-title {
-        margin: 0 0 1.2rem 0;
-        font-size: 1.25rem;
-    }
-    .evidenza-titolo {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.5rem 0.5rem 0.5rem;
-    }
-    .banner-full {
-        height: 240px;
-        min-height: 200px;
-        overflow: hidden;
-    }
-    .banner-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center center;
-    }
-    .banner-content[style] {
-        bottom: 0.3rem !important;
-        left: 0.3rem !important;
-        right: 0.3rem !important;
-        max-width: none !important;
-        padding: 0.3rem 0.6rem !important;
-    }
-    .banner-content p[style] {
-        font-size: 0.8rem !important;
-        margin: 0 0 0.3rem 0 !important;
-        line-height: 1.3 !important;
-    }
-    .banner-actions[style] {
-        flex-wrap: wrap !important;
-        gap: 0.3rem !important;
-    }
-    .banner-button[style] {
-        padding: 0.3rem 0.8rem !important;
-        font-size: 0.75rem !important;
-    }
-    .banner-search[style] {
-        flex: 1 1 100% !important;
-        padding: 0.2rem 0.6rem !important;
-        gap: 0.3rem !important;
-    }
-    .banner-search input[style] {
-        min-width: 80px !important;
-        font-size: 0.75rem !important;
-    }
-    .banner-search button[style] {
-        font-size: 0.7rem !important;
-        padding: 0.1rem 0.3rem !important;
-    }
-    .banner-search-icon[style] {
-        width: 0.9rem !important;
-        height: 0.9rem !important;
-    }
-}
-
-@media (max-width: 600px) {
-    .evidenza-card {
-        height: 170px;
-    }
-    .evidenza-titolo {
-        font-size: 0.8rem;
-        min-height: 2.2rem;
-        padding: 0.4rem 0.5rem 0.5rem 0.5rem;
-    }
-    .doc-row {
-        flex-direction: column;
-        gap: 0.1rem;
-        padding: 0.6rem 0.2rem;
-    }
-    .doc-data {
-        flex: 0 0 auto;
-        white-space: normal;
-        font-size: 0.8rem;
-    }
-    .doc-titolo {
-        font-size: 0.95rem;
-    }
-    .doc-sommario {
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .evidenza-card {
-        height: 150px;
-    }
-    .section-title {
-        font-size: 1.2rem;
-    }
-    .banner-full {
-        height: 180px;
-        min-height: 150px;
-    }
-    .banner-content p[style] {
-        font-size: 0.7rem !important;
-    }
-    .banner-button[style] {
-        padding: 0.2rem 0.6rem !important;
-        font-size: 0.65rem !important;
-    }
-    .banner-search input[style] {
-        font-size: 0.7rem !important;
-        min-width: 60px !important;
-    }
-    .banner-search button[style] {
-        font-size: 0.65rem !important;
-    }
-}
-
-/* ------------------------------------------------------------
-PERSONE PIÙ MENZIONATE (medaglie)
------------------------------------------------------------- */
-.persona-rank {
-    flex: 0 0 42px;
-    width: 42px;
-    height: 42px;
+.persona-avatar {
+    position: relative;
+    flex: 0 0 52px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+.persona-avatar--1 { background: #b71c1c; }
+.persona-avatar--2 { background: #424242; }
+.persona-avatar--3 { background: #8d6e63; }
+.persona-iniziali {
     font-weight: 700;
     font-size: 1.05rem;
     color: #ffffff;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.05em;
+    user-select: none;
 }
-.persona-rank--1 {
-    background: linear-gradient(135deg, #f6d365, #c9911d);
+.persona-rank-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    border: 2px solid var(--md-code-bg-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
-.persona-rank--2 {
-    background: linear-gradient(135deg, #dde3e6, #9aa5ab);
-}
-.persona-rank--3 {
-    background: linear-gradient(135deg, #d7a06e, #a05a2c);
-}
+.persona-rank-badge--1 { background: linear-gradient(135deg, #f6d365, #c9911d); }
+.persona-rank-badge--2 { background: linear-gradient(135deg, #dde3e6, #9aa5ab); }
+.persona-rank-badge--3 { background: linear-gradient(135deg, #d7a06e, #a05a2c); }
 .persona-date {
     font-size: 0.8rem;
     color: var(--md-default-fg-color--light);
@@ -798,15 +681,9 @@ DROPDOWN SUGGERIMENTI RICERCA HERO
     white-space: nowrap;
     margin-left: 0.4em;
 }
-.hero-search-item-tag--persona {
-    background: #6a1b9a;
-}
-.hero-search-item-tag--organizzazione {
-    background: #1565c0;
-}
-.hero-search-item-tag--documento {
-    background: #b71c1c;
-}
+.hero-search-item-tag--persona { background: #6a1b9a; }
+.hero-search-item-tag--organizzazione { background: #1565c0; }
+.hero-search-item-tag--documento { background: #b71c1c; }
 .hero-search-item-snippet {
     font-size: 0.82rem;
     color: #666666;
@@ -817,6 +694,157 @@ DROPDOWN SUGGERIMENTI RICERCA HERO
     background: transparent;
     color: #b71c1c;
     font-weight: 700;
+}
+
+/* ------------------------------------------------------------
+RESPONSIVE
+------------------------------------------------------------ */
+@media (max-width: 768px) {
+    .home-columns {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    /* Scroll orizzontale per i documenti in evidenza su mobile */
+    .evidenza-grid {
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding: 0 1rem 0.8rem 1rem !important;
+        margin: 0 -1rem !important;
+        gap: 1rem !important;
+    }
+    .evidenza-grid::-webkit-scrollbar {
+        display: none !important;
+    }
+    .evidenza-grid {
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+    .evidenza-card {
+        flex: 0 0 auto !important;
+        scroll-snap-align: start !important;
+        height: 200px !important;
+    }
+    .evidenza-band {
+        padding: 0.9rem 0 1.1rem;
+    }
+    .evidenza-band .section-title {
+        margin: 0 0 1.2rem 0;
+        font-size: 1.25rem;
+    }
+    .evidenza-titolo {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.5rem 0.5rem 0.5rem;
+    }
+
+    .banner-full {
+        height: 240px;
+        min-height: 200px;
+        overflow: hidden;
+    }
+    .banner-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+    .banner-content[style] {
+        bottom: 0.3rem !important;
+        left: 0.3rem !important;
+        right: 0.3rem !important;
+        max-width: none !important;
+        padding: 0.3rem 0.6rem !important;
+    }
+    .banner-content p[style] {
+        font-size: 0.8rem !important;
+        margin: 0 0 0.3rem 0 !important;
+        line-height: 1.3 !important;
+    }
+    .banner-actions[style] {
+        flex-wrap: wrap !important;
+        gap: 0.3rem !important;
+    }
+    .banner-button[style] {
+        padding: 0.3rem 0.8rem !important;
+        font-size: 0.75rem !important;
+    }
+    .banner-search[style] {
+        flex: 1 1 100% !important;
+        padding: 0.2rem 0.6rem !important;
+        gap: 0.3rem !important;
+    }
+    .banner-search input[style] {
+        min-width: 80px !important;
+        font-size: 0.75rem !important;
+    }
+    .banner-search button[style] {
+        font-size: 0.7rem !important;
+        padding: 0.1rem 0.3rem !important;
+    }
+    .banner-search-icon[style] {
+        width: 0.9rem !important;
+        height: 0.9rem !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .evidenza-card {
+        height: 170px !important;
+    }
+    .evidenza-titolo {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.5rem 0.5rem 0.5rem;
+    }
+    .doc-row {
+        flex-direction: column;
+        gap: 0.1rem;
+        padding: 0.6rem 0.2rem;
+    }
+    .doc-row-persona {
+        flex-direction: row;
+        gap: 1rem;
+    }
+    .doc-data {
+        flex: 0 0 auto;
+        white-space: normal;
+        font-size: 0.8rem;
+    }
+    .doc-titolo {
+        font-size: 0.95rem;
+    }
+    .doc-sommario {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.2rem;
+    }
+    .evidenza-card {
+        height: 150px !important;
+    }
+    .banner-full {
+        height: 180px;
+        min-height: 150px;
+    }
+    .banner-content p[style] {
+        font-size: 0.7rem !important;
+    }
+    .banner-button[style] {
+        padding: 0.2rem 0.6rem !important;
+        font-size: 0.65rem !important;
+    }
+    .banner-search input[style] {
+        font-size: 0.7rem !important;
+        min-width: 60px !important;
+    }
+    .banner-search button[style] {
+        font-size: 0.65rem !important;
+    }
 }
 </style>
 """
