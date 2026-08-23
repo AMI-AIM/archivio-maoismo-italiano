@@ -53,9 +53,11 @@
 </footer>
 
 <style>
+  /* Uso le variabili DEDICATE del footer di Material (sfondo scuro / testo chiaro di default),
+     non quelle della pagina — sono due coppie di variabili distinte nel tema. */
   .ami-footer {
-    border-top: 1px solid var(--md-default-fg-color--lightest);
-    background-color: var(--md-default-bg-color);
+    background-color: var(--md-footer-bg-color);
+    color: var(--md-footer-fg-color);
   }
 
   .ami-footer__grid {
@@ -73,24 +75,25 @@
   .md-footer-copyright__text {
     font-weight: 700;
     font-size: 0.9rem;
-    color: var(--md-default-fg-color);
+    color: var(--md-footer-fg-color);
     margin-bottom: 0.25rem;
   }
 
   .md-footer-copyright__subtext {
     font-size: 0.75rem;
-    color: var(--md-default-fg-color--light);
+    color: var(--md-footer-fg-color--light);
     margin-bottom: 0.35rem;
   }
 
   .md-footer-copyright__email a {
     font-size: 0.75rem;
-    color: var(--md-primary-fg-color);
-    text-decoration: none;
+    color: var(--md-footer-fg-color);
+    text-decoration: underline;
+    opacity: 0.85;
   }
 
   .md-footer-copyright__email a:hover {
-    text-decoration: underline;
+    opacity: 1;
   }
 
   .ami-footer__social {
@@ -101,11 +104,19 @@
     display: inline-flex;
   }
 
+  /* !important per vincere sulle regole generiche img{} del tema (es. max-width:100%
+     applicato alla larghezza naturale dell'immagine, che qui è grande) */
   .ami-footer__ia-logo {
-    height: 40px;
-    width: auto;
-    opacity: 0.85;
+    height: 28px !important;
+    width: auto !important;
+    max-width: 90px !important;
+    object-fit: contain;
+    display: block;
+    opacity: 0.9;
     transition: opacity 0.15s ease;
+    /* se il PNG originale ha sfondo trasparente su testo scuro, decommentare la riga sotto
+       per renderlo leggibile su sfondo scuro del footer */
+    /* filter: brightness(0) invert(1); */
   }
 
   .ami-footer__social-link:hover .ami-footer__ia-logo {
@@ -118,7 +129,7 @@
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.03em;
-    color: var(--md-default-fg-color--light);
+    color: var(--md-footer-fg-color--light);
     margin-bottom: 0.75rem;
   }
 
@@ -130,19 +141,21 @@
 
   .ami-footer__links-list a {
     font-size: 0.8rem;
-    color: var(--md-default-fg-color--light);
+    color: var(--md-footer-fg-color);
     text-decoration: none;
     width: max-content;
+    opacity: 0.85;
   }
 
   .ami-footer__links-list a:hover {
-    color: var(--md-primary-fg-color);
+    opacity: 1;
     text-decoration: underline;
   }
 
   .ami-footer__divider {
     height: 1px;
-    background-color: var(--md-default-fg-color--lightest);
+    background-color: var(--md-footer-fg-color--lighter);
+    opacity: 0.3;
   }
 
   .ami-footer__bottom {
@@ -151,7 +164,7 @@
     padding: 1rem 0;
     font-size: 0.75rem;
     font-weight: 300;
-    color: var(--md-default-fg-color--light);
+    color: var(--md-footer-fg-color--light);
   }
 
   @media (max-width: 44rem) {
