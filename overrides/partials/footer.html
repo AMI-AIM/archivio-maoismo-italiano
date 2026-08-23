@@ -53,23 +53,35 @@
 </footer>
 
 <style>
-  /* Rimuove l'ombra di elevazione di default su .md-footer (se presente nel tema base) */
-  .md-footer {
+  /* ------------------------------------------------------------
+     RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
+     di base su .md-footer e i suoi discendenti, inclusi eventuali
+     pseudo-elementi ::before/::after (i due reset mirati precedenti
+     su .md-footer e .md-footer-meta non erano bastati, quindi il
+     bordo probabilmente viene da uno pseudo-elemento non coperto).
+     ------------------------------------------------------------ */
+  .md-footer,
+  .md-footer *,
+  .md-footer::before,
+  .md-footer::after,
+  .md-footer *::before,
+  .md-footer *::after {
     box-shadow: none !important;
+    outline: none !important;
+  }
+
+  .md-footer,
+  .md-footer > *,
+  .ami-footer,
+  .ami-footer > * {
     border-top: none !important;
   }
 
   /* Uso le variabili DEDICATE del footer di Material (sfondo scuro / testo chiaro di default),
-     non quelle della pagina — sono due coppie di variabili distinte nel tema.
-     Aggiunto reset di border-top/box-shadow: in extra.css .md-footer__inner (la vecchia nav
-     prev/next) è nascosta con display:none, ma il bordo di separazione tra nav e barra
-     copyright restava agganciato proprio a questo elemento (.md-footer-meta), creando la
-     riga grigia in cima al footer. */
+     non quelle della pagina — sono due coppie di variabili distinte nel tema. */
   .ami-footer {
     background-color: var(--md-footer-bg-color);
     color: var(--md-footer-fg-color);
-    border-top: none !important;
-    box-shadow: none !important;
   }
 
   .ami-footer__grid {
@@ -164,10 +176,13 @@
     text-decoration: underline;
   }
 
+  /* Unico divisore intenzionale del footer, dichiarato DOPO il reset esteso
+     così da poter comparire nonostante border-top:none sopra */
   .ami-footer__divider {
     height: 1px;
     background-color: var(--md-footer-fg-color--lighter);
     opacity: 0.3;
+    border: none;
   }
 
   .ami-footer__bottom {
