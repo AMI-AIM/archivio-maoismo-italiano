@@ -53,6 +53,13 @@
 </footer>
 
 <style>
+  /* Rimuove l'ombra/bordo di elevazione che Material applica di default a .md-footer
+     (visibile come una sottile linea grigia sopra il footer) */
+  .md-footer {
+    box-shadow: none !important;
+    border-top: none !important;
+  }
+
   /* Uso le variabili DEDICATE del footer di Material (sfondo scuro / testo chiaro di default),
      non quelle della pagina — sono due coppie di variabili distinte nel tema. */
   .ami-footer {
