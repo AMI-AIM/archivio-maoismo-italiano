@@ -631,3 +631,19 @@
         height: 150px !important;
     }
 }
+/* ============================================================
+FIX: striscia bianca tra header e banner
+Azzera ogni margine/padding che può aprire un varco tra i due
+============================================================ */
+.md-header {
+    margin-bottom: 0 !important;
+}
+.md-container,
+.md-main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+/* Specificità (0,3,0): vince su .md-typeset > *:first-child (0,2,0) */
+.md-typeset > .banner-full:first-child {
+    margin-top: 0 !important;
+}
