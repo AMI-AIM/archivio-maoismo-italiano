@@ -351,16 +351,15 @@ SEZIONE DOCUMENTI IN EVIDENZA
     flex-shrink: 0;
 }
 
-/* Riga flex: la larghezza di ogni card è dettata dalla copertina,
-   gli spazi tra le card sono ripartiti in modo uniforme */
+/* Riga flex: larghezza card = larghezza copertina, spazi uniformi */
 .evidenza-grid {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1.5rem;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 1.5rem !important;
     overflow-x: auto;
-    padding-bottom: 2.4rem; /* spazio riservato ai titoli (posizionati in assoluto) */
+    padding-bottom: 2.6rem; /* spazio riservato ai titoli */
     margin-bottom: 0;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -370,7 +369,8 @@ SEZIONE DOCUMENTI IN EVIDENZA
 }
 .evidenza-card {
     position: relative;
-    flex: 0 0 auto;
+    flex: 0 0 auto !important;
+    min-width: 0;
     transition: transform 0.25s ease;
 }
 .evidenza-card:hover {
@@ -381,17 +381,22 @@ SEZIONE DOCUMENTI IN EVIDENZA
     text-decoration: none;
     color: inherit;
 }
+/* Box copertina: altezza fissa 240px su desktop */
 .evidenza-thumbnail {
-    height: 220px;
+    height: 240px !important;
+    max-height: 240px !important;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-/* Copertina: altezza fissa, larghezza automatica = proporzioni originali, nessun crop */
+/* Copertina: mai croppata, mai fuori dal box, proporzioni originali */
 .evidenza-thumbnail-img {
-    height: 100%;
-    width: auto;
-    display: block;
+    display: block !important;
+    height: 100% !important;
+    max-height: 240px !important;
+    width: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
 }
 .evidenza-placeholder {
     color: #ffffff;
@@ -401,11 +406,11 @@ SEZIONE DOCUMENTI IN EVIDENZA
 /* Titolo fuori flusso: non altera la larghezza della card;
    se più lungo della copertina viene troncato con "..." */
 .evidenza-titolo {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    margin-top: 0.6rem;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-top: 0.75rem !important;
     font-size: 0.85rem;
     font-weight: 500;
     line-height: 1.3;
@@ -701,7 +706,11 @@ RESPONSIVE
 ------------------------------------------------------------ */
 @media (max-width: 1100px) {
     .evidenza-thumbnail {
-        height: 190px;
+        height: 200px !important;
+        max-height: 200px !important;
+    }
+    .evidenza-thumbnail-img {
+        max-height: 200px !important;
     }
 }
 
@@ -713,12 +722,12 @@ RESPONSIVE
 
     /* Evidenza: scroll orizzontale su mobile */
     .evidenza-grid {
-        justify-content: flex-start;
+        justify-content: flex-start !important;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
-        padding: 0 1rem 2.2rem 1rem;
-        margin: 0 -1rem;
-        gap: 1.25rem;
+        padding: 0 1rem 2.4rem 1rem !important;
+        margin: 0 -1rem !important;
+        gap: 1.25rem !important;
     }
     .evidenza-card {
         scroll-snap-align: start;
@@ -731,7 +740,8 @@ RESPONSIVE
         font-size: 1.25rem;
     }
     .evidenza-thumbnail {
-        height: 200px;
+        height: 200px !important;
+        max-height: 200px !important;
     }
     .evidenza-titolo {
         font-size: 0.8rem;
@@ -789,7 +799,11 @@ RESPONSIVE
 
 @media (max-width: 600px) {
     .evidenza-thumbnail {
-        height: 170px;
+        height: 170px !important;
+        max-height: 170px !important;
+    }
+    .evidenza-thumbnail-img {
+        max-height: 170px !important;
     }
     .doc-row {
         flex-direction: column;
@@ -818,7 +832,11 @@ RESPONSIVE
         font-size: 1.2rem;
     }
     .evidenza-thumbnail {
-        height: 150px;
+        height: 150px !important;
+        max-height: 150px !important;
+    }
+    .evidenza-thumbnail-img {
+        max-height: 150px !important;
     }
     .banner-full {
         height: 180px;
