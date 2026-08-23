@@ -651,12 +651,11 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 /* ------------------------------------------------------------
 13. TIPOGRAFIA — SISTEMA FONT D'ARCHIVIO (kit armonizzato)
 Fraunces      → titoli E corpo: stessa famiglia, cambia solo peso
-                e dimensione ottica (riduce il contrasto rispetto
-                alla precedente coppia Anton/Literata)
+                e dimensione ottica
 Archivo       → etichette, nav, bottoni, badge — unico accento
                 grottesco ammesso, un solo "accento" per riga
 Courier Prime → RISERVATO a codice e blocchi isolati (mai in riga
-                con altro testo)
+                con altro testo, es. pannello citazioni — vedi documenti.css)
 ------------------------------------------------------------ */
 :root {
     --ami-font-display: "Fraunces", Georgia, "Times New Roman", serif;
@@ -668,7 +667,7 @@ Courier Prime → RISERVATO a codice e blocchi isolati (mai in riga
 }
 
 /* Corpo: Fraunces regolare, con ottimizzazione automatica della
-   dimensione ottica del disegno (variable font) */
+dimensione ottica del disegno (variable font) */
 body,
 .md-typeset {
     font-family: var(--ami-font-text) !important;
@@ -676,7 +675,7 @@ body,
 }
 
 /* Titoli di sezione: Fraunces peso 900 — stessa famiglia del corpo,
-   cambia solo il peso: zero salto di "scheletro" tra titolo e testo */
+cambia solo il peso: zero salto di "scheletro" tra titolo e testo */
 .md-typeset h1,
 .md-typeset h2,
 .md-typeset h3,
@@ -689,7 +688,7 @@ body,
 }
 
 /* Titoli di riga (schede, elenchi, card): Fraunces peso 600 —
-   restano nella stessa famiglia del corpo, non nel font etichette */
+restano nella stessa famiglia del corpo, non nel font etichette */
 .doc-titolo,
 .doc-titolo a,
 .evidenza-titolo,
@@ -704,7 +703,7 @@ body,
 }
 
 /* Date delle liste: stessa famiglia del corpo. Il colore rosso resta
-   l'unico segnale distintivo — niente cambio di famiglia in riga */
+l'unico segnale distintivo — niente cambio di famiglia in riga */
 .doc-data,
 .persona-date {
     font-family: var(--ami-font-text) !important;
@@ -713,7 +712,7 @@ body,
 }
 
 /* Etichette e UI: Archivo — riservato a nav, bottoni e badge/chip,
-   che restano l'UNICO accento tipografico ammesso per riga */
+che restano l'UNICO accento tipografico ammesso per riga */
 .md-header__nav-link,
 .md-drawer__link,
 .md-button,
@@ -753,9 +752,51 @@ body,
 }
 
 /* Courier Prime: solo codice e blocchi isolati (mai in riga con
-   altro testo, es. pannello citazioni — vedi documenti.css) */
+altro testo, es. pannello citazioni — vedi documenti.css) */
 .md-typeset code,
 .md-typeset kbd,
 .md-typeset pre {
     font-family: var(--ami-font-mono) !important;
+}
+
+/* ------------------------------------------------------------
+14. TIPOGRAFIA — PAGINE INTERNE (Persone, Organizzazioni, Archivio)
+Gli !important vincono sui <style> inline generati dai generatori
+(persone.py, org.py) senza dover toccare il markup.
+------------------------------------------------------------ */
+
+/* Badge ruolo e categoria: Archivo 700 (sistema etichette) */
+.ruolo-badge,
+.top-card-tipo,
+.org-tipo {
+    font-family: var(--ami-font-label) !important;
+    font-weight: 700 !important;
+}
+
+/* UI di filtro (barra alfabetica, contatori): Archivo */
+.lettera-btn,
+.search-counter {
+    font-family: var(--ami-font-label);
+    font-weight: 600;
+}
+
+/* Date di vita nelle card e sotto i titoli: Fraunces italic */
+.person-dates,
+.org-dates,
+.top-card-dates,
+.people-dates {
+    font-family: var(--ami-font-text);
+    font-style: italic;
+    font-weight: 400;
+}
+
+/* Risultati archivio: titolo già Fraunces 600 (sez. 13);
+   data in Fraunces 600, meta in Archivo 700 */
+.risultato-data {
+    font-family: var(--ami-font-text) !important;
+    font-weight: 600 !important;
+}
+.risultato-meta {
+    font-family: var(--ami-font-label) !important;
+    font-weight: 700 !important;
 }

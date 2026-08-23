@@ -1,3 +1,6 @@
+/* ============================================================
+STILE SCHEDE DOCUMENTO
+============================================================ */
 .doc-date-large { font-size: 1.8rem; font-weight: 700; color: var(--md-primary-fg-color); margin: .5rem 0 0; line-height: 1.2; letter-spacing: -.02em; }
 .doc-title-large { font-size: 2.4rem; font-weight: 700; margin: .2rem 0 1.5rem; line-height: 1.2; letter-spacing: -.02em; color: var(--md-default-fg-color); }
 .embed-container { margin: 1.5rem 0; background: var(--md-code-bg-color); border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.08); min-height: 100px; }
@@ -31,3 +34,56 @@
 .citazione-tab--active, .citazione-copia { color: #fff; background: var(--md-primary-fg-color); border-color: var(--md-primary-fg-color); }
 .citazione-copia { align-self: flex-end; border: 0; border-radius: 6px; padding: .4rem 1.2rem; font-size: .85rem; font-weight: 600; cursor: pointer; }
 @media (max-width: 600px) { .doc-date-large { font-size: 1.3rem; } .doc-title-large { font-size: 1.6rem; } .universal-embed { height: 65vh; min-height: 420px; max-height: 550px; } .photo-embed { max-height: 50vh; } .doc-abstract { margin: 1rem 0; padding: .8rem 1rem; font-size: .85rem; } .text-preview { max-height: 400px; padding: 1rem; font-size: .85rem; } .metadata-grid { grid-template-columns: 1fr; gap: .3rem; } .metadata-item { flex-direction: row; gap: .5rem; padding: .2rem 0; border-bottom: 1px solid var(--md-default-fg-color--lightest); } .metadata-label { min-width: 100px; } .metadata-value { font-size: .85rem; } }
+
+/* ------------------------------------------------------------
+TIPOGRAFIA — SCHEDA DOCUMENTO (sistema Fraunces/Archivo/Courier)
+Gli !important vincono sui <style> inline generati da schede.py,
+incluse le schede già in cache che non verranno rigenerate.
+------------------------------------------------------------ */
+
+/* Intestazione scheda: Fraunces 900 (voce del titolo) */
+.doc-date-large,
+.doc-title-large {
+    font-family: var(--ami-font-display) !important;
+    font-weight: 900 !important;
+    letter-spacing: -0.01em;
+}
+
+/* Abstract IA: Fraunces 400 da lettura */
+.doc-abstract {
+    font-family: var(--ami-font-text) !important;
+    font-weight: 400 !important;
+}
+
+/* Scheda catalografica: etichette Archivo 700, valori Courier Prime
+   (effetto "scheda dattiloscritta" riservato al documento) */
+.metadata-label {
+    font-family: var(--ami-font-label) !important;
+    font-weight: 700 !important;
+}
+.metadata-value {
+    font-family: var(--ami-font-mono) !important;
+    font-weight: 400 !important;
+    font-size: .9rem !important;
+}
+
+/* Trascrizioni: Courier Prime (il documento dattiloscritto) */
+.text-preview {
+    font-family: var(--ami-font-mono) !important;
+}
+
+/* Pannello citazioni: Courier Prime (sostituisce Roboto Mono) */
+.citazione-testo {
+    font-family: var(--ami-font-mono) !important;
+}
+
+/* Azioni, tab e toggle lingua: Archivo (sistema etichette) */
+.citazione-link,
+.fullscreen-btn,
+.embed-footer a,
+.citazione-tab,
+.citazione-copia,
+.lingua-btn {
+    font-family: var(--ami-font-label) !important;
+    font-weight: 600 !important;
+}
