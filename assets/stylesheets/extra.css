@@ -206,6 +206,12 @@ da overrides/partials/footer.html)
     background: rgba(0, 0, 0, 0.45);
 }
 
+/* Placeholder ricerca: colore più leggibile */
+#hero-search-input::placeholder {
+    color: #e0e0e0 !important;
+    opacity: 1 !important;
+}
+
 /* ------------------------------------------------------------
 7. DRAWER PERSONALIZZATO (solo mobile)
 ------------------------------------------------------------ */
@@ -622,12 +628,13 @@ da overrides/partials/footer.html)
         flex: 0 0 auto !important;
         scroll-snap-align: start !important;
         min-width: 0 !important;
+        height: 200px !important;
     }
     .evidenza-band {
         padding: 0.9rem 0 1.2rem !important;
     }
     .evidenza-band .section-title {
-        margin: 0 0 0.8rem 0 !important;
+        margin: 0 0 1.2rem 0 !important;
         font-size: 1.25rem;
     }
     .evidenza-thumbnail {
@@ -644,10 +651,14 @@ da overrides/partials/footer.html)
         max-width: none !important;
         object-fit: contain !important;
     }
+    .evidenza-titolo {
+        font-size: 0.8rem !important;
+        padding: 0.4rem 0.5rem 0.5rem 0.5rem !important;
+    }
 }
 
 @media (max-width: 600px) {
-    .evidenza-thumbnail {
+    .evidenza-card {
         height: 170px !important;
     }
     .evidenza-titolo {
@@ -660,7 +671,7 @@ da overrides/partials/footer.html)
     .md-header__button.md-logo img {
         height: 32px !important;
     }
-    .evidenza-thumbnail {
+    .evidenza-card {
         height: 150px !important;
     }
 }
