@@ -258,6 +258,7 @@ hide:
     <a href="persone/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg> Tutte le persone</a>
 </div>
 </div>
+</div>
 """
 
     # ============================================================
@@ -279,9 +280,10 @@ sfondo (::before) a estendersi a tutta larghezza.
 ============================================================ */
 .evidenza-band {
     position: relative;
-    padding: 1.6rem 0 2rem;
-    margin: 0 0 2rem 0; /* margin-top 0 => aderente al banner */
+    padding: 1.1rem 0 1.3rem;   /* padding ridotto sopra/sotto */
+    margin: 0 0 2rem 0;         /* margin-top 0 => aderente al banner */
 }
+
 .evidenza-band::before {
     content: "";
     position: absolute;
@@ -293,10 +295,14 @@ sfondo (::before) a estendersi a tutta larghezza.
     z-index: -1;
 }
 
+/* neutralizza i margini di default del tema sull'h2 dentro la fascia */
+.evidenza-band .section-title {
+    margin: 0 0 1rem 0;
+}
+
 .section-title {
     font-size: 1.5rem;
     font-weight: 600;
-    margin: 0 0 1.2rem 0;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -336,20 +342,21 @@ sfondo (::before) a estendersi a tutta larghezza.
     flex-direction: column;
 }
 
-/* ALTEZZA UNIFORME; la larghezza si adatta alla colonna (object-fit: contain) */
+/* ALTEZZA FISSA del contenitore; niente overflow hidden: niente tagli */
 .evidenza-thumbnail {
     height: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
     flex-shrink: 0;
 }
 
+/* COPERTINA COMPLETA: altezza fissa, larghezza libera in base
+   alle proporzioni originali di ciascuna immagine */
 .evidenza-thumbnail-img {
-    width: 100%;
     height: 100%;
-    object-fit: contain;
+    width: auto;
+    max-width: 100%;   /* valvola di sicurezza nelle celle molto strette */
     display: block;
 }
 
@@ -359,7 +366,7 @@ sfondo (::before) a estendersi a tutta larghezza.
     opacity: 0.5;
 }
 
-/* Titolo sotto la copertina: stessa grandezza di prima, colore chiaro */
+/* Titolo sotto la copertina: grandezza attuale, colore chiaro */
 .evidenza-titolo {
     padding: 0.5rem 0.7rem 0.7rem 0.7rem;
     font-size: 0.85rem;
@@ -534,7 +541,7 @@ RESPONSIVE
         gap: 0.8rem;
     }
     .evidenza-band {
-        padding: 1.2rem 0.8rem 1.5rem;
+        padding: 0.9rem 0.8rem 1.1rem;
     }
     .evidenza-thumbnail {
         height: 200px;
