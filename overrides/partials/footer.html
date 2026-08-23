@@ -64,9 +64,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
     border-top: none !important;
 }
 /* [FIX] elimina la linea grigia: azzera il margin-top che
-   .md-typeset > *:first-child darebbe alla griglia (il margine
-   collassava fuori dallo sfondo della meta, lasciando una striscia
-   dipinta solo dal fondo semitrasparente di .md-footer) */
+   .md-typeset > *:first-child darebbe alla griglia */
 .ami-footer.md-typeset > *:first-child {
     margin-top: 0 !important;
 }
@@ -84,16 +82,23 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
 .ami-footer__brand {
     max-width: 26rem;
 }
+/* [FIX] line-height 1.2: ripristina la compattazione delle righe
+   che prima viveva nel vecchio extra.css */
 .md-footer-copyright__text {
     font-weight: 700;
     font-size: 0.9rem;
+    line-height: 1.2;
     color: var(--md-footer-fg-color);
     margin-bottom: 0.2rem;
 }
 .md-footer-copyright__subtext {
     font-size: 0.65rem;
+    line-height: 1.2;
     color: var(--md-footer-fg-color--light);
     margin-bottom: 0.2rem;
+}
+.md-footer-copyright__email {
+    line-height: 1.2;
 }
 .md-footer-copyright__email a {
     font-size: 0.65rem;

@@ -32,6 +32,12 @@
 .md-typeset > *:first-child {
     margin-top: 0.5rem !important;
 }
+/* [FIX] Il banner in home è il primo figlio: niente margine sopra,
+   deve restare aderente all'header (specificità più alta della
+   regola precedente, entrambi !important) */
+.md-typeset > .banner-full:first-child {
+    margin-top: 0 !important;
+}
 
 /* ------------------------------------------------------------
    3. COLORE PRIMARIO
@@ -162,7 +168,6 @@
 
 /* ------------------------------------------------------------
    6. BANNER A LARGHEZZA COMPLETA (home)
-   [FIX] commento chiuso correttamente: queste regole ora vivono
 ------------------------------------------------------------ */
 .banner-full {
     position: relative;
@@ -458,7 +463,6 @@
 
 /* ------------------------------------------------------------
    10. LEGGIBILITÀ SU MOBILE
-   [FIX] commento chiuso correttamente: la media query ora esiste
 ------------------------------------------------------------ */
 @media (max-width: 600px) {
     /* Home - documenti recenti */
@@ -568,13 +572,12 @@
         width: auto !important;
         max-width: 160px !important;
     }
-    /* Banner: niente margine e niente ombra (evita aloni grigi) */
+    /* Banner: niente margine e niente ombra (evita aloni/grigio) */
     .banner-full {
         margin-bottom: 0 !important;
         box-shadow: none !important;
     }
-    /* L'immagine DEVE riempire il box: niente striscia vuota
-       (il velo scuro sul bianco la renderebbe grigia) */
+    /* L'immagine DEVE riempire il box: niente striscia vuota */
     .banner-image {
         width: 100% !important;
         height: 100% !important;
