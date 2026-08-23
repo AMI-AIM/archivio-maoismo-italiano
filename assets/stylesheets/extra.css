@@ -669,3 +669,48 @@
         font-size: 0.65rem !important;
     }
 }
+
+/* ============================================================
+   ANIMAZIONI HEADER
+   ============================================================ */
+/* Underline animato sulle voci di navigazione:
+   entra da sinistra al hover; la voce attiva resta sottolineata */
+.md-header__nav-link {
+    position: relative;
+}
+
+.md-header__nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.35rem;
+    height: 2px;
+    border-radius: 2px;
+    background: #ffffff;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.md-header__nav-item:hover .md-header__nav-link::after,
+.md-header__nav-link--active::after {
+    transform: scaleX(1);
+}
+
+/* Micro-zoom del logo al passaggio del mouse */
+.md-header__button.md-logo img {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.md-header__button.md-logo:hover img {
+    transform: scale(1.03);
+}
+
+/* Accessibilità: disattiva le animazioni se l'utente le riduce nel sistema */
+@media (prefers-reduced-motion: reduce) {
+    .md-header__nav-link::after,
+    .md-header__button.md-logo img {
+        transition: none;
+    }
+}
