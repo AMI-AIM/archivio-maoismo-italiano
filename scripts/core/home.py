@@ -311,7 +311,7 @@ SEZIONE DOCUMENTI IN EVIDENZA
 ------------------------------------------------------------ */
 .evidenza-band {
     position: relative;
-    padding: 1.5rem 0 2rem;
+    padding: 1.5rem 0 1.2rem;
     margin: 0 0 2rem 0;
 }
 .evidenza-band::before {
@@ -351,59 +351,61 @@ SEZIONE DOCUMENTI IN EVIDENZA
     flex-shrink: 0;
 }
 
-/* Griglia flex: card con larghezza naturale, proporzioni preservate */
+/* Riga flex: la larghezza di ogni card è dettata dalla copertina,
+   gli spazi tra le card sono ripartiti in modo uniforme */
 .evidenza-grid {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
     gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 2.4rem; /* spazio riservato ai titoli (posizionati in assoluto) */
     margin-bottom: 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.evidenza-grid::-webkit-scrollbar {
+    display: none;
 }
 .evidenza-card {
-    background: transparent;
-    border: none;
-    overflow: visible;
-    transition: transform 0.25s ease;
+    position: relative;
     flex: 0 0 auto;
-    height: 220px;
-    display: flex;
-    flex-direction: column;
+    transition: transform 0.25s ease;
 }
 .evidenza-card:hover {
     transform: translateY(-4px);
 }
 .evidenza-link {
+    display: block;
     text-decoration: none;
     color: inherit;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
 }
 .evidenza-thumbnail {
-    flex: 1;
+    height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
-    padding: 0;
-    min-height: 0;
-    overflow: hidden;
 }
-/* Copertina: altezza fissa, larghezza automatica, proporzioni originali */
+/* Copertina: altezza fissa, larghezza automatica = proporzioni originali, nessun crop */
 .evidenza-thumbnail-img {
     height: 100%;
     width: auto;
-    max-width: 100%;
     display: block;
-    object-fit: contain;
 }
 .evidenza-placeholder {
     color: #ffffff;
     font-size: 2.5rem;
     opacity: 0.5;
 }
+/* Titolo fuori flusso: non altera la larghezza della card;
+   se più lungo della copertina viene troncato con "..." */
 .evidenza-titolo {
-    padding: 0.5rem 0.7rem 0.7rem 0.7rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.6rem;
     font-size: 0.85rem;
     font-weight: 500;
     line-height: 1.3;
@@ -412,8 +414,6 @@ SEZIONE DOCUMENTI IN EVIDENZA
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100%;
-    flex-shrink: 0;
 }
 
 /* ------------------------------------------------------------
@@ -699,45 +699,42 @@ DROPDOWN SUGGERIMENTI RICERCA HERO
 /* ------------------------------------------------------------
 RESPONSIVE
 ------------------------------------------------------------ */
+@media (max-width: 1100px) {
+    .evidenza-thumbnail {
+        height: 190px;
+    }
+}
+
 @media (max-width: 768px) {
     .home-columns {
         grid-template-columns: 1fr;
         gap: 0.5rem;
     }
 
-    /* Scroll orizzontale per i documenti in evidenza su mobile */
+    /* Evidenza: scroll orizzontale su mobile */
     .evidenza-grid {
-        flex-wrap: nowrap !important;
-        justify-content: flex-start !important;
-        overflow-x: auto !important;
-        scroll-snap-type: x mandatory !important;
-        -webkit-overflow-scrolling: touch !important;
-        padding: 0 1rem 0.8rem 1rem !important;
-        margin: 0 -1rem !important;
-        gap: 1rem !important;
-    }
-    .evidenza-grid::-webkit-scrollbar {
-        display: none !important;
-    }
-    .evidenza-grid {
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
+        justify-content: flex-start;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 1rem 2.2rem 1rem;
+        margin: 0 -1rem;
+        gap: 1.25rem;
     }
     .evidenza-card {
-        flex: 0 0 auto !important;
-        scroll-snap-align: start !important;
-        height: 200px !important;
+        scroll-snap-align: start;
     }
     .evidenza-band {
-        padding: 0.9rem 0 1.1rem;
+        padding: 0.9rem 0 1rem;
     }
     .evidenza-band .section-title {
         margin: 0 0 1.2rem 0;
         font-size: 1.25rem;
     }
+    .evidenza-thumbnail {
+        height: 200px;
+    }
     .evidenza-titolo {
         font-size: 0.8rem;
-        padding: 0.4rem 0.5rem 0.5rem 0.5rem;
     }
 
     .banner-full {
@@ -791,12 +788,8 @@ RESPONSIVE
 }
 
 @media (max-width: 600px) {
-    .evidenza-card {
-        height: 170px !important;
-    }
-    .evidenza-titolo {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.5rem 0.5rem 0.5rem;
+    .evidenza-thumbnail {
+        height: 170px;
     }
     .doc-row {
         flex-direction: column;
@@ -824,8 +817,8 @@ RESPONSIVE
     .section-title {
         font-size: 1.2rem;
     }
-    .evidenza-card {
-        height: 150px !important;
+    .evidenza-thumbnail {
+        height: 150px;
     }
     .banner-full {
         height: 180px;

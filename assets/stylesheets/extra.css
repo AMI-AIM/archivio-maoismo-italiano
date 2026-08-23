@@ -551,7 +551,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 
 /* ------------------------------------------------------------
-12. OVERRIDE MOBILE PER LA HOME
+12. OVERRIDE MOBILE PER LA HOME — DOCUMENTI IN EVIDENZA
 ------------------------------------------------------------ */
 @media (max-width: 768px) {
     .md-header__button.md-logo {
@@ -574,16 +574,14 @@ STILE PERSONALIZZATO — TEMA MATERIAL
         object-position: center center !important;
     }
 
-    /* Evidenza: scroll orizzontale, card con larghezza naturale */
+    /* Evidenza: scroll orizzontale, larghezza card = larghezza copertina */
     .evidenza-grid {
-        flex-wrap: nowrap !important;
         justify-content: flex-start !important;
-        overflow-x: auto !important;
         scroll-snap-type: x mandatory !important;
         -webkit-overflow-scrolling: touch !important;
-        padding: 0 1rem 0.8rem 1rem !important;
+        padding: 0 1rem 2.2rem 1rem !important;
         margin: 0 -1rem !important;
-        gap: 1rem !important;
+        gap: 1.25rem !important;
     }
     .evidenza-grid::-webkit-scrollbar {
         display: none !important;
@@ -596,10 +594,9 @@ STILE PERSONALIZZATO — TEMA MATERIAL
         flex: 0 0 auto !important;
         scroll-snap-align: start !important;
         min-width: 0 !important;
-        height: 200px !important;
     }
     .evidenza-band {
-        padding: 0.9rem 0 1.2rem !important;
+        padding: 0.9rem 0 1rem !important;
     }
     .evidenza-band .section-title {
         margin: 0 0 1.2rem 0 !important;
@@ -607,30 +604,27 @@ STILE PERSONALIZZATO — TEMA MATERIAL
     }
     .evidenza-thumbnail {
         height: 200px !important;
-        min-height: 0 !important;
         padding: 0 !important;
         background: transparent !important;
-        overflow: hidden !important;
     }
     .evidenza-thumbnail-img {
         height: 100% !important;
         width: auto !important;
-        min-height: 0 !important;
         max-width: none !important;
         object-fit: contain !important;
     }
     .evidenza-titolo {
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
         font-size: 0.8rem !important;
-        padding: 0.4rem 0.5rem 0.5rem 0.5rem !important;
     }
 }
 
 @media (max-width: 600px) {
-    .evidenza-card {
+    .evidenza-thumbnail {
         height: 170px !important;
-    }
-    .evidenza-titolo {
-        font-size: 0.8rem;
     }
 }
 
@@ -638,7 +632,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
     .md-header__button.md-logo img {
         height: 32px !important;
     }
-    .evidenza-card {
+    .evidenza-thumbnail {
         height: 150px !important;
     }
 }
