@@ -1,18 +1,17 @@
 /* ============================================================
-   STILE PERSONALIZZATO — TEMA MATERIAL
-   Versione pulita: commenti corretti, regole banner riattivate,
-   animazioni header, fix striscia bianca e fix mobile integrati.
+STILE PERSONALIZZATO — TEMA MATERIAL
+Versione pulita: commenti corretti, regole banner riattivate,
+animazioni header, fix striscia bianca e fix mobile integrati.
 ============================================================ */
-
 /* ------------------------------------------------------------
-   1. VARIABILE CONDIVISA: altezza header (usata anche dal banner)
+VARIABILE CONDIVISA: altezza header (usata anche dal banner)
 ------------------------------------------------------------ */
 :root {
     --ami-header-height: 80px;
 }
 
 /* ------------------------------------------------------------
-   2. RIMUOVI IL PADDING DEL CONTENUTO PRINCIPALE
+2. RIMUOVI IL PADDING DEL CONTENUTO PRINCIPALE
 ------------------------------------------------------------ */
 .md-main__inner {
     padding-top: 0 !important;
@@ -29,13 +28,14 @@
 .md-content__inner::before {
     display: none !important;
 }
-.md-typeset > *:first-child {
+.md-typeset > :first-child {
     margin-top: 0.5rem !important;
 }
+
 /* [FIX STRISCIA BIANCA] Il banner in home è il primo figlio ma deve
-   restare incollato all'header. Specificità (0,3,0) > (0,2,0),
-   entrambi !important => vince questa. Le regole sotto azzerano la
-   catena del margin collapsing fino a md-main__inner. */
+restare incollato all'header. Specificità (0,3,0) > (0,2,0),
+entrambi !important => vince questa. Le regole sotto azzerano la
+catena del margin collapsing fino a md-main__inner. */
 .md-typeset > .banner-full:first-child {
     margin-top: 0 !important;
 }
@@ -48,7 +48,7 @@
 }
 
 /* ------------------------------------------------------------
-   3. COLORE PRIMARIO
+3. COLORE PRIMARIO
 ------------------------------------------------------------ */
 [data-md-color-primary="red"] {
     --md-primary-fg-color: #b71c1c;
@@ -57,7 +57,7 @@
 }
 
 /* ------------------------------------------------------------
-   4. HEADER PIÙ GRANDE CON NAV A DESTRA + ANIMAZIONI
+4. HEADER PIÙ GRANDE CON NAV A DESTRA + ANIMAZIONI
 ------------------------------------------------------------ */
 .md-header {
     background: var(--md-primary-fg-color);
@@ -91,10 +91,12 @@
     object-fit: contain;
     transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 /* Micro-zoom del logo al passaggio del mouse */
 .md-header__button.md-logo:hover img {
     transform: scale(1.03);
 }
+
 .md-header__nav {
     display: flex;
     align-items: center;
@@ -133,6 +135,7 @@
 .md-header__nav-link--active {
     color: #ffffff !important;
 }
+
 /* Underline animato: entra da sinistra al hover; la voce attiva resta sottolineata */
 .md-header__nav-link::after {
     content: "";
@@ -151,6 +154,7 @@
 .md-header__nav-link--active::after {
     transform: scaleX(1);
 }
+
 /* Accessibilità: niente animazioni se l'utente le riduce nel sistema */
 @media (prefers-reduced-motion: reduce) {
     .md-header__nav-link::after,
@@ -158,25 +162,26 @@
         transition: none;
     }
 }
+
 .md-header__title {
     display: none !important;
 }
+
 /* NASCONDE LA SIDEBAR PRIMARIA IN TUTTI I CASI */
 .md-sidebar--primary {
     display: none !important;
 }
 
 /* ------------------------------------------------------------
-   5. FOOTER — rete di sicurezza (il footer è gestito interamente
-   da overrides/partials/footer.html)
+5. FOOTER — rete di sicurezza (il footer è gestito interamente
+da overrides/partials/footer.html)
 ------------------------------------------------------------ */
 .md-footer__inner {
     display: none !important;
 }
 
 /* ------------------------------------------------------------
-   6. BANNER A LARGHEZZA COMPLETA (home)
-   [FIX] commento chiuso correttamente: queste regole ora vivono
+6. BANNER A LARGHEZZA COMPLETA (home)
 ------------------------------------------------------------ */
 .banner-full {
     position: relative;
@@ -202,7 +207,7 @@
 }
 
 /* ------------------------------------------------------------
-   7. DRAWER PERSONALIZZATO (solo mobile)
+7. DRAWER PERSONALIZZATO (solo mobile)
 ------------------------------------------------------------ */
 #__drawer {
     display: none;
@@ -298,7 +303,7 @@
 }
 
 /* ------------------------------------------------------------
-   8. VISIBILITÀ DESKTOP vs MOBILE + BANNER MOBILE
+8. VISIBILITÀ DESKTOP vs MOBILE + BANNER MOBILE
 ------------------------------------------------------------ */
 @media (min-width: 769px) {
     .md-drawer-overlay,
@@ -339,6 +344,7 @@
         position: relative;
         z-index: 1;
     }
+
     /* Banner mobile */
     .banner-full {
         margin-bottom: 0;
@@ -392,7 +398,7 @@
 }
 
 /* ------------------------------------------------------------
-   9. CATALOGO (home e archivio)
+9. CATALOGO (home e archivio)
 ------------------------------------------------------------ */
 .catalogo-lista {
     display: flex;
@@ -471,8 +477,7 @@
 }
 
 /* ------------------------------------------------------------
-   10. LEGGIBILITÀ SU MOBILE
-   [FIX] commento chiuso correttamente: la media query ora esiste
+10. LEGGIBILITÀ SU MOBILE
 ------------------------------------------------------------ */
 @media (max-width: 600px) {
     /* Home - documenti recenti */
@@ -528,7 +533,7 @@
 }
 
 /* ------------------------------------------------------------
-   11. RESPONSIVE EXTRA (schermi molto piccoli)
+11. RESPONSIVE EXTRA (schermi molto piccoli)
 ------------------------------------------------------------ */
 @media (max-width: 480px) {
     :root {
@@ -565,8 +570,8 @@
 }
 
 /* ------------------------------------------------------------
-   12. OVERRIDE MOBILE PER LA HOME
-   (!important: vincono sul <style> generato in index.md)
+12. OVERRIDE MOBILE PER LA HOME
+(!important: vincono sullo <style> generato in index.md)
 ------------------------------------------------------------ */
 @media (max-width: 768px) {
     /* Logo sempre visibile accanto all'hamburger */
@@ -579,29 +584,47 @@
         width: auto !important;
         max-width: 160px !important;
     }
+
     /* Banner: niente margine e niente ombra (evita aloni/grigio) */
     .banner-full {
         margin-bottom: 0 !important;
         box-shadow: none !important;
     }
+
     /* L'immagine DEVE riempire il box: niente striscia vuota
-       (il velo scuro sul bianco la renderebbe grigia) */
+    (il velo scuro sul bianco la renderebbe grigia) */
     .banner-image {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
         object-position: center center !important;
     }
-    /* Evidenza: box fisso, niente overflow, copertina completa */
+
+    /* Evidenza: scroll orizzontale, card con larghezza naturale */
     .evidenza-grid {
-        grid-template-columns: 1fr 1fr !important;
-        gap: 0.8rem !important;
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding: 0 1rem 0.8rem 1rem !important;
+        margin: 0 -1rem !important;
+        gap: 1rem !important;
+    }
+    .evidenza-grid::-webkit-scrollbar {
+        display: none !important;
+    }
+    .evidenza-grid {
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
     }
     .evidenza-card {
-        min-width: 0;
+        flex: 0 0 auto !important;
+        scroll-snap-align: start !important;
+        min-width: 0 !important;
     }
     .evidenza-band {
-        padding: 0.9rem 0.8rem 1.2rem !important;
+        padding: 0.9rem 0 1.2rem !important;
     }
     .evidenza-band .section-title {
         margin: 0 0 0.8rem 0 !important;
@@ -615,13 +638,14 @@
         overflow: hidden !important;
     }
     .evidenza-thumbnail-img {
-        width: 100% !important;
         height: 100% !important;
+        width: auto !important;
         min-height: 0 !important;
         max-width: none !important;
         object-fit: contain !important;
     }
 }
+
 @media (max-width: 600px) {
     .evidenza-thumbnail {
         height: 170px !important;
@@ -631,6 +655,7 @@
         min-height: 2.2rem;
     }
 }
+
 @media (max-width: 480px) {
     .md-header__button.md-logo img {
         height: 32px !important;

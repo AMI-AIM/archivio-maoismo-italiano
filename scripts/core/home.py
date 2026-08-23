@@ -3,7 +3,8 @@ import re
 from collections import Counter
 from .utils import formatta_data, split_nomi
 
-# 🔥 DOCUMENTI IN EVIDENZA: inserisci qui gli ID dei documenti che vuoi mostrare
+
+#🔥 DOCUMENTI IN EVIDENZA: inserisci qui gli ID dei documenti che vuoi mostrare
 EVIDENZA_IDS = [
     'AMI-0049',
     'AMI-0045',
@@ -11,6 +12,17 @@ EVIDENZA_IDS = [
     'AMI-0013',
     'AMI-0035'
 ]
+
+
+def estrai_iniziali(nome):
+    """Estrae le iniziali da un nome (es. 'Mao Zedong' → 'MZ')."""
+    parti = nome.strip().split()
+    if not parti:
+        return '?'
+    if len(parti) == 1:
+        return parti[0][:2].upper()
+    return (parti[0][0] + parti[-1][0]).upper()
+
 
 def genera_home(df, persone, output_dir):
     print("\n🏠 Generazione della Home page...")
@@ -45,7 +57,6 @@ def genera_home(df, persone, output_dir):
             org = ''
 
         url_ia = str(row.get('url', '#')).strip()
-
         identifier = None
         if url_ia and url_ia != '#':
             match = re.search(r'/details/([^/?#]+)', url_ia)
@@ -103,6 +114,7 @@ def genera_home(df, persone, output_dir):
             nomi_da_contare.update(split_nomi(autore_raw))
         if persone_collegate_raw and persone_collegate_raw not in ['nan', 'None']:
             nomi_da_contare.update(split_nomi(persone_collegate_raw))
+
         for nome in nomi_da_contare:
             if nome in persone:
                 conteggio_persone[nome] += 1
@@ -153,26 +165,27 @@ hide:
 ---
 {banner_html}
 <div class="evidenza-band">
-<h2 class="section-title">Documenti in evidenza</h2>
-<div class="evidenza-grid">
+    <h2 class="section-title">Documenti in evidenza</h2>
+    <div class="evidenza-grid">
 """
         for doc in evidenza_ordinati:
             if doc.get('copertina'):
-                img_html = f'<img src="{doc["copertina"]}" alt="{doc["titolo"]}" class="evidenza-thumbnail-img" loading="lazy">'
+                img_html = f'            <img src="{doc["copertina"]}" alt="{doc["titolo"]}" class="evidenza-thumbnail-img" loading="lazy">'
             else:
-                img_html = '<span class="evidenza-placeholder">📄</span>'
+                img_html = '            <span class="evidenza-placeholder"></span>'
+
             home_content += f"""
-    <div class="evidenza-card">
-        <a href="documenti/{doc['id']}/" class="evidenza-link">
-            <div class="evidenza-thumbnail">
-                {img_html}
-            </div>
-            <div class="evidenza-titolo">{doc['titolo']}</div>
-        </a>
-    </div>
+        <div class="evidenza-card">
+            <a href="documenti/{doc['id']}/" class="evidenza-link">
+                <div class="evidenza-thumbnail">
+{img_html}
+                </div>
+                <div class="evidenza-titolo">{doc['titolo']}</div>
+            </a>
+        </div>
 """
         home_content += """
-</div>
+    </div>
 </div>
 <div class="home-columns">
 """
@@ -190,37 +203,37 @@ hide:
     # ============================================================
     home_content += """
 <div class="home-column">
-<h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 12h10v2H7zm0-4h10v2H7zm0 8h6v2H7z"/></svg> Aggiunti di recente</h2>
-<div class="recent-container">
-<div class="catalogo-lista">
+    <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 12h10v2H7zm0-4h10v2H7zm0 8h6v2H7z"/></svg> Aggiunti di recente</h2>
+    <div class="recent-container">
+        <div class="catalogo-lista">
 """
     for s in ultime_tre:
         home_content += f"""
-<div class="doc-row">
-    <div class="doc-data">{s['data']}</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="documenti/{s['id']}/">{s['titolo']}</a></div>
-        <div class="doc-meta">{s['meta_html']}</div>
-    </div>
-</div>
+            <div class="doc-row">
+                <div class="doc-data">{s['data']}</div>
+                <div class="doc-contenuto">
+                    <div class="doc-titolo"><a href="documenti/{s['id']}/">{s['titolo']}</a></div>
+                    <div class="doc-meta">{s['meta_html']}</div>
+                </div>
+            </div>
 """
     home_content += """
-</div>
-</div>
-<div style="text-align: center; margin-top: 1rem;">
-    <a href="documenti/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg> Tutti i documenti</a>
-</div>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 1rem;">
+        <a href="documenti/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg> Tutti i documenti</a>
+    </div>
 </div>
 """
 
     # ============================================================
-    # COLONNA DESTRA: Persone più menzionate
+    # COLONNA DESTRA: Persone più menzionate (con avatar iniziali)
     # ============================================================
     home_content += """
 <div class="home-column">
-<h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> Persone più menzionate</h2>
-<div class="recent-container">
-<div class="catalogo-lista">
+    <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> Persone più menzionate</h2>
+    <div class="recent-container">
+        <div class="catalogo-lista">
 """
     if persone_top:
         for rank, (nome, conteggio) in enumerate(persone_top, start=1):
@@ -230,26 +243,31 @@ hide:
             morte = info_persona.get('morte', '').strip()
             date_vita = ' – '.join([d for d in [nascita, morte] if d and d not in ['nan', 'None']])
             etichetta_conteggio = "1 documento collegato" if conteggio == 1 else f"{conteggio} documenti collegati"
+            iniziali = estrai_iniziali(nome)
+
             home_content += f"""
-<div class="doc-row">
-    <div class="persona-rank persona-rank--{rank}">{rank}</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="persone/{slug}/">{nome}</a></div>
-        <div class="doc-sommario">{etichetta_conteggio}</div>
-        {f'<div class="persona-date">{date_vita}</div>' if date_vita else ''}
-    </div>
-</div>
+            <div class="doc-row doc-row-persona">
+                <div class="persona-avatar persona-avatar--{rank}">
+                    <span class="persona-iniziali">{iniziali}</span>
+                    <span class="persona-rank-badge persona-rank-badge--{rank}">{rank}</span>
+                </div>
+                <div class="doc-contenuto">
+                    <div class="doc-titolo"><a href="persone/{slug}/">{nome}</a></div>
+                    <div class="doc-sommario">{etichetta_conteggio}</div>
+                    {f'<div class="persona-date">{date_vita}</div>' if date_vita else ''}
+                </div>
+            </div>
 """
     else:
         home_content += """
-<p style="padding: 0.6rem 0.8rem; color: var(--md-default-fg-color--light);">Nessuna persona ancora collegata ai documenti.</p>
+            <p style="padding: 0.6rem 0.8rem; color: var(--md-default-fg-color--light);">Nessuna persona ancora collegata ai documenti.</p>
 """
     home_content += """
-</div>
-</div>
-<div style="text-align: center; margin-top: 1rem;">
-    <a href="persone/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg> Tutte le persone</a>
-</div>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 1rem;">
+        <a href="persone/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg> Tutte le persone</a>
+    </div>
 </div>
 </div>
 """
@@ -292,6 +310,12 @@ BANNER (regole base: valgono anche se extra.css non è aggiornato)
     margin-bottom: 0 !important;
 }
 
+/* Placeholder ricerca: colore più leggibile */
+#hero-search-input::placeholder {
+    color: #e0e0e0 !important;
+    opacity: 1 !important;
+}
+
 /* ------------------------------------------------------------
 SEZIONE DOCUMENTI IN EVIDENZA — fascia scura full-bleed
 ------------------------------------------------------------ */
@@ -321,15 +345,27 @@ SEZIONE DOCUMENTI IN EVIDENZA — fascia scura full-bleed
     gap: 0.5rem;
     color: #ffffff;
 }
+.section-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #b71c1c;
+    margin-left: 0.5rem;
+    border-radius: 2px;
+}
 .section-icon {
     width: 1.4rem;
     height: 1.4rem;
     fill: var(--md-primary-fg-color);
     flex-shrink: 0;
 }
+
+/* Griglia flessibile: card con larghezza naturale, proporzioni preservate */
 .evidenza-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1rem;
     margin-bottom: 0;
 }
@@ -337,7 +373,9 @@ SEZIONE DOCUMENTI IN EVIDENZA — fascia scura full-bleed
     background: transparent;
     border: none;
     overflow: visible;
-    transition: transform 0.2s;
+    transition: transform 0.25s ease;
+    flex: 0 0 auto;
+    max-width: 100%;
 }
 .evidenza-card:hover {
     transform: translateY(-4px);
@@ -349,18 +387,20 @@ SEZIONE DOCUMENTI IN EVIDENZA — fascia scura full-bleed
     flex-direction: column;
 }
 .evidenza-thumbnail {
-    height: 280px;
+    height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    padding: 0;
 }
-/* Copertina completa: altezza fissa, larghezza in proporzione */
+/* Copertina: altezza fissa, larghezza automatica, proporzioni originali */
 .evidenza-thumbnail-img {
     height: 100%;
     width: auto;
     max-width: 100%;
     display: block;
+    object-fit: contain;
 }
 .evidenza-placeholder {
     color: #ffffff;
@@ -404,6 +444,9 @@ CATALOGO
 .doc-row:hover {
     background-color: var(--md-code-bg-color);
     border-left-color: var(--md-primary-fg-color);
+}
+.doc-row-persona {
+    gap: 1rem;
 }
 .doc-data {
     flex: 0 0 150px;
@@ -487,6 +530,15 @@ LAYOUT A DUE COLONNE (home)
     align-items: center;
     gap: 0.5rem;
 }
+.home-column h2::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #b71c1c;
+    margin-left: 0.5rem;
+    border-radius: 2px;
+}
 .button-icon {
     width: 1rem;
     height: 1rem;
@@ -504,160 +556,49 @@ LAYOUT A DUE COLONNE (home)
 }
 
 /* ------------------------------------------------------------
-RESPONSIVE
+PERSONE PIÙ MENZIONATE (avatar con iniziali + badge rank)
 ------------------------------------------------------------ */
-@media (max-width: 768px) {
-    .home-columns {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-    }
-    .evidenza-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.8rem;
-    }
-    .evidenza-band {
-        padding: 0.9rem 0.8rem 1.1rem;
-    }
-    .evidenza-thumbnail {
-        height: 200px;
-    }
-    .banner-full {
-        height: 240px;
-        min-height: 200px;
-        overflow: hidden;
-    }
-    .banner-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center center;
-    }
-    .banner-content[style] {
-        bottom: 0.3rem !important;
-        left: 0.3rem !important;
-        right: 0.3rem !important;
-        max-width: none !important;
-        padding: 0.3rem 0.6rem !important;
-    }
-    .banner-content p[style] {
-        font-size: 0.8rem !important;
-        margin: 0 0 0.3rem 0 !important;
-        line-height: 1.3 !important;
-    }
-    .banner-actions[style] {
-        flex-wrap: wrap !important;
-        gap: 0.3rem !important;
-    }
-    .banner-button[style] {
-        padding: 0.3rem 0.8rem !important;
-        font-size: 0.75rem !important;
-    }
-    .banner-search[style] {
-        flex: 1 1 100% !important;
-        padding: 0.2rem 0.6rem !important;
-        gap: 0.3rem !important;
-    }
-    .banner-search input[style] {
-        min-width: 80px !important;
-        font-size: 0.75rem !important;
-    }
-    .banner-search button[style] {
-        font-size: 0.7rem !important;
-        padding: 0.1rem 0.3rem !important;
-    }
-    .banner-search-icon[style] {
-        width: 0.9rem !important;
-        height: 0.9rem !important;
-    }
-}
-
-@media (max-width: 600px) {
-    .evidenza-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 0.6rem;
-    }
-    .evidenza-titolo {
-        font-size: 0.8rem;
-        min-height: 2.2rem;
-        padding: 0.4rem 0.5rem 0.5rem 0.5rem;
-    }
-    .evidenza-thumbnail {
-        height: 170px;
-    }
-    .doc-row {
-        flex-direction: column;
-        gap: 0.1rem;
-        padding: 0.6rem 0.2rem;
-    }
-    .doc-data {
-        flex: 0 0 auto;
-        white-space: normal;
-        font-size: 0.8rem;
-    }
-    .doc-titolo {
-        font-size: 0.95rem;
-    }
-    .doc-sommario {
-        font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .evidenza-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 0.5rem;
-    }
-    .section-title {
-        font-size: 1.2rem;
-    }
-    .evidenza-thumbnail {
-        height: 150px;
-    }
-    .banner-full {
-        height: 180px;
-        min-height: 150px;
-    }
-    .banner-content p[style] {
-        font-size: 0.7rem !important;
-    }
-    .banner-button[style] {
-        padding: 0.2rem 0.6rem !important;
-        font-size: 0.65rem !important;
-    }
-    .banner-search input[style] {
-        font-size: 0.7rem !important;
-        min-width: 60px !important;
-    }
-    .banner-search button[style] {
-        font-size: 0.65rem !important;
-    }
-}
-
-/* ------------------------------------------------------------
-PERSONE PIÙ MENZIONATE (medaglie)
------------------------------------------------------------- */
-.persona-rank {
-    flex: 0 0 42px;
-    width: 42px;
-    height: 42px;
+.persona-avatar {
+    position: relative;
+    flex: 0 0 52px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+.persona-avatar--1 { background: #b71c1c; }
+.persona-avatar--2 { background: #424242; }
+.persona-avatar--3 { background: #8d6e63; }
+.persona-iniziali {
     font-weight: 700;
     font-size: 1.05rem;
     color: #ffffff;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.05em;
+    user-select: none;
 }
-.persona-rank--1 {
-    background: linear-gradient(135deg, #f6d365, #c9911d);
+.persona-rank-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    border: 2px solid var(--md-code-bg-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
-.persona-rank--2 {
-    background: linear-gradient(135deg, #dde3e6, #9aa5ab);
-}
-.persona-rank--3 {
-    background: linear-gradient(135deg, #d7a06e, #a05a2c);
-}
+.persona-rank-badge--1 { background: linear-gradient(135deg, #f6d365, #c9911d); }
+.persona-rank-badge--2 { background: linear-gradient(135deg, #dde3e6, #9aa5ab); }
+.persona-rank-badge--3 { background: linear-gradient(135deg, #d7a06e, #a05a2c); }
 .persona-date {
     font-size: 0.8rem;
     color: var(--md-default-fg-color--light);
@@ -745,15 +686,9 @@ DROPDOWN SUGGERIMENTI RICERCA HERO
     white-space: nowrap;
     margin-left: 0.4em;
 }
-.hero-search-item-tag--persona {
-    background: #6a1b9a;
-}
-.hero-search-item-tag--organizzazione {
-    background: #1565c0;
-}
-.hero-search-item-tag--documento {
-    background: #b71c1c;
-}
+.hero-search-item-tag--persona { background: #6a1b9a; }
+.hero-search-item-tag--organizzazione { background: #1565c0; }
+.hero-search-item-tag--documento { background: #b71c1c; }
 .hero-search-item-snippet {
     font-size: 0.82rem;
     color: #666666;
@@ -764,6 +699,153 @@ DROPDOWN SUGGERIMENTI RICERCA HERO
     background: transparent;
     color: #b71c1c;
     font-weight: 700;
+}
+
+/* ------------------------------------------------------------
+RESPONSIVE
+------------------------------------------------------------ */
+@media (max-width: 768px) {
+    .home-columns {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    /* Scroll orizzontale per i documenti in evidenza su mobile */
+    .evidenza-grid {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 1rem 0.8rem 1rem;
+        margin: 0 -1rem;
+        gap: 1rem;
+    }
+    /* Nasconde la scrollbar mantenendo lo scroll */
+    .evidenza-grid::-webkit-scrollbar {
+        display: none;
+    }
+    .evidenza-grid {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    .evidenza-card {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+    }
+    .evidenza-band {
+        padding: 0.9rem 0 1.1rem;
+    }
+    .evidenza-thumbnail {
+        height: 200px;
+    }
+
+    .banner-full {
+        height: 240px;
+        min-height: 200px;
+        overflow: hidden;
+    }
+    .banner-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+    .banner-content[style] {
+        bottom: 0.3rem !important;
+        left: 0.3rem !important;
+        right: 0.3rem !important;
+        max-width: none !important;
+        padding: 0.3rem 0.6rem !important;
+    }
+    .banner-content p[style] {
+        font-size: 0.8rem !important;
+        margin: 0 0 0.3rem 0 !important;
+        line-height: 1.3 !important;
+    }
+    .banner-actions[style] {
+        flex-wrap: wrap !important;
+        gap: 0.3rem !important;
+    }
+    .banner-button[style] {
+        padding: 0.3rem 0.8rem !important;
+        font-size: 0.75rem !important;
+    }
+    .banner-search[style] {
+        flex: 1 1 100% !important;
+        padding: 0.2rem 0.6rem !important;
+        gap: 0.3rem !important;
+    }
+    .banner-search input[style] {
+        min-width: 80px !important;
+        font-size: 0.75rem !important;
+    }
+    .banner-search button[style] {
+        font-size: 0.7rem !important;
+        padding: 0.1rem 0.3rem !important;
+    }
+    .banner-search-icon[style] {
+        width: 0.9rem !important;
+        height: 0.9rem !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .evidenza-thumbnail {
+        height: 170px !important;
+    }
+    .evidenza-titolo {
+        font-size: 0.8rem;
+        min-height: 2.2rem;
+        padding: 0.4rem 0.5rem 0.5rem 0.5rem;
+    }
+    .doc-row {
+        flex-direction: column;
+        gap: 0.1rem;
+        padding: 0.6rem 0.2rem;
+    }
+    .doc-row-persona {
+        flex-direction: row;
+        gap: 1rem;
+    }
+    .doc-data {
+        flex: 0 0 auto;
+        white-space: normal;
+        font-size: 0.8rem;
+    }
+    .doc-titolo {
+        font-size: 0.95rem;
+    }
+    .doc-sommario {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.2rem;
+    }
+    .evidenza-thumbnail {
+        height: 150px !important;
+    }
+    .banner-full {
+        height: 180px;
+        min-height: 150px;
+    }
+    .banner-content p[style] {
+        font-size: 0.7rem !important;
+    }
+    .banner-button[style] {
+        padding: 0.2rem 0.6rem !important;
+        font-size: 0.65rem !important;
+    }
+    .banner-search input[style] {
+        font-size: 0.7rem !important;
+        min-width: 60px !important;
+    }
+    .banner-search button[style] {
+        font-size: 0.65rem !important;
+    }
 }
 </style>
 """
