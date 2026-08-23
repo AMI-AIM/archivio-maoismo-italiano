@@ -6,7 +6,7 @@ from .utils import formatta_data, split_nomi
 # 🔥 DOCUMENTI IN EVIDENZA: inserisci qui gli ID dei documenti che vuoi mostrare
 # (modifica questa lista per cambiare i documenti in evidenza)
 EVIDENZA_IDS = [
-    'AMI-0049',  # Sostituisci con i tuoi ID
+    'AMI-0049',
     'AMI-0045',
     'AMI-0043',
     'AMI-0013',
@@ -15,71 +15,70 @@ EVIDENZA_IDS = [
 
 def genera_home(df, persone, output_dir):
     print("\n🏠 Generazione della Home page...")
-    
+
     schede = []
     conteggio_persone = Counter()
     documenti_evidenza = []
-    
+
     for index, row in df.iterrows():
         ami_id = str(row.get('id', '')).strip()
         if not ami_id:
             continue
-        
+
         titolo = str(row.get('titolo', 'Senza titolo')).strip()
         if titolo in ['nan', 'None', '']:
             titolo = 'Senza titolo'
-        
+
         data_raw = str(row.get('data', row.get('anno', ''))).strip()
         if data_raw in ['nan', 'None', '']:
             data_raw = 'n.d.'
         data_formattata, _ = formatta_data(data_raw)
-        
+
         tipo_raw = str(row.get('tipo', '')).strip()
         if tipo_raw in ['nan', 'None']:
             tipo_raw = ''
         tipo = tipo_raw.lower()
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
         tipo_display = tipo_display.capitalize() if tipo_display else ''
-        
+
         org = str(row.get('organizzazione', '')).strip()
         if org in ['nan', 'None']:
             org = ''
-        
+
         url_ia = str(row.get('url', '#')).strip()
-        
+
         # 🔥 ESTRAI IDENTIFIER PER LA COPERTINA
         identifier = None
         if url_ia and url_ia != '#':
             match = re.search(r'/details/([^/?#]+)', url_ia)
             if match:
                 identifier = match.group(1)
-        
+
         # 🔥 URL COPERTINA DA INTERNET ARCHIVE (servizio thumbnail)
         if identifier:
             copertina_url = f"https://archive.org/services/img/{identifier}"
         else:
             copertina_url = None
-        
+
         parti_sommario = []
         if tipo:
             parti_sommario.append(tipo)
         if org:
             parti_sommario.append(org)
-        
         sommario = ' · '.join(parti_sommario) if parti_sommario else 'Documento storico'
-        
+
         meta_html_parts = []
         if tipo_display:
             meta_html_parts.append(f'<span class="doc-type-chip">{tipo_display}</span>')
         if org:
             meta_html_parts.append(f'<span class="doc-org">{org}</span>')
         meta_html = ''.join(meta_html_parts) if meta_html_parts else '<span class="doc-org">Documento storico</span>'
-        
+
         try:
             num_id = int(re.search(r'(\d+)', ami_id).group(1))
-        except:
+        except Exception:
             num_id = 0
-        
+
         # 🔥 RACCOLTA PER SCHEDE RECENTI
         schede.append({
             'id': ami_id,
@@ -89,7 +88,7 @@ def genera_home(df, persone, output_dir):
             'meta_html': meta_html,
             'num_id': num_id
         })
-        
+
         # 🔥 RACCOLTA PER DOCUMENTI IN EVIDENZA
         if ami_id in EVIDENZA_IDS:
             documenti_evidenza.append({
@@ -101,24 +100,22 @@ def genera_home(df, persone, output_dir):
                 'num_id': num_id,
                 'copertina': copertina_url
             })
-        
+
         # 🔥 CONTEGGIO PERSONE PIÙ MENZIONATE
         autore_raw = str(row.get('autore', '')).strip()
         persone_collegate_raw = str(row.get('persone_collegate', '')).strip()
-        
         nomi_da_contare = set()
         if autore_raw and autore_raw not in ['nan', 'None']:
             nomi_da_contare.update(split_nomi(autore_raw))
         if persone_collegate_raw and persone_collegate_raw not in ['nan', 'None']:
             nomi_da_contare.update(split_nomi(persone_collegate_raw))
-        
         for nome in nomi_da_contare:
             if nome in persone:
                 conteggio_persone[nome] += 1
-    
+
     schede.sort(key=lambda x: x['num_id'], reverse=True)
     ultime_tre = schede[:3]
-    
+
     # 🔥 ORDINA I DOCUMENTI IN EVIDENZA secondo l'ordine della lista
     evidenza_ordinati = []
     for id_target in EVIDENZA_IDS:
@@ -126,14 +123,14 @@ def genera_home(df, persone, output_dir):
             if doc['id'] == id_target:
                 evidenza_ordinati.append(doc)
                 break
-    
+
     persone_top = conteggio_persone.most_common(3)
-    
-    # 🔥 BANNER
+
+    # 🔥 BANNER (margin-bottom 0: la fascia scura della sezione evidenza è aderente)
     banner_html = """
-<div class="banner-full" style="margin-bottom: 2rem;">
-    <img src="/archivio-maoismo-italiano/immagini/banner.webp" 
-         alt="Archivio del Maoismo Italiano" 
+<div class="banner-full" style="margin-bottom: 0;">
+    <img src="/archivio-maoismo-italiano/immagini/banner.webp"
+         alt="Archivio del Maoismo Italiano"
          class="banner-image">
     <div class="banner-overlay"></div>
     <div class="banner-content" style="position: absolute; bottom: 0.5rem; left: 0.5rem; z-index: 1; text-align: left; color: #ffffff; max-width: 650px; padding: 0.5rem 1rem;">
@@ -152,21 +149,18 @@ def genera_home(df, persone, output_dir):
     </div>
 </div>
 """
-    
+
     # ============================================================
-    # 🔥 SEZIONE DOCUMENTI IN EVIDENZA
+    # 🔥 SEZIONE DOCUMENTI IN EVIDENZA (fascia scura full-bleed)
     # ============================================================
-    
     if evidenza_ordinati:
         home_content = f"""---
 hide:
   - toc
 ---
-
 {banner_html}
-
-<h2 class="section-title"><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg> Documenti in evidenza</h2>
-
+<div class="evidenza-band">
+<h2 class="section-title">Documenti in evidenza</h2>
 <div class="evidenza-grid">
 """
         for doc in evidenza_ordinati:
@@ -174,20 +168,19 @@ hide:
                 img_html = f'<img src="{doc["copertina"]}" alt="{doc["titolo"]}" class="evidenza-thumbnail-img" loading="lazy">'
             else:
                 img_html = '<span class="evidenza-placeholder">📄</span>'
-            
             home_content += f"""
-<div class="evidenza-card">
-    <a href="documenti/{doc['id']}/" class="evidenza-link">
-        <div class="evidenza-thumbnail">
-            {img_html}
-        </div>
-        <div class="evidenza-titolo">{doc['titolo']}</div>
-    </a>
-</div>
+    <div class="evidenza-card">
+        <a href="documenti/{doc['id']}/" class="evidenza-link">
+            <div class="evidenza-thumbnail">
+                {img_html}
+            </div>
+            <div class="evidenza-titolo">{doc['titolo']}</div>
+        </a>
+    </div>
 """
         home_content += """
 </div>
-
+</div>
 <div class="home-columns">
 """
     else:
@@ -195,27 +188,19 @@ hide:
 hide:
   - toc
 ---
-
 {banner_html}
-
 <div class="home-columns">
 """
-    
+
     # ============================================================
     # COLONNA SINISTRA: Aggiunti di recente
     # ============================================================
-    
     home_content += """
 <div class="home-column">
-
 <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 12h10v2H7zm0-4h10v2H7zm0 8h6v2H7z"/></svg> Aggiunti di recente</h2>
-
 <div class="recent-container">
-
 <div class="catalogo-lista">
-
 """
-    
     for s in ultime_tre:
         home_content += f"""
 <div class="doc-row">
@@ -226,34 +211,24 @@ hide:
     </div>
 </div>
 """
-    
     home_content += """
 </div>
 </div>
-
 <div style="text-align: center; margin-top: 1rem;">
     <a href="documenti/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg> Tutti i documenti</a>
 </div>
-
 </div>
-
 """
-    
+
     # ============================================================
     # COLONNA DESTRA: Persone più menzionate
     # ============================================================
-    
     home_content += """
 <div class="home-column">
-
 <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> Persone più menzionate</h2>
-
 <div class="recent-container">
-
 <div class="catalogo-lista">
-
 """
-
     if persone_top:
         for rank, (nome, conteggio) in enumerate(persone_top, start=1):
             info_persona = persone.get(nome, {})
@@ -276,44 +251,56 @@ hide:
         home_content += """
 <p style="padding: 0.6rem 0.8rem; color: var(--md-default-fg-color--light);">Nessuna persona ancora collegata ai documenti.</p>
 """
-
     home_content += """
 </div>
 </div>
-
 <div style="text-align: center; margin-top: 1rem;">
     <a href="persone/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg> Tutte le persone</a>
 </div>
-
-</div>
-
 </div>
 """
-    
+
     # ============================================================
     # STILI
     # ============================================================
-    
     home_content += """
 <style>
 /* ============================================================
-   NASCONDE IL TITOLO "Home" NELLA PAGINA
-   ============================================================ */
+NASCONDE IL TITOLO "Home" NELLA PAGINA
+============================================================ */
 .md-content article h1:first-of-type {
     display: none !important;
 }
 
 /* ============================================================
-   SEZIONE DOCUMENTI IN EVIDENZA
-   ============================================================ */
+SEZIONE DOCUMENTI IN EVIDENZA — fascia scura full-bleed
+Il contenuto resta allineato alla colonna di testo: è solo lo
+sfondo (::before) a estendersi a tutta larghezza.
+============================================================ */
+.evidenza-band {
+    position: relative;
+    padding: 1.6rem 0 2rem;
+    margin: 0 0 2rem 0; /* margin-top 0 => aderente al banner */
+}
+.evidenza-band::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(-50vw + 50%);
+    right: calc(-50vw + 50%);
+    background: #0d0d0d;
+    z-index: -1;
+}
+
 .section-title {
     font-size: 1.5rem;
     font-weight: 600;
-    margin: 1.5rem 0 1rem 0;
+    margin: 0 0 1.2rem 0;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--md-default-fg-color);
+    color: #ffffff;
 }
 
 .section-icon {
@@ -327,20 +314,19 @@ hide:
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0; /* lo spazio sotto lo dà la fascia */
 }
 
+/* Card trasparente sul nero: niente sfondo, niente bordo, niente cornice */
 .evidenza-card {
-    background: var(--md-code-bg-color);
-    border-radius: 8px;
-    border: 1px solid var(--md-default-fg-color--lightest);
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+    background: transparent;
+    border: none;
+    overflow: visible;
+    transition: transform 0.2s;
 }
 
 .evidenza-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transform: translateY(-4px);
 }
 
 .evidenza-link {
@@ -350,24 +336,20 @@ hide:
     flex-direction: column;
 }
 
-/* 🔥 CONTAINER PIÙ ALTO PER MOSTRARE LE COPERTINE COMPLETE */
+/* ALTEZZA UNIFORME; la larghezza si adatta alla colonna (object-fit: contain) */
 .evidenza-thumbnail {
-    min-height: 280px;           /* 🔥 ALTEZZA MINIMA PIÙ ALTA */
-    height: auto;                /* 🔥 SI ADATTA ALL'IMMAGINE */
-    background: #1a1a1a;
+    height: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     flex-shrink: 0;
-    padding: 8px;
 }
 
 .evidenza-thumbnail-img {
     width: 100%;
     height: 100%;
-    min-height: 260px;           /* 🔥 ALTEZZA MINIMA PER L'IMMAGINE */
-    object-fit: contain;         /* 🔥 MOSTRA L'IMMAGINE COMPLETA */
+    object-fit: contain;
     display: block;
 }
 
@@ -377,12 +359,13 @@ hide:
     opacity: 0.5;
 }
 
+/* Titolo sotto la copertina: stessa grandezza di prima, colore chiaro */
 .evidenza-titolo {
     padding: 0.5rem 0.7rem 0.7rem 0.7rem;
     font-size: 0.85rem;
     font-weight: 500;
     line-height: 1.3;
-    color: var(--md-default-fg-color);
+    color: rgba(255, 255, 255, 0.92);
     text-align: center;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -392,8 +375,15 @@ hide:
 }
 
 /* ============================================================
-   CATALOGO
-   ============================================================ */
+BANNER: aderente alla fascia scura (solo home)
+============================================================ */
+.banner-full {
+    margin-bottom: 0 !important;
+}
+
+/* ============================================================
+CATALOGO
+============================================================ */
 .catalogo-lista {
     display: flex;
     flex-direction: column;
@@ -489,8 +479,8 @@ hide:
 }
 
 /* ============================================================
-   LAYOUT A DUE COLONNE (home)
-   ============================================================ */
+LAYOUT A DUE COLONNE (home)
+============================================================ */
 .home-columns {
     display: grid;
     grid-template-columns: 3fr 2fr;
@@ -531,6 +521,9 @@ hide:
     flex: 1;
 }
 
+/* ============================================================
+RESPONSIVE
+============================================================ */
 @media (max-width: 768px) {
     .home-columns {
         grid-template-columns: 1fr;
@@ -540,12 +533,59 @@ hide:
         grid-template-columns: repeat(2, 1fr);
         gap: 0.8rem;
     }
-    /* 🔥 ALTEZZA RIDOTTA PER TABLET */
-    .evidenza-thumbnail {
-        min-height: 200px;
+    .evidenza-band {
+        padding: 1.2rem 0.8rem 1.5rem;
     }
-    .evidenza-thumbnail-img {
-        min-height: 180px;
+    .evidenza-thumbnail {
+        height: 200px;
+    }
+    .banner-full {
+        height: 240px;
+        min-height: 200px;
+        overflow: hidden;
+    }
+    .banner-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+    .banner-content[style] {
+        bottom: 0.3rem !important;
+        left: 0.3rem !important;
+        right: 0.3rem !important;
+        max-width: none !important;
+        padding: 0.3rem 0.6rem !important;
+    }
+    .banner-content p[style] {
+        font-size: 0.8rem !important;
+        margin: 0 0 0.3rem 0 !important;
+        line-height: 1.3 !important;
+    }
+    .banner-actions[style] {
+        flex-wrap: wrap !important;
+        gap: 0.3rem !important;
+    }
+    .banner-button[style] {
+        padding: 0.3rem 0.8rem !important;
+        font-size: 0.75rem !important;
+    }
+    .banner-search[style] {
+        flex: 1 1 100% !important;
+        padding: 0.2rem 0.6rem !important;
+        gap: 0.3rem !important;
+    }
+    .banner-search input[style] {
+        min-width: 80px !important;
+        font-size: 0.75rem !important;
+    }
+    .banner-search button[style] {
+        font-size: 0.7rem !important;
+        padding: 0.1rem 0.3rem !important;
+    }
+    .banner-search-icon[style] {
+        width: 0.9rem !important;
+        height: 0.9rem !important;
     }
 }
 
@@ -560,10 +600,7 @@ hide:
         padding: 0.4rem 0.5rem 0.5rem 0.5rem;
     }
     .evidenza-thumbnail {
-        min-height: 160px;
-    }
-    .evidenza-thumbnail-img {
-        min-height: 140px;
+        height: 160px;
     }
     .doc-row {
         flex-direction: column;
@@ -592,41 +629,31 @@ hide:
         font-size: 1.2rem;
     }
     .evidenza-thumbnail {
-        min-height: 140px;
+        height: 140px;
     }
-    .evidenza-thumbnail-img {
-        min-height: 120px;
+    .banner-full {
+        height: 180px;
+        min-height: 150px;
+    }
+    .banner-content p[style] {
+        font-size: 0.7rem !important;
+    }
+    .banner-button[style] {
+        padding: 0.2rem 0.6rem !important;
+        font-size: 0.65rem !important;
+    }
+    .banner-search input[style] {
+        font-size: 0.7rem !important;
+        min-width: 60px !important;
+    }
+    .banner-search button[style] {
+        font-size: 0.65rem !important;
     }
 }
 
 /* ============================================================
-   BANNER
-   ============================================================ */
-.banner-full {
-    position: relative;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
-
-.banner-image {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.banner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.45);
-}
-
-/* Badge "medaglia" per la classifica delle persone più menzionate */
+PERSONE PIÙ MENZIONATE (medaglie)
+============================================================ */
 .persona-rank {
     flex: 0 0 42px;
     width: 42px;
@@ -677,7 +704,9 @@ hide:
     background-color: var(--md-primary-fg-color--dark);
 }
 
-/* Stili per il dropdown dei suggerimenti della ricerca hero */
+/* ============================================================
+DROPDOWN SUGGERIMENTI RICERCA HERO
+============================================================ */
 .hero-search-results {
     display: none;
     max-height: 60vh;
@@ -774,87 +803,10 @@ hide:
     color: #b71c1c;
     font-weight: 700;
 }
-
-/* ============================================================
-   RESPONSIVE (mobile)
-   ============================================================ */
-@media (max-width: 768px) {
-    .banner-full {
-        margin-bottom: 1rem !important;
-        height: 240px;
-        min-height: 200px;
-        overflow: hidden;
-    }
-    .banner-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center center;
-    }
-    .banner-content[style] {
-        bottom: 0.3rem !important;
-        left: 0.3rem !important;
-        right: 0.3rem !important;
-        max-width: none !important;
-        padding: 0.3rem 0.6rem !important;
-    }
-    .banner-content p[style] {
-        font-size: 0.8rem !important;
-        margin: 0 0 0.3rem 0 !important;
-        line-height: 1.3 !important;
-    }
-    .banner-actions[style] {
-        flex-wrap: wrap !important;
-        gap: 0.3rem !important;
-    }
-    .banner-button[style] {
-        padding: 0.3rem 0.8rem !important;
-        font-size: 0.75rem !important;
-    }
-    .banner-search[style] {
-        flex: 1 1 100% !important;
-        padding: 0.2rem 0.6rem !important;
-        gap: 0.3rem !important;
-    }
-    .banner-search input[style] {
-        min-width: 80px !important;
-        font-size: 0.75rem !important;
-    }
-    .banner-search button[style] {
-        font-size: 0.7rem !important;
-        padding: 0.1rem 0.3rem !important;
-    }
-    .banner-search-icon[style] {
-        width: 0.9rem !important;
-        height: 0.9rem !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .banner-full {
-        height: 180px;
-        min-height: 150px;
-    }
-    .banner-content p[style] {
-        font-size: 0.7rem !important;
-    }
-    .banner-button[style] {
-        padding: 0.2rem 0.6rem !important;
-        font-size: 0.65rem !important;
-    }
-    .banner-search input[style] {
-        font-size: 0.7rem !important;
-        min-width: 60px !important;
-    }
-    .banner-search button[style] {
-        font-size: 0.65rem !important;
-    }
-}
 </style>
 """
-    
+
     index_path = os.path.join(output_dir, 'index.md')
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(home_content)
-    
     print(f"   ✅ Home generata con {len(ultime_tre)} ultimi documenti.")
