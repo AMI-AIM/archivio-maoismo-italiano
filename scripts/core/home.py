@@ -285,11 +285,11 @@ hide:
 
     # ============================================================
     # COLONNA 2: Organizzazioni più menzionate
-    # 🔥 Icona: Material Symbols Outlined "flag" (bandiera)
+    # Icona: SVG inline "flag" (bandiera) — nessuna dipendenza esterna
     # ============================================================
     home_content += """
 <div class="home-column">
-    <h2><span class="material-symbols-outlined section-icon">flag</span> Organizzazioni più menzionate</h2>
+    <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg> Organizzazioni più menzionate</h2>
     <div class="recent-container">
         <div class="catalogo-lista">
 """
@@ -324,7 +324,7 @@ hide:
         </div>
     </div>
     <div style="text-align: center; margin-top: 1rem;">
-        <a href="organizzazioni/" class="md-button md-button--primary"><span class="material-symbols-outlined button-icon" style="font-size: 1rem; width: 1rem; height: 1rem;">flag</span> Tutte le organizzazioni</a>
+        <a href="organizzazioni/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg> Tutte le organizzazioni</a>
     </div>
 </div>
 </div>
