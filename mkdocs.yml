@@ -24,11 +24,13 @@ theme:
 extra_css:
   - stylesheets/extra.css
   - stylesheets/documenti.css
+  - stylesheets/galleria.css
 
 extra_javascript:
   - javascripts/hero-search.js
   - javascripts/documenti.js
   - javascripts/archivio-filtri.js
+  - javascripts/galleria.js
 
 plugins:
   - search

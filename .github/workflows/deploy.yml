@@ -46,6 +46,9 @@ jobs:
       - name: Generate organization pages
         run: python scripts/org.py
       
+      - name: Generate gallery
+        run: python scripts/galleria.py
+
       - name: Generate document schede
         run: python scripts/generatore.py
       
