@@ -14,14 +14,17 @@ EVIDENZA_IDS = [
 ]
 
 
-def estrai_iniziali(nome):
-    """Estrae le iniziali da un nome (es. 'Mao Zedong' -> 'MZ')."""
-    parti = nome.strip().split()
+def estrai_iniziali(nome, max_lettere=2):
+    """Estrae le iniziali dalle prime due parole significative
+    (scarta quelle che iniziano con punteggiatura, es. parentesi).
+    Es. 'Mao Zedong' -> 'MZ';
+        'Partito Comunista d'Italia (marxista-leninista)' -> 'PC'."""
+    parti = [p for p in nome.split() if p and p[0].isalnum()]
     if not parti:
         return '?'
     if len(parti) == 1:
-        return parti[0][:2].upper()
-    return (parti[0][0] + parti[-1][0]).upper()
+        return parti[0][:max_lettere].upper()
+    return ''.join(p[0] for p in parti[:max_lettere]).upper()
 
 
 def genera_home(df, persone, output_dir, organizzazioni=None):
