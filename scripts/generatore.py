@@ -59,14 +59,12 @@ def pubblica_file_seo():
     """
     Garantisce che robots.txt e i file di verifica (Google Search Console)
     finiscano in build/ a ogni generazione: MkDocs li pubblicherà in root
-    del sito. Risolve il problema dei file messi nella root del repo,
-    che GitHub Pages NON serve (serve solo l'output di mkdocs build).
+    del sito. I file messi nella root del repo NON vengono serviti da
+    GitHub Pages (serve solo l'output di mkdocs build).
     """
     print("\n[SEO] Pubblicazione file statici SEO in build/...")
 
-    # ----------------------------------------------------------------
     # 1. robots.txt: (ri)scritto sempre, così non può mancare
-    # ----------------------------------------------------------------
     robots_path = os.path.join(OUTPUT_DIR, 'robots.txt')
     robots_content = """# robots.txt — Archivio del Maoismo Italiano
 User-agent: *
@@ -78,18 +76,16 @@ Sitemap: https://ami-aim.github.io/archivio-maoismo-italiano/sitemap.xml
         f.write(robots_content)
     print("   [OK] robots.txt scritto in build/")
 
-    # ----------------------------------------------------------------
     # 2. File di verifica Search Console (google*.html):
     #    copiati dalla root del repo (o da static/) dentro build/
-    # ----------------------------------------------------------------
     sorgenti = []
     sorgenti += glob.glob(os.path.join(ROOT_DIR, 'google*.html'))
     sorgenti += glob.glob(os.path.join(ROOT_DIR, 'static', 'google*.html'))
 
     if not sorgenti:
-        print("   [INFO] Nessun file google*.html trovato nella root: "
-              "se devi verificare la Search Console, lascia il file di "
-              "verifica nella root del repo: verrà copiato automaticamente.")
+        print("   [INFO] Nessun file google*.html nella root: se devi verificare "
+              "la Search Console, lascia il file di verifica nella root del repo "
+              "e verrà copiato automaticamente.")
         return
 
     for src in sorgenti:
@@ -101,6 +97,8 @@ Sitemap: https://ami-aim.github.io/archivio-maoismo-italiano/sitemap.xml
 def genera_sitemap(output_dir, df, persone, organizzazioni):
     """
     Genera sitemap.xml per SEO (Google, Bing, etc).
+    Versione irrobustita: lastmod W3C, schemaLocation esplicito,
+    nessun carattere prima della dichiarazione XML.
 
     Args:
         output_dir: Cartella output (docs/)
@@ -110,6 +108,7 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
     """
     print("\n[SITEMAP] Generazione della sitemap...")
     base_url = "https://ami-aim.github.io/archivio-maoismo-italiano"
+    oggi_iso = datetime.now().strftime('%Y-%m-%d')
 
     def escape_xml(text):
         """Escape caratteri speciali per XML."""
@@ -161,24 +160,35 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
                 "changefreq": "monthly"
             })
 
-    # Costruisce XML
+    # Costruisce XML (dichiarazione rigorosamente al primo byte)
     xml_lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
-        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+        'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
+        'xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 '
+        'http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'
     ]
     for pagina in pagine:
         xml_lines.append('  <url>')
         xml_lines.append(f'    <loc>{escape_xml(pagina["loc"])}</loc>')
-        xml_lines.append(f'    <priority>{pagina["priority"]}</priority>')
+        xml_lines.append(f'    <lastmod>{oggi_iso}</lastmod>')
         xml_lines.append(f'    <changefreq>{pagina["changefreq"]}</changefreq>')
+        xml_lines.append(f'    <priority>{pagina["priority"]}</priority>')
         xml_lines.append('  </url>')
     xml_lines.append('</urlset>')
 
-    # Salva file
+    # Salva file (senza BOM, senza righe vuote iniziali)
     sitemap_path = os.path.join(output_dir, 'sitemap.xml')
     with open(sitemap_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(xml_lines))
-    print(f"   [OK] Sitemap generata con {len(pagine)} URL")
+
+    # Auto-verifica: il file deve iniziare con la dichiarazione XML
+    with open(sitemap_path, 'r', encoding='utf-8') as f:
+        primo_byte = f.read(5)
+    if primo_byte != '<?xml':
+        print(f"   [WARN] Sitemap: primi caratteri inattesi: {primo_byte!r}")
+    else:
+        print(f"   [OK] Sitemap generata con {len(pagine)} URL (XML valido al primo byte)")
 
 
 def ottimizza_json(output_dir):
