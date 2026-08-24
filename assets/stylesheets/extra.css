@@ -800,3 +800,39 @@ Gli !important vincono sui <style> inline generati dai generatori
     font-family: var(--ami-font-label) !important;
     font-weight: 700 !important;
 }
+
+/* ------------------------------------------------------------
+15. MATERIAL SYMBOLS OUTLINED — integrazione col sistema
+Le icone Material Symbols usate con classe .section-icon ereditano
+dimensione e colore delle icone SVG inline delle altre sezioni
+(documento, persona) per coerenza visiva.
+------------------------------------------------------------ */
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1.4rem;
+    width: 1.4rem;
+    height: 1.4rem;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+    letter-spacing: normal;
+    text-transform: none;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'liga';
+    color: var(--md-primary-fg-color);
+    /* Peso e grado visivo di default: outline sottile (GRAD 0) */
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Quando l'icona è all'interno di un titolo scuro (fascia nera
+dell'evidenza), eredita il colore bianco dal contesto */
+.evidenza-band .material-symbols-outlined,
+.evidenza-band .section-icon {
+    color: #ffffff;
+}

@@ -284,11 +284,12 @@ hide:
 """
 
     # ============================================================
-    # COLONNA 2: Organizzazioni più menzionate (stessa logica)
+    # COLONNA 2: Organizzazioni più menzionate
+    # 🔥 Icona: Material Symbols Outlined "flag" (bandiera)
     # ============================================================
     home_content += """
 <div class="home-column">
-    <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg> Organizzazioni più menzionate</h2>
+    <h2><span class="material-symbols-outlined section-icon">flag</span> Organizzazioni più menzionate</h2>
     <div class="recent-container">
         <div class="catalogo-lista">
 """
@@ -323,7 +324,7 @@ hide:
         </div>
     </div>
     <div style="text-align: center; margin-top: 1rem;">
-        <a href="organizzazioni/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg> Tutte le organizzazioni</a>
+        <a href="organizzazioni/" class="md-button md-button--primary"><span class="material-symbols-outlined button-icon" style="font-size: 1rem; width: 1rem; height: 1rem;">flag</span> Tutte le organizzazioni</a>
     </div>
 </div>
 </div>
