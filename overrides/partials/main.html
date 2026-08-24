@@ -1,56 +1,48 @@
 {% extends "base.html" %}
 
 {% block extrahead %}
-  <!-- ======================================================
-       FONT D'ARCHIVIO
-       ====================================================== -->
+  <!-- AMI-MAIN-ATTIVO v2 -->
+
+  <!-- Font d'archivio -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=Archivo:wght@500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap">
 
-  <!-- Preload hero image (LCP) -->
+  <!-- Preload hero (LCP) -->
   <link rel="preload" as="image" href="{{ base_url }}/immagini/banner.webp" fetchpriority="high">
 
-  {# ---------- Preparazione variabili sicure ---------- #}
-  {% set page_title = page.title | default('', true) %}
-  {% set fallback_desc = config.site_description | default('', true) %}
-  {% set page_desc = (page.meta.description if (page and page.meta and page.meta.description) else '') or fallback_desc %}
+  {# ----- Variabili sicure (niente Jinja esotico) ----- #}
+  {% set t = (page.title | default('', true)) | replace('"', '') | replace('\n', ' ') %}
+  {% set d_meta = page.meta.description | default('', true) %}
+  {% set d = (d_meta | replace('"', '') | replace('\n', ' ')) or (config.site_description | default('', true) | replace('"', '')) %}
+  {% set page_url = page.canonical_url | default(config.site_url ~ page.url | default('', true), true) %}
   {% set banner_img = config.site_url ~ 'immagini/banner.webp' %}
-  {% set page_url = page.canonical_url | default(config.site_url ~ page.url, true) %}
-
-  {# ---------- Identificazione tipo pagina ---------- #}
   {% set path = (page.url | default('', true)) | trim('/') %}
   {% set parts = path.split('/') if path else [] %}
   {% set sezione = parts[0] if parts else '' %}
   {% set is_scheda = parts | length > 1 %}
   {% set is_sezione = parts | length == 1 %}
   {% set is_home = (path == '') %}
-  {% set nomi_sez = {'documenti': 'Archivio', 'persone': 'Persone', 'organizzazioni': 'Organizzazioni', 'progetto': 'Il progetto'} %}
+  {% set nomi = {'documenti': 'Archivio', 'persone': 'Persone', 'organizzazioni': 'Organizzazioni', 'progetto': 'Il progetto'} %}
 
-  <!-- ======================================================
-       OPEN GRAPH
-       ====================================================== -->
+  <!-- Open Graph -->
   <meta property="og:site_name" content="Archivio del Maoismo Italiano">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
-  <meta property="og:title" content="{{ page_title or config.site_name }}">
-  <meta property="og:description" content="{{ page_desc }}">
+  <meta property="og:title" content="{{ t or config.site_name }}">
+  <meta property="og:description" content="{{ d }}">
   <meta property="og:url" content="{{ page_url }}">
   <meta property="og:image" content="{{ banner_img }}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
-  <!-- ======================================================
-       TWITTER CARD
-       ====================================================== -->
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ page_title or config.site_name }}">
-  <meta name="twitter:description" content="{{ page_desc }}">
+  <meta name="twitter:title" content="{{ t or config.site_name }}">
+  <meta name="twitter:description" content="{{ d }}">
   <meta name="twitter:image" content="{{ banner_img }}">
 
-  <!-- ======================================================
-       JSON-LD GLOBALE: WebSite + SearchAction
-       ====================================================== -->
+  <!-- JSON-LD globale: WebSite + SearchAction -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -70,94 +62,78 @@
   }
   </script>
 
-  {# ======================================================
-     JSON-LD PER PAGINA: BreadcrumbList + entità
-     Emesso solo se non siamo sulla home
-     ====================================================== #}
-  {% if not is_home %}
-
-  <!-- BreadcrumbList strutturato -->
+  {# ===== BreadcrumbList + entità (solo pagine interne) ===== #}
+  {% if is_scheda %}
+  <!-- BreadcrumbList -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "{{ config.site_url }}"
-      }{% if is_sezione %},
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "{{ nomi_sez.get(sezione, sezione) }}",
-        "item": "{{ page_url }}"
-      }{% elif is_scheda %},
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "{{ nomi_sez.get(sezione, sezione) }}",
-        "item": "{{ config.site_url }}{{ sezione }}/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "{{ page_title | replace('"', '') }}",
-        "item": "{{ page_url }}"
-      }{% endif %}
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ config.site_url }}"},
+      {"@type": "ListItem", "position": 2, "name": "{{ nomi.get(sezione, sezione) }}", "item": "{{ config.site_url }}{{ sezione }}/"},
+      {"@type": "ListItem", "position": 3, "name": "{{ t }}", "item": "{{ page_url }}"}
     ]
   }
   </script>
-
-  {# Entità specifica della pagina #}
-  {% if is_scheda and sezione == 'documenti' %}
+  {% if sezione == 'documenti' %}
+  <!-- CreativeWork -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
-    "name": "{{ page_title | replace('"', '') }}",
-    "description": "{{ page_desc | replace('"', '') }}",
+    "name": "{{ t }}",
+    "description": "{{ d }}",
     "url": "{{ page_url }}",
     "inLanguage": "it",
-    "isPartOf": {
-      "@type": "Collection",
-      "name": "Archivio del Maoismo Italiano",
-      "url": "{{ config.site_url }}"
-    }
+    "isPartOf": {"@type": "Collection", "name": "Archivio del Maoismo Italiano", "url": "{{ config.site_url }}"}
   }
   </script>
-  {% elif is_scheda and sezione == 'persone' %}
+  {% elif sezione == 'persone' %}
+  <!-- Person -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "{{ page_title | replace('"', '') }}",
-    "description": "{{ page_desc | replace('"', '') }}",
+    "name": "{{ t }}",
+    "description": "{{ d }}",
     "url": "{{ page_url }}"
   }
   </script>
-  {% elif is_scheda and sezione == 'organizzazioni' %}
+  {% elif sezione == 'organizzazioni' %}
+  <!-- Organization -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "{{ page_title | replace('"', '') }}",
-    "description": "{{ page_desc | replace('"', '') }}",
+    "name": "{{ t }}",
+    "description": "{{ d }}",
     "url": "{{ page_url }}"
   }
   </script>
+  {% endif %}
   {% elif is_sezione %}
+  <!-- BreadcrumbList a 2 livelli -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ config.site_url }}"},
+      {"@type": "ListItem", "position": 2, "name": "{{ nomi.get(sezione, sezione) }}", "item": "{{ page_url }}"}
+    ]
+  }
+  </script>
+  <!-- CollectionPage -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "{{ page_title | replace('"', '') }}",
-    "description": "{{ page_desc | replace('"', '') }}",
+    "name": "{{ t }}",
+    "description": "{{ d }}",
     "url": "{{ page_url }}",
     "inLanguage": "it"
   }
   </script>
-  {% endif %}
   {% endif %}
 {% endblock %}
