@@ -1,7 +1,7 @@
 import os
 import re
 from collections import Counter
-from .utils import formatta_data, split_nomi
+from .utils import formatta_data, split_nomi, slugify
 
 
 # DOCUMENTI IN EVIDENZA: inserisci qui gli ID dei documenti che vuoi mostrare
@@ -24,11 +24,12 @@ def estrai_iniziali(nome):
     return (parti[0][0] + parti[-1][0]).upper()
 
 
-def genera_home(df, persone, output_dir):
+def genera_home(df, persone, output_dir, organizzazioni=None):
     print("\nGenerazione della Home page...")
 
     schede = []
     conteggio_persone = Counter()
+    conteggio_organizzazioni = Counter()
     documenti_evidenza = []
 
     for index, row in df.iterrows():
@@ -107,6 +108,7 @@ def genera_home(df, persone, output_dir):
                 'copertina': copertina_url
             })
 
+        # ---- Conteggio PERSONE (autore + persone_collegate) ----
         autore_raw = str(row.get('autore', '')).strip()
         persone_collegate_raw = str(row.get('persone_collegate', '')).strip()
         nomi_da_contare = set()
@@ -114,10 +116,21 @@ def genera_home(df, persone, output_dir):
             nomi_da_contare.update(split_nomi(autore_raw))
         if persone_collegate_raw and persone_collegate_raw not in ['nan', 'None']:
             nomi_da_contare.update(split_nomi(persone_collegate_raw))
-
         for nome in nomi_da_contare:
             if nome in persone:
                 conteggio_persone[nome] += 1
+
+        # ---- Conteggio ORGANIZZAZIONI (organizzazione + organizzazioni_collegate) ----
+        org_raw = str(row.get('organizzazione', '')).strip()
+        org_collegate_raw = str(row.get('organizzazioni_collegate', '')).strip()
+        org_da_contare = set()
+        if org_raw and org_raw not in ['nan', 'None']:
+            org_da_contare.update(split_nomi(org_raw))
+        if org_collegate_raw and org_collegate_raw not in ['nan', 'None']:
+            org_da_contare.update(split_nomi(org_collegate_raw))
+        for nome in org_da_contare:
+            if organizzazioni is None or nome in organizzazioni:
+                conteggio_organizzazioni[nome] += 1
 
     schede.sort(key=lambda x: x['num_id'], reverse=True)
     ultime_tre = schede[:3]
@@ -130,16 +143,17 @@ def genera_home(df, persone, output_dir):
                 break
 
     persone_top = conteggio_persone.most_common(3)
+    organizzazioni_top = conteggio_organizzazioni.most_common(3)
 
-    # BANNER
+    # BANNER — testo più grande e spesso per leggibilità
     banner_html = """
 <div class="banner-full" style="margin-bottom: 0;">
     <img src="/archivio-maoismo-italiano/immagini/banner.webp"
          alt="Archivio del Maoismo Italiano"
          class="banner-image">
     <div class="banner-overlay"></div>
-    <div class="banner-content" style="position: absolute; bottom: 0.5rem; left: 0.5rem; z-index: 1; text-align: left; color: #ffffff; max-width: 650px; padding: 0.5rem 1rem;">
-        <p style="font-size: 1.2rem; opacity: 0.92; margin: 0 0 0.8rem 0; line-height: 1.5; text-shadow: 0 2px 12px rgba(0,0,0,0.4); font-weight: 400;">Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia</p>
+    <div class="banner-content" style="position: absolute; bottom: 0.5rem; left: 0.5rem; z-index: 1; text-align: left; color: #ffffff; max-width: 700px; padding: 0.5rem 1rem;">
+        <p style="font-size: 1.4rem; font-weight: 600; opacity: 1; margin: 0 0 0.8rem 0; line-height: 1.45; text-shadow: 0 2px 14px rgba(0,0,0,0.65), 0 1px 3px rgba(0,0,0,0.5);">Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia</p>
         <div class="banner-actions" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 0.6rem;">
             <a href="documenti/" class="banner-button" style="display: inline-block; padding: 0.5rem 1.2rem; background-color: #ffffff; color: #b71c1c !important; font-weight: 600; font-size: 0.9rem; border-radius: 6px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.25); white-space: nowrap; flex-shrink: 0;">Esplora l'archivio</a>
             <form class="banner-search" id="hero-search-form" action="documenti/" method="get" style="display: flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); border-radius: 24px; padding: 0.3rem 0.8rem; backdrop-filter: blur(2px); transition: background 0.2s, border-color 0.2s; position: relative; flex: 1 1 auto; min-width: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
@@ -155,7 +169,7 @@ def genera_home(df, persone, output_dir):
 </div>
 """
 
-    # SEZIONE DOCUMENTI IN EVIDENZA
+    # SEZIONE DOCUMENTI IN EVIDENZA (con tooltip sui titoli)
     if evidenza_ordinati:
         home_content = f"""---
 hide:
@@ -174,7 +188,7 @@ hide:
 
             home_content += f"""
         <div class="evidenza-card">
-            <a href="documenti/{doc['id']}/" class="evidenza-link">
+            <a href="documenti/{doc['id']}/" class="evidenza-link" title="{doc['titolo']}">
                 <div class="evidenza-thumbnail">
 {img_html}
                 </div>
@@ -185,7 +199,6 @@ hide:
         home_content += """
     </div>
 </div>
-<div class="home-columns">
 """
     else:
         home_content = f"""---
@@ -193,12 +206,13 @@ hide:
   - toc
 ---
 {banner_html}
-<div class="home-columns">
 """
 
-    # COLONNA SINISTRA: Aggiunti di recente
+    # ============================================================
+    # AGGIUNTI DI RECENTE — sezione piena larghezza, SOPRA le colonne
+    # ============================================================
     home_content += """
-<div class="home-column">
+<div class="home-column home-recent">
     <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 12h10v2H7zm0-4h10v2H7zm0 8h6v2H7z"/></svg> Aggiunti di recente</h2>
     <div class="recent-container">
         <div class="catalogo-lista">
@@ -208,7 +222,7 @@ hide:
             <div class="doc-row">
                 <div class="doc-data">{s['data']}</div>
                 <div class="doc-contenuto">
-                    <div class="doc-titolo"><a href="documenti/{s['id']}/">{s['titolo']}</a></div>
+                    <div class="doc-titolo"><a href="documenti/{s['id']}/" title="{s['titolo']}">{s['titolo']}</a></div>
                     <div class="doc-meta">{s['meta_html']}</div>
                 </div>
             </div>
@@ -220,9 +234,13 @@ hide:
         <a href="documenti/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg> Tutti i documenti</a>
     </div>
 </div>
+
+<div class="home-columns">
 """
 
-    # COLONNA DESTRA: Persone più menzionate (con avatar iniziali)
+    # ============================================================
+    # COLONNA 1: Persone più menzionate
+    # ============================================================
     home_content += """
 <div class="home-column">
     <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> Persone più menzionate</h2>
@@ -232,10 +250,10 @@ hide:
     if persone_top:
         for rank, (nome, conteggio) in enumerate(persone_top, start=1):
             info_persona = persone.get(nome, {})
-            slug = info_persona.get('slug', '')
-            nascita = info_persona.get('nascita', '').strip()
-            morte = info_persona.get('morte', '').strip()
-            date_vita = ' \u2013 '.join([d for d in [nascita, morte] if d and d not in ['nan', 'None']])
+            slug = info_persona.get('slug', slugify(nome))
+            nascita = str(info_persona.get('nascita', '')).strip()
+            morte = str(info_persona.get('morte', '')).strip()
+            date_vita = ' \u2013 '.join([d for d in [nascita, morte] if d and d not in ['nan', 'None', '']])
             etichetta_conteggio = "1 documento collegato" if conteggio == 1 else f"{conteggio} documenti collegati"
             iniziali = estrai_iniziali(nome)
 
@@ -261,6 +279,51 @@ hide:
     </div>
     <div style="text-align: center; margin-top: 1rem;">
         <a href="persone/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg> Tutte le persone</a>
+    </div>
+</div>
+"""
+
+    # ============================================================
+    # COLONNA 2: Organizzazioni più menzionate (stessa logica)
+    # ============================================================
+    home_content += """
+<div class="home-column">
+    <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg> Organizzazioni più menzionate</h2>
+    <div class="recent-container">
+        <div class="catalogo-lista">
+"""
+    if organizzazioni_top:
+        for rank, (nome, conteggio) in enumerate(organizzazioni_top, start=1):
+            info_org = (organizzazioni or {}).get(nome, {})
+            slug = info_org.get('slug', slugify(nome))
+            data_range = str(info_org.get('data_range', '')).strip()
+            if data_range in ['nan', 'None']:
+                data_range = ''
+            etichetta_conteggio = "1 documento collegato" if conteggio == 1 else f"{conteggio} documenti collegati"
+            iniziali = estrai_iniziali(nome)
+
+            home_content += f"""
+            <div class="doc-row doc-row-persona">
+                <div class="persona-avatar persona-avatar--{rank}">
+                    <span class="persona-iniziali">{iniziali}</span>
+                    <span class="persona-rank-badge persona-rank-badge--{rank}">{rank}</span>
+                </div>
+                <div class="doc-contenuto">
+                    <div class="doc-titolo"><a href="organizzazioni/{slug}/">{nome}</a></div>
+                    <div class="doc-sommario">{etichetta_conteggio}</div>
+                    {f'<div class="persona-date">{data_range}</div>' if data_range else ''}
+                </div>
+            </div>
+"""
+    else:
+        home_content += """
+            <p style="padding: 0.6rem 0.8rem; color: var(--md-default-fg-color--light);">Nessuna organizzazione ancora collegata ai documenti.</p>
+"""
+    home_content += """
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 1rem;">
+        <a href="organizzazioni/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg> Tutte le organizzazioni</a>
     </div>
 </div>
 </div>
@@ -359,7 +422,7 @@ SEZIONE DOCUMENTI IN EVIDENZA
     align-items: flex-start !important;
     gap: 1.5rem !important;
     overflow-x: auto;
-    padding-bottom: 2.6rem; /* spazio riservato ai titoli */
+    padding-bottom: 2.6rem;
     margin-bottom: 0;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -381,7 +444,6 @@ SEZIONE DOCUMENTI IN EVIDENZA
     text-decoration: none;
     color: inherit;
 }
-/* Box copertina: altezza fissa 240px su desktop */
 .evidenza-thumbnail {
     height: 240px !important;
     max-height: 240px !important;
@@ -389,7 +451,6 @@ SEZIONE DOCUMENTI IN EVIDENZA
     align-items: center;
     justify-content: center;
 }
-/* Copertina: mai croppata, mai fuori dal box, proporzioni originali */
 .evidenza-thumbnail-img {
     display: block !important;
     height: 100% !important;
@@ -403,8 +464,6 @@ SEZIONE DOCUMENTI IN EVIDENZA
     font-size: 2.5rem;
     opacity: 0.5;
 }
-/* Titolo fuori flusso: non altera la larghezza della card;
-   se più lungo della copertina viene troncato con "..." */
 .evidenza-titolo {
     position: absolute !important;
     top: 100% !important;
@@ -509,11 +568,14 @@ CATALOGO
 }
 
 /* ------------------------------------------------------------
-LAYOUT A DUE COLONNE
+LAYOUT HOME: recenti a piena larghezza SOPRA, poi due colonne 1:1
 ------------------------------------------------------------ */
+.home-recent {
+    margin: 0.5rem 0 2rem 0;
+}
 .home-columns {
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
     align-items: stretch;
     margin-top: 0.5rem;
@@ -556,7 +618,7 @@ LAYOUT A DUE COLONNE
 }
 
 /* ------------------------------------------------------------
-PERSONE PIÙ MENZIONATE (avatar con iniziali + badge rank)
+AVATAR con iniziali + badge rank (persone E organizzazioni)
 ------------------------------------------------------------ */
 .persona-avatar {
     position: relative;
@@ -706,21 +768,21 @@ RESPONSIVE
 ------------------------------------------------------------ */
 @media (max-width: 1100px) {
     .evidenza-thumbnail {
-        height: 200px !important;
-        max-height: 200px !important;
+        height: 190px !important;
+        max-height: 190px !important;
     }
     .evidenza-thumbnail-img {
-        max-height: 200px !important;
+        max-height: 190px !important;
     }
 }
 
 @media (max-width: 768px) {
+    /* Le due colonne diventano impilate */
     .home-columns {
         grid-template-columns: 1fr;
         gap: 0.5rem;
     }
 
-    /* Evidenza: scroll orizzontale su mobile */
     .evidenza-grid {
         justify-content: flex-start !important;
         scroll-snap-type: x mandatory;
@@ -766,7 +828,7 @@ RESPONSIVE
         padding: 0.3rem 0.6rem !important;
     }
     .banner-content p[style] {
-        font-size: 0.8rem !important;
+        font-size: 0.85rem !important;
         margin: 0 0 0.3rem 0 !important;
         line-height: 1.3 !important;
     }
@@ -843,7 +905,7 @@ RESPONSIVE
         min-height: 150px;
     }
     .banner-content p[style] {
-        font-size: 0.7rem !important;
+        font-size: 0.75rem !important;
     }
     .banner-button[style] {
         padding: 0.2rem 0.6rem !important;
