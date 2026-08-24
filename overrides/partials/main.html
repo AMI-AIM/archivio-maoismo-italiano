@@ -2,11 +2,73 @@
 
 {% block extrahead %}
   <!-- ======================================================
+       SEO & PERFORMANCE — nessun impatto grafico
+       ====================================================== -->
+
+  <!-- Preload hero image: anticipa il download del banner,
+       migliora LCP (Largest Contentful Paint) -->
+  <link rel="preload" as="image" href="{{ base_url }}/immagini/banner.webp" fetchpriority="high">
+
+  <!-- Open Graph di default (fallback per tutte le pagine) -->
+  <meta property="og:site_name" content="Archivio del Maoismo Italiano">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  {% if page and page.meta and page.meta.title %}
+  <meta property="og:title" content="{{ page.meta.title }}">
+  {% elif page and page.title %}
+  <meta property="og:title" content="{{ page.title }}">
+  {% else %}
+  <meta property="og:title" content="{{ config.site_name }}">
+  {% endif %}
+  {% if page and page.meta and page.meta.description %}
+  <meta property="og:description" content="{{ page.meta.description }}">
+  {% elif config.site_description %}
+  <meta property="og:description" content="{{ config.site_description }}">
+  {% endif %}
+  <meta property="og:url" content="{{ page.canonical_url | default(config.site_url, true) }}">
+  <meta property="og:image" content="{{ config.site_url }}immagini/banner.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  {% if page and page.meta and page.meta.title %}
+  <meta name="twitter:title" content="{{ page.meta.title }}">
+  {% elif page and page.title %}
+  <meta name="twitter:title" content="{{ page.title }}">
+  {% else %}
+  <meta name="twitter:title" content="{{ config.site_name }}">
+  {% endif %}
+  {% if page and page.meta and page.meta.description %}
+  <meta name="twitter:description" content="{{ page.meta.description }}">
+  {% elif config.site_description %}
+  <meta name="twitter:description" content="{{ config.site_description }}">
+  {% endif %}
+  <meta name="twitter:image" content="{{ config.site_url }}immagini/banner.webp">
+
+  <!-- JSON-LD: WebSite + SearchAction (abilita sitelinks searchbox su Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Archivio del Maoismo Italiano",
+    "alternateName": "AMI - Archivio Maoismo Italiano",
+    "url": "{{ config.site_url }}",
+    "description": "{{ config.site_description }}",
+    "inLanguage": "it",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "{{ config.site_url }}documenti/?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- ======================================================
        FONT D'ARCHIVIO
-       Fraunces      → titoli e corpo (stessa famiglia, peso variabile)
-       Archivo       → etichette, nav, bottoni
-       Courier Prime → codice e blocchi isolati (schede, trascrizioni)
-       Le icone sono SVG inline: nessuna dipendenza da font icona.
        ====================================================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

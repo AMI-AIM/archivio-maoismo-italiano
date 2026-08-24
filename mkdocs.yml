@@ -1,5 +1,5 @@
 site_name: AMI - Archivio del Maoismo Italiano
-site_description: Risorsa digitale per la ricerca storica sul maoismo in Italia
+site_description: Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia. Archivio digitale a cura di Ivan Masci.
 site_author: Ivan Masci
 site_url: https://ami-aim.github.io/archivio-maoismo-italiano/
 
@@ -32,6 +32,11 @@ extra_javascript:
 
 plugins:
   - search
+  - sitemap:
+      enabled: true
+      changefreq: weekly
+      priority: 0.5
+      alternate_links: false
 
 markdown_extensions:
   - attr_list

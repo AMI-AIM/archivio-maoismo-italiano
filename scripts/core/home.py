@@ -175,6 +175,8 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
     # SEZIONE DOCUMENTI IN EVIDENZA (con tooltip sui titoli)
     if evidenza_ordinati:
         home_content = f"""---
+title: "Archivio del Maoismo Italiano — documenti, periodici e fonti del movimento filo-cinese"
+description: "Archivio digitale di documenti, periodici, opuscoli e fonti primarie del movimento politico 'filo-cinese' in Italia (anni '60-'80). Catalogo ricercabile con schede catalografiche, biografie e organizzazioni."
 hide:
   - toc
 ---
@@ -205,6 +207,8 @@ hide:
 """
     else:
         home_content = f"""---
+title: "Archivio del Maoismo Italiano — documenti, periodici e fonti del movimento filo-cinese"
+description: "Archivio digitale di documenti, periodici, opuscoli e fonti primarie del movimento politico 'filo-cinese' in Italia (anni '60-'80). Catalogo ricercabile con schede catalografiche, biografie e organizzazioni."
 hide:
   - toc
 ---
