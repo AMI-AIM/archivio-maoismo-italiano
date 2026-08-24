@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block extrahead %}
-  <!-- AMI-MAIN-ATTIVO v2 -->
+  <!-- AMI-MAIN-ATTIVO v3 -->
 
   <!-- Font d'archivio -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,13 +11,12 @@
   <!-- Preload hero (LCP) -->
   <link rel="preload" as="image" href="{{ base_url }}/immagini/banner.webp" fetchpriority="high">
 
-  {# ----- Variabili sicure (niente Jinja esotico) ----- #}
-  {% set t = (page.title | default('', true)) | replace('"', '') | replace('\n', ' ') %}
-  {% set d_meta = page.meta.description | default('', true) %}
-  {% set d = (d_meta | replace('"', '') | replace('\n', ' ')) or (config.site_description | default('', true) | replace('"', '')) %}
-  {% set page_url = page.canonical_url | default(config.site_url ~ page.url | default('', true), true) %}
+  {# ----- Variabili sicure (gestisce page=None) ----- #}
+  {% set t = (page.title | default('', true)) | replace('"', '') | replace('\n', ' ') if page else '' %}
+  {% set d = (page.meta.description | default('', true) if (page and page.meta) else '') | replace('"', '') | replace('\n', ' ') or (config.site_description | default('', true) | replace('"', '')) %}
+  {% set page_url = page.canonical_url | default(config.site_url ~ (page.url | default('', true)), true) if page else config.site_url %}
   {% set banner_img = config.site_url ~ 'immagini/banner.webp' %}
-  {% set path = (page.url | default('', true)) | trim('/') %}
+  {% set path = (page.url | default('', true)) | trim('/') if page else '' %}
   {% set parts = path.split('/') if path else [] %}
   {% set sezione = parts[0] if parts else '' %}
   {% set is_scheda = parts | length > 1 %}
@@ -63,8 +62,7 @@
   </script>
 
   {# ===== BreadcrumbList + entità (solo pagine interne) ===== #}
-  {% if is_scheda %}
-  <!-- BreadcrumbList -->
+  {% if page and is_scheda %}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -112,7 +110,7 @@
   }
   </script>
   {% endif %}
-  {% elif is_sezione %}
+  {% elif page and is_sezione %}
   <!-- BreadcrumbList a 2 livelli -->
   <script type="application/ld+json">
   {
