@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div style="max-width: 640px; margin: 3rem auto; padding: 2rem; text-align: center;">
+  <div style="font-family: 'Fraunces', Georgia, serif; font-weight: 900; font-size: clamp(4rem, 12vw, 7rem); color: #b71c1c; line-height: 1; margin-bottom: 0.5rem; letter-spacing: -0.01em;">404</div>
+  <h1 style="font-family: 'Fraunces', Georgia, serif; font-weight: 900; font-size: clamp(1.5rem, 4vw, 2.2rem); margin: 0 0 1rem; letter-spacing: -0.01em;">Pagina non trovata</h1>
+  <p style="font-family: 'Fraunces', Georgia, serif; font-size: 1.05rem; color: #6b6b6b; line-height: 1.6; margin: 0 0 2rem;">
+    Il documento che stai cercando non è in questo archivio — forse è stato spostato, o l'URL contiene un errore.
+  </p>
+  <div style="display: flex; flex-direction: column; gap: 0.8rem; align-items: center;">
+    <a href="{{ base_url }}/" style="display: inline-block; padding: 0.7rem 1.8rem; background: #b71c1c; color: #ffffff; text-decoration: none; border-radius: 4px; font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 0.9rem;">Torna alla home</a>
+    <a href="{{ base_url }}/documenti/" style="font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 0.9rem; color: #b71c1c; text-decoration: none;">Oppure esplora l'archivio completo →</a>
+  </div>
+  <form action="{{ base_url }}/documenti/" method="get" style="margin-top: 2rem; max-width: 420px; margin-left: auto; margin-right: auto;">
+    <label for="search-404" style="display: block; font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: #6b6b6b; margin-bottom: 0.5rem;">Cerca nell'archivio</label>
+    <div style="display: flex; gap: 0.4rem;">
+      <input type="text" id="search-404" name="q" placeholder="Titolo, persona, organizzazione..." style="flex: 1; padding: 0.6rem 0.9rem; border: 1px solid #e3e3e3; border-radius: 6px; font-family: 'Fraunces', Georgia, serif; font-size: 0.95rem;">
+      <button type="submit" style="padding: 0.6rem 1.2rem; background: #b71c1c; color: #ffffff; border: none; border-radius: 6px; font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 0.9rem; cursor: pointer;">Cerca</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -32,11 +32,6 @@ extra_javascript:
 
 plugins:
   - search
-  - sitemap:
-      enabled: true
-      changefreq: weekly
-      priority: 0.5
-      alternate_links: false
 
 markdown_extensions:
   - attr_list
