@@ -8,11 +8,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=Archivo:wght@500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap">
 
-  <!-- Preload hero image: migliora LCP -->
+  <!-- Preload hero image (LCP) -->
   <link rel="preload" as="image" href="{{ base_url }}/immagini/banner.webp" fetchpriority="high">
 
-  {% set t = ((page.title or '') | replace('"', '\\"')) if page else '' %}
-  {% set d = (((page.meta.description if (page and page.meta) else '') or config.site_description or '') | replace('"', '\\"') | replace('\n', ' ')) %}
+  {# ---------- Preparazione variabili sicure ---------- #}
+  {% set page_title = page.title | default('', true) %}
+  {% set fallback_desc = config.site_description | default('', true) %}
+  {% set page_desc = (page.meta.description if (page and page.meta and page.meta.description) else '') or fallback_desc %}
+  {% set banner_img = config.site_url ~ 'immagini/banner.webp' %}
+  {% set page_url = page.canonical_url | default(config.site_url ~ page.url, true) %}
+
+  {# ---------- Identificazione tipo pagina ---------- #}
+  {% set path = (page.url | default('', true)) | trim('/') %}
+  {% set parts = path.split('/') if path else [] %}
+  {% set sezione = parts[0] if parts else '' %}
+  {% set is_scheda = parts | length > 1 %}
+  {% set is_sezione = parts | length == 1 %}
+  {% set is_home = (path == '') %}
+  {% set nomi_sez = {'documenti': 'Archivio', 'persone': 'Persone', 'organizzazioni': 'Organizzazioni', 'progetto': 'Il progetto'} %}
 
   <!-- ======================================================
        OPEN GRAPH
@@ -20,14 +33,10 @@
   <meta property="og:site_name" content="Archivio del Maoismo Italiano">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
-  <meta property="og:title" content="{{ t or config.site_name }}">
-  <meta property="og:description" content="{{ d }}">
-  <meta property="og:url" content="{{ page.canonical_url | default(config.site_url, true) }}">
-  {% if page and page.meta and page.meta.image %}
-  <meta property="og:image" content="{{ page.meta.image }}">
-  {% else %}
-  <meta property="og:image" content="{{ config.site_url }}immagini/banner.webp">
-  {% endif %}
+  <meta property="og:title" content="{{ page_title or config.site_name }}">
+  <meta property="og:description" content="{{ page_desc }}">
+  <meta property="og:url" content="{{ page_url }}">
+  <meta property="og:image" content="{{ banner_img }}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
@@ -35,13 +44,9 @@
        TWITTER CARD
        ====================================================== -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ t or config.site_name }}">
-  <meta name="twitter:description" content="{{ d }}">
-  {% if page and page.meta and page.meta.image %}
-  <meta name="twitter:image" content="{{ page.meta.image }}">
-  {% else %}
-  <meta name="twitter:image" content="{{ config.site_url }}immagini/banner.webp">
-  {% endif %}
+  <meta name="twitter:title" content="{{ page_title or config.site_name }}">
+  <meta name="twitter:description" content="{{ page_desc }}">
+  <meta name="twitter:image" content="{{ banner_img }}">
 
   <!-- ======================================================
        JSON-LD GLOBALE: WebSite + SearchAction
@@ -53,7 +58,6 @@
     "name": "Archivio del Maoismo Italiano",
     "alternateName": "AMI - Archivio Maoismo Italiano",
     "url": "{{ config.site_url }}",
-    "description": "{{ config.site_description | replace('"', '\\"') }}",
     "inLanguage": "it",
     "potentialAction": {
       "@type": "SearchAction",
@@ -66,14 +70,11 @@
   }
   </script>
 
-  <!-- ======================================================
-       JSON-LD PER PAGINA: BreadcrumbList + entità
-       (Jinja2 sicuro: split() è un metodo Python, non un filtro)
-       ====================================================== -->
-  {% if page and not page.is_homepage and page.url %}
-  {% set parts = page.url.rstrip('/').split('/') %}
-  {% set sezione = parts[0] if parts else '' %}
-  {% set nomi = {'documenti': 'Archivio', 'persone': 'Persone', 'organizzazioni': 'Organizzazioni', 'progetto': 'Il progetto'} %}
+  {# ======================================================
+     JSON-LD PER PAGINA: BreadcrumbList + entità
+     Emesso solo se non siamo sulla home
+     ====================================================== #}
+  {% if not is_home %}
 
   <!-- BreadcrumbList strutturato -->
   <script type="application/ld+json">
@@ -81,26 +82,43 @@
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ config.site_url }}"}
-      {%- if parts | length > 1 %},
-      {"@type": "ListItem", "position": 2, "name": "{{ nomi.get(sezione, sezione) }}", "item": "{{ config.site_url }}{{ sezione }}/"},
-      {"@type": "ListItem", "position": 3, "name": "{{ t }}", "item": "{{ page.canonical_url }}"}
-      {%- elif parts | length == 1 and sezione %},
-      {"@type": "ListItem", "position": 2, "name": "{{ nomi.get(sezione, sezione) }}", "item": "{{ page.canonical_url }}"}
-      {%- endif %}
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ config.site_url }}"
+      }{% if is_sezione %},
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ nomi_sez.get(sezione, sezione) }}",
+        "item": "{{ page_url }}"
+      }{% elif is_scheda %},
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ nomi_sez.get(sezione, sezione) }}",
+        "item": "{{ config.site_url }}{{ sezione }}/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{ page_title | replace('"', '') }}",
+        "item": "{{ page_url }}"
+      }{% endif %}
     ]
   }
   </script>
 
-  {% if parts | length > 1 and sezione == 'documenti' %}
-  <!-- Scheda documento: CreativeWork -->
+  {# Entità specifica della pagina #}
+  {% if is_scheda and sezione == 'documenti' %}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
-    "name": "{{ t }}",
-    "description": "{{ d }}",
-    "url": "{{ page.canonical_url }}",
+    "name": "{{ page_title | replace('"', '') }}",
+    "description": "{{ page_desc | replace('"', '') }}",
+    "url": "{{ page_url }}",
     "inLanguage": "it",
     "isPartOf": {
       "@type": "Collection",
@@ -109,37 +127,34 @@
     }
   }
   </script>
-  {% elif parts | length > 1 and sezione == 'persone' %}
-  <!-- Scheda persona: Person -->
+  {% elif is_scheda and sezione == 'persone' %}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "{{ t }}",
-    "description": "{{ d }}",
-    "url": "{{ page.canonical_url }}"
+    "name": "{{ page_title | replace('"', '') }}",
+    "description": "{{ page_desc | replace('"', '') }}",
+    "url": "{{ page_url }}"
   }
   </script>
-  {% elif parts | length > 1 and sezione == 'organizzazioni' %}
-  <!-- Scheda organizzazione: Organization -->
+  {% elif is_scheda and sezione == 'organizzazioni' %}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "{{ t }}",
-    "description": "{{ d }}",
-    "url": "{{ page.canonical_url }}"
+    "name": "{{ page_title | replace('"', '') }}",
+    "description": "{{ page_desc | replace('"', '') }}",
+    "url": "{{ page_url }}"
   }
   </script>
-  {% elif parts | length == 1 and sezione %}
-  <!-- Pagine indice: CollectionPage -->
+  {% elif is_sezione %}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "{{ t }}",
-    "description": "{{ d }}",
-    "url": "{{ page.canonical_url }}",
+    "name": "{{ page_title | replace('"', '') }}",
+    "description": "{{ page_desc | replace('"', '') }}",
+    "url": "{{ page_url }}",
     "inLanguage": "it"
   }
   </script>
