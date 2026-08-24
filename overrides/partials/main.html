@@ -3,41 +3,25 @@
 {% block extrahead %}
   <!-- ======================================================
        FONT D'ARCHIVIO
-       Fraunces      → titoli e corpo (stessa famiglia, peso variabile)
-       Archivo       → etichette, nav, bottoni
-       Courier Prime → codice e blocchi isolati (schede, trascrizioni)
-       Le icone sono SVG inline: nessuna dipendenza da font icona.
        ====================================================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=Archivo:wght@500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap">
 
-  <!-- ======================================================
-       SEO & PERFORMANCE — nessun impatto grafico
-       ====================================================== -->
-
-  <!-- Preload hero image: anticipa il download del banner, migliora LCP -->
+  <!-- Preload hero image: migliora LCP -->
   <link rel="preload" as="image" href="{{ base_url }}/immagini/banner.webp" fetchpriority="high">
 
-  {% set t  = (page.title or '') | replace('"', '\\"') %}
-  {% set d  = (page.meta.description or config.site_description or '') | replace('"', '\\"') | replace('\n', ' ') %}
+  {% set t = ((page.title or '') | replace('"', '\\"')) if page else '' %}
+  {% set d = (((page.meta.description if (page and page.meta) else '') or config.site_description or '') | replace('"', '\\"') | replace('\n', ' ')) %}
 
-  <!-- Open Graph -->
+  <!-- ======================================================
+       OPEN GRAPH
+       ====================================================== -->
   <meta property="og:site_name" content="Archivio del Maoismo Italiano">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
-  {% if page and page.meta and page.meta.title %}
-  <meta property="og:title" content="{{ page.meta.title }}">
-  {% elif page and page.title %}
-  <meta property="og:title" content="{{ page.title }}">
-  {% else %}
-  <meta property="og:title" content="{{ config.site_name }}">
-  {% endif %}
-  {% if page and page.meta and page.meta.description %}
-  <meta property="og:description" content="{{ page.meta.description }}">
-  {% elif config.site_description %}
-  <meta property="og:description" content="{{ config.site_description }}">
-  {% endif %}
+  <meta property="og:title" content="{{ t or config.site_name }}">
+  <meta property="og:description" content="{{ d }}">
   <meta property="og:url" content="{{ page.canonical_url | default(config.site_url, true) }}">
   {% if page and page.meta and page.meta.image %}
   <meta property="og:image" content="{{ page.meta.image }}">
@@ -47,27 +31,21 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
-  <!-- Twitter Card -->
+  <!-- ======================================================
+       TWITTER CARD
+       ====================================================== -->
   <meta name="twitter:card" content="summary_large_image">
-  {% if page and page.meta and page.meta.title %}
-  <meta name="twitter:title" content="{{ page.meta.title }}">
-  {% elif page and page.title %}
-  <meta name="twitter:title" content="{{ page.title }}">
-  {% else %}
-  <meta name="twitter:title" content="{{ config.site_name }}">
-  {% endif %}
-  {% if page and page.meta and page.meta.description %}
-  <meta name="twitter:description" content="{{ page.meta.description }}">
-  {% elif config.site_description %}
-  <meta name="twitter:description" content="{{ config.site_description }}">
-  {% endif %}
+  <meta name="twitter:title" content="{{ t or config.site_name }}">
+  <meta name="twitter:description" content="{{ d }}">
   {% if page and page.meta and page.meta.image %}
   <meta name="twitter:image" content="{{ page.meta.image }}">
   {% else %}
   <meta name="twitter:image" content="{{ config.site_url }}immagini/banner.webp">
   {% endif %}
 
-  <!-- JSON-LD: WebSite + SearchAction (globale) -->
+  <!-- ======================================================
+       JSON-LD GLOBALE: WebSite + SearchAction
+       ====================================================== -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -89,13 +67,13 @@
   </script>
 
   <!-- ======================================================
-       JSON-LD PER PAGINA: breadcrumb + entità
-       Deriva da URL e frontmatter esistenti: nessun generatore toccato.
+       JSON-LD PER PAGINA: BreadcrumbList + entità
+       (Jinja2 sicuro: split() è un metodo Python, non un filtro)
        ====================================================== -->
-  {% if page and not page.is_homepage %}
-  {% set parts = (page.url or '') | trim('/') | split('/') %}
+  {% if page and not page.is_homepage and page.url %}
+  {% set parts = page.url.rstrip('/').split('/') %}
   {% set sezione = parts[0] if parts else '' %}
-  {% set nomi_sezione = {'documenti': 'Archivio', 'persone': 'Persone', 'organizzazioni': 'Organizzazioni', 'progetto': 'Il progetto'} %}
+  {% set nomi = {'documenti': 'Archivio', 'persone': 'Persone', 'organizzazioni': 'Organizzazioni', 'progetto': 'Il progetto'} %}
 
   <!-- BreadcrumbList strutturato -->
   <script type="application/ld+json">
@@ -105,10 +83,10 @@
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ config.site_url }}"}
       {%- if parts | length > 1 %},
-      {"@type": "ListItem", "position": 2, "name": "{{ nomi_sezione.get(sezione, sezione) }}", "item": "{{ config.site_url }}{{ sezione }}/"},
+      {"@type": "ListItem", "position": 2, "name": "{{ nomi.get(sezione, sezione) }}", "item": "{{ config.site_url }}{{ sezione }}/"},
       {"@type": "ListItem", "position": 3, "name": "{{ t }}", "item": "{{ page.canonical_url }}"}
-      {%- elif parts | length == 1 %},
-      {"@type": "ListItem", "position": 2, "name": "{{ nomi_sezione.get(sezione, sezione) }}", "item": "{{ page.canonical_url }}"}
+      {%- elif parts | length == 1 and sezione %},
+      {"@type": "ListItem", "position": 2, "name": "{{ nomi.get(sezione, sezione) }}", "item": "{{ page.canonical_url }}"}
       {%- endif %}
     ]
   }
@@ -153,7 +131,7 @@
     "url": "{{ page.canonical_url }}"
   }
   </script>
-  {% elif parts | length == 1 %}
+  {% elif parts | length == 1 and sezione %}
   <!-- Pagine indice: CollectionPage -->
   <script type="application/ld+json">
   {
