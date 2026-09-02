@@ -66,6 +66,7 @@ User-agent: *
 Allow: /
 
 Sitemap: https://ami-aim.github.io/archivio-maoismo-italiano/sitemap.xml
+Sitemap: https://ami-aim.github.io/archivio-maoismo-italiano/sitemap.txt
 """
     with open(robots_path, 'w', encoding='utf-8') as f:
         f.write(robots_content)

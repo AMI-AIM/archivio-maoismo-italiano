@@ -52,15 +52,27 @@ jobs:
       - name: Build MkDocs
         run: mkdocs build
 
-      - name: Verify build output
+      - name: Force sitemap, robots and JSON into site/
         run: |
-          echo "=== Verifica file critici in site/ ==="
-          test -f site/sitemap.xml || { echo "❌ ERRORE: sitemap.xml mancante"; exit 1; }
-          test -f site/robots.txt || { echo "❌ ERRORE: robots.txt mancante"; exit 1; }
-          test -f site/documenti.json || { echo "❌ ERRORE: documenti.json mancante"; exit 1; }
-          test -f site/soggetti.json || { echo "❌ ERRORE: soggetti.json mancante"; exit 1; }
-          test -f site/index.html || { echo "❌ ERRORE: index.html mancante"; exit 1; }
-          echo "✅ Tutti i file critici presenti in site/"
+          echo "=== Copia forzata file SEO in site/ ==="
+          cp -f build/sitemap.xml site/sitemap.xml
+          cp -f build/sitemap.txt site/sitemap.txt
+          cp -f build/robots.txt site/robots.txt
+          cp -f build/documenti.json site/documenti.json
+          cp -f build/soggetti.json site/soggetti.json
+          echo "=== Verifica ==="
+          ls -la site/sitemap.xml site/sitemap.txt site/robots.txt
+          head -3 site/sitemap.xml
+          head -3 site/sitemap.txt
+          head -5 site/robots.txt
+
+      - name: Verify critical files
+        run: |
+          test -f site/sitemap.xml || { echo "ERRORE: sitemap.xml mancante"; exit 1; }
+          test -f site/sitemap.txt || { echo "ERRORE: sitemap.txt mancante"; exit 1; }
+          test -f site/robots.txt || { echo "ERRORE: robots.txt mancante"; exit 1; }
+          test -f site/index.html || { echo "ERRORE: index.html mancante"; exit 1; }
+          echo "Tutti i file critici presenti"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
