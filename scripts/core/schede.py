@@ -6,6 +6,7 @@ import urllib.parse
 import pandas as pd
 from .utils import formatta_data, split_nomi, scarica_descrizione_ia, scarica_testo_ia, pulisci_per_meta_description, escape_yaml_string
 from .soggetti import crea_link, link_lista
+from .site_config import site_path, site_url
 
 
 def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
@@ -36,11 +37,14 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
             continue
         
         file_path = os.path.join(documenti_dir, f'{ami_id}.md')
+        row_hash = cache_manager.hash_data(row.to_dict()) if cache_manager else None
         
-        # ✨ CACHE CHECK: Se documento esiste in cache e file esiste, salta
+        # Salta solo se la riga sorgente e' identica a quella che ha prodotto
+        # la scheda: la sola presenza in cache non e' una garanzia di attualita'.
         if cache_manager and os.path.exists(file_path):
             cached_data = cache_manager.get_doc_metadata(ami_id)
-            if cached_data:
+            cached_hash = (cached_data or {}).get('data', {}).get('source_hash')
+            if cached_hash == row_hash:
                 contatore_saltati += 1
                 print(f"   ⏭️ Saltato {ami_id} (cache valido)")
                 continue
@@ -190,7 +194,7 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
         serie_tags = [tag.strip() for tag in serie.split(';') if tag.strip()]
         if serie_tags:
             argomento_html = ', '.join(
-                f'<a href="/archivio-maoismo-italiano/documenti/?serie={urllib.parse.quote(tag, safe="")}">{html.escape(tag)}</a>'
+                f'<a href="{site_path("documenti/")}?serie={urllib.parse.quote(tag, safe="")}">{html.escape(tag)}</a>'
                 for tag in serie_tags
             )
         else:
@@ -201,7 +205,7 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
         # ========================================================================
         
         anno_citazione = data_formattata if data_formattata else 's.d.'
-        permalink = f"https://ami-aim.github.io/archivio-maoismo-italiano/documenti/{ami_id}/"
+        permalink = site_url(f"documenti/{ami_id}/")
         citazione_id = ami_id.lower().replace('-', '_')
         
         is_bibliografico = tipo in ['libro', 'opuscolo']
@@ -980,6 +984,7 @@ hide:
                 'titolo': titolo,
                 'data': data_formattata,
                 'tipo': tipo,
+                'source_hash': row_hash,
                 'stato': 'generato'
             })
         

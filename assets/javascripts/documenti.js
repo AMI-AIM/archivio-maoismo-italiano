@@ -3,6 +3,7 @@
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function() {
+    var baseUrl = (document.querySelector('meta[name="ami-base-url"]')?.content || '').replace(/\/$/, '');
 
     // ============================================================
     // 1. ARGOMENTI: split di serie multiple in link separati
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         tags.forEach(function(tag, index) {
             if (index > 0) fragment.append(' , ');
             var a = document.createElement('a');
-            a.href = '/archivio-maoismo-italiano/documenti/?serie=' + encodeURIComponent(tag);
+            a.href = baseUrl + '/documenti/?serie=' + encodeURIComponent(tag);
             a.textContent = tag;
             fragment.append(a);
         });

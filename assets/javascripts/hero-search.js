@@ -11,6 +11,7 @@
   const input = document.getElementById("hero-search-input");
   const resultsBox = document.getElementById("hero-search-results");
   const form = document.getElementById("hero-search-form");
+  const baseUrl = (document.querySelector('meta[name="ami-base-url"]')?.content || "").replace(/\/$/, "");
 
   if (!input || !resultsBox || !form) {
     return; // non siamo in home: nessuna azione
@@ -54,8 +55,8 @@
   function caricaDati() {
     if (datiCaricati) return;
     Promise.all([
-      fetch("/archivio-maoismo-italiano/documenti.json").then((res) => res.json()),
-      fetch("/archivio-maoismo-italiano/soggetti.json").then((res) => res.json())
+      fetch(`${baseUrl}/documenti.json`).then((res) => res.json()),
+      fetch(`${baseUrl}/soggetti.json`).then((res) => res.json())
     ])
       .then(([datiDocumenti, datiSoggetti]) => {
         documenti = datiDocumenti.documenti || [];
@@ -120,7 +121,7 @@
           tipo: "persona",
           etichetta: "Persona",
           titolo: p.nome,
-          href: `/archivio-maoismo-italiano/persone/${p.slug}/`,
+          href: `${baseUrl}/persone/${p.slug}/`,
           frammento: [dateVita, estraiFrammento([p.biografia], q)].filter(Boolean).join(" · ")
         };
       });
@@ -135,7 +136,7 @@
           tipo: "organizzazione",
           etichetta: "Organizzazione",
           titolo: o.nome,
-          href: `/archivio-maoismo-italiano/organizzazioni/${o.slug}/`,
+          href: `${baseUrl}/organizzazioni/${o.slug}/`,
           frammento: [o.categoria, estraiFrammento([o.storia], q)].filter(Boolean).join(" · ")
         };
       });
@@ -159,7 +160,7 @@
           tipo: "documento",
           etichetta: "Documento",
           titolo: doc.titolo,
-          href: `/archivio-maoismo-italiano/documenti/${doc.id}/`,
+          href: `${baseUrl}/documenti/${doc.id}/`,
           frammento: estraiFrammento(
             [doc.descrizione, doc.keywords, doc.autore, doc.organizzazione],
             q

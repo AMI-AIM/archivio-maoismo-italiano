@@ -2,6 +2,7 @@ import pandas as pd
 import os
 import json
 from .utils import slugify, split_nomi
+from .site_config import site_path
 
 def carica_soggetti(data_dir):
     persone = {}
@@ -64,7 +65,7 @@ def crea_link(nome, persone, organizzazioni):
         return ''
     sezione, slug = trova_soggetto(nome, persone, organizzazioni)
     if sezione:
-        return f'<a href="/archivio-maoismo-italiano/{sezione}/{slug}/">{nome}</a>'
+        return f'<a href="{site_path(f"{sezione}/{slug}/")}">{nome}</a>'
     else:
         return nome
 

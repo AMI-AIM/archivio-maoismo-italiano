@@ -2,6 +2,7 @@ import os
 import re
 from collections import Counter
 from .utils import formatta_data, split_nomi, slugify
+from .site_config import site_path
 
 
 # DOCUMENTI IN EVIDENZA: inserisci qui gli ID dei documenti che vuoi mostrare
@@ -151,7 +152,7 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
     # BANNER — testo più grande e spesso per leggibilità
     banner_html = """
 <div class="banner-full" style="margin-bottom: 0;">
-    <img src="/archivio-maoismo-italiano/immagini/banner.webp"
+    <img src="{site_path('immagini/banner.webp')}"
          alt="Archivio del Maoismo Italiano"
          class="banner-image">
     <div class="banner-overlay"></div>

@@ -2,12 +2,13 @@ import os
 import hashlib
 import pandas as pd
 from core.utils import slugify, formatta_data, split_nomi
+from core.site_config import site_path
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 OUTPUT_DIR = os.path.join(ROOT_DIR, 'build')
 
-PLACEHOLDER_URL = '/archivio-maoismo-italiano/immagini/profili/placeholder.webp'
+PLACEHOLDER_URL = site_path('immagini/profili/placeholder.webp')
 
 
 def colore_hash(nome):
@@ -80,7 +81,7 @@ def genera_persone():
             if immagine_raw.startswith('http://') or immagine_raw.startswith('https://'):
                 immagine_url = immagine_raw
             else:
-                immagine_url = f'/archivio-maoismo-italiano/immagini/profili/{immagine_raw}'
+                immagine_url = site_path(f'immagini/profili/{immagine_raw}')
         else:
             immagine_url = None
         
@@ -215,7 +216,7 @@ hide:
 <div class="doc-row">
     <div class="doc-data">{doc['data']}</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="/archivio-maoismo-italiano/documenti/{doc['id']}/">{doc['titolo']}</a></div>
+        <div class="doc-titolo"><a href="{site_path(f"documenti/{doc['id']}/")}">{doc['titolo']}</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">{ruoli_text}</span></div>
     </div>
 </div>

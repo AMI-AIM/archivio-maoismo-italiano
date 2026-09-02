@@ -7,14 +7,25 @@ let annoMin = 1950;
 let annoMax = 2025;
 let currentPage = 1;
 const DOCS_PER_PAGE = 20;
+const baseUrl = (document.querySelector('meta[name="ami-base-url"]')?.content || '').replace(/\/$/, '');
 
 async function caricaDati() {
     try {
-        const response = await fetch('/archivio-maoismo-italiano/documenti.json');
-        const data = await response.json();
-        documenti = data.documenti;
-        annoMin = data.anno_min || 1900;
-        annoMax = data.anno_max || 2025;
+        const lazyLoader = window.amiLazyLoader;
+        const manifest = lazyLoader ? await lazyLoader.init() : null;
+        if (manifest) {
+            await lazyLoader.loadNext();
+            documenti = lazyLoader.documents();
+            annoMin = manifest.anno_min || 1900;
+            annoMax = manifest.anno_max || 2025;
+        } else {
+            const response = await fetch(`${baseUrl}/documenti.json`);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            documenti = data.documenti;
+            annoMin = data.anno_min || 1900;
+            annoMax = data.anno_max || 2025;
+        }
         inizializzaFiltri();
         precompilaRicercaDaURL();
         applicaFiltri();
@@ -77,25 +88,8 @@ function inizializzaFiltri() {
         });
     });
     
-    const organizzazioni = new Set();
-    const persone = new Set();
-    const tipi = new Set();
-    const argomenti = new Set();
-    
-    documenti.forEach(doc => {
-        doc.organizzazioni.forEach(org => organizzazioni.add(org));
-        doc.persone.forEach(persona => persone.add(persona));
-        if (doc.tipo) tipi.add(doc.tipo);
-        if (doc.serie && Array.isArray(doc.serie)) {
-            doc.serie.forEach(tag => argomenti.add(tag));
-        }
-    });
-    
-    popolaSelect('filtro-organizzazione', organizzazioni);
-    popolaSelect('filtro-persona', persone);
-    popolaSelect('filtro-tipo', tipi);
-    popolaSelect('filtro-argomento', argomenti);
-    
+    aggiornaOpzioniFiltri();
+
     const minSlider = document.getElementById('filtro-anno-min');
     const maxSlider = document.getElementById('filtro-anno-max');
     const minLabel = document.getElementById('anno-min-label');
@@ -109,7 +103,7 @@ function inizializzaFiltri() {
     maxSlider.value = annoMax;
     minLabel.textContent = annoMin;
     maxLabel.textContent = annoMax;
-    
+
     // 🔥 CREA LE PILLOLE PER I VALORI DEGLI ANNI
     const minPill = document.createElement('span');
     minPill.className = 'slider-value-pill';
@@ -122,7 +116,7 @@ function inizializzaFiltri() {
     maxPill.id = 'anno-max-pill';
     maxPill.textContent = annoMax;
     maxSlider.parentNode.appendChild(maxPill);
-    
+
     function aggiornaTrack() {
         const min = parseInt(minSlider.value);
         const max = parseInt(maxSlider.value);
@@ -150,42 +144,56 @@ function inizializzaFiltri() {
             maxPillEl.textContent = max;
         }
     }
-    
+
     minSlider.addEventListener('input', function() {
         const val = parseInt(this.value);
         const maxVal = parseInt(maxSlider.value);
-        if (val > maxVal) {
-            this.value = maxVal;
-        }
+        if (val > maxVal) this.value = maxVal;
         document.getElementById('anno-min-label').textContent = this.value;
         aggiornaTrack();
         applicaFiltri();
     });
-    
+
     maxSlider.addEventListener('input', function() {
         const val = parseInt(this.value);
         const minVal = parseInt(minSlider.value);
-        if (val < minVal) {
-            this.value = minVal;
-        }
+        if (val < minVal) this.value = minVal;
         document.getElementById('anno-max-label').textContent = this.value;
         aggiornaTrack();
         applicaFiltri();
     });
-    
+
     aggiornaTrack();
-    
-    document.querySelectorAll('select, input').forEach(el => {
-        el.addEventListener('change', applicaFiltri);
-    });
-    
+    document.querySelectorAll('select, input').forEach(el => el.addEventListener('change', applicaFiltri));
     document.getElementById('filtro-testo').addEventListener('input', applicaFiltri);
     document.getElementById('reset-filtri').addEventListener('click', resetFiltri);
+}
+
+function aggiornaOpzioniFiltri() {
+    const organizzazioni = new Set();
+    const persone = new Set();
+    const tipi = new Set();
+    const argomenti = new Set();
+    
+    documenti.forEach(doc => {
+        doc.organizzazioni.forEach(org => organizzazioni.add(org));
+        doc.persone.forEach(persona => persone.add(persona));
+        if (doc.tipo) tipi.add(doc.tipo);
+        if (doc.serie && Array.isArray(doc.serie)) {
+            doc.serie.forEach(tag => argomenti.add(tag));
+        }
+    });
+    
+    popolaSelect('filtro-organizzazione', organizzazioni);
+    popolaSelect('filtro-persona', persone);
+    popolaSelect('filtro-tipo', tipi);
+    popolaSelect('filtro-argomento', argomenti);
 }
 
 function popolaSelect(id, items) {
     const select = document.getElementById(id);
     if (!select) return;
+    const selectedValues = Array.from(select.selectedOptions).map(opt => opt.value);
     const sorted = Array.from(items).sort();
     const allOption = select.querySelector('option[value="all"]');
     select.innerHTML = '';
@@ -201,6 +209,7 @@ function popolaSelect(id, items) {
         const opt = document.createElement('option');
         opt.value = item;
         opt.textContent = item;
+        opt.selected = selectedValues.includes(item);
         select.appendChild(opt);
     });
 }
@@ -308,7 +317,9 @@ function mostraRisultati(risultati) {
     
     // Aggiorna conteggio
     if (conteggio) {
-        conteggio.textContent = `${totale} documenti (pagina ${currentPage} di ${totalPages})`;
+        const manifest = window.amiLazyLoader?.metadata();
+        const caricati = manifest ? ` tra ${documenti.length} di ${manifest.totale} caricati` : '';
+        conteggio.textContent = `${totale} documenti${caricati} (pagina ${currentPage} di ${totalPages})`;
     }
     
     // Costruisci HTML dei risultati
@@ -334,7 +345,7 @@ function mostraRisultati(risultati) {
             <div class="risultato-data">${doc.data || 'n.d.'}</div>
             <div class="risultato-contenuto">
                 <div class="risultato-titolo">
-                    <a href="/archivio-maoismo-italiano/documenti/${doc.id}/">${doc.titolo}</a>
+                    <a href="${baseUrl}/documenti/${doc.id}/">${doc.titolo}</a>
                 </div>
                 <div class="risultato-meta">${metaLine}</div>
                 ${descrizione ? `<div class="risultato-desc">${descrizione}</div>` : ''}
@@ -348,6 +359,27 @@ function mostraRisultati(risultati) {
     // Genera paginazione
     if (paginazioneContainer) {
         generaIterfacciaPaginazione(paginazioneContainer, currentPage, totalPages);
+        if (window.amiLazyLoader?.hasMore()) {
+            const loadMore = document.createElement('button');
+            loadMore.type = 'button';
+            loadMore.className = 'pag-btn';
+            loadMore.textContent = 'Carica altri documenti';
+            loadMore.addEventListener('click', caricaProssimoChunk);
+            paginazioneContainer.appendChild(loadMore);
+        }
+    }
+}
+
+async function caricaProssimoChunk() {
+    const loader = window.amiLazyLoader;
+    if (!loader?.hasMore()) return;
+    try {
+        await loader.loadNext();
+        documenti = loader.documents();
+        aggiornaOpzioniFiltri();
+        applicaFiltri();
+    } catch (error) {
+        console.error('Errore nel caricamento del catalogo:', error);
     }
 }
 

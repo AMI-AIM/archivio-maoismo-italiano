@@ -15,6 +15,7 @@ from core.json_export import genera_json
 from core.home import genera_home
 from core.cache_manager import CacheManager
 from core.json_optimizer import JSONOptimizer
+from core.site_config import SITE_URL
 
 # ================================================================
 # CONFIGURAZIONE GLOBALE
@@ -70,7 +71,7 @@ def pubblica_file_seo():
 User-agent: *
 Allow: /
 
-Sitemap: https://ami-aim.github.io/archivio-maoismo-italiano/sitemap.xml
+Sitemap: {SITE_URL}/sitemap.xml
 """
     with open(robots_path, 'w', encoding='utf-8') as f:
         f.write(robots_content)
@@ -107,7 +108,7 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
         organizzazioni: dict organizzazioni
     """
     print("\n[SITEMAP] Generazione della sitemap...")
-    base_url = "https://ami-aim.github.io/archivio-maoismo-italiano"
+    base_url = SITE_URL
     oggi_iso = datetime.now().strftime('%Y-%m-%d')
 
     def escape_xml(text):
@@ -261,6 +262,10 @@ def main():
     catalogo_path = os.path.join(DATA_DIR, 'dati.xlsx')
     print("\n[CACHE] Controllo cambiamenti file sorgente...")
     excel_changed = cache_mgr.is_file_changed(catalogo_path)
+    if excel_changed:
+        # Persone e organizzazioni influenzano anche i link delle schede: il
+        # file Excel e' quindi l'unita' minima sicura di invalidazione.
+        cache_mgr.clear_doc_metadata()
 
     # ================================================================
     # PREPARAZIONE: Immagini profilo + file SEO statici

@@ -80,7 +80,9 @@ class JSONOptimizer:
             
             chunks.append({
                 'numero': chunk_num,
-                'file': chunk_path,
+                # Il frontend riceve un nome relativo pubblicabile, mai un
+                # percorso assoluto della macchina che ha eseguito la build.
+                'file': Path(chunk_path).name,
                 'count': len(chunk),
                 'range': f"{i+1}-{i+len(chunk)}"
             })
@@ -89,6 +91,8 @@ class JSONOptimizer:
         metadata = {
             'totale': len(documenti),
             'chunk_size': chunk_size,
+            'anno_min': data.get('anno_min'),
+            'anno_max': data.get('anno_max'),
             'chunks': chunks
         }
         

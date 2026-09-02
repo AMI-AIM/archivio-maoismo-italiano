@@ -58,6 +58,12 @@ class CacheManager:
             for byte_block in iter(lambda: f.read(4096), b""):
                 sha256_hash.update(byte_block)
         return sha256_hash.hexdigest()
+
+    @staticmethod
+    def hash_data(data):
+        """Calcola un hash stabile per i dati che determinano un artefatto."""
+        serialized = json.dumps(data, ensure_ascii=False, sort_keys=True, default=str)
+        return hashlib.sha256(serialized.encode('utf-8')).hexdigest()
     
     # ============================================================
     # INTERNET ARCHIVE CACHE

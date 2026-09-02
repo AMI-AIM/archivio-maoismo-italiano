@@ -27,6 +27,7 @@ extra_css:
   - stylesheets/galleria.css
 
 extra_javascript:
+  - javascripts/lazy-load.js
   - javascripts/hero-search.js
   - javascripts/documenti.js
   - javascripts/archivio-filtri.js
@@ -51,7 +52,6 @@ nav:
   - Organizzazioni: organizzazioni/
 
 extra:
-  homepage: /archivio-maoismo-italiano/
   generator: false
   social:
     - icon: fontawesome/brands/internet-archive
