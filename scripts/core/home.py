@@ -150,7 +150,7 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
     organizzazioni_top = conteggio_organizzazioni.most_common(3)
 
     # BANNER — testo più grande e spesso per leggibilità
-    banner_html = """
+    banner_html = f"""
 <div class="banner-full" style="margin-bottom: 0;">
     <img src="{site_path('immagini/banner.webp')}"
          alt="Archivio del Maoismo Italiano"
