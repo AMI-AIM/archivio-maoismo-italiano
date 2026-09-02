@@ -1,9 +1,11 @@
 import os
+import json
 import hashlib
 import pandas as pd
 from core.utils import slugify, formatta_data, split_nomi
-from core.catalog_indexer import CatalogIndexer
 from core.site_config import site_path
+from core.catalog_indexer import CatalogIndexer
+from core.schema_generator import SchemaGenerator
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
@@ -58,7 +60,7 @@ def genera_persone():
     
     print(f"   📊 Caricate {len(df_persone)} persone dal foglio 'Persone' di dati.xlsx")
     print(f"   📊 Caricati {len(df_catalogo)} documenti dal foglio 'Catalogo' di dati.xlsx")
-
+    
     # ============================================================
     # CREAZIONE INDEXER (lookup O(1))
     # ============================================================
@@ -66,7 +68,7 @@ def genera_persone():
     indexer = CatalogIndexer(df_catalogo)
     print("   ✅ Indici creati")
     
-    persone = {}    
+    persone = {}
     
     for _, row in df_persone.iterrows():
         nome = str(row.get('nome', '')).strip()
@@ -169,6 +171,18 @@ def genera_persone():
         elif '\n' in bio_text:
             bio_text = '<p>' + '</p><p>'.join(bio_text.split('\n')) + '</p>'
         
+        # Genera schema JSON-LD per la persona
+        schema = SchemaGenerator.person_schema(
+            nome=nome,
+            biografia=data['biografia'],
+            immagine_url=data['immagine'],
+            slug=data['slug'],
+            num_doc=data['num_doc'],
+            data_range=data['data_range']
+        )
+        
+        schema_json = json.dumps(schema, ensure_ascii=False)
+        
         frontmatter = f"""---
 title: "{nome}"
 description: "Scheda biografica e documenti di {nome}"
@@ -179,6 +193,10 @@ hide:
 ---
 
 <link rel="stylesheet" href="{site_path('stylesheets/soggetti.css')}">
+
+<script type="application/ld+json">
+{schema_json}
+</script>
 """
         
         if data.get('immagine'):
@@ -188,7 +206,7 @@ hide:
         {bio_text}
     </div>
     <div class="person-bio-image">
-        <img src="{data['immagine']}" alt="{nome}" class="person-bio-img">
+        <img src="{data['immagine']}" alt="Foto di {nome}, persona nel maoismo italiano" class="person-bio-img" loading="lazy">
     </div>
 </div>
 '''
@@ -206,7 +224,7 @@ hide:
 
 {bio_section}
 
-<h3 style="font-weight: bold; font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0;">Documenti</h3>
+<h2 style="font-weight: bold; font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0;">Documenti</h2>
 
 <div class="catalogo-lista">
 """
