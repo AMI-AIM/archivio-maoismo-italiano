@@ -2,6 +2,7 @@ import os
 import hashlib
 import pandas as pd
 from core.utils import slugify, formatta_data, split_nomi
+from core.catalog_indexer import CatalogIndexer
 from core.site_config import site_path
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -79,7 +80,14 @@ def genera_organizzazioni():
     
     print(f"   📊 Caricate {len(df_org)} organizzazioni dal foglio 'Organizzazioni' di dati.xlsx")
     print(f"   📊 Caricati {len(df_catalogo)} documenti dal foglio 'Catalogo' di dati.xlsx")
-    
+
+    # ============================================================
+    # CREAZIONE INDEXER (lookup O(1))
+    # ============================================================
+    print("   🔍 Creazione indici catalogo...")
+    indexer = CatalogIndexer(df_catalogo)
+    print("   ✅ Indici creati")
+       
     organizzazioni = {}
     
     for _, row in df_org.iterrows():
@@ -119,9 +127,11 @@ def genera_organizzazioni():
         else:
             data_range = ''
         
+        # Usa l'indexer per lookup O(1)
         documenti = []
+        docs_rows = indexer.get_docs_for_organization(nome)
         
-        for _, doc in df_catalogo.iterrows():
+        for doc in docs_rows:
             ami_id = str(doc.get('id', '')).strip()
             if not ami_id or ami_id in ['nan', 'None']:
                 continue
@@ -137,25 +147,8 @@ def genera_organizzazioni():
                 data_form = 'n.d.'
                 data_ordine = (9999, 1, 1)
             
-            ruoli = []
-            
-            org_raw = str(doc.get('organizzazione', '')).strip()
-            if org_raw and org_raw not in ['nan', 'None']:
-                orgs = split_nomi(org_raw)
-                if nome in orgs:
-                    ruoli.append('pubblicato da')
-            
-            autore_raw = str(doc.get('autore', '')).strip()
-            if autore_raw and autore_raw not in ['nan', 'None']:
-                autori = split_nomi(autore_raw)
-                if nome in autori:
-                    ruoli.append('autore')
-            
-            org_collegate = str(doc.get('organizzazioni_collegate', '')).strip()
-            if org_collegate and org_collegate not in ['nan', 'None']:
-                collegati = split_nomi(org_collegate)
-                if nome in collegati:
-                    ruoli.append('menzionato')
+            # Usa indexer.get_roles_for_organization() (O(1))
+            ruoli = indexer.get_roles_for_organization(nome, doc)
             
             if ruoli:
                 documenti.append({
