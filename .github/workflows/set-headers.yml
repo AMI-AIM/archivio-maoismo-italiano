@@ -1,0 +1,23 @@
+name: Set Sitemap MIME Type
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Fix sitemap MIME type
+        run: |
+          # Aggiungi charset al sitemap
+          sed -i '1s/^/<?xml version="1.0" encoding="UTF-8"?>\n/' build/sitemap.xml
+      
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
