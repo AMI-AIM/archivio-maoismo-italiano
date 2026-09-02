@@ -35,6 +35,8 @@ extra_javascript:
 
 plugins:
   - search
+  - sitemap:
+      enabled: false
 
 markdown_extensions:
   - attr_list

@@ -97,16 +97,16 @@ Sitemap: https://ami-aim.github.io/archivio-maoismo-italiano/sitemap.xml
 
 def genera_sitemap(output_dir, df, persone, organizzazioni):
     """
-    Genera sitemap.xml per SEO (Google, Bing, etc).
+    Genera sitemap.xml e sitemap.txt per SEO (Google, Bing, etc).
     
     Versione irrobustita:
-    - BOM UTF-8 per forzare riconoscimento encoding (risolve problemi GSC)
+    - Genera doppio formato (XML + TXT) per massima compatibilità
     - Verifica esistenza file prima di includerli (evita 404)
     - Escape XML corretto per caratteri speciali
     - lastmod W3C conforme
     - schemaLocation esplicito per validazione
     """
-    print("\n[SITEMAP] Generazione della sitemap...")
+    print("\n[SITEMAP] Generazione della sitemap (XML + TXT)...")
     base_url = "https://ami-aim.github.io/archivio-maoismo-italiano"
     oggi_iso = datetime.now().strftime('%Y-%m-%d')
     
@@ -170,7 +170,9 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
                 "changefreq": "monthly"
             })
     
-    # Costruisce XML (dichiarazione rigorosamente al primo byte)
+    # ============================================================
+    # GENERA sitemap.xml
+    # ============================================================
     xml_lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
@@ -189,24 +191,43 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
     
     xml_lines.append('</urlset>')
     
-    # Salva file CON BOM UTF-8 per forzare riconoscimento encoding
-    # Il BOM (Byte Order Mark) è EF BB BF e aiuta i parser che non leggono
-    # correttamente il charset dagli header HTTP di GitHub Pages
-    sitemap_path = os.path.join(output_dir, 'sitemap.xml')
-    with open(sitemap_path, 'w', encoding='utf-8-sig') as f:
+    sitemap_xml_path = os.path.join(output_dir, 'sitemap.xml')
+    with open(sitemap_xml_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(xml_lines))
     
-    # Auto-verifica: il file deve iniziare con BOM + dichiarazione XML
-    with open(sitemap_path, 'rb') as f:
-        primi_bytes = f.read(10)
+    # ============================================================
+    # GENERA sitemap.txt (formato text sitemap accettato da Google)
+    # Un URL per riga, senza header, senza metadati
+    # ============================================================
+    txt_lines = [pagina["loc"] for pagina in pagine]
     
-    # BOM UTF-8 è EF BB BF, seguito da <?xml
-    if primi_bytes.startswith(b'\xef\xbb\xbf<?xml'):
-        print(f"   [OK] Sitemap generata con BOM UTF-8 ({len(pagine)} URL)")
-    elif primi_bytes.startswith(b'<?xml'):
-        print(f"   [WARN] Sitemap senza BOM (potrebbe causare problemi encoding)")
+    sitemap_txt_path = os.path.join(output_dir, 'sitemap.txt')
+    with open(sitemap_txt_path, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(txt_lines))
+    
+    # ============================================================
+    # AUTO-VERIFICA
+    # ============================================================
+    # Verifica XML
+    with open(sitemap_xml_path, 'r', encoding='utf-8') as f:
+        primo_xml = f.read(5)
+    
+    if primo_xml == '<?xml':
+        print(f"   [OK] sitemap.xml generata ({len(pagine)} URL)")
     else:
-        print(f"   [ERROR] Sitemap: primi bytes inattesi: {primi_bytes[:10]!r}")
+        print(f"   [WARN] sitemap.xml: primi caratteri inattesi: {primo_xml!r}")
+    
+    # Verifica TXT (prima riga deve essere un URL)
+    with open(sitemap_txt_path, 'r', encoding='utf-8') as f:
+        prima_riga = f.readline().strip()
+    
+    if prima_riga.startswith('http'):
+        print(f"   [OK] sitemap.txt generata ({len(pagine)} URL)")
+    else:
+        print(f"   [WARN] sitemap.txt: prima riga inattesa: {prima_riga!r}")
+    
+    print(f"   [INFO] Entrambi i file pronti per essere serviti da GitHub Pages")
+
 def ottimizza_json(output_dir):
     """
 
