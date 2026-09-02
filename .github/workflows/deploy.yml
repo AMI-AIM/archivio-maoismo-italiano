@@ -62,5 +62,9 @@ jobs:
           test -f site/index.html || { echo "❌ ERRORE: index.html mancante"; exit 1; }
           echo "✅ Tutti i file critici presenti in site/"
 
-      - name: Deploy to gh-pages
-        run: mkdocs gh-deploy --force --no-build
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          publish_branch: gh-pages
