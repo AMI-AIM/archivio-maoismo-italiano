@@ -1,0 +1,5 @@
+# robots.txt — Archivio del Maoismo Italiano
+User-agent: *
+Allow: /
+
+Sitemap: {SITE_URL}/sitemap.xml
