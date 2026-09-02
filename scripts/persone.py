@@ -178,6 +178,8 @@ hide:
   - toc
   - title
 ---
+
+<link rel="stylesheet" href="{site_path('stylesheets/soggetti.css')}">
 """
         
         if data.get('immagine'):
@@ -224,90 +226,6 @@ hide:
         
         content += """
 </div>
-
-<style>
-.md-typeset h1.person-name { font-size: 2.4rem; font-weight: 700; margin: 0 0 0.2rem 0; color: var(--md-primary-fg-color); }
-.person-dates { font-size: 1rem; color: var(--md-default-fg-color--light); margin: 0 0 0.8rem 0; font-weight: 400; }
-
-/* BIOGRAFIA CON FOTO (testo a sinistra, foto a destra) */
-.person-bio-with-image {
-    display: flex;
-    gap: 1.5rem;
-    margin: 1rem 0 1.5rem 0;
-    padding: 1rem;
-    background: var(--md-code-bg-color);
-    border-radius: 8px;
-    border-left: 4px solid var(--md-primary-fg-color);
-    align-items: flex-start;
-}
-
-.person-bio-text {
-    flex: 1;
-    min-width: 0;
-}
-
-.person-bio-text p {
-    margin: 0.5rem 0;
-}
-
-.person-bio-image {
-    flex: 0 0 360px;
-    width: 360px;
-    height: auto;
-    max-height: 400px;
-    overflow: hidden;
-    border-radius: 8px;
-    flex-shrink: 0;
-}
-
-.person-bio-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* BIOGRAFIA SENZA FOTO (tutta larghezza) */
-.person-bio-full {
-    margin: 1rem 0 1.5rem 0;
-    padding: 1rem;
-    background: var(--md-code-bg-color);
-    border-radius: 8px;
-    border-left: 4px solid var(--md-primary-fg-color);
-}
-
-.person-bio-full p {
-    margin: 0.5rem 0;
-}
-
-.catalogo-lista { display: flex; flex-direction: column; gap: 0.25rem; margin-top: 0.5rem; }
-.doc-row { display: flex; align-items: flex-start; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--md-default-fg-color--lightest); transition: background-color 0.15s; gap: 1.5rem; }
-.doc-row:hover { background-color: var(--md-code-bg-color); }
-.doc-data { flex: 0 0 140px; font-size: 0.9rem; color: var(--md-primary-fg-color); font-weight: 500; white-space: nowrap; padding-top: 0.05rem; }
-.doc-contenuto { flex: 1; min-width: 0; }
-.doc-titolo { font-size: 1rem; font-weight: 500; }
-.doc-titolo a { text-decoration: none; color: var(--md-default-fg-color); }
-.doc-titolo a:hover { text-decoration: underline; color: var(--md-primary-fg-color); }
-.doc-ruoli { margin-top: 0.1rem; }
-.ruolo-badge { display: inline-block; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff !important; background: var(--md-primary-fg-color); padding: 0.05rem 0.6rem; border-radius: 4px; }
-
-@media (max-width: 768px) {
-    .person-bio-with-image {
-        flex-direction: column;
-        align-items: center;
-    }
-    .person-bio-image {
-        flex: 0 0 auto;
-        width: 100%;
-        max-width: 360px;
-        max-height: 300px;
-    }
-    .doc-row { flex-direction: column; gap: 0.1rem; padding: 0.6rem 0.2rem; }
-    .doc-data { flex: 0 0 auto; white-space: normal; font-size: 0.8rem; }
-    .person-name { font-size: 1.6rem; }
-    .person-dates { font-size: 0.85rem; }
-}
-</style>
 """
         
         with open(file_path, 'w', encoding='utf-8') as f:
@@ -439,38 +357,8 @@ hide:
     lines.append('</script>')
     lines.append('')
     
-    lines.append('<style>')
-    lines.append('.top-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }')
-    lines.append('.top-card { aspect-ratio: 1 / 1; background: var(--md-code-bg-color); border-radius: 12px; border: 1px solid var(--md-default-fg-color--lightest); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; padding: 0; }')
-    lines.append('.top-card:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }')
-    lines.append('.top-card-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; width: 100%; height: 100%; }')
-    lines.append('.top-card-image-wrapper { flex: 1; overflow: hidden; background: var(--md-code-bg-color); display: flex; }')
-    lines.append('.top-card-avatar-img { width: 100%; height: 100%; object-fit: cover; display: block; }')
-    lines.append('.top-card-text { padding: 0.6rem 1rem 0.8rem 1rem; background: var(--md-code-bg-color); border-top: 1px solid var(--md-default-fg-color--lightest); flex-shrink: 0; }')
-    lines.append('.top-card-name { font-size: 1rem; font-weight: 600; color: var(--md-default-fg-color); line-height: 1.2; }')
-    lines.append('.top-card-dates { font-size: 0.8rem; color: var(--md-default-fg-color--light); }')
-    lines.append('.top-card-count { font-size: 0.75rem; color: var(--md-default-fg-color--light); font-weight: 400; }')
-    lines.append('.filtri-persone { margin: 1rem 0 1.5rem 0; padding: 0.8rem 1rem; background: var(--md-code-bg-color); border-radius: 8px; border: 1px solid var(--md-default-fg-color--lightest); }')
-    lines.append('.search-bar { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.6rem; }')
-    lines.append('.search-bar input { flex: 1; padding: 0.5rem 0.8rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 6px; background: var(--md-default-bg-color); color: var(--md-default-fg-color); font-size: 0.95rem; outline: none; transition: border-color 0.2s; }')
-    lines.append('.search-bar input:focus { border-color: var(--md-primary-fg-color); }')
-    lines.append('.search-counter { font-size: 0.8rem; color: var(--md-default-fg-color--light); white-space: nowrap; font-weight: 500; }')
-    lines.append('.alfabeto-bar { display: flex; flex-wrap: wrap; gap: 0.2rem; }')
-    lines.append('.lettera-btn { background: transparent; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 4px; padding: 0.2rem 0.5rem; font-size: 0.75rem; font-weight: 600; color: var(--md-default-fg-color); cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s; min-width: 28px; text-align: center; }')
-    lines.append('.lettera-btn:hover:not(.lettera-btn--disabled) { background: var(--md-primary-fg-color); color: #ffffff; border-color: var(--md-primary-fg-color); }')
-    lines.append('.lettera-btn--active { background: var(--md-primary-fg-color); color: #ffffff !important; border-color: var(--md-primary-fg-color); }')
-    lines.append('.lettera-btn--disabled { opacity: 0.3; cursor: not-allowed; }')
-    lines.append('.people-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 0.5rem; }')
-    lines.append('.people-card { background: var(--md-code-bg-color); border-radius: 8px; padding: 1rem 1.2rem; transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s; border: 1px solid var(--md-default-fg-color--lightest); min-height: 80px; display: flex; align-items: center; }')
-    lines.append('.people-card:hover { background: var(--md-default-bg-color); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }')
-    lines.append('.people-link { text-decoration: none; display: flex; flex-direction: column; width: 100%; gap: 0.05rem; }')
-    lines.append('.people-name { font-size: 0.95rem; font-weight: 600; color: var(--md-default-fg-color); line-height: 1.3; }')
-    lines.append('.people-dates { font-size: 0.7rem; color: var(--md-default-fg-color--light); }')
-    lines.append('.people-count { font-size: 0.75rem; color: var(--md-default-fg-color--light); }')
-    lines.append('@media (max-width: 900px) { .people-grid { grid-template-columns: repeat(2, 1fr); } }')
-    lines.append('@media (max-width: 768px) { .top-row { grid-template-columns: 1fr; gap: 1rem; } .top-card { aspect-ratio: auto; min-height: 200px; } .top-card-text { padding: 0.4rem 0.8rem 0.6rem 0.8rem; } .top-card-name { font-size: 0.95rem; } .search-bar { flex-direction: column; align-items: stretch; gap: 0.4rem; } .search-counter { text-align: right; } .alfabeto-bar { justify-content: center; gap: 0.15rem; } .lettera-btn { font-size: 0.7rem; padding: 0.15rem 0.4rem; min-width: 24px; } }')
-    lines.append('@media (max-width: 600px) { .people-grid { grid-template-columns: 1fr; } .people-name { font-size: 0.9rem; } .people-dates { font-size: 0.65rem; } }')
-    lines.append('</style>')
+    lines.append('<link rel="stylesheet" href="../stylesheets/soggetti-indice.css">')
+    lines.append('')
     
     index_content = "\n".join(lines)
     

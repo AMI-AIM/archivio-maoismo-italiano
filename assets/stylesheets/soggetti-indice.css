@@ -1,0 +1,271 @@
+/* ============================================================
+   SOGGETTI-INDICE (Persone/Organizzazioni) - Pagine indice
+   Stili comuni per persone/index.md e organizzazioni/index.md
+   ============================================================ */
+
+/* Top cards row - Persone/Organizzazioni in evidenza */
+.top-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.top-card {
+    aspect-ratio: 1 / 1;
+    background: var(--md-code-bg-color);
+    border-radius: 12px;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.top-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.top-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.top-card-image-wrapper {
+    flex: 1;
+    overflow: hidden;
+    background: var(--md-code-bg-color);
+    display: flex;
+}
+
+.top-card-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.top-card-text {
+    padding: 0.6rem 1rem 0.8rem 1rem;
+    background: var(--md-code-bg-color);
+    border-top: 1px solid var(--md-default-fg-color--lightest);
+    flex-shrink: 0;
+}
+
+.top-card-tipo {
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #ffffff !important;
+    background: var(--md-primary-fg-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 0.3rem;
+}
+
+.top-card-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--md-default-fg-color);
+    line-height: 1.2;
+}
+
+.top-card-dates {
+    font-size: 0.8rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.top-card-count {
+    font-size: 0.75rem;
+    color: var(--md-default-fg-color--light);
+    font-weight: 400;
+}
+
+/* Filtri container */
+.filtri-persone,
+.filtri-organizzazioni {
+    margin: 1rem 0 1.5rem 0;
+    padding: 0.8rem 1rem;
+    background: var(--md-code-bg-color);
+    border-radius: 8px;
+    border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* Search bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.6rem;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 6px;
+    background: var(--md-default-bg-color);
+    color: var(--md-default-fg-color);
+    font-size: 0.9rem;
+}
+
+.search-bar input:focus {
+    border-color: var(--md-primary-fg-color);
+    outline: none;
+}
+
+.search-counter {
+    font-size: 0.8rem;
+    color: var(--md-default-fg-color--light);
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+/* Alphabet bar */
+.alfabeto-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+}
+
+.lettera-btn {
+    background: transparent;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+    color: var(--md-default-fg-color);
+}
+
+.lettera-btn:hover:not(.lettera-btn--disabled) {
+    background: var(--md-primary-fg-color);
+    color: #ffffff;
+    border-color: var(--md-primary-fg-color);
+}
+
+.lettera-btn--active {
+    background: var(--md-primary-fg-color);
+    color: #ffffff !important;
+    border-color: var(--md-primary-fg-color);
+}
+
+.lettera-btn--disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* People/Organization grid */
+.people-grid,
+.org-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.people-card,
+.org-card {
+    background: var(--md-code-bg-color);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.people-card:hover,
+.org-card:hover {
+    background: var(--md-default-bg-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.people-link,
+.org-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.05rem;
+}
+
+.org-tipo {
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #ffffff !important;
+    background: var(--md-primary-fg-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 0.3rem;
+    width: fit-content;
+}
+
+.people-name,
+.org-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--md-default-fg-color);
+    line-height: 1.3;
+}
+
+.people-dates,
+.org-dates {
+    font-size: 0.7rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.people-count,
+.org-count {
+    font-size: 0.75rem;
+    color: var(--md-default-fg-color--light);
+}
+
+/* Responsive: tablet */
+@media (max-width: 900px) {
+    .people-grid,
+    .org-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Responsive: mobile */
+@media (max-width: 768px) {
+    .top-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .top-card {
+        aspect-ratio: auto;
+        min-height: 200px;
+    }
+
+    .top-card-text {
+        padding: 0.4rem 0.8rem 0.6rem 0.8rem;
+    }
+
+    .people-grid,
+    .org-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .people-name,
+    .org-name {
+        font-size: 0.9rem;
+    }
+
+    .people-dates,
+    .org-dates {
+        font-size: 0.65rem;
+    }
+}
