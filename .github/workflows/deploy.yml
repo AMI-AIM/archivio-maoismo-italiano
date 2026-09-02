@@ -13,55 +13,54 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      
+
       - name: Setup cache pip
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-      
+
       - name: Setup cache AMI
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: scripts/.cache
-          key: ${{ runner.os }}-ami-cache-${{ hashFiles('**/data/dati.xlsx') }}
+          key: ${{ runner.os }}-ami-cache-v2-${{ hashFiles('**/data/dati.xlsx', '**/scripts/**/*.py') }}
           restore-keys: |
-            ${{ runner.os }}-ami-cache-
-      
+            ${{ runner.os }}-ami-cache-v2-
+
       - name: Install dependencies
         run: pip install -r requirements.txt
-      
+
       - name: Sync static assets
         run: python scripts/sync_assets.py
-      
+
       - name: Generate people pages
         run: python scripts/persone.py
-      
+
       - name: Generate organization pages
         run: python scripts/org.py
-      
-      - name: Generate gallery
-        run: python scripts/galleria.py
 
       - name: Generate document schede
         run: python scripts/generatore.py
-      
-      - name: Copy and compress static files
+
+      - name: Build MkDocs
+        run: mkdocs build
+
+      - name: Verify build output
         run: |
-          mkdocs build
-          if [ -f build/documenti.json ]; then cp build/documenti.json site/; fi
-          if [ -f build/soggetti.json ]; then cp build/soggetti.json site/; fi
-          if [ -f build/javascripts/lazy-load.js ]; then cp build/javascripts/lazy-load.js site/; fi
-          # Gzip per CDN (mantiene gli originali: senza -k, gzip cancella
-          # il file sorgente e lascia solo il .gz, rompendo ogni fetch/link
-          # che punta al nome file originale, es. documenti.json, extra.css)
-          find site -type f \( -name "*.json" -o -name "*.js" -o -name "*.css" \) -exec gzip -9 -k {} +
-      
+          echo "=== Verifica file critici in site/ ==="
+          test -f site/sitemap.xml || { echo "❌ ERRORE: sitemap.xml mancante"; exit 1; }
+          test -f site/robots.txt || { echo "❌ ERRORE: robots.txt mancante"; exit 1; }
+          test -f site/documenti.json || { echo "❌ ERRORE: documenti.json mancante"; exit 1; }
+          test -f site/soggetti.json || { echo "❌ ERRORE: soggetti.json mancante"; exit 1; }
+          test -f site/index.html || { echo "❌ ERRORE: index.html mancante"; exit 1; }
+          echo "✅ Tutti i file critici presenti in site/"
+
       - name: Deploy to gh-pages
-        run: mkdocs gh-deploy --force
+        run: mkdocs gh-deploy --force --no-build

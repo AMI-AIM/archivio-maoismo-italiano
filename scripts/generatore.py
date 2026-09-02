@@ -57,25 +57,25 @@ def copia_immagini_profili():
 
 
 def pubblica_file_seo():
-    """
-    Garantisce che robots.txt e i file di verifica (Google Search Console)
-    finiscano in build/ a ogni generazione: MkDocs li pubblicherà in root
-    del sito. I file messi nella root del repo NON vengono serviti da
-    GitHub Pages (serve solo l'output di mkdocs build).
-    """
     print("\n[SEO] Pubblicazione file statici SEO in build/...")
-
-    # 1. robots.txt: (ri)scritto sempre, così non può mancare
+    
+    # 1. robots.txt: (ri)scritto sempre, con URL hardcoded
     robots_path = os.path.join(OUTPUT_DIR, 'robots.txt')
     robots_content = """# robots.txt — Archivio del Maoismo Italiano
 User-agent: *
 Allow: /
 
-Sitemap: {SITE_URL}/sitemap.xml
+Sitemap: https://ami-aim.github.io/archivio-maoismo-italiano/sitemap.xml
 """
     with open(robots_path, 'w', encoding='utf-8') as f:
         f.write(robots_content)
     print("   [OK] robots.txt scritto in build/")
+    
+    # Verifica che non ci siano file robots.txt in assets/ che potrebbero sovrascriverlo
+    assets_robots = os.path.join(ROOT_DIR, 'assets', 'robots.txt')
+    if os.path.exists(assets_robots):
+        print(f"   [WARNING] Trovato {assets_robots} - verrà rimosso per evitare conflitti")
+        os.remove(assets_robots)
 
     # 2. File di verifica Search Console (google*.html):
     #    copiati dalla root del repo (o da static/) dentro build/
@@ -98,19 +98,18 @@ Sitemap: {SITE_URL}/sitemap.xml
 def genera_sitemap(output_dir, df, persone, organizzazioni):
     """
     Genera sitemap.xml per SEO (Google, Bing, etc).
-    Versione irrobustita: lastmod W3C, schemaLocation esplicito,
-    nessun carattere prima della dichiarazione XML.
-
-    Args:
-        output_dir: Cartella output (docs/)
-        df: DataFrame catalogo
-        persone: dict persone
-        organizzazioni: dict organizzazioni
+    
+    Versione irrobustita:
+    - BOM UTF-8 per forzare riconoscimento encoding (risolve problemi GSC)
+    - Verifica esistenza file prima di includerli (evita 404)
+    - Escape XML corretto per caratteri speciali
+    - lastmod W3C conforme
+    - schemaLocation esplicito per validazione
     """
     print("\n[SITEMAP] Generazione della sitemap...")
-    base_url = SITE_URL
+    base_url = "https://ami-aim.github.io/archivio-maoismo-italiano"
     oggi_iso = datetime.now().strftime('%Y-%m-%d')
-
+    
     def escape_xml(text):
         """Escape caratteri speciali per XML."""
         if not text:
@@ -121,16 +120,26 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
                 .replace('>', '&gt;')
                 .replace('"', '&quot;')
                 .replace("'", '&apos;'))
-
-    # Pagine principali
+    
+    # Pagine principali (verifica esistenza file)
     pagine = [
         {"loc": f"{base_url}/", "priority": "1.0", "changefreq": "weekly"},
-        {"loc": f"{base_url}/progetto/", "priority": "0.8", "changefreq": "monthly"},
+    ]
+    
+    # Verifica esistenza progetto.md (potrebbe non esistere)
+    progetto_path = os.path.join(output_dir, 'progetto.md')
+    if os.path.exists(progetto_path):
+        pagine.append({"loc": f"{base_url}/progetto/", "priority": "0.8", "changefreq": "monthly"})
+    else:
+        print("   [INFO] progetto.md non trovato, escluso dalla sitemap")
+    
+    # Pagine che esistono sempre (generate dagli script)
+    pagine.extend([
         {"loc": f"{base_url}/documenti/", "priority": "0.9", "changefreq": "weekly"},
         {"loc": f"{base_url}/persone/", "priority": "0.8", "changefreq": "monthly"},
         {"loc": f"{base_url}/organizzazioni/", "priority": "0.8", "changefreq": "monthly"},
-    ]
-
+    ])
+    
     # Aggiunge documenti
     for _, row in df.iterrows():
         ami_id = str(row.get('id', '')).strip()
@@ -140,7 +149,7 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
                 "priority": "0.7",
                 "changefreq": "monthly"
             })
-
+    
     # Aggiunge persone
     for nome in persone.keys():
         slug = persone[nome].get('slug', '')
@@ -150,7 +159,7 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
                 "priority": "0.6",
                 "changefreq": "monthly"
             })
-
+    
     # Aggiunge organizzazioni
     for nome in organizzazioni.keys():
         slug = organizzazioni[nome].get('slug', '')
@@ -160,7 +169,7 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
                 "priority": "0.6",
                 "changefreq": "monthly"
             })
-
+    
     # Costruisce XML (dichiarazione rigorosamente al primo byte)
     xml_lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
@@ -169,6 +178,7 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
         'xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 '
         'http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'
     ]
+    
     for pagina in pagine:
         xml_lines.append('  <url>')
         xml_lines.append(f'    <loc>{escape_xml(pagina["loc"])}</loc>')
@@ -176,24 +186,30 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
         xml_lines.append(f'    <changefreq>{pagina["changefreq"]}</changefreq>')
         xml_lines.append(f'    <priority>{pagina["priority"]}</priority>')
         xml_lines.append('  </url>')
+    
     xml_lines.append('</urlset>')
-
-    # Salva file (senza BOM, senza righe vuote iniziali)
+    
+    # Salva file CON BOM UTF-8 per forzare riconoscimento encoding
+    # Il BOM (Byte Order Mark) è EF BB BF e aiuta i parser che non leggono
+    # correttamente il charset dagli header HTTP di GitHub Pages
     sitemap_path = os.path.join(output_dir, 'sitemap.xml')
-    with open(sitemap_path, 'w', encoding='utf-8') as f:
+    with open(sitemap_path, 'w', encoding='utf-8-sig') as f:
         f.write('\n'.join(xml_lines))
-
-    # Auto-verifica: il file deve iniziare con la dichiarazione XML
-    with open(sitemap_path, 'r', encoding='utf-8') as f:
-        primo_byte = f.read(5)
-    if primo_byte != '<?xml':
-        print(f"   [WARN] Sitemap: primi caratteri inattesi: {primo_byte!r}")
+    
+    # Auto-verifica: il file deve iniziare con BOM + dichiarazione XML
+    with open(sitemap_path, 'rb') as f:
+        primi_bytes = f.read(10)
+    
+    # BOM UTF-8 è EF BB BF, seguito da <?xml
+    if primi_bytes.startswith(b'\xef\xbb\xbf<?xml'):
+        print(f"   [OK] Sitemap generata con BOM UTF-8 ({len(pagine)} URL)")
+    elif primi_bytes.startswith(b'<?xml'):
+        print(f"   [WARN] Sitemap senza BOM (potrebbe causare problemi encoding)")
     else:
-        print(f"   [OK] Sitemap generata con {len(pagine)} URL (XML valido al primo byte)")
-
-
+        print(f"   [ERROR] Sitemap: primi bytes inattesi: {primi_bytes[:10]!r}")
 def ottimizza_json(output_dir):
     """
+
     Ottimizza JSON per frontend: minificazione e chunking.
 
     Args:
