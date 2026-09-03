@@ -88,7 +88,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   display: flex;
   align-items: center;
   margin-left: auto;
-  overflow: hidden;
+  overflow: visible;
 }
 .md-header__nav-list {
   display: flex;
@@ -150,6 +150,125 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 .md-sidebar--primary {
   display: none !important;
+}
+
+/* ============================================================
+   4b. DROPDOWN NAVIGAZIONE HEADER (voci di sezione, es. "Archivio")
+   ============================================================ */
+
+/* Il contenitore della sezione fa da riferimento per il menu */
+.md-header__nav-item--dropdown {
+  position: relative;
+}
+
+/* Trigger del dropdown (voce "Archivio" con freccia) */
+.md-header__nav-link--dropdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Freccia: ruota di 180° quando il menu è aperto */
+.md-header__dropdown-caret {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+/* Menu a tendina: nascosto di default.
+   Stesso linguaggio visivo di .hero-search-results (bianco, ombra, radius 10px) */
+.md-header__dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  min-width: 220px;
+  margin: 0;
+  padding: 0.4rem 0;
+  list-style: none;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+/* Ponte invisibile sopra il menu: mantiene continuo l'hover
+   tra il trigger e il menu, evitando che si chiuda nel tragitto */
+.md-header__dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -0.5rem;
+  left: 0;
+  width: 100%;
+  height: 0.5rem;
+}
+
+/* Apertura: al passaggio del mouse OPPURE al click/focus (touch e tastiera) */
+.md-header__nav-item--dropdown:hover .md-header__dropdown-menu,
+.md-header__nav-item--dropdown:focus-within .md-header__dropdown-menu {
+  display: block;
+}
+
+.md-header__nav-item--dropdown:hover .md-header__dropdown-caret,
+.md-header__nav-item--dropdown:focus-within .md-header__dropdown-caret {
+  transform: rotate(180deg);
+}
+
+/* Singola voce del menu */
+.md-header__dropdown-item {
+  list-style: none;
+}
+
+.md-header__dropdown-link {
+  display: block;
+  padding: 0.55rem 1.1rem;
+  font-family: var(--ami-font-label);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+
+.md-header__dropdown-link:hover {
+  background: #f5f5f5;
+  color: var(--md-primary-fg-color);
+}
+
+.md-header__dropdown-link--active {
+  color: var(--md-primary-fg-color);
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------
+   Sezioni nel drawer mobile (menu laterale)
+   ------------------------------------------------------------ */
+.md-drawer__item--section {
+  padding: 0.1rem 0;
+}
+
+.md-drawer__section-title {
+  display: block;
+  padding: 0.6rem 1rem 0.3rem 1rem;
+  font-family: var(--ami-font-label);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--md-default-fg-color--light);
+}
+
+.md-drawer__sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.md-drawer__subitem .md-drawer__link {
+  padding-left: 2.2rem;
+  font-size: 0.95rem;
 }
 
 /* ------------------------------------------------------------

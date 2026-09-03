@@ -184,40 +184,91 @@
     <nav class="md-header__nav" aria-label="Navigazione">
       <ul class="md-header__nav-list">
         
-          <li class="md-header__nav-item">
-            <a href=".."
-               class="md-header__nav-link">
-              Home
-            </a>
-          </li>
+
+          
+            
+            <li class="md-header__nav-item">
+              <a href=".."
+                 class="md-header__nav-link">
+                Home
+              </a>
+            </li>
+          
+
         
-          <li class="md-header__nav-item">
-            <a href="../progetto/"
-               class="md-header__nav-link">
-              Il progetto
-            </a>
-          </li>
+
+          
+            
+            <li class="md-header__nav-item">
+              <a href="../progetto/"
+                 class="md-header__nav-link">
+                Il progetto
+              </a>
+            </li>
+          
+
         
-          <li class="md-header__nav-item">
-            <a href=".."
-               class="md-header__nav-link">
-              Archivio
-            </a>
-          </li>
+
+          
+            
+            <li class="md-header__nav-item md-header__nav-item--dropdown">
+              <span class="md-header__nav-link md-header__nav-link--dropdown"
+                    tabindex="0"
+                    role="button"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                Archivio
+                <svg class="md-header__dropdown-caret" xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                  <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+                </svg>
+              </span>
+
+              <ul class="md-header__dropdown-menu">
+                
+                  <li class="md-header__dropdown-item">
+                    <a href="../documenti/"
+                       class="md-header__dropdown-link">
+                      Tutti i documenti
+                    </a>
+                  </li>
+                
+                  <li class="md-header__dropdown-item">
+                    <a href="../argomenti/"
+                       class="md-header__dropdown-link">
+                      Argomenti
+                    </a>
+                  </li>
+                
+              </ul>
+            </li>
+
+          
+
         
-          <li class="md-header__nav-item">
-            <a href="./"
-               class="md-header__nav-link">
-              Persone
-            </a>
-          </li>
+
+          
+            
+            <li class="md-header__nav-item">
+              <a href="./"
+                 class="md-header__nav-link">
+                Persone
+              </a>
+            </li>
+          
+
         
-          <li class="md-header__nav-item">
-            <a href="../organizzazioni/"
-               class="md-header__nav-link">
-              Organizzazioni
-            </a>
-          </li>
+
+          
+            
+            <li class="md-header__nav-item">
+              <a href="../organizzazioni/"
+                 class="md-header__nav-link">
+                Organizzazioni
+              </a>
+            </li>
+          
+
         
       </ul>
     </nav>
@@ -231,14 +282,14 @@
 <!-- DRAWER PERSONALIZZATO (menu laterale) -->
 <div class="md-drawer" id="custom-drawer" role="navigation" aria-label="Navigazione mobile">
   <div class="md-drawer__inner">
-    
+
     <!-- INTESTAZIONE ROSSA CON LOGO -->
     <div class="md-drawer__header">
       <a href="https://ami-aim.github.io/archivio-maoismo-italiano/"
          class="md-drawer__logo-link"
          aria-label="AMI - Archivio del Maoismo Italiano">
-        <img src="../immagini/logo.webp" 
-             alt="AMI - Archivio del Maoismo Italiano" 
+        <img src="../immagini/logo.webp"
+             alt="AMI - Archivio del Maoismo Italiano"
              class="md-drawer__logo">
       </a>
     </div>
@@ -246,42 +297,79 @@
     <!-- VOCI DI NAVIGAZIONE -->
     <ul class="md-drawer__list">
       
-        <li class="md-drawer__item">
-          <a href=".."
-             class="md-drawer__link">
-            Home
-          </a>
-        </li>
+
+        
+          <li class="md-drawer__item">
+            <a href=".."
+               class="md-drawer__link">
+              Home
+            </a>
+          </li>
+        
+
       
-        <li class="md-drawer__item">
-          <a href="../progetto/"
-             class="md-drawer__link">
-            Il progetto
-          </a>
-        </li>
+
+        
+          <li class="md-drawer__item">
+            <a href="../progetto/"
+               class="md-drawer__link">
+              Il progetto
+            </a>
+          </li>
+        
+
       
-        <li class="md-drawer__item">
-          <a href=".."
-             class="md-drawer__link">
-            Archivio
-          </a>
-        </li>
+
+        
+          
+          <li class="md-drawer__item md-drawer__item--section">
+            <span class="md-drawer__section-title">Archivio</span>
+            <ul class="md-drawer__sublist">
+              
+                <li class="md-drawer__subitem">
+                  <a href="../documenti/"
+                     class="md-drawer__link">
+                    Tutti i documenti
+                  </a>
+                </li>
+              
+                <li class="md-drawer__subitem">
+                  <a href="../argomenti/"
+                     class="md-drawer__link">
+                    Argomenti
+                  </a>
+                </li>
+              
+            </ul>
+          </li>
+
+        
+
       
-        <li class="md-drawer__item">
-          <a href="./"
-             class="md-drawer__link">
-            Persone
-          </a>
-        </li>
+
+        
+          <li class="md-drawer__item">
+            <a href="./"
+               class="md-drawer__link">
+              Persone
+            </a>
+          </li>
+        
+
       
-        <li class="md-drawer__item">
-          <a href="../organizzazioni/"
-             class="md-drawer__link">
-            Organizzazioni
-          </a>
-        </li>
+
+        
+          <li class="md-drawer__item">
+            <a href="../organizzazioni/"
+               class="md-drawer__link">
+              Organizzazioni
+            </a>
+          </li>
+        
+
       
     </ul>
+
   </div>
 </div>
     
