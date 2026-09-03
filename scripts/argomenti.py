@@ -2,6 +2,7 @@ import os
 import re
 import json
 import html
+import hashlib
 import unicodedata
 from datetime import datetime
 
@@ -24,6 +25,13 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 OUTPUT_DIR = os.path.join(ROOT_DIR, 'build')
 ARGOMENTI_DIR = os.path.join(OUTPUT_DIR, 'argomenti')
+
+# Cartelle in cui lo script cerca le immagini degli argomenti.
+# La fonte primaria è assets/ (versionata nel repo);
+# build/ è controllata come fallback per esecuzioni locali.
+ASSETS_ARGOMENTI_IMG_DIR = os.path.join(ROOT_DIR, 'assets', 'immagini', 'argomenti')
+BUILD_ARGOMENTI_IMG_DIR = os.path.join(OUTPUT_DIR, 'immagini', 'argomenti')
+ESTENSIONI_IMMAGINE = ['.webp', '.jpg', '.jpeg', '.png']
 
 BASE_URL = str(SITE_URL).rstrip('/')
 
@@ -78,9 +86,6 @@ def xml_escape(value):
 def normalize_key(value):
     """
     Normalizza il nome di un argomento per il raggruppamento.
-    - minuscole;
-    - rimozione accenti;
-    - compressione spazi.
     """
     value = str(value).strip().lower()
     value = unicodedata.normalize('NFKD', value)
@@ -103,9 +108,7 @@ def pulisci_valore(raw):
 def split_argomenti(raw):
     """
     Divide il contenuto del campo Serie/Argomenti.
-
-    Nei dati attuali il separatore principale è ';'.
-    Se non c'è ';', ma c'è ',', usa ',' come fallback.
+    Separatore principale: ';'. Fallback: ','.
     """
     txt = pulisci_valore(raw)
     if not txt:
@@ -198,7 +201,6 @@ def count_text(num):
 def get_years_text(docs):
     """
     Restituisce l'arco cronologico dei documenti collegati a un argomento.
-    Esempio: '1967–1971' oppure '1968'.
     """
     years = set()
 
@@ -241,7 +243,6 @@ def find_column(df, candidates):
 def clean_argomenti_dir():
     """
     Rimuove i vecchi file Markdown generati nella cartella argomenti.
-    Serve a evitare pagine residue quando un argomento viene eliminato.
     """
     if not os.path.isdir(ARGOMENTI_DIR):
         return
@@ -252,6 +253,58 @@ def clean_argomenti_dir():
                 os.remove(os.path.join(ARGOMENTI_DIR, filename))
             except OSError:
                 pass
+
+
+# ============================================================
+# IMMAGINI ARGOMENTI
+# ============================================================
+
+def colore_hash(nome):
+    """
+    Colore esadecimale stabile a partire dal nome.
+    Usato solo come fallback quando manca la foto.
+    """
+    hash_obj = hashlib.md5(str(nome).encode('utf-8'))
+    return f'#{hash_obj.hexdigest()[:6]}'
+
+
+def scurisci(hex_color, fattore=0.55):
+    """
+    Scurisce un colore hex per il gradient di fallback.
+    """
+    hex_color = hex_color.lstrip('#')
+    r = int(int(hex_color[0:2], 16) * fattore)
+    g = int(int(hex_color[2:4], 16) * fattore)
+    b = int(int(hex_color[4:6], 16) * fattore)
+    return f'#{r:02x}{g:02x}{b:02x}'
+
+
+def get_iniziali(nome, max_lettere=2):
+    """
+    Iniziali per la filigrana delle card senza foto.
+    """
+    parti = [p for p in str(nome).split() if p]
+    if not parti:
+        return '?'
+
+    if len(parti) == 1:
+        return parti[0][0].upper()
+
+    return ''.join(p[0].upper() for p in parti[:max_lettere])
+
+
+def trova_immagine_argomento(slug):
+    """
+    Cerca l'immagine di un argomento in assets/ e poi in build/.
+    Restituisce (url, nome_file) oppure (None, None).
+    """
+    for base_dir in (ASSETS_ARGOMENTI_IMG_DIR, BUILD_ARGOMENTI_IMG_DIR):
+        for est in ESTENSIONI_IMMAGINE:
+            percorso = os.path.join(base_dir, f'{slug}{est}')
+            if os.path.exists(percorso):
+                return site_path(f'immagini/argomenti/{slug}{est}'), f'{slug}{est}'
+
+    return None, None
 
 
 # ============================================================
@@ -331,18 +384,17 @@ def generate_single_page(item):
 
 
 # ============================================================
-# GENERAZIONE INDICE
+# GENERAZIONE INDICE (HERO CARDS)
 # ============================================================
 
 def generate_index(argomenti):
     """
-    Genera un indice semplice degli argomenti come elenco di card
-    orizzontali a larghezza piena.
-
-    Nessuna sezione in evidenza, nessun filtro alfabetico.
+    Genera l'indice degli argomenti come elenco di hero card
+    orizzontali a larghezza piena, con foto di sfondo e
+    gradient solo nella parte bassa.
     """
     # Ordine alfabetico.
-    # Se preferisci ordinare per numero di documenti, usa:
+    # Per ordinare per numero di documenti usa:
     # argomenti_ordinati = sorted(argomenti, key=lambda item: (-item['num_doc'], item['label'].lower()))
     argomenti_ordinati = sorted(argomenti, key=lambda item: item['label'].lower())
 
@@ -376,81 +428,109 @@ def generate_index(argomenti):
     lines.append('.argomenti-intro {')
     lines.append('    max-width: 70ch;')
     lines.append('    color: var(--md-default-fg-color--light);')
-    lines.append('    margin: 0 0 1.25rem;')
+    lines.append('    margin: 0 0 1.5rem;')
     lines.append('}')
     lines.append('')
-    lines.append('.argomenti-stack {')
+    lines.append('.hero-stack {')
     lines.append('    display: grid;')
-    lines.append('    gap: 0.8rem;')
-    lines.append('    margin: 0 0 2rem;')
+    lines.append('    gap: 1.2rem;')
+    lines.append('    margin: 0 0 2.5rem;')
     lines.append('}')
     lines.append('')
-    lines.append('.argomento-card {')
-    lines.append('    display: flex;')
-    lines.append('    align-items: center;')
-    lines.append('    justify-content: space-between;')
-    lines.append('    gap: 1rem;')
+    lines.append('.hero-card {')
+    lines.append('    position: relative;')
+    lines.append('    display: block;')
     lines.append('    width: 100%;')
-    lines.append('    min-height: 4.6rem;')
-    lines.append('    padding: 1rem 1.2rem;')
-    lines.append('    border: 1px solid rgba(0, 0, 0, 0.12);')
-    lines.append('    border-left: 4px solid var(--md-primary-fg-color);')
-    lines.append('    border-radius: 0.6rem;')
-    lines.append('    background: var(--md-default-bg-color);')
-    lines.append('    color: var(--md-default-fg-color);')
+    lines.append('    height: 260px;')
+    lines.append('    border-radius: 0.8rem;')
+    lines.append('    overflow: hidden;')
     lines.append('    text-decoration: none;')
-    lines.append('    transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;')
+    lines.append('    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);')
+    lines.append('    transition: transform 180ms ease, box-shadow 180ms ease;')
     lines.append('}')
     lines.append('')
-    lines.append('.argomento-card:hover {')
-    lines.append('    transform: translateY(-1px);')
-    lines.append('    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.10);')
-    lines.append('    color: var(--md-default-fg-color);')
+    lines.append('.hero-card:hover {')
+    lines.append('    transform: translateY(-2px);')
+    lines.append('    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);')
+    lines.append('    color: #ffffff;')
     lines.append('    text-decoration: none;')
     lines.append('}')
     lines.append('')
-    lines.append('.argomento-card:focus-visible {')
+    lines.append('.hero-card:focus-visible {')
     lines.append('    outline: 3px solid var(--md-primary-fg-color);')
-    lines.append('    outline-offset: 2px;')
+    lines.append('    outline-offset: 3px;')
     lines.append('}')
     lines.append('')
-    lines.append('.argomento-card-main {')
-    lines.append('    display: flex;')
-    lines.append('    flex-direction: column;')
-    lines.append('    gap: 0.25rem;')
-    lines.append('    min-width: 0;')
+    lines.append('.hero-card-img {')
+    lines.append('    position: absolute;')
+    lines.append('    inset: 0;')
+    lines.append('    width: 100%;')
+    lines.append('    height: 100%;')
+    lines.append('    object-fit: cover;')
+    lines.append('    transition: transform 350ms ease;')
     lines.append('}')
     lines.append('')
-    lines.append('.argomento-card-nome {')
-    lines.append('    font-size: 1.05rem;')
-    lines.append('    font-weight: 600;')
-    lines.append('    line-height: 1.35;')
+    lines.append('.hero-card:hover .hero-card-img {')
+    lines.append('    transform: scale(1.04);')
+    lines.append('}')
+    lines.append('')
+    lines.append('.hero-card-iniziali {')
+    lines.append('    position: absolute;')
+    lines.append('    top: 0.8rem;')
+    lines.append('    right: 1.2rem;')
+    lines.append('    font-size: 5.5rem;')
+    lines.append('    font-weight: 800;')
+    lines.append('    color: rgba(255, 255, 255, 0.16);')
+    lines.append('    line-height: 1;')
+    lines.append('    user-select: none;')
+    lines.append('}')
+    lines.append('')
+    lines.append('.hero-card-gradient {')
+    lines.append('    position: absolute;')
+    lines.append('    inset: 0;')
+    lines.append('    background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 38%, rgba(0, 0, 0, 0) 68%);')
+    lines.append('}')
+    lines.append('')
+    lines.append('.hero-card-content {')
+    lines.append('    position: absolute;')
+    lines.append('    left: 0;')
+    lines.append('    right: 0;')
+    lines.append('    bottom: 0;')
+    lines.append('    padding: 1.1rem 1.4rem;')
+    lines.append('    color: #ffffff;')
+    lines.append('}')
+    lines.append('')
+    lines.append('.hero-card-nome {')
+    lines.append('    font-size: 1.5rem;')
+    lines.append('    font-weight: 700;')
+    lines.append('    line-height: 1.25;')
+    lines.append('    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);')
     lines.append('    overflow-wrap: anywhere;')
     lines.append('}')
     lines.append('')
-    lines.append('.argomento-card-meta {')
-    lines.append('    color: var(--md-default-fg-color--light);')
-    lines.append('    font-size: 0.92rem;')
-    lines.append('}')
-    lines.append('')
-    lines.append('.argomento-card-freccia {')
-    lines.append('    flex: 0 0 auto;')
-    lines.append('    font-size: 1.25rem;')
-    lines.append('    color: var(--md-primary-fg-color);')
-    lines.append('}')
-    lines.append('')
-    lines.append('html[data-md-color-scheme="slate"] .argomento-card {')
-    lines.append('    border-color: rgba(255, 255, 255, 0.16);')
+    lines.append('.hero-card-meta {')
+    lines.append('    margin-top: 0.25rem;')
+    lines.append('    font-size: 0.95rem;')
+    lines.append('    color: rgba(255, 255, 255, 0.85);')
+    lines.append('    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);')
     lines.append('}')
     lines.append('')
     lines.append('@media screen and (max-width: 40em) {')
-    lines.append('    .argomento-card {')
-    lines.append('        padding: 0.9rem 1rem;')
-    lines.append('        min-height: 4.2rem;')
+    lines.append('    .hero-card {')
+    lines.append('        height: 200px;')
+    lines.append('        border-radius: 0.6rem;')
     lines.append('    }')
     lines.append('')
-    lines.append('    .argomento-card-nome {')
-    lines.append('        font-size: 1rem;')
+    lines.append('    .hero-card-nome {')
+    lines.append('        font-size: 1.2rem;')
+    lines.append('    }')
+    lines.append('')
+    lines.append('    .hero-card-content {')
+    lines.append('        padding: 0.9rem 1.1rem;')
+    lines.append('    }')
+    lines.append('')
+    lines.append('    .hero-card-iniziali {')
+    lines.append('        font-size: 4rem;')
     lines.append('    }')
     lines.append('}')
     lines.append('</style>')
@@ -465,7 +545,7 @@ def generate_index(argomenti):
     lines.append('</div>')
     lines.append('')
 
-    lines.append('<div class="argomenti-stack">')
+    lines.append('<div class="hero-stack">')
 
     for item in argomenti_ordinati:
         slug = item['slug']
@@ -480,12 +560,24 @@ def generate_index(argomenti):
 
         meta_html = escape_html(meta)
 
-        lines.append(f'<a class="argomento-card" href="{slug}/">')
-        lines.append('    <span class="argomento-card-main">')
-        lines.append(f'        <span class="argomento-card-nome">{label_html}</span>')
-        lines.append(f'        <span class="argomento-card-meta">{meta_html}</span>')
-        lines.append('    </span>')
-        lines.append('    <span class="argomento-card-freccia" aria-hidden="true">→</span>')
+        if item.get('immagine'):
+            # Card con foto storica di sfondo
+            lines.append(f'<a class="hero-card" href="{slug}/">')
+            lines.append(f'    <img class="hero-card-img" src="{item["immagine"]}" alt="" loading="lazy">')
+        else:
+            # Fallback: gradient colorato deterministico + iniziali
+            colore = colore_hash(item['label'])
+            scuro = scurisci(colore)
+            iniziali = escape_html(get_iniziali(item['label']))
+
+            lines.append(f'<a class="hero-card" href="{slug}/" style="background: linear-gradient(140deg, {colore} 0%, {scuro} 100%);">')
+            lines.append(f'    <div class="hero-card-iniziali" aria-hidden="true">{iniziali}</div>')
+
+        lines.append('    <div class="hero-card-gradient" aria-hidden="true"></div>')
+        lines.append('    <div class="hero-card-content">')
+        lines.append(f'        <div class="hero-card-nome">{label_html}</div>')
+        lines.append(f'        <div class="hero-card-meta">{meta_html}</div>')
+        lines.append('    </div>')
         lines.append('</a>')
 
     lines.append('</div>')
@@ -496,7 +588,7 @@ def generate_index(argomenti):
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines))
 
-    print(f'   ✅ Indice argomenti generato come elenco di {len(argomenti)} card.')
+    print(f'   ✅ Indice argomenti generato come elenco di {len(argomenti)} hero card.')
 
 
 # ============================================================
@@ -506,9 +598,7 @@ def generate_index(argomenti):
 def update_sitemap(argomenti):
     """
     Aggiunge le pagine argomento alla sitemap, se AGGIORNA_SITEMAP = True.
-
-    Va eseguito dopo generatore.py, perché generatore.py crea
-    build/sitemap.xml e build/sitemap.txt.
+    Va eseguito dopo generatore.py.
     """
     if not AGGIORNA_SITEMAP:
         return
@@ -734,7 +824,24 @@ def genera_argomenti():
         item['num_doc'] = len(item['docs'])
         item['slug'] = make_slug(item['label'], used_slugs)
 
+        immagine_url, immagine_file = trova_immagine_argomento(item['slug'])
+        item['immagine'] = immagine_url
+        item['immagine_file'] = immagine_file
+
     print(f'   📊 Trovati {len(argomenti)} argomenti con documenti associati.')
+
+    # ------------------------------------------------------------
+    # MANIFESTO IMMAGINI
+    # ------------------------------------------------------------
+
+    print('   🖼️  Stato immagini argomenti:')
+
+    for item in sorted(argomenti, key=lambda x: x['label'].lower()):
+        if item['immagine']:
+            print(f"      ✅ {item['label']}: {item['immagine_file']}")
+        else:
+            print(f"      ⚠️  {item['label']}: nessuna immagine → fallback colorato.")
+            print(f"          File atteso: assets/immagini/argomenti/{item['slug']}.webp (oppure .jpg / .jpeg / .png)")
 
     for item in argomenti:
         generate_single_page(item)
