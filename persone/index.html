@@ -673,7 +673,7 @@
             <div class="top-card-text">
                 <div class="top-card-name">Mao Zedong</div>
                 <div class="top-card-dates">1893 – 1976</div>
-                <div class="top-card-count">35 documenti</div>
+                <div class="top-card-count">34 documenti</div>
             </div>
         </a>
     </div>
@@ -823,35 +823,46 @@
     const searchCounter = document.getElementById("search-counter");
     const grid = document.getElementById("people-grid");
     const letteraBtns = document.querySelectorAll(".lettera-btn");
+
     if (!grid) return;
+
     const cards = grid.querySelectorAll(".people-card");
+
     function filtra() {
         const query = searchInput.value.toLowerCase().trim();
         const letteraAttiva = document.querySelector(".lettera-btn--active");
         const lettera = letteraAttiva ? letteraAttiva.dataset.lettera : "all";
         let visibili = 0;
+
         cards.forEach(card => {
             const nome = card.querySelector(".people-name").textContent.toLowerCase();
             const cardLettera = card.dataset.lettera;
             const matchLettera = (lettera === "all" || cardLettera === lettera);
             const matchRicerca = nome.includes(query);
             const visibile = matchLettera && matchRicerca;
+
             card.style.display = visibile ? "" : "none";
+
             if (visibile) visibili++;
         });
+
         if (searchCounter) {
             searchCounter.textContent = visibili + " persone";
         }
     }
+
     searchInput.addEventListener("input", filtra);
+
     letteraBtns.forEach(btn => {
         btn.addEventListener("click", function() {
             if (this.disabled) return;
+
             letteraBtns.forEach(b => b.classList.remove("lettera-btn--active"));
             this.classList.add("lettera-btn--active");
             filtra();
         });
     });
+
     filtra();
 })();
 </script>
