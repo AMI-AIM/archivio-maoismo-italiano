@@ -41,13 +41,13 @@ markdown_extensions:
   - pymdownx.superfences
 
 nav:
-  Home: index.md
-  Il progetto: progetto.md
-  Archivio:
+  - Home: index.md
+  - Il progetto: progetto.md
+  - Archivio:
     - Tutti i documenti: documenti/
     - Argomenti: argomenti/
-  Persone: persone/
-  Organizzazioni: organizzazioni/
+  - Persone: persone/
+  - Organizzazioni: organizzazioni/
 
 extra:
   homepage: /archivio-maoismo-italiano/
