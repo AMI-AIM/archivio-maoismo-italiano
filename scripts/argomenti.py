@@ -2,7 +2,6 @@ import os
 import re
 import json
 import html
-import hashlib
 import unicodedata
 from datetime import datetime
 
@@ -28,8 +27,7 @@ ARGOMENTI_DIR = os.path.join(OUTPUT_DIR, 'argomenti')
 
 BASE_URL = str(SITE_URL).rstrip('/')
 
-# Slug che non devono mai essere usati per una pagina argomento,
-# perché possono creare conflitti con file tecnici o indici.
+# Slug che non devono mai essere usati per una pagina argomento.
 RESERVED_SLUGS = {
     'index',
     '404',
@@ -153,45 +151,6 @@ def choose_label(current, new):
     return current
 
 
-def lettera_iniziale(nome):
-    """
-    Restituisce la lettera iniziale per i filtri alfabetici.
-    Normalizza anche le lettere accentate.
-    """
-    key = normalize_key(nome)
-    if not key:
-        return '#'
-
-    ch = key[0].upper()
-    if 'A' <= ch <= 'Z':
-        return ch
-
-    return '#'
-
-
-def get_iniziali(nome, max_lettere=2):
-    """
-    Restituisce iniziali per avatar sintetici.
-    """
-    parti = [p for p in str(nome).split() if p]
-    if not parti:
-        return '?'
-
-    if len(parti) == 1:
-        return parti[0][0].upper()
-
-    return ''.join(p[0].upper() for p in parti[:max_lettere])
-
-
-def colore_hash(nome):
-    """
-    Colore stabile per avatar sintetici.
-    """
-    hash_obj = hashlib.md5(str(nome).encode('utf-8'))
-    hex_color = hash_obj.hexdigest()[:6]
-    return f'#{hex_color}'
-
-
 def formatta_data_sicura(raw):
     """
     Wrapper sicuro attorno a formatta_data.
@@ -236,6 +195,39 @@ def count_text(num):
     return f'{num} documenti'
 
 
+def get_years_text(docs):
+    """
+    Restituisce l'arco cronologico dei documenti collegati a un argomento.
+    Esempio: '1967–1971' oppure '1968'.
+    """
+    years = set()
+
+    for doc in docs:
+        ordine = doc.get('data_ordine')
+
+        if not isinstance(ordine, tuple) or not ordine:
+            continue
+
+        try:
+            year = int(ordine[0])
+        except (TypeError, ValueError):
+            continue
+
+        if year != 9999:
+            years.add(year)
+
+    if not years:
+        return ''
+
+    min_year = min(years)
+    max_year = max(years)
+
+    if min_year == max_year:
+        return str(min_year)
+
+    return f'{min_year}–{max_year}'
+
+
 def find_column(df, candidates):
     """
     Trova la prima colonna disponibile tra quelle candidate.
@@ -263,71 +255,13 @@ def clean_argomenti_dir():
 
 
 # ============================================================
-# JSON-LD
-# ============================================================
-
-def topic_schema(item):
-    """
-    JSON-LD semplice per una pagina argomento.
-    Non dipende da metodi specifici di SchemaGenerator.
-    """
-    docs = []
-
-    for idx, doc in enumerate(item['docs'], start=1):
-        docs.append({
-            '@type': 'ListItem',
-            'position': idx,
-            'name': doc['titolo'],
-            'url': site_path(f"documenti/{doc['id']}/"),
-        })
-
-    return {
-        '@context': 'https://schema.org',
-        '@type': 'CollectionPage',
-        'name': item['label'],
-        'description': f"Documenti dell'Archivio del Maoismo Italiano collegati all'argomento {item['label']}.",
-        'inLanguage': 'it',
-        'mainEntity': {
-            '@type': 'ItemList',
-            'name': f'Documenti collegati a {item["label"]}',
-            'itemListElement': docs,
-        },
-    }
-
-
-def index_schema(argomenti):
-    """
-    JSON-LD semplice per l'indice degli argomenti.
-    """
-    items = []
-
-    for idx, item in enumerate(sorted(argomenti, key=lambda x: x['label'].lower()), start=1):
-        items.append({
-            '@type': 'ListItem',
-            'position': idx,
-            'name': item['label'],
-            'url': site_path(f"argomenti/{item['slug']}/"),
-        })
-
-    return {
-        '@context': 'https://schema.org',
-        '@type': 'CollectionPage',
-        'name': 'Argomenti',
-        'description': "Elenco degli argomenti presenti nell'Archivio del Maoismo Italiano.",
-        'inLanguage': 'it',
-        'mainEntity': {
-            '@type': 'ItemList',
-            'name': 'Argomenti',
-            'itemListElement': items,
-        },
-    }
-
-
-# ============================================================
 # GENERAZIONE SCHEDE SINGOLE
 # ============================================================
 
 def generate_single_page(item):
+    """
+    Genera la pagina singola di un argomento.
+    """
     label = item['label']
     slug = item['slug']
     num_doc = item['num_doc']
@@ -335,10 +269,8 @@ def generate_single_page(item):
     file_path = os.path.join(ARGOMENTI_DIR, f'{slug}.md')
     description = f"Documenti dell'Archivio del Maoismo Italiano collegati all'argomento {label}."
 
-    schema = topic_schema(item)
-    schema_json = json.dumps(schema, ensure_ascii=False).replace('</', '<\\/')
-
     css_url = site_path('stylesheets/soggetti.css')
+    back_url = site_path('argomenti/')
 
     fm = []
     fm.append('---')
@@ -359,8 +291,7 @@ def generate_single_page(item):
     body = []
     body.append(f'<link rel="stylesheet" href="{css_url}">')
     body.append('')
-    body.append(f'<script type="application/ld+json">\n{schema_json}\n</script>')
-    body.append('')
+    body.append(f'<p style="margin: 0 0 1rem; font-size: 0.92rem;"><a href="{back_url}">← Tutti gli argomenti</a></p>')
     body.append(f'<h1 class="person-name">{escape_html(label)}</h1>')
     body.append(f'<div class="org-dates">{count_text(num_doc)}</div>')
     body.append('<p style="margin: 0.5rem 0 1rem 0; color: var(--md-default-fg-color--light);">')
@@ -404,30 +335,28 @@ def generate_single_page(item):
 # ============================================================
 
 def generate_index(argomenti):
-    argomenti_top = sorted(
-        argomenti,
-        key=lambda item: (
-            -item['num_doc'],
-            item['label'].lower()
-        )
-    )[:3]
+    """
+    Genera un indice semplice degli argomenti come elenco di card
+    orizzontali a larghezza piena.
 
-    top_slugs = {item['slug'] for item in argomenti_top}
+    Nessuna sezione in evidenza, nessun filtro alfabetico.
+    """
+    # Ordine alfabetico.
+    # Se preferisci ordinare per numero di documenti, usa:
+    # argomenti_ordinati = sorted(argomenti, key=lambda item: (-item['num_doc'], item['label'].lower()))
+    argomenti_ordinati = sorted(argomenti, key=lambda item: item['label'].lower())
 
-    argomenti_resto = sorted(
-        [item for item in argomenti if item['slug'] not in top_slugs],
-        key=lambda item: item['label'].lower()
-    )
-
-    schema = index_schema(argomenti)
-    schema_json = json.dumps(schema, ensure_ascii=False).replace('</', '<\\/')
-    css_url = site_path('stylesheets/soggetti-indice.css')
+    description_text = "Elenco degli argomenti presenti nell'Archivio del Maoismo Italiano."
 
     lines = []
 
+    # ------------------------------------------------------------
+    # FRONTMATTER
+    # ------------------------------------------------------------
+
     lines.append('---')
     lines.append(f'title: {yaml_string("Argomenti")}')
-    lines.append(f'description: {yaml_string("Elenco degli argomenti presenti nell\'Archivio del Maoismo Italiano.")}')
+    lines.append(f'description: {yaml_string(description_text)}')
     lines.append('hide:')
     lines.append('  - navigation')
     lines.append('  - toc')
@@ -438,165 +367,128 @@ def generate_index(argomenti):
 
     lines.append('---')
     lines.append('')
-    lines.append(f'<link rel="stylesheet" href="{css_url}">')
-    lines.append('')
-    lines.append(f'<script type="application/ld+json">\n{schema_json}\n</script>')
-    lines.append('')
-    lines.append('# Argomenti in evidenza')
-    lines.append('')
 
     # ------------------------------------------------------------
-    # CARD ARGOMENTI PRINCIPALI
+    # STILE DELLA PAGINA
     # ------------------------------------------------------------
 
-    if argomenti_top:
-        lines.append('<div class="top-row">')
-
-        for item in argomenti_top:
-            slug = item['slug']
-            label = item['label']
-            label_html = escape_html(label)
-            label_attr = escape_html(label)
-            iniziali_html = escape_html(get_iniziali(label))
-            colore = colore_hash(label)
-            num_text = count_text(item['num_doc'])
-
-            avatar_style = (
-                f'background:{colore};'
-                'width:100%;'
-                'height:100%;'
-                'display:flex;'
-                'align-items:center;'
-                'justify-content:center;'
-                'color:#fff;'
-                'font-weight:700;'
-                'font-size:1.8rem;'
-                'line-height:1;'
-            )
-
-            lines.append('    <div class="top-card topic-card">')
-            lines.append(f'        <a href="{slug}/" class="top-card-link">')
-            lines.append('            <div class="top-card-image-wrapper">')
-            lines.append(f'                <div class="top-card-avatar-img topic-avatar" role="img" aria-label="{label_attr}" style="{avatar_style}">{iniziali_html}</div>')
-            lines.append('            </div>')
-            lines.append('            <div class="top-card-text">')
-            lines.append('                <div class="top-card-tipo">Argomento</div>')
-            lines.append(f'                <div class="top-card-name">{label_html}</div>')
-            lines.append(f'                <div class="top-card-count">{num_text}</div>')
-            lines.append('            </div>')
-            lines.append('        </a>')
-            lines.append('    </div>')
-
-        lines.append('</div>')
-
-    # ------------------------------------------------------------
-    # FILTRI E GRIGLIA ARGOMENTI RESTANTI
-    # ------------------------------------------------------------
-
-    if argomenti_resto:
-        lettere_presenti = sorted(set(
-            lettera_iniziale(item['label'])
-            for item in argomenti_resto
-        ))
-
-        tutte_lettere = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
-
-        if '#' in lettere_presenti:
-            tutte_lettere.append('#')
-
-        lines.append('<div class="filtri-persone filtri-argomenti">')
-        lines.append('    <div class="search-bar">')
-        lines.append('        <input type="text" id="search-input" placeholder="🔍 Cerca per argomento..." aria-label="Cerca argomenti">')
-        lines.append('        <span id="search-counter" class="search-counter"></span>')
-        lines.append('    </div>')
-        lines.append('    <div class="alfabeto-bar">')
-        lines.append('        <button class="lettera-btn lettera-btn--active" data-lettera="all">Tutte</button>')
-
-        for lettera in tutte_lettere:
-            if lettera in lettere_presenti:
-                lines.append(f'        <button class="lettera-btn" data-lettera="{lettera}">{lettera}</button>')
-            else:
-                lines.append(f'        <button class="lettera-btn lettera-btn--disabled" data-lettera="{lettera}" disabled>{lettera}</button>')
-
-        lines.append('    </div>')
-        lines.append('</div>')
-
-        lines.append('<div class="people-grid topic-grid" id="topic-grid">')
-
-        for item in argomenti_resto:
-            slug = item['slug']
-            label = item['label']
-            label_html = escape_html(label)
-            lettera = lettera_iniziale(label)
-            num_text = count_text(item['num_doc'])
-
-            lines.append(f'<div class="people-card topic-card" data-lettera="{lettera}">')
-            lines.append(f'    <a href="{slug}/" class="people-link topic-link">')
-            lines.append(f'        <div class="people-name topic-name">{label_html}</div>')
-            lines.append(f'        <div class="people-count topic-count">{num_text}</div>')
-            lines.append('    </a>')
-            lines.append('</div>')
-
-        lines.append('</div>')
-
-    else:
-        lines.append('<p style="padding: 1rem 0; color: var(--md-default-fg-color--light);">Nessun altro argomento.</p>')
-
+    lines.append('<style>')
+    lines.append('.argomenti-intro {')
+    lines.append('    max-width: 70ch;')
+    lines.append('    color: var(--md-default-fg-color--light);')
+    lines.append('    margin: 0 0 1.25rem;')
+    lines.append('}')
     lines.append('')
-
-    # ------------------------------------------------------------
-    # SCRIPT RICERCA + FILTRO ALFABETICO
-    # ------------------------------------------------------------
-
-    lines.append('<script>')
-    lines.append('(function() {')
-    lines.append('    const searchInput = document.getElementById("search-input");')
-    lines.append('    const searchCounter = document.getElementById("search-counter");')
-    lines.append('    const grid = document.getElementById("topic-grid");')
-    lines.append('    const letteraBtns = document.querySelectorAll(".lettera-btn");')
+    lines.append('.argomenti-stack {')
+    lines.append('    display: grid;')
+    lines.append('    gap: 0.8rem;')
+    lines.append('    margin: 0 0 2rem;')
+    lines.append('}')
     lines.append('')
-    lines.append('    if (!grid) return;')
+    lines.append('.argomento-card {')
+    lines.append('    display: flex;')
+    lines.append('    align-items: center;')
+    lines.append('    justify-content: space-between;')
+    lines.append('    gap: 1rem;')
+    lines.append('    width: 100%;')
+    lines.append('    min-height: 4.6rem;')
+    lines.append('    padding: 1rem 1.2rem;')
+    lines.append('    border: 1px solid rgba(0, 0, 0, 0.12);')
+    lines.append('    border-left: 4px solid var(--md-primary-fg-color);')
+    lines.append('    border-radius: 0.6rem;')
+    lines.append('    background: var(--md-default-bg-color);')
+    lines.append('    color: var(--md-default-fg-color);')
+    lines.append('    text-decoration: none;')
+    lines.append('    transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;')
+    lines.append('}')
     lines.append('')
-    lines.append('    const cards = grid.querySelectorAll(".people-card");')
+    lines.append('.argomento-card:hover {')
+    lines.append('    transform: translateY(-1px);')
+    lines.append('    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.10);')
+    lines.append('    color: var(--md-default-fg-color);')
+    lines.append('    text-decoration: none;')
+    lines.append('}')
     lines.append('')
-    lines.append('    function filtra() {')
-    lines.append('        const query = searchInput.value.toLowerCase().trim();')
-    lines.append('        const letteraAttiva = document.querySelector(".lettera-btn--active");')
-    lines.append('        const lettera = letteraAttiva ? letteraAttiva.dataset.lettera : "all";')
-    lines.append('        let visibili = 0;')
+    lines.append('.argomento-card:focus-visible {')
+    lines.append('    outline: 3px solid var(--md-primary-fg-color);')
+    lines.append('    outline-offset: 2px;')
+    lines.append('}')
     lines.append('')
-    lines.append('        cards.forEach(card => {')
-    lines.append('            const nome = card.querySelector(".people-name").textContent.toLowerCase();')
-    lines.append('            const cardLettera = card.dataset.lettera;')
-    lines.append('            const matchLettera = (lettera === "all" || cardLettera === lettera);')
-    lines.append('            const matchRicerca = nome.includes(query);')
-    lines.append('            const visibile = matchLettera && matchRicerca;')
+    lines.append('.argomento-card-main {')
+    lines.append('    display: flex;')
+    lines.append('    flex-direction: column;')
+    lines.append('    gap: 0.25rem;')
+    lines.append('    min-width: 0;')
+    lines.append('}')
     lines.append('')
-    lines.append('            card.style.display = visibile ? "" : "none";')
+    lines.append('.argomento-card-nome {')
+    lines.append('    font-size: 1.05rem;')
+    lines.append('    font-weight: 600;')
+    lines.append('    line-height: 1.35;')
+    lines.append('    overflow-wrap: anywhere;')
+    lines.append('}')
     lines.append('')
-    lines.append('            if (visibile) visibili++;')
-    lines.append('        });')
+    lines.append('.argomento-card-meta {')
+    lines.append('    color: var(--md-default-fg-color--light);')
+    lines.append('    font-size: 0.92rem;')
+    lines.append('}')
     lines.append('')
-    lines.append('        if (searchCounter) {')
-    lines.append('            searchCounter.textContent = visibili + " argomenti";')
-    lines.append('        }')
+    lines.append('.argomento-card-freccia {')
+    lines.append('    flex: 0 0 auto;')
+    lines.append('    font-size: 1.25rem;')
+    lines.append('    color: var(--md-primary-fg-color);')
+    lines.append('}')
+    lines.append('')
+    lines.append('html[data-md-color-scheme="slate"] .argomento-card {')
+    lines.append('    border-color: rgba(255, 255, 255, 0.16);')
+    lines.append('}')
+    lines.append('')
+    lines.append('@media screen and (max-width: 40em) {')
+    lines.append('    .argomento-card {')
+    lines.append('        padding: 0.9rem 1rem;')
+    lines.append('        min-height: 4.2rem;')
     lines.append('    }')
     lines.append('')
-    lines.append('    searchInput.addEventListener("input", filtra);')
+    lines.append('    .argomento-card-nome {')
+    lines.append('        font-size: 1rem;')
+    lines.append('    }')
+    lines.append('}')
+    lines.append('</style>')
     lines.append('')
-    lines.append('    letteraBtns.forEach(btn => {')
-    lines.append('        btn.addEventListener("click", function() {')
-    lines.append('            if (this.disabled) return;')
+
+    # ------------------------------------------------------------
+    # CONTENUTO
+    # ------------------------------------------------------------
+
+    lines.append('<div class="argomenti-intro">')
+    lines.append('Elenco dei percorsi tematici presenti in archivio. Ogni argomento raccoglie i documenti catalogati con quella serie.')
+    lines.append('</div>')
     lines.append('')
-    lines.append('            letteraBtns.forEach(b => b.classList.remove("lettera-btn--active"));')
-    lines.append('            this.classList.add("lettera-btn--active");')
-    lines.append('            filtra();')
-    lines.append('        });')
-    lines.append('    });')
-    lines.append('')
-    lines.append('    filtra();')
-    lines.append('})();')
-    lines.append('</script>')
+
+    lines.append('<div class="argomenti-stack">')
+
+    for item in argomenti_ordinati:
+        slug = item['slug']
+        label_html = escape_html(item['label'])
+        count = count_text(item['num_doc'])
+        years = get_years_text(item['docs'])
+
+        if years:
+            meta = f'{count} · {years}'
+        else:
+            meta = count
+
+        meta_html = escape_html(meta)
+
+        lines.append(f'<a class="argomento-card" href="{slug}/">')
+        lines.append('    <span class="argomento-card-main">')
+        lines.append(f'        <span class="argomento-card-nome">{label_html}</span>')
+        lines.append(f'        <span class="argomento-card-meta">{meta_html}</span>')
+        lines.append('    </span>')
+        lines.append('    <span class="argomento-card-freccia" aria-hidden="true">→</span>')
+        lines.append('</a>')
+
+    lines.append('</div>')
     lines.append('')
 
     index_path = os.path.join(ARGOMENTI_DIR, 'index.md')
@@ -604,7 +496,7 @@ def generate_index(argomenti):
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines))
 
-    print(f'   ✅ Indice argomenti generato con {len(argomenti)} argomenti.')
+    print(f'   ✅ Indice argomenti generato come elenco di {len(argomenti)} card.')
 
 
 # ============================================================
