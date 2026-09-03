@@ -2,25 +2,25 @@
 Launcher AMI — aggiorna e pubblica il sito.
 
 Uso:
-    python Launcher.py                          Rigenera e pubblica (con messaggio commit automatico)
-    python Launcher.py "messaggio commit"       Rigenera e pubblica con messaggio custom
-    python Launcher.py --only AMI-0034          Rigenera SOLO le schede indicate (invalida cache
-                                                 metadati documento + cache IA collegata), poi pubblica
-    python Launcher.py --refresh-ia ID1,ID2     Invalida la cache IA solo per gli identifier indicati,
-                                                 poi rigenera e pubblica
-    python Launcher.py --force-refresh-ia       Invalida TUTTA la cache IA (metadati + testi),
-                                                 poi rigenera e pubblica
-    python Launcher.py --clear-cache            Svuota tutta la cache (IA, hash file, metadati doc)
-    python Launcher.py --cache-stats            Mostra statistiche cache
-    python Launcher.py --help                   Mostra questo messaggio
+  python Launcher.py                          Rigenera e pubblica (con messaggio commit automatico)
+  python Launcher.py "messaggio commit"       Rigenera e pubblica con messaggio custom
+  python Launcher.py --only AMI-0034          Rigenera SOLO le schede indicate (invalida cache
+                                              metadati documento + cache IA collegata), poi pubblica
+  python Launcher.py --refresh-ia ID1,ID2     Invalida la cache IA solo per gli identifier indicati,
+                                              poi rigenera e pubblica
+  python Launcher.py --force-refresh-ia       Invalida TUTTA la cache IA (metadati + testi),
+                                              poi rigenera e pubblica
+  python Launcher.py --clear-cache            Svuota tutta la cache (IA, hash file, metadati doc)
+  python Launcher.py --cache-stats            Mostra statistiche cache
+  python Launcher.py --help                   Mostra questo messaggio
 """
-
 import re
 import subprocess
 import sys
 import shutil
 from datetime import datetime
 from pathlib import Path
+
 from scripts.core.cache_manager import CacheManager
 
 ROOT_DIR = Path(__file__).resolve().parent
@@ -54,7 +54,6 @@ def esegui(comando, cwd=None, descrizione=None):
 def verifica_dipendenze():
     stampa_titolo("🔎 Verifica dipendenze")
     mancanti = []
-
     requirements_path = ROOT_DIR / "requirements.txt"
     mappa_moduli = {
         "pandas": "pandas",
@@ -95,6 +94,7 @@ def verifica_dipendenze():
             msg += f"\n   Installa il resto con: pip install -r requirements.txt"
         raise ErroreComando(msg)
 
+
 def git_ci_sono_modifiche():
     risultato = subprocess.run(
         ["git", "status", "--porcelain"],
@@ -129,7 +129,6 @@ def identifier_ia_per_documento(ami_id):
 
 def aggiorna(messaggio=None, refresh_ia=None, only=None):
     stampa_titolo("🚀 Aggiornamento del sito AMI")
-
     verifica_dipendenze()
 
     # -1. Rigenerazione mirata di specifiche schede documento
@@ -137,7 +136,6 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None):
         stampa_titolo("🎯 Rigenerazione mirata")
         cache_mgr = CacheManager()
         cache_mgr.clear_doc_metadata(only)
-
         identifiers = [i for i in (identifier_ia_per_documento(d) for d in only) if i]
         if identifiers:
             cache_mgr.clear_ia_metadata(identifiers)
@@ -156,21 +154,24 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None):
             cache_mgr.clear_ia_metadata(refresh_ia)
             print(f"   Verranno ri-scaricati solo: {', '.join(refresh_ia)}")
 
-    # 0. Sincronizzazione file statici (NUOVO — deve girare per primo)
+    # 0. Sincronizzazione file statici (deve girare per primo)
     esegui([sys.executable, "sync_assets.py"], cwd=SCRIPTS_DIR,
            descrizione="🔄 Sincronizzazione file statici (assets/ → build/)")
 
-    # 1-3. Rigenerazione contenuti (ordine: persone/org PRIMA di generatore)
+    # 1-4. Rigenerazione contenuti.
+    # Ordine: persone/org PRIMA di generatore; argomenti DOPO generatore,
+    # così argomenti.py può aggiornare la sitemap appena creata.
     esegui([sys.executable, "persone.py"], cwd=SCRIPTS_DIR,
            descrizione="👤 Generazione schede persone")
     esegui([sys.executable, "org.py"], cwd=SCRIPTS_DIR,
            descrizione="🏛️  Generazione schede organizzazioni")
     esegui([sys.executable, "generatore.py"], cwd=SCRIPTS_DIR,
            descrizione="📑 Generazione documenti, archivio, home, sitemap")
+    esegui([sys.executable, "argomenti.py"], cwd=SCRIPTS_DIR,
+           descrizione="🏷️  Generazione pagine argomenti")
 
-    # 4. Pubblicazione
+    # 5. Pubblicazione
     stampa_titolo("📤 Pubblicazione")
-
     if not git_ci_sono_modifiche():
         print("   ℹ️  Nessuna modifica rispetto all'ultimo commit: niente da pubblicare.")
         stampa_titolo("✅ Completato (nessuna modifica)")
@@ -206,7 +207,7 @@ def svuota_cache():
 def main():
     codice_uscita = 0
     try:
-        # ✨ Gestisci opzioni CLI
+        # Gestisci opzioni CLI
         args = sys.argv[1:]
         refresh_ia = None
         only = None
@@ -242,6 +243,7 @@ def main():
                 messaggio = args[0]
 
         aggiorna(messaggio=messaggio, refresh_ia=refresh_ia, only=only)
+
     except ErroreComando as e:
         print(f"\n❌ ERRORE: {e}")
         print("   Il sito NON è stato pubblicato: correggi l'errore sopra e rilancia lo script.")
@@ -255,6 +257,7 @@ def main():
             input("Premi INVIO per chiudere...")
         except EOFError:
             pass
+
     sys.exit(codice_uscita)
 
 

@@ -1,15 +1,14 @@
 import os
-import re
 import json
 import html
 import hashlib
-import unicodedata
 from datetime import datetime
 
 import pandas as pd
 
 from core.utils import slugify, formatta_data
 from core.site_config import site_path
+from core.argomenti import build_argomenti_index, normalize_key, split_argomenti
 
 try:
     from core.site_config import SITE_URL
@@ -26,16 +25,14 @@ DATA_DIR = os.path.join(ROOT_DIR, 'data')
 OUTPUT_DIR = os.path.join(ROOT_DIR, 'build')
 ARGOMENTI_DIR = os.path.join(OUTPUT_DIR, 'argomenti')
 
-# Cartelle in cui lo script cerca le immagini degli argomenti.
-# La fonte primaria è assets/ (versionata nel repo);
-# build/ è controllata come fallback per esecuzioni locali.
+# Cartelle in cui cercare le immagini degli argomenti.
+# Fonte primaria: assets/ (versionata). Fallback: build/ (gia' sincronizzata).
 ASSETS_ARGOMENTI_IMG_DIR = os.path.join(ROOT_DIR, 'assets', 'immagini', 'argomenti')
 BUILD_ARGOMENTI_IMG_DIR = os.path.join(OUTPUT_DIR, 'immagini', 'argomenti')
 ESTENSIONI_IMMAGINE = ['.webp', '.jpg', '.jpeg', '.png']
 
 BASE_URL = str(SITE_URL).rstrip('/')
 
-# Slug che non devono mai essere usati per una pagina argomento.
 RESERVED_SLUGS = {
     'index',
     '404',
@@ -43,13 +40,9 @@ RESERVED_SLUGS = {
     'robots',
 }
 
-# Le pagine argomento devono restare fuori dalla navigazione.
-# Con True, aggiunge frontmatter per escluderle dalla ricerca Material.
-ESCLUDI_DALLA_RICERCA = True
-
-# Con True, aggiunge le pagine argomento alla sitemap generata da generatore.py.
-# Lascia False se vuoi pagine raggiungibili solo tramite URL diretto.
-AGGIORNA_SITEMAP = False
+# La pagina ora E' in navigazione: la rendiamo ricercabile e indicizzata.
+ESCLUDI_DALLA_RICERCA = False
+AGGIORNA_SITEMAP = True
 
 
 # ============================================================
@@ -57,23 +50,17 @@ AGGIORNA_SITEMAP = False
 # ============================================================
 
 def yaml_string(value):
-    """
-    Restituisce una stringa YAML-safe usando JSON double-quoted string.
-    """
+    """Ritorna una stringa YAML-safe (JSON double-quoted)."""
     return json.dumps(str(value), ensure_ascii=False)
 
 
 def escape_html(value):
-    """
-    Escape HTML.
-    """
+    """Escape HTML."""
     return html.escape(str(value), quote=True)
 
 
 def xml_escape(value):
-    """
-    Escape XML.
-    """
+    """Escape XML."""
     value = str(value)
     value = value.replace('&', '&amp;')
     value = value.replace('<', '&lt;')
@@ -83,157 +70,48 @@ def xml_escape(value):
     return value
 
 
-def normalize_key(value):
-    """
-    Normalizza il nome di un argomento per il raggruppamento.
-    """
-    value = str(value).strip().lower()
-    value = unicodedata.normalize('NFKD', value)
-    value = ''.join(ch for ch in value if not unicodedata.combining(ch))
-    value = re.sub(r'\s+', ' ', value)
-    return value
-
-
-def pulisci_valore(raw):
-    """
-    Pulisce un valore stringa proveniente dall'Excel.
-    """
-    txt = str(raw).strip()
-    if txt.lower() in {'nan', 'none'}:
-        return ''
-    txt = re.sub(r'\s+', ' ', txt)
-    return txt
-
-
-def split_argomenti(raw):
-    """
-    Divide il contenuto del campo Serie/Argomenti.
-    Separatore principale: ';'. Fallback: ','.
-    """
-    txt = pulisci_valore(raw)
-    if not txt:
-        return []
-
-    if ';' in txt or '\n' in txt:
-        parti = re.split(r';|\n', txt)
-    elif ',' in txt:
-        parti = txt.split(',')
-    else:
-        parti = [txt]
-
-    argomenti = []
-    for parte in parti:
-        parte = pulisci_valore(parte)
-        if parte:
-            argomenti.append(parte)
-
-    return argomenti
-
-
-def choose_label(current, new):
-    """
-    Scegli quale etichetta mostrare quando lo stesso argomento compare
-    con differenze di maiuscole/minuscole.
-    """
-    if not current:
-        return new
-
-    if normalize_key(current) != normalize_key(new):
-        return current
-
-    current_upper = sum(1 for ch in current if ch.isupper())
-    new_upper = sum(1 for ch in new if ch.isupper())
-
-    if new_upper > current_upper:
-        return new
-
-    if current_upper == new_upper:
-        if len(new) > len(current) and new != new.lower():
-            return new
-
-    return current
-
-
 def formatta_data_sicura(raw):
-    """
-    Wrapper sicuro attorno a formatta_data.
-    """
-    raw = pulisci_valore(raw)
-
-    if not raw:
+    """Wrapper sicuro attorno a formatta_data."""
+    raw = str(raw).strip()
+    if not raw or raw in ['nan', 'None']:
         return 'n.d.', (9999, 1, 1)
-
     try:
         return formatta_data(raw)
     except Exception:
         return raw, (9999, 1, 1)
 
 
-def make_slug(label, used_slugs):
-    """
-    Genera uno slug sicuro, evitando collisioni e slug riservati.
-    """
-    base = slugify(label)
-
-    if not base or base in RESERVED_SLUGS:
-        base = 'argomento'
-
-    slug = base
-    counter = 2
-
-    while slug in used_slugs or slug in RESERVED_SLUGS:
-        slug = f'{base}-{counter}'
-        counter += 1
-
-    used_slugs.add(slug)
-    return slug
-
-
 def count_text(num):
-    """
-    Testo leggibile per il conteggio documenti.
-    """
+    """Testo leggibile per il conteggio documenti."""
     if num == 1:
         return '1 documento'
     return f'{num} documenti'
 
 
 def get_years_text(docs):
-    """
-    Restituisce l'arco cronologico dei documenti collegati a un argomento.
-    """
+    """Arco cronologico dei documenti collegati a un argomento."""
     years = set()
-
     for doc in docs:
         ordine = doc.get('data_ordine')
-
         if not isinstance(ordine, tuple) or not ordine:
             continue
-
         try:
             year = int(ordine[0])
         except (TypeError, ValueError):
             continue
-
         if year != 9999:
             years.add(year)
-
     if not years:
         return ''
-
     min_year = min(years)
     max_year = max(years)
-
     if min_year == max_year:
         return str(min_year)
-
     return f'{min_year}–{max_year}'
 
 
 def find_column(df, candidates):
-    """
-    Trova la prima colonna disponibile tra quelle candidate.
-    """
+    """Trova la prima colonna disponibile tra quelle candidate."""
     for candidate in candidates:
         if candidate in df.columns:
             return candidate
@@ -241,12 +119,9 @@ def find_column(df, candidates):
 
 
 def clean_argomenti_dir():
-    """
-    Rimuove i vecchi file Markdown generati nella cartella argomenti.
-    """
+    """Rimuove i vecchi file Markdown generati nella cartella argomenti."""
     if not os.path.isdir(ARGOMENTI_DIR):
         return
-
     for filename in os.listdir(ARGOMENTI_DIR):
         if filename.endswith('.md'):
             try:
@@ -255,23 +130,32 @@ def clean_argomenti_dir():
                 pass
 
 
+def make_slug(label, used_slugs):
+    """Fallback locale per lo slug (usato solo se manca l'indice condiviso)."""
+    base = slugify(label) or 'argomento'
+    if base in RESERVED_SLUGS:
+        base = 'argomento'
+    slug = base
+    counter = 2
+    while slug in used_slugs or slug in RESERVED_SLUGS:
+        slug = f'{base}-{counter}'
+        counter += 1
+    used_slugs.add(slug)
+    return slug
+
+
 # ============================================================
 # IMMAGINI ARGOMENTI
 # ============================================================
 
 def colore_hash(nome):
-    """
-    Colore esadecimale stabile a partire dal nome.
-    Usato solo come fallback quando manca la foto.
-    """
+    """Colore esadecimale stabile a partire dal nome (fallback senza foto)."""
     hash_obj = hashlib.md5(str(nome).encode('utf-8'))
     return f'#{hash_obj.hexdigest()[:6]}'
 
 
 def scurisci(hex_color, fattore=0.55):
-    """
-    Scurisce un colore hex per il gradient di fallback.
-    """
+    """Scurisce un colore hex per il gradient di fallback."""
     hex_color = hex_color.lstrip('#')
     r = int(int(hex_color[0:2], 16) * fattore)
     g = int(int(hex_color[2:4], 16) * fattore)
@@ -280,30 +164,25 @@ def scurisci(hex_color, fattore=0.55):
 
 
 def get_iniziali(nome, max_lettere=2):
-    """
-    Iniziali per la filigrana delle card senza foto.
-    """
+    """Iniziali per la filigrana delle card senza foto."""
     parti = [p for p in str(nome).split() if p]
     if not parti:
         return '?'
-
     if len(parti) == 1:
         return parti[0][0].upper()
-
     return ''.join(p[0].upper() for p in parti[:max_lettere])
 
 
 def trova_immagine_argomento(slug):
     """
     Cerca l'immagine di un argomento in assets/ e poi in build/.
-    Restituisce (url, nome_file) oppure (None, None).
+    Ritorna (url, nome_file) oppure (None, None).
     """
     for base_dir in (ASSETS_ARGOMENTI_IMG_DIR, BUILD_ARGOMENTI_IMG_DIR):
         for est in ESTENSIONI_IMMAGINE:
             percorso = os.path.join(base_dir, f'{slug}{est}')
             if os.path.exists(percorso):
                 return site_path(f'immagini/argomenti/{slug}{est}'), f'{slug}{est}'
-
     return None, None
 
 
@@ -312,9 +191,7 @@ def trova_immagine_argomento(slug):
 # ============================================================
 
 def generate_single_page(item):
-    """
-    Genera la pagina singola di un argomento.
-    """
+    """Genera la pagina singola di un argomento."""
     label = item['label']
     slug = item['slug']
     num_doc = item['num_doc']
@@ -333,11 +210,6 @@ def generate_single_page(item):
     fm.append('  - navigation')
     fm.append('  - toc')
     fm.append('  - title')
-
-    if ESCLUDI_DALLA_RICERCA:
-        fm.append('search:')
-        fm.append('  exclude: true')
-
     fm.append('---')
     fm.append('')
 
@@ -393,18 +265,11 @@ def generate_index(argomenti):
     orizzontali a larghezza piena, con foto di sfondo e
     gradient solo nella parte bassa.
     """
-    # Ordine alfabetico.
-    # Per ordinare per numero di documenti usa:
-    # argomenti_ordinati = sorted(argomenti, key=lambda item: (-item['num_doc'], item['label'].lower()))
     argomenti_ordinati = sorted(argomenti, key=lambda item: item['label'].lower())
 
     description_text = "Elenco degli argomenti presenti nell'Archivio del Maoismo Italiano."
 
     lines = []
-
-    # ------------------------------------------------------------
-    # FRONTMATTER
-    # ------------------------------------------------------------
 
     lines.append('---')
     lines.append(f'title: {yaml_string("Argomenti")}')
@@ -412,17 +277,8 @@ def generate_index(argomenti):
     lines.append('hide:')
     lines.append('  - navigation')
     lines.append('  - toc')
-
-    if ESCLUDI_DALLA_RICERCA:
-        lines.append('search:')
-        lines.append('  exclude: true')
-
     lines.append('---')
     lines.append('')
-
-    # ------------------------------------------------------------
-    # STILE DELLA PAGINA
-    # ------------------------------------------------------------
 
     lines.append('<style>')
     lines.append('.argomenti-intro {')
@@ -536,10 +392,6 @@ def generate_index(argomenti):
     lines.append('</style>')
     lines.append('')
 
-    # ------------------------------------------------------------
-    # CONTENUTO
-    # ------------------------------------------------------------
-
     lines.append('<div class="argomenti-intro">')
     lines.append('Elenco dei percorsi tematici presenti in archivio. Ogni argomento raccoglie i documenti catalogati con quella serie.')
     lines.append('</div>')
@@ -561,15 +413,12 @@ def generate_index(argomenti):
         meta_html = escape_html(meta)
 
         if item.get('immagine'):
-            # Card con foto storica di sfondo
             lines.append(f'<a class="hero-card" href="{slug}/">')
             lines.append(f'    <img class="hero-card-img" src="{item["immagine"]}" alt="" loading="lazy">')
         else:
-            # Fallback: gradient colorato deterministico + iniziali
             colore = colore_hash(item['label'])
             scuro = scurisci(colore)
             iniziali = escape_html(get_iniziali(item['label']))
-
             lines.append(f'<a class="hero-card" href="{slug}/" style="background: linear-gradient(140deg, {colore} 0%, {scuro} 100%);">')
             lines.append(f'    <div class="hero-card-iniziali" aria-hidden="true">{iniziali}</div>')
 
@@ -592,27 +441,22 @@ def generate_index(argomenti):
 
 
 # ============================================================
-# SITEMAP OPZIONALE
+# SITEMAP
 # ============================================================
 
 def update_sitemap(argomenti):
     """
-    Aggiunge le pagine argomento alla sitemap, se AGGIORNA_SITEMAP = True.
-    Va eseguito dopo generatore.py.
+    Aggiunge le pagine argomento alla sitemap generata da generatore.py.
+    Va eseguito DOPO generatore.py (ordine garantito da deploy.yml).
     """
     if not AGGIORNA_SITEMAP:
         return
 
     urls = [f'{BASE_URL}/argomenti/']
-
     for item in argomenti:
         urls.append(f"{BASE_URL}/argomenti/{item['slug']}/")
 
     oggi = datetime.now().strftime('%Y-%m-%d')
-
-    # ------------------------------------------------------------
-    # sitemap.xml
-    # ------------------------------------------------------------
 
     xml_path = os.path.join(OUTPUT_DIR, 'sitemap.xml')
 
@@ -621,7 +465,6 @@ def update_sitemap(argomenti):
             content = f.read()
 
         blocks = []
-
         for url in urls:
             if url not in content:
                 blocks.append(
@@ -638,19 +481,16 @@ def update_sitemap(argomenti):
                 '</urlset>',
                 '\n'.join(blocks) + '\n</urlset>'
             )
-
             with open(xml_path, 'w', encoding='utf-8') as f:
                 f.write(content)
-
             print(f'   ✅ sitemap.xml aggiornata con {len(blocks)} URL argomento.')
         else:
-            print('   ℹ️ sitemap.xml già contiene tutte le pagine argomento o non è modificabile.')
+            print('   ℹ️ sitemap.xml già contiene le pagine argomento o non è modificabile.')
     else:
         xml_lines = [
             '<?xml version="1.0" encoding="UTF-8"?>',
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
         ]
-
         for url in urls:
             xml_lines.append('  <url>')
             xml_lines.append(f'    <loc>{xml_escape(url)}</loc>')
@@ -658,39 +498,26 @@ def update_sitemap(argomenti):
             xml_lines.append('    <changefreq>monthly</changefreq>')
             xml_lines.append('    <priority>0.5</priority>')
             xml_lines.append('  </url>')
-
         xml_lines.append('</urlset>')
-
         with open(xml_path, 'w', encoding='utf-8') as f:
             f.write('\n'.join(xml_lines))
-
         print(f'   ✅ sitemap.xml creata con {len(urls)} URL argomento.')
 
-    # ------------------------------------------------------------
-    # sitemap.txt
-    # ------------------------------------------------------------
-
     txt_path = os.path.join(OUTPUT_DIR, 'sitemap.txt')
-
     existing_lines = set()
-
     if os.path.exists(txt_path):
         with open(txt_path, 'r', encoding='utf-8') as f:
             existing_lines = set(line.strip() for line in f if line.strip())
-
         missing = [url for url in urls if url not in existing_lines]
-
         if missing:
             with open(txt_path, 'a', encoding='utf-8') as f:
                 for url in missing:
                     f.write(url + '\n')
-
             print(f'   ✅ sitemap.txt aggiornata con {len(missing)} URL argomento.')
     else:
         with open(txt_path, 'w', encoding='utf-8') as f:
             for url in urls:
                 f.write(url + '\n')
-
         print(f'   ✅ sitemap.txt creata con {len(urls)} URL argomento.')
 
 
@@ -723,13 +550,7 @@ def genera_argomenti():
 
     topic_column = find_column(
         df_catalogo,
-        [
-            'serie',
-            'argomenti',
-            'argomento',
-            'tag',
-            'tags',
-        ]
+        ['serie', 'argomenti', 'argomento', 'tag', 'tags']
     )
 
     if not topic_column:
@@ -743,29 +564,35 @@ def genera_argomenti():
     print(f"   📊 Caricati {len(df_catalogo)} documenti dal foglio 'Catalogo' di dati.xlsx")
     print(f"   📊 Uso la colonna '{topic_column}' come fonte degli argomenti")
 
-    # Rimuove eventuali pagine argomento generate in esecuzioni precedenti.
     os.makedirs(ARGOMENTI_DIR, exist_ok=True)
     clean_argomenti_dir()
 
+    # ----------------------------------------------------------------
+    # RACCOLTA DOCUMENTI PER ARGOMENTO
+    # ----------------------------------------------------------------
     argomenti_map = {}
 
     for _, row in df_catalogo.iterrows():
-        ami_id = pulisci_valore(row.get('id', ''))
-        if not ami_id:
+        ami_id = str(row.get('id', '')).strip()
+        if not ami_id or ami_id in ['nan', 'None']:
             continue
 
-        titolo = pulisci_valore(row.get('titolo', ''))
-        if not titolo:
+        titolo = str(row.get('titolo', '')).strip()
+        if not titolo or titolo in ['nan', 'None']:
             titolo = 'Senza titolo'
 
-        data_raw = pulisci_valore(row.get('data', ''))
-        if not data_raw:
-            data_raw = pulisci_valore(row.get('anno', ''))
+        data_raw = str(row.get('data', '')).strip()
+        if not data_raw or data_raw in ['nan', 'None']:
+            data_raw = str(row.get('anno', '')).strip()
 
         data_form, data_ordine = formatta_data_sicura(data_raw)
 
-        organizzazione = pulisci_valore(row.get('organizzazione', ''))
-        tipo = pulisci_valore(row.get('tipo', ''))
+        organizzazione = str(row.get('organizzazione', '')).strip()
+        if organizzazione in ['nan', 'None']:
+            organizzazione = ''
+        tipo = str(row.get('tipo', '')).strip()
+        if tipo in ['nan', 'None']:
+            tipo = ''
 
         if organizzazione and tipo:
             badge = f'{organizzazione} · {tipo}'
@@ -776,73 +603,76 @@ def genera_argomenti():
         if not argomenti:
             continue
 
-        seen_keys = set()
+        doc = {
+            'id': ami_id,
+            'titolo': titolo,
+            'data': data_form,
+            'data_ordine': data_ordine,
+            'badge': badge,
+        }
 
+        seen_keys = set()
         for argomento in argomenti:
             key = normalize_key(argomento)
-
             if not key or key in seen_keys:
                 continue
-
             seen_keys.add(key)
-
-            doc = {
-                'id': ami_id,
-                'titolo': titolo,
-                'data': data_form,
-                'data_ordine': data_ordine,
-                'badge': badge,
-            }
-
             if key not in argomenti_map:
-                argomenti_map[key] = {
-                    'label': argomento,
-                    'docs': [doc],
-                }
+                argomenti_map[key] = [doc]
             else:
-                argomenti_map[key]['label'] = choose_label(
-                    argomenti_map[key]['label'],
-                    argomento
-                )
-                argomenti_map[key]['docs'].append(doc)
+                argomenti_map[key].append(doc)
 
     if not argomenti_map:
         print('   ⚠️ Nessun argomento valido trovato.')
         return
 
-    argomenti = list(argomenti_map.values())
+    # ----------------------------------------------------------------
+    # INDICE CONDIVISO: label + slug deterministici (coerenti con schede.py)
+    # ----------------------------------------------------------------
+    argomenti_index = build_argomenti_index(df_catalogo, topic_column)
 
-    used_slugs = set()
+    argomenti = []
+    used_slugs_fallback = set()
 
+    for key, docs in argomenti_map.items():
+        index_entry = argomenti_index.get(key)
+        if index_entry:
+            label = index_entry['label']
+            slug = index_entry['slug']
+        else:
+            label = key
+            slug = make_slug(label, used_slugs_fallback)
+
+        docs.sort(key=lambda d: (d['data_ordine'], d['titolo'].lower()))
+
+        argomenti.append({
+            'label': label,
+            'slug': slug,
+            'docs': docs,
+            'num_doc': len(docs),
+        })
+
+    print(f'   📊 Trovati {len(argomenti)} argomenti con documenti associati.')
+
+    # ----------------------------------------------------------------
+    # IMMAGINI
+    # ----------------------------------------------------------------
     for item in argomenti:
-        item['docs'].sort(
-            key=lambda doc: (
-                doc['data_ordine'],
-                doc['titolo'].lower()
-            )
-        )
-        item['num_doc'] = len(item['docs'])
-        item['slug'] = make_slug(item['label'], used_slugs)
-
         immagine_url, immagine_file = trova_immagine_argomento(item['slug'])
         item['immagine'] = immagine_url
         item['immagine_file'] = immagine_file
 
-    print(f'   📊 Trovati {len(argomenti)} argomenti con documenti associati.')
-
-    # ------------------------------------------------------------
-    # MANIFESTO IMMAGINI
-    # ------------------------------------------------------------
-
     print('   🖼️  Stato immagini argomenti:')
-
     for item in sorted(argomenti, key=lambda x: x['label'].lower()):
         if item['immagine']:
             print(f"      ✅ {item['label']}: {item['immagine_file']}")
         else:
             print(f"      ⚠️  {item['label']}: nessuna immagine → fallback colorato.")
-            print(f"          File atteso: assets/immagini/argomenti/{item['slug']}.webp (oppure .jpg / .jpeg / .png)")
+            print(f"          File atteso: assets/immagini/argomenti/{item['slug']}.webp (oppure .jpg/.jpeg/.png)")
 
+    # ----------------------------------------------------------------
+    # GENERAZIONE PAGINE
+    # ----------------------------------------------------------------
     for item in argomenti:
         generate_single_page(item)
 
