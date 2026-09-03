@@ -267,12 +267,12 @@ def generate_index(argomenti):
     """
     argomenti_ordinati = sorted(argomenti, key=lambda item: item['label'].lower())
 
-    description_text = "Elenco degli argomenti presenti nell'Archivio del Maoismo Italiano."
+    description_text = "Percorsi tematici dell'Archivio del Maoismo Italiano."
 
     lines = []
 
     lines.append('---')
-    lines.append(f'title: {yaml_string("Argomenti")}')
+    lines.append(f'title: {yaml_string("Percorsi tematici")}')
     lines.append(f'description: {yaml_string(description_text)}')
     lines.append('hide:')
     lines.append('  - navigation')
@@ -281,23 +281,18 @@ def generate_index(argomenti):
     lines.append('')
 
     lines.append('<style>')
-    lines.append('.argomenti-intro {')
-    lines.append('    max-width: 70ch;')
-    lines.append('    color: var(--md-default-fg-color--light);')
-    lines.append('    margin: 0 0 1.5rem;')
-    lines.append('}')
-    lines.append('')
     lines.append('.hero-stack {')
     lines.append('    display: grid;')
-    lines.append('    gap: 1.2rem;')
+    lines.append('    gap: 0.8rem;')
     lines.append('    margin: 0 0 2.5rem;')
     lines.append('}')
     lines.append('')
     lines.append('.hero-card {')
     lines.append('    position: relative;')
     lines.append('    display: block;')
+    lines.append('    background: #141414;')
     lines.append('    width: 100%;')
-    lines.append('    height: 260px;')
+    lines.append('    height: 480px;')
     lines.append('    border-radius: 0.8rem;')
     lines.append('    overflow: hidden;')
     lines.append('    text-decoration: none;')
@@ -323,6 +318,7 @@ def generate_index(argomenti):
     lines.append('    width: 100%;')
     lines.append('    height: 100%;')
     lines.append('    object-fit: cover;')
+    lines.append('    object-position: center center;')
     lines.append('    transition: transform 350ms ease;')
     lines.append('}')
     lines.append('')
@@ -373,7 +369,7 @@ def generate_index(argomenti):
     lines.append('')
     lines.append('@media screen and (max-width: 40em) {')
     lines.append('    .hero-card {')
-    lines.append('        height: 200px;')
+    lines.append('        height: 320px;')
     lines.append('        border-radius: 0.6rem;')
     lines.append('    }')
     lines.append('')
@@ -390,11 +386,6 @@ def generate_index(argomenti):
     lines.append('    }')
     lines.append('}')
     lines.append('</style>')
-    lines.append('')
-
-    lines.append('<div class="argomenti-intro">')
-    lines.append('Elenco dei percorsi tematici presenti in archivio. Ogni argomento raccoglie i documenti catalogati con quella serie.')
-    lines.append('</div>')
     lines.append('')
 
     lines.append('<div class="hero-stack">')
