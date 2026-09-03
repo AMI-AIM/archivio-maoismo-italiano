@@ -2,11 +2,18 @@
 // RICERCA ISTANTANEA NELLA HERO (home page)
 // ============================================================
 // Componente completamente autonomo e indipendente dalla ricerca
-// di Material (header): usa gli stessi dati di documenti.json
-// (già generati per la pagina Archivio) per mostrare suggerimenti
-// mentre l'utente digita. Se l'elemento non esiste in pagina (cioè
-// su qualsiasi pagina diversa dalla home), lo script non fa nulla.
-
+// di Material (header): usa gli stessi dati di documenti.json /
+// soggetti.json (già generati per la pagina Archivio) per mostrare
+// suggerimenti mentre l'utente digita. Se l'elemento non esiste in
+// pagina (cioè su qualsiasi pagina diversa dalla home), lo script
+// non fa nulla.
+//
+// NOTE SUI TESTI: le descrizioni provenienti da Internet Archive
+// possono contenere HTML con stili inline (export Word). Per evitare
+// artefatti (frammenti di tag visibili negli snippet) e match falsi
+// dentro i tag, ricerca, taglio degli snippet ed evidenziazione
+// avvengono sempre su testo pulito; ciò che viene iniettato nel DOM
+// è escapato (unica eccezione: i <mark> dell'evidenziazione).
 (function () {
   const input = document.getElementById("hero-search-input");
   const resultsBox = document.getElementById("hero-search-results");
@@ -27,9 +34,13 @@
 
   function posizionaDropdown() {
     const rect = form.getBoundingClientRect();
+    // Larghezza: mai oltre il viewport (schermi piccoli), mai sotto i
+    // 320px se il form è più stretto; posizione clampata ai bordi.
+    const larghezza = Math.min(window.innerWidth - 16, Math.max(rect.width, 320));
+    const sinistra = Math.max(8, Math.min(rect.left, window.innerWidth - larghezza - 8));
     resultsBox.style.top = rect.bottom + 8 + "px";
-    resultsBox.style.left = rect.left + "px";
-    resultsBox.style.width = Math.max(rect.width, 320) + "px";
+    resultsBox.style.left = sinistra + "px";
+    resultsBox.style.width = larghezza + "px";
   }
 
   window.addEventListener("resize", function () {
@@ -52,6 +63,84 @@
   let organizzazioni = [];
   let datiCaricati = false;
 
+  // ------------------------------------------------------------
+  // UTILITY TESTO: pulizia, escape, evidenziazione
+  // ------------------------------------------------------------
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  const _cacheTesto = new Map();
+  function pulisciTesto(raw) {
+    if (!raw) return "";
+    const s = String(raw);
+    const hit = _cacheTesto.get(s);
+    if (hit !== undefined) return hit;
+    let out;
+    if (s.includes("<")) {
+      // DOMParser non esegue script: sicuro anche con HTML sporco.
+      const doc = new DOMParser().parseFromString(s, "text/html");
+      out = (doc.body.textContent || "").replace(/\s+/g, " ").trim();
+    } else {
+      out = s.replace(/\s+/g, " ").trim();
+    }
+    _cacheTesto.set(s, out);
+    return out;
+  }
+
+  // Descrizione senza HTML: preferisce il campo plain generato a monte
+  // (json_export.py: descrizione_testo), con fallback alla pulizia
+  // client-side per i JSON che non lo contengono ancora.
+  function descrizionePulita(doc) {
+    if (!doc) return "";
+    return doc.descrizione_testo || pulisciTesto(doc.descrizione);
+  }
+
+  // Evidenzia il match su testo PULITO, escapando tutto il resto:
+  // nessun HTML proveniente dai dati può finire nel DOM.
+  function evidenzia(testo, query) {
+    if (!testo) return "";
+    const q = query.toLowerCase();
+    const idx = testo.toLowerCase().indexOf(q);
+    if (idx === -1) return escapeHtml(testo);
+    return (
+      escapeHtml(testo.slice(0, idx)) +
+      "<mark>" +
+      escapeHtml(testo.slice(idx, idx + q.length)) +
+      "</mark>" +
+      escapeHtml(testo.slice(idx + q.length))
+    );
+  }
+
+  // Snippet con confini di parola, mai a metà di una parola/tag.
+  function estraiFrammento(campi, query) {
+    const q = query.toLowerCase();
+    for (const campo of campi) {
+      const pulito = pulisciTesto(campo);
+      if (!pulito) continue;
+      const idx = pulito.toLowerCase().indexOf(q);
+      if (idx === -1) continue;
+      if (pulito.length <= 160) return evidenzia(pulito, query);
+      let inizio = Math.max(0, idx - 40);
+      if (inizio > 0) {
+        const sb = pulito.lastIndexOf(" ", inizio);
+        if (sb > 0) inizio = sb + 1; // non parte a metà parola
+      }
+      let fine = Math.min(pulito.length, inizio + 160);
+      if (fine < pulito.length) {
+        const sp = pulito.lastIndexOf(" ", fine);
+        if (sp > idx) fine = sp; // non spezza l'ultima parola
+      }
+      const estratto = (inizio > 0 ? "…" : "") + pulito.slice(inizio, fine) + "…";
+      return evidenzia(estratto, query);
+    }
+    return "";
+  }
+
   function caricaDati() {
     if (datiCaricati) return;
     Promise.all([
@@ -73,47 +162,20 @@
   // della pagina, per non appesantire il primo rendering della home.
   input.addEventListener("focus", caricaDati, { once: true });
 
-  function evidenzia(testo, query) {
-    if (!testo) return "";
-    const idx = testo.toLowerCase().indexOf(query.toLowerCase());
-    if (idx === -1) return testo;
-    return (
-      testo.slice(0, idx) +
-      "<mark>" +
-      testo.slice(idx, idx + query.length) +
-      "</mark>" +
-      testo.slice(idx + query.length)
-    );
-  }
-
-  function estraiFrammento(campi, query) {
-    for (const campo of campi) {
-      if (campo && campo.toLowerCase().includes(query.toLowerCase())) {
-        if (campo.length > 140) {
-          const idx = campo.toLowerCase().indexOf(query.toLowerCase());
-          const inizio = Math.max(0, idx - 40);
-          const estratto = (inizio > 0 ? "…" : "") + campo.slice(inizio, inizio + 140) + "…";
-          return evidenzia(estratto, query);
-        }
-        return evidenzia(campo, query);
-      }
-    }
-    return "";
-  }
-
   // Restituisce un elenco unificato di risultati (persone, organizzazioni
   // e documenti), ciascuno con tipo/etichetta/link già pronti per il
   // rendering. Le persone e organizzazioni vengono prima: un nome cercato
   // è quasi sempre più specifico e rilevante di un riferimento generico
-  // dentro un documento.
+  // dentro un documento. I filtri usano solo testo pulito: cercare
+  // "serif" o "0.75pt" non restituisce più match dentro i tag HTML.
   function cercaTutti(query) {
     const q = query.toLowerCase().trim();
     if (!q) return [];
 
     const risultatiPersone = persone
       .filter((p) => {
-        const campo = (p.nome || "") + " " + (p.biografia || "");
-        return campo.toLowerCase().includes(q);
+        const campo = ((p.nome || "") + " " + pulisciTesto(p.biografia)).toLowerCase();
+        return campo.includes(q);
       })
       .map((p) => {
         const dateVita = [p.nascita, p.morte].filter(Boolean).join(" – ");
@@ -128,8 +190,8 @@
 
     const risultatiOrganizzazioni = organizzazioni
       .filter((o) => {
-        const campo = (o.nome || "") + " " + (o.storia || "") + " " + (o.categoria || "");
-        return campo.toLowerCase().includes(q);
+        const campo = ((o.nome || "") + " " + pulisciTesto(o.storia) + " " + (o.categoria || "")).toLowerCase();
+        return campo.includes(q);
       })
       .map((o) => {
         return {
@@ -152,7 +214,7 @@
           " " +
           (doc.keywords || "") +
           " " +
-          (doc.descrizione || "");
+          descrizionePulita(doc);
         return campo.toLowerCase().includes(q);
       })
       .map((doc) => {
@@ -162,7 +224,7 @@
           titolo: doc.titolo,
           href: `${baseUrl}/documenti/${doc.id}/`,
           frammento: estraiFrammento(
-            [doc.descrizione, doc.keywords, doc.autore, doc.organizzazione],
+            [descrizionePulita(doc), doc.keywords, doc.autore, doc.organizzazione],
             q
           )
         };
@@ -173,13 +235,11 @@
 
   function mostraRisultati(query) {
     const risultati = cercaTutti(query);
-
     if (!query.trim()) {
       resultsBox.innerHTML = "";
       resultsBox.classList.remove("is-open");
       return;
     }
-
     if (risultati.length === 0) {
       resultsBox.innerHTML =
         '<div class="hero-search-empty">Nessun risultato trovato.</div>';
@@ -187,7 +247,6 @@
       resultsBox.classList.add("is-open");
       return;
     }
-
     let html = '<div class="hero-search-count">' + risultati.length + " risultati</div>";
     risultati.forEach((r) => {
       html += `
@@ -200,7 +259,6 @@
         </a>
       `;
     });
-
     resultsBox.innerHTML = html;
     posizionaDropdown();
     resultsBox.classList.add("is-open");
@@ -233,18 +291,16 @@
     }
   });
 
-  // === NUOVA MODIFICA: gestione del submit ===
+  // === gestione del submit ===
   // Se il campo di ricerca è vuoto, blocchiamo il submit e restiamo
   // sulla home. Se invece c'è testo, il form invia a documenti/?q=...
   form.addEventListener("submit", function (event) {
     const query = input.value.trim();
-    
     // Se non c'è testo, blocchiamo il submit e usciamo
     if (!query) {
       event.preventDefault();
       return;
     }
-
     // Se ci sono suggerimenti e l'utente preme Invio, vai al primo
     // risultato invece di far partire il submit nativo del form.
     const primoRisultato = resultsBox.querySelector(".hero-search-item");
@@ -255,6 +311,5 @@
     }
     // Altrimenti, se non ci sono suggerimenti ma c'è testo,
     // lasciamo che il form invii normalmente a documenti/?q=...
-    // (il submit viene eseguito normalmente)
   });
 })();
