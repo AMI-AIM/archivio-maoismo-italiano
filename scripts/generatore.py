@@ -219,26 +219,22 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
 
 def ottimizza_json(output_dir):
     """
-    Ottimizza JSON per frontend: solo minificazione (NO chunking).
-    Tutti i documenti sono caricati subito in un unico file.
+    Ottimizza JSON per frontend: minificazione.
     
     Args:
         output_dir: Cartella output (docs/)
     """
-    print("\n[OPTIMIZE] Ottimizzazione JSON per frontend (solo minificazione)...")
+    print("\n[OPTIMIZE] Ottimizzazione JSON per frontend...")
+    
     documenti_json = os.path.join(output_dir, 'documenti.json')
     soggetti_json = os.path.join(output_dir, 'soggetti.json')
     
     # Minifica (riduzione 50-60%)
     if os.path.exists(documenti_json):
         JSONOptimizer.minify_json(documenti_json, documenti_json)
-        print(f"   [OK] documenti.json minificato")
     
     if os.path.exists(soggetti_json):
         JSONOptimizer.minify_json(soggetti_json, soggetti_json)
-        print(f"   [OK] soggetti.json minificato")
-    
-    #  RIMOSSO IL CHUNKING - tutti i documenti sono in un unico file
 
 def stampa_statistiche(df, persone, organizzazioni, cache_mgr=None):
     """
