@@ -1,6 +1,6 @@
 import os
 import re
-from .utils import formatta_data, split_nomi
+from .utils import formatta_data, split_nomi, scarica_descrizione_ia
 
 def genera_indice(df, output_dir):
     print("\n📑 Generazione della pagina Archivio con filtri...")
@@ -37,6 +37,14 @@ def genera_indice(df, output_dir):
         if autore_raw in ['nan', 'None']:
             autore_raw = ''
         
+        url_ia = str(row.get('url', '#')).strip()
+        descrizione = None
+        if url_ia and url_ia != '#':
+            match = re.search(r'/details/([^/?#]+)', url_ia)
+            if match:
+                identifier = match.group(1)
+                descrizione = scarica_descrizione_ia(identifier)
+        
         if autore_raw and autore_raw not in ['nan', 'None']:
             autori = split_nomi(autore_raw)
             autore_display = autori[0] if autori else 'N/A'
@@ -53,7 +61,8 @@ def genera_indice(df, output_dir):
             'data_ordine': data_ordine,
             'tipo': tipo_display,
             'organizzazione': org,
-            'autore': autore_display
+            'autore': autore_display,
+            'descrizione': descrizione
         })
     
     schede.sort(key=lambda x: (x['data_ordine'], x['titolo']))
