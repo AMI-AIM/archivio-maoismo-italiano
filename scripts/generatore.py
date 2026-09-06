@@ -16,6 +16,7 @@ from core.home import genera_home
 from core.cache_manager import CacheManager
 from core.json_optimizer import JSONOptimizer
 from core.site_config import SITE_URL
+from core.utils import get_cache_manager
 
 # ========================================================================
 # CONFIGURAZIONE GLOBALE
@@ -276,7 +277,8 @@ def main():
     # ================================================================
     # CACHE MANAGER: Verifica cambiamenti file
     # ================================================================
-    cache_mgr = CacheManager()
+    # Usa singleton per garantire consistenza cache tra tutti i moduli
+    cache_mgr = get_cache_manager()
     catalogo_path = os.path.join(DATA_DIR, 'dati.xlsx')
     print("\n[CACHE] Controllo cambiamenti file sorgente...")
     excel_changed = cache_mgr.is_file_changed(catalogo_path)
@@ -351,7 +353,8 @@ def main():
     # ================================================================
     print("\n[GEN] Generazione indice archivio...")
     try:
-        genera_indice(df, OUTPUT_DIR)
+        # Passa cache_mgr a genera_indice per caching descrizioni IA
+        genera_indice(df, OUTPUT_DIR, cache_manager=cache_mgr)
         print(f"[OK] Indice archivio generato")
     except Exception as e:
         print(f"[ERROR] Errore generazione indice: {e}")

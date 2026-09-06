@@ -1,0 +1,725 @@
+---
+title: "Archivio del Maoismo Italiano — documenti, periodici e fonti del movimento filo-cinese"
+description: "Archivio digitale di documenti, periodici, opuscoli e fonti primarie del movimento politico 'filo-cinese' in Italia (anni '60-'80). Catalogo ricercabile con schede catalografiche, biografie e organizzazioni."
+hide:
+  - toc
+---
+
+
+<div class="banner-full" style="margin-bottom: 0;">
+  <img src="/archivio-maoismo-italiano/immagini/banner.webp"
+       alt="Archivio del Maoismo Italiano"
+       class="banner-image">
+  <div class="banner-overlay"></div>
+  <div class="banner-content" style="position: absolute; bottom: 0.5rem; left: 0.5rem; z-index: 1; text-align: left; color: #ffffff; max-width: 700px; padding: 0.5rem 1rem;">
+    <p style="font-size: 1.4rem; font-weight: 600; opacity: 1; margin: 0 0 0.8rem 0; line-height: 1.45; text-shadow: 0 2px 14px rgba(0,0,0,0.65), 0 1px 3px rgba(0,0,0,0.5);">Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia</p>
+    <div class="banner-actions" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 0.6rem;">
+      <a href="documenti/" class="banner-button" style="display: inline-block; padding: 0.5rem 1.2rem; background-color: #ffffff; color: #b71c1c !important; font-weight: 600; font-size: 0.9rem; border-radius: 6px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.25); white-space: nowrap; flex-shrink: 0;">Esplora l'archivio</a>
+      <form class="banner-search" id="hero-search-form" action="documenti/" method="get" style="display: flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); border-radius: 24px; padding: 0.3rem 0.8rem; backdrop-filter: blur(2px); transition: background 0.2s, border-color 0.2s; position: relative; flex: 1 1 auto; min-width: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="banner-search-icon" aria-hidden="true" style="width: 1.1rem; height: 1.1rem; fill: #ffffff; flex-shrink: 0;">
+          <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5s2 4.5 4.5 4.5 4.5-2 4.5-4.5S12 5 9.5 5z"/>
+        </svg>
+        <input type="text" id="hero-search-input" name="q" placeholder="Cerca nell'archivio..." aria-label="Cerca nell'archivio" autocomplete="off" style="background: transparent; border: none; outline: none; color: #ffffff; font-size: 0.9rem; width: 100%; min-width: 140px; flex: 1 1 auto;">
+        <button type="submit" aria-label="Cerca" style="background: none; border: none; color: #ffffff; font-weight: 600; font-size: 0.85rem; cursor: pointer; padding: 0.2rem 0.4rem; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; flex-shrink: 0;">Cerca</button>
+        <div class="hero-search-results" id="hero-search-results"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="evidenza-band">
+  <h2 class="section-title">Documenti in evidenza</h2>
+  <div class="evidenza-grid">
+
+    <div class="evidenza-card">
+        <a href="documenti/AMI-0049/" class="evidenza-link" title="Sulla contraddizione">
+            <div class="evidenza-thumbnail">
+              <img src="https://archive.org/services/img/sulla-contraddizione" alt="Sulla contraddizione" class="evidenza-thumbnail-img" loading="lazy">
+            </div>
+            <div class="evidenza-titolo">Sulla contraddizione</div>
+        </a>
+    </div>
+
+    <div class="evidenza-card">
+        <a href="documenti/AMI-0045/" class="evidenza-link" title="Sulla pratica">
+            <div class="evidenza-thumbnail">
+              <img src="https://archive.org/services/img/sulla-pratica" alt="Sulla pratica" class="evidenza-thumbnail-img" loading="lazy">
+            </div>
+            <div class="evidenza-titolo">Sulla pratica</div>
+        </a>
+    </div>
+
+    <div class="evidenza-card">
+        <a href="documenti/AMI-0043/" class="evidenza-link" title="Sulla Nuova Democrazia">
+            <div class="evidenza-thumbnail">
+              <img src="https://archive.org/services/img/sulla-nuova-democrazia" alt="Sulla Nuova Democrazia" class="evidenza-thumbnail-img" loading="lazy">
+            </div>
+            <div class="evidenza-titolo">Sulla Nuova Democrazia</div>
+        </a>
+    </div>
+
+    <div class="evidenza-card">
+        <a href="documenti/AMI-0013/" class="evidenza-link" title="Dichiarazione di Principio - Statuto">
+            <div class="evidenza-thumbnail">
+              <img src="https://archive.org/services/img/statuto-pcdiml" alt="Dichiarazione di Principio - Statuto" class="evidenza-thumbnail-img" loading="lazy">
+            </div>
+            <div class="evidenza-titolo">Dichiarazione di Principio - Statuto</div>
+        </a>
+    </div>
+
+    <div class="evidenza-card">
+        <a href="documenti/AMI-0035/" class="evidenza-link" title="Viva il popolo cinese">
+            <div class="evidenza-thumbnail">
+              <img src="https://archive.org/services/img/viva-il-popolo-cinese" alt="Viva il popolo cinese" class="evidenza-thumbnail-img" loading="lazy">
+            </div>
+            <div class="evidenza-titolo">Viva il popolo cinese</div>
+        </a>
+    </div>
+
+  </div>
+</div>
+
+<div class="home-column home-recent">
+  <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 12h10v2H7zm0-4h10v2H7zm0 8h6v2H7z"/></svg> Aggiunti di recente</h2>
+  <div class="recent-container">
+    <div class="catalogo-lista">
+
+      <div class="doc-row">
+        <div class="doc-data">1 maggio 1973</div>
+        <div class="doc-contenuto">
+          <div class="doc-titolo"><a href="documenti/AMI-0091/" title="Lotta di Classe, anno IV, no. 1/2">Lotta di Classe, anno IV, no. 1/2</a></div>
+          <div class="doc-meta"><span class="doc-type-chip">Periodico</span><span class="doc-org">Circoli Lenin dell'Emilia Romagna</span></div>
+        </div>
+      </div>
+
+      <div class="doc-row">
+        <div class="doc-data">5 novembre 1972</div>
+        <div class="doc-contenuto">
+          <div class="doc-titolo"><a href="documenti/AMI-0090/" title="Lotta di Classe, anno III, no. 6">Lotta di Classe, anno III, no. 6</a></div>
+          <div class="doc-meta"><span class="doc-type-chip">Periodico</span><span class="doc-org">Circoli Lenin dell'Emilia Romagna</span></div>
+        </div>
+      </div>
+
+      <div class="doc-row">
+        <div class="doc-data">1 maggio 1972</div>
+        <div class="doc-contenuto">
+          <div class="doc-titolo"><a href="documenti/AMI-0089/" title="Lotta di Classe, anno III, no. 4/5">Lotta di Classe, anno III, no. 4/5</a></div>
+          <div class="doc-meta"><span class="doc-type-chip">Periodico</span><span class="doc-org">Circoli Lenin dell'Emilia Romagna</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 1rem;">
+    <a href="documenti/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg> Tutti i documenti</a>
+  </div>
+</div>
+
+<div class="home-columns">
+
+<div class="home-column">
+  <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> Persone più menzionate</h2>
+  <div class="recent-container">
+    <div class="catalogo-lista">
+
+        <div class="doc-row doc-row-persona">
+            <div class="persona-avatar persona-avatar--1">
+                <span class="persona-iniziali">MZ</span>
+                <span class="persona-rank-badge persona-rank-badge--1">1</span>
+            </div>
+            <div class="doc-contenuto">
+                <div class="doc-titolo"><a href="persone/mao-zedong/">Mao Zedong</a></div>
+                <div class="doc-sommario">34 documenti collegati</div>
+                <div class="persona-date">1893 – 1976</div>
+            </div>
+        </div>
+
+        <div class="doc-row doc-row-persona">
+            <div class="persona-avatar persona-avatar--2">
+                <span class="persona-iniziali">OP</span>
+                <span class="persona-rank-badge persona-rank-badge--2">2</span>
+            </div>
+            <div class="doc-contenuto">
+                <div class="doc-titolo"><a href="persone/osvaldo-pesce/">Osvaldo Pesce</a></div>
+                <div class="doc-sommario">7 documenti collegati</div>
+                <div class="persona-date">1938 – 2021</div>
+            </div>
+        </div>
+
+        <div class="doc-row doc-row-persona">
+            <div class="persona-avatar persona-avatar--3">
+                <span class="persona-iniziali">DD</span>
+                <span class="persona-rank-badge persona-rank-badge--3">3</span>
+            </div>
+            <div class="doc-contenuto">
+                <div class="doc-titolo"><a href="persone/dino-dini/">Dino Dini</a></div>
+                <div class="doc-sommario">3 documenti collegati</div>
+                
+            </div>
+        </div>
+
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 1rem;">
+    <a href="persone/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 2c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg> Tutte le persone</a>
+  </div>
+</div>
+
+<div class="home-column">
+  <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg> Organizzazioni più menzionate</h2>
+  <div class="recent-container">
+    <div class="catalogo-lista">
+
+        <div class="doc-row doc-row-persona">
+            <div class="persona-avatar persona-avatar--1">
+                <span class="persona-iniziali">PC</span>
+                <span class="persona-rank-badge persona-rank-badge--1">1</span>
+            </div>
+            <div class="doc-contenuto">
+                <div class="doc-titolo"><a href="organizzazioni/partito-comunista-cinese/">Partito Comunista Cinese</a></div>
+                <div class="doc-sommario">30 documenti collegati</div>
+                
+            </div>
+        </div>
+
+        <div class="doc-row doc-row-persona">
+            <div class="persona-avatar persona-avatar--2">
+                <span class="persona-iniziali">CL</span>
+                <span class="persona-rank-badge persona-rank-badge--2">2</span>
+            </div>
+            <div class="doc-contenuto">
+                <div class="doc-titolo"><a href="organizzazioni/circoli-lenin-dellemilia-romagna/">Circoli Lenin dell'Emilia Romagna</a></div>
+                <div class="doc-sommario">24 documenti collegati</div>
+                
+            </div>
+        </div>
+
+        <div class="doc-row doc-row-persona">
+            <div class="persona-avatar persona-avatar--3">
+                <span class="persona-iniziali">PC</span>
+                <span class="persona-rank-badge persona-rank-badge--3">3</span>
+            </div>
+            <div class="doc-contenuto">
+                <div class="doc-titolo"><a href="organizzazioni/partito-comunista-ditalia-marxista-leninista/">Partito Comunista d'Italia (marxista-leninista)</a></div>
+                <div class="doc-sommario">12 documenti collegati</div>
+                
+            </div>
+        </div>
+
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 1rem;">
+    <a href="organizzazioni/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg> Tutte le organizzazioni</a>
+  </div>
+</div>
+</div>
+
+<style>
+/* Nasconde il titolo "Home" nella pagina */
+.md-content article h1:first-of-type {
+  display: none !important;
+}
+
+/* ------------------------------------------------------------
+BANNER
+------------------------------------------------------------ */
+.banner-full {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  margin-bottom: 0 !important;
+}
+.banner-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* Placeholder ricerca più leggibile */
+#hero-search-input::placeholder {
+  color: #e0e0e0 !important;
+  opacity: 1 !important;
+}
+
+/* ------------------------------------------------------------
+SEZIONE DOCUMENTI IN EVIDENZA
+------------------------------------------------------------ */
+.evidenza-band {
+  position: relative;
+  padding: 1.5rem 0 1.2rem;
+  margin: 0 0 2rem 0;
+}
+.evidenza-band::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(-50vw + 50%);
+  right: calc(-50vw + 50%);
+  background: #0d0d0d;
+  z-index: -1;
+}
+.evidenza-band .section-title {
+  margin: 0 0 1.5rem 0;
+}
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: block;
+  color: #ffffff;
+  padding-bottom: 0.5rem;
+  position: relative;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #b71c1c;
+  margin-top: 0.4rem;
+  border-radius: 2px;
+}
+.section-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: var(--md-primary-fg-color);
+  flex-shrink: 0;
+}
+
+/* Riga flex: larghezza card = larghezza copertina, spazi uniformi */
+.evidenza-grid {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  gap: 1.5rem !important;
+  overflow-x: auto;
+  padding-bottom: 2.6rem;
+  margin-bottom: 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.evidenza-grid::-webkit-scrollbar {
+  display: none;
+}
+.evidenza-card {
+  position: relative;
+  flex: 0 0 auto !important;
+  min-width: 0;
+  transition: transform 0.25s ease;
+}
+.evidenza-card:hover {
+  transform: translateY(-4px);
+}
+.evidenza-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.evidenza-thumbnail {
+  height: 240px !important;
+  max-height: 240px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.evidenza-thumbnail-img {
+  display: block !important;
+  height: 100% !important;
+  max-height: 240px !important;
+  width: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+}
+.evidenza-placeholder {
+  color: #ffffff;
+  font-size: 2.5rem;
+  opacity: 0.5;
+}
+.evidenza-titolo {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin-top: 0.75rem !important;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.92);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ------------------------------------------------------------
+CATALOGO
+------------------------------------------------------------ */
+.catalogo-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.doc-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  border-left: 3px solid transparent;
+  transition: background-color 0.15s, border-left-color 0.15s;
+  gap: 1.5rem;
+}
+.doc-row:last-child {
+  border-bottom: none;
+}
+.doc-row:hover {
+  background-color: var(--md-code-bg-color);
+  border-left-color: var(--md-primary-fg-color);
+}
+.doc-row-persona {
+  gap: 1rem;
+}
+.doc-data {
+  flex: 0 0 150px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--md-primary-fg-color);
+  white-space: nowrap;
+  padding-top: 0.05rem;
+}
+.doc-contenuto {
+  flex: 1;
+  min-width: 0;
+}
+.doc-titolo {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.1rem;
+}
+.doc-titolo a {
+  text-decoration: none;
+  color: var(--md-default-fg-color);
+}
+.doc-titolo a:hover {
+  text-decoration: underline;
+  color: var(--md-primary-fg-color);
+}
+.doc-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.15rem;
+}
+.doc-type-chip {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--md-primary-fg-color);
+  background: rgba(183, 28, 28, 0.1);
+  padding: 0.15rem 0.55rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.doc-org {
+  font-size: 0.88rem;
+  color: var(--md-default-fg-color--light);
+}
+.doc-sommario {
+  font-size: 0.9rem;
+  color: var(--md-default-fg-color--light);
+}
+.recent-container {
+  background: var(--md-code-bg-color);
+  border-radius: 14px;
+  padding: 0.5rem 0.5rem 0.2rem 0.5rem;
+  margin: 1rem 0;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ------------------------------------------------------------
+LAYOUT HOME: recenti a piena larghezza SOPRA, poi due colonne 1:1
+------------------------------------------------------------ */
+.home-recent {
+  margin: 0.5rem 0 2rem 0;
+}
+.home-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+  margin-top: 0.5rem;
+}
+.home-column {
+  display: flex;
+  flex-direction: column;
+}
+.home-column h2 {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  font-size: 1.3rem;
+  display: block;
+  padding-bottom: 0.5rem;
+  position: relative;
+}
+.home-column h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #b71c1c;
+  margin-top: 0.4rem;
+  border-radius: 2px;
+}
+.button-icon {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+  vertical-align: -0.15em;
+  margin-right: 0.3rem;
+}
+.home-column .recent-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.home-column .catalogo-lista {
+  flex: 1;
+}
+
+/* ------------------------------------------------------------
+AVATAR con iniziali + badge rank (persone E organizzazioni)
+------------------------------------------------------------ */
+.persona-avatar {
+  position: relative;
+  flex: 0 0 52px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+.persona-avatar--1 { background: #b71c1c; }
+.persona-avatar--2 { background: #424242; }
+.persona-avatar--3 { background: #8d6e63; }
+.persona-iniziali {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+.persona-rank-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  border: 2px solid var(--md-code-bg-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.persona-rank-badge--1 { background: linear-gradient(135deg, #f6d365, #c9911d); }
+.persona-rank-badge--2 { background: linear-gradient(135deg, #dde3e6, #9aa5ab); }
+.persona-rank-badge--3 { background: linear-gradient(135deg, #d7a06e, #a05a2c); }
+.persona-date {
+  font-size: 0.8rem;
+  color: var(--md-default-fg-color--light);
+  font-style: italic;
+}
+.md-button {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+.md-button--primary {
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color) !important;
+}
+.md-button--primary:hover {
+  background-color: var(--md-primary-fg-color--dark);
+}
+
+/* ------------------------------------------------------------
+RESPONSIVE
+------------------------------------------------------------ */
+@media (max-width: 1100px) {
+  .evidenza-thumbnail {
+    height: 190px !important;
+    max-height: 190px !important;
+  }
+  .evidenza-thumbnail-img {
+    max-height: 190px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Le due colonne diventano impilate */
+  .home-columns {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .evidenza-grid {
+    justify-content: flex-start !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 1rem 2.4rem 1rem !important;
+    margin: 0 -1rem !important;
+    gap: 1.25rem !important;
+  }
+  .evidenza-card {
+    scroll-snap-align: start;
+  }
+  .evidenza-band {
+    padding: 0.9rem 0 1rem;
+  }
+  .evidenza-band .section-title {
+    margin: 0 0 1.2rem 0;
+    font-size: 1.25rem;
+  }
+  .evidenza-thumbnail {
+    height: 200px !important;
+    max-height: 200px !important;
+  }
+  .evidenza-titolo {
+    font-size: 0.8rem;
+  }
+
+  .banner-full {
+    height: 240px;
+    min-height: 200px;
+    overflow: hidden;
+  }
+  .banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+  .banner-content[style] {
+    bottom: 0.3rem !important;
+    left: 0.3rem !important;
+    right: 0.3rem !important;
+    max-width: none !important;
+    padding: 0.3rem 0.6rem !important;
+  }
+  .banner-content p[style] {
+    font-size: 0.85rem !important;
+    margin: 0 0 0.3rem 0 !important;
+    line-height: 1.3 !important;
+  }
+  .banner-actions[style] {
+    flex-wrap: wrap !important;
+    gap: 0.3rem !important;
+  }
+  .banner-button[style] {
+    padding: 0.3rem 0.8rem !important;
+    font-size: 0.75rem !important;
+  }
+  .banner-search[style] {
+    flex: 1 1 100% !important;
+    padding: 0.2rem 0.6rem !important;
+    gap: 0.3rem !important;
+  }
+  .banner-search input[style] {
+    min-width: 80px !important;
+    font-size: 0.75rem !important;
+  }
+  .banner-search button[style] {
+    font-size: 0.7rem !important;
+    padding: 0.1rem 0.3rem !important;
+  }
+  .banner-search-icon[style] {
+    width: 0.9rem !important;
+    height: 0.9rem !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .evidenza-thumbnail {
+    height: 170px !important;
+    max-height: 170px !important;
+  }
+  .evidenza-thumbnail-img {
+    max-height: 170px !important;
+  }
+  .doc-row {
+    flex-direction: column;
+    gap: 0.1rem;
+    padding: 0.6rem 0.2rem;
+  }
+  .doc-row-persona {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .doc-data {
+    flex: 0 0 auto;
+    white-space: normal;
+    font-size: 0.8rem;
+  }
+  .doc-titolo {
+    font-size: 0.95rem;
+  }
+  .doc-sommario {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.2rem;
+  }
+  .evidenza-thumbnail {
+    height: 150px !important;
+    max-height: 150px !important;
+  }
+  .evidenza-thumbnail-img {
+    max-height: 150px !important;
+  }
+  .banner-full {
+    height: 180px;
+    min-height: 150px;
+  }
+  .banner-content p[style] {
+    font-size: 0.75rem !important;
+  }
+  .banner-button[style] {
+    padding: 0.2rem 0.6rem !important;
+    font-size: 0.65rem !important;
+  }
+  .banner-search input[style] {
+    font-size: 0.7rem !important;
+    min-width: 60px !important;
+  }
+  .banner-search button[style] {
+    font-size: 0.65rem !important;
+  }
+}
+</style>

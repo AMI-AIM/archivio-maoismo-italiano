@@ -156,8 +156,7 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
 
             if descrizione_ia and cache_manager:
                 cache_manager.set_ia_metadata(identifier, {'metadata': {'description': descrizione_ia}})
-        else:
-            descrizione_ia = scarica_descrizione_ia(identifier)
+        # else: nessun identifier disponibile, descrizione_ia rimane None
 
         # ========================================================================
         # META DESCRIPTION (SEO)
