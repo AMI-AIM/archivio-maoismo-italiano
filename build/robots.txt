@@ -1,5 +1,0 @@
-# robots.txt — Archivio del Maoismo Italiano
-User-agent: *
-Allow: /
-Sitemap: https://ami-aim.github.io/archivio-maoismo-italiano/sitemap.xml
-Sitemap: https://ami-aim.github.io/archivio-maoismo-italiano/sitemap.txt
