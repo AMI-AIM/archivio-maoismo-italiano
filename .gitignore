@@ -1,19 +1,40 @@
-# Output di build 
-build/
-
-# Excel lock file
-data/~$*.xlsx
-
-# Cache interna del generatore (metadati IA, hash file, ecc.)
-scripts/.cache/
-
-# Python
-scripts/__pycache__/
-scripts/core/__pycache__/
+```python
+# Compiled Python files
 *.pyc
-*.pyo
-*.pyd
-.Python
+__pycache__/
 
-# MkDocs (output finale prodotto da "mkdocs build")
-site/
+# Dependencies
+.venv/
+venv/
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Environment variables
+.env
+.env.local
+*.env
+
+# Logs
+*.log
+
+# Coverage reports
+.coverage
+coverage/
+htmlcov/
+
+# Pytest cache
+.pytest_cache/
+
+# MyPy cache
+.mypy_cache/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+```

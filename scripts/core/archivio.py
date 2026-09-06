@@ -2,7 +2,7 @@ import os
 import re
 from .utils import formatta_data, split_nomi, scarica_descrizione_ia
 
-def genera_indice(df, output_dir):
+def genera_indice(df, output_dir, cache_manager=None):
     print("\n📑 Generazione della pagina Archivio con filtri...")
     
     schede = []
@@ -43,7 +43,18 @@ def genera_indice(df, output_dir):
             match = re.search(r'/details/([^/?#]+)', url_ia)
             if match:
                 identifier = match.group(1)
-                descrizione = scarica_descrizione_ia(identifier)
+                # Usa cache_manager se disponibile per evitare download duplicati
+                if cache_manager:
+                    cached_metadata = cache_manager.get_ia_metadata(identifier)
+                    if cached_metadata:
+                        descrizione = cached_metadata.get('metadata', {}).get('description')
+                    if not descrizione:
+                        descrizione = scarica_descrizione_ia(identifier)
+                        # Salva in cache per riutilizzo successivo
+                        if descrizione:
+                            cache_manager.set_ia_metadata(identifier, {'metadata': {'description': descrizione}})
+                else:
+                    descrizione = scarica_descrizione_ia(identifier)
         
         if autore_raw and autore_raw not in ['nan', 'None']:
             autori = split_nomi(autore_raw)
