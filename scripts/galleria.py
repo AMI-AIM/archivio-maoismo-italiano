@@ -47,7 +47,62 @@ def clean_value(value, default=""):
     if s.lower() in {"nan", "none", "nat"}:
         return default
     return s
+MESI_IT = {
+    1: "gennaio", 2: "febbraio", 3: "marzo", 4: "aprile",
+    5: "maggio", 6: "giugno", 7: "luglio", 8: "agosto",
+    9: "settembre", 10: "ottobre", 11: "novembre", 12: "dicembre",
+}
 
+
+def format_data(valore):
+    """Riduce le date al formato esteso italiano:
+    '1964-05-14 00:00:00' -> '14 maggio 1964'
+    '1968-08-31 00:00:00' -> '31 agosto 1968'
+    '03/1978'             -> 'marzo 1978'
+    '1978-03'             -> 'marzo 1978'
+    '1967'                -> '1967'
+    Date già testuali o non riconosciute: restituite invariate.
+    L'orario è rimosso solo se mezzanotte (00:00:00 = orario assente);
+    un orario reale verrebbe mantenuto come ', ore HH:MM'.
+    """
+    s = clean_value(valore)
+    if not s:
+        return ""
+
+    # Giorno-mese-anno, con eventuale orario (ISO o Timestamp pandas)
+    m = re.match(
+        r"^(\d{4})-(\d{1,2})-(\d{1,2})"
+        r"(?:[ T](\d{1,2}):(\d{2})(?::(\d{2}))?)?$",
+        s,
+    )
+    if m:
+        anno, mese, giorno = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        hh, mm = int(m.group(4) or 0), int(m.group(5) or 0)
+        if 1 <= mese <= 12 and 1 <= giorno <= 31:
+            base = f"{giorno} {MESI_IT[mese]} {anno}"
+            if (hh, mm) != (0, 0):
+                base += f", ore {hh:02d}:{mm:02d}"
+            return base
+        return s
+
+    # Mese/anno: 03/1978
+    m = re.match(r"^(\d{1,2})/(\d{4})$", s)
+    if m:
+        mese = int(m.group(1))
+        if 1 <= mese <= 12:
+            return f"{MESI_IT[mese]} {m.group(2)}"
+        return s
+
+    # Anno-mese: 1978-03
+    m = re.match(r"^(\d{4})-(\d{1,2})$", s)
+    if m:
+        mese = int(m.group(2))
+        if 1 <= mese <= 12:
+            return f"{MESI_IT[mese]} {m.group(1)}"
+        return s
+
+    # Solo anno, o data già testuale: invariata
+    return s
 
 def sanitize_url(url):
     """Consente solo scheme http/https negli href (evita javascript: ecc.)."""
@@ -91,7 +146,7 @@ def gallery_card(row):
     + lazy loading con skeleton (lazy-img/data-src) e fallback su cover IA."""
     titolo = clean_value(row.get("titolo"), "Senza titolo")
     org = clean_value(row.get("organizzazione"))
-    data_str = clean_value(row.get("data"))
+    data_str = format_data(row.get("data"))
 
     url = clean_value(row.get("url"))
     nome_file = clean_value(row.get("nome_file"))
