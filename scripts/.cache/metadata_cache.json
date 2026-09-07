@@ -1,0 +1,912 @@
+{
+  "doc_AMI-0001": {
+    "data": {
+      "titolo": "Citazioni dalle opere del presidente Mao Tse-tung",
+      "data": "1969",
+      "tipo": "libro",
+      "source_hash": "222efb6d53cad3fdf28129c34d4fbe93c507f098dcf597e1eefd87cfd6bedfe8",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:05.329167"
+  },
+  "doc_AMI-0002": {
+    "data": {
+      "titolo": "Sulla giusta soluzione delle contraddizioni in seno al popolo",
+      "data": "1967",
+      "tipo": "opuscolo",
+      "source_hash": "b8777dec6c415a9110a2103ce1a8e8d799c35c0cfabf5e3dac7043bd76b68ac6",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:06.551572"
+  },
+  "doc_AMI-0003": {
+    "data": {
+      "titolo": "Come correggere le idee errate nel Partito",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "6f6087cfb9d28c1c4eac6b844f8284121146fbab9417211d4875026a4821e36a",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:07.986448"
+  },
+  "doc_AMI-0004": {
+    "data": {
+      "titolo": "Dichiarazione del compagno Mao Tse-tung, presidente del Comitato Centrale del Partito Comunista Cinese, in appoggio alla lotta degli afroamericani contro la repressione violenta",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "d3455ef134f5e375f8db2834f80025dc0326144889ef08897ca869ce54b14680",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:09.475869"
+  },
+  "doc_AMI-0005": {
+    "data": {
+      "titolo": "Da dove provengono le idee giuste?",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "61d2413d3552d69dcfca32b9ae78102a1a2f82876b7e17a8091570739e8d865b",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:10.917472"
+  },
+  "doc_AMI-0006": {
+    "data": {
+      "titolo": "Al servizio del popolo; In memoria di Norman Bethune; Come Yu Kung rimosse le montagne",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "482ae27c1320a12371758f481733b32695ec682b38a323acb20e9850336afbae",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:12.351194"
+  },
+  "doc_AMI-0007": {
+    "data": {
+      "titolo": "Preoccuparsi delle condizioni di vita delle masse fare attenzione ai metodi di lavoro",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "6d0acba219f5413cb253d585888d0dda135c736f29e87a40d2e4cc3c5f4ba0d6",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:15.860946"
+  },
+  "doc_AMI-0008": {
+    "data": {
+      "titolo": "Sul rafforzamento del sistema dei comitati di partito",
+      "data": "1969",
+      "tipo": "opuscolo",
+      "source_hash": "457ea83f1d605dfe5d5715a3eac2cb96d1f3f7548187d69c0b8604fe00910398",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:16.990909"
+  },
+  "doc_AMI-0009": {
+    "data": {
+      "titolo": "Orientamento del movimento giovanile",
+      "data": "1969",
+      "tipo": "opuscolo",
+      "source_hash": "19d6a7bc5cbfa30549479be18d014d7062fab0f7964ed7262bb9343d9f70fbbc",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:18.318498"
+  },
+  "doc_AMI-0010": {
+    "data": {
+      "titolo": "Popoli di tutto il mondo, unitevi per sconfiggere gli aggressori americani e tutti i loro lacché! (Dichiarazione del 20 maggio 1970)",
+      "data": "1970",
+      "tipo": "opuscolo",
+      "source_hash": "ea668072b01bf5d218c902f336a8271084fdb8b5f7228f1010b83fa73eb26f04",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:19.654124"
+  },
+  "doc_AMI-0011": {
+    "data": {
+      "titolo": "Circolare del 16 maggio 1966 - Un grande documento storico",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "583be6a2d6e06fc0292d18fae0f5489ba352b9f379f3de6a3a9390e6210a7215",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:20.780329"
+  },
+  "doc_AMI-0012": {
+    "data": {
+      "titolo": "La classe operaia deve esercitare la sua direzione in ogni campo",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "a318cf9d508515bf07f443da3636aab4cb2021c033479025692378a30859ea79",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:21.905171"
+  },
+  "doc_AMI-0013": {
+    "data": {
+      "titolo": "Dichiarazione di Principio - Statuto",
+      "data": "1967",
+      "tipo": "opuscolo",
+      "source_hash": "b403c50966db2453bb399f1650e1258bcfddbf0d2139f3cf894f2097373e4d9b",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:22.634169"
+  },
+  "doc_AMI-0014": {
+    "data": {
+      "titolo": "Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta dalla leadership del Partito Comunista Cinese",
+      "data": "14 agosto 1968",
+      "tipo": "foto",
+      "source_hash": "7d992cf966e82d79a0e72ce65b0ac0da64924aaeec041bc6d8b3546efba359b8",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:23.854927"
+  },
+  "doc_AMI-0015": {
+    "data": {
+      "titolo": "Osvaldo Pesce, Partito Comunista d'Italia (marxista-leninista), incontra il presidente Mao Zedong",
+      "data": "31 agosto 1968",
+      "tipo": "foto",
+      "source_hash": "8af86414c94895f394dc1ff6db4bc1259f07272c004436ea9c3a951f0f836f38",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:24.874446"
+  },
+  "doc_AMI-0016": {
+    "data": {
+      "titolo": "Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese",
+      "data": "3 ottobre 1969",
+      "tipo": "foto",
+      "source_hash": "0168135ed9446b36ff5390c8953b009234c2592e8da7bbe38cdd566bfff29270",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:26.005791"
+  },
+  "doc_AMI-0017": {
+    "data": {
+      "titolo": "Studenti ed intellettuali rivoluzionari",
+      "data": "9 ottobre 1969",
+      "tipo": "volantino",
+      "source_hash": "b539ded250a8a53451a99d84283ade66e0f06798b24283ce23642352ebdf24cc",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:27.948244"
+  },
+  "doc_AMI-0018": {
+    "data": {
+      "titolo": "Delegazione delle Edizioni Oriente accolta dal Presidente Mao Zedong",
+      "data": "14 maggio 1964",
+      "tipo": "foto",
+      "source_hash": "0a05abc8b70c379a0166302de1d26b1b024a52461b90eff5da84290647865b0b",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:29.003840"
+  },
+  "doc_AMI-0019": {
+    "data": {
+      "titolo": "Citazioni del presidente Mao Tse-tung",
+      "data": "1969",
+      "tipo": "audio",
+      "source_hash": "420cf964023433b752a8ae1b6cffff05c21970d05e6bd3dbc6812e038a8fb7d1",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:30.303686"
+  },
+  "doc_AMI-0020": {
+    "data": {
+      "titolo": "Ribellarsi è giusto! Antologia",
+      "data": "1993",
+      "tipo": "libro",
+      "source_hash": "19385f31a7e74bcebcc390ba0906350a17659125f37d0f82700f3ac56aac1774",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:31.559478"
+  },
+  "doc_AMI-0021": {
+    "data": {
+      "titolo": "Lavoro Politico, no. 1",
+      "data": "ottobre 1967",
+      "tipo": "periodico",
+      "source_hash": "16720358022575d19539ed8e8fe231ac415b17ce3fdb1f93f2aec9af5801df0f",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:32.455278"
+  },
+  "doc_AMI-0022": {
+    "data": {
+      "titolo": "Lavoro Politico, no. 2",
+      "data": "novembre 1967",
+      "tipo": "periodico",
+      "source_hash": "d2ab0d5565c3497ee3b911c427606a6c3f9d1f937b475a6b7426351eb1f88b8c",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:34.095574"
+  },
+  "doc_AMI-0023": {
+    "data": {
+      "titolo": "Lavoro Politico, no. 3",
+      "data": "gennaio 1968",
+      "tipo": "periodico",
+      "source_hash": "730c19888d5e98536e1c68640c427caad9a12aedf276055484d4bdb905f1cab0",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:35.533223"
+  },
+  "doc_AMI-0024": {
+    "data": {
+      "titolo": "Lavoro Politico, no. 4",
+      "data": "febbraio 1968",
+      "tipo": "periodico",
+      "source_hash": "0eed6cee957b84eb1bddddaade254b9a27ba3be4713b5a6b60052b3445bec6bf",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:39.535874"
+  },
+  "doc_AMI-0025": {
+    "data": {
+      "titolo": "Lavoro Politico, no. 5/6",
+      "data": "marzo 1968",
+      "tipo": "periodico",
+      "source_hash": "ea97250e97858295a62af19348e18dec6beb389f2b629e36c4e4ff265a8141a2",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:40.381023"
+  },
+  "doc_AMI-0026": {
+    "data": {
+      "titolo": "Lavoro Politico, no. 7",
+      "data": "maggio 1968",
+      "tipo": "periodico",
+      "source_hash": "24e89afce76b3295b3b60aa5f4a995feddda05fc52a8f9948596e9f7cd920f7d",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:41.679499"
+  },
+  "doc_AMI-0027": {
+    "data": {
+      "titolo": "Lavoro Politico, no. 8/9",
+      "data": "giugno 1968",
+      "tipo": "periodico",
+      "source_hash": "2981dc5e8c0811b1f22375d028fe3c4264dd72ac3940040f9c0d299b615f2959",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:44.033759"
+  },
+  "doc_AMI-0028": {
+    "data": {
+      "titolo": "Lavoro Politico, no. 10",
+      "data": "settembre 1968",
+      "tipo": "periodico",
+      "source_hash": "090a51488376df24cb38fce467c8876aa45661d9c9d8988a3c22d9ff136da265",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:46.491706"
+  },
+  "doc_AMI-0029": {
+    "data": {
+      "titolo": "Lavoro Politico, no. 11/12",
+      "data": "dicembre 1968",
+      "tipo": "periodico",
+      "source_hash": "f216cee165cf65bffa4102c3f24cfb7cccc970ba7256ea223e5fed230bef9151",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:48.331974"
+  },
+  "doc_AMI-0030": {
+    "data": {
+      "titolo": "La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "dd12a808904f8573fb37604f02d7d55ab881b9e2b85cb25f65668e376e26c9e4",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:49.458096"
+  },
+  "doc_AMI-0031": {
+    "data": {
+      "titolo": "Sulla tattica contro l'imperialismo giapponese",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "542c457c0cb229bbccf92400f99d0b3518af421a1871a07bf6d356fcb3287b76",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:50.585375"
+  },
+  "doc_AMI-0032": {
+    "data": {
+      "titolo": "Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista",
+      "data": "1970",
+      "tipo": "testo",
+      "source_hash": "235252cd6aba6906e76f4d608f16e0be997f16b9603e6f185c02bac8f62dc599",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:53.764943"
+  },
+  "doc_AMI-0033": {
+    "data": {
+      "titolo": "Verbale della conversazione del Presidente Mao con la delegazione comunista (marxista-leninista) italiana",
+      "data": "13 agosto 1968",
+      "tipo": "testo_bilingue",
+      "source_hash": "564f5b8d702fa77704296136b881cd17303a9b5feceeb57c4b013112529b8e03",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:50:59.194026"
+  },
+  "doc_AMI-0034": {
+    "data": {
+      "titolo": "Nota del Presidente Mao sulla relazione di Kang Sheng riguardante la raccolta di materiale sulle elezioni parlamentari nei paesi capitalisti",
+      "data": "31 agosto 1968",
+      "tipo": "testo_bilingue",
+      "source_hash": "200c9f17f2c991818f0d159d62a7c909266868b3e1a48d78ba3ae8f4fbb787f6",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:04.308543"
+  },
+  "doc_AMI-0035": {
+    "data": {
+      "titolo": "Viva il popolo cinese",
+      "data": "agosto 1969",
+      "tipo": "periodico",
+      "source_hash": "8c1061402a333988cd39e9f3f2516d47a5335a07ddc46ad526630926a78948a3",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:05.434039"
+  },
+  "doc_AMI-0036": {
+    "data": {
+      "titolo": "In caso di golpe: Manuale teorico-pratico per il cittadino, di resistenza totale e di guerra di popolo, di guerriglia e di controguerriglia",
+      "data": "1975",
+      "tipo": "libro",
+      "source_hash": "a85e0793f20460b6fc55abe2f2851f39c7762a96cdc1f674a737e1902f3657dc",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:06.771987"
+  },
+  "doc_AMI-0037": {
+    "data": {
+      "titolo": "I compiti del Partito Comunista Cinese nel periodo della resistenza al Giappone",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "cb265a4005883bcabf437a3dc9454b95bfc4a21323290e5152d31616111bee8d",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:08.002175"
+  },
+  "doc_AMI-0038": {
+    "data": {
+      "titolo": "Comunicato della seconda sessione plenaria del IX Comitato Centrale del Partito Comunista Cinese",
+      "data": "1970",
+      "tipo": "opuscolo",
+      "source_hash": "1571966fc3409e84e2ab6e43fd89bd89a4b92dadcda59dd7f6bd83a77d224b66",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:09.231863"
+  },
+  "doc_AMI-0039": {
+    "data": {
+      "titolo": "Il Presidente Mao Tse-tung sulla Guerra Popolare",
+      "data": "1968",
+      "tipo": "libro",
+      "source_hash": "544547c3ff81282b350ec7b6dd58130d7bb06ae84d68f7c1faafabdf3dd1c176",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:10.362608"
+  },
+  "doc_AMI-0040": {
+    "data": {
+      "titolo": "I membri del Partito Comunista devono essere elementi avanzati del proletariato",
+      "data": "1970",
+      "tipo": "opuscolo",
+      "source_hash": "06b2bbfd15a4febbd4404df680ec8cfdd3f6252cbd7a15cf61d76f919e463aa8",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:11.484892"
+  },
+  "doc_AMI-0041": {
+    "data": {
+      "titolo": "Citazioni del presidente Mao Tse-tung: Il libro delle guardie rosse",
+      "data": "1968",
+      "tipo": "libro",
+      "source_hash": "496073b237c17b0b7bc7586b05105c1c17f39904241e93fff3acb521b615a0d2",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:12.716182"
+  },
+  "doc_AMI-0042": {
+    "data": {
+      "titolo": "Citazioni: Il breviario delle guardie rosse",
+      "data": "1967",
+      "tipo": "libro",
+      "source_hash": "d2517aa823282aa164a2ca48a210ddffbd9382833c91f280a409103941616846",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:13.836890"
+  },
+  "doc_AMI-0043": {
+    "data": {
+      "titolo": "Sulla Nuova Democrazia",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "96e4fe25f2552dc72c3923f5b3b3280fd84cafa400b0431e9ca38915af40cfec",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:14.958799"
+  },
+  "doc_AMI-0044": {
+    "data": {
+      "titolo": "Analisi delle classi nella società cinese",
+      "data": "1967",
+      "tipo": "opuscolo",
+      "source_hash": "73257b49416851780fd3d9266077af3cad33bd84bdd40999266f3c4404ba1693",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:15.999148"
+  },
+  "doc_AMI-0045": {
+    "data": {
+      "titolo": "Sulla pratica",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "ef57c8dcb901e75cd950f00e355a727fc6fbdd2ce846750c9cc1c701835b8941",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:17.218646"
+  },
+  "doc_AMI-0046": {
+    "data": {
+      "titolo": "La lotta sui monti Chingkang",
+      "data": "1969",
+      "tipo": "opuscolo",
+      "source_hash": "5e535c0483269f1dafd4bde9bd6b20c59e6ff631c161ffc87061a4309b539010",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:20.495486"
+  },
+  "doc_AMI-0047": {
+    "data": {
+      "titolo": "La questione dell'indipendenza e dell'autonomia nel Fronte Unito",
+      "data": "1971",
+      "tipo": "opuscolo",
+      "source_hash": "12a39cdc2180081f3bd222c159c5e9d5d65c9fa440c30330f8e392b8233f6d0f",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:21.824869"
+  },
+  "doc_AMI-0048": {
+    "data": {
+      "titolo": "Rapporto d'inchiesta sul movimento contadino nello Hunan",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "3e94297af553a62b4261683a218b65c4864155f87bc00aaec7f584e55afe4659",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:23.153323"
+  },
+  "doc_AMI-0049": {
+    "data": {
+      "titolo": "Sulla contraddizione",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "fe5bfa630d821c3981b787579b2e63409d57fc1b81003522c1e5fe5b6d6069f3",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:25.735276"
+  },
+  "doc_AMI-0050": {
+    "data": {
+      "titolo": "Problemi strategici della guerra rivoluzionaria in Cina",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "13bc615c0aff5884595f106fb9e77ae0d9b745f58f52bc2057566c73fcef0cc9",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:27.262380"
+  },
+  "doc_AMI-0051": {
+    "data": {
+      "titolo": "Rapporto alla seconda sessione plenaria del settimo Comitato Centrale del Partito Comunista Cinese",
+      "data": "1968",
+      "tipo": "opuscolo",
+      "source_hash": "63c24a0cafb1fb2367fa09d6e1cc3dca1b0132d3abd84a15d26159699b9cafb0",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:28.797660"
+  },
+  "doc_AMI-0052": {
+    "data": {
+      "titolo": "Gli studenti alleati del proletariato nella lotta rivoluzionaria in Italia",
+      "data": "1969",
+      "tipo": "libro",
+      "source_hash": "be55f948091fe7985d4196348e94c378457523a7a08abeb255d3b778937c0786",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:29.924576"
+  },
+  "doc_AMI-0053": {
+    "data": {
+      "titolo": "Sosteniamo il Congresso di fondazione del PARTITO COMUNISTA (marxista-leninista) ITALIANO per fare l'Italia rossa e socialista come la Cina di Mao",
+      "data": "1972",
+      "tipo": "volantino",
+      "source_hash": "0e9e9af27b3624546ccfdfe5772ea06bd60b9198a018a8353ad954ffd8522558",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:31.145225"
+  },
+  "doc_AMI-0054": {
+    "data": {
+      "titolo": "RICERCATO: Leonida Breznev - Manifesto del Partito Comunista Unificato d'Italia",
+      "data": "marzo 1978",
+      "tipo": "manifesto",
+      "source_hash": "bbb03f71bcb90d5918411bd4d82c9cdff2e4c83485e92435345c3e8084445efa",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:32.481434"
+  },
+  "doc_AMI-0055": {
+    "data": {
+      "titolo": "Osare pensare, osare parlare, osare agire, osare fare la rivoluzione - Manifesto PCd'I (m-l)",
+      "data": "1967",
+      "tipo": "manifesto",
+      "source_hash": "f863a60d799796d03f7f533e6fe5357921427e88d122b615a54e8189e1c4a40c",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:33.711266"
+  },
+  "doc_AMI-0056": {
+    "data": {
+      "titolo": "Il Presidente Mao Tse-tung sulla Guerra di popolo",
+      "data": "1967",
+      "tipo": "libro",
+      "source_hash": "e677297998babe5620bf6f8db73d2151aff308f6365878ccd2524fe95b0503e7",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:35.149856"
+  },
+  "doc_AMI-0057": {
+    "data": {
+      "titolo": "Congresso di fondazione del Partito Comunista Unificato d'Italia",
+      "data": "8 maggio 1977",
+      "tipo": "foto",
+      "source_hash": "1ef544cd70c55b3d717a09d56114a2ccb706f84d72c9939a626e6790b4423184",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:36.370525"
+  },
+  "doc_AMI-0058": {
+    "data": {
+      "titolo": "Proletari senza rivoluzione: Storia delle classi subalterne italiane dal 1860 al 1950, Vol. 1",
+      "data": "1970",
+      "tipo": "libro",
+      "source_hash": "1e439de3b4fd2ba6dfb6baa1619124540256bf900592ddb442e88dc75e2c9346",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:37.605552"
+  },
+  "doc_AMI-0059": {
+    "data": {
+      "titolo": "Proletari senza rivoluzione: Storia delle classi subalterne italiane dal 1860 al 1950, Vol. 2",
+      "data": "1970",
+      "tipo": "libro",
+      "source_hash": "fba1280ce816cbc30aff44e31078df65f20a54a104acf9fc07a739fd7836afd5",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:39.029895"
+  },
+  "doc_AMI-0060": {
+    "data": {
+      "titolo": "Come diventare un buon comunista",
+      "data": "1965",
+      "tipo": "libro",
+      "source_hash": "1169bc0c026a597fd2448b1696822fb0a5e4579256000f093684c14f670f8f3b",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:39.858700"
+  },
+  "doc_AMI-0061": {
+    "data": {
+      "titolo": "Sulla guerra di lunga durata",
+      "data": "1971",
+      "tipo": "opuscolo",
+      "source_hash": "cf00adec2bf64bc16faffff4d3645cd73c70b28c541e9ffb62cc4c0a9427fadd",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:41.008178"
+  },
+  "doc_AMI-0062": {
+    "data": {
+      "titolo": "Delegazione del movimento studentesco dell'Università di Trieste sulla nave cinese Jinsha",
+      "data": "20 marzo 1968",
+      "tipo": "foto",
+      "source_hash": "a1fda2eba7259763305b9af0ac294774d06a868d888c386dd0d226e7858f9b27",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:42.210115"
+  },
+  "doc_AMI-0063": {
+    "data": {
+      "titolo": "Volantino del PC(m-l)I contro il carovita sotto il governo Rumor",
+      "data": "gennaio 1974",
+      "tipo": "volantino",
+      "source_hash": "db481edaa764cdb3bf086806dd095ff15ec450e22e740740406cbc5bb78c0018",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:43.355080"
+  },
+  "doc_AMI-0064": {
+    "data": {
+      "titolo": "Volantino dell'OC(m-l) - Fronte Unito contro l'aumento del costo della benzina",
+      "data": "19 ottobre 1973",
+      "tipo": "volantino",
+      "source_hash": "a96e83c06821f5856825dba232b5700a507082d6fb7515b7208b8132aae461f1",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:44.546158"
+  },
+  "doc_AMI-0065": {
+    "data": {
+      "titolo": "Manifestazione del Partito Comunista d'Italia (marxista-leninista)",
+      "data": "1968",
+      "tipo": "foto",
+      "source_hash": "dfdeac21eb32dc7a8baa931512118cabf03d03f36cc8c043396ffaaecf43c10f",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:45.685401"
+  },
+  "doc_AMI-0066": {
+    "data": {
+      "titolo": "Manifestazione del Movimento Studentesco",
+      "data": "1970",
+      "tipo": "foto",
+      "source_hash": "095ab7bdb5119edd6f01459a6173dda80341c7e76605031bbee2d7245e694ea3",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:46.820262"
+  },
+  "doc_AMI-0067": {
+    "data": {
+      "titolo": "Volantino del PCd'I(m-l) contro l'eccidio di Avola",
+      "data": "dicembre 1968",
+      "tipo": "volantino",
+      "source_hash": "21abeb070855aab694b4a49cd74be04a04039db98b3c9f2e4fd2d5a4dd6ca695",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:48.046635"
+  },
+  "doc_AMI-0068": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 1",
+      "data": "maggio 1970",
+      "tipo": "periodico",
+      "source_hash": "dd218b3c629412ff071a8487488c32ece53151fdc106edebf62bde76a79b87dd",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:49.208491"
+  },
+  "doc_AMI-0069": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 2",
+      "data": "16 maggio 1970",
+      "tipo": "periodico",
+      "source_hash": "67f041313d1e910e8990ca8850fd6af76ba61d66e10c75d9cd91c7d885369ecf",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:50.512901"
+  },
+  "doc_AMI-0070": {
+    "data": {
+      "titolo": "Lotta di Classe, supplemento al no. 2",
+      "data": "30 maggio 1970",
+      "tipo": "periodico",
+      "source_hash": "fce9887a78ec4a021e26ec5bec15d46534e4fde49d66b5057ccc1012a0b91653",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:51.760934"
+  },
+  "doc_AMI-0071": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 3",
+      "data": "31 maggio 1970",
+      "tipo": "periodico",
+      "source_hash": "d144a32dbdd175f8950c54deb68097c4169cbf4b9e689082c35a60bc59975f77",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:52.763316"
+  },
+  "doc_AMI-0072": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 4",
+      "data": "21 giugno 1970",
+      "tipo": "periodico",
+      "source_hash": "489a35d51d1c2062b5465b0b97f5dbace4e4efff5c4b42eae7220b27fe735241",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:53.930308"
+  },
+  "doc_AMI-0073": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 5/6",
+      "data": "16 luglio 1970",
+      "tipo": "periodico",
+      "source_hash": "35acfe8e52afbfb46f2b8b20de68e4d8a20aa3fbde2a89a6ad1c975424d22634",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:55.138881"
+  },
+  "doc_AMI-0074": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 7/8",
+      "data": "13 settembre 1970",
+      "tipo": "periodico",
+      "source_hash": "9ccd6ada92ff1614c172babff18a06ee8524d5cfb5ca17f3b69c14609cea576d",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:56.385128"
+  },
+  "doc_AMI-0075": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 9/10",
+      "data": "25 ottobre 1970",
+      "tipo": "periodico",
+      "source_hash": "8a25e5f49b915dad0e7e59f4eedd5b4cab4797b117a2fb05581526f4a18f0010",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:57.453017"
+  },
+  "doc_AMI-0076": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 11",
+      "data": "15 novembre 1970",
+      "tipo": "periodico",
+      "source_hash": "bed25640be51cb8c7cb5a74a1bb23e386122b76eb1523f0c2f37efa60864656e",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:58.322040"
+  },
+  "doc_AMI-0077": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 12",
+      "data": "13 dicembre 1970",
+      "tipo": "periodico",
+      "source_hash": "06ac59a2fb23c5e13452f96280114dba0850d057e8e514e4f39b192628357515",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:51:59.426424"
+  },
+  "doc_AMI-0078": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 13",
+      "data": "17 gennaio 1971",
+      "tipo": "periodico",
+      "source_hash": "55149d585636f15f9ad3f46ff146c65821d082123460df2e01aab75ad143f2b3",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:52:00.578277"
+  },
+  "doc_AMI-0079": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 14",
+      "data": "7 febbraio 1971",
+      "tipo": "periodico",
+      "source_hash": "cbd83cba78bdff42dd9a36ac67500d2a042829ea94ff5f9b414b4a7e91aa33d1",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:52:01.574163"
+  },
+  "doc_AMI-0080": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 15/16",
+      "data": "7 marzo 1971",
+      "tipo": "periodico",
+      "source_hash": "f37a9d13c54229bed0c4248306cd17e35e7877bd72bc297296bdf11588e3d853",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:52:02.503432"
+  },
+  "doc_AMI-0081": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 17/18",
+      "data": "4 aprile 1971",
+      "tipo": "periodico",
+      "source_hash": "ef31e3e441a00ea0a200779a06d10a70abde0c938a3d70480fda78984b3f681c",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:52:03.922743"
+  },
+  "doc_AMI-0082": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 19/20",
+      "data": "1 maggio 1971",
+      "tipo": "periodico",
+      "source_hash": "77940e9f7f272dce876fd760d006550513e87799abf488d0a8a19f16e7c94e67",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:52:05.358255"
+  },
+  "doc_AMI-0083": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 21",
+      "data": "23 maggio 1971",
+      "tipo": "periodico",
+      "source_hash": "e726c9f4ccaafaf61834399fd9990a41c28c5b50ea7ce426e41edef4a1655317",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:52:06.584040"
+  },
+  "doc_AMI-0084": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 22",
+      "data": "20 giugno 1971",
+      "tipo": "periodico",
+      "source_hash": "f51671a85ffe1306eac30cbf0d04a0721051271952b7407a7cbd0ea3204a2547",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:52:07.715719"
+  },
+  "doc_AMI-0085": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 23",
+      "data": "25 luglio 1971",
+      "tipo": "periodico",
+      "source_hash": "20b816dc04961a14aec4035dc5fe4ed1f4ec9f030c905c070081e61ffa4c74a4",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:52:08.836306"
+  },
+  "doc_AMI-0086": {
+    "data": {
+      "titolo": "Lotta di Classe, no. 24/25",
+      "data": "28 novembre 1971",
+      "tipo": "periodico",
+      "source_hash": "3695e787453ecb5f0b478527eec44f6ea04963260228f7fabdf6697deb65b1d6",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:52:09.965075"
+  },
+  "doc_AMI-0087": {
+    "data": {
+      "titolo": "Lotta di Classe, anno III, no. 1",
+      "data": "9 gennaio 1972",
+      "tipo": "periodico",
+      "source_hash": "e414c6fe78c8f9870c538cdb9e76745d5384b3275d57d479f2eefead68e5f21d",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:52:11.196603"
+  },
+  "doc_AMI-0088": {
+    "data": {
+      "titolo": "Lotta di Classe, anno III, no. 2/3",
+      "data": "12 marzo 1972",
+      "tipo": "periodico",
+      "source_hash": "d02344f143f34c2ddeb6876e240aad5b323749de376a86a99f57c23a09fdfe15",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:52:12.214464"
+  },
+  "doc_AMI-0089": {
+    "data": {
+      "titolo": "Lotta di Classe, anno III, no. 4/5",
+      "data": "1 maggio 1972",
+      "tipo": "periodico",
+      "source_hash": "62cfef4c2ff998dee238afee1613db265117b777f4ebbec2c2c690d08c767a84",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:52:13.072603"
+  },
+  "doc_AMI-0090": {
+    "data": {
+      "titolo": "Lotta di Classe, anno III, no. 6",
+      "data": "5 novembre 1972",
+      "tipo": "periodico",
+      "source_hash": "474293aaeeb4500d9819c0690329122f59436742cd033e4d898c5cff51f7e36c",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:52:14.233869"
+  },
+  "doc_AMI-0091": {
+    "data": {
+      "titolo": "Lotta di Classe, anno IV, no. 1/2",
+      "data": "1 maggio 1973",
+      "tipo": "periodico",
+      "source_hash": "28eaadf4657c21000d603c74dc896527e64cb509bf79e50c328e71d3ab190eef",
+      "stato": "generato"
+    },
+    "timestamp": "2026-09-03T16:52:15.396585"
+  }
+}
