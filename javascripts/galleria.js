@@ -1,79 +1,90 @@
 /**
- * Galleria Fotografica - Interactive Timeline & Masonry Gallery
- * Features: Active year tracking, smooth scroll
+ * Galleria Fotografica — AMI
+ * Scrollspy + smooth scroll per la timeline.
+ * Il masonry è CSS-only: questo file non misura e non modifica le card.
  */
-document.addEventListener('DOMContentLoaded', () => {
-  const sections = document.querySelectorAll('.galleria-year-section');
-  const timelineLinks = document.querySelectorAll('.timeline-link');
-  
-  if (!sections.length) return;
+(function () {
+  "use strict";
 
-  // Smooth scroll per i link della timeline
-  timelineLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetId = link.getAttribute('href');
-      const targetSection = document.querySelector(targetId);
-      
-      if (targetSection) {
-        targetSection.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-        
-        // Aggiorna stato active immediatamente
-        timelineLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
+  document.addEventListener("DOMContentLoaded", function () {
+    var nav = document.getElementById("galleria-timeline");
+    if (!nav) return;
+
+    var links = Array.prototype.slice.call(nav.querySelectorAll(".timeline-link"));
+    var sections = Array.prototype.slice.call(document.querySelectorAll(".galleria-year-section"));
+
+    if (!links.length || !sections.length) return;
+
+    var reduceMotion = window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function setActive(activeLink) {
+      links.forEach(function (link) {
+        link.classList.remove("active", "is-active");
+        link.removeAttribute("aria-current");
+      });
+
+      if (activeLink) {
+        activeLink.classList.add("active", "is-active");
+        activeLink.setAttribute("aria-current", "true");
       }
+    }
+
+    links.forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        var href = link.getAttribute("href");
+        if (!href || href.charAt(0) !== "#") return;
+
+        var target = document.getElementById(href.slice(1));
+        if (!target) return;
+
+        event.preventDefault();
+
+        target.scrollIntoView({
+          behavior: reduceMotion ? "auto" : "smooth",
+          block: "start"
+        });
+
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, "", href);
+        }
+
+        setActive(link);
+      });
     });
-  });
 
-  // Configurazione IntersectionObserver per tracking anno corrente
-  const observerOptions = {
-    root: null,
-    rootMargin: '-100px 0px -60% 0px',
-    threshold: 0
-  };
+    if ("IntersectionObserver" in window) {
+      var linkByYear = {};
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio > 0) {
-        const year = entry.target.getAttribute('data-year');
-        
-        // Aggiorna Timeline
-        timelineLinks.forEach(link => {
-          if (link.getAttribute('data-year') === year) {
-            link.classList.add('active');
-            
-            // Auto-scroll della timeline per mantenere anno attivo visibile
-            const timeline = document.getElementById('galleria-timeline');
-            if (timeline) {
-              link.scrollIntoView({ 
-                block: 'center', 
-                behavior: 'smooth',
-                inline: 'nearest'
-              });
-            }
-          } else {
-            link.classList.remove('active');
+      links.forEach(function (link) {
+        var year = link.getAttribute("data-year");
+        if (year) {
+          linkByYear[year] = link;
+        }
+      });
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+
+          var year = entry.target.getAttribute("data-year");
+          var link = linkByYear[year];
+
+          if (link) {
+            setActive(link);
           }
         });
-      }
-    });
-  }, observerOptions);
+      }, {
+        root: null,
+        rootMargin: "-30% 0px -60% 0px",
+        threshold: 0
+      });
 
-  // Osserva tutte le sezioni anno
-  sections.forEach(section => {
-    observer.observe(section);
-  });
-  
-  // Imposta primo anno come attivo all'avvio
-  const firstSection = sections[0];
-  if (firstSection) {
-    const firstYear = firstSection.getAttribute('data-year');
-    const firstLink = document.querySelector(`.timeline-link[data-year="${firstYear}"]`);
-    if (firstLink) {
-      firstLink.classList.add('active');
+      sections.forEach(function (section) {
+        observer.observe(section);
+      });
+    } else {
+      setActive(links[0]);
     }
-  }
-});
+  });
+})();
