@@ -1,26 +1,3 @@
---- scripts/core/validator_advanced.py (原始)
-
-
-+++ scripts/core/validator_advanced.py (修改后)
-"""
-ADVANCED DATA VALIDATION SYSTEM
-Archivio del Maoismo Italiano (AMI)
-
-Sistema completo di validazione dati per il catalogo Excel,
-persone e organizzazioni con reporting dettagliato.
-
-Utilizzo:
-    from core.validator import AdvancedValidator
-
-    validator = AdvancedValidator()
-    success, report = validator.validate_catalogo(df)
-
-    if not success:
-        print("Validazione fallita:")
-        for error in report['errors']:
-            print(f"  ❌ {error}")
-"""
-
 import pandas as pd
 import re
 import logging

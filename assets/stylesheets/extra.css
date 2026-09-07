@@ -1113,6 +1113,14 @@ archivio-filtri.js), senza più stili inline Word */
     border-radius: 8px;
 }
 
+/* Documenti in evidenza (home) */
+.evidenza-thumbnail .lazy-skeleton {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
 /* Grid layout skeletons */
 .skeleton-grid {
     display: grid;
