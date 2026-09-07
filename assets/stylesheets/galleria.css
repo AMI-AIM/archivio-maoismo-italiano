@@ -43,8 +43,8 @@
    ============================================================ */
 .galleria-timeline {
   position: sticky;
-  top: 0;
-  z-index: 20;
+  top: var(--gal-top, var(--ami-header-height, 0px);
+  z-index: 1;
   margin: 0 0 34px;
   padding: 8px 0;
   background: color-mix(in srgb, var(--md-default-bg-color, #fff) 92%, transparent);
@@ -123,12 +123,12 @@
   grid-template-columns: clamp(82px, 14vw, 180px) minmax(0, 1fr);
   gap: clamp(18px, 4vw, 56px);
   margin: 0 0 64px;
-  scroll-margin-top: 74px;
+  scroll-margin-top: calc(var(--gal-top, var(--ami-header-height, 0px)) + 108px);
 }
 
 .galleria-year-title {
   position: sticky;
-  top: 56px;
+  top: calc(var(--gal-top, var(--ami-header-height, 0px)) + 52px);
   align-self: start;
   margin: 0;
   color: var(--gal-ink);
