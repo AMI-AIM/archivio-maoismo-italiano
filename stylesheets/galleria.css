@@ -1,8 +1,7 @@
 /* ============================================================
    GALLERIA FOTOGRAFICA — AMI
-   Masonry dinamico (proporzioni naturali) + timeline a riga unica
-   sticky, sincronizzata con header.autohide via --gal-top (JS).
-   Lazy loading con skeleton integrato (lazy-loading.js).
+   Masonry dinamico + timeline a riga unica sticky (--gal-top)
+   + lazy loading con skeleton + lightbox minimo (dialog nativo).
    ============================================================ */
 
 :root {
@@ -10,11 +9,11 @@
   --gal-ink: #111217;
   --gal-muted: #626873;
   --gal-accent: #b71c1c;
-  --gal-gap: 14px;   /* DEVE restare sincronizzato con CARD_PAD in galleria.js */
+  --gal-accent-dark: #8e0000;
+  --gal-gap: 14px;   /* sincronizzato con CARD_PAD in galleria.js */
   --gal-radius: 2px;
 }
 
-/* Full-bleed: la galleria non è vincolata alla larghezza standard Material */
 @supports selector(:has(*)) {
   .md-main__inner:has(.galleria-wrapper) { max-width: none; }
   .md-content:has(.galleria-wrapper),
@@ -44,7 +43,6 @@
 }
 
 .galleria-subtitle { margin: 0; color: var(--gal-muted); font-size: 0.95rem; }
-
 .galleria-empty { margin: 0; color: var(--gal-muted); font-size: 0.95rem; }
 
 /* ------------------------------------------------------------
@@ -53,7 +51,7 @@
 .galleria-timeline {
   position: sticky;
   top: var(--gal-top, var(--ami-header-height, 0px));
-  z-index: 1; /* sotto l'header Material, mai sopra */
+  z-index: 1;
   margin: 0 0 34px;
   padding: 8px 0;
   background: color-mix(in srgb, var(--md-default-bg-color, #fff) 92%, transparent);
@@ -124,7 +122,7 @@
 }
 
 /* ------------------------------------------------------------
-   SEZIONI ANNO: etichetta grande a sinistra + griglia a destra
+   SEZIONI ANNO
    ------------------------------------------------------------ */
 .galleria-year-section {
   display: grid;
@@ -148,8 +146,6 @@
 
 /* ------------------------------------------------------------
    MASONRY
-   Senza JS: colonne CSS (proporzioni naturali, nessun taglio).
-   Con JS (.is-js): griglia con span esatti (1 span = 1 px).
    ------------------------------------------------------------ */
 .galleria-grid {
   display: block;
@@ -176,10 +172,9 @@
 .is-js .galleria-card {
   margin: 0;
   padding-bottom: var(--gal-gap);
-  grid-row-end: span 320; /* segnaposto anti-collasso prima del load */
+  grid-row-end: span 320;
 }
 
-/* Blocco a tutta riga (stile sketch) solo in griglia e solo su desktop */
 .is-js .galleria-card.h-wide { grid-column: 1 / -1; }
 
 .card-link {
@@ -192,7 +187,6 @@
   outline-offset: 3px;
 }
 
-/* Media: contiene immagine + overlay, a proporzioni NATURALI */
 .card-media {
   position: relative;
   overflow: hidden;
@@ -213,11 +207,9 @@
   filter: saturate(1.03) contrast(1.02);
 }
 
-/* Placeholder per immagini non caricabili */
 .card-error .card-media { aspect-ratio: 4 / 5; }
 .card-error .galleria-img { display: none; }
 
-/* Overlay metadati: hover/focus su pointer, sempre visibile su touch */
 .img-overlay {
   position: absolute;
   inset: 0;
@@ -265,30 +257,156 @@
 /* ------------------------------------------------------------
    LAZY LOADING CON SKELETON DENTRO LE CARD
    ------------------------------------------------------------ */
-
-/* Senza JS il tema Material lascia <html class="no-js">: extra.css impone
-   opacity 0 a .lazy-img, che renderebbe le immagini invisibili per sempre.
-   Qui si ripristina la visibilità nel caso no-JS. */
 html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
 
-/* Lo skeleton creato da lazy-loading.js ha width/height inline:
-   qui lo si adatta al contenitore della card. NON si tocca display:
-   inline-block (normale) e flex (stato errore) arrivano inline dallo script. */
 .card-media > .lazy-skeleton {
   width: 100% !important;
   height: auto !important;
   min-height: 240px;
-  vertical-align: top !important;   /* elimina il gap di baseline */
+  vertical-align: top !important;
   border-radius: var(--gal-radius);
 }
 
-/* Niente overlay hover finché lo skeleton è presente: evita il gradiente
-   sul placeholder. :has è già usato altrove nel file, stesso guard. */
 @supports selector(:has(*)) {
   .card-media:has(.lazy-skeleton) .img-overlay {
     opacity: 0 !important;
     pointer-events: none;
   }
+}
+
+/* ------------------------------------------------------------
+   LIGHTBOX MINIMO (dialog nativo, top layer)
+   ------------------------------------------------------------ */
+.galleria-lightbox {
+  border: 0;
+  padding: 0;
+  margin: auto;
+  width: 100%;
+  max-width: min(1100px, 94vw);
+  max-height: min(90vh, 900px);
+  background: var(--md-default-bg-color, #fff);
+  color: var(--gal-ink);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .45);
+}
+.galleria-lightbox[open] {
+  display: flex;
+  flex-direction: column;
+}
+.galleria-lightbox::backdrop {
+  background: rgba(8, 8, 10, .78);
+  backdrop-filter: blur(3px);
+}
+
+.lightbox-media {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  background: #101013;
+}
+.galleria-lightbox.is-loading .lightbox-media {
+  background: linear-gradient(90deg, #1c1c20 25%, #2a2a30 50%, #1c1c20 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.lightbox-img {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+.galleria-lightbox.is-error .lightbox-img { display: none; }
+.galleria-lightbox.is-error .lightbox-media::after {
+  content: '⚠️ Immagine non disponibile';
+  margin: auto;
+  color: #ffb4b4;
+  font-family: var(--ami-font-label, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, .55);
+  color: #fff;
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox-close:hover { background: var(--gal-accent); }
+.lightbox-close:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+.lightbox-caption {
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 18px;
+  padding: 14px 18px;
+  border-top: 1px solid rgba(0, 0, 0, .08);
+  background: var(--md-default-bg-color, #fff);
+}
+
+.lightbox-titles { flex: 1 1 320px; min-width: 0; }
+.lightbox-title {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.lightbox-meta {
+  margin: 2px 0 0;
+  color: var(--gal-muted);
+  font-size: 0.82rem;
+  font-style: italic;
+}
+
+.lightbox-actions { display: flex; gap: 8px; flex: 0 0 auto; }
+.lightbox-action {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: 7px 14px;
+  border: 1px solid #d7dbe3;
+  border-radius: 999px;
+  background: #fff;
+  color: #33383f;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.lightbox-action[hidden] { display: none !important; }
+.lightbox-action:hover {
+  border-color: var(--gal-accent);
+  color: var(--gal-accent);
+}
+.lightbox-action--scheda,
+.lightbox-action--scheda:hover {
+  background: var(--gal-accent);
+  border-color: var(--gal-accent);
+  color: #fff;
+}
+.lightbox-action--scheda:hover { background: var(--gal-accent-dark); }
+.lightbox-action:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--gal-accent) 45%, transparent);
+  outline-offset: 2px;
 }
 
 /* ------------------------------------------------------------
@@ -302,6 +420,14 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
 .md-typeset .galleria-wrapper .card-link { color: inherit; }
 .md-typeset .galleria-wrapper .timeline-list { list-style: none; }
 .md-typeset .galleria-wrapper .timeline-list li { margin: 0; }
+
+.md-typeset .galleria-lightbox .lightbox-title {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+.md-typeset .galleria-lightbox a { text-decoration: none; }
+.md-typeset .galleria-lightbox p { margin: 0; }
 
 /* ------------------------------------------------------------
    RESPONSIVE
@@ -327,6 +453,19 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   }
 }
 
+@media screen and (max-width: 700px) {
+  .galleria-lightbox {
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+  .lightbox-caption { padding: 12px 14px; }
+  .lightbox-actions { width: 100%; }
+  .lightbox-action { flex: 1 1 auto; justify-content: center; }
+}
+
 @media screen and (max-width: 560px) {
   .galleria-grid,
   .galleria-grid:not(.is-js) { columns: 1; }
@@ -334,7 +473,6 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   .is-js .galleria-card.h-wide { grid-column: auto; }
 }
 
-/* Su touch i metadati restano accessibili senza hover */
 @media (hover: none) {
   .img-overlay {
     opacity: 1;
@@ -346,7 +484,6 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   .card-link:hover .galleria-img { transform: none; filter: none; }
 }
 
-/* Accessibilità: riduzione movimento */
 @media (prefers-reduced-motion: reduce) {
   .galleria-timeline .timeline-list { scroll-behavior: auto; }
   .galleria-wrapper *,
@@ -355,6 +492,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
     transition-duration: .01ms !important;
     animation-duration: .01ms !important;
   }
+  .galleria-lightbox.is-loading .lightbox-media { animation: none; }
   .card-link:hover .galleria-img,
   .card-link:focus-visible .galleria-img { transform: none; }
   .galleria-timeline .timeline-link:hover { transform: none; }
