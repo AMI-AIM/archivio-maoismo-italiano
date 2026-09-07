@@ -47,6 +47,8 @@ def clean_value(value, default=""):
     if s.lower() in {"nan", "none", "nat"}:
         return default
     return s
+
+
 MESI_IT = {
     1: "gennaio", 2: "febbraio", 3: "marzo", 4: "aprile",
     5: "maggio", 6: "giugno", 7: "luglio", 8: "agosto",
@@ -57,19 +59,14 @@ MESI_IT = {
 def format_data(valore):
     """Riduce le date al formato esteso italiano:
     '1964-05-14 00:00:00' -> '14 maggio 1964'
-    '1968-08-31 00:00:00' -> '31 agosto 1968'
     '03/1978'             -> 'marzo 1978'
-    '1978-03'             -> 'marzo 1978'
     '1967'                -> '1967'
-    Date già testuali o non riconosciute: restituite invariate.
-    L'orario è rimosso solo se mezzanotte (00:00:00 = orario assente);
-    un orario reale verrebbe mantenuto come ', ore HH:MM'.
+    L'orario è rimosso solo se mezzanotte (00:00:00 = orario assente).
     """
     s = clean_value(valore)
     if not s:
         return ""
 
-    # Giorno-mese-anno, con eventuale orario (ISO o Timestamp pandas)
     m = re.match(
         r"^(\d{4})-(\d{1,2})-(\d{1,2})"
         r"(?:[ T](\d{1,2}):(\d{2})(?::(\d{2}))?)?$",
@@ -85,7 +82,6 @@ def format_data(valore):
             return base
         return s
 
-    # Mese/anno: 03/1978
     m = re.match(r"^(\d{1,2})/(\d{4})$", s)
     if m:
         mese = int(m.group(1))
@@ -93,7 +89,6 @@ def format_data(valore):
             return f"{MESI_IT[mese]} {m.group(2)}"
         return s
 
-    # Anno-mese: 1978-03
     m = re.match(r"^(\d{4})-(\d{1,2})$", s)
     if m:
         mese = int(m.group(2))
@@ -101,8 +96,8 @@ def format_data(valore):
             return f"{MESI_IT[mese]} {m.group(1)}"
         return s
 
-    # Solo anno, o data già testuale: invariata
     return s
+
 
 def sanitize_url(url):
     """Consente solo scheme http/https negli href (evita javascript: ecc.)."""
@@ -112,44 +107,11 @@ def sanitize_url(url):
     return "#"
 
 
-def get_img_url(row):
-    """Costruisce l'URL dell'immagine da Internet Archive."""
+def get_image_urls(row):
+    """Ritorna (primary, fallback) per l'immagine su Internet Archive."""
     url = clean_value(row.get("url"))
     nome_file = clean_value(row.get("nome_file"))
 
-    if not url:
-        return None
-
-    m = re.search(r"archive\.org/details/([^/?#]+)", url)
-    if not m:
-        return None
-
-    identifier = m.group(1)
-
-    if nome_file:
-        return f"https://archive.org/download/{identifier}/{quote(nome_file, safe='')}"
-
-    return f"https://archive.org/services/img/{identifier}"
-
-
-def load_catalogo():
-    """Legge il foglio 'Catalogo'; in fallback il primo foglio disponibile."""
-    try:
-        df = pd.read_excel(DATA_PATH, sheet_name="Catalogo")
-    except ValueError:
-        df = pd.read_excel(DATA_PATH)
-    return normalize_columns(df)
-
-
-def gallery_card(row):
-    """Genera una card: immagine a proporzioni naturali + overlay metadati
-    + lazy loading con skeleton (lazy-img/data-src) e fallback su cover IA."""
-    titolo = clean_value(row.get("titolo"), "Senza titolo")
-    org = clean_value(row.get("organizzazione"))
-    data_str = format_data(row.get("data"))
-
-    url = clean_value(row.get("url"))
-    nome_file = clean_value(row.get("nome_file"))
     m = re.search(r"archive\.org/details/([^/?#]+)", url) if url else None
     identifier = m.group(1) if m else None
 
@@ -163,22 +125,45 @@ def gallery_card(row):
         primary = "https://archive.org/services/img/default"
         fallback = ""
 
+    return primary, fallback
+
+
+def gallery_card(row):
+    """Card galleria: immagine a proporzioni naturali, overlay metadati,
+    lazy loading con skeleton e attributi data-* per il lightbox."""
+    titolo = clean_value(row.get("titolo"), "Senza titolo")
+    org = clean_value(row.get("organizzazione"))
+    data_str = format_data(row.get("data"))
+    doc_id = clean_value(row.get("id"))
+
+    primary, fallback = get_image_urls(row)
     link_url = sanitize_url(row.get("url"))
+    scheda_url = f"../documenti/{quote(doc_id, safe='')}/" if doc_id else ""
 
     titolo_esc = html.escape(titolo)
     titolo_attr = html.escape(titolo, quote=True)
     primary_esc = html.escape(primary, quote=True)
     fallback_attr = f' data-src-fallback="{html.escape(fallback, quote=True)}"' if fallback else ""
+    card_id = f' id="{html.escape(doc_id, quote=True)}"' if doc_id else ""
 
     meta_text = " · ".join(x for x in [data_str, org] if x)
     meta_html = f'<span class="overlay-meta">{html.escape(meta_text)}</span>' if meta_text else ""
 
+    data_attrs = (
+        f' data-titolo="{titolo_attr}"'
+        f' data-data="{html.escape(data_str, quote=True)}"'
+        f' data-org="{html.escape(org, quote=True)}"'
+        f' data-ia-url="{html.escape(link_url, quote=True)}"'
+        f' data-scheda-url="{html.escape(scheda_url, quote=True)}"'
+        f' data-full-src="{primary_esc}"'
+    )
+
     return (
-        '<article class="galleria-card">\n'
+        f'<article class="galleria-card"{card_id}{data_attrs}>\n'
         f'<a class="card-link" href="{html.escape(link_url, quote=True)}" target="_blank" rel="noopener noreferrer">\n'
         '<div class="card-media">\n'
         # src nativo = fallback senza JS; data-src = pattern skeleton/fade;
-        # data-src-fallback = retry automatico su cover IA se il file è 404.
+        # data-src-fallback = retry su cover IA se il file specifico è 404.
         f'<img class="galleria-img lazy-img" src="{primary_esc}" data-src="{primary_esc}"{fallback_attr} alt="{titolo_attr}" loading="lazy" decoding="async">\n'
         '<div class="img-overlay">\n'
         '<span class="overlay-icon" aria-hidden="true">🔍</span>\n'
@@ -189,6 +174,29 @@ def gallery_card(row):
         '</a>\n'
         '</article>\n'
     )
+
+
+def lightbox_dialog():
+    """Visualizzatore minimo: un solo <dialog> popolato via JS."""
+    return (
+        '<dialog class="galleria-lightbox" id="galleria-lightbox" aria-labelledby="lightbox-title">\n'
+        '<div class="lightbox-media">\n'
+        '<img class="lightbox-img" alt="" decoding="async">\n'
+        '<button class="lightbox-close" type="button" aria-label="Chiudi visualizzatore">✕</button>\n'
+        '</div>\n'
+        '<div class="lightbox-caption">\n'
+        '<div class="lightbox-titles">\n'
+        '<h2 class="lightbox-title" id="lightbox-title"></h2>\n'
+        '<p class="lightbox-meta"></p>\n'
+        '</div>\n'
+        '<div class="lightbox-actions">\n'
+        '<a class="lightbox-action lightbox-action--scheda" href="#">Scheda archivistica</a>\n'
+        '<a class="lightbox-action lightbox-action--ia" href="#" target="_blank" rel="noopener noreferrer">Internet Archive ↗</a>\n'
+        '</div>\n'
+        '</div>\n'
+        '</dialog>\n'
+    )
+
 
 def generate_gallery():
     """Genera build/galleria/index.md. Ritorna exit code: 0 ok, 1 errore fatale."""
@@ -292,10 +300,23 @@ def generate_gallery():
     out.append('</main>\n')
     out.append('</div>\n')
 
+    # Lightbox: fuori dal wrapper, per evitare qualsiasi interferenza
+    # di antenati CSS (overflow, filter, backdrop-filter) con il top layer.
+    out.append(lightbox_dialog())
+
     output_path = OUTPUT_DIR / "index.md"
     output_path.write_text("".join(out), encoding="utf-8")
     print(f"Galleria generata con successo in {output_path} ({len(df_gal)} card, {len(anni_ordinati)} anni)")
     return 0
+
+
+def load_catalogo():
+    """Legge il foglio 'Catalogo'; in fallback il primo foglio disponibile."""
+    try:
+        df = pd.read_excel(DATA_PATH, sheet_name="Catalogo")
+    except ValueError:
+        df = pd.read_excel(DATA_PATH)
+    return normalize_columns(df)
 
 
 def main():
