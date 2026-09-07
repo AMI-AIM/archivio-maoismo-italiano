@@ -184,7 +184,7 @@ hide:
 """
         for doc in evidenza_ordinati:
             if doc.get('copertina'):
-                img_html = f'              <img src="{doc["copertina"]}" alt="{doc["titolo"]}" class="evidenza-thumbnail-img" loading="lazy">'
+                img_html = f'              <img data-src="{doc["copertina"]}" alt="{doc["titolo"]}" class="lazy-img evidenza-thumbnail-img">'
             else:
                 img_html = '              <span class="evidenza-placeholder"></span>'
             home_content += f"""

@@ -331,13 +331,13 @@ hide:
         if tipo in ['foto', 'manifesto'] and identifier:
             if nome_file:
                 img_url = f"https://archive.org/download/{identifier}/{nome_file}"
-                img_tag = f'<img src="{img_url}" alt="{titolo}" class="photo-embed" onerror="this.style.display=\'none\'; this.parentElement.querySelector(\'.photo-fallback\').style.display=\'block\';">'
+                img_tag = f'<img data-src="{img_url}" alt="{titolo}" class="lazy-img photo-embed">'
             else:
                 img_url_jpg = f"https://archive.org/download/{identifier}/{identifier}.jpg"
                 img_url_png = f"https://archive.org/download/{identifier}/{identifier}.png"
                 img_tag = (
-                    f'<img src="{img_url_jpg}" alt="{titolo}" class="photo-embed" '
-                    f'onerror="if(this.src.indexOf(\'.jpg\')!=-1){{this.src=this.src.replace(\'.jpg\',\'.png\');}}else{{this.style.display=\'none\'; this.parentElement.querySelector(\'.photo-fallback\').style.display=\'block\';}};">'
+                    f'<img data-src="{img_url_jpg}" data-src-fallback="{img_url_png}" '
+                    f'alt="{titolo}" class="lazy-img photo-embed">'
                 )
             content += f"""
 <div class="photo-viewer">

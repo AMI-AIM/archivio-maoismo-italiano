@@ -1,7 +1,3 @@
---- assets/javascripts/lazy-loading.js (原始)
-
-
-+++ assets/javascripts/lazy-loading.js (修改后)
 /**
  * LAZY LOADING CON SKELETON - Archivio del Maoismo Italiano
  *
@@ -35,7 +31,8 @@
         imageClass: 'lazy-img',
         srcAttribute: 'data-src',
         srcsetAttribute: 'data-srcset',
-        sizesAttribute: 'data-sizes'
+        sizesAttribute: 'data-sizes',
+        fallbackAttribute: 'data-src-fallback' // URL alternativo da tentare se il primo fallisce (es. .jpg -> .png)
     };
 
     // Verifica supporto Intersection Observer
@@ -76,6 +73,7 @@
         }
 
         const src = img.getAttribute(CONFIG.srcAttribute);
+        const fallbackSrc = img.getAttribute(CONFIG.fallbackAttribute);
         const srcset = img.getAttribute(CONFIG.srcsetAttribute);
         const sizes = img.getAttribute(CONFIG.sizesAttribute);
 
@@ -95,20 +93,28 @@
             img.style.transition = `opacity ${CONFIG.fadeInDuration}ms ease-in-out`;
         }
 
-        // Crea nuova istanza Image per precaricare
+        attemptLoad(img, src, fallbackSrc, srcset, sizes);
+    }
+
+    /**
+     * Tenta il caricamento di un URL; se fallisce e viene fornito un
+     * fallbackSrc (es. variante .png quando .jpg non esiste), riprova
+     * una sola volta con quello prima di considerare l'errore definitivo.
+     */
+    function attemptLoad(img, src, fallbackSrc, srcset, sizes) {
         const tempImg = new Image();
 
-        // Copia attributi
         if (srcset) tempImg.srcset = srcset;
         if (sizes) tempImg.sizes = sizes;
 
         tempImg.onload = function() {
-            // Imposta src reale solo dopo caricamento completo
+            // Imposta src reale (quello effettivamente caricato, primario o fallback)
             if (srcset) img.srcset = srcset;
-            img.src = src;
+            img.src = tempImg.currentSrc || tempImg.src;
 
             // Rimuovi attributi data
             img.removeAttribute(CONFIG.srcAttribute);
+            img.removeAttribute(CONFIG.fallbackAttribute);
             if (srcset) img.removeAttribute(CONFIG.srcsetAttribute);
             if (sizes) img.removeAttribute(CONFIG.sizesAttribute);
 
@@ -128,27 +134,56 @@
         };
 
         tempImg.onerror = function() {
+            if (fallbackSrc) {
+                // Riprova una sola volta con l'URL di fallback, senza ulteriori fallback
+                attemptLoad(img, fallbackSrc, null, srcset, sizes);
+                return;
+            }
             console.error('[LazyLoad] Errore caricamento immagine:', src);
             img.classList.add(CONFIG.errorClass);
-
-            // Mostra messaggio di errore o fallback
-            const skeleton = img.previousElementSibling;
-            if (skeleton && skeleton.classList.contains(CONFIG.skeletonClass)) {
-                skeleton.style.background = '#ffebee';
-                skeleton.innerHTML = '<span style="color:#d32f2f;font-size:12px;">⚠️ Img non disponibile</span>';
-                skeleton.style.display = 'flex';
-                skeleton.style.alignItems = 'center';
-                skeleton.style.justifyContent = 'center';
-                skeleton.style.textAlign = 'center';
-                skeleton.style.padding = '10px';
-            }
-
-            // Nascondi immagine rotta
-            img.style.display = 'none';
+            handleLoadError(img);
         };
 
         // Avvia caricamento
         tempImg.src = src;
+    }
+
+    /**
+     * Gestisce l'errore definitivo di caricamento (dopo eventuale fallback).
+     * Se l'immagine si trova in un contenitore con un elemento ".photo-fallback"
+     * (pattern usato nelle schede documento), nasconde l'immagine e mostra
+     * quell'elemento. Altrimenti mostra il messaggio di errore generico
+     * nello skeleton.
+     */
+    function handleLoadError(img) {
+        const skeleton = img.previousElementSibling;
+        const hasSkeleton = skeleton && skeleton.classList.contains(CONFIG.skeletonClass);
+
+        const container = img.closest('.photo-viewer') || img.parentElement;
+        const customFallback = container ? container.querySelector('.photo-fallback') : null;
+
+        if (customFallback) {
+            img.style.display = 'none';
+            customFallback.style.display = 'block';
+            if (hasSkeleton) {
+                skeleton.remove();
+            }
+            return;
+        }
+
+        // Fallback generico: skeleton con messaggio di errore
+        if (hasSkeleton) {
+            skeleton.style.background = '#ffebee';
+            skeleton.innerHTML = '<span style="color:#d32f2f;font-size:12px;">⚠️ Img non disponibile</span>';
+            skeleton.style.display = 'flex';
+            skeleton.style.alignItems = 'center';
+            skeleton.style.justifyContent = 'center';
+            skeleton.style.textAlign = 'center';
+            skeleton.style.padding = '10px';
+        }
+
+        // Nascondi immagine rotta
+        img.style.display = 'none';
     }
 
     /**
