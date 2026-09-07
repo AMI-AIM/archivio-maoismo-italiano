@@ -1,6 +1,6 @@
 import html
-import os
 import re
+import sys
 from pathlib import Path
 from urllib.parse import quote
 
@@ -21,12 +21,10 @@ def parse_year(date_str):
     if not s:
         return None
 
-    # Anno a 4 cifre (19xx o 20xx)
     m = re.search(r"\b(19\d{2}|20\d{2})\b", s)
     if m:
         return int(m.group(1))
 
-    # Anno a 2 cifre (es. 68 -> 1968): nel contesto AMI assumiamo Novecento
     m = re.search(r"\b(\d{2})\b", s)
     if m:
         return 1900 + int(m.group(1))
@@ -74,7 +72,6 @@ def get_img_url(row):
     identifier = m.group(1)
 
     if nome_file:
-        # quote() gestisce spazi e caratteri speciali nel path
         return f"https://archive.org/download/{identifier}/{quote(nome_file, safe='')}"
 
     return f"https://archive.org/services/img/{identifier}"
@@ -121,47 +118,45 @@ def gallery_card(row):
 
 
 def generate_gallery():
+    """Genera build/galleria/index.md. Ritorna exit code: 0 ok, 1 errore fatale."""
     print("Generazione Galleria in corso...")
 
     if not DATA_PATH.exists():
         print(f"Errore: {DATA_PATH} non trovato.")
-        return
+        return 1
 
     try:
         df = load_catalogo()
     except Exception as e:
         print(f"Errore durante la lettura di {DATA_PATH}: {e}")
-        return
+        return 1
 
     for col in ("tipo", "data"):
         if col not in df.columns:
             print(f"Errore: colonna '{col}' non trovata nel catalogo.")
-            return
+            return 1
 
     # Substring match: copre foto, fotografia, manifesto, manifesti, ecc.
     mask = df["tipo"].astype(str).str.contains("foto|manifest", case=False, na=False)
     df_gal = df[mask].copy()
 
-    if df_gal.empty:
-        print("Nessun documento trovato con tipo Foto/Fotografia/Manifesto.")
-        return
-
-    df_gal["anno"] = df_gal["data"].apply(parse_year)
-    df_gal["anno_sort"] = df_gal["anno"].fillna(9999).astype(int)
-    df_gal["titolo_sort"] = (
-        df_gal["titolo"].astype(str) if "titolo" in df_gal.columns else ""
-    )
-
-    df_gal = df_gal.sort_values(by=["anno_sort", "titolo_sort"], kind="stable")
+    empty_state = df_gal.empty
+    if empty_state:
+        print("⚠️ Nessun documento con tipo Foto/Fotografia/Manifesto: pagina in stato vuoto.")
+    else:
+        df_gal["anno"] = df_gal["data"].apply(parse_year)
+        df_gal["anno_sort"] = df_gal["anno"].fillna(9999).astype(int)
+        df_gal["titolo_sort"] = (
+            df_gal["titolo"].astype(str) if "titolo" in df_gal.columns else ""
+        )
+        df_gal = df_gal.sort_values(by=["anno_sort", "titolo_sort"], kind="stable")
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    anni_ordinati = sorted(int(a) for a in df_gal["anno"].dropna().unique())
-    has_sd = bool(df_gal["anno"].isna().any())
+    anni_ordinati = [] if empty_state else sorted(int(a) for a in df_gal["anno"].dropna().unique())
+    has_sd = False if empty_state else bool(df_gal["anno"].isna().any())
 
     out = []
-
-    # Front-matter CHIUSO correttamente (hide + meta per OG/description)
     out.append("---\n")
     out.append("title: Galleria Fotografica\n")
     out.append(
@@ -180,7 +175,6 @@ def generate_gallery():
     out.append('<p class="galleria-subtitle">Documenti visivi dalla storia del maoismo italiano</p>\n')
     out.append('</header>\n')
 
-    # Timeline a chip orizzontali (una sola riga, sticky)
     out.append('<nav class="galleria-timeline" id="galleria-timeline" aria-label="Timeline anni">\n')
     out.append('<ul class="timeline-list">\n')
     for idx, anno in enumerate(anni_ordinati):
@@ -198,6 +192,9 @@ def generate_gallery():
     out.append('</nav>\n')
 
     out.append('<main class="galleria-content">\n')
+
+    if empty_state:
+        out.append('<p class="galleria-empty">Nessun documento visivo disponibile al momento.</p>\n')
 
     for anno in anni_ordinati:
         df_year = df_gal[df_gal["anno"] == anno]
@@ -225,7 +222,16 @@ def generate_gallery():
     output_path = OUTPUT_DIR / "index.md"
     output_path.write_text("".join(out), encoding="utf-8")
     print(f"Galleria generata con successo in {output_path} ({len(df_gal)} card, {len(anni_ordinati)} anni)")
+    return 0
+
+
+def main():
+    try:
+        return generate_gallery()
+    except Exception as e:
+        print(f"Errore inatteso durante la generazione della galleria: {e}")
+        return 1
 
 
 if __name__ == "__main__":
-    generate_gallery()
+    sys.exit(main())

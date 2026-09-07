@@ -131,6 +131,7 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
     # Pagine che esistono sempre (generate dagli script)
     pagine.extend([
         {"loc": f"{base_url}/documenti/", "priority": "0.9", "changefreq": "weekly"},
+        {"loc": f"{base_url}/galleria/", "priority": "0.7", "changefreq": "weekly"},
         {"loc": f"{base_url}/persone/", "priority": "0.8", "changefreq": "monthly"},
         {"loc": f"{base_url}/organizzazioni/", "priority": "0.8", "changefreq": "monthly"},
     ])

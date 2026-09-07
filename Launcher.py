@@ -2,28 +2,32 @@
 Launcher AMI — aggiorna e pubblica il sito.
 
 Uso:
-  python Launcher.py                          Rigenera e pubblica (con messaggio commit automatico)
-  python Launcher.py "messaggio commit"       Rigenera e pubblica con messaggio custom
-  python Launcher.py --only AMI-0034          Rigenera SOLO le schede indicate (invalida cache
-                                              metadati documento + cache IA collegata), poi pubblica
-  python Launcher.py --refresh-ia ID1,ID2     Invalida la cache IA solo per gli identifier indicati,
-                                              poi rigenera e pubblica
-  python Launcher.py --force-refresh-ia       Invalida TUTTA la cache IA (metadati + testi),
-                                              poi rigenera e pubblica
-  python Launcher.py --clear-cache            Svuota tutta la cache (IA, hash file, metadati doc)
-  python Launcher.py --cache-stats            Mostra statistiche cache
-  python Launcher.py --skip-validation        Salta la validazione dati (scripts/core/validator.py)
-                                              e pubblica comunque anche se ci sono errori
-  python Launcher.py --help                   Mostra questo messaggio
+    python Launcher.py                          Rigenera e pubblica (con messaggio commit automatico)
+    python Launcher.py "messaggio commit"       Rigenera e pubblica con messaggio custom
+    python Launcher.py --only AMI-0034          Rigenera SOLO le schede indicate (invalida cache
+                                                metadati documento + cache IA collegata), poi pubblica
+    python Launcher.py --refresh-ia ID1,ID2     Invalida la cache IA solo per gli identifier indicati,
+                                                poi rigenera e pubblica
+    python Launcher.py --force-refresh-ia       Invalida TUTTA la cache IA (metadati + testi),
+                                                poi rigenera e pubblica
+    python Launcher.py --clear-cache            Svuota tutta la cache (IA, hash file, metadati doc)
+    python Launcher.py --cache-stats            Mostra statistiche cache
+    python Launcher.py --skip-validation        Salta la validazione dati (scripts/core/validator.py)
+                                                e pubblica comunque anche se ci sono errori
+    python Launcher.py --help                   Mostra questo messaggio
 
 Nota: prima di rigenerare il sito, il Launcher esegue sempre la validazione
 di data/dati.xlsx (scripts/core/validator.py). Se la validazione fallisce,
 la pubblicazione viene bloccata, a meno di usare --skip-validation.
+
+Sequenza di generazione, speculare a .github/workflows/deploy.yml:
+    sync_assets -> persone -> org -> generatore -> argomenti -> galleria
 """
+
 import re
+import shutil
 import subprocess
 import sys
-import shutil
 from datetime import datetime
 from pathlib import Path
 
@@ -67,7 +71,6 @@ def verifica_dipendenze():
         "openpyxl": "openpyxl",
         "mkdocs-material": "mkdocs",
     }
-
     if requirements_path.exists():
         pacchetti = [
             riga.strip() for riga in requirements_path.read_text(encoding="utf-8").splitlines()
@@ -86,11 +89,11 @@ def verifica_dipendenze():
             print(f"   ❌ {pacchetto} non installato")
             mancanti.append(pacchetto)
 
-    if not shutil.which("git"):
+    if shutil.which("git"):
+        print("   ✅ git")
+    else:
         print("   ❌ git non trovato nel PATH")
         mancanti.append("git")
-    else:
-        print("   ✅ git")
 
     if mancanti:
         msg = f"mancano le dipendenze: {', '.join(mancanti)}."
@@ -98,7 +101,7 @@ def verifica_dipendenze():
             msg += "\n   Installa git dal sito ufficiale per il tuo sistema operativo."
         pacchetti_pip = [m for m in mancanti if m != "git"]
         if pacchetti_pip:
-            msg += f"\n   Installa il resto con: pip install -r requirements.txt"
+            msg += "\n   Installa il resto con: pip install -r requirements.txt"
         raise ErroreComando(msg)
 
 
@@ -199,9 +202,10 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
     esegui([sys.executable, "sync_assets.py"], cwd=SCRIPTS_DIR,
            descrizione="🔄 Sincronizzazione file statici (assets/ → build/)")
 
-    # 1-4. Rigenerazione contenuti.
+    # 1-5. Rigenerazione contenuti.
     # Ordine: persone/org PRIMA di generatore; argomenti DOPO generatore,
-    # così argomenti.py può aggiornare la sitemap appena creata.
+    # così argomenti.py può aggiornare la sitemap appena creata;
+    # galleria DOPO argomenti, come in .github/workflows/deploy.yml.
     esegui([sys.executable, "persone.py"], cwd=SCRIPTS_DIR,
            descrizione="👤 Generazione schede persone")
     esegui([sys.executable, "org.py"], cwd=SCRIPTS_DIR,
@@ -210,8 +214,10 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
            descrizione="📑 Generazione documenti, archivio, home, sitemap")
     esegui([sys.executable, "argomenti.py"], cwd=SCRIPTS_DIR,
            descrizione="🏷️  Generazione pagine argomenti")
+    esegui([sys.executable, "galleria.py"], cwd=SCRIPTS_DIR,
+           descrizione="🖼️  Generazione galleria fotografica (build/galleria/)")
 
-    # 5. Pubblicazione
+    # 6. Pubblicazione
     stampa_titolo("📤 Pubblicazione")
     if not git_ci_sono_modifiche():
         print("   ℹ️  Nessuna modifica rispetto all'ultimo commit: niente da pubblicare.")
@@ -242,13 +248,12 @@ def svuota_cache():
     stampa_titolo("🗑️ Pulizia Cache")
     cache_mgr = CacheManager()
     cache_mgr.clear_all()
-    print("   ✅ Cache completamente svuotato")
+    print("   ✅ Cache completamente svuotata")
 
 
 def main():
     codice_uscita = 0
     try:
-        # Gestisci opzioni CLI
         args = sys.argv[1:]
         refresh_ia = None
         only = None
@@ -287,7 +292,8 @@ def main():
             if args and not args[0].startswith('--'):
                 messaggio = args[0]
 
-        aggiorna(messaggio=messaggio, refresh_ia=refresh_ia, only=only, skip_validation=skip_validation)
+        aggiorna(messaggio=messaggio, refresh_ia=refresh_ia, only=only,
+                 skip_validation=skip_validation)
 
     except ErroreComando as e:
         print(f"\n❌ ERRORE: {e}")
