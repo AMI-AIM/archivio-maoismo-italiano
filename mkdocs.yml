@@ -28,6 +28,7 @@ extra_javascript:
   - javascripts/hero-search.js
   - javascripts/documenti.js
   - javascripts/archivio-filtri.js
+  - assets/javascripts/lazy-loading.js
 
 plugins:
   - search

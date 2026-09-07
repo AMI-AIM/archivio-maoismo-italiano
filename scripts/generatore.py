@@ -325,6 +325,7 @@ def main():
     except Exception as e:
         print(f"[ERROR] Errore lettura catalogo: {e}")
         return
+
     
     # Normalizza colonne
     df.columns = df.columns.str.strip().str.lower()
