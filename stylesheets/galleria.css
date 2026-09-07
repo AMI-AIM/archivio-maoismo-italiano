@@ -434,7 +434,12 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   font-weight: 700;
 }
 .md-typeset .galleria-lightbox a { text-decoration: none; }
-.md-typeset .galleria-lightbox p { margin: 0; }
+.md-typeset .galleria-lightbox .lightbox-action { color: #33383f; }
+.md-typeset .galleria-lightbox .lightbox-action:hover { color: var(--gal-accent); }
+.md-typeset .galleria-lightbox .lightbox-action--scheda,
+.md-typeset .galleria-lightbox .lightbox-action--scheda:hover,
+.md-typeset .galleria-lightbox .lightbox-action--scheda:visited,
+.md-typeset .galleria-lightbox .lightbox-action--scheda:focus-visible { color: #fff; }.md-typeset .galleria-lightbox p { margin: 0; }
 
 /* ------------------------------------------------------------
    RESPONSIVE
