@@ -119,30 +119,25 @@ def gallery_card(row, index_in_year):
     img_url = get_img_url(row) or "https://archive.org/services/img/default"
     link_url = sanitize_url(row.get("url"))
 
-    size_class = LAYOUT_CYCLE[index_in_year % len(LAYOUT_CYCLE)]
-
     titolo_esc = html.escape(titolo)
     titolo_attr = html.escape(titolo, quote=True)
-    org_esc = html.escape(org)
-    data_esc = html.escape(data_str)
-
-    meta_parts = [x for x in [data_str, org] if x]
-    meta_text = " · ".join(meta_parts)
+    meta_text = " · ".join(x for x in [data_str, org] if x)
     meta_esc = html.escape(meta_text)
-
     meta_html = f'<span class="overlay-meta">{meta_esc}</span>' if meta_text else ""
 
     return (
-        f'<article class="galleria-card {size_class}">\n'
+        '<article class="galleria-card">\n'
         f'  <a class="card-link" href="{html.escape(link_url, quote=True)}" target="_blank" rel="noopener noreferrer">\n'
-        f'    <img class="galleria-img" src="{html.escape(img_url, quote=True)}" alt="{titolo_attr}" loading="lazy" decoding="async">\n'
-        f'    <div class="img-overlay">\n'
-        f'      <span class="overlay-icon" aria-hidden="true">🔍</span>\n'
-        f'      <span class="overlay-title">{titolo_esc}</span>\n'
-        f"      {meta_html}\n"
-        f'    </div>\n'
-        f'  </a>\n'
-        f'</article>\n'
+        '    <div class="card-media">\n'
+        f'      <img class="galleria-img" src="{html.escape(img_url, quote=True)}" alt="{titolo_attr}" loading="lazy" decoding="async">\n'
+        '      <div class="img-overlay">\n'
+        '        <span class="overlay-icon" aria-hidden="true">🔍</span>\n'
+        f'        <span class="overlay-title">{titolo_esc}</span>\n'
+        f"        {meta_html}\n"
+        '      </div>\n'
+        '    </div>\n'
+        '  </a>\n'
+        '</article>\n'
     )
 
 
