@@ -39,9 +39,8 @@
 .galleria-subtitle { margin: 0; color: var(--gal-muted); font-size: 0.95rem; }
 
 /* ============================================================
-   TIMELINE: UNA SOLA RIGA, sticky, scorrevole in orizzontale
+   TIMELINE: UNA SOLA RIGA ORIZZONTALE (cascade-proof)
    ============================================================ */
-
 .galleria-timeline {
   position: sticky;
   top: 0;
@@ -52,29 +51,36 @@
   backdrop-filter: blur(10px);
 }
 
-.timeline-list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;              /* UNA riga, sempre */
+.galleria-timeline .timeline-list,
+.md-typeset .galleria-timeline .timeline-list {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
   align-items: center;
   gap: 8px;
   margin: 0;
   padding: 2px;
-  list-style: none;
-  overflow-x: auto;               /* scroll orizzontale se non ci sta */
+  list-style: none !important;
+  overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
   scroll-behavior: smooth;
-  /* fade ai bordi per suggerire lo scroll */
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
 }
-.timeline-list::-webkit-scrollbar { display: none; }
-.timeline-list::before { content: none; }
+.galleria-timeline .timeline-list::-webkit-scrollbar { display: none; }
+.galleria-timeline .timeline-list::before { content: none !important; }
 
-.timeline-item { margin: 0; padding: 0; flex: 0 0 auto; }
+.galleria-timeline .timeline-item,
+.md-typeset .galleria-timeline .timeline-item {
+  display: inline-flex !important;
+  flex: 0 0 auto;
+  margin: 0 !important;
+  padding: 0;
+}
 
-.timeline-link {
+.galleria-timeline .timeline-link,
+.md-typeset .galleria-timeline .timeline-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -83,20 +89,27 @@
   border: 1px solid #d7dbe3;
   border-radius: 999px;
   background: #fff;
-  color: #424854;
+  color: #424854 !important;          /* vince sul rosso di .md-typeset a */
   font-size: 0.72rem;
   font-weight: 750;
   line-height: 1;
   letter-spacing: 0.01em;
-  text-decoration: none;
+  text-decoration: none !important;
   white-space: nowrap;
   transition: color .18s ease, background-color .18s ease, border-color .18s ease;
 }
-.timeline-link::before { content: none; }
-.timeline-link:hover { color: var(--gal-accent); border-color: var(--gal-accent); }
-.timeline-link.is-active,
-.timeline-link.active { color: #fff; background: var(--gal-accent); border-color: var(--gal-accent); }
-.timeline-link:focus-visible {
+.galleria-timeline .timeline-link::before { content: none !important; }  /* rimuove i pallini del vecchio CSS */
+.galleria-timeline .timeline-link:hover {
+  color: var(--gal-accent) !important;
+  border-color: var(--gal-accent);
+}
+.galleria-timeline .timeline-link.is-active,
+.galleria-timeline .timeline-link.active {
+  color: #fff !important;
+  background: var(--gal-accent);
+  border-color: var(--gal-accent);
+}
+.galleria-timeline .timeline-link:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--gal-accent) 35%, transparent);
   outline-offset: 2px;
 }
