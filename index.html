@@ -991,6 +991,8 @@ SEZIONE DOCUMENTI IN EVIDENZA
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
 }
 .evidenza-thumbnail-img {
   display: block !important;
@@ -999,6 +1001,26 @@ SEZIONE DOCUMENTI IN EVIDENZA
   width: auto !important;
   max-width: 100% !important;
   object-fit: contain !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease;
+}
+.evidenza-card:hover .evidenza-thumbnail-img {
+  transform: scale(1.04);
+}
+
+/* Griglia desktop: larghezza fissa per card uniformi (sotto i 769px
+   subentra la vista a scroll orizzontale definita in extra.css, dove
+   la larghezza della card segue invece quella reale della copertina) */
+@media (min-width: 769px) {
+  .evidenza-thumbnail {
+    width: 170px !important;
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .evidenza-thumbnail-img {
+    width: 100% !important;
+    object-fit: cover !important;
+  }
 }
 .evidenza-placeholder {
   color: #ffffff;
@@ -1228,6 +1250,7 @@ RESPONSIVE
 ------------------------------------------------------------ */
 @media (max-width: 1100px) {
   .evidenza-thumbnail {
+    width: 135px !important;
     height: 190px !important;
     max-height: 190px !important;
   }
