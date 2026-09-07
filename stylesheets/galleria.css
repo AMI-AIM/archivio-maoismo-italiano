@@ -43,6 +43,7 @@
 }
 
 .galleria-subtitle { margin: 0; color: var(--gal-muted); font-size: 0.95rem; }
+.galleria-empty { margin: 0; color: var(--gal-muted); font-size: 0.95rem; }
 
 /* ------------------------------------------------------------
    TIMELINE: UNA SOLA RIGA ORIZZONTALE, sticky, cascade-proof
