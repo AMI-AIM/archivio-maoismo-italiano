@@ -1,6 +1,6 @@
 /* ============================================================
    GALLERIA FOTOGRAFICA — AMI
-   Layout masonry/pinterest ispirato allo sketch fornito
+   Masonry dinamico (proporzioni naturali) + timeline a riga unica
    ============================================================ */
 
 :root {
@@ -8,45 +8,26 @@
   --gal-ink: #111217;
   --gal-muted: #626873;
   --gal-accent: #b71c1c;
-  --gal-gap: 14px;
-  --gal-row: 10px;
+  --gal-gap: 14px;   /* gutter orizzontale + padding verticale card */
   --gal-radius: 2px;
 }
 
-/* Permette alla pagina galleria di occupare più spazio del layout standard */
 @supports selector(:has(*)) {
-  .md-main__inner:has(.galleria-wrapper) {
-    max-width: none;
-  }
-
+  .md-main__inner:has(.galleria-wrapper) { max-width: none; }
   .md-content:has(.galleria-wrapper),
-  .md-content__inner:has(.galleria-wrapper) {
-    max-width: none;
-  }
-
-  .md-content__inner:has(.galleria-wrapper) {
-    margin: 0;
-    padding-top: 0;
-  }
+  .md-content__inner:has(.galleria-wrapper) { max-width: none; }
+  .md-content__inner:has(.galleria-wrapper) { margin: 0; padding-top: 0; }
 }
 
-/* Wrapper principale */
 .galleria-wrapper {
   width: min(1240px, calc(100vw - 40px));
-  max-width: none;
   margin: 0 auto;
   padding: 32px 0 120px;
   color: var(--gal-ink);
 }
 
 /* Header */
-.galleria-header {
-  margin: 0 0 24px;
-  padding: 0;
-  border: 0;
-  text-align: left;
-}
-
+.galleria-header { margin: 0 0 20px; text-align: left; }
 .galleria-main-title {
   margin: 0 0 6px;
   color: var(--gal-ink);
@@ -55,24 +36,18 @@
   line-height: 1;
   letter-spacing: -0.035em;
 }
-
-.galleria-subtitle {
-  margin: 0;
-  color: var(--gal-muted);
-  font-size: 0.95rem;
-  line-height: 1.45;
-}
+.galleria-subtitle { margin: 0; color: var(--gal-muted); font-size: 0.95rem; }
 
 /* ============================================================
-   Timeline a chip orizzontale
+   TIMELINE: UNA SOLA RIGA, sticky, scorrevole in orizzontale
    ============================================================ */
 
 .galleria-timeline {
   position: sticky;
   top: 0;
   z-index: 20;
-  margin: 0 0 38px;
-  padding: 12px 0;
+  margin: 0 0 34px;
+  padding: 8px 0;
   background: color-mix(in srgb, var(--md-default-bg-color, #fff) 92%, transparent);
   backdrop-filter: blur(10px);
 }
@@ -80,89 +55,69 @@
 .timeline-list {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;              /* UNA riga, sempre */
+  align-items: center;
   gap: 8px;
+  margin: 0;
+  padding: 2px;
   list-style: none;
-  margin: 0;
-  padding: 0;
+  overflow-x: auto;               /* scroll orizzontale se non ci sta */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  /* fade ai bordi per suggerire lo scroll */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
 }
+.timeline-list::-webkit-scrollbar { display: none; }
+.timeline-list::before { content: none; }
 
-.timeline-list::before {
-  content: none;
-}
-
-.timeline-item {
-  margin: 0;
-  padding: 0;
-}
+.timeline-item { margin: 0; padding: 0; flex: 0 0 auto; }
 
 .timeline-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 32px;
-  padding: 6px 14px;
+  min-height: 28px;
+  padding: 5px 12px;
   border: 1px solid #d7dbe3;
   border-radius: 999px;
-  color: #424854;
   background: #fff;
-  text-decoration: none;
-  font-size: 0.78rem;
+  color: #424854;
+  font-size: 0.72rem;
   font-weight: 750;
   line-height: 1;
   letter-spacing: 0.01em;
-  transition:
-    color 0.18s ease,
-    background-color 0.18s ease,
-    border-color 0.18s ease,
-    transform 0.18s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .18s ease, background-color .18s ease, border-color .18s ease;
 }
-
-.timeline-link::before {
-  content: none;
-}
-
-.timeline-link:hover {
-  color: var(--gal-accent);
-  border-color: var(--gal-accent);
-  transform: translateY(-1px);
-}
-
+.timeline-link::before { content: none; }
+.timeline-link:hover { color: var(--gal-accent); border-color: var(--gal-accent); }
 .timeline-link.is-active,
-.timeline-link.active {
-  color: #fff;
-  background: var(--gal-accent);
-  border-color: var(--gal-accent);
-}
-
+.timeline-link.active { color: #fff; background: var(--gal-accent); border-color: var(--gal-accent); }
 .timeline-link:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--gal-accent) 35%, transparent);
   outline-offset: 2px;
 }
 
 /* ============================================================
-   Sezione anno: anno grande a sinistra + griglia a destra
+   SEZIONI ANNO: anno grande a sinistra + griglia a destra
    ============================================================ */
-
-.galleria-content {
-  width: 100%;
-}
 
 .galleria-year-section {
   display: grid;
   grid-template-columns: clamp(82px, 14vw, 180px) minmax(0, 1fr);
   gap: clamp(18px, 4vw, 56px);
   margin: 0 0 64px;
-  scroll-margin-top: 86px;
+  scroll-margin-top: 74px;
 }
 
 .galleria-year-title {
   position: sticky;
-  top: 74px;
+  top: 56px;
   align-self: start;
   margin: 0;
-  padding: 0;
-  border: 0;
   color: var(--gal-ink);
   font-size: clamp(2.1rem, 5vw, 3.6rem);
   font-weight: 850;
@@ -171,88 +126,77 @@
 }
 
 /* ============================================================
-   Masonry CSS-only
-   - grid-auto-rows piccolo
-   - card con span predefiniti
-   - niente JS, niente misurazioni runtime, CLS molto basso
+   MASONRY
+   - Senza JS: colonne CSS (proporzioni naturali, nessun taglio)
+   - Con JS: griglia con span esatti calcolati dalle dimensioni reali
    ============================================================ */
 
 .galleria-grid {
+  display: block;
+  columns: 2;
+  column-gap: var(--gal-gap);
+}
+
+.galleria-grid.is-js {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: var(--gal-row);
+  grid-auto-rows: 1px;          /* 1 span = 1 px: misure esatte */
+  column-gap: var(--gal-gap);
+  row-gap: 0;
   grid-auto-flow: dense;
-  gap: var(--gal-gap);
-  align-items: stretch;
+  align-items: start;
 }
 
-/* Altezze visive:
-   altezza = span * 10px + gap interni generati dalla griglia */
 .galleria-card {
-  position: relative;
+  margin: 0 0 var(--gal-gap);
+  break-inside: avoid;
   min-width: 0;
+}
+.is-js .galleria-card {
   margin: 0;
-  overflow: hidden;
-  border: 0;
-  border-radius: var(--gal-radius);
-  background: #e7eaf0;
-  box-shadow: none;
-  transform: none;
+  padding-bottom: var(--gal-gap);  /* gutter verticale incluso nello span */
+  grid-row-end: span 320;          /* segnaposto prima del load (anti-collasso) */
 }
 
-.galleria-card:hover {
-  box-shadow: none;
-  transform: none;
-}
-
-.galleria-card.h-short {
-  grid-row: span 10;
-}
-
-.galleria-card.h-med {
-  grid-row: span 14;
-}
-
-.galleria-card.h-tall {
-  grid-row: span 19;
-}
-
-.galleria-card.h-wide {
-  grid-column: 1 / -1;
-  grid-row: span 12;
-}
+/* Il wide ha senso solo in griglia e solo su desktop */
+.is-js .galleria-card.h-wide { grid-column: 1 / -1; }
 
 .card-link {
-  position: relative;
   display: block;
-  width: 100%;
-  height: 100%;
   color: inherit;
   text-decoration: none;
 }
-
 .card-link:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--gal-accent) 50%, transparent);
   outline-offset: 3px;
 }
 
-/* Immagine */
+/* Media: contiene immagine + overlay, a proporzioni NATURALI */
+.card-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--gal-radius);
+  background: #e7eaf0;
+}
+
 .galleria-img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;               /* NESSUN object-fit: nessun taglio */
   background: #e7eaf0;
-  transition: transform 0.35s ease, filter 0.35s ease;
+  transition: transform .35s ease, filter .35s ease;
 }
-
 .card-link:hover .galleria-img,
 .card-link:focus-visible .galleria-img {
-  transform: scale(1.035);
+  transform: scale(1.02);
   filter: saturate(1.03) contrast(1.02);
 }
 
-/* Overlay metadati */
+/* Placeholder per immagini non caricabili */
+.card-error .card-media { aspect-ratio: 4 / 5; }
+.card-error .galleria-img { display: none; }
+
+/* Overlay metadati (hover/focus; sempre visibile su touch) */
 .img-overlay {
   position: absolute;
   inset: 0;
@@ -261,178 +205,76 @@
   justify-content: flex-end;
   gap: 4px;
   padding: 14px;
-  background:
-    linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.78) 0%,
-      rgba(0, 0, 0, 0.48) 34%,
-      rgba(0, 0, 0, 0.06) 72%,
-      rgba(0, 0, 0, 0) 100%
-    );
+  background: linear-gradient(to top,
+    rgba(0,0,0,.78) 0%, rgba(0,0,0,.48) 34%,
+    rgba(0,0,0,.06) 72%, rgba(0,0,0,0) 100%);
   opacity: 0;
-  transition: opacity 0.24s ease;
+  transition: opacity .24s ease;
 }
-
 .card-link:hover .img-overlay,
-.card-link:focus-visible .img-overlay {
-  opacity: 1;
-}
+.card-link:focus-visible .img-overlay { opacity: 1; }
 
 .overlay-icon {
   position: absolute;
-  top: 11px;
-  right: 12px;
-  color: #fff;
-  font-size: 1rem;
-  line-height: 1;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  top: 11px; right: 12px;
+  color: #fff; font-size: 1rem; line-height: 1;
+  text-shadow: 0 2px 10px rgba(0,0,0,.45);
 }
-
 .overlay-title {
   color: #fff;
   font-size: 0.92rem;
   font-weight: 760;
   line-height: 1.25;
-  letter-spacing: -0.01em;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  text-shadow: 0 2px 10px rgba(0,0,0,.45);
 }
+.overlay-meta { color: rgba(255,255,255,.82); font-size: 0.74rem; font-weight: 500; }
 
-.overlay-meta {
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 0.74rem;
-  font-weight: 500;
-  line-height: 1.3;
-}
-
-/* Neutralizzazioni Material/MkDocs dentro la galleria */
+/* Neutralizzazioni Material */
 .md-typeset .galleria-wrapper h1,
 .md-typeset .galleria-wrapper h2,
-.md-typeset .galleria-wrapper h3 {
-  color: inherit;
-}
-
-.md-typeset .galleria-wrapper a {
-  text-decoration: none;
-}
-
-.md-typeset .timeline-list {
-  list-style: none;
-}
-
-.md-typeset .timeline-list li {
-  margin: 0;
-}
+.md-typeset .galleria-wrapper h3 { color: inherit; }
+.md-typeset .galleria-wrapper a { text-decoration: none; }
+.md-typeset .timeline-list { list-style: none; }
+.md-typeset .timeline-list li { margin: 0; }
 
 /* ============================================================
-   Responsive
+   RESPONSIVE
    ============================================================ */
 
 @media screen and (min-width: 1600px) {
-  .galleria-wrapper {
-    width: min(1460px, calc(100vw - 64px));
-  }
-
-  .galleria-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+  .galleria-wrapper { width: min(1460px, calc(100vw - 64px)); }
+  .galleria-grid.is-js { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .galleria-grid:not(.is-js) { columns: 3; }
 }
 
 @media screen and (max-width: 840px) {
-  .galleria-wrapper {
-    width: min(100%, calc(100vw - 28px));
-    padding-top: 24px;
-  }
-
-  .galleria-timeline {
-    margin-bottom: 28px;
-  }
-
-  .galleria-year-section {
-    display: block;
-    margin-bottom: 52px;
-    scroll-margin-top: 82px;
-  }
-
-  .galleria-year-title {
-    position: static;
-    margin: 0 0 16px;
-    font-size: clamp(2rem, 13vw, 3.2rem);
-  }
+  .galleria-wrapper { width: min(100%, calc(100vw - 28px)); padding-top: 24px; }
+  .galleria-timeline { margin-bottom: 26px; }
+  .galleria-year-section { display: block; margin-bottom: 52px; scroll-margin-top: 64px; }
+  .galleria-year-title { position: static; margin: 0 0 16px; font-size: clamp(2rem, 13vw, 3.2rem); }
 }
 
 @media screen and (max-width: 560px) {
-  .galleria-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .galleria-card.h-wide {
-    grid-column: auto;
-  }
-
-  .galleria-card.h-short {
-    grid-row: span 12;
-  }
-
-  .galleria-card.h-med {
-    grid-row: span 15;
-  }
-
-  .galleria-card.h-tall {
-    grid-row: span 19;
-  }
-
-  .galleria-card.h-wide {
-    grid-row: span 14;
-  }
-
-  .timeline-list {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    scrollbar-width: thin;
-  }
-
-  .timeline-link {
-    white-space: nowrap;
-  }
+  .galleria-grid, .galleria-grid:not(.is-js) { columns: 1; }
+  .galleria-grid.is-js { grid-template-columns: 1fr; }
+  .is-js .galleria-card.h-wide { grid-column: auto; }
 }
 
-/* Su touch i metadati restano accessibili senza hover */
 @media (hover: none) {
   .img-overlay {
     opacity: 1;
-    background:
-      linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.74) 0%,
-        rgba(0, 0, 0, 0.38) 38%,
-        rgba(0, 0, 0, 0) 78%
-      );
+    background: linear-gradient(to top,
+      rgba(0,0,0,.74) 0%, rgba(0,0,0,.38) 38%, rgba(0,0,0,0) 78%);
   }
-
-  .card-link:hover .galleria-img {
-    transform: none;
-    filter: none;
-  }
+  .card-link:hover .galleria-img { transform: none; filter: none; }
 }
 
-/* Accessibilità: riduzione movimento, solo nell'area galleria */
 @media (prefers-reduced-motion: reduce) {
-  .galleria-wrapper *,
-  .galleria-wrapper *::before,
-  .galleria-wrapper *::after {
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
+  .timeline-list { scroll-behavior: auto; }
+  .galleria-wrapper *, .galleria-wrapper *::before, .galleria-wrapper *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
   }
-
   .card-link:hover .galleria-img,
-  .card-link:focus-visible .galleria-img {
-    transform: none;
-  }
-
-  .timeline-link:hover {
-    transform: none;
-  }
+  .card-link:focus-visible .galleria-img { transform: none; }
 }
