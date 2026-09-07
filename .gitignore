@@ -1,3 +1,36 @@
-# Examples 1:
+# Build artifacts
+build/
 
-# Example 2 (Project with artifacts):
+# Cache
+__pycache__/
+scripts/__pycache__/
+scripts/.cache
+scripts/core/__pycache__/
+
+# Dependencies
+.venv/
+venv/
+node_modules/
+.mypy_cache/
+.pytest_cache/
+.gradle/
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+

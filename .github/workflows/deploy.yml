@@ -62,6 +62,9 @@ jobs:
       - name: Generate topic pages
         run: python scripts/argomenti.py
 
+      - name: Generate gallery
+        run: python scripts/galleria.py
+
       - name: Build MkDocs
         run: mkdocs build
 
