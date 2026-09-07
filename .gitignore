@@ -1,36 +1,23 @@
-# --- Python / Cache ---
+```
+# Compiled and build artifacts
+*.pyc
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-ENV/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
 
-# --- AMI Project Specifics ---
-# Cartella di output di MkDocs
-site/
-# Cartella di lavoro
-build/
-# Cache interna degli script
-scripts/.cache/
-scripts/__pycache__/
-scripts/core/__pycache__/
-# File di log temporanei
+# Dependencies
+.venv/
+venv/
+
+# Logs and temp files
 *.log
+*.tmp
+*.swp
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+```

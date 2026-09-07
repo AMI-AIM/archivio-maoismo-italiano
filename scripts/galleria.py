@@ -76,75 +76,109 @@ hide:
   - toc
 ---
 
-<div class="galleria-layout">
-  <nav class="galleria-timeline" id="galleria-timeline">
-    <ul>
+<!-- Galleria Fotografica - Archivio Maoismo Italiano -->
+<div class="galleria-wrapper">
+  <header class="galleria-header">
+    <h1 class="galleria-main-title">Galleria Fotografica</h1>
+    <p class="galleria-subtitle">Documenti visivi dalla storia del maoismo italiano</p>
+  </header>
+
+  <div class="galleria-layout">
+    <nav class="galleria-timeline" id="galleria-timeline" aria-label="Timeline anni">
+      <div class="timeline-header">
+        <span class="timeline-label">Anni</span>
+      </div>
+      <ul class="timeline-list">
 """
     
     # Genera indici timeline
     anni_unici = df_gal['Anno'].dropna().unique()
-    for anno in sorted(anni_unici):
-        html_content += f'      <li><a href="#anno-{int(anno)}" data-year="{int(anno)}">{int(anno)}</a></li>\n'
+    anni_ordinati = sorted(anni_unici)
+    for idx, anno in enumerate(anni_ordinati):
+        year_int = int(anno)
+        active_class = " active" if idx == 0 else ""
+        html_content += f'        <li><a href="#anno-{year_int}" data-year="{year_int}" class="timeline-link{active_class}">{year_int}</a></li>\n'
     
     if df_gal['Anno'].isna().any():
-        html_content += '      <li><a href="#anno-sd" data-year="s.d.">s.d.</a></li>\n'
+        html_content += '        <li><a href="#anno-sd" data-year="s.d." class="timeline-link">s.d.</a></li>\n'
 
-    html_content += """    </ul>
-  </nav>
+    html_content += """      </ul>
+    </nav>
 
-  <div class="galleria-content">
-    <div class="galleria-year-badge" id="galleria-year-badge">1968</div>
+    <main class="galleria-content">
+      <div class="galleria-year-badge" id="galleria-year-badge" aria-live="polite">
+        <span class="badge-label">Anno</span>
+        <span class="badge-year" id="badge-year-value">1968</span>
+      </div>
 """
 
     # Genera sezioni per anno
     current_year = None
+    card_count = 0
     for index, row in df_gal.iterrows():
         anno = row['Anno']
         
         # Apri nuova sezione se l'anno cambia
         if anno != current_year:
             if current_year is not None:
-                html_content += "    </div>\n  </section>\n" # Chiudi sezione precedente
+                html_content += "        </div>\n      </section>\n" # Chiudi griglia e sezione
             
             current_year = anno
             anno_label = str(int(anno)) if pd.notna(anno) else "Anni non definiti"
             section_id = f"anno-{int(anno)}" if pd.notna(anno) else "anno-sd"
             
             html_content += f"""
-  <section id="{section_id}" class="galleria-year-section" data-year="{anno_label}">
-    <h2 class="galleria-year-title">{anno_label}</h2>
-    <div class="galleria-grid">
+      <section id="{section_id}" class="galleria-year-section" data-year="{anno_label}">
+        <h2 class="galleria-year-title">
+          <span class="year-number">{anno_label}</span>
+          <span class="year-divider"></span>
+        </h2>
+        <div class="galleria-grid">
 """
         
         # Card
         titolo = row.get('Titolo', 'Senza titolo')
         org = row.get('Organizzazione', '')
+        data_str = row.get('Data', '')
         img_url = get_img_url(row)
         link_url = row.get('URL', '#') # Link a Internet Archive
         
         # Fallback immagine
         if not img_url:
             img_url = "https://archive.org/services/img/default"
+        
+        # Sanitizza attributi HTML
+        titolo_attr = titolo.replace('"', '&quot;')
+        card_count += 1
 
         html_content += f"""
-      <a href="{link_url}" target="_blank" class="galleria-card">
-        <div class="galleria-img-container">
-          <img src="{img_url}" alt="{titolo}" class="galleria-img" loading="lazy">
-        </div>
-        <div class="galleria-meta">
-          <strong>{titolo}</strong>
-          <span class="galleria-org">{org}</span>
-        </div>
-      </a>
+          <article class="galleria-card" data-order="{card_count}">
+            <a href="{link_url}" target="_blank" rel="noopener noreferrer" class="card-link">
+              <div class="galleria-img-container">
+                <img src="{img_url}" alt="{titolo_attr}" class="galleria-img" loading="lazy" decoding="async">
+                <div class="img-overlay">
+                  <span class="overlay-icon">🔍</span>
+                </div>
+              </div>
+              <div class="galleria-meta">
+                <h3 class="meta-title">{titolo}</h3>
+                {f'<span class="meta-date">{data_str}</span>' if pd.notna(data_str) and str(data_str).strip() else ''}
+                {f'<span class="meta-org">{org}</span>' if pd.notna(org) and str(org).strip() else ''}
+              </div>
+            </a>
+          </article>
 """
 
     # Chiudi ultima sezione
     if current_year is not None:
-        html_content += "    </div>\n  </section>\n"
+        html_content += "        </div>\n      </section>\n"
 
     html_content += """
+    </main>
   </div>
 </div>
+
+<script src="../../assets/javascripts/galleria.js"></script>
 """
 
     # 6. Salva file
