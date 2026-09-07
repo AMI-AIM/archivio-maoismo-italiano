@@ -1008,3 +1008,245 @@ archivio-filtri.js), senza più stili inline Word */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* ==========================================================================
+   SKELETON LOADING ANIMATIONS
+   ========================================================================== */
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+@keyframes skeleton-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* ==========================================================================
+   SKELETON PLACEHOLDER BASE
+   ========================================================================== */
+
+.lazy-skeleton {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Variante con pulse più sottile */
+.lazy-skeleton.pulse {
+    animation: skeleton-pulse 2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   IMMAGINI LAZY
+   ========================================================================== */
+
+.lazy-img {
+    transition: opacity 300ms ease-in-out;
+    opacity: 0;
+    will-change: opacity;
+}
+
+.lazy-img.lazy-loaded {
+    opacity: 1;
+}
+
+.lazy-img.lazy-error {
+    display: none;
+}
+
+/* ==========================================================================
+   CONTESTI SPECIFICI - SCHEDE DOCUMENTI
+   ========================================================================== */
+
+/* Foto embed nelle schede documento */
+.photo-viewer .lazy-skeleton {
+    width: 100%;
+    min-height: 300px;
+    border-radius: 8px;
+}
+
+/* Immagini small (thumbnail) */
+.doc-thumbnail .lazy-skeleton {
+    width: 120px;
+    height: 160px;
+    border-radius: 4px;
+}
+
+/* Immagini profilo soggetti */
+.subject-avatar .lazy-skeleton {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #f5f5f5 25%, #e8e8e8 50%, #f5f5f5 75%);
+}
+
+/* ==========================================================================
+   CONTESTI SPECIFICI - ARCHIVIO/GALLERIA
+   ========================================================================== */
+
+/* Card documento nell'archivio */
+.archive-card .lazy-skeleton {
+    width: 100%;
+    padding-top: 66%; /* Aspect ratio 3:2 */
+    border-radius: 6px;
+}
+
+/* Galleria immagini */
+.gallery-item .lazy-skeleton {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+}
+
+/* Grid layout skeletons */
+.skeleton-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.skeleton-grid .lazy-skeleton {
+    background: linear-gradient(90deg, #f8f8f8 25%, #ececec 50%, #f8f8f8 75%);
+}
+
+/* ==========================================================================
+   ERROR STATE
+   ========================================================================== */
+
+.lazy-skeleton.error-state {
+    background: #ffebee;
+    animation: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+.lazy-skeleton.error-state::after {
+    content: '⚠️ Immagine non disponibile';
+    color: #d32f2f;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   DARK MODE SUPPORT (MkDocs Material)
+   ========================================================================== */
+
+[data-md-color-scheme="slate"] .lazy-skeleton {
+    background: linear-gradient(90deg, #2d2d2d 25%, #3a3a3a 50%, #2d2d2d 75%);
+}
+
+[data-md-color-scheme="slate"] .skeleton-grid .lazy-skeleton {
+    background: linear-gradient(90deg, #333 25%, #404040 50%, #333 75%);
+}
+
+[data-md-color-scheme="slate"] .lazy-skeleton.error-state {
+    background: #3a1c1c;
+}
+
+[data-md-color-scheme="slate"] .lazy-skeleton.error-state::after {
+    color: #ef5350;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .photo-viewer .lazy-skeleton {
+        min-height: 200px;
+    }
+
+    .gallery-item .lazy-skeleton {
+        height: 150px;
+    }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+/* Riduci animazioni per utenti con preferenze di movimento ridotto */
+@media (prefers-reduced-motion: reduce) {
+    .lazy-skeleton {
+        animation: none;
+        background: #e0e0e0;
+    }
+
+    [data-md-color-scheme="slate"] .lazy-skeleton {
+        background: #3a3a3a;
+    }
+}
+
+/* ==========================================================================
+   UTILITY CLASSES
+   ========================================================================== */
+
+/* Forza aspect ratio specifico */
+.lazy-skeleton.aspect-16-9 {
+    padding-top: 56.25%;
+    height: 0;
+}
+
+.lazy-skeleton.aspect-4-3 {
+    padding-top: 75%;
+    height: 0;
+}
+
+.lazy-skeleton.aspect-1-1 {
+    padding-top: 100%;
+    height: 0;
+}
+
+.lazy-skeleton.aspect-3-4 {
+    padding-top: 133.33%;
+    height: 0;
+}
+
+/* Larghezze predefinite */
+.lazy-skeleton.w-small {
+    width: 150px;
+}
+
+.lazy-skeleton.w-medium {
+    width: 300px;
+}
+
+.lazy-skeleton.w-large {
+    width: 600px;
+}
+
+.lazy-skeleton.w-full {
+    width: 100%;
+}
+
+/* ==========================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ========================================================================== */
+
+/* Usa GPU acceleration per animazioni fluide */
+.lazy-skeleton {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Previene reflow durante caricamento */
+.lazy-img[style*="opacity"] {
+    contain: paint;
+}
