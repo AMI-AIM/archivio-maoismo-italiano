@@ -6,333 +6,342 @@
  * - Intersection Observer API per performance
  * - Fade-in animation al completamento
  * - Supporto fallback per browser legacy
- * - Gestione errori robusta
+ * - Gestione errori robusta (retry su data-src-fallback)
  *
  * Utilizzo:
- * 1. Aggiungere classe "lazy-img" alle immagini nel Markdown/HTML
- * 2. Usare attributo "data-src" invece di "src"
- * 3. Includere questo script nella pagina
+ *   Aggiungere classe "lazy-img" alle immagini nel Markdown/HTML
+ *   Usare attributo "data-src" invece di (o insieme a) "src"
+ *   Opzionale: "data-src-fallback" = URL alternativo se il primario è 404
+ *   Esempio: <img class="lazy-img" src="a.webp" data-src="a.webp"
+ *                 data-src-fallback="b.webp" alt="Descrizione">
  *
- * Esempio HTML:
- * <img class="lazy-img" data-src="immagine.webp" alt="Descrizione">
+ * Eventi pubblici (per consumatori, es. galleria.js):
+ *   'ami:lazy-loaded'  dispatchato sulla <img> al completamento (bubbles)
+ *   'ami:lazy-error'   dispatchato sulla <img> all'errore definitivo (bubbles)
+ *
+ * Nota: se l'immagine è già caricata al momento dell'intersezione
+ * (es. sopra la fold, con src nativo), lo skeleton NON viene inserito:
+ * evita flash su contenuti già pronti.
  */
+(function () {
+  'use strict';
 
-(function() {
-    'use strict';
+  // Configurazione
+  const CONFIG = {
+    rootMargin: '50px',      // Carica immagine 50px prima che entri in viewport
+    threshold: 0.01,         // Attiva quando l'1% dell'immagine è visibile
+    fadeInDuration: 300,     // Durata fade-in in ms
+    skeletonClass: 'lazy-skeleton',
+    loadedClass: 'lazy-loaded',
+    errorClass: 'lazy-error',
+    imageClass: 'lazy-img',
+    srcAttribute: 'data-src',
+    srcsetAttribute: 'data-srcset',
+    sizesAttribute: 'data-sizes',
+    fallbackAttribute: 'data-src-fallback' // URL alternativo da tentare se il primo fallisce
+  };
 
-    // Configurazione
-    const CONFIG = {
-        rootMargin: '50px',      // Carica immagine 50px prima che entri in viewport
-        threshold: 0.01,         // Attiva quando l'1% dell'immagine è visibile
-        fadeInDuration: 300,     // Durata fade-in in ms
-        skeletonClass: 'lazy-skeleton',
-        loadedClass: 'lazy-loaded',
-        errorClass: 'lazy-error',
-        imageClass: 'lazy-img',
-        srcAttribute: 'data-src',
-        srcsetAttribute: 'data-srcset',
-        sizesAttribute: 'data-sizes',
-        fallbackAttribute: 'data-src-fallback' // URL alternativo da tentare se il primo fallisce (es. .jpg -> .png)
-    };
+  // Verifica supporto Intersection Observer
+  const hasIntersectionObserver = 'IntersectionObserver' in window;
+  const hasNativeLazyLoad = 'loading' in HTMLImageElement.prototype;
 
-    // Verifica supporto Intersection Observer
-    const hasIntersectionObserver = 'IntersectionObserver' in window;
-    const hasNativeLazyLoad = 'loading' in HTMLImageElement.prototype;
+  /**
+   * Crea elemento skeleton placeholder
+   */
+  function createSkeleton(img) {
+    const skeleton = document.createElement('div');
+    skeleton.className = CONFIG.skeletonClass;
 
-    /**
-     * Crea elemento skeleton placeholder
-     */
-    function createSkeleton(img) {
-        const skeleton = document.createElement('div');
-        skeleton.className = CONFIG.skeletonClass;
+    // Mantieni dimensioni proporzionali
+    const width = img.getAttribute('width') || img.offsetWidth || '100%';
+    const height = img.getAttribute('height') || img.offsetHeight || '200px';
+    skeleton.style.width = typeof width === 'number' ? width + 'px' : width;
+    skeleton.style.height = typeof height === 'number' ? height + 'px' : height;
+    skeleton.style.display = 'inline-block';
+    skeleton.style.verticalAlign = 'middle';
+    skeleton.style.background = 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)';
+    skeleton.style.backgroundSize = '200% 100%';
+    skeleton.style.animation = 'skeleton-loading 1.5s infinite';
+    skeleton.style.borderRadius = img.style.borderRadius || '4px';
+    return skeleton;
+  }
 
-        // Mantieni dimensioni proporzionali
-        const width = img.getAttribute('width') || img.offsetWidth || '100%';
-        const height = img.getAttribute('height') || img.offsetHeight || '200px';
-
-        skeleton.style.width = typeof width === 'number' ? width + 'px' : width;
-        skeleton.style.height = typeof height === 'number' ? height + 'px' : height;
-        skeleton.style.display = 'inline-block';
-        skeleton.style.verticalAlign = 'middle';
-        skeleton.style.background = 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)';
-        skeleton.style.backgroundSize = '200% 100%';
-        skeleton.style.animation = 'skeleton-loading 1.5s infinite';
-        skeleton.style.borderRadius = img.style.borderRadius || '4px';
-
-        return skeleton;
+  /**
+   * Carica un'immagine singola
+   */
+  function loadImage(img) {
+    // Se già caricata o in errore, salta
+    if (img.classList.contains(CONFIG.loadedClass) ||
+        img.classList.contains(CONFIG.errorClass)) {
+      return;
     }
 
-    /**
-     * Carica un'immagine singola
-     */
-    function loadImage(img) {
-        // Se già caricata o in errore, salta
-        if (img.classList.contains(CONFIG.loadedClass) ||
-            img.classList.contains(CONFIG.errorClass)) {
-            return;
-        }
-
-        const src = img.getAttribute(CONFIG.srcAttribute);
-        const fallbackSrc = img.getAttribute(CONFIG.fallbackAttribute);
-        const srcset = img.getAttribute(CONFIG.srcsetAttribute);
-        const sizes = img.getAttribute(CONFIG.sizesAttribute);
-
-        if (!src) {
-            console.warn('[LazyLoad] Immagine senza data-src:', img);
-            return;
-        }
-
-        // Crea skeleton se non esiste
-        if (!img.previousElementSibling ||
-            !img.previousElementSibling.classList.contains(CONFIG.skeletonClass)) {
-            const skeleton = createSkeleton(img);
-            img.parentNode.insertBefore(skeleton, img);
-
-            // Nascondi immagine finché non è caricata
-            img.style.opacity = '0';
-            img.style.transition = `opacity ${CONFIG.fadeInDuration}ms ease-in-out`;
-        }
-
-        attemptLoad(img, src, fallbackSrc, srcset, sizes);
+    // [AMI] Immagine già caricata (es. sopra la fold con src nativo):
+    // niente skeleton, nessun flash; riattiva eventuale opacità azzerata.
+    if (img.complete && img.naturalWidth) {
+      img.classList.add(CONFIG.loadedClass);
+      if (img.style.opacity === '0') img.style.opacity = '1';
+      return;
     }
 
-    /**
-     * Tenta il caricamento di un URL; se fallisce e viene fornito un
-     * fallbackSrc (es. variante .png quando .jpg non esiste), riprova
-     * una sola volta con quello prima di considerare l'errore definitivo.
-     */
-    function attemptLoad(img, src, fallbackSrc, srcset, sizes) {
-        const tempImg = new Image();
+    const src = img.getAttribute(CONFIG.srcAttribute);
+    const fallbackSrc = img.getAttribute(CONFIG.fallbackAttribute);
+    const srcset = img.getAttribute(CONFIG.srcsetAttribute);
+    const sizes = img.getAttribute(CONFIG.sizesAttribute);
 
-        if (srcset) tempImg.srcset = srcset;
-        if (sizes) tempImg.sizes = sizes;
-
-        tempImg.onload = function() {
-            // Imposta src reale (quello effettivamente caricato, primario o fallback)
-            if (srcset) img.srcset = srcset;
-            img.src = tempImg.currentSrc || tempImg.src;
-
-            // Rimuovi attributi data
-            img.removeAttribute(CONFIG.srcAttribute);
-            img.removeAttribute(CONFIG.fallbackAttribute);
-            if (srcset) img.removeAttribute(CONFIG.srcsetAttribute);
-            if (sizes) img.removeAttribute(CONFIG.sizesAttribute);
-
-            // Attendi che l'immagine sia effettivamente renderizzata
-            setTimeout(() => {
-                img.style.opacity = '1';
-                img.classList.add(CONFIG.loadedClass);
-
-                // Rimuovi skeleton dopo fade-in
-                const skeleton = img.previousElementSibling;
-                if (skeleton && skeleton.classList.contains(CONFIG.skeletonClass)) {
-                    setTimeout(() => {
-                        skeleton.remove();
-                    }, CONFIG.fadeInDuration);
-                }
-            }, 50);
-        };
-
-        tempImg.onerror = function() {
-            if (fallbackSrc) {
-                // Riprova una sola volta con l'URL di fallback, senza ulteriori fallback
-                attemptLoad(img, fallbackSrc, null, srcset, sizes);
-                return;
-            }
-            console.error('[LazyLoad] Errore caricamento immagine:', src);
-            img.classList.add(CONFIG.errorClass);
-            handleLoadError(img);
-        };
-
-        // Avvia caricamento
-        tempImg.src = src;
+    if (!src) {
+      console.warn('[LazyLoad] Immagine senza data-src:', img);
+      return;
     }
 
-    /**
-     * Gestisce l'errore definitivo di caricamento (dopo eventuale fallback).
-     * Se l'immagine si trova in un contenitore con un elemento ".photo-fallback"
-     * (pattern usato nelle schede documento), nasconde l'immagine e mostra
-     * quell'elemento. Altrimenti mostra il messaggio di errore generico
-     * nello skeleton.
-     */
-    function handleLoadError(img) {
+    // Crea skeleton se non esiste
+    if (!img.previousElementSibling ||
+        !img.previousElementSibling.classList.contains(CONFIG.skeletonClass)) {
+      const skeleton = createSkeleton(img);
+      img.parentNode.insertBefore(skeleton, img);
+      // Nascondi immagine finché non è caricata
+      img.style.opacity = '0';
+      img.style.transition = `opacity ${CONFIG.fadeInDuration}ms ease-in-out`;
+    }
+
+    attemptLoad(img, src, fallbackSrc, srcset, sizes);
+  }
+
+  /**
+   * Tenta il caricamento di un URL; se fallisce e viene fornito un
+   * fallbackSrc (es. cover IA quando il file specifico è 404), riprova
+   * una sola volta con quello prima di considerare l'errore definitivo.
+   */
+  function attemptLoad(img, src, fallbackSrc, srcset, sizes) {
+    const tempImg = new Image();
+    if (srcset) tempImg.srcset = srcset;
+    if (sizes) tempImg.sizes = sizes;
+
+    tempImg.onload = function () {
+      // Imposta src reale (quello effettivamente caricato, primario o fallback)
+      if (srcset) img.srcset = srcset;
+      img.src = tempImg.currentSrc || tempImg.src;
+
+      // Rimuovi attributi data
+      img.removeAttribute(CONFIG.srcAttribute);
+      img.removeAttribute(CONFIG.fallbackAttribute);
+      if (srcset) img.removeAttribute(CONFIG.srcsetAttribute);
+      if (sizes) img.removeAttribute(CONFIG.sizesAttribute);
+
+      // Attendi che l'immagine sia effettivamente renderizzata
+      setTimeout(() => {
+        img.style.opacity = '1';
+        img.classList.add(CONFIG.loadedClass);
+
+        // [AMI] Notifica i consumatori (es. masonry della galleria)
+        img.dispatchEvent(new CustomEvent('ami:lazy-loaded', { bubbles: true }));
+
+        // Rimuovi skeleton dopo fade-in
         const skeleton = img.previousElementSibling;
-        const hasSkeleton = skeleton && skeleton.classList.contains(CONFIG.skeletonClass);
-
-        const container = img.closest('.photo-viewer') || img.parentElement;
-        const customFallback = container ? container.querySelector('.photo-fallback') : null;
-
-        if (customFallback) {
-            img.style.display = 'none';
-            customFallback.style.display = 'block';
-            if (hasSkeleton) {
-                skeleton.remove();
-            }
-            return;
+        if (skeleton && skeleton.classList.contains(CONFIG.skeletonClass)) {
+          setTimeout(() => {
+            skeleton.remove();
+          }, CONFIG.fadeInDuration);
         }
-
-        // Fallback generico: skeleton con messaggio di errore
-        if (hasSkeleton) {
-            skeleton.style.background = '#ffebee';
-            skeleton.innerHTML = '<span style="color:#d32f2f;font-size:12px;">⚠️ Img non disponibile</span>';
-            skeleton.style.display = 'flex';
-            skeleton.style.alignItems = 'center';
-            skeleton.style.justifyContent = 'center';
-            skeleton.style.textAlign = 'center';
-            skeleton.style.padding = '10px';
-        }
-
-        // Nascondi immagine rotta
-        img.style.display = 'none';
-    }
-
-    /**
-     * Setup Intersection Observer per lazy loading
-     */
-    function setupLazyLoading() {
-        if (!hasIntersectionObserver) {
-            // Fallback: carica tutte le immagini immediatamente
-            console.warn('[LazyLoad] IntersectionObserver non supportato, caricamento immediato');
-            document.querySelectorAll('.' + CONFIG.imageClass).forEach(loadImage);
-            return;
-        }
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    loadImage(entry.target);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            rootMargin: CONFIG.rootMargin,
-            threshold: CONFIG.threshold
-        });
-
-        // Osserva tutte le immagini lazy
-        document.querySelectorAll('.' + CONFIG.imageClass).forEach(img => {
-            observer.observe(img);
-        });
-    }
-
-    /**
-     * Caricamento nativo lazy (browser moderni)
-     */
-    function setupNativeLazyLoad() {
-        if (!hasNativeLazyLoad) return;
-
-        document.querySelectorAll('.' + CONFIG.imageClass).forEach(img => {
-            img.loading = 'lazy';
-
-            // Aggiungi evento load per fade-in anche con native lazy
-            img.addEventListener('load', () => {
-                img.classList.add(CONFIG.loadedClass);
-                const skeleton = img.previousElementSibling;
-                if (skeleton && skeleton.classList.contains(CONFIG.skeletonClass)) {
-                    skeleton.remove();
-                }
-            });
-        });
-    }
-
-    /**
-     * Inizializza sistema lazy loading
-     */
-    function init() {
-        // Aggiungi CSS per animazioni se non esiste
-        if (!document.getElementById('lazy-load-styles')) {
-            const style = document.createElement('style');
-            style.id = 'lazy-load-styles';
-            style.textContent = `
-                @keyframes skeleton-loading {
-                    0% { background-position: 200% 0; }
-                    100% { background-position: -200% 0; }
-                }
-
-                .lazy-skeleton {
-                    position: relative;
-                    overflow: hidden;
-                }
-
-                .lazy-img {
-                    transition: opacity 300ms ease-in-out;
-                }
-
-                .lazy-img.lazy-loaded {
-                    /* Immagine completamente caricata */
-                }
-
-                .lazy-img.lazy-error {
-                    /* Gestione errore - immagine nascosta */
-                }
-            `;
-            document.head.appendChild(style);
-        }
-
-        // Usa native lazy load se disponibile, altrimenti IntersectionObserver
-        if (hasNativeLazyLoad) {
-            setupNativeLazyLoad();
-        }
-
-        // Setup sempre IntersectionObserver per skeleton
-        setupLazyLoading();
-    }
-
-    /**
-     * API pubblica per ricaricare immagini dinamiche
-     */
-    window.LazyImageLoader = {
-        /**
-         * Ricarica immagini in un container specifico
-         * Utile per contenuti caricati dinamicamente (AJAX, etc.)
-         */
-        refresh: function(container) {
-            const root = container || document;
-            const images = root.querySelectorAll('.' + CONFIG.imageClass);
-
-            if (hasIntersectionObserver) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            loadImage(entry.target);
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, {
-                    rootMargin: CONFIG.rootMargin,
-                    threshold: CONFIG.threshold
-                });
-
-                images.forEach(img => observer.observe(img));
-            } else {
-                images.forEach(loadImage);
-            }
-        },
-
-        /**
-         * Carica immediatamente un'immagine specifica
-         */
-        loadNow: function(img) {
-            if (img instanceof HTMLElement) {
-                loadImage(img);
-            } else if (typeof img === 'string') {
-                const element = document.querySelector(img);
-                if (element) loadImage(element);
-            }
-        },
-
-        /**
-         * Distrugge observer e carica tutte le immagini
-         */
-        loadAll: function() {
-            document.querySelectorAll('.' + CONFIG.imageClass).forEach(loadImage);
-        }
+      }, 50);
     };
 
-    // Avvia quando DOM è pronto
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
+    tempImg.onerror = function () {
+      if (fallbackSrc) {
+        // Riprova una sola volta con l'URL di fallback, senza ulteriori fallback
+        attemptLoad(img, fallbackSrc, null, srcset, sizes);
+        return;
+      }
+      console.error('[LazyLoad] Errore caricamento immagine:', src);
+      img.classList.add(CONFIG.errorClass);
+      handleLoadError(img);
+
+      // [AMI] Notifica i consumatori (es. placeholder card in galleria)
+      img.dispatchEvent(new CustomEvent('ami:lazy-error', { bubbles: true }));
+    };
+
+    // Avvia caricamento
+    tempImg.src = src;
+  }
+
+  /**
+   * Gestisce l'errore definitivo di caricamento (dopo eventuale fallback).
+   * Se l'immagine si trova in un contenitore con un elemento ".photo-fallback"
+   * (pattern usato nelle schede documento), nasconde l'immagine e mostra
+   * quell'elemento. Altrimenti mostra il messaggio di errore generico
+   * nello skeleton.
+   */
+  function handleLoadError(img) {
+    const skeleton = img.previousElementSibling;
+    const hasSkeleton = skeleton && skeleton.classList.contains(CONFIG.skeletonClass);
+    const container = img.closest('.photo-viewer') || img.parentElement;
+    const customFallback = container ? container.querySelector('.photo-fallback') : null;
+
+    if (customFallback) {
+      img.style.display = 'none';
+      customFallback.style.display = 'block';
+      if (hasSkeleton) {
+        skeleton.remove();
+      }
+      return;
     }
+
+    // Fallback generico: skeleton con messaggio di errore
+    if (hasSkeleton) {
+      skeleton.style.background = '#ffebee';
+      skeleton.innerHTML = '<span style="color:#d32f2f;font-size:12px;">⚠️ Img non disponibile</span>';
+      skeleton.style.display = 'flex';
+      skeleton.style.alignItems = 'center';
+      skeleton.style.justifyContent = 'center';
+      skeleton.style.textAlign = 'center';
+      skeleton.style.padding = '10px';
+    }
+
+    // Nascondi immagine rotta
+    img.style.display = 'none';
+  }
+
+  /**
+   * Setup Intersection Observer per lazy loading
+   */
+  function setupLazyLoading() {
+    if (!hasIntersectionObserver) {
+      // Fallback: carica tutte le immagini immediatamente
+      console.warn('[LazyLoad] IntersectionObserver non supportato, caricamento immediato');
+      document.querySelectorAll('.' + CONFIG.imageClass).forEach(loadImage);
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          loadImage(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: CONFIG.rootMargin,
+      threshold: CONFIG.threshold
+    });
+
+    // Osserva tutte le immagini lazy
+    document.querySelectorAll('.' + CONFIG.imageClass).forEach(img => {
+      observer.observe(img);
+    });
+  }
+
+  /**
+   * Caricamento nativo lazy (browser moderni)
+   */
+  function setupNativeLazyLoad() {
+    if (!hasNativeLazyLoad) return;
+
+    document.querySelectorAll('.' + CONFIG.imageClass).forEach(img => {
+      img.loading = 'lazy';
+
+      // Aggiungi evento load per fade-in anche con native lazy
+      img.addEventListener('load', () => {
+        img.classList.add(CONFIG.loadedClass);
+        // [AMI] se il flusso skeleton aveva azzerato l'opacità, ripristinala
+        if (img.style.opacity === '0') img.style.opacity = '1';
+        const skeleton = img.previousElementSibling;
+        if (skeleton && skeleton.classList.contains(CONFIG.skeletonClass)) {
+          skeleton.remove();
+        }
+      });
+    });
+  }
+
+  /**
+   * Inizializza sistema lazy loading
+   */
+  function init() {
+    // Aggiungi CSS per animazioni se non esiste
+    if (!document.getElementById('lazy-load-styles')) {
+      const style = document.createElement('style');
+      style.id = 'lazy-load-styles';
+      style.textContent = `
+        @keyframes skeleton-loading {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+        .lazy-skeleton {
+          position: relative;
+          overflow: hidden;
+        }
+        .lazy-img {
+          transition: opacity 300ms ease-in-out;
+        }
+        .lazy-img.lazy-loaded {
+          /* Immagine completamente caricata */
+        }
+        .lazy-img.lazy-error {
+          /* Gestione errore - immagine nascosta */
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    // Usa native lazy load se disponibile, altrimenti IntersectionObserver
+    if (hasNativeLazyLoad) {
+      setupNativeLazyLoad();
+    }
+
+    // Setup sempre IntersectionObserver per skeleton
+    setupLazyLoading();
+  }
+
+  /**
+   * API pubblica per ricaricare immagini dinamiche
+   */
+  window.LazyImageLoader = {
+    /**
+     * Ricarica immagini in un container specifico
+     * Utile per contenuti caricati dinamicamente (AJAX, etc.)
+     */
+    refresh: function (container) {
+      const root = container || document;
+      const images = root.querySelectorAll('.' + CONFIG.imageClass);
+      if (hasIntersectionObserver) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              loadImage(entry.target);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          rootMargin: CONFIG.rootMargin,
+          threshold: CONFIG.threshold
+        });
+        images.forEach(img => observer.observe(img));
+      } else {
+        images.forEach(loadImage);
+      }
+    },
+    /**
+     * Carica immediatamente un'immagine specifica
+     */
+    loadNow: function (img) {
+      if (img instanceof HTMLElement) {
+        loadImage(img);
+      } else if (typeof img === 'string') {
+        const element = document.querySelector(img);
+        if (element) loadImage(element);
+      }
+    },
+    /**
+     * Distrugge observer e carica tutte le immagini
+     */
+    loadAll: function () {
+      document.querySelectorAll('.' + CONFIG.imageClass).forEach(loadImage);
+    }
+  };
+
+  // Avvia quando DOM è pronto
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();

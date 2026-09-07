@@ -2,6 +2,7 @@
    GALLERIA FOTOGRAFICA — AMI
    Masonry dinamico (proporzioni naturali) + timeline a riga unica
    sticky, sincronizzata con header.autohide via --gal-top (JS).
+   Lazy loading con skeleton integrato (lazy-loading.js).
    ============================================================ */
 
 :root {
@@ -43,6 +44,7 @@
 }
 
 .galleria-subtitle { margin: 0; color: var(--gal-muted); font-size: 0.95rem; }
+
 .galleria-empty { margin: 0; color: var(--gal-muted); font-size: 0.95rem; }
 
 /* ------------------------------------------------------------
@@ -190,7 +192,7 @@
   outline-offset: 3px;
 }
 
-/* Media: immagine + overlay, a proporzioni NATURALI (nessun taglio) */
+/* Media: contiene immagine + overlay, a proporzioni NATURALI */
 .card-media {
   position: relative;
   overflow: hidden;
@@ -258,6 +260,35 @@
   font-size: 0.74rem;
   font-weight: 500;
   line-height: 1.3;
+}
+
+/* ------------------------------------------------------------
+   LAZY LOADING CON SKELETON DENTRO LE CARD
+   ------------------------------------------------------------ */
+
+/* Senza JS il tema Material lascia <html class="no-js">: extra.css impone
+   opacity 0 a .lazy-img, che renderebbe le immagini invisibili per sempre.
+   Qui si ripristina la visibilità nel caso no-JS. */
+html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
+
+/* Lo skeleton creato da lazy-loading.js ha width/height inline:
+   qui lo si adatta al contenitore della card. NON si tocca display:
+   inline-block (normale) e flex (stato errore) arrivano inline dallo script. */
+.card-media > .lazy-skeleton {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 240px;
+  vertical-align: top !important;   /* elimina il gap di baseline */
+  border-radius: var(--gal-radius);
+}
+
+/* Niente overlay hover finché lo skeleton è presente: evita il gradiente
+   sul placeholder. :has è già usato altrove nel file, stesso guard. */
+@supports selector(:has(*)) {
+  .card-media:has(.lazy-skeleton) .img-overlay {
+    opacity: 0 !important;
+    pointer-events: none;
+  }
 }
 
 /* ------------------------------------------------------------

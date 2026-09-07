@@ -87,16 +87,33 @@ def load_catalogo():
 
 
 def gallery_card(row):
-    """Genera una card: immagine a proporzioni naturali + overlay metadati."""
+    """Genera una card: immagine a proporzioni naturali + overlay metadati
+    + lazy loading con skeleton (lazy-img/data-src) e fallback su cover IA."""
     titolo = clean_value(row.get("titolo"), "Senza titolo")
     org = clean_value(row.get("organizzazione"))
     data_str = clean_value(row.get("data"))
 
-    img_url = get_img_url(row) or "https://archive.org/services/img/default"
+    url = clean_value(row.get("url"))
+    nome_file = clean_value(row.get("nome_file"))
+    m = re.search(r"archive\.org/details/([^/?#]+)", url) if url else None
+    identifier = m.group(1) if m else None
+
+    if identifier and nome_file:
+        primary = f"https://archive.org/download/{identifier}/{quote(nome_file, safe='')}"
+        fallback = f"https://archive.org/services/img/{identifier}"
+    elif identifier:
+        primary = f"https://archive.org/services/img/{identifier}"
+        fallback = ""
+    else:
+        primary = "https://archive.org/services/img/default"
+        fallback = ""
+
     link_url = sanitize_url(row.get("url"))
 
     titolo_esc = html.escape(titolo)
     titolo_attr = html.escape(titolo, quote=True)
+    primary_esc = html.escape(primary, quote=True)
+    fallback_attr = f' data-src-fallback="{html.escape(fallback, quote=True)}"' if fallback else ""
 
     meta_text = " · ".join(x for x in [data_str, org] if x)
     meta_html = f'<span class="overlay-meta">{html.escape(meta_text)}</span>' if meta_text else ""
@@ -105,7 +122,9 @@ def gallery_card(row):
         '<article class="galleria-card">\n'
         f'<a class="card-link" href="{html.escape(link_url, quote=True)}" target="_blank" rel="noopener noreferrer">\n'
         '<div class="card-media">\n'
-        f'<img class="galleria-img" src="{html.escape(img_url, quote=True)}" alt="{titolo_attr}" loading="lazy" decoding="async">\n'
+        # src nativo = fallback senza JS; data-src = pattern skeleton/fade;
+        # data-src-fallback = retry automatico su cover IA se il file è 404.
+        f'<img class="galleria-img lazy-img" src="{primary_esc}" data-src="{primary_esc}"{fallback_attr} alt="{titolo_attr}" loading="lazy" decoding="async">\n'
         '<div class="img-overlay">\n'
         '<span class="overlay-icon" aria-hidden="true">🔍</span>\n'
         f'<span class="overlay-title">{titolo_esc}</span>\n'
@@ -115,7 +134,6 @@ def gallery_card(row):
         '</a>\n'
         '</article>\n'
     )
-
 
 def generate_gallery():
     """Genera build/galleria/index.md. Ritorna exit code: 0 ok, 1 errore fatale."""
