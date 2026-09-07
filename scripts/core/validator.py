@@ -23,7 +23,7 @@ COLONNE_OPZIONALI_CATALOGO = [
 
 TIPI_DOCUMENTO_VALIDI = [
     'libro', 'opuscolo', 'articolo', 'manifesto', 'foto', 'fotografia',
-    'testo', 'testo_bilingue', 'volantino', 'giornale', 'rivista',
+    'testo', 'testo_bilingue', 'volantino', 'audio', 'periodico', 'giornale', 'rivista',
     'corrispondenza', 'documento', 'archivio', 'altro'
 ]
 
