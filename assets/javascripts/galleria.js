@@ -1,12 +1,10 @@
 /**
  * Galleria Fotografica - Interactive Timeline & Masonry Gallery
- * Features: Active year tracking, smooth scroll, badge updates
+ * Features: Active year tracking, smooth scroll
  */
 document.addEventListener('DOMContentLoaded', () => {
   const sections = document.querySelectorAll('.galleria-year-section');
   const timelineLinks = document.querySelectorAll('.timeline-link');
-  const yearBadge = document.getElementById('galleria-year-badge');
-  const badgeYearValue = document.getElementById('badge-year-value');
   
   if (!sections.length) return;
 
@@ -31,10 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Configurazione IntersectionObserver per tracking anno corrente
-  // rootMargin: "-25% 0px -75% 0px" = attiva quando sezione è nel 25% superiore viewport
   const observerOptions = {
     root: null,
-    rootMargin: '-25% 0px -75% 0px',
+    rootMargin: '-100px 0px -60% 0px',
     threshold: 0
   };
 
@@ -43,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (entry.isIntersecting && entry.intersectionRatio > 0) {
         const year = entry.target.getAttribute('data-year');
         
-        // 1. Aggiorna Timeline Desktop
+        // Aggiorna Timeline
         timelineLinks.forEach(link => {
           if (link.getAttribute('data-year') === year) {
             link.classList.add('active');
@@ -61,18 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.remove('active');
           }
         });
-
-        // 2. Aggiorna Badge Mobile
-        if (badgeYearValue) {
-          badgeYearValue.textContent = year;
-          
-          // Animazione flash quando cambia anno
-          if (yearBadge) {
-            yearBadge.style.animation = 'none';
-            yearBadge.offsetHeight; /* trigger reflow */
-            yearBadge.style.animation = 'pulse 0.3s ease';
-          }
-        }
       }
     });
   }, observerOptions);
@@ -89,9 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const firstLink = document.querySelector(`.timeline-link[data-year="${firstYear}"]`);
     if (firstLink) {
       firstLink.classList.add('active');
-    }
-    if (badgeYearValue) {
-      badgeYearValue.textContent = firstYear;
     }
   }
 });
