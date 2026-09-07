@@ -12,7 +12,13 @@ Uso:
                                               poi rigenera e pubblica
   python Launcher.py --clear-cache            Svuota tutta la cache (IA, hash file, metadati doc)
   python Launcher.py --cache-stats            Mostra statistiche cache
+  python Launcher.py --skip-validation        Salta la validazione dati (scripts/core/validator.py)
+                                              e pubblica comunque anche se ci sono errori
   python Launcher.py --help                   Mostra questo messaggio
+
+Nota: prima di rigenerare il sito, il Launcher esegue sempre la validazione
+di data/dati.xlsx (scripts/core/validator.py). Se la validazione fallisce,
+la pubblicazione viene bloccata, a meno di usare --skip-validation.
 """
 import re
 import subprocess
@@ -22,6 +28,7 @@ from datetime import datetime
 from pathlib import Path
 
 from scripts.core.cache_manager import CacheManager
+from scripts.core.validator import run_validation
 
 ROOT_DIR = Path(__file__).resolve().parent
 SCRIPTS_DIR = ROOT_DIR / "scripts"
@@ -127,9 +134,43 @@ def identifier_ia_per_documento(ami_id):
         return None
 
 
-def aggiorna(messaggio=None, refresh_ia=None, only=None):
+def esegui_validazione(bloccante=True):
+    """
+    Esegue la validazione dei dati (data/dati.xlsx) tramite
+    scripts.core.validator prima di rigenerare il sito.
+
+    Args:
+        bloccante: Se True (default), interrompe l'aggiornamento se la
+            validazione fallisce. Se False, mostra comunque il report ma
+            prosegue (utile con --skip-validation).
+    """
+    stampa_titolo("🔍 Validazione dati (data/dati.xlsx)")
+    esito = run_validation(str(ROOT_DIR / "data"))
+
+    if esito.get('error'):
+        messaggio = f"Impossibile completare la validazione: {esito['error']}"
+        if bloccante:
+            raise ErroreComando(messaggio)
+        print(f"   ⚠️ {messaggio} (proseguo comunque, --skip-validation attivo)")
+        return
+
+    if not esito.get('success', False):
+        if bloccante:
+            raise ErroreComando(
+                "la validazione dei dati è fallita (vedi errori sopra). "
+                "Correggi data/dati.xlsx oppure rilancia con --skip-validation per pubblicare comunque."
+            )
+        print("   ⚠️ Validazione fallita, ma proseguo comunque (--skip-validation attivo).")
+    else:
+        print("   ✅ Dati validati correttamente.")
+
+
+def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
     stampa_titolo("🚀 Aggiornamento del sito AMI")
     verifica_dipendenze()
+
+    # 0bis. Validazione dei dati (blocca la pubblicazione se ci sono errori)
+    esegui_validazione(bloccante=not skip_validation)
 
     # -1. Rigenerazione mirata di specifiche schede documento
     if only:
@@ -213,6 +254,10 @@ def main():
         only = None
         messaggio = None
 
+        skip_validation = '--skip-validation' in args
+        if skip_validation:
+            args = [a for a in args if a != '--skip-validation']
+
         if args:
             if args[0] == '--clear-cache':
                 svuota_cache()
@@ -242,7 +287,7 @@ def main():
             if args and not args[0].startswith('--'):
                 messaggio = args[0]
 
-        aggiorna(messaggio=messaggio, refresh_ia=refresh_ia, only=only)
+        aggiorna(messaggio=messaggio, refresh_ia=refresh_ia, only=only, skip_validation=skip_validation)
 
     except ErroreComando as e:
         print(f"\n❌ ERRORE: {e}")

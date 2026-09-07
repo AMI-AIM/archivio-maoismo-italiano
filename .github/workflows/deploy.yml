@@ -38,6 +38,15 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Validate data (dati.xlsx)
+        run: |
+          python -c "
+          import sys
+          from scripts.core.validator import run_validation
+          esito = run_validation('data')
+          sys.exit(0 if esito.get('success') else 1)
+          "
+
       - name: Sync static assets
         run: python scripts/sync_assets.py
 

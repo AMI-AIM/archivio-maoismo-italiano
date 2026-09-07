@@ -1,9 +1,11 @@
 import pandas as pd
 import re
 import logging
-from typing import List, Tuple, Dict, Any, Optional
+from typing import List, Tuple, Dict, Any, Optional, Set
 from datetime import datetime
 from pathlib import Path
+
+from .utils import split_nomi
 
 logger = logging.getLogger(__name__)
 
@@ -132,12 +134,23 @@ class AdvancedValidator:
         df.columns = df.columns.str.strip().str.lower()
         return df
 
-    def validate_catalogo(self, df: pd.DataFrame) -> Tuple[bool, Dict[str, Any]]:
+    def validate_catalogo(
+        self,
+        df: pd.DataFrame,
+        nomi_persone: Optional[Set[str]] = None,
+        nomi_organizzazioni: Optional[Set[str]] = None,
+    ) -> Tuple[bool, Dict[str, Any]]:
         """
         Valida il DataFrame del Catalogo completo.
 
         Args:
             df: DataFrame del catalogo
+            nomi_persone: Set dei nomi presenti nel foglio Persone, usato per il
+                controllo di integrità referenziale su 'persone_collegate'.
+                Se None, quel controllo viene saltato.
+            nomi_organizzazioni: Set dei nomi presenti nel foglio Organizzazioni,
+                usato per il controllo di integrità referenziale su
+                'organizzazioni_collegate'. Se None, quel controllo viene saltato.
 
         Returns:
             Tuple[bool, Dict]: (Successo, Report completo)
@@ -175,7 +188,7 @@ class AdvancedValidator:
         self._validate_url_ia(df)
 
         # 8. Controllo coerenza riferimenti
-        self._validate_riferimenti(df)
+        self._validate_riferimenti(df, nomi_persone, nomi_organizzazioni)
 
         # 9. Controllo valori vuoti sospetti
         self._validate_valori_sospetti(df)
@@ -380,9 +393,14 @@ class AdvancedValidator:
             if url_malformati:
                 self.result.add_warning(f"URL potenzialmente malformati: {url_malformati[:5]}")
 
-    def _validate_riferimenti(self, df: pd.DataFrame):
+    def _validate_riferimenti(
+        self,
+        df: pd.DataFrame,
+        nomi_persone: Optional[Set[str]] = None,
+        nomi_organizzazioni: Optional[Set[str]] = None,
+    ):
         """Valida riferimenti incrociati (persone, organizzazioni collegate)."""
-        # Controllo sintassi liste separate da punto e virgola
+        # Controllo sintassi liste con separatori misti (',' e ';')
         col_lista = ['persone_collegate', 'organizzazioni_collegate', 'serie']
 
         for col in col_lista:
@@ -394,9 +412,55 @@ class AdvancedValidator:
                 # Controllo che non ci siano separatori inconsistenti
                 valori = df.loc[mask, col]
                 # Rileva uso misto di separatori
-                misto = valori[vali.str.contains(',') & vali.str.contains(';')]
+                misto = valori[valori.str.contains(',') & valori.str.contains(';')]
                 if not misto.empty:
                     self.result.add_info(f"Colonna '{col}': rilevato uso misto di separatori in {len(misto)} righe")
+
+        # Controllo di integrità referenziale vero e proprio: le persone/organizzazioni
+        # citate nel Catalogo devono esistere nei fogli Persone/Organizzazioni,
+        # altrimenti in produzione (schede.py -> link_lista/crea_link) il nome viene
+        # renderizzato come testo semplice, senza link e senza alcun avviso.
+        self._validate_riferimenti_incrociati(
+            df, 'persone_collegate', nomi_persone, 'Persone'
+        )
+        self._validate_riferimenti_incrociati(
+            df, 'organizzazioni_collegate', nomi_organizzazioni, 'Organizzazioni'
+        )
+
+    def _validate_riferimenti_incrociati(
+        self,
+        df: pd.DataFrame,
+        col: str,
+        nomi_validi: Optional[Set[str]],
+        foglio_riferimento: str,
+    ):
+        """
+        Controlla che i nomi elencati in `col` (separati da ';' o ',', come
+        fatto da split_nomi in utils.py) esistano tutti in `nomi_validi`.
+
+        Se `nomi_validi` è None, il controllo viene saltato (permette di
+        chiamare il validatore del Catalogo senza dover sempre caricare
+        anche Persone/Organizzazioni).
+        """
+        if col not in df.columns or nomi_validi is None:
+            return
+
+        mancanti: Dict[str, List[str]] = {}
+        mask = df[col].notna() & (df[col] != '')
+        for idx, valore in df.loc[mask, col].items():
+            for nome in split_nomi(valore):
+                if nome not in nomi_validi:
+                    id_doc = str(df.loc[idx, 'id']) if 'id' in df.columns else f"riga {idx}"
+                    mancanti.setdefault(nome, []).append(id_doc)
+
+        if mancanti:
+            dettaglio = [f"'{nome}' (in {', '.join(ids[:5])}{'...' if len(ids) > 5 else ''})"
+                         for nome, ids in list(mancanti.items())[:10]]
+            self.result.add_warning(
+                f"Colonna '{col}': {len(mancanti)} nomi citati nel Catalogo non trovati "
+                f"nel foglio {foglio_riferimento}: {'; '.join(dettaglio)}"
+            )
+            self.result.stats[f'{col}_riferimenti_mancanti'] = len(mancanti)
 
     def _validate_valori_sospetti(self, df: pd.DataFrame):
         """Rileva valori potenzialmente errati o inconsistenti."""
@@ -447,12 +511,10 @@ def run_validation(data_dir: str) -> Dict[str, Any]:
         print(f"\n🔍 VALIDAZIONE DATI - {excel_path}")
         print(f"📋 Fogli rilevati: {', '.join(sheet_names)}\n")
 
-        # Valida Catalogo
-        if 'Catalogo' in sheet_names:
-            df_cat = pd.read_excel(excel_path, sheet_name='Catalogo', dtype=str).fillna('')
-            valido, report = validator.validate_catalogo(df_cat)
-            reports['catalogo'] = report
-            print(f"Catalogo: {'✅ VALIDO' if valido else '❌ INVALIDO'}")
+        # Carica Persone e Organizzazioni PRIMA del Catalogo: servono per il
+        # controllo di integrità referenziale su persone_collegate/organizzazioni_collegate.
+        nomi_persone = None
+        nomi_organizzazioni = None
 
         # Valida Persone
         if 'Persone' in sheet_names:
@@ -460,6 +522,9 @@ def run_validation(data_dir: str) -> Dict[str, Any]:
             valido, report = validator.validate_persone(df_pers)
             reports['persone'] = report
             print(f"Persone: {'✅ VALIDO' if valido else '❌ INVALIDO'}")
+            df_pers_norm = validator._normalize_columns(df_pers.copy())
+            if 'nome' in df_pers_norm.columns:
+                nomi_persone = {n.strip() for n in df_pers_norm['nome'] if str(n).strip() not in ('', 'nan', 'None')}
 
         # Valida Organizzazioni
         if 'Organizzazioni' in sheet_names:
@@ -467,6 +532,16 @@ def run_validation(data_dir: str) -> Dict[str, Any]:
             valido, report = validator.validate_organizzazioni(df_org)
             reports['organizzazioni'] = report
             print(f"Organizzazioni: {'✅ VALIDO' if valido else '❌ INVALIDO'}")
+            df_org_norm = validator._normalize_columns(df_org.copy())
+            if 'nome' in df_org_norm.columns:
+                nomi_organizzazioni = {n.strip() for n in df_org_norm['nome'] if str(n).strip() not in ('', 'nan', 'None')}
+
+        # Valida Catalogo (con controllo referenziale su Persone/Organizzazioni, se disponibili)
+        if 'Catalogo' in sheet_names:
+            df_cat = pd.read_excel(excel_path, sheet_name='Catalogo', dtype=str).fillna('')
+            valido, report = validator.validate_catalogo(df_cat, nomi_persone, nomi_organizzazioni)
+            reports['catalogo'] = report
+            print(f"Catalogo: {'✅ VALIDO' if valido else '❌ INVALIDO'}")
 
         # Report finale
         tutti_validi = all(r.get('is_valid', False) for r in reports.values())
