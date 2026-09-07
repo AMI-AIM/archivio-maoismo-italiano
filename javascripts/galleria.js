@@ -12,6 +12,30 @@
   var MOBILE_MQ = "(max-width: 560px)";
 
   document.addEventListener("DOMContentLoaded", function () {
+        /* ============ SYNC STICKY: barra chip sempre sotto l'header ============ */
+    /* Con header.autohide l'altezza visibile dell'header cambia durante lo
+       scroll: --gal-top insegue il suo bordo inferiore frame per frame.
+       Header nascosto -> bottom <= 0 -> --gal-top: 0px (barra a filo top). */
+    var header = document.querySelector(".md-header");
+    var rootEl = document.documentElement;
+    var ticking = false;
+
+    function syncStickyTop() {
+      ticking = false;
+      var bottom = header ? header.getBoundingClientRect().bottom : 0;
+      rootEl.style.setProperty("--gal-top", (bottom > 0 ? Math.round(bottom) : 0) + "px");
+    }
+    function onScrollSync() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(syncStickyTop);
+      }
+    }
+
+    window.addEventListener("scroll", onScrollSync, { passive: true });
+    window.addEventListener("resize", onScrollSync);
+    syncStickyTop();
+
     /* ================= MASONRY DINAMICO ================= */
     var grids = Array.prototype.slice.call(document.querySelectorAll(".galleria-grid"));
 
