@@ -85,9 +85,6 @@ hide:
 
   <div class="galleria-layout">
     <nav class="galleria-timeline" id="galleria-timeline" aria-label="Timeline anni">
-      <div class="timeline-header">
-        <span class="timeline-label">Anni</span>
-      </div>
       <ul class="timeline-list">
 """
     
@@ -97,24 +94,19 @@ hide:
     for idx, anno in enumerate(anni_ordinati):
         year_int = int(anno)
         active_class = " active" if idx == 0 else ""
-        html_content += f'        <li><a href="#anno-{year_int}" data-year="{year_int}" class="timeline-link{active_class}">{year_int}</a></li>\n'
+        html_content += f'        <li class="timeline-item"><a href="#anno-{year_int}" data-year="{year_int}" class="timeline-link{active_class}"><span>{year_int}</span></a></li>\n'
     
     if df_gal['Anno'].isna().any():
-        html_content += '        <li><a href="#anno-sd" data-year="s.d." class="timeline-link">s.d.</a></li>\n'
+        html_content += '        <li class="timeline-item"><a href="#anno-sd" data-year="s.d." class="timeline-link"><span>s.d.</span></a></li>\n'
 
     html_content += """      </ul>
     </nav>
 
     <main class="galleria-content">
-      <div class="galleria-year-badge" id="galleria-year-badge" aria-live="polite">
-        <span class="badge-label">Anno</span>
-        <span class="badge-year" id="badge-year-value">1968</span>
-      </div>
 """
 
     # Genera sezioni per anno
     current_year = None
-    card_count = 0
     for index, row in df_gal.iterrows():
         anno = row['Anno']
         
@@ -129,10 +121,7 @@ hide:
             
             html_content += f"""
       <section id="{section_id}" class="galleria-year-section" data-year="{anno_label}">
-        <h2 class="galleria-year-title">
-          <span class="year-number">{anno_label}</span>
-          <span class="year-divider"></span>
-        </h2>
+        <h2 class="galleria-year-title">{anno_label}</h2>
         <div class="galleria-grid">
 """
         
@@ -149,10 +138,9 @@ hide:
         
         # Sanitizza attributi HTML
         titolo_attr = titolo.replace('"', '&quot;')
-        card_count += 1
 
         html_content += f"""
-          <article class="galleria-card" data-order="{card_count}">
+          <article class="galleria-card">
             <a href="{link_url}" target="_blank" rel="noopener noreferrer" class="card-link">
               <div class="galleria-img-container">
                 <img src="{img_url}" alt="{titolo_attr}" class="galleria-img" loading="lazy" decoding="async">
