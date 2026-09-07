@@ -1,21 +1,25 @@
 /**
  * Galleria Fotografica — AMI
- * 1) Masonry dinamico: span di griglia calcolati dalle dimensioni REALI delle immagini.
- * 2) Timeline a riga unica: scrollspy + keep-visible del chip attivo.
- * Le immagini NON vengono tagliate: height auto, proporzioni naturali.
+ * 1) Sync sticky: la barra chip insegue il bordo inferiore dell'header
+ *    (header.autohide) tramite --gal-top, senza sovrapposizioni né buchi.
+ * 2) Masonry dinamico: span di griglia calcolati dalle dimensioni REALI
+ *    delle immagini (proporzioni naturali, nessun taglio).
+ * 3) Timeline a riga unica: scrollspy + keep-visible del chip attivo.
  */
 (function () {
   "use strict";
 
-  var WIDE_ASPECT = 1.45;   // sopra questa proporzione la card diventa a tutta larghezza
-  var CARD_PAD = 14;        // DEVE restare sincronizzato con --gal-gap nel CSS
+  var WIDE_ASPECT = 1.45; // sopra questa proporzione la card va a tutta riga
+  var CARD_PAD = 14;      // DEVE restare sincronizzato con --gal-gap nel CSS
   var MOBILE_MQ = "(max-width: 560px)";
 
   document.addEventListener("DOMContentLoaded", function () {
-        /* ============ SYNC STICKY: barra chip sempre sotto l'header ============ */
-    /* Con header.autohide l'altezza visibile dell'header cambia durante lo
-       scroll: --gal-top insegue il suo bordo inferiore frame per frame.
-       Header nascosto -> bottom <= 0 -> --gal-top: 0px (barra a filo top). */
+    // La galleria è l'unica pagina con questo wrapper: altrove no-op.
+    if (!document.querySelector(".galleria-wrapper")) return;
+
+    /* ============================================================
+       1) SYNC STICKY HEADER / BARRA CHIP
+       ============================================================ */
     var header = document.querySelector(".md-header");
     var rootEl = document.documentElement;
     var ticking = false;
@@ -36,7 +40,9 @@
     window.addEventListener("resize", onScrollSync);
     syncStickyTop();
 
-    /* ================= MASONRY DINAMICO ================= */
+    /* ============================================================
+       2) MASONRY DINAMICO (griglia a span esatti)
+       ============================================================ */
     var grids = Array.prototype.slice.call(document.querySelectorAll(".galleria-grid"));
 
     if (grids.length) {
@@ -60,10 +66,10 @@
         } else if (img.complete) {
           card.classList.add("card-error");
         } else {
-          return; // non ancora caricata
+          return; // immagine non ancora caricata
         }
 
-        // Altezza reale resa dal browser (proporzioni naturali) + gutter verticale
+        // Altezza reale resa dal browser + gutter verticale = span in px
         var h = media.getBoundingClientRect().height + CARD_PAD;
         card.style.gridRowEnd = "span " + Math.max(40, Math.round(h));
       };
@@ -73,7 +79,7 @@
         Array.prototype.slice.call(grid.querySelectorAll(".galleria-card")).forEach(function (card) {
           var img = card.querySelector(".galleria-img");
           if (!img) return;
-          if (img.complete && (img.naturalWidth || img.complete === true)) {
+          if (img.complete) {
             layoutCard(card);
           }
           img.addEventListener("load", function () { layoutCard(card); }, { once: true });
@@ -86,14 +92,14 @@
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function () {
           isMobile = window.matchMedia && window.matchMedia(MOBILE_MQ).matches;
-          document.querySelectorAll(".galleria-card").forEach
-            ? document.querySelectorAll(".galleria-card").forEach(layoutCard)
-            : Array.prototype.slice.call(document.querySelectorAll(".galleria-card")).forEach(layoutCard);
+          Array.prototype.slice.call(document.querySelectorAll(".galleria-card")).forEach(layoutCard);
         }, 150);
       });
     }
 
-    /* ================= TIMELINE A RIGA UNICA ================= */
+    /* ============================================================
+       3) TIMELINE A RIGA UNICA: scrollspy + keep-visible
+       ============================================================ */
     var nav = document.getElementById("galleria-timeline");
     if (!nav) return;
 
