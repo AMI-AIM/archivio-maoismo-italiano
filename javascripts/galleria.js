@@ -3,8 +3,9 @@
  * 1) Sync sticky: barra chip sotto l'header autohide via --gal-top.
  * 2) Masonry dinamico: span calcolati dalle dimensioni reali delle immagini.
  * 3) Timeline a riga unica: scrollspy + keep-visible del chip attivo.
- * 4) Lightbox minimo: <dialog> nativo con immagine, metadati e azioni
- *    (Scheda archivistica / Internet Archive). Senza prev/next né permalink.
+ * 4) Lightbox COMPLETO: dialog nativo con navigazione prev/next (pulsanti e
+ *    frecce), contatore, permalink #doc-<id> con deep-link, pannello
+ *    citazione con copia, barra metadati compatta.
  */
 (function () {
   "use strict";
@@ -176,28 +177,78 @@
     }
 
     /* ============================================================
-       4) LIGHTBOX MINIMO (dialog nativo)
+       4) LIGHTBOX COMPLETO
        ============================================================ */
     var dialog = document.getElementById("galleria-lightbox");
     if (!dialog || typeof dialog.showModal !== "function") return;
 
+    var cards = Array.prototype.slice.call(document.querySelectorAll(".galleria-card"));
+    if (!cards.length) return;
+
     var lbImg = dialog.querySelector(".lightbox-img");
     var lbTitle = dialog.querySelector(".lightbox-title");
     var lbMeta = dialog.querySelector(".lightbox-meta");
+    var lbCounter = dialog.querySelector(".lightbox-counter");
+    var lbPrev = dialog.querySelector(".lightbox-nav--prev");
+    var lbNext = dialog.querySelector(".lightbox-nav--next");
+    var lbClose = dialog.querySelector(".lightbox-close");
     var lbScheda = dialog.querySelector(".lightbox-action--scheda");
     var lbIa = dialog.querySelector(".lightbox-action--ia");
-    var lbClose = dialog.querySelector(".lightbox-close");
+    var lbCiteBtn = dialog.querySelector(".lightbox-action--cite");
+    var lbCitePanel = dialog.getElementById ? document.getElementById("lightbox-cite-panel") : null;
+    lbCitePanel = lbCitePanel || dialog.querySelector(".lightbox-cite");
+    var lbCiteText = lbCitePanel.querySelector(".citazione-testo");
+    var lbCiteCopy = lbCitePanel.querySelector(".citazione-copia");
+
+    var currentIndex = -1;
     var lastTrigger = null;
+    var hashBeforeOpen = "";
 
-    lbImg.addEventListener("load", function () {
-      dialog.classList.remove("is-loading");
-    });
-    lbImg.addEventListener("error", function () {
-      dialog.classList.remove("is-loading");
-      dialog.classList.add("is-error");
-    });
+    function absoluteUrl(rel) {
+      try {
+        return new URL(rel, document.baseURI).href;
+      } catch (e) {
+        return rel;
+      }
+    }
 
-    function openLightbox(card, trigger) {
+    function buildCitation(card) {
+      var titolo = card.getAttribute("data-titolo") || "Senza titolo";
+      var data = card.getAttribute("data-data") || "";
+      var org = card.getAttribute("data-org") || "";
+      var tipo = card.getAttribute("data-tipo") || "";
+      var ia = card.getAttribute("data-ia-url") || "";
+      var schedaRel = card.getAttribute("data-scheda-url") || "";
+      var id = card.id || "";
+
+      var oggi = new Date();
+      var accesso = oggi.getDate() + "/" + (oggi.getMonth() + 1) + "/" + oggi.getFullYear();
+
+      var head = org ? (org + ", " + titolo) : titolo;
+      var cit = head;
+      if (data) cit += ", " + data;
+      if (tipo) cit += " [" + tipo + "]";
+      if (ia) cit += ", in Internet Archive: " + ia;
+      if (schedaRel) {
+        cit += "; AMI — Archivio del Maoismo Italiano, scheda " + (id || "s.i.") +
+               ": " + absoluteUrl(schedaRel);
+      }
+      cit += " (consultato il " + accesso + ").";
+      return cit;
+    }
+
+    function setHash(card) {
+      if (!window.history || !window.history.replaceState) return;
+      if (card && card.id) {
+        window.history.replaceState(null, "", "#doc-" + card.id);
+      }
+    }
+
+    function populate(index) {
+      var card = cards[index];
+      if (!card) return;
+      currentIndex = index;
+
       var titolo = card.getAttribute("data-titolo") || "Senza titolo";
       var data = card.getAttribute("data-data") || "";
       var org = card.getAttribute("data-org") || "";
@@ -205,12 +256,14 @@
       var schedaUrl = card.getAttribute("data-scheda-url") || "";
       var fullSrc = card.getAttribute("data-full-src") || "";
 
-      lastTrigger = trigger || null;
-
       lbTitle.textContent = titolo;
+      lbTitle.title = titolo;
       var metaText = [data, org].filter(Boolean).join(" · ");
       lbMeta.textContent = metaText;
+      lbMeta.title = metaText;
       lbMeta.hidden = !metaText;
+
+      lbCounter.textContent = (index + 1) + " / " + cards.length;
 
       if (schedaUrl) {
         lbScheda.href = schedaUrl;
@@ -221,18 +274,40 @@
       }
       lbIa.href = iaUrl;
 
+      // Pannello citazione: rigenerato e richiuso a ogni documento
+      lbCitePanel.hidden = true;
+      lbCiteBtn.setAttribute("aria-expanded", "false");
+      lbCiteText.value = buildCitation(card);
+
+      lbPrev.disabled = index <= 0;
+      lbNext.disabled = index >= cards.length - 1;
+
       dialog.classList.remove("is-error");
       dialog.classList.add("is-loading");
       lbImg.removeAttribute("src");
       lbImg.alt = titolo;
+      lbImg.src = fullSrc;
 
-      dialog.showModal();
-      lbImg.src = fullSrc; // assegnato dopo showModal: misure corrette
+      setHash(card);
     }
 
-    // Intercetta il click sulle card SOLO se è un click "semplice":
-    // ctrl/meta/shift+click e click col tasto destro/passano al comportamento
-    // nativo del link (apri in nuova scheda ecc.).
+    function openLightbox(card, trigger) {
+      var index = cards.indexOf(card);
+      if (index < 0) return;
+      lastTrigger = trigger || null;
+      hashBeforeOpen = window.location.hash;
+      dialog.showModal();
+      populate(index);
+    }
+
+    function navigate(delta) {
+      var target = currentIndex + delta;
+      if (target < 0 || target >= cards.length) return;
+      populate(target);
+    }
+
+    // Click "semplice" sulle card apre il lightbox; ctrl/meta/shift+tasto
+    // medio conservano il comportamento nativo del link.
     document.addEventListener("click", function (event) {
       if (event.defaultPrevented) return;
       if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -244,21 +319,97 @@
       openLightbox(card, link);
     });
 
-    lbClose.addEventListener("click", function () {
-      dialog.close();
-    });
+    lbPrev.addEventListener("click", function () { navigate(-1); });
+    lbNext.addEventListener("click", function () { navigate(1); });
+    lbClose.addEventListener("click", function () { dialog.close(); });
 
-    // Click sul backdrop (il target è il dialog stesso)
     dialog.addEventListener("click", function (event) {
       if (event.target === dialog) dialog.close();
     });
 
+    // Tastiera: frecce per navigare (ESC chiude, nativo)
+    dialog.addEventListener("keydown", function (event) {
+      if (event.target === lbCiteText) return; // non rubare le frecce al textarea
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        navigate(-1);
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        navigate(1);
+      }
+    });
+
+    // Pannello citazione
+    lbCiteBtn.addEventListener("click", function () {
+      var aperto = lbCitePanel.hidden;
+      lbCitePanel.hidden = !aperto;
+      lbCiteBtn.setAttribute("aria-expanded", String(aperto));
+    });
+
+    lbCiteCopy.addEventListener("click", function () {
+      var testo = lbCiteText.value;
+      var originale = lbCiteCopy.textContent;
+
+      function feedback() {
+        lbCiteCopy.textContent = "Copiato ✓";
+        setTimeout(function () {
+          lbCiteCopy.textContent = originale;
+        }, 1500);
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(testo).then(feedback, function () {
+          lbCiteText.select();
+          document.execCommand("copy");
+          feedback();
+        });
+      } else {
+        lbCiteText.select();
+        document.execCommand("copy");
+        feedback();
+      }
+    });
+
+    lbImg.addEventListener("load", function () {
+      dialog.classList.remove("is-loading");
+    });
+    lbImg.addEventListener("error", function () {
+      dialog.classList.remove("is-loading");
+      dialog.classList.add("is-error");
+    });
+
     dialog.addEventListener("close", function () {
       dialog.classList.remove("is-loading", "is-error");
+
+      // Ripristina l'hash precedente (i permalink #doc- non restano in URL)
+      if (window.history && window.history.replaceState) {
+        var restore = hashBeforeOpen;
+        if (restore.indexOf("#doc-") === 0) restore = "";
+        window.history.replaceState(
+          null, "",
+          window.location.pathname + window.location.search + (restore || "")
+        );
+      }
+      hashBeforeOpen = "";
+
       if (lastTrigger && document.contains(lastTrigger)) {
         lastTrigger.focus({ preventScroll: true });
       }
       lastTrigger = null;
     });
+
+    // Deep-link: /galleria/#doc-AMI-xxxx apre direttamente il lightbox
+    var m = window.location.hash.match(/^#doc-(.+)$/);
+    if (m) {
+      var targetCard = null;
+      try {
+        targetCard = document.getElementById(decodeURIComponent(m[1]));
+      } catch (e) {
+        targetCard = null;
+      }
+      if (targetCard && targetCard.classList.contains("galleria-card")) {
+        openLightbox(targetCard, null);
+      }
+    }
   });
 })();
