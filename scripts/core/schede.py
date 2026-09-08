@@ -3,7 +3,7 @@ import os
 import re
 import urllib.parse
 import pandas as pd
-from .argomenti import build_argomenti_index, get_argomento_slug
+from .argomenti import build_argomenti_index, find_topic_column, get_argomento_slug
 from .citazioni import (
     CITAZIONI_TEMPLATE_VERSION,
     costruisci_payload_citazione,
@@ -39,7 +39,13 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
     print("📄 Creazione delle schede dei documenti...")
     documenti_dir = os.path.join(output_dir, "documenti")
     os.makedirs(documenti_dir, exist_ok=True)
-    argomenti_index = build_argomenti_index(df)
+    # Colonna argomenti/serie: stessa logica condivisa usata da
+    # scripts/argomenti.py (core/argomenti.find_topic_column), cosi' le due
+    # generazioni restano sempre sincronizzate anche se il foglio Excel
+    # usa un alias diverso da 'serie'. Bug corretto: prima questa funzione
+    # leggeva sempre e solo la colonna 'serie' in modo hardcoded.
+    topic_column = find_topic_column(df) or 'serie'
+    argomenti_index = build_argomenti_index(df, topic_column=topic_column)
     contatore_generati = 0
     contatore_saltati = 0
     
@@ -122,7 +128,7 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
         tipo_display = "testo" if tipo == "testo_bilingue" else tipo
         tipo_display = tipo_display.capitalize() if tipo_display else ""
         
-        serie = str(row.get("serie", "")).strip()
+        serie = str(row.get(topic_column, "")).strip()
         if serie in ("nan", "None"):
             serie = ""
         

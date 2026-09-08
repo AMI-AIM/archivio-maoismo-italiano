@@ -8,7 +8,12 @@ import pandas as pd
 
 from core.utils import slugify, formatta_data
 from core.site_config import site_path
-from core.argomenti import build_argomenti_index, normalize_key, split_argomenti
+from core.argomenti import (
+    build_argomenti_index,
+    find_topic_column,
+    normalize_key,
+    split_argomenti,
+)
 
 try:
     from core.site_config import SITE_URL
@@ -108,14 +113,6 @@ def get_years_text(docs):
     if min_year == max_year:
         return str(min_year)
     return f'{min_year}–{max_year}'
-
-
-def find_column(df, candidates):
-    """Trova la prima colonna disponibile tra quelle candidate."""
-    for candidate in candidates:
-        if candidate in df.columns:
-            return candidate
-    return None
 
 
 def clean_argomenti_dir():
@@ -540,10 +537,10 @@ def genera_argomenti():
         print("   ⚠️ Il foglio 'Catalogo' in dati.xlsx è vuoto.")
         return
 
-    topic_column = find_column(
-        df_catalogo,
-        ['serie', 'argomenti', 'argomento', 'tag', 'tags']
-    )
+    # Colonna argomenti: stessa logica condivisa usata da core/schede.py,
+    # cosi' le due generazioni restano sempre sincronizzate anche se il
+    # foglio Excel usa un alias diverso da 'serie'.
+    topic_column = find_topic_column(df_catalogo)
 
     if not topic_column:
         print("   ❌ ERRORE: nessuna colonna argomento trovata (cercavo 'Serie', 'Argomenti', 'Argomento', 'Tag', 'Tags').")

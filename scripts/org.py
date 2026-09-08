@@ -1,9 +1,10 @@
+import html
 import os
 import json
 import hashlib
 import pandas as pd
 
-from core.utils import slugify, formatta_data, split_nomi
+from core.utils import escape_yaml_string, slugify, formatta_data, split_nomi
 from core.site_config import site_path
 from core.catalog_indexer import CatalogIndexer
 from core.schema_generator import SchemaGenerator
@@ -200,9 +201,17 @@ def genera_organizzazioni():
         slug = data['slug']
         file_path = os.path.join(org_dir, f'{slug}.md')
 
+        # NOTA: 'storia' resta intenzionalmente senza escape quando
+        # proviene dal foglio Excel (testo lungo curato dal redattore,
+        # stessa convenzione di 'biografia' in persone.py e di
+        # descrizione_ia in core/schede.py). Il messaggio di fallback
+        # generato dallo script, invece, contiene 'nome' e va escapato.
         storia_text = data['storia']
         if not storia_text:
-            storia_text = f'<p><em>Scheda in fase di redazione. Nel frattempo, consulta i documenti collegati a {nome} qui sotto.</em></p>'
+            storia_text = (
+                '<p><em>Scheda in fase di redazione. Nel frattempo, consulta '
+                f'i documenti collegati a {html.escape(nome)} qui sotto.</em></p>'
+            )
         elif '\n' in storia_text:
             storia_text = '<p>' + '</p><p>'.join(storia_text.split('\n')) + '</p>'
 
@@ -218,9 +227,11 @@ def genera_organizzazioni():
         )
         schema_json = json.dumps(schema, ensure_ascii=False)
 
+        # FIX: title/description del frontmatter YAML ora passano da
+        # escape_yaml_string() (utils.py), stessa correzione di persone.py.
         frontmatter = f"""---
-title: "{nome}"
-description: "Documenti relativi a {nome}"
+title: "{escape_yaml_string(nome)}"
+description: "Documenti relativi a {escape_yaml_string(nome)}"
 hide:
   - navigation
   - toc
@@ -233,6 +244,8 @@ hide:
 </script>
 """
 
+        nome_attr = html.escape(nome, quote=True)
+
         if data.get('immagine'):
             img_url = data['immagine']
             bio_section = f'''
@@ -241,7 +254,7 @@ hide:
 {storia_text}
     </div>
     <div class="org-bio-image">
-        <img src="{img_url}" alt="Logo di {nome}, organizzazione nel maoismo italiano" class="org-bio-img" loading="lazy">
+        <img src="{img_url}" alt="Logo di {nome_attr}, organizzazione nel maoismo italiano" class="org-bio-img" loading="lazy">
     </div>
 </div>
 '''
@@ -252,23 +265,27 @@ hide:
 </div>
 '''
 
-        dates_html = f'<div class="org-dates">{data["data_range"]}</div>' if data["data_range"] else ''
+        data_range_html = html.escape(data['data_range'])
+        dates_html = f'<div class="org-dates">{data_range_html}</div>' if data['data_range'] else ''
 
+        nome_html = html.escape(nome)
         content = f"""
-<h1 class="org-name">{nome}</h1>
+<h1 class="org-name">{nome_html}</h1>
 {dates_html}
 {bio_section}
 <h2 style="font-weight: bold; font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0;">Documenti</h2>
 <div class="catalogo-lista">
 """
         for doc in data['documenti']:
-            ruoli_text = ", ".join(doc['ruoli'])
+            ruoli_text = html.escape(", ".join(doc['ruoli']))
             doc_url = site_path(f"documenti/{doc['id']}/")
+            doc_data_html = html.escape(doc['data'])
+            doc_titolo_html = html.escape(doc['titolo'])
             content += f"""
 <div class="doc-row">
-    <div class="doc-data">{doc['data']}</div>
+    <div class="doc-data">{doc_data_html}</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="{doc_url}">{doc['titolo']}</a></div>
+        <div class="doc-titolo"><a href="{doc_url}">{doc_titolo_html}</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">{ruoli_text}</span></div>
     </div>
 </div>
@@ -310,11 +327,14 @@ hide:
             num_doc = data['num_doc']
             date_range = data['data_range']
             categoria = data['categoria']
+            nome_html = html.escape(nome, quote=True)
+            date_range_html = html.escape(date_range)
+            categoria_html = html.escape(categoria)
 
             if data.get('immagine'):
-                avatar_html = f'<img src="{data["immagine"]}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
+                avatar_html = f'<img src="{data["immagine"]}" alt="{nome_html}" class="top-card-avatar-img" loading="lazy">'
             else:
-                avatar_html = f'<img src="{PLACEHOLDER_URL}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
+                avatar_html = f'<img src="{PLACEHOLDER_URL}" alt="{nome_html}" class="top-card-avatar-img" loading="lazy">'
 
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
 
@@ -324,9 +344,9 @@ hide:
             lines.append(f'                {avatar_html}')
             lines.append(f'            </div>')
             lines.append(f'            <div class="top-card-text">')
-            lines.append(f'                <div class="top-card-tipo">{categoria}</div>')
-            lines.append(f'                <div class="top-card-name">{nome}</div>')
-            lines.append(f'                <div class="top-card-dates">{date_range}</div>')
+            lines.append(f'                <div class="top-card-tipo">{categoria_html}</div>')
+            lines.append(f'                <div class="top-card-name">{nome_html}</div>')
+            lines.append(f'                <div class="top-card-dates">{date_range_html}</div>')
             lines.append(f'                <div class="top-card-count">{count_text}</div>')
             lines.append(f'            </div>')
             lines.append(f'        </a>')
@@ -356,13 +376,16 @@ hide:
             date_range = data['data_range']
             categoria = data['categoria']
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
-            lettera = nome[0].upper()
+            lettera = html.escape(nome[0].upper(), quote=True)
+            nome_html = html.escape(nome)
+            date_range_html = html.escape(date_range)
+            categoria_html = html.escape(categoria)
 
             lines.append(f'<div class="org-card" data-lettera="{lettera}">')
             lines.append(f'    <a href="{slug}/" class="org-link">')
-            lines.append(f'        <div class="org-tipo">{categoria}</div>')
-            lines.append(f'        <div class="org-name">{nome}</div>')
-            lines.append(f'        <div class="org-dates">{date_range}</div>')
+            lines.append(f'        <div class="org-tipo">{categoria_html}</div>')
+            lines.append(f'        <div class="org-name">{nome_html}</div>')
+            lines.append(f'        <div class="org-dates">{date_range_html}</div>')
             lines.append(f'        <div class="org-count">{count_text}</div>')
             lines.append(f'    </a>')
             lines.append(f'</div>')

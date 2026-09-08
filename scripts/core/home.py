@@ -1,3 +1,4 @@
+import html
 import os
 import re
 from collections import Counter
@@ -70,11 +71,14 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
         if org:
             parti_sommario.append(org)
         sommario = ' \u00b7 '.join(parti_sommario) if parti_sommario else 'Documento storico'
+        # FIX: tipo_display e org sono dati d'archivio (colonne 'tipo' e
+        # 'organizzazione'), non testo interno controllato: vanno
+        # escapati prima di finire dentro i tag <span>.
         meta_html_parts = []
         if tipo_display:
-            meta_html_parts.append(f'<span class="doc-type-chip">{tipo_display}</span>')
+            meta_html_parts.append(f'<span class="doc-type-chip">{html.escape(tipo_display)}</span>')
         if org:
-            meta_html_parts.append(f'<span class="doc-org">{org}</span>')
+            meta_html_parts.append(f'<span class="doc-org">{html.escape(org)}</span>')
         meta_html = ''.join(meta_html_parts) if meta_html_parts else '<span class="doc-org">Documento storico</span>'
         try:
             num_id = int(re.search(r'(\d+)', ami_id).group(1))
@@ -178,17 +182,20 @@ hide:
   <div class="evidenza-grid">
 """
         for doc in evidenza_ordinati:
+            # FIX: titolo e' dato d'archivio non escapato; viene usato sia
+            # come testo visibile sia come attributo (alt/title).
+            titolo_html = html.escape(doc['titolo'], quote=True)
             if doc.get('copertina'):
-                img_html = f'              <img data-src="{doc["copertina"]}" alt="{doc["titolo"]}" class="lazy-img evidenza-thumbnail-img">'
+                img_html = f'              <img data-src="{doc["copertina"]}" alt="{titolo_html}" class="lazy-img evidenza-thumbnail-img">'
             else:
                 img_html = '              <span class="evidenza-placeholder"></span>'
             home_content += f"""
     <div class="evidenza-card">
-        <a href="documenti/{doc['id']}/" class="evidenza-link" title="{doc['titolo']}">
+        <a href="documenti/{doc['id']}/" class="evidenza-link" title="{titolo_html}">
             <div class="evidenza-thumbnail">
 {img_html}
             </div>
-            <div class="evidenza-titolo">{doc['titolo']}</div>
+            <div class="evidenza-titolo">{titolo_html}</div>
         </a>
     </div>
 """
@@ -226,11 +233,16 @@ hide:
     <div class="catalogo-lista">
 """
     for s in ultime_tre:
+        # FIX: s['data'] e s['titolo'] sono dati d'archivio non escapati;
+        # s['meta_html'] e' invece gia' escapato al momento della sua
+        # costruzione (vedi sopra), quindi va inserito cosi' com'e'.
+        data_html = html.escape(s['data'])
+        titolo_html = html.escape(s['titolo'], quote=True)
         home_content += f"""
       <div class="doc-row">
-        <div class="doc-data">{s['data']}</div>
+        <div class="doc-data">{data_html}</div>
         <div class="doc-contenuto">
-          <div class="doc-titolo"><a href="documenti/{s['id']}/" title="{s['titolo']}">{s['titolo']}</a></div>
+          <div class="doc-titolo"><a href="documenti/{s['id']}/" title="{titolo_html}">{titolo_html}</a></div>
           <div class="doc-meta">{s['meta_html']}</div>
         </div>
       </div>
@@ -272,17 +284,21 @@ hide:
             morte = str(info_persona.get('morte', '')).strip()
             date_vita = ' \u2013 '.join([d for d in [nascita, morte] if d and d not in ['nan', 'None', '']])
             etichetta_conteggio = "1 documento collegato" if conteggio == 1 else f"{conteggio} documenti collegati"
-            iniziali = estrai_iniziali(nome)
+            # FIX: nome, date_vita e le iniziali derivate da nome sono
+            # dati d'archivio non escapati.
+            nome_html = html.escape(nome)
+            date_vita_html = html.escape(date_vita)
+            iniziali_html = html.escape(estrai_iniziali(nome))
             home_content += f"""
       <div class="doc-row doc-row-persona">
         <div class="persona-avatar persona-avatar--{rank}">
-          <span class="persona-iniziali">{iniziali}</span>
+          <span class="persona-iniziali">{iniziali_html}</span>
           <span class="persona-rank-badge persona-rank-badge--{rank}">{rank}</span>
         </div>
         <div class="doc-contenuto">
-          <div class="doc-titolo"><a href="persone/{slug}/">{nome}</a></div>
+          <div class="doc-titolo"><a href="persone/{slug}/">{nome_html}</a></div>
           <div class="doc-sommario">{etichetta_conteggio}</div>
-          {f'<div class="persona-date">{date_vita}</div>' if date_vita else ''}
+          {f'<div class="persona-date">{date_vita_html}</div>' if date_vita_html else ''}
         </div>
       </div>
 """
@@ -327,17 +343,21 @@ hide:
             if data_range in ['nan', 'None']:
                 data_range = ''
             etichetta_conteggio = "1 documento collegato" if conteggio == 1 else f"{conteggio} documenti collegati"
-            iniziali = estrai_iniziali(nome)
+            # FIX: nome, data_range e le iniziali derivate da nome sono
+            # dati d'archivio non escapati.
+            nome_html = html.escape(nome)
+            data_range_html = html.escape(data_range)
+            iniziali_html = html.escape(estrai_iniziali(nome))
             home_content += f"""
       <div class="doc-row doc-row-persona">
         <div class="persona-avatar persona-avatar--{rank}">
-          <span class="persona-iniziali">{iniziali}</span>
+          <span class="persona-iniziali">{iniziali_html}</span>
           <span class="persona-rank-badge persona-rank-badge--{rank}">{rank}</span>
         </div>
         <div class="doc-contenuto">
-          <div class="doc-titolo"><a href="organizzazioni/{slug}/">{nome}</a></div>
+          <div class="doc-titolo"><a href="organizzazioni/{slug}/">{nome_html}</a></div>
           <div class="doc-sommario">{etichetta_conteggio}</div>
-          {f'<div class="persona-date">{data_range}</div>' if data_range else ''}
+          {f'<div class="persona-date">{data_range_html}</div>' if data_range_html else ''}
         </div>
       </div>
 """

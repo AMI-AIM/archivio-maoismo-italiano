@@ -1,3 +1,4 @@
+import html
 import pandas as pd
 import os
 import json
@@ -61,13 +62,24 @@ def trova_soggetto(nome, persone, organizzazioni):
         return None, None
 
 def crea_link(nome, persone, organizzazioni):
+    """
+    Crea il link HTML a una persona/organizzazione, o restituisce il
+    nome come testo semplice se non e' presente nei fogli Persone/
+    Organizzazioni.
+
+    FIX: il nome (dato d'archivio, non controllato dal codice) veniva
+    inserito senza escape sia nel testo del link sia come testo semplice:
+    un titolo/nome con caratteri come '&', '<', '>' o '"' avrebbe rotto
+    il markup della pagina. Ora e' sempre passato attraverso html.escape().
+    """
     if not nome or nome in ['nan', 'None']:
         return ''
     sezione, slug = trova_soggetto(nome, persone, organizzazioni)
+    nome_html = html.escape(nome)
     if sezione:
-        return f'<a href="{site_path(f"{sezione}/{slug}/")}">{nome}</a>'
+        return f'<a href="{site_path(f"{sezione}/{slug}/")}">{nome_html}</a>'
     else:
-        return nome
+        return nome_html
 
 def link_lista(nomi_str, persone, organizzazioni):
     nomi = split_nomi(nomi_str)

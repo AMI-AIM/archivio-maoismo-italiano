@@ -1,9 +1,10 @@
+import html
 import os
 import json
 import hashlib
 import pandas as pd
 
-from core.utils import slugify, formatta_data, split_nomi
+from core.utils import escape_yaml_string, slugify, formatta_data, split_nomi
 from core.site_config import site_path
 from core.catalog_indexer import CatalogIndexer
 from core.schema_generator import SchemaGenerator
@@ -173,9 +174,18 @@ def genera_persone():
         slug = data['slug']
         file_path = os.path.join(persone_dir, f'{slug}.md')
 
+        # NOTA: 'biografia' resta intenzionalmente senza escape quando
+        # proviene dal foglio Excel (e' testo lungo curato dal
+        # redattore, che puo' contenere markup voluto come <em>/<a>,
+        # stessa convenzione usata per descrizione_ia in core/schede.py).
+        # Il messaggio di fallback qui sotto, invece, e' generato dallo
+        # script e contiene 'nome': quello va sempre escapato.
         bio_text = data['biografia']
         if not bio_text:
-            bio_text = f'<p><em>Scheda biografica in fase di redazione. Nel frattempo, consulta i documenti collegati a {nome} qui sotto.</em></p>'
+            bio_text = (
+                '<p><em>Scheda biografica in fase di redazione. Nel frattempo, '
+                f'consulta i documenti collegati a {html.escape(nome)} qui sotto.</em></p>'
+            )
         elif '\n' in bio_text:
             bio_text = '<p>' + '</p><p>'.join(bio_text.split('\n')) + '</p>'
 
@@ -190,9 +200,13 @@ def genera_persone():
         )
         schema_json = json.dumps(schema, ensure_ascii=False)
 
+        # FIX: title/description del frontmatter YAML ora passano da
+        # escape_yaml_string() (utils.py), che raddoppia backslash e
+        # virgolette: un nome con una virgolette doppia avrebbe altrimenti
+        # rotto il parsing YAML della pagina.
         frontmatter = f"""---
-title: "{nome}"
-description: "Scheda biografica e documenti di {nome}"
+title: "{escape_yaml_string(nome)}"
+description: "Scheda biografica e documenti di {escape_yaml_string(nome)}"
 hide:
   - navigation
   - toc
@@ -205,6 +219,8 @@ hide:
 </script>
 """
 
+        nome_attr = html.escape(nome, quote=True)
+
         if data.get('immagine'):
             img_url = data['immagine']
             bio_section = f'''
@@ -213,7 +229,7 @@ hide:
 {bio_text}
     </div>
     <div class="person-bio-image">
-        <img src="{img_url}" alt="Foto di {nome}, persona nel maoismo italiano" class="person-bio-img" loading="lazy">
+        <img src="{img_url}" alt="Foto di {nome_attr}, persona nel maoismo italiano" class="person-bio-img" loading="lazy">
     </div>
 </div>
 '''
@@ -224,23 +240,27 @@ hide:
 </div>
 '''
 
-        dates_html = f'<div class="person-dates">{data["data_range"]}</div>' if data["data_range"] else ''
+        data_range_html = html.escape(data['data_range'])
+        dates_html = f'<div class="person-dates">{data_range_html}</div>' if data['data_range'] else ''
 
+        nome_html = html.escape(nome)
         content = f"""
-<h1 class="person-name">{nome}</h1>
+<h1 class="person-name">{nome_html}</h1>
 {dates_html}
 {bio_section}
 <h2 style="font-weight: bold; font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0;">Documenti</h2>
 <div class="catalogo-lista">
 """
         for doc in data['documenti']:
-            ruoli_text = ", ".join(doc['ruoli'])
+            ruoli_text = html.escape(", ".join(doc['ruoli']))
             doc_url = site_path(f"documenti/{doc['id']}/")
+            doc_data_html = html.escape(doc['data'])
+            doc_titolo_html = html.escape(doc['titolo'])
             content += f"""
 <div class="doc-row">
-    <div class="doc-data">{doc['data']}</div>
+    <div class="doc-data">{doc_data_html}</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="{doc_url}">{doc['titolo']}</a></div>
+        <div class="doc-titolo"><a href="{doc_url}">{doc_titolo_html}</a></div>
         <div class="doc-ruoli"><span class="ruolo-badge">{ruoli_text}</span></div>
     </div>
 </div>
@@ -281,11 +301,13 @@ hide:
             slug = data['slug']
             num_doc = data['num_doc']
             date_vita = data['data_range']
+            nome_html = html.escape(nome, quote=True)
+            date_vita_html = html.escape(date_vita)
 
             if data.get('immagine'):
-                avatar_html = f'<img src="{data["immagine"]}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
+                avatar_html = f'<img src="{data["immagine"]}" alt="{nome_html}" class="top-card-avatar-img" loading="lazy">'
             else:
-                avatar_html = f'<img src="{PLACEHOLDER_URL}" alt="{nome}" class="top-card-avatar-img" loading="lazy">'
+                avatar_html = f'<img src="{PLACEHOLDER_URL}" alt="{nome_html}" class="top-card-avatar-img" loading="lazy">'
 
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
 
@@ -295,8 +317,8 @@ hide:
             lines.append(f'                {avatar_html}')
             lines.append(f'            </div>')
             lines.append(f'            <div class="top-card-text">')
-            lines.append(f'                <div class="top-card-name">{nome}</div>')
-            lines.append(f'                <div class="top-card-dates">{date_vita}</div>')
+            lines.append(f'                <div class="top-card-name">{nome_html}</div>')
+            lines.append(f'                <div class="top-card-dates">{date_vita_html}</div>')
             lines.append(f'                <div class="top-card-count">{count_text}</div>')
             lines.append(f'            </div>')
             lines.append(f'        </a>')
@@ -325,12 +347,14 @@ hide:
             num_doc = data['num_doc']
             date_vita = data['data_range']
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
-            lettera = nome[0].upper()
+            lettera = html.escape(nome[0].upper(), quote=True)
+            nome_html = html.escape(nome)
+            date_vita_html = html.escape(date_vita)
 
             lines.append(f'<div class="people-card" data-lettera="{lettera}">')
             lines.append(f'    <a href="{slug}/" class="people-link">')
-            lines.append(f'        <div class="people-name">{nome}</div>')
-            lines.append(f'        <div class="people-dates">{date_vita}</div>')
+            lines.append(f'        <div class="people-name">{nome_html}</div>')
+            lines.append(f'        <div class="people-dates">{date_vita_html}</div>')
             lines.append(f'        <div class="people-count">{count_text}</div>')
             lines.append(f'    </a>')
             lines.append(f'</div>')

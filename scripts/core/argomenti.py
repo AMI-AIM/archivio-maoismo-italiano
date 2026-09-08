@@ -9,6 +9,15 @@ schede documento), cosi' i link puntano sempre alla pagina corretta.
 Gli slug sono assegnati in ordine alfabetico per etichetta, in modo
 deterministico: a parita' di Catalogo, argomenti.py e schede.py
 producono sempre gli stessi slug.
+
+NOTA (fix coerenza colonna argomenti): find_topic_column() e' anch'essa
+fonte unica di verita' per QUALE colonna del Catalogo contiene gli
+argomenti. In precedenza scripts/argomenti.py cercava la colonna tra
+piu' alias possibili ('serie', 'argomenti', 'argomento', 'tag', 'tags'),
+mentre core/schede.py leggeva sempre e solo 'serie' in modo hardcoded:
+se il foglio Excel avesse usato un alias diverso da 'serie', le pagine
+argomento e i backlink nelle singole schede sarebbero andati fuori
+sincrono tra loro. Ora entrambi i chiamanti usano find_topic_column().
 """
 import re
 import unicodedata
@@ -22,6 +31,37 @@ RESERVED_SLUGS = {
     'sitemap',
     'robots',
 }
+
+# Alias accettati per la colonna argomenti/serie nel foglio Catalogo,
+# in ordine di preferenza.
+CANDIDATE_TOPIC_COLUMNS = ['serie', 'argomenti', 'argomento', 'tag', 'tags']
+
+
+def find_topic_column(df, candidates=None):
+    """
+    Trova la prima colonna disponibile tra quelle candidate per gli
+    argomenti/serie di un documento.
+
+    Fonte unica di verita' condivisa da scripts/argomenti.py (pagine
+    argomento) e core/schede.py (backlink nelle schede documento):
+    usarla in entrambi i punti garantisce che le due generazioni
+    leggano sempre la stessa colonna, anche se nel foglio Excel viene
+    usato un alias diverso da 'serie'.
+
+    Args:
+        df: DataFrame con colonne gia' normalizzate (minuscole/strip).
+        candidates: lista di alias da provare, in ordine di preferenza.
+            Default: CANDIDATE_TOPIC_COLUMNS.
+
+    Returns:
+        str o None: nome della prima colonna trovata, None se nessuna
+        delle colonne candidate e' presente nel DataFrame.
+    """
+    candidates = candidates or CANDIDATE_TOPIC_COLUMNS
+    for candidate in candidates:
+        if candidate in df.columns:
+            return candidate
+    return None
 
 
 def normalize_key(value):
@@ -95,6 +135,9 @@ def build_argomenti_index(df_catalogo, topic_column='serie'):
     Args:
         df_catalogo: DataFrame del foglio Catalogo (colonne gia' lowercase).
         topic_column: nome della colonna argomenti (default 'serie').
+            I chiamanti dovrebbero determinarla con find_topic_column()
+            piuttosto che affidarsi al default, per restare coerenti
+            anche quando il foglio usa un alias diverso da 'serie'.
 
     Returns:
         dict: {normalize_key(label): {'label': str, 'slug': str}}
