@@ -64,26 +64,22 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
             copertina_url = f"https://archive.org/services/img/{identifier}"
         else:
             copertina_url = None
-
         parti_sommario = []
         if tipo:
             parti_sommario.append(tipo)
         if org:
             parti_sommario.append(org)
         sommario = ' \u00b7 '.join(parti_sommario) if parti_sommario else 'Documento storico'
-
         meta_html_parts = []
         if tipo_display:
             meta_html_parts.append(f'<span class="doc-type-chip">{tipo_display}</span>')
         if org:
             meta_html_parts.append(f'<span class="doc-org">{org}</span>')
         meta_html = ''.join(meta_html_parts) if meta_html_parts else '<span class="doc-org">Documento storico</span>'
-
         try:
             num_id = int(re.search(r'(\d+)', ami_id).group(1))
         except Exception:
             num_id = 0
-
         schede.append({
             'id': ami_id,
             'titolo': titolo,
@@ -92,7 +88,6 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
             'meta_html': meta_html,
             'num_id': num_id
         })
-
         if ami_id in EVIDENZA_IDS:
             documenti_evidenza.append({
                 'id': ami_id,
@@ -103,7 +98,6 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
                 'num_id': num_id,
                 'copertina': copertina_url
             })
-
         # ---- Conteggio PERSONE (autore + persone_collegate) ----
         autore_raw = str(row.get('autore', '')).strip()
         persone_collegate_raw = str(row.get('persone_collegate', '')).strip()
@@ -115,7 +109,6 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
         for nome in nomi_da_contare:
             if nome in persone:
                 conteggio_persone[nome] += 1
-
         # ---- Conteggio ORGANIZZAZIONI (organizzazione + organizzazioni_collegate) ----
         org_raw = str(row.get('organizzazione', '')).strip()
         org_collegate_raw = str(row.get('organizzazioni_collegate', '')).strip()
@@ -130,14 +123,12 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
 
     schede.sort(key=lambda x: x['num_id'], reverse=True)
     ultime_tre = schede[:3]
-
     evidenza_ordinati = []
     for id_target in EVIDENZA_IDS:
         for doc in documenti_evidenza:
             if doc['id'] == id_target:
                 evidenza_ordinati.append(doc)
                 break
-
     persone_top = conteggio_persone.most_common(3)
     organizzazioni_top = conteggio_organizzazioni.most_common(3)
 
@@ -156,7 +147,7 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
       <a href="documenti/" class="banner-button" style="display: inline-block; padding: 0.5rem 1.2rem; background-color: #ffffff; color: #b71c1c !important; font-weight: 600; font-size: 0.9rem; border-radius: 6px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.25); white-space: nowrap; flex-shrink: 0;">Esplora l'archivio</a>
       <form class="banner-search" id="hero-search-form" action="documenti/" method="get" style="display: flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); border-radius: 24px; padding: 0.3rem 0.8rem; backdrop-filter: blur(2px); transition: background 0.2s, border-color 0.2s; position: relative; flex: 1 1 auto; min-width: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="banner-search-icon" aria-hidden="true" style="width: 1.1rem; height: 1.1rem; fill: #ffffff; flex-shrink: 0;">
-          <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5s2 4.5 4.5 4.5 4.5-2 4.5-4.5S12 5 9.5 5z"/>
+          <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5s2 4.5 4.5 4.5S14 9.5 14 4.5 12 5 9.5 5z"/>
         </svg>
         <input type="text" id="hero-search-input" name="q" placeholder="Cerca nell'archivio..." aria-label="Cerca nell'archivio" autocomplete="off" style="background: transparent; border: none; outline: none; color: #ffffff; font-size: 0.9rem; width: 100%; min-width: 140px; flex: 1 1 auto;">
         <button type="submit" aria-label="Cerca" style="background: none; border: none; color: #ffffff; font-weight: 600; font-size: 0.85rem; cursor: pointer; padding: 0.2rem 0.4rem; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; flex-shrink: 0;">Cerca</button>
@@ -170,8 +161,12 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
     # SEZIONE DOCUMENTI IN EVIDENZA (con tooltip sui titoli)
     if evidenza_ordinati:
         home_content = f"""---
-title: "Archivio del Maoismo Italiano - Fonti primarie del movimento filo-cinese in Italia"
-description: "Archivio digitale volto alla conservazione e alla valorizzazione di documenti e fonti primarie (volantini, manifesti, periodici, foto...) relative al movimento maoista o 'filo-cinese' in Italia (anni '60-'90). Catalogo ricercabile tramite schede documentarie, biografie di militanti e organizzazioni, percorsi tematici."
+title: 'Archivio del Maoismo Italiano - Fonti primarie del movimento filo-cinese in Italia'
+description: >-
+  Archivio digitale volto alla conservazione e alla valorizzazione di documenti e fonti primarie 
+  (volantini, manifesti, periodici, foto...) relative al movimento maoista o 'filo-cinese' in Italia 
+  (anni '60-'90). Catalogo ricercabile tramite schede documentarie, biografie di militanti 
+  e organizzazioni, percorsi tematici.
 hide:
   - toc
 ---
@@ -203,8 +198,12 @@ hide:
 """
     else:
         home_content = f"""---
-title: "Archivio del Maoismo Italiano - Fonti primarie del movimento filo-cinese in Italia"
-description: "Archivio digitale volto alla conservazione e alla valorizzazione di documenti e fonti primarie (volantini, manifesti, periodici, foto...) relative al movimento maoista o 'filo-cinese' in Italia (anni '60-'90). Catalogo ricercabile tramite schede documentarie, biografie di militanti e organizzazioni, percorsi tematici."
+title: 'Archivio del Maoismo Italiano - Fonti primarie del movimento filo-cinese in Italia'
+description: >-
+  Archivio digitale volto alla conservazione e alla valorizzazione di documenti e fonti primarie 
+  (volantini, manifesti, periodici, foto...) relative al movimento maoista o 'filo-cinese' in Italia 
+  (anni '60-'90). Catalogo ricercabile tramite schede documentarie, biografie di militanti 
+  e organizzazioni, percorsi tematici.
 hide:
   - toc
 ---
@@ -217,7 +216,12 @@ hide:
     # ============================================================
     home_content += """
 <div class="home-column home-recent">
-  <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 12h10v2H7zm0-4h10v2H7zm0 8h6v2H7z"/></svg> Aggiunti di recente</h2>
+  <h2>
+    <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 12h10v2H7zm0-4h10v2H7zm0 8h6v2H7z"/>
+    </svg>
+    Aggiunti di recente
+  </h2>
   <div class="recent-container">
     <div class="catalogo-lista">
 """
@@ -235,10 +239,14 @@ hide:
     </div>
   </div>
   <div style="text-align: center; margin-top: 1rem;">
-    <a href="documenti/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg> Tutti i documenti</a>
+    <a href="documenti/" class="md-button md-button--primary">
+      <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+      </svg>
+      Tutti i documenti
+    </a>
   </div>
 </div>
-
 <div class="home-columns">
 """
 
@@ -247,7 +255,12 @@ hide:
     # ============================================================
     home_content += """
 <div class="home-column">
-  <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> Persone più menzionate</h2>
+  <h2>
+    <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+    </svg>
+    Persone più menzionate
+  </h2>
   <div class="recent-container">
     <div class="catalogo-lista">
 """
@@ -261,17 +274,17 @@ hide:
             etichetta_conteggio = "1 documento collegato" if conteggio == 1 else f"{conteggio} documenti collegati"
             iniziali = estrai_iniziali(nome)
             home_content += f"""
-        <div class="doc-row doc-row-persona">
-            <div class="persona-avatar persona-avatar--{rank}">
-                <span class="persona-iniziali">{iniziali}</span>
-                <span class="persona-rank-badge persona-rank-badge--{rank}">{rank}</span>
-            </div>
-            <div class="doc-contenuto">
-                <div class="doc-titolo"><a href="persone/{slug}/">{nome}</a></div>
-                <div class="doc-sommario">{etichetta_conteggio}</div>
-                {f'<div class="persona-date">{date_vita}</div>' if date_vita else ''}
-            </div>
+      <div class="doc-row doc-row-persona">
+        <div class="persona-avatar persona-avatar--{rank}">
+          <span class="persona-iniziali">{iniziali}</span>
+          <span class="persona-rank-badge persona-rank-badge--{rank}">{rank}</span>
         </div>
+        <div class="doc-contenuto">
+          <div class="doc-titolo"><a href="persone/{slug}/">{nome}</a></div>
+          <div class="doc-sommario">{etichetta_conteggio}</div>
+          {f'<div class="persona-date">{date_vita}</div>' if date_vita else ''}
+        </div>
+      </div>
 """
     else:
         home_content += """
@@ -281,7 +294,12 @@ hide:
     </div>
   </div>
   <div style="text-align: center; margin-top: 1rem;">
-    <a href="persone/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 2c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg> Tutte le persone</a>
+    <a href="persone/" class="md-button md-button--primary">
+      <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 2c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+      </svg>
+      Tutte le persone
+    </a>
   </div>
 </div>
 """
@@ -292,7 +310,12 @@ hide:
     # ============================================================
     home_content += """
 <div class="home-column">
-  <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg> Organizzazioni più menzionate</h2>
+  <h2>
+    <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>
+    </svg>
+    Organizzazioni più menzionate
+  </h2>
   <div class="recent-container">
     <div class="catalogo-lista">
 """
@@ -306,17 +329,17 @@ hide:
             etichetta_conteggio = "1 documento collegato" if conteggio == 1 else f"{conteggio} documenti collegati"
             iniziali = estrai_iniziali(nome)
             home_content += f"""
-        <div class="doc-row doc-row-persona">
-            <div class="persona-avatar persona-avatar--{rank}">
-                <span class="persona-iniziali">{iniziali}</span>
-                <span class="persona-rank-badge persona-rank-badge--{rank}">{rank}</span>
-            </div>
-            <div class="doc-contenuto">
-                <div class="doc-titolo"><a href="organizzazioni/{slug}/">{nome}</a></div>
-                <div class="doc-sommario">{etichetta_conteggio}</div>
-                {f'<div class="persona-date">{data_range}</div>' if data_range else ''}
-            </div>
+      <div class="doc-row doc-row-persona">
+        <div class="persona-avatar persona-avatar--{rank}">
+          <span class="persona-iniziali">{iniziali}</span>
+          <span class="persona-rank-badge persona-rank-badge--{rank}">{rank}</span>
         </div>
+        <div class="doc-contenuto">
+          <div class="doc-titolo"><a href="organizzazioni/{slug}/">{nome}</a></div>
+          <div class="doc-sommario">{etichetta_conteggio}</div>
+          {f'<div class="persona-date">{data_range}</div>' if data_range else ''}
+        </div>
+      </div>
 """
     else:
         home_content += """
@@ -326,7 +349,12 @@ hide:
     </div>
   </div>
   <div style="text-align: center; margin-top: 1rem;">
-    <a href="organizzazioni/" class="md-button md-button--primary"><svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg> Tutte le organizzazioni</a>
+    <a href="organizzazioni/" class="md-button md-button--primary">
+      <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>
+      </svg>
+      Tutte le organizzazioni
+    </a>
   </div>
 </div>
 </div>
@@ -346,7 +374,7 @@ hide:
 }
 
 /* ------------------------------------------------------------
-BANNER
+   BANNER
 ------------------------------------------------------------ */
 .banner-full {
   position: relative;
@@ -378,7 +406,7 @@ BANNER
 }
 
 /* ------------------------------------------------------------
-SEZIONE DOCUMENTI IN EVIDENZA
+   SEZIONE DOCUMENTI IN EVIDENZA
 ------------------------------------------------------------ */
 .evidenza-band {
   position: relative;
@@ -386,7 +414,7 @@ SEZIONE DOCUMENTI IN EVIDENZA
   margin: 0 0 2rem 0;
 }
 .evidenza-band::before {
-  content: "";
+  content: " ";
   position: absolute;
   top: 0;
   bottom: 0;
@@ -407,7 +435,7 @@ SEZIONE DOCUMENTI IN EVIDENZA
   position: relative;
 }
 .section-title::after {
-  content: "";
+  content: " ";
   display: block;
   width: 60px;
   height: 3px;
@@ -511,7 +539,7 @@ SEZIONE DOCUMENTI IN EVIDENZA
 }
 
 /* ------------------------------------------------------------
-CATALOGO
+   CATALOGO
 ------------------------------------------------------------ */
 .catalogo-lista {
   display: flex;
@@ -570,7 +598,7 @@ CATALOGO
   margin-top: 0.15rem;
 }
 .doc-type-chip {
-  font-size: 0.68rem;
+  font-size: 0.68rem; 
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -598,25 +626,25 @@ CATALOGO
 }
 
 /* ------------------------------------------------------------
-SKELETON HOME - grigio scuro solido (no gradient)
+   SKELETON HOME - grigio scuro solido (no gradient)
 ------------------------------------------------------------ */
 .home-page .lazy-skeleton,
 body:first-of-type .lazy-skeleton {
-    background: #2d2d2d !important;
-    background-image: none !important;
-    animation: none !important;
-    border-radius: 4px;
+  background: #2d2d2d !important;
+  background-image: none !important;
+  animation: none !important;
+  border-radius: 4px;
 }
 
 /* Per la sezione documenti in evidenza specificamente */
 .home-page .evidenza-thumbnail .lazy-skeleton,
 body:first-of-type .evidenza-thumbnail .lazy-skeleton {
-    background: #1a1a1a !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  background: #1a1a1a !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
 }
 
 /* ------------------------------------------------------------
-LAYOUT HOME: recenti a piena larghezza SOPRA, poi due colonne 1:1
+   LAYOUT HOME: recenti a piena larghezza SOPRA, poi due colonne 1:1
 ------------------------------------------------------------ */
 .home-recent {
   margin: 0.5rem 0 2rem 0;
@@ -641,7 +669,7 @@ LAYOUT HOME: recenti a piena larghezza SOPRA, poi due colonne 1:1
   position: relative;
 }
 .home-column h2::after {
-  content: "";
+  content: " ";
   display: block;
   width: 60px;
   height: 3px;
@@ -666,7 +694,7 @@ LAYOUT HOME: recenti a piena larghezza SOPRA, poi due colonne 1:1
 }
 
 /* ------------------------------------------------------------
-AVATAR con iniziali + badge rank (persone E organizzazioni)
+   AVATAR con iniziali + badge rank (persone E organizzazioni)
 ------------------------------------------------------------ */
 .persona-avatar {
   position: relative;
@@ -731,7 +759,7 @@ AVATAR con iniziali + badge rank (persone E organizzazioni)
 }
 
 /* ------------------------------------------------------------
-RESPONSIVE
+   RESPONSIVE
 ------------------------------------------------------------ */
 @media (max-width: 1100px) {
   .evidenza-thumbnail {
@@ -781,7 +809,7 @@ RESPONSIVE
     height: 240px;
     min-height: 200px;
     overflow: hidden;
-  }
+  } 
   .banner-image {
     width: 100%;
     height: 100%;
