@@ -3,12 +3,35 @@ import re
 import html
 import json
 import urllib.parse
+from datetime import datetime
 import pandas as pd
 
 from .utils import formatta_data, split_nomi, scarica_descrizione_ia, scarica_testo_ia, pulisci_per_meta_description, escape_yaml_string
 from .soggetti import crea_link, link_lista
 from .site_config import site_path, site_url
 from .argomenti import build_argomenti_index, get_argomento_slug
+from .schema_generator import SchemaGenerator
+
+# Tipi documento trattati come pubblicazioni bibliografiche: generano
+# citazioni complete (Chicago/MLA/BibTeX) invece della citazione minima.
+# Estesi oltre a libro/opuscolo per includere periodici, riviste, giornali
+# e articoli, coerentemente con TIPI_DOCUMENTO_VALIDI in core/validator.py.
+TIPI_BIBLIOGRAFICI = {'libro', 'opuscolo', 'periodico', 'giornale', 'rivista', 'articolo'}
+
+_MESI_ITALIANI = {
+    1: 'gennaio', 2: 'febbraio', 3: 'marzo', 4: 'aprile',
+    5: 'maggio', 6: 'giugno', 7: 'luglio', 8: 'agosto',
+    9: 'settembre', 10: 'ottobre', 11: 'novembre', 12: 'dicembre',
+}
+
+
+def _data_consultazione_oggi():
+    """Data odierna in formato italiano esteso (es. '8 settembre 2026'),
+    usata come 'data di consultazione' nelle citazioni generate: e' la
+    data in cui il sito e' stato costruito, che coincide con la data in
+    cui i metadati sono stati raccolti/verificati per l'ultima volta."""
+    oggi = datetime.now()
+    return f"{oggi.day} {_MESI_ITALIANI[oggi.month]} {oggi.year}"
 
 
 def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
@@ -36,6 +59,10 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
 
     contatore_generati = 0
     contatore_saltati = 0
+
+    # Calcolata una sola volta: rappresenta la data di generazione del
+    # sito, cioe' quando i dati sono stati effettivamente consultati.
+    data_consultazione = _data_consultazione_oggi()
 
     for index, row in df.iterrows():
         ami_id = str(row.get('id', '')).strip()
@@ -96,7 +123,8 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
         if data_raw in ['nan', 'None', '']:
             data_raw = ''
 
-        data_formattata, _ = formatta_data(data_raw)
+        data_formattata, data_ordine = formatta_data(data_raw)
+        anno_pubblicazione = str(data_ordine[0]) if data_ordine and data_ordine[0] != 9999 else ''
 
         tipo_raw = str(row.get('tipo', '')).strip()
         if tipo_raw in ['nan', 'None']:
@@ -210,7 +238,7 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
         anno_citazione = data_formattata if data_formattata else 's.d.'
         permalink = site_url(f"documenti/{ami_id}/")
         citazione_id = ami_id.lower().replace('-', '_')
-        is_bibliografico = tipo in ['libro', 'opuscolo']
+        is_bibliografico = tipo in TIPI_BIBLIOGRAFICI
 
         citazione_bottone_html = (
             f'<button class="citazione-link" type="button" '
@@ -255,17 +283,23 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
             citazione_chicago = (
                 f'{autore_citazione}. "{titolo}". '
                 f'{luogo_editore}{anno_citazione}. Archivio del Maoismo Italiano ({ami_id}). '
-                f'{permalink}.'
+                f'{permalink}. Data di consultazione: {data_consultazione}.'
             )
 
             citazione_mla = (
                 f'{autore_citazione}. "{titolo}". '
                 + (f'{editore_citazione}, ' if editore_citazione else '')
-                + f'{anno_citazione}. Archivio del Maoismo Italiano ({ami_id}), {permalink}.'
+                + f'{anno_citazione}. Archivio del Maoismo Italiano ({ami_id}), {permalink}. '
+                f'Data di consultazione: {data_consultazione}.'
             )
 
             bibtex_key = citazione_id
-            bibtex_type = 'book' if tipo == 'libro' else 'booklet'
+            if tipo == 'libro':
+                bibtex_type = 'book'
+            elif tipo in ('periodico', 'giornale', 'rivista', 'articolo'):
+                bibtex_type = 'article'
+            else:
+                bibtex_type = 'booklet'
             citazione_bibtex = (
                 '@' + bibtex_type + '{' + bibtex_key + ',\n'
                 '  title = {' + titolo + '},\n'
@@ -273,14 +307,17 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
                 '  year = {' + anno_citazione + '},\n'
                 + (('  publisher = {' + editore_citazione + '},\n') if editore_citazione else '')
                 + (('  address = {' + luogo_raw + '},\n') if luogo_raw else '')
-                + '  note = {Archivio del Maoismo Italiano, ' + ami_id + '. ' + permalink + '}\n'
+                + '  url = {' + permalink + '},\n'
+                + '  urldate = {' + datetime.now().strftime('%Y-%m-%d') + '},\n'
+                + '  note = {Archivio del Maoismo Italiano, ' + ami_id + '}\n'
                 '}'
             )
 
             citazione_semplice = (
                 f'{autore_citazione}, {titolo}'
                 + (f', {luogo_raw}: {editore_citazione}' if luogo_raw and editore_citazione else (f', {editore_citazione}' if editore_citazione else ''))
-                + f', {anno_citazione}. Archivio del Maoismo Italiano ({ami_id}). {permalink}'
+                + f', {anno_citazione}. Archivio del Maoismo Italiano ({ami_id}). {permalink}. '
+                f'Data di consultazione: {data_consultazione}.'
             )
 
             citazioni_dict = {
@@ -294,8 +331,32 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
             # ================================================================
             # CITAZIONE SEMPLICE (non bibliografico)
             # ================================================================
-            citazione_minima = f'"{titolo}", {anno_citazione}. Archivio del Maoismo Italiano. {permalink}'
+            citazione_minima = (
+                f'"{titolo}", {anno_citazione}. Archivio del Maoismo Italiano. '
+                f'{permalink}. Data di consultazione: {data_consultazione}.'
+            )
             citazione_minima_html = html.escape(citazione_minima)
+
+        # ========================================================================
+        # SCHEMA.ORG JSON-LD (scheda specifica del documento)
+        # ========================================================================
+        autori_nomi = split_nomi(autore_raw) if autore_raw else []
+        organizzazioni_nomi = split_nomi(org_raw) if org_raw else []
+        immagine_url_schema = f"https://archive.org/services/img/{identifier}" if identifier else None
+
+        document_schema = SchemaGenerator.document_schema(
+            ami_id=ami_id,
+            titolo=titolo,
+            descrizione=meta_description,
+            tipo=tipo,
+            autori=autori_nomi,
+            organizzazioni=organizzazioni_nomi,
+            data_pubblicazione=anno_pubblicazione,
+            keywords=serie_tags,
+            url_ia=url_ia,
+            immagine_url=immagine_url_schema
+        )
+        document_schema_json = json.dumps(document_schema, ensure_ascii=False)
 
         # ========================================================================
         # COSTRUZIONE FRONTMATTER
@@ -313,6 +374,10 @@ hide:
   - navigation
   - toc
 ---
+
+<script type="application/ld+json">
+{document_schema_json}
+</script>
 """
 
         # ========================================================================
