@@ -154,6 +154,7 @@ hide:
             </button>
             <div class="filtro-contenuto" id="filtro-anno-container">
                 <div class="slider-container" id="slider-container">
+                    <div class="slider-histogram" id="slider-histogram"></div>
                     <div class="slider-track">
                         <div class="slider-track-fill" id="slider-track-fill"></div>
                     </div>
@@ -295,37 +296,77 @@ hide:
     color: var(--md-primary-bg-color);
 }}
 
+/* ------------------------------------------------------------
+   SLIDER ANNO — ISTOGRAMMA STILE INTERNET ARCHIVE
+   Struttura (dal basso verso l'alto, per z-index):
+   0. slider-track-fill  → area di selezione a tutta altezza
+   1. slider-histogram   → barre per anno (una per ogni anno tra
+      anno_min e anno_max), altezza proporzionale al conteggio
+      documenti; popolate via JS da costruisciIstogramma()
+   2. slider-track        → sottile guida orizzontale
+   10-12. input[range]    → maniglie trascinabili
+   ------------------------------------------------------------ */
 .slider-container {{
     position: relative;
     width: 100%;
     margin-top: 1.7rem;
     margin-bottom: 0.5rem;
-    height: 50px;
+    height: 64px;
+}}
+
+.slider-histogram {{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 14px;
+    display: flex;
+    align-items: flex-end;
+    gap: 1px;
+    pointer-events: none;
+    z-index: 1;
+}}
+
+.hist-bar {{
+    flex: 1 1 0;
+    min-width: 1px;
+    background: var(--md-default-fg-color--lighter);
+    opacity: 0.55;
+    border-radius: 1px 1px 0 0;
+    transition: background-color 0.15s, opacity 0.15s;
+}}
+
+.hist-bar--in-range {{
+    background: var(--md-primary-fg-color);
+    opacity: 0.9;
 }}
 
 .slider-track {{
     position: absolute;
     width: 100%;
-    height: 6px;
-    top: 50%;
-    transform: translateY(-50%);
+    height: 3px;
+    bottom: 12px;
     background: var(--md-default-fg-color--lightest);
-    border-radius: 3px;
+    border-radius: 2px;
+    z-index: 2;
 }}
 
 .slider-track-fill {{
     position: absolute;
-    height: 100%;
-    background: var(--md-primary-fg-color);
-    border-radius: 3px;
+    top: 0;
+    bottom: 14px;
+    background: rgba(183, 28, 28, 0.08);
+    border-left: 2px solid var(--md-primary-fg-color);
+    border-right: 2px solid var(--md-primary-fg-color);
     left: 0%;
     right: 0%;
+    z-index: 0;
 }}
 
 .slider-value-pill {{
     position: absolute;
-    bottom: 50%;
-    margin-bottom: 14px;
+    bottom: 100%;
+    margin-bottom: 4px;
     transform: translateX(-50%);
     background: var(--md-default-bg-color);
     border: 1.5px solid var(--md-primary-fg-color);
@@ -345,9 +386,9 @@ hide:
 .slider-container input[type="range"] {{
     position: absolute;
     width: 100%;
-    top: 0;
+    bottom: 0;
     left: 0;
-    height: 100%;
+    height: 28px;
     -webkit-appearance: none;
     appearance: none;
     background: transparent;
@@ -360,52 +401,49 @@ hide:
 .slider-container input[type="range"]::-webkit-slider-thumb {{
     -webkit-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+    width: 10px;
+    height: 26px;
+    border-radius: 3px;
     background: var(--md-primary-fg-color);
     cursor: pointer;
     pointer-events: auto;
     border: 2px solid var(--md-default-bg-color);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
     z-index: 12;
-    margin-top: -7px;
     transition: transform 0.15s, box-shadow 0.15s;
 }}
 
 .slider-container input[type="range"]::-webkit-slider-thumb:hover {{
-    transform: scale(1.15);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    transform: scaleX(1.3);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }}
 
 .slider-container input[type="range"]::-moz-range-thumb {{
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+    width: 10px;
+    height: 26px;
+    border-radius: 3px;
     background: var(--md-primary-fg-color);
     cursor: pointer;
     pointer-events: auto;
     border: 2px solid var(--md-default-bg-color);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
     z-index: 12;
     transition: transform 0.15s, box-shadow 0.15s;
 }}
 
 .slider-container input[type="range"]::-moz-range-thumb:hover {{
-    transform: scale(1.15);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    transform: scaleX(1.3);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }}
 
 .slider-container input[type="range"]::-webkit-slider-runnable-track {{
-    height: 6px;
+    height: 28px;
     background: transparent;
-    border-radius: 3px;
 }}
 
 .slider-container input[type="range"]::-moz-range-track {{
-    height: 6px;
+    height: 28px;
     background: transparent;
-    border-radius: 3px;
 }}
 
 .slider-labels {{
