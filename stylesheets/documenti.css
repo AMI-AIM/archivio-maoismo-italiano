@@ -253,7 +253,7 @@ STILE SCHEDE DOCUMENTO
 .citazione-testo {
   width: 100%;
   box-sizing: border-box;
-  font-family: 'Roboto Mono', 'Courier New', monospace;
+  font-family: var(--ami-font-mono, 'Courier Prime', 'Courier New', monospace) !important;
   font-size: 0.85rem;
   line-height: 1.5;
   padding: 0.7rem 0.9rem;
@@ -355,10 +355,6 @@ TIPOGRAFIA — SCHEDA DOCUMENTO
 }
 
 .text-preview {
-  font-family: var(--ami-font-mono, 'Courier Prime', 'Courier New', monospace) !important;
-}
-
-.citazione-testo {
   font-family: var(--ami-font-mono, 'Courier Prime', 'Courier New', monospace) !important;
 }
 
