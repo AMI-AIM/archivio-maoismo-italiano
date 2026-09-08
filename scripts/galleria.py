@@ -130,9 +130,10 @@ def get_image_urls(row):
 
 def gallery_card(row):
     """Card galleria: immagine a proporzioni naturali, overlay metadati,
-    lazy loading con skeleton e attributi data-* per il lightbox."""
+    lazy loading con skeleton e attributi data-* per il lightbox completo."""
     titolo = clean_value(row.get("titolo"), "Senza titolo")
     org = clean_value(row.get("organizzazione"))
+    tipo = clean_value(row.get("tipo"))
     data_str = format_data(row.get("data"))
     doc_id = clean_value(row.get("id"))
 
@@ -153,6 +154,7 @@ def gallery_card(row):
         f' data-titolo="{titolo_attr}"'
         f' data-data="{html.escape(data_str, quote=True)}"'
         f' data-org="{html.escape(org, quote=True)}"'
+        f' data-tipo="{html.escape(tipo, quote=True)}"'
         f' data-ia-url="{html.escape(link_url, quote=True)}"'
         f' data-scheda-url="{html.escape(scheda_url, quote=True)}"'
         f' data-full-src="{primary_esc}"'
@@ -162,8 +164,6 @@ def gallery_card(row):
         f'<article class="galleria-card"{card_id}{data_attrs}>\n'
         f'<a class="card-link" href="{html.escape(link_url, quote=True)}" target="_blank" rel="noopener noreferrer">\n'
         '<div class="card-media">\n'
-        # src nativo = fallback senza JS; data-src = pattern skeleton/fade;
-        # data-src-fallback = retry su cover IA se il file specifico è 404.
         f'<img class="galleria-img lazy-img" src="{primary_esc}" data-src="{primary_esc}"{fallback_attr} alt="{titolo_attr}" loading="lazy" decoding="async">\n'
         '<div class="img-overlay">\n'
         '<span class="overlay-icon" aria-hidden="true">🔍</span>\n'
@@ -177,21 +177,30 @@ def gallery_card(row):
 
 
 def lightbox_dialog():
-    """Visualizzatore minimo: un solo <dialog> popolato via JS."""
+    """Lightbox completo: un solo <dialog> popolato via JS.
+    Navigazione prev/next, contatore, pannello citazione, barra compatta."""
     return (
         '<dialog class="galleria-lightbox" id="galleria-lightbox" aria-labelledby="lightbox-title">\n'
         '<div class="lightbox-media">\n'
         '<img class="lightbox-img" alt="" decoding="async">\n'
+        '<span class="lightbox-counter" aria-hidden="true"></span>\n'
+        '<button class="lightbox-nav lightbox-nav--prev" type="button" aria-label="Documento precedente">‹</button>\n'
+        '<button class="lightbox-nav lightbox-nav--next" type="button" aria-label="Documento successivo">›</button>\n'
         '<button class="lightbox-close" type="button" aria-label="Chiudi visualizzatore">✕</button>\n'
         '</div>\n'
-        '<div class="lightbox-caption">\n'
-        '<div class="lightbox-titles">\n'
-        '<h2 class="lightbox-title" id="lightbox-title"></h2>\n'
-        '<p class="lightbox-meta"></p>\n'
+        '<div class="lightbox-cite" id="lightbox-cite-panel" hidden>\n'
+        '<textarea class="citazione-testo" readonly rows="4"></textarea>\n'
+        '<button class="citazione-copia" type="button">Copia citazione</button>\n'
         '</div>\n'
+        '<div class="lightbox-caption">\n'
+        '<p class="lightbox-line">\n'
+        '<span class="lightbox-title" id="lightbox-title"></span>\n'
+        '<span class="lightbox-meta"></span>\n'
+        '</p>\n'
         '<div class="lightbox-actions">\n'
-        '<a class="lightbox-action lightbox-action--scheda" href="#">Scheda archivistica</a>\n'
+        '<a class="lightbox-action lightbox-action--scheda" href="#" title="Vai alla scheda archivistica">Scheda</a>\n'
         '<a class="lightbox-action lightbox-action--ia" href="#" target="_blank" rel="noopener noreferrer">Internet Archive ↗</a>\n'
+        '<button class="lightbox-action lightbox-action--cite" type="button" aria-expanded="false" aria-controls="lightbox-cite-panel">Cita</button>\n'
         '</div>\n'
         '</div>\n'
         '</dialog>\n'
@@ -217,7 +226,6 @@ def generate_gallery():
             print(f"Errore: colonna '{col}' non trovata nel catalogo.")
             return 1
 
-    # Substring match: copre foto, fotografia, manifesto, manifesti, ecc.
     mask = df["tipo"].astype(str).str.contains("foto|manifest", case=False, na=False)
     df_gal = df[mask].copy()
 
@@ -300,8 +308,7 @@ def generate_gallery():
     out.append('</main>\n')
     out.append('</div>\n')
 
-    # Lightbox: fuori dal wrapper, per evitare qualsiasi interferenza
-    # di antenati CSS (overflow, filter, backdrop-filter) con il top layer.
+    # Lightbox fuori dal wrapper: nessuna interferenza di antenati CSS
     out.append(lightbox_dialog())
 
     output_path = OUTPUT_DIR / "index.md"
