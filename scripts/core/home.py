@@ -171,7 +171,7 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
     if evidenza_ordinati:
         home_content = f"""---
 title: "Archivio del Maoismo Italiano - Fonti primarie del movimento filo-cinese in Italia"
-description: "Archivio digitale volto alla conservazione e alla valorizzazione di documenti e fonti primarie (volantini, manifesti, periodici, foto...) relative al movimento "filo-cinese" in Italia (anni '60-'90). Catalogo ricercabile tramite schede documentarie, biografie di militanti e organizzazioni, percorsi tematici."
+description: "Archivio digitale volto alla conservazione e alla valorizzazione di documenti e fonti primarie (volantini, manifesti, periodici, foto...) relative al movimento maoista o 'filo-cinese' in Italia (anni '60-'90). Catalogo ricercabile tramite schede documentarie, biografie di militanti e organizzazioni, percorsi tematici."
 hide:
   - toc
 ---
@@ -204,7 +204,7 @@ hide:
     else:
         home_content = f"""---
 title: "Archivio del Maoismo Italiano - Fonti primarie del movimento filo-cinese in Italia"
-description: "Archivio digitale volto alla conservazione e alla valorizzazione di documenti e fonti primarie (volantini, manifesti, periodici, foto...) relative al movimento "filo-cinese" in Italia (anni '60-'90). Catalogo ricercabile tramite schede documentarie, biografie di militanti e organizzazioni, percorsi tematici."
+description: "Archivio digitale volto alla conservazione e alla valorizzazione di documenti e fonti primarie (volantini, manifesti, periodici, foto...) relative al movimento maoista o 'filo-cinese' in Italia (anni '60-'90). Catalogo ricercabile tramite schede documentarie, biografie di militanti e organizzazioni, percorsi tematici."
 hide:
   - toc
 ---
