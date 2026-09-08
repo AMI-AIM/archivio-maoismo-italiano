@@ -338,7 +338,7 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
                     parti_mla.append(f'no. {numero}')
 
                 # Chicago
-                chicago_core = f'{autore_periodico}. <i>{journal_name}</i>'
+                chicago_core = f'{autore_periodico}. *{journal_name}*'
                 if parti_chicago:
                     chicago_core += ', ' + ', '.join(parti_chicago)
                 chicago_core += f', {anno_citazione}.'
@@ -348,7 +348,7 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
                 )
 
                 # MLA
-                mla_core = f'{autore_periodico}. <i>{journal_name}</i>'
+                mla_core = f'{autore_periodico}. *{journal_name}*'
                 if parti_mla:
                     mla_core += ', ' + ', '.join(parti_mla)
                 mla_core += f', {anno_citazione}.'
@@ -380,7 +380,7 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
                 citazione_bibtex = '\n'.join(bibtex_lines)
 
                 # Semplice
-                semplice_core = f'<i>{journal_name}</i>'
+                semplice_core = f'*{journal_name}*'
                 if parti_chicago:
                     semplice_core += ', ' + ', '.join(parti_chicago)
                 semplice_core += f' ({anno_citazione})'
@@ -626,7 +626,7 @@ hide:
         <button class="citazione-tab" data-formato="bibtex" type="button">BibTeX</button>
         <button class="citazione-tab" data-formato="semplice" type="button">Semplice</button>
     </div>
-    <div class="citazione-testo" id="citazione-testo-{citazione_id}" contenteditable="false"></div>
+    <textarea class="citazione-testo" id="citazione-testo-{citazione_id}" readonly rows="4"></textarea>
     <button class="citazione-copia" id="citazione-copia-{citazione_id}" type="button">📋 Copia</button>
 </div>
 <script type="application/json" id="citazioni-dati-{citazione_id}">{citazioni_json}</script>
