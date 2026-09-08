@@ -36,6 +36,17 @@
     return String(value);
   }
 
+  // NUOVO: escape HTML per prevenire XSS nei titoli/autori
+  function escapeHtml(text) {
+    var s = safeText(text);
+    return s
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   function escapeBibtex(value) {
     var text = safeText(value);
     return text
@@ -60,28 +71,28 @@
     if (!names.length) {
       return '';
     }
-    return names.join('; ') + '. ';
+    return escapeHtml(names.join('; ')) + '. ';
   }
 
   function buildArchivePart(doc) {
-    return safeText(doc.archive) + ' (' + safeText(doc.ami_id) + ')';
+    return escapeHtml(doc.archive) + ' (' + escapeHtml(doc.ami_id) + ')';
   }
 
   function buildAccessPart(date) {
-    return 'Data di consultazione: ' + date.it + '.';
+    return 'Data di consultazione: ' + escapeHtml(date.it) + '.';
   }
 
   function buildPublisherPartChicago(doc) {
     var place = safeText(doc.place);
     var publisher = safeText(doc.publisher);
     if (place && publisher) {
-      return place + ': ' + publisher + ', ';
+      return escapeHtml(place) + ': ' + escapeHtml(publisher) + ', ';
     }
     if (publisher) {
-      return publisher + ', ';
+      return escapeHtml(publisher) + ', ';
     }
     if (place) {
-      return place + ', ';
+      return escapeHtml(place) + ', ';
     }
     return '';
   }
@@ -89,10 +100,10 @@
   function buildPeriodicalParts(doc) {
     var parts = [];
     if (doc.volume) {
-      parts.push('anno ' + safeText(doc.volume));
+      parts.push('anno ' + escapeHtml(doc.volume));
     }
     if (doc.issue) {
-      parts.push('no. ' + safeText(doc.issue));
+      parts.push('no. ' + escapeHtml(doc.issue));
     }
     return parts;
   }
@@ -109,23 +120,23 @@
       var journal = getPeriodicalTitle(doc);
       var authorPart = buildAuthorPart(doc.authors, journal);
       var parts = buildPeriodicalParts(doc);
-      var core = authorPart + '<em>' + journal + '</em>';
+      var core = authorPart + '<em>' + escapeHtml(journal) + '</em>';
       if (parts.length) {
         core += ', ' + parts.join(', ');
       }
-      core += ', ' + (safeText(doc.date_display) || 's.d.') + '.';
-      return core + ' ' + archive + '. ' + safeText(doc.url) + '. ' + access;
+      core += ', ' + (escapeHtml(doc.date_display) || 's.d.') + '.';
+      return core + ' ' + archive + '. ' + escapeHtml(doc.url) + '. ' + access;
     }
     
     var author = buildAuthorPart(doc.authors);
     var publisher = buildPublisherPartChicago(doc);
     return (
       author +
-      '<em>' + safeText(doc.title) + '</em>. ' +
+      '<em>' + escapeHtml(doc.title) + '</em>. ' +
       publisher +
-      (safeText(doc.date_display) || 's.d.') + '. ' +
+      (escapeHtml(doc.date_display) || 's.d.') + '. ' +
       archive + '. ' +
-      safeText(doc.url) + '. ' +
+      escapeHtml(doc.url) + '. ' +
       access
     );
   }
@@ -138,26 +149,28 @@
       var journal = getPeriodicalTitle(doc);
       var authorPart = buildAuthorPart(doc.authors, journal);
       var parts = buildPeriodicalParts(doc);
-      var core = authorPart + '<em>' + journal + '</em>';
+      var core = authorPart + '<em>' + escapeHtml(journal) + '</em>';
       if (parts.length) {
         core += ', ' + parts.join(', ');
       }
-      core += ', ' + (safeText(doc.date_display) || 's.d.') + '.';
-      return core + ' ' + archive + ', ' + safeText(doc.url) + '. ' + access;
+      core += ', ' + (escapeHtml(doc.date_display) || 's.d.') + '.';
+      return core + ' ' + archive + ', ' + escapeHtml(doc.url) + '. ' + access;
     }
     
     var author = buildAuthorPart(doc.authors);
     var publisher = safeText(doc.publisher) || safeText(doc.place);
     if (publisher) {
-      publisher += ', ';
+      publisher = escapeHtml(publisher) + ', ';
+    } else {
+      publisher = '';
     }
     return (
       author +
-      '<em>' + safeText(doc.title) + '</em>. ' +
+      '<em>' + escapeHtml(doc.title) + '</em>. ' +
       publisher +
-      (safeText(doc.date_display) || 's.d.') + '. ' +
+      (escapeHtml(doc.date_display) || 's.d.') + '. ' +
       archive + ', ' +
-      safeText(doc.url) + '. ' +
+      escapeHtml(doc.url) + '. ' +
       access
     );
   }
@@ -169,48 +182,48 @@
     if (doc.is_periodical) {
       var journal = getPeriodicalTitle(doc);
       var parts = buildPeriodicalParts(doc);
-      var core = '<em>' + journal + '</em>';
+      var core = '<em>' + escapeHtml(journal) + '</em>';
       if (parts.length) {
         core += ', ' + parts.join(', ');
       }
-      core += ' (' + (safeText(doc.date_display) || 's.d.') + ')';
+      core += ' (' + (escapeHtml(doc.date_display) || 's.d.') + ')';
       var author = buildAuthorPart(doc.authors, journal).replace(/\.\s*$/, '');
       if (author) {
         core += '. ' + author;
       }
-      return core + '. ' + archive + '. ' + safeText(doc.url) + '. ' + access;
+      return core + '. ' + archive + '. ' + escapeHtml(doc.url) + '. ' + access;
     }
     
     var author = buildAuthorPart(doc.authors).replace(/\.\s*$/, '');
     var details = [];
     if (doc.place && doc.publisher) {
-      details.push(doc.place + ': ' + doc.publisher);
+      details.push(escapeHtml(doc.place) + ': ' + escapeHtml(doc.publisher));
     } else if (doc.publisher) {
-      details.push(doc.publisher);
+      details.push(escapeHtml(doc.publisher));
     } else if (doc.place) {
-      details.push(doc.place);
+      details.push(escapeHtml(doc.place));
     }
     
     var text = '';
     if (author) {
       text += author + ', ';
     }
-    text += '<em>' + safeText(doc.title) + '</em>';
+    text += '<em>' + escapeHtml(doc.title) + '</em>';
     if (details.length) {
       text += ', ' + details.join(', ');
     }
-    text += ', ' + (safeText(doc.date_display) || 's.d.');
-    return text + '. ' + archive + '. ' + safeText(doc.url) + '. ' + access;
+    text += ', ' + (escapeHtml(doc.date_display) || 's.d.');
+    return text + '. ' + archive + '. ' + escapeHtml(doc.url) + '. ' + access;
   }
 
   function buildMinima(doc, date) {
     var access = buildAccessPart(date);
     var archive = buildArchivePart(doc);
     return (
-      '<em>' + safeText(doc.title) + '</em>, ' +
-      (safeText(doc.date_display) || 's.d.') + '. ' +
+      '<em>' + escapeHtml(doc.title) + '</em>, ' +
+      (escapeHtml(doc.date_display) || 's.d.') + '. ' +
       archive + '. ' +
-      safeText(doc.url) + '. ' +
+      escapeHtml(doc.url) + '. ' +
       access
     );
   }
@@ -224,11 +237,10 @@
   }
 
   function buildBibtex(doc, date) {
+    // MODIFICATO: @book invece di @booklet per opuscoli
     var entryType = '@misc';
-    if (doc.type === 'libro') {
+    if (doc.type === 'libro' || doc.type === 'opuscolo') {
       entryType = '@book';
-    } else if (doc.type === 'opuscolo') {
-      entryType = '@booklet';
     } else if (doc.type === 'articolo') {
       entryType = '@article';
     }
@@ -494,6 +506,7 @@
         if (!citations) {
           citations = buildCitations(payload);
         }
+        // MODIFICATO: innerHTML invece di .value per supportare <em>
         textElement.innerHTML = citations[currentFormat] || citations.semplice || '';
         updateTabs();
       }
@@ -540,7 +553,7 @@
             }, 1500);
           }
           
-          // Usa la Clipboard API avanzata per copiare sia HTML che Testo Puro
+          // MODIFICATO: Clipboard API avanzata per copiare sia HTML che Testo Puro
           if (navigator.clipboard && window.ClipboardItem) {
             var htmlBlob = new Blob([htmlContent], { type: 'text/html' });
             var textBlob = new Blob([plainText], { type: 'text/plain' });
