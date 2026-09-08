@@ -1,180 +1,186 @@
+import html
 import os
 import re
-import html
-import json
 import urllib.parse
-from datetime import datetime
+
 import pandas as pd
 
-from .utils import formatta_data, split_nomi, scarica_descrizione_ia, scarica_testo_ia, pulisci_per_meta_description, escape_yaml_string
-from .soggetti import crea_link, link_lista
-from .site_config import site_path, site_url
 from .argomenti import build_argomenti_index, get_argomento_slug
+from .citazioni import (
+    CITAZIONI_TEMPLATE_VERSION,
+    costruisci_payload_citazione,
+    json_per_script,
+    sanitize_citation_id,
+    yaml_value,
+)
 from .schema_generator import SchemaGenerator
-
-# Tipi documento trattati come pubblicazioni bibliografiche: generano
-# citazioni complete (Chicago/MLA/BibTeX) invece della citazione minima.
-# Estesi oltre a libro/opuscolo per includere periodici, riviste, giornali
-# e articoli, coerentemente con TIPI_DOCUMENTO_VALIDI in core/validator.py.
-TIPI_BIBLIOGRAFICI = {'libro', 'opuscolo', 'periodico', 'giornale', 'rivista', 'articolo'}
-
-_MESI_ITALIANI = {
-    1: 'gennaio', 2: 'febbraio', 3: 'marzo', 4: 'aprile',
-    5: 'maggio', 6: 'giugno', 7: 'luglio', 8: 'agosto',
-    9: 'settembre', 10: 'ottobre', 11: 'novembre', 12: 'dicembre',
-}
-
-
-def _data_consultazione_oggi():
-    """Data odierna in formato italiano esteso (es. '8 settembre 2026'),
-    usata come 'data di consultazione' nelle citazioni generate: e' la
-    data in cui il sito e' stato costruito, che coincide con la data in
-    cui i metadati sono stati raccolti/verificati per l'ultima volta."""
-    oggi = datetime.now()
-    return f"{oggi.day} {_MESI_ITALIANI[oggi.month]} {oggi.year}"
+from .site_config import site_path, site_url
+from .soggetti import crea_link, link_lista
+from .utils import (
+    formatta_data,
+    pulisci_per_meta_description,
+    scarica_descrizione_ia,
+    scarica_testo_ia,
+    split_nomi,
+)
 
 
 def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
     """
-    Crea schede documento con cache opzionale per velocizzare rigenerazione.
+    Crea le schede documento.
 
     Args:
-        df: DataFrame catalogo con colonne id, titolo, autore, etc.
-        persone: dict persone caricate
-        organizzazioni: dict organizzazioni caricate
-        output_dir: directory output (docs/)
-        cache_manager: CacheManager opzionale per caching IA e metadati
+        df: DataFrame catalogo.
+        persone: dict persone.
+        organizzazioni: dict organizzazioni.
+        output_dir: directory output (build/).
+        cache_manager: CacheManager opzionale.
 
     Returns:
-        tuple: (contatore_generati, contatore_saltati_da_cache)
+        tuple: (schede_generate, schede_saltate)
     """
     print("📄 Creazione delle schede dei documenti...")
 
-    documenti_dir = os.path.join(output_dir, 'documenti')
+    documenti_dir = os.path.join(output_dir, "documenti")
     os.makedirs(documenti_dir, exist_ok=True)
 
-    # Indice argomenti: slug deterministici condivisi con scripts/argomenti.py.
-    # Costruito una sola volta dal Catalogo e riusato per tutte le schede.
     argomenti_index = build_argomenti_index(df)
 
     contatore_generati = 0
     contatore_saltati = 0
 
-    # Calcolata una sola volta: rappresenta la data di generazione del
-    # sito, cioe' quando i dati sono stati effettivamente consultati.
-    data_consultazione = _data_consultazione_oggi()
-
     for index, row in df.iterrows():
-        ami_id = str(row.get('id', '')).strip()
-        if not ami_id or pd.isna(row.get('id')):
+        ami_id = str(row.get("id", "")).strip()
+
+        if not ami_id or pd.isna(row.get("id")):
             continue
 
-        file_path = os.path.join(documenti_dir, f'{ami_id}.md')
+        file_path = os.path.join(documenti_dir, f"{ami_id}.md")
 
-        row_hash = cache_manager.hash_data(row.to_dict()) if cache_manager else None
+        row_hash = None
 
-        # Salta solo se la riga sorgente e' identica a quella che ha prodotto
-        # la scheda: la sola presenza in cache non e' una garanzia di attualita'.
+        if cache_manager:
+            hash_input = {
+                "source": row.to_dict(),
+                "template_version": CITAZIONI_TEMPLATE_VERSION,
+            }
+            row_hash = cache_manager.hash_data(hash_input)
+
         if cache_manager and os.path.exists(file_path):
             cached_data = cache_manager.get_doc_metadata(ami_id)
-            cached_hash = (cached_data or {}).get('data', {}).get('source_hash')
+            cached_hash = (cached_data or {}).get("data", {}).get("source_hash")
+
             if cached_hash == row_hash:
                 contatore_saltati += 1
                 print(f"   ⏭️ Saltato {ami_id} (cache valido)")
                 continue
 
-        # ========================================================================
+        # =====================================================================
         # PARSING DATI DALLA RIGA EXCEL
-        # ========================================================================
-        titolo = str(row.get('titolo', 'Senza titolo')).strip()
-        if titolo in ['nan', 'None', '']:
-            titolo = 'Senza titolo'
+        # =====================================================================
 
-        autore_raw = str(row.get('autore', '')).strip()
-        if autore_raw in ['nan', 'None']:
-            autore_raw = ''
+        titolo = str(row.get("titolo", "Senza titolo")).strip()
+        if titolo in ("nan", "None", ""):
+            titolo = "Senza titolo"
 
-        org_raw = str(row.get('organizzazione', '')).strip()
-        if org_raw in ['nan', 'None']:
-            org_raw = ''
+        autore_raw = str(row.get("autore", "")).strip()
+        if autore_raw in ("nan", "None"):
+            autore_raw = ""
 
-        luogo_raw = str(row.get('luogo', '')).strip()
-        if luogo_raw in ['nan', 'None']:
-            luogo_raw = ''
+        org_raw = str(row.get("organizzazione", "")).strip()
+        if org_raw in ("nan", "None"):
+            org_raw = ""
 
-        editore_raw = str(row.get('editore', '')).strip()
-        if editore_raw in ['nan', 'None']:
-            editore_raw = ''
+        luogo_raw = str(row.get("luogo", "")).strip()
+        if luogo_raw in ("nan", "None"):
+            luogo_raw = ""
 
-        # 🔥 NUOVO CAMPO: PROVENIENZA (maiuscolo come da richiesta)
-        provenienza_raw = str(row.get('provenienza', '')).strip()
-        if provenienza_raw in ['nan', 'None']:
-            provenienza_raw = ''
+        editore_raw = str(row.get("editore", "")).strip()
+        if editore_raw in ("nan", "None"):
+            editore_raw = ""
 
-        persone_collegate = str(row.get('persone_collegate', '')).strip()
-        if persone_collegate in ['nan', 'None']:
-            persone_collegate = ''
+        provenienza_raw = str(row.get("provenienza", "")).strip()
+        if provenienza_raw in ("nan", "None"):
+            provenienza_raw = ""
 
-        organizzazioni_collegate = str(row.get('organizzazioni_collegate', '')).strip()
-        if organizzazioni_collegate in ['nan', 'None']:
-            organizzazioni_collegate = ''
+        persone_collegate = str(row.get("persone_collegate", "")).strip()
+        if persone_collegate in ("nan", "None"):
+            persone_collegate = ""
 
-        data_raw = str(row.get('data', row.get('anno', ''))).strip()
-        if data_raw in ['nan', 'None', '']:
-            data_raw = ''
+        organizzazioni_collegate = str(row.get("organizzazioni_collegate", "")).strip()
+        if organizzazioni_collegate in ("nan", "None"):
+            organizzazioni_collegate = ""
+
+        data_raw = str(row.get("data", row.get("anno", ""))).strip()
+        if data_raw in ("nan", "None", ""):
+            data_raw = ""
 
         data_formattata, data_ordine = formatta_data(data_raw)
-        anno_pubblicazione = str(data_ordine[0]) if data_ordine and data_ordine[0] != 9999 else ''
 
-        tipo_raw = str(row.get('tipo', '')).strip()
-        if tipo_raw in ['nan', 'None']:
-            tipo_raw = ''
+        anno_pubblicazione = ""
+        if data_ordine and data_ordine[0] != 9999:
+            anno_pubblicazione = str(data_ordine[0])
+
+        tipo_raw = str(row.get("tipo", "")).strip()
+        if tipo_raw in ("nan", "None"):
+            tipo_raw = ""
 
         tipo = tipo_raw.lower()
-        if tipo == 'fotografia':
-            tipo = 'foto'
 
-        tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
-        tipo_display = tipo_display.capitalize() if tipo_display else ''
+        if tipo == "fotografia":
+            tipo = "foto"
 
-        serie = str(row.get('serie', '')).strip()
-        if serie in ['nan', 'None']:
-            serie = ''
+        tipo_display = "testo" if tipo == "testo_bilingue" else tipo
+        tipo_display = tipo_display.capitalize() if tipo_display else ""
 
-        url_ia = str(row.get('url', '#')).strip()
-        if url_ia in ['nan', 'None', '']:
-            url_ia = '#'
+        serie = str(row.get("serie", "")).strip()
+        if serie in ("nan", "None"):
+            serie = ""
 
-        nome_file = str(row.get('nome_file', '')).strip()
-        if nome_file in ['nan', 'None']:
-            nome_file = ''
+        url_ia = str(row.get("url", "#")).strip()
+        if url_ia in ("nan", "None", ""):
+            url_ia = "#"
 
-        nome_file_originale = str(row.get('nome_file_originale', '')).strip()
-        if nome_file_originale in ['nan', 'None']:
-            nome_file_originale = ''
+        nome_file = str(row.get("nome_file", "")).strip()
+        if nome_file in ("nan", "None"):
+            nome_file = ""
 
-        nome_file_traduzione = str(row.get('nome_file_traduzione', '')).strip()
-        if nome_file_traduzione in ['nan', 'None']:
-            nome_file_traduzione = ''
+        nome_file_originale = str(row.get("nome_file_originale", "")).strip()
+        if nome_file_originale in ("nan", "None"):
+            nome_file_originale = ""
 
-        # ========================================================================
-        # ESTRAI IDENTIFIER DA URL INTERNET ARCHIVE
-        # ========================================================================
+        nome_file_traduzione = str(row.get("nome_file_traduzione", "")).strip()
+        if nome_file_traduzione in ("nan", "None"):
+            nome_file_traduzione = ""
+
+        # =====================================================================
+        # IDENTIFIER INTERNET ARCHIVE
+        # =====================================================================
+
         identifier = None
-        if url_ia and url_ia != '#':
-            match = re.search(r'/details/([^/?#]+)', url_ia)
+
+        if url_ia and url_ia != "#":
+            match = re.search(r"/details/([^/?#]+)", url_ia)
             if match:
                 identifier = match.group(1)
 
-        # ========================================================================
-        # 🔥 DESCRIZIONE: cache + fallback
-        # ========================================================================
+        # =====================================================================
+        # DESCRIZIONE IA
+        # =====================================================================
+
         descrizione_ia = None
+
         if identifier:
             if cache_manager:
                 cached_metadata = cache_manager.get_ia_metadata(identifier)
+
                 if cached_metadata:
-                    descrizione_ia = cached_metadata.get('metadata', {}).get('description')
+                    descrizione_ia = (
+                        cached_metadata
+                        .get("metadata", {})
+                        .get("description")
+                    )
+
                 if not descrizione_ia:
                     print(f"   📡 Descrizione {identifier} scaricata da IA (cache vuota)")
                     descrizione_ia = scarica_descrizione_ia(identifier)
@@ -183,279 +189,129 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
                 descrizione_ia = scarica_descrizione_ia(identifier)
 
             if descrizione_ia and cache_manager:
-                cache_manager.set_ia_metadata(identifier, {'metadata': {'description': descrizione_ia}})
-        # else: nessun identifier disponibile, descrizione_ia rimane None
+                cache_manager.set_ia_metadata(
+                    identifier,
+                    {"metadata": {"description": descrizione_ia}},
+                )
 
-        # ========================================================================
-        # META DESCRIPTION (SEO)
-        # ========================================================================
-        meta_description = pulisci_per_meta_description(descrizione_ia) if descrizione_ia else ''
+        # =====================================================================
+        # META DESCRIPTION SEO
+        # =====================================================================
+
+        meta_description = (
+            pulisci_per_meta_description(descrizione_ia)
+            if descrizione_ia
+            else ""
+        )
 
         if not meta_description:
             if org_raw:
-                meta_description = f"{tipo_display or tipo} su {org_raw}. Documento conservato su Internet Archive."
+                meta_description = (
+                    f"{tipo_display or tipo} su {org_raw}. "
+                    "Documento conservato su Internet Archive."
+                )
             else:
-                meta_description = f"{tipo_display or tipo} conservato su Internet Archive."
+                meta_description = (
+                    f"{tipo_display or tipo} conservato su Internet Archive."
+                )
 
-        meta_description_escaped = escape_yaml_string(meta_description)
+        # =====================================================================
+        # LINK HTML PERSONE/ORGANIZZAZIONI
+        # =====================================================================
 
-        # ========================================================================
-        # GENERAZIONE LINK HTML PER PERSONE/ORG
-        # ========================================================================
         autore_links = []
-        if autore_raw and autore_raw not in ['nan', 'None']:
-            autori = split_nomi(autore_raw)
-            for autore in autori:
-                link = crea_link(autore, persone, organizzazioni)
-                autore_links.append(link)
 
-        autore_html = ', '.join(autore_links) if autore_links else 'N/A'
+        if autore_raw:
+            for autore in split_nomi(autore_raw):
+                link = crea_link(autore, persone, organizzazioni)
+                if link:
+                    autore_links.append(link)
+
+        autore_html = ", ".join(autore_links) if autore_links else "N/A"
+
         org_html = link_lista(org_raw, persone, organizzazioni)
         persone_collegate_html = link_lista(persone_collegate, persone, organizzazioni)
-        organizzazioni_collegate_html = link_lista(organizzazioni_collegate, persone, organizzazioni)
-
-        # ========================================================================
-        # GESTIONE SERIE/ARGOMENTI (link alle schede argomento)
-        # ========================================================================
-        serie_tags = [tag.strip() for tag in serie.split(';') if tag.strip()]
-        if serie_tags:
-            argomento_links = []
-            for tag in serie_tags:
-                slug = get_argomento_slug(tag, argomenti_index)
-                if slug:
-                    url = site_path(f'argomenti/{slug}/')
-                else:
-                    # Fallback di sicurezza: vecchio filtro archivio
-                    url = site_path('documenti/') + '?serie=' + urllib.parse.quote(tag, safe='')
-                argomento_links.append(f'<a href="{url}">{html.escape(tag)}</a>')
-            argomento_html = ', '.join(argomento_links)
-        else:
-            argomento_html = 'N/A'
-
-        # ========================================================================
-        # GESTIONE CITAZIONI
-        # ========================================================================
-        anno_citazione = data_formattata if data_formattata else 's.d.'
-        permalink = site_url(f"documenti/{ami_id}/")
-        citazione_id = ami_id.lower().replace('-', '_')
-        is_bibliografico = tipo in TIPI_BIBLIOGRAFICI
-
-        citazione_bottone_html = (
-            f'<button class="citazione-link" type="button" '
-            f'data-citazioni-id="{citazione_id}">📑 Cita questo documento</button>'
+        organizzazioni_collegate_html = link_lista(
+            organizzazioni_collegate,
+            persone,
+            organizzazioni,
         )
 
-        citazioni_json = None
-        citazione_minima_html = None
+        # =====================================================================
+        # SERIE / ARGOMENTI
+        # =====================================================================
 
-        if is_bibliografico:
-            # ================================================================
-            # GENERAZIONE CITAZIONI BIBLIOGRAFICHE (CHICAGO, MLA, BIBTEX)
-            # ================================================================
-            def formatta_autore_bibliografico(nome_completo):
-                info = persone.get(nome_completo)
-                if info and info.get('cognome'):
-                    cognome = info['cognome'].strip()
-                    resto = nome_completo.replace(cognome, '', 1).strip(' ,')
-                    return f'{cognome}, {resto}' if resto else cognome
-                return nome_completo
+        serie_tags = [tag.strip() for tag in serie.split(";") if tag.strip()]
 
-            def parse_periodico_titolo(titolo_raw):
-                """Estrae nome testata, anno/volume e numero fascicolo dal titolo.
-                'anno X' ha sempre precedenza su eventuali indicazioni di volume.
-                Gestisce pattern tipici: 'Lotta di Classe, anno III, no. 1',
-                'Lavoro Politico, no. 5/6', 'Lotta di Classe, supplemento al no. 2'.
-                """
-                t = titolo_raw.strip()
-                journal = t
-                anno_vol = None
-                numero = None
+        if serie_tags:
+            argomento_links = []
 
-                # 1. Estrai "anno X" (romano o arabo) se presente.
-                #    'anno' ha sempre priorità; si rimuove l'intero pezzo ", anno X," 
-                #    lasciando una virgola pulita per il parsing successivo del numero.
-                m_anno = re.search(r',\s*anno\s+([IVXLCDM]+|\d+)\b', t, re.IGNORECASE)
-                if m_anno:
-                    anno_vol = m_anno.group(1)
-                    t = re.sub(r',\s*anno\s+(?:[IVXLCDM]+|\d+)\s*,?', ',', t, count=1, flags=re.IGNORECASE)
-                    t = re.sub(r',\s*,', ',', t).strip(' ,')
+            for tag in serie_tags:
+                slug = get_argomento_slug(tag, argomenti_index)
 
-                # 2. Estrai numero fascicolo (no. / n. / n°)
-                m_no = re.search(r',\s*(?:no\.?|n\.?|n°)\s*([\d]+(?:\s*/\s*[\d]+)?)', t, re.IGNORECASE)
-                if m_no:
-                    numero = re.sub(r'\s+', '', m_no.group(1))
-                    journal = t[:m_no.start()].strip().rstrip(',')
+                if slug:
+                    url = site_path(f"argomenti/{slug}/")
                 else:
-                    m_supp = re.search(
-                        r',\s*supplemento\s+al\s+(?:no\.?|n\.?)\s*([\d]+(?:\s*/\s*[\d]+)?)',
-                        t, re.IGNORECASE
+                    url = (
+                        site_path("documenti/")
+                        + "?serie="
+                        + urllib.parse.quote(tag, safe="")
                     )
-                    if m_supp:
-                        numero = 'suppl. ' + re.sub(r'\s+', '', m_supp.group(1))
-                        journal = t[:m_supp.start()].strip().rstrip(',')
-                    else:
-                        journal = t.strip().rstrip(',')
 
-                return journal, anno_vol, numero
-
-            # ---- Autore / editore (comune a tutti i tipi bibliografici) ----
-            if autore_raw:
-                autori_lista = split_nomi(autore_raw)
-                autore_citazione = '; '.join(formatta_autore_bibliografico(a) for a in autori_lista)
-            elif editore_raw:
-                autore_citazione = editore_raw
-            elif org_raw:
-                autore_citazione = org_raw
-            else:
-                autore_citazione = 'Archivio del Maoismo Italiano (a cura di)'
-
-            editore_citazione = editore_raw if editore_raw else org_raw
-
-            luogo_editore = ''
-            if luogo_raw and editore_citazione:
-                luogo_editore = f'{luogo_raw}: {editore_citazione}, '
-            elif editore_citazione:
-                luogo_editore = f'{editore_citazione}, '
-            elif luogo_raw:
-                luogo_editore = f'{luogo_raw}, '
-
-            # ---- Ramo specifico per PERIODICO / RIVISTA / GIORNALE ----
-            if tipo in ('periodico', 'rivista', 'giornale'):
-                # Per i fascicoli l' "autore" della citazione è l'organizzazione
-                # (nome della testata o del gruppo editore), non la persona.
-                autore_periodico = org_raw if org_raw else autore_citazione
-
-                journal_name, anno_vol, numero = parse_periodico_titolo(titolo)
-
-                # Costruzione parti opzionali
-                parti_chicago = []
-                parti_mla = []
-                if anno_vol:
-                    parti_chicago.append(f'anno {anno_vol}')
-                    parti_mla.append(f'anno {anno_vol}')
-                if numero:
-                    parti_chicago.append(f'no. {numero}')
-                    parti_mla.append(f'no. {numero}')
-
-                # Chicago
-                chicago_core = f'{autore_periodico}. *{journal_name}*'
-                if parti_chicago:
-                    chicago_core += ', ' + ', '.join(parti_chicago)
-                chicago_core += f', {anno_citazione}.'
-                citazione_chicago = (
-                    f'{chicago_core} Archivio del Maoismo Italiano ({ami_id}). '
-                    f'{permalink}. Data di consultazione: {data_consultazione}.'
+                argomento_links.append(
+                    f'<a href="{html.escape(url, quote=True)}">'
+                    f"{html.escape(tag)}</a>"
                 )
 
-                # MLA
-                mla_core = f'{autore_periodico}. *{journal_name}*'
-                if parti_mla:
-                    mla_core += ', ' + ', '.join(parti_mla)
-                mla_core += f', {anno_citazione}.'
-                citazione_mla = (
-                    f'{mla_core} Archivio del Maoismo Italiano ({ami_id}), {permalink}. '
-                    f'Data di consultazione: {data_consultazione}.'
-                )
-
-                # BibTeX
-                bibtex_key = citazione_id
-                bibtex_lines = [
-                    f'@periodical{{{bibtex_key},',
-                    f'  title = {{{journal_name}}},',
-                    f'  author = {{{autore_periodico}}},',
-                    f'  year = {{{anno_citazione}}},',
-                ]
-                if numero:
-                    bibtex_lines.append(f'  number = {{{numero}}},')
-                if anno_vol:
-                    bibtex_lines.append(f'  volume = {{{anno_vol}}},')
-                if editore_citazione:
-                    bibtex_lines.append(f'  publisher = {{{editore_citazione}}},')
-                if luogo_raw:
-                    bibtex_lines.append(f'  address = {{{luogo_raw}}},')
-                bibtex_lines.append(f'  url = {{{permalink}}},')
-                bibtex_lines.append(f'  urldate = {{{datetime.now().strftime("%Y-%m-%d")}}},')
-                bibtex_lines.append(f'  note = {{Archivio del Maoismo Italiano, {ami_id}}}')
-                bibtex_lines.append('}')
-                citazione_bibtex = '\n'.join(bibtex_lines)
-
-                # Semplice
-                semplice_core = f'*{journal_name}*'
-                if parti_chicago:
-                    semplice_core += ', ' + ', '.join(parti_chicago)
-                semplice_core += f' ({anno_citazione})'
-                if autore_periodico:
-                    semplice_core += f'. {autore_periodico}'
-                citazione_semplice = (
-                    f'{semplice_core}. Archivio del Maoismo Italiano ({ami_id}). '
-                    f'{permalink}. Data di consultazione: {data_consultazione}.'
-                )
-
-            else:
-                # ---- Ramo LIBRO / OPUSCOLO / ARTICOLO (comportamento precedente) ----
-                citazione_chicago = (
-                    f'{autore_citazione}. "{titolo}". '
-                    f'{luogo_editore}{anno_citazione}. Archivio del Maoismo Italiano ({ami_id}). '
-                    f'{permalink}. Data di consultazione: {data_consultazione}.'
-                )
-
-                citazione_mla = (
-                    f'{autore_citazione}. "{titolo}". '
-                    + (f'{editore_citazione}, ' if editore_citazione else '')
-                    + f'{anno_citazione}. Archivio del Maoismo Italiano ({ami_id}), {permalink}. '
-                    f'Data di consultazione: {data_consultazione}.'
-                )
-
-                bibtex_key = citazione_id
-                if tipo == 'libro':
-                    bibtex_type = 'book'
-                elif tipo == 'articolo':
-                    bibtex_type = 'article'
-                else:
-                    bibtex_type = 'booklet'
-                citazione_bibtex = (
-                    '@' + bibtex_type + '{' + bibtex_key + ',\n'
-                    '  title = {' + titolo + '},\n'
-                    '  author = {' + autore_citazione + '},\n'
-                    '  year = {' + anno_citazione + '},\n'
-                    + (('  publisher = {' + editore_citazione + '},\n') if editore_citazione else '')
-                    + (('  address = {' + luogo_raw + '},\n') if luogo_raw else '')
-                    + '  url = {' + permalink + '},\n'
-                    + '  urldate = {' + datetime.now().strftime('%Y-%m-%d') + '},\n'
-                    + '  note = {Archivio del Maoismo Italiano, ' + ami_id + '}\n'
-                    '}'
-                )
-
-                citazione_semplice = (
-                    f'{autore_citazione}, {titolo}'
-                    + (f', {luogo_raw}: {editore_citazione}' if luogo_raw and editore_citazione else (f', {editore_citazione}' if editore_citazione else ''))
-                    + f', {anno_citazione}. Archivio del Maoismo Italiano ({ami_id}). {permalink}. '
-                    f'Data di consultazione: {data_consultazione}.'
-                )
-
-            citazioni_dict = {
-                'chicago': citazione_chicago,
-                'mla': citazione_mla,
-                'bibtex': citazione_bibtex,
-                'semplice': citazione_semplice
-            }
-            citazioni_json = json.dumps(citazioni_dict, ensure_ascii=False)
+            argomento_html = ", ".join(argomento_links)
         else:
-            # ================================================================
-            # CITAZIONE SEMPLICE (non bibliografico)
-            # ================================================================
-            citazione_minima = (
-                f'"{titolo}", {anno_citazione}. Archivio del Maoismo Italiano. '
-                f'{permalink}. Data di consultazione: {data_consultazione}.'
-            )
-            citazione_minima_html = html.escape(citazione_minima)
+            argomento_html = "N/A"
 
-        # ========================================================================
-        # SCHEMA.ORG JSON-LD (scheda specifica del documento)
-        # ========================================================================
+        # =====================================================================
+        # CITAZIONI
+        # =====================================================================
+
+        citazione_id = sanitize_citation_id(ami_id)
+
+        payload_citazione = costruisci_payload_citazione(
+            ami_id=ami_id,
+            titolo=titolo,
+            tipo=tipo,
+            autore_raw=autore_raw,
+            org_raw=org_raw,
+            editore_raw=editore_raw,
+            luogo_raw=luogo_raw,
+            data_formattata=data_formattata,
+            anno_pubblicazione=anno_pubblicazione,
+            identifier=identifier or "",
+            persone=persone,
+            organizzazioni=organizzazioni,
+        )
+
+        is_bibliografico = payload_citazione.get("mode") == "bibliografica"
+
+        citazioni_json = json_per_script(payload_citazione)
+
+        citazione_bottone_html = (
+            '<button class="citazione-link" type="button" '
+            f'data-citazioni-id="{citazione_id}" '
+            f'aria-controls="citazione-pannello-{citazione_id}" '
+            'aria-expanded="false">'
+            "📑 Cita questo documento</button>"
+        )
+
+        # =====================================================================
+        # SCHEMA.ORG JSON-LD
+        # =====================================================================
+
         autori_nomi = split_nomi(autore_raw) if autore_raw else []
         organizzazioni_nomi = split_nomi(org_raw) if org_raw else []
-        immagine_url_schema = f"https://archive.org/services/img/{identifier}" if identifier else None
+
+        immagine_url_schema = (
+            f"https://archive.org/services/img/{identifier}"
+            if identifier
+            else None
+        )
 
         document_schema = SchemaGenerator.document_schema(
             ami_id=ami_id,
@@ -467,181 +323,237 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
             data_pubblicazione=anno_pubblicazione,
             keywords=serie_tags,
             url_ia=url_ia,
-            immagine_url=immagine_url_schema
+            immagine_url=immagine_url_schema,
         )
-        document_schema_json = json.dumps(document_schema, ensure_ascii=False)
 
-        # ========================================================================
-        # COSTRUZIONE FRONTMATTER
-        # ========================================================================
+        document_schema_json = json_per_script(document_schema)
+
+        # =====================================================================
+        # FRONTMATTER
+        # =====================================================================
+
         frontmatter = f"""---
-title: "{titolo}"
-ami_id: {ami_id}
-organization: "{org_raw}"
-author: "{autore_raw}"
-year: "{data_formattata}"
-type: "{tipo}"
-series: "{serie}"
-description: "{meta_description_escaped}"
+title: {yaml_value(titolo)}
+ami_id: {yaml_value(ami_id)}
+organization: {yaml_value(org_raw)}
+author: {yaml_value(autore_raw)}
+year: {yaml_value(data_formattata)}
+type: {yaml_value(tipo)}
+series: {yaml_value(serie)}
+description: {yaml_value(meta_description)}
 hide:
   - navigation
   - toc
 ---
-
-<script type="application/ld+json">
-{document_schema_json}
-</script>
 """
 
-        # ========================================================================
-        # COSTRUZIONE CONTENT - INTESTAZIONE
-        # ========================================================================
-        content = f"""
-<div class="doc-date-large">{data_formattata if data_formattata else 'Data non disponibile'}</div>
-<h1 class="doc-title-large">{titolo}</h1>
+        # =====================================================================
+        # CONTENUTO
+        # =====================================================================
+
+        data_display_html = html.escape(
+            data_formattata
+            if data_formattata and data_formattata != "n.d."
+            else "Data non disponibile"
+        )
+
+        titolo_html = html.escape(titolo)
+        url_ia_attr = html.escape(url_ia, quote=True)
+
+        content = f"""<script type="application/ld+json">{document_schema_json}</script>
+
+<div class="doc-date-large">{data_display_html}</div>
+<h1 class="doc-title-large">{titolo_html}</h1>
 <div class="embed-container">
 """
 
-        # ========================================================================
+        # =====================================================================
         # EMBED MULTIMEDIALE
-        # ========================================================================
-        # 🔥 GESTIONE FOTO / MANIFESTO
-        if tipo in ['foto', 'manifesto'] and identifier:
+        # =====================================================================
+
+        if tipo in ("foto", "manifesto") and identifier:
             if nome_file:
-                img_url = f"https://archive.org/download/{identifier}/{nome_file}"
-                img_tag = f'<img data-src="{img_url}" alt="{titolo}" class="lazy-img photo-embed">'
+                quoted_file = urllib.parse.quote(nome_file)
+                img_url = f"https://archive.org/download/{identifier}/{quoted_file}"
+                img_url_attr = html.escape(img_url, quote=True)
+
+                img_tag = (
+                    f'<img data-src="{img_url_attr}" '
+                    f'alt="{titolo_html}" '
+                    'class="lazy-img photo-embed">'
+                )
             else:
                 img_url_jpg = f"https://archive.org/download/{identifier}/{identifier}.jpg"
                 img_url_png = f"https://archive.org/download/{identifier}/{identifier}.png"
+
+                img_url_jpg_attr = html.escape(img_url_jpg, quote=True)
+                img_url_png_attr = html.escape(img_url_png, quote=True)
+
                 img_tag = (
-                    f'<img data-src="{img_url_jpg}" data-src-fallback="{img_url_png}" '
-                    f'alt="{titolo}" class="lazy-img photo-embed">'
+                    f'<img data-src="{img_url_jpg_attr}" '
+                    f'data-src-fallback="{img_url_png_attr}" '
+                    f'alt="{titolo_html}" '
+                    'class="lazy-img photo-embed">'
                 )
+
+            label_ia = (
+                "Visualizza il manifesto su Internet Archive"
+                if tipo == "manifesto"
+                else "Visualizza la foto su Internet Archive"
+            )
+
             content += f"""
 <div class="photo-viewer">
-    {img_tag}
-    <div class="photo-fallback" style="display:none; padding:1rem; text-align:center;">
-        <p>🔗 <a href="{url_ia}" target="_blank">Visualizza {'il manifesto' if tipo == 'manifesto' else 'la foto'} su Internet Archive</a></p>
-    </div>
-    <div class="embed-footer">
-        {citazione_bottone_html}
-        <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
-    </div>
+{img_tag}
+<div class="photo-fallback" style="display:none; padding:1rem; text-align:center;">
+<p>🔗 <a href="{url_ia_attr}" target="_blank" rel="noopener">{label_ia}</a></p>
+</div>
+<div class="embed-footer">
+{citazione_bottone_html}
+<a href="{url_ia_attr}" target="_blank" rel="noopener">🔗 Apri su Internet Archive</a>
+</div>
 </div>
 """
-        # 🔥 GESTIONE TESTO BILINGUE
-        elif tipo == 'testo_bilingue' and identifier:
-            testo_originale = scarica_testo_ia(identifier, nome_file_originale) if nome_file_originale else None
-            testo_traduzione = scarica_testo_ia(identifier, nome_file_traduzione) if nome_file_traduzione else None
+
+        elif tipo == "testo_bilingue" and identifier:
+            testo_originale = (
+                scarica_testo_ia(identifier, nome_file_originale)
+                if nome_file_originale
+                else None
+            )
+
+            testo_traduzione = (
+                scarica_testo_ia(identifier, nome_file_traduzione)
+                if nome_file_traduzione
+                else None
+            )
 
             if testo_originale:
                 testo_originale = html.escape(testo_originale)
             else:
-                testo_originale = 'Testo originale non disponibile.'
+                testo_originale = "Testo originale non disponibile."
 
             if testo_traduzione:
                 testo_traduzione = html.escape(testo_traduzione)
             else:
-                testo_traduzione = 'Traduzione non disponibile.'
+                testo_traduzione = "Traduzione non disponibile."
 
             content += f"""
 <div class="text-bilingue">
-    <div class="lingua-toggle" data-toggle-container>
-        <button class="lingua-btn lingua-btn--active" data-lingua="originale">Originale</button>
-        <button class="lingua-btn" data-lingua="traduzione">Traduzione</button>
-    </div>
-    <div class="lingua-content lingua-content--originale" data-lingua-content="originale">
-        <pre class="text-preview">{testo_originale}</pre>
-    </div>
-    <div class="lingua-content lingua-content--traduzione" data-lingua-content="traduzione" style="display:none;">
-        <pre class="text-preview">{testo_traduzione}</pre>
-    </div>
+<div class="lingua-toggle" data-toggle-container>
+<button class="lingua-btn lingua-btn--active" data-lingua="originale">Originale</button>
+<button class="lingua-btn" data-lingua="traduzione">Traduzione</button>
+</div>
+<div class="lingua-content lingua-content--originale" data-lingua-content="originale">
+<pre class="text-preview">{testo_originale}</pre>
+</div>
+<div class="lingua-content lingua-content--traduzione" data-lingua-content="traduzione" style="display:none;">
+<pre class="text-preview">{testo_traduzione}</pre>
+</div>
 </div>
 <div class="embed-footer">
-    {citazione_bottone_html}
-    <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
+{citazione_bottone_html}
+<a href="{url_ia_attr}" target="_blank" rel="noopener">🔗 Apri su Internet Archive</a>
 </div>
 """
-        # 🔥 GESTIONE TESTO/TRASCRIZIONE
-        elif tipo in ['testo', 'trascrizione'] and identifier:
+
+        elif tipo in ("testo", "trascrizione") and identifier:
             testo = scarica_testo_ia(identifier, nome_file)
+
             if testo:
                 testo = html.escape(testo)
+
                 content += f"""
 <div class="text-content">
-    <pre class="text-preview">{testo}</pre>
+<pre class="text-preview">{testo}</pre>
 </div>
 """
             else:
                 content += f"""
 <div class="text-fallback">
-    <p>🔗 <a href="{url_ia}" target="_blank">Visualizza il testo su Internet Archive</a></p>
+<p>🔗 <a href="{url_ia_attr}" target="_blank" rel="noopener">Visualizza il testo su Internet Archive</a></p>
 </div>
 """
-            content += f"""
-<div class="embed-footer">
-    {citazione_bottone_html}
-    <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
-</div>
-"""
-        # 🔥 GESTIONE AUDIO, PDF, ETC.
-        elif identifier:
-            if tipo == 'audio':
-                embed_url = f"https://archive.org/embed/{identifier}?ui=embed&nav=0&show_covers=1&playlist=1"
-            else:
-                embed_url = f"https://archive.org/embed/{identifier}?ui=embed&nav=0"
 
-            fs_id = f"ia-embed-{ami_id}"
             content += f"""
-<iframe id="{fs_id}" src="{embed_url}" 
-        class="universal-embed" 
-        allowfullscreen>
-</iframe>
 <div class="embed-footer">
-    {citazione_bottone_html}
-    <button class="fullscreen-btn" data-target="{fs_id}" type="button">⛶ Schermo intero</button>
-    <a href="{url_ia}" target="_blank">🔗 Apri su Internet Archive</a>
+{citazione_bottone_html}
+<a href="{url_ia_attr}" target="_blank" rel="noopener">🔗 Apri su Internet Archive</a>
 </div>
 """
-        # Fallback: nessun embed disponibile
+
+        elif identifier:
+            if tipo == "audio":
+                embed_url = (
+                    f"https://archive.org/embed/{identifier}"
+                    "?ui=embed&nav=0&show_covers=1&playlist=1"
+                )
+            else:
+                embed_url = (
+                    f"https://archive.org/embed/{identifier}"
+                    "?ui=embed&nav=0"
+                )
+
+            embed_url_attr = html.escape(embed_url, quote=True)
+            fs_id = f"ia-embed-{ami_id}"
+
+            content += f"""
+<iframe id="{fs_id}" src="{embed_url_attr}" class="universal-embed" allowfullscreen></iframe>
+<div class="embed-footer">
+{citazione_bottone_html}
+<button class="fullscreen-btn" data-target="{fs_id}" type="button">⛶ Schermo intero</button>
+<a href="{url_ia_attr}" target="_blank" rel="noopener">🔗 Apri su Internet Archive</a>
+</div>
+"""
+
         else:
             content += f"""
 <div class="no-embed">
-    <p>📄 <a href="{url_ia}" target="_blank">Visualizza il documento su Internet Archive</a></p>
+<p>📄 <a href="{url_ia_attr}" target="_blank" rel="noopener">Visualizza il documento su Internet Archive</a></p>
 </div>
 <div class="embed-footer">
-    {citazione_bottone_html}
+{citazione_bottone_html}
 </div>
 """
 
-        # ========================================================================
+        # Chiude .embed-container
+        content += "\n</div>\n"
+
+        # =====================================================================
         # PANNELLO CITAZIONI
-        # ========================================================================
+        # =====================================================================
+
+        tabs_html = ""
+
         if is_bibliografico:
-            content += f"""
-<div class="citazione-pannello" id="citazione-pannello-{citazione_id}" style="display:none;">
-    <div class="citazione-tabs">
-        <button class="citazione-tab citazione-tab--active" data-formato="chicago" type="button">Chicago</button>
-        <button class="citazione-tab" data-formato="mla" type="button">MLA</button>
-        <button class="citazione-tab" data-formato="bibtex" type="button">BibTeX</button>
-        <button class="citazione-tab" data-formato="semplice" type="button">Semplice</button>
-    </div>
-    <textarea class="citazione-testo" id="citazione-testo-{citazione_id}" readonly rows="4"></textarea>
-    <button class="citazione-copia" id="citazione-copia-{citazione_id}" type="button">📋 Copia</button>
+            tabs_html = """
+<div class="citazione-tabs">
+<button class="citazione-tab citazione-tab--active" data-formato="chicago" type="button">Chicago</button>
+<button class="citazione-tab" data-formato="mla" type="button">MLA</button>
+<button class="citazione-tab" data-formato="bibtex" type="button">BibTeX</button>
+<button class="citazione-tab" data-formato="semplice" type="button">Semplice</button>
 </div>
+"""
+
+        content += f"""
+<div class="citazione-pannello" id="citazione-pannello-{citazione_id}" style="display:none;">
+{tabs_html}
+<textarea class="citazione-testo" id="citazione-testo-{citazione_id}" readonly rows="4"></textarea>
+<button class="citazione-copia" id="citazione-copia-{citazione_id}" type="button">📋 Copia</button>
+</div>
+<noscript>
+<div class="citazione-pannello citazione-pannello--noscript">
+<textarea class="citazione-testo" readonly rows="3"></textarea>
+<p class="citazione-noscript-msg">Abilita JavaScript per vedere e copiare la citazione completa con data di consultazione.</p>
+</div>
+</noscript>
 <script type="application/json" id="citazioni-dati-{citazione_id}">{citazioni_json}</script>
 """
-        else:
-            content += f"""
-<div class="citazione-pannello" id="citazione-pannello-{citazione_id}" style="display:none;">
-    <textarea class="citazione-testo" id="citazione-testo-{citazione_id}" readonly rows="3">{citazione_minima_html}</textarea>
-    <button class="citazione-copia" id="citazione-copia-{citazione_id}" type="button">📋 Copia</button>
-</div>
-"""
 
-        # ========================================================================
-        # 🔥 DESCRIZIONE IA
-        # ========================================================================
+        # =====================================================================
+        # ABSTRACT IA
+        # =====================================================================
+
         if descrizione_ia:
             content += f"""
 <div class="doc-abstract">
@@ -649,505 +561,79 @@ hide:
 </div>
 """
 
-        # ========================================================================
-        # METADATI CON LINK (INCLUSA PROVENIENZA)
-        # ========================================================================
+        # =====================================================================
+        # METADATI
+        # =====================================================================
+
+        provenienza_html = html.escape(provenienza_raw) if provenienza_raw else "N/A"
+        tipo_display_html = html.escape(tipo_display) if tipo_display else "N/A"
+        data_metadata_html = html.escape(data_formattata) if data_formattata else "N/A"
+
         content += f"""
 <div class="doc-metadata">
-    <div class="metadata-grid">
-        <div class="metadata-item">
-            <span class="metadata-label">Autore</span>
-            <span class="metadata-value">{autore_html}</span>
-        </div>
-        <div class="metadata-item">
-            <span class="metadata-label">Organizzazione</span>
-            <span class="metadata-value">{org_html}</span>
-        </div>
-        <div class="metadata-item">
-            <span class="metadata-label">Persone collegate</span>
-            <span class="metadata-value">{persone_collegate_html}</span>
-        </div>
-        <div class="metadata-item">
-            <span class="metadata-label">Organizzazioni collegate</span>
-            <span class="metadata-value">{organizzazioni_collegate_html}</span>
-        </div>
-        <div class="metadata-item">
-            <span class="metadata-label">Data</span>
-            <span class="metadata-value">{data_formattata if data_formattata else 'N/A'}</span>
-        </div>
-        <div class="metadata-item">
-            <span class="metadata-label">Provenienza</span>
-            <span class="metadata-value">{provenienza_raw if provenienza_raw else 'N/A'}</span>
-        </div>
-        <div class="metadata-item">
-            <span class="metadata-label">Tipologia</span>
-            <span class="metadata-value">{tipo_display if tipo_display else 'N/A'}</span>
-        </div>
-        <div class="metadata-item">
-            <span class="metadata-label">Argomenti</span>
-            <span class="metadata-value">{argomento_html}</span>
-        </div>
-    </div>
+<div class="metadata-grid">
+<div class="metadata-item">
+<span class="metadata-label">Autore</span>
+<span class="metadata-value">{autore_html}</span>
 </div>
-<style>
-.doc-date-large {{
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--md-primary-fg-color);
-    margin: 0.5rem 0 0 0;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-}}
-
-.doc-title-large {{
-    font-size: 2.4rem;
-    font-weight: 700;
-    margin: 0.2rem 0 1.5rem 0;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    color: var(--md-default-fg-color);
-}}
-
-.embed-container {{
-    margin: 1.5rem 0;
-    background: var(--md-code-bg-color);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    min-height: 100px;
-}}
-
-.universal-embed {{
-    width: 100%;
-    height: 600px;
-    border: none;
-    display: block;
-    background: var(--md-code-bg-color);
-}}
-
-.photo-viewer {{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-    background: var(--md-code-bg-color);
-}}
-
-.photo-embed {{
-    max-width: 100%;
-    max-height: 80vh;
-    object-fit: contain;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}}
-
-.photo-fallback {{
-    padding: 2rem;
-    text-align: center;
-    color: var(--md-default-fg-color--light);
-}}
-
-.photo-fallback a {{
-    color: var(--md-primary-fg-color);
-    text-decoration: none;
-    font-weight: 500;
-}}
-
-.photo-fallback a:hover {{
-    text-decoration: underline;
-}}
-
-.embed-footer {{
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    gap: 1.2rem;
-    padding: 0.5rem 1rem 0.8rem 1rem;
-    font-size: 0.9rem;
-    background: var(--md-code-bg-color);
-    border-top: 1px solid var(--md-default-fg-color--lightest);
-}}
-
-.embed-footer a {{
-    color: var(--md-primary-fg-color);
-    text-decoration: none;
-    font-weight: 500;
-}}
-
-.embed-footer a:hover {{
-    text-decoration: underline;
-}}
-
-.citazione-link {{
-    background: none;
-    border: none;
-    padding: 0;
-    color: var(--md-primary-fg-color);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    cursor: pointer;
-    font-family: inherit;
-}}
-
-.citazione-link:hover {{
-    text-decoration: underline;
-}}
-
-.fullscreen-btn {{
-    background: none;
-    border: none;
-    padding: 0;
-    color: var(--md-primary-fg-color);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    cursor: pointer;
-    font-family: inherit;
-}}
-
-.fullscreen-btn:hover {{
-    text-decoration: underline;
-}}
-
-.no-embed {{
-    padding: 2rem;
-    text-align: center;
-    color: var(--md-default-fg-color--light);
-}}
-
-.doc-abstract {{
-    margin: 1.5rem 0;
-    padding: 1rem 1.5rem;
-    background: var(--md-code-bg-color);
-    border-left: 4px solid var(--md-primary-fg-color);
-    border-radius: 4px;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--md-default-fg-color--light);
-}}
-
-.doc-abstract p {{
-    margin: 0;
-}}
-
-.doc-abstract * {{
-    font-size: inherit !important;
-    font-weight: inherit !important;
-    font-style: inherit !important;
-    font-family: inherit !important;
-    color: inherit !important;
-    line-height: inherit !important;
-    background: none !important;
-}}
-
-.doc-abstract p,
-.doc-abstract ul,
-.doc-abstract ol {{
-    margin: 0 0 0.8rem 0 !important;
-}}
-
-.doc-abstract p:last-child,
-.doc-abstract ul:last-child,
-.doc-abstract ol:last-child {{
-    margin-bottom: 0 !important;
-}}
-
-.doc-metadata {{
-    margin-top: 2.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--md-default-fg-color--lightest);
-}}
-
-.metadata-grid {{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 0.8rem 2rem;
-}}
-
-.metadata-item {{
-    display: flex;
-    flex-direction: column;
-    padding: 0.3rem 0;
-}}
-
-.metadata-label {{
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--md-default-fg-color--light);
-    margin-bottom: 0.1rem;
-}}
-
-.metadata-value {{
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--md-default-fg-color);
-    word-break: break-word;
-}}
-
-.metadata-value a {{
-    color: var(--md-primary-fg-color);
-    text-decoration: none;
-}}
-
-.metadata-value a:hover {{
-    text-decoration: underline;
-}}
-
-.text-content {{
-    margin: 1rem 0;
-    background: var(--md-code-bg-color);
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--md-default-fg-color--lightest);
-}}
-
-.text-preview {{
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    font-family: inherit;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    padding: 1.5rem;
-    margin: 0;
-    max-height: 600px;
-    overflow-y: auto;
-    background: transparent;
-    color: var(--md-default-fg-color);
-}}
-
-.text-fallback {{
-    padding: 2rem;
-    text-align: center;
-    color: var(--md-default-fg-color--light);
-}}
-
-.text-fallback a {{
-    color: var(--md-primary-fg-color);
-    text-decoration: none;
-    font-weight: 500;
-}}
-
-.text-fallback a:hover {{
-    text-decoration: underline;
-}}
-
-.text-bilingue {{
-    margin: 1rem 0;
-    background: var(--md-code-bg-color);
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--md-default-fg-color--lightest);
-}}
-
-.lingua-toggle {{
-    display: flex;
-    gap: 0.5rem;
-    padding: 0.6rem 1rem;
-    background: var(--md-default-fg-color--lightest);
-    border-bottom: 1px solid var(--md-default-fg-color--light);
-}}
-
-.lingua-btn {{
-    background: transparent;
-    border: 2px solid transparent;
-    border-radius: 4px;
-    padding: 0.3rem 1rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--md-default-fg-color--light);
-    cursor: pointer;
-    transition: color 0.2s, border-color 0.2s, background 0.2s;
-}}
-
-.lingua-btn:hover {{
-    color: var(--md-default-fg-color);
-}}
-
-.lingua-btn--active {{
-    color: var(--md-primary-fg-color);
-    border-color: var(--md-primary-fg-color);
-    background: rgba(183, 28, 28, 0.08);
-}}
-
-.lingua-content {{
-    padding: 0;
-}}
-
-.lingua-content .text-preview {{
-    max-height: 600px;
-    overflow-y: auto;
-    padding: 1.5rem;
-    margin: 0;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    font-family: inherit;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    background: transparent;
-    color: var(--md-default-fg-color);
-}}
-
-.citazione-pannello {{
-    background: var(--md-code-bg-color);
-    border-top: 1px solid var(--md-default-fg-color--lightest);
-    padding: 0.9rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.7rem;
-}}
-
-.citazione-testo {{
-    width: 100%;
-    box-sizing: border-box;
-    font-family: 'Roboto Mono', 'Courier New', monospace;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    padding: 0.7rem 0.9rem;
-    border-radius: 6px;
-    border: 1px solid var(--md-default-fg-color--lightest);
-    background: var(--md-default-bg-color);
-    color: var(--md-default-fg-color);
-    resize: vertical;
-}}
-
-.citazione-tabs {{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-}}
-
-.citazione-tab {{
-    background: transparent;
-    border: 1px solid var(--md-default-fg-color--lightest);
-    border-radius: 20px;
-    padding: 0.2rem 0.8rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--md-default-fg-color--light);
-    cursor: pointer;
-    transition: color 0.15s, border-color 0.15s, background 0.15s;
-}}
-
-.citazione-tab:hover {{
-    color: var(--md-default-fg-color);
-}}
-
-.citazione-tab--active {{
-    color: #ffffff;
-    background: var(--md-primary-fg-color);
-    border-color: var(--md-primary-fg-color);
-}}
-
-.citazione-copia {{
-    align-self: flex-end;
-    background: var(--md-primary-fg-color);
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    padding: 0.4rem 1.2rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s;
-    white-space: nowrap;
-}}
-
-.citazione-copia:hover {{
-    background: var(--md-primary-fg-color--dark);
-}}
-
-@media (max-width: 600px) {{
-    .citazione-testo {{
-        font-size: 0.78rem;
-    }}
-    .citazione-copia {{
-        align-self: stretch;
-    }}
-    .doc-date-large {{
-        font-size: 1.3rem;
-    }}
-    .doc-title-large {{
-        font-size: 1.6rem;
-    }}
-    .universal-embed {{
-        height: 65vh;
-        min-height: 420px;
-        max-height: 550px;
-    }}
-    .photo-embed {{
-        max-height: 50vh;
-    }}
-    .photo-viewer {{
-        padding: 0.5rem;
-    }}
-    .doc-abstract {{
-        padding: 0.8rem 1rem;
-        font-size: 0.85rem;
-        margin: 1rem 0;
-    }}
-    .text-preview {{
-        font-size: 0.85rem;
-        padding: 1rem;
-        max-height: 400px;
-    }}
-    .lingua-content .text-preview {{
-        font-size: 0.85rem;
-        padding: 1rem;
-        max-height: 400px;
-    }}
-    .lingua-toggle {{
-        padding: 0.4rem 0.8rem;
-        gap: 0.3rem;
-    }}
-    .lingua-btn {{
-        padding: 0.2rem 0.6rem;
-        font-size: 0.75rem;
-    }}
-    .metadata-grid {{
-        grid-template-columns: 1fr;
-        gap: 0.3rem;
-    }}
-    .metadata-item {{
-        flex-direction: row;
-        gap: 0.5rem;
-        padding: 0.2rem 0;
-        border-bottom: 1px solid var(--md-default-fg-color--lightest);
-    }}
-    .metadata-label {{
-        min-width: 100px;
-        font-size: 0.7rem;
-    }}
-    .metadata-value {{
-        font-size: 0.85rem;
-    }}
-}}
-</style>
+<div class="metadata-item">
+<span class="metadata-label">Organizzazione</span>
+<span class="metadata-value">{org_html}</span>
+</div>
+<div class="metadata-item">
+<span class="metadata-label">Persone collegate</span>
+<span class="metadata-value">{persone_collegate_html}</span>
+</div>
+<div class="metadata-item">
+<span class="metadata-label">Organizzazioni collegate</span>
+<span class="metadata-value">{organizzazioni_collegate_html}</span>
+</div>
+<div class="metadata-item">
+<span class="metadata-label">Data</span>
+<span class="metadata-value">{data_metadata_html}</span>
+</div>
+<div class="metadata-item">
+<span class="metadata-label">Provenienza</span>
+<span class="metadata-value">{provenienza_html}</span>
+</div>
+<div class="metadata-item">
+<span class="metadata-label">Tipologia</span>
+<span class="metadata-value">{tipo_display_html}</span>
+</div>
+<div class="metadata-item">
+<span class="metadata-label">Argomenti</span>
+<span class="metadata-value">{argomento_html}</span>
+</div>
+</div>
+</div>
 """
 
-        # ========================================================================
-        # SALVATAGGIO FILE
-        # ========================================================================
-        with open(file_path, 'w', encoding='utf-8') as f:
+        # =====================================================================
+        # SALVATAGGIO
+        # =====================================================================
+
+        with open(file_path, "w", encoding="utf-8") as f:
             f.write(frontmatter + content)
 
-        # ✨ CACHE: Salva metadati del documento
         if cache_manager:
-            cache_manager.set_doc_metadata(ami_id, {
-                'titolo': titolo,
-                'data': data_formattata,
-                'tipo': tipo,
-                'source_hash': row_hash,
-                'stato': 'generato'
-            })
+            cache_manager.set_doc_metadata(
+                ami_id,
+                {
+                    "titolo": titolo,
+                    "data": data_formattata,
+                    "tipo": tipo,
+                    "source_hash": row_hash,
+                    "stato": "generato",
+                },
+            )
 
         contatore_generati += 1
         print(f"   ✅ Creata scheda per {ami_id} (tipo: {tipo})")
 
-    # Report finale
-    print(f"\n✅ Schede documento: {contatore_generati} generate, {contatore_saltati} saltate (da cache)")
+    print(
+        "\n✅ Schede documento: "
+        f"{contatore_generati} generate, "
+        f"{contatore_saltati} saltate (da cache)"
+    )
+
     return contatore_generati, contatore_saltati
