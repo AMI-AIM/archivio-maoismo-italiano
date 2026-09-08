@@ -260,6 +260,45 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
                     return f'{cognome}, {resto}' if resto else cognome
                 return nome_completo
 
+            def parse_periodico_titolo(titolo_raw):
+                """Estrae nome testata, anno/volume e numero fascicolo dal titolo.
+                'anno X' ha sempre precedenza su eventuali indicazioni di volume.
+                Gestisce pattern tipici: 'Lotta di Classe, anno III, no. 1',
+                'Lavoro Politico, no. 5/6', 'Lotta di Classe, supplemento al no. 2'.
+                """
+                t = titolo_raw.strip()
+                journal = t
+                anno_vol = None
+                numero = None
+
+                # 1. Estrai "anno X" (romano o arabo) se presente.
+                #    'anno' ha sempre priorità; si rimuove l'intero pezzo ", anno X," 
+                #    lasciando una virgola pulita per il parsing successivo del numero.
+                m_anno = re.search(r',\s*anno\s+([IVXLCDM]+|\d+)\b', t, re.IGNORECASE)
+                if m_anno:
+                    anno_vol = m_anno.group(1)
+                    t = re.sub(r',\s*anno\s+(?:[IVXLCDM]+|\d+)\s*,?', ',', t, count=1, flags=re.IGNORECASE)
+                    t = re.sub(r',\s*,', ',', t).strip(' ,')
+
+                # 2. Estrai numero fascicolo (no. / n. / n°)
+                m_no = re.search(r',\s*(?:no\.?|n\.?|n°)\s*([\d]+(?:\s*/\s*[\d]+)?)', t, re.IGNORECASE)
+                if m_no:
+                    numero = re.sub(r'\s+', '', m_no.group(1))
+                    journal = t[:m_no.start()].strip().rstrip(',')
+                else:
+                    m_supp = re.search(
+                        r',\s*supplemento\s+al\s+(?:no\.?|n\.?)\s*([\d]+(?:\s*/\s*[\d]+)?)',
+                        t, re.IGNORECASE
+                    )
+                    if m_supp:
+                        numero = 'suppl. ' + re.sub(r'\s+', '', m_supp.group(1))
+                        journal = t[:m_supp.start()].strip().rstrip(',')
+                    else:
+                        journal = t.strip().rstrip(',')
+
+                return journal, anno_vol, numero
+
+            # ---- Autore / editore (comune a tutti i tipi bibliografici) ----
             if autore_raw:
                 autori_lista = split_nomi(autore_raw)
                 autore_citazione = '; '.join(formatta_autore_bibliografico(a) for a in autori_lista)
@@ -280,45 +319,119 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
             elif luogo_raw:
                 luogo_editore = f'{luogo_raw}, '
 
-            citazione_chicago = (
-                f'{autore_citazione}. "{titolo}". '
-                f'{luogo_editore}{anno_citazione}. Archivio del Maoismo Italiano ({ami_id}). '
-                f'{permalink}. Data di consultazione: {data_consultazione}.'
-            )
+            # ---- Ramo specifico per PERIODICO / RIVISTA / GIORNALE ----
+            if tipo in ('periodico', 'rivista', 'giornale'):
+                # Per i fascicoli l' "autore" della citazione è l'organizzazione
+                # (nome della testata o del gruppo editore), non la persona.
+                autore_periodico = org_raw if org_raw else autore_citazione
 
-            citazione_mla = (
-                f'{autore_citazione}. "{titolo}". '
-                + (f'{editore_citazione}, ' if editore_citazione else '')
-                + f'{anno_citazione}. Archivio del Maoismo Italiano ({ami_id}), {permalink}. '
-                f'Data di consultazione: {data_consultazione}.'
-            )
+                journal_name, anno_vol, numero = parse_periodico_titolo(titolo)
 
-            bibtex_key = citazione_id
-            if tipo == 'libro':
-                bibtex_type = 'book'
-            elif tipo in ('periodico', 'giornale', 'rivista', 'articolo'):
-                bibtex_type = 'article'
+                # Costruzione parti opzionali
+                parti_chicago = []
+                parti_mla = []
+                if anno_vol:
+                    parti_chicago.append(f'anno {anno_vol}')
+                    parti_mla.append(f'anno {anno_vol}')
+                if numero:
+                    parti_chicago.append(f'no. {numero}')
+                    parti_mla.append(f'no. {numero}')
+
+                # Chicago
+                chicago_core = f'{autore_periodico}. *{journal_name}*'
+                if parti_chicago:
+                    chicago_core += ', ' + ', '.join(parti_chicago)
+                chicago_core += f', {anno_citazione}.'
+                citazione_chicago = (
+                    f'{chicago_core} Archivio del Maoismo Italiano ({ami_id}). '
+                    f'{permalink}. Data di consultazione: {data_consultazione}.'
+                )
+
+                # MLA
+                mla_core = f'{autore_periodico}. *{journal_name}*'
+                if parti_mla:
+                    mla_core += ', ' + ', '.join(parti_mla)
+                mla_core += f', {anno_citazione}.'
+                citazione_mla = (
+                    f'{mla_core} Archivio del Maoismo Italiano ({ami_id}), {permalink}. '
+                    f'Data di consultazione: {data_consultazione}.'
+                )
+
+                # BibTeX
+                bibtex_key = citazione_id
+                bibtex_lines = [
+                    f'@periodical{{{bibtex_key},',
+                    f'  title = {{{journal_name}}},',
+                    f'  author = {{{autore_periodico}}},',
+                    f'  year = {{{anno_citazione}}},',
+                ]
+                if numero:
+                    bibtex_lines.append(f'  number = {{{numero}}},')
+                if anno_vol:
+                    bibtex_lines.append(f'  volume = {{{anno_vol}}},')
+                if editore_citazione:
+                    bibtex_lines.append(f'  publisher = {{{editore_citazione}}},')
+                if luogo_raw:
+                    bibtex_lines.append(f'  address = {{{luogo_raw}}},')
+                bibtex_lines.append(f'  url = {{{permalink}}},')
+                bibtex_lines.append(f'  urldate = {{{datetime.now().strftime("%Y-%m-%d")}}},')
+                bibtex_lines.append(f'  note = {{Archivio del Maoismo Italiano, {ami_id}}}')
+                bibtex_lines.append('}')
+                citazione_bibtex = '\n'.join(bibtex_lines)
+
+                # Semplice
+                semplice_core = f'*{journal_name}*'
+                if parti_chicago:
+                    semplice_core += ', ' + ', '.join(parti_chicago)
+                semplice_core += f' ({anno_citazione})'
+                if autore_periodico:
+                    semplice_core += f'. {autore_periodico}'
+                citazione_semplice = (
+                    f'{semplice_core}. Archivio del Maoismo Italiano ({ami_id}). '
+                    f'{permalink}. Data di consultazione: {data_consultazione}.'
+                )
+
             else:
-                bibtex_type = 'booklet'
-            citazione_bibtex = (
-                '@' + bibtex_type + '{' + bibtex_key + ',\n'
-                '  title = {' + titolo + '},\n'
-                '  author = {' + autore_citazione + '},\n'
-                '  year = {' + anno_citazione + '},\n'
-                + (('  publisher = {' + editore_citazione + '},\n') if editore_citazione else '')
-                + (('  address = {' + luogo_raw + '},\n') if luogo_raw else '')
-                + '  url = {' + permalink + '},\n'
-                + '  urldate = {' + datetime.now().strftime('%Y-%m-%d') + '},\n'
-                + '  note = {Archivio del Maoismo Italiano, ' + ami_id + '}\n'
-                '}'
-            )
+                # ---- Ramo LIBRO / OPUSCOLO / ARTICOLO (comportamento precedente) ----
+                citazione_chicago = (
+                    f'{autore_citazione}. "{titolo}". '
+                    f'{luogo_editore}{anno_citazione}. Archivio del Maoismo Italiano ({ami_id}). '
+                    f'{permalink}. Data di consultazione: {data_consultazione}.'
+                )
 
-            citazione_semplice = (
-                f'{autore_citazione}, {titolo}'
-                + (f', {luogo_raw}: {editore_citazione}' if luogo_raw and editore_citazione else (f', {editore_citazione}' if editore_citazione else ''))
-                + f', {anno_citazione}. Archivio del Maoismo Italiano ({ami_id}). {permalink}. '
-                f'Data di consultazione: {data_consultazione}.'
-            )
+                citazione_mla = (
+                    f'{autore_citazione}. "{titolo}". '
+                    + (f'{editore_citazione}, ' if editore_citazione else '')
+                    + f'{anno_citazione}. Archivio del Maoismo Italiano ({ami_id}), {permalink}. '
+                    f'Data di consultazione: {data_consultazione}.'
+                )
+
+                bibtex_key = citazione_id
+                if tipo == 'libro':
+                    bibtex_type = 'book'
+                elif tipo == 'articolo':
+                    bibtex_type = 'article'
+                else:
+                    bibtex_type = 'booklet'
+                citazione_bibtex = (
+                    '@' + bibtex_type + '{' + bibtex_key + ',\n'
+                    '  title = {' + titolo + '},\n'
+                    '  author = {' + autore_citazione + '},\n'
+                    '  year = {' + anno_citazione + '},\n'
+                    + (('  publisher = {' + editore_citazione + '},\n') if editore_citazione else '')
+                    + (('  address = {' + luogo_raw + '},\n') if luogo_raw else '')
+                    + '  url = {' + permalink + '},\n'
+                    + '  urldate = {' + datetime.now().strftime('%Y-%m-%d') + '},\n'
+                    + '  note = {Archivio del Maoismo Italiano, ' + ami_id + '}\n'
+                    '}'
+                )
+
+                citazione_semplice = (
+                    f'{autore_citazione}, {titolo}'
+                    + (f', {luogo_raw}: {editore_citazione}' if luogo_raw and editore_citazione else (f', {editore_citazione}' if editore_citazione else ''))
+                    + f', {anno_citazione}. Archivio del Maoismo Italiano ({ami_id}). {permalink}. '
+                    f'Data di consultazione: {data_consultazione}.'
+                )
 
             citazioni_dict = {
                 'chicago': citazione_chicago,
