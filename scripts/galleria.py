@@ -247,7 +247,7 @@ def generate_gallery():
 
     out = []
     out.append("---\n")
-    out.append("title: Galleria Fotografica\n")
+    out.append("title: Galleria fotografica\n")
     out.append(
         'description: "Galleria fotografica e iconografica dell\'Archivio del '
         'Maoismo Italiano - manifesti, fotografie e documenti visivi dalle '
@@ -260,7 +260,7 @@ def generate_gallery():
 
     out.append('<div class="galleria-wrapper">\n')
     out.append('<header class="galleria-header">\n')
-    out.append('<h1 class="galleria-main-title">Galleria Fotografica</h1>\n')
+    out.append('<h1 class="galleria-main-title">Galleria fotografica</h1>\n')
     out.append('<p class="galleria-subtitle">Documenti visivi dalla storia del maoismo italiano</p>\n')
     out.append('</header>\n')
 
