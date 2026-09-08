@@ -68,10 +68,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.citazione-link[data-citazioni-id]').forEach(function(toggleButton) {
         var id = toggleButton.dataset.citazioniId;
         var panel = document.getElementById('citazione-pannello-' + id);
-        var textarea = document.getElementById('citazione-testo-' + id);
+        var testoEl = document.getElementById('citazione-testo-' + id);
         var copyButton = document.getElementById('citazione-copia-' + id);
         var dataElement = document.getElementById('citazioni-dati-' + id);
-        if (!panel || !textarea) return;
+        if (!panel || !testoEl) return;
 
         var citations = null;
         if (dataElement) {
@@ -79,7 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 citations = JSON.parse(dataElement.textContent);
                 var tabs = panel.querySelectorAll('.citazione-tab');
                 var showFormat = function(format) {
-                    textarea.value = citations[format] || '';
+                    // Usa innerHTML per supportare il corsivo (<i>...</i>)
+                    // Per BibTeX (testo puro) funziona ugualmente
+                    testoEl.innerHTML = citations[format] || '';
                     tabs.forEach(function(tab) {
                         tab.classList.toggle('citazione-tab--active', tab.dataset.formato === format);
                     });
@@ -102,24 +104,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (copyButton) {
             copyButton.addEventListener('click', function() {
-                textarea.select();
+                // Copia il testo puro (senza i tag HTML del corsivo)
+                var plainText = testoEl.innerText || testoEl.textContent || '';
                 var originalText = copyButton.textContent;
+
                 if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(textarea.value).then(function() {
+                    navigator.clipboard.writeText(plainText).then(function() {
                         copyButton.textContent = '✅ Copiato!';
                         setTimeout(function() { copyButton.textContent = originalText; }, 1500);
                     }).catch(function() {
+                        // Fallback vecchi browser
+                        var range = document.createRange();
+                        range.selectNodeContents(testoEl);
+                        var sel = window.getSelection();
+                        sel.removeAllRanges();
+                        sel.addRange(range);
                         document.execCommand('copy');
+                        sel.removeAllRanges();
                         copyButton.textContent = '✅ Copiato!';
                         setTimeout(function() { copyButton.textContent = originalText; }, 1500);
                     });
                 } else {
+                    var range = document.createRange();
+                    range.selectNodeContents(testoEl);
+                    var sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(range);
                     document.execCommand('copy');
+                    sel.removeAllRanges();
                     copyButton.textContent = '✅ Copiato!';
                     setTimeout(function() { copyButton.textContent = originalText; }, 1500);
                 }
             });
         }
     });
-
-});
