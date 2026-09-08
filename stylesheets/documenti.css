@@ -1,7 +1,6 @@
 /* ============================================================
-   STILE SCHEDE DOCUMENTO
-   ============================================================ */
-
+STILE SCHEDE DOCUMENTO
+============================================================ */
 .doc-date-large {
   font-size: 1.8rem;
   font-weight: 700;
@@ -250,6 +249,7 @@
   margin-top: 1rem;
 }
 
+/* MODIFICATO: .citazione-testo ora è un div, non un textarea */
 .citazione-testo {
   width: 100%;
   box-sizing: border-box;
@@ -261,7 +261,19 @@
   border: 1px solid var(--md-default-fg-color--lightest);
   background: var(--md-default-bg-color);
   color: var(--md-default-fg-color);
-  resize: vertical;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-y: auto;
+  max-height: 200px;
+  cursor: text;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* NUOVO: stili per il corsivo nelle citazioni */
+.citazione-testo em {
+  font-style: italic;
+  color: inherit;
 }
 
 .citazione-tabs {
@@ -317,9 +329,8 @@
 }
 
 /* ------------------------------------------------------------
-   TIPOGRAFIA — SCHEDA DOCUMENTO
-   ------------------------------------------------------------ */
-
+TIPOGRAFIA — SCHEDA DOCUMENTO
+------------------------------------------------------------ */
 .doc-date-large,
 .doc-title-large {
   font-family: var(--ami-font-display, 'Fraunces', Georgia, serif) !important;
@@ -362,85 +373,84 @@
 }
 
 /* ------------------------------------------------------------
-   MOBILE
-   ------------------------------------------------------------ */
-
+MOBILE
+------------------------------------------------------------ */
 @media (max-width: 600px) {
   .doc-date-large {
     font-size: 1.3rem;
   }
-
+  
   .doc-title-large {
     font-size: 1.6rem;
   }
-
+  
   .universal-embed {
     height: 65vh;
     min-height: 420px;
     max-height: 550px;
   }
-
+  
   .photo-embed {
     max-height: 50vh;
   }
-
+  
   .photo-viewer {
     padding: 0.5rem;
   }
-
+  
   .doc-abstract {
     padding: 0.8rem 1rem;
     font-size: 0.85rem;
     margin: 1rem 0;
   }
-
+  
   .text-preview {
     font-size: 0.85rem;
     padding: 1rem;
     max-height: 400px;
   }
-
+  
   .lingua-content .text-preview {
     font-size: 0.85rem;
     padding: 1rem;
     max-height: 400px;
   }
-
+  
   .lingua-toggle {
     padding: 0.4rem 0.8rem;
     gap: 0.3rem;
   }
-
+  
   .lingua-btn {
     padding: 0.2rem 0.6rem;
     font-size: 0.75rem;
   }
-
+  
   .metadata-grid {
     grid-template-columns: 1fr;
     gap: 0.3rem;
   }
-
+  
   .metadata-item {
     flex-direction: row;
     gap: 0.5rem;
     padding: 0.2rem 0;
     border-bottom: 1px solid var(--md-default-fg-color--lightest);
   }
-
+  
   .metadata-label {
     min-width: 100px;
     font-size: 0.7rem;
   }
-
+  
   .metadata-value {
     font-size: 0.85rem;
   }
-
+  
   .citazione-testo {
     font-size: 0.78rem;
   }
-
+  
   .citazione-copia {
     align-self: stretch;
   }

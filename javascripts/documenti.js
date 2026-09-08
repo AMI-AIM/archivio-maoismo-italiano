@@ -1,24 +1,19 @@
 // ============================================================
 // DOCUMENTI - Funzionalità delle schede singole
 // ============================================================
-
 (function () {
   'use strict';
 
   // ------------------------------------------------------------
   // UTILITIES CITAZIONI
   // ------------------------------------------------------------
-
   function getConsultationDate() {
     var now = new Date();
-
     var year = now.getFullYear();
     var month = String(now.getMonth() + 1).padStart(2, '0');
     var day = String(now.getDate()).padStart(2, '0');
     var iso = year + '-' + month + '-' + day;
-
     var it = iso;
-
     try {
       it = new Intl.DateTimeFormat('it-IT', {
         day: 'numeric',
@@ -28,7 +23,6 @@
     } catch (e) {
       it = iso;
     }
-
     return {
       it: it,
       iso: iso
@@ -39,13 +33,11 @@
     if (value === null || value === undefined) {
       return '';
     }
-
     return String(value);
   }
 
   function escapeBibtex(value) {
     var text = safeText(value);
-
     return text
       .replace(/\\/g, '\\textbackslash{}')
       .replace(/([&%#_])/g, '\\$1')
@@ -65,11 +57,9 @@
     var names = authorNames(authors).filter(function (name) {
       return name !== skipName;
     });
-
     if (!names.length) {
       return '';
     }
-
     return names.join('; ') + '. ';
   }
 
@@ -84,33 +74,26 @@
   function buildPublisherPartChicago(doc) {
     var place = safeText(doc.place);
     var publisher = safeText(doc.publisher);
-
     if (place && publisher) {
       return place + ': ' + publisher + ', ';
     }
-
     if (publisher) {
       return publisher + ', ';
     }
-
     if (place) {
       return place + ', ';
     }
-
     return '';
   }
 
   function buildPeriodicalParts(doc) {
     var parts = [];
-
     if (doc.volume) {
       parts.push('anno ' + safeText(doc.volume));
     }
-
     if (doc.issue) {
       parts.push('no. ' + safeText(doc.issue));
     }
-
     return parts;
   }
 
@@ -121,29 +104,24 @@
   function buildChicago(doc, date) {
     var access = buildAccessPart(date);
     var archive = buildArchivePart(doc);
-
+    
     if (doc.is_periodical) {
       var journal = getPeriodicalTitle(doc);
       var authorPart = buildAuthorPart(doc.authors, journal);
       var parts = buildPeriodicalParts(doc);
-
-      var core = authorPart + '*' + journal + '*';
-
+      var core = authorPart + '<em>' + journal + '</em>';
       if (parts.length) {
         core += ', ' + parts.join(', ');
       }
-
       core += ', ' + (safeText(doc.date_display) || 's.d.') + '.';
-
       return core + ' ' + archive + '. ' + safeText(doc.url) + '. ' + access;
     }
-
+    
     var author = buildAuthorPart(doc.authors);
     var publisher = buildPublisherPartChicago(doc);
-
     return (
       author +
-      '"' + safeText(doc.title) + '". ' +
+      '<em>' + safeText(doc.title) + '</em>. ' +
       publisher +
       (safeText(doc.date_display) || 's.d.') + '. ' +
       archive + '. ' +
@@ -155,33 +133,27 @@
   function buildMLA(doc, date) {
     var access = buildAccessPart(date);
     var archive = buildArchivePart(doc);
-
+    
     if (doc.is_periodical) {
       var journal = getPeriodicalTitle(doc);
       var authorPart = buildAuthorPart(doc.authors, journal);
       var parts = buildPeriodicalParts(doc);
-
-      var core = authorPart + '*' + journal + '*';
-
+      var core = authorPart + '<em>' + journal + '</em>';
       if (parts.length) {
         core += ', ' + parts.join(', ');
       }
-
       core += ', ' + (safeText(doc.date_display) || 's.d.') + '.';
-
       return core + ' ' + archive + ', ' + safeText(doc.url) + '. ' + access;
     }
-
+    
     var author = buildAuthorPart(doc.authors);
     var publisher = safeText(doc.publisher) || safeText(doc.place);
-
     if (publisher) {
       publisher += ', ';
     }
-
     return (
       author +
-      '"' + safeText(doc.title) + '". ' +
+      '<em>' + safeText(doc.title) + '</em>. ' +
       publisher +
       (safeText(doc.date_display) || 's.d.') + '. ' +
       archive + ', ' +
@@ -193,31 +165,24 @@
   function buildSemplice(doc, date) {
     var access = buildAccessPart(date);
     var archive = buildArchivePart(doc);
-
+    
     if (doc.is_periodical) {
       var journal = getPeriodicalTitle(doc);
       var parts = buildPeriodicalParts(doc);
-
-      var core = '*' + journal + '*';
-
+      var core = '<em>' + journal + '</em>';
       if (parts.length) {
         core += ', ' + parts.join(', ');
       }
-
       core += ' (' + (safeText(doc.date_display) || 's.d.') + ')';
-
       var author = buildAuthorPart(doc.authors, journal).replace(/\.\s*$/, '');
-
       if (author) {
         core += '. ' + author;
       }
-
       return core + '. ' + archive + '. ' + safeText(doc.url) + '. ' + access;
     }
-
+    
     var author = buildAuthorPart(doc.authors).replace(/\.\s*$/, '');
     var details = [];
-
     if (doc.place && doc.publisher) {
       details.push(doc.place + ': ' + doc.publisher);
     } else if (doc.publisher) {
@@ -225,30 +190,24 @@
     } else if (doc.place) {
       details.push(doc.place);
     }
-
+    
     var text = '';
-
     if (author) {
       text += author + ', ';
     }
-
-    text += safeText(doc.title);
-
+    text += '<em>' + safeText(doc.title) + '</em>';
     if (details.length) {
       text += ', ' + details.join(', ');
     }
-
     text += ', ' + (safeText(doc.date_display) || 's.d.');
-
     return text + '. ' + archive + '. ' + safeText(doc.url) + '. ' + access;
   }
 
   function buildMinima(doc, date) {
     var access = buildAccessPart(date);
     var archive = buildArchivePart(doc);
-
     return (
-      '"' + safeText(doc.title) + '", ' +
+      '<em>' + safeText(doc.title) + '</em>, ' +
       (safeText(doc.date_display) || 's.d.') + '. ' +
       archive + '. ' +
       safeText(doc.url) + '. ' +
@@ -258,17 +217,14 @@
 
   function bibtexAuthor(author) {
     var name = escapeBibtex(author.name);
-
     if (author.corporate) {
       return '{{' + name + '}}';
     }
-
     return name;
   }
 
   function buildBibtex(doc, date) {
     var entryType = '@misc';
-
     if (doc.type === 'libro') {
       entryType = '@book';
     } else if (doc.type === 'opuscolo') {
@@ -276,15 +232,14 @@
     } else if (doc.type === 'articolo') {
       entryType = '@article';
     }
-
+    
     var title = safeText(doc.title);
-
     if (doc.is_periodical) {
       title = getPeriodicalTitle(doc);
     }
-
+    
     var authors = doc.authors || [];
-
+    
     // Evita duplicati evidenti nei periodici:
     // se l'autore corporativo coincide con la testata, lo omettiamo.
     if (
@@ -294,46 +249,42 @@
     ) {
       authors = [];
     }
-
+    
     var fields = [];
-
     fields.push('title = {' + escapeBibtex(title) + '}');
-
+    
     if (authors.length) {
       var authorField = authors
         .map(bibtexAuthor)
         .join(' and ');
-
       fields.push('author = {' + authorField + '}');
     }
-
+    
     if (doc.year) {
       fields.push('year = {' + safeText(doc.year) + '}');
     }
-
+    
     if (doc.is_periodical) {
       if (doc.issue) {
         fields.push('number = {' + escapeBibtex(doc.issue) + '}');
       }
-
       if (doc.volume) {
         fields.push('volume = {' + escapeBibtex(doc.volume) + '}');
       }
     }
-
+    
     var skipNames = authorNames(doc.authors);
-
     if (doc.is_periodical) {
       skipNames.push(getPeriodicalTitle(doc));
     }
-
+    
     if (
       doc.publisher &&
       skipNames.indexOf(doc.publisher) === -1
     ) {
       fields.push('publisher = {' + escapeBibtex(doc.publisher) + '}');
     }
-
+    
     if (
       doc.place &&
       skipNames.indexOf(doc.place) === -1 &&
@@ -341,46 +292,41 @@
     ) {
       fields.push('address = {' + escapeBibtex(doc.place) + '}');
     }
-
+    
     var noteParts = [
       safeText(doc.archive) + ', ' + safeText(doc.ami_id)
     ];
-
     if (!doc.year) {
       noteParts.push('s.d.');
     }
-
     if (doc.ia_identifier) {
       noteParts.push('Internet Archive: ' + safeText(doc.ia_identifier));
     }
-
+    
     fields.push('note = {' + escapeBibtex(noteParts.join('; ')) + '}');
     fields.push('url = {' + safeText(doc.url) + '}');
     fields.push('urldate = {' + date.iso + '}');
-
+    
     var lines = [entryType + '{' + safeText(doc.citation_key) + ','];
-
     fields.forEach(function (field, index) {
       var comma = index < fields.length - 1 ? ',' : '';
       lines.push('  ' + field + comma);
     });
-
     lines.push('}');
-
+    
     return lines.join('\n');
   }
 
   function buildCitations(payload) {
     var date = getConsultationDate();
-
     if (!payload || !payload.doc) {
       return {
         semplice: 'Citazione non disponibile.'
       };
     }
-
+    
     var doc = payload.doc;
-
+    
     if (payload.mode === 'bibliografica') {
       return {
         chicago: buildChicago(doc, date),
@@ -389,7 +335,7 @@
         semplice: buildSemplice(doc, date)
       };
     }
-
+    
     return {
       semplice: buildMinima(doc, date)
     };
@@ -398,7 +344,6 @@
   // ------------------------------------------------------------
   // INIT
   // ------------------------------------------------------------
-
   function init() {
     var metaBaseUrl = document.querySelector('meta[name="ami-base-url"]');
     var baseUrl = metaBaseUrl
@@ -409,7 +354,6 @@
       if (baseUrl) {
         return baseUrl + '/documenti/?serie=' + encodeURIComponent(tag);
       }
-
       // Le schede documento sono in /documenti/AMI-XXXX/,
       // quindi ../ risolve normalmente all'indice documenti.
       return '../?serie=' + encodeURIComponent(tag);
@@ -418,70 +362,61 @@
     // ==========================================================
     // 1. ARGOMENTI: split di serie multiple in link separati
     // ==========================================================
-
     document.querySelectorAll('.metadata-item').forEach(function (item) {
       var label = item.querySelector('.metadata-label');
       var value = item.querySelector('.metadata-value');
-
+      
       if (!label || !value) {
         return;
       }
-
+      
       if (label.textContent.trim() !== 'Argomenti') {
         return;
       }
-
+      
       var link = value.querySelector('a');
-
       if (!link) {
         return;
       }
-
+      
       var tags = link.textContent
         .split(';')
         .map(function (t) {
           return t.trim();
         })
         .filter(Boolean);
-
+      
       if (tags.length < 2) {
         return;
       }
-
+      
       var fragment = document.createDocumentFragment();
-
       tags.forEach(function (tag, index) {
         if (index > 0) {
           fragment.append(', ');
         }
-
         var a = document.createElement('a');
         a.href = archivioSerieUrl(tag);
         a.textContent = tag;
-
         fragment.append(a);
       });
-
+      
       value.replaceChildren(fragment);
     });
 
     // ==========================================================
     // 2. FULLSCREEN iframe
     // ==========================================================
-
     document.querySelectorAll('.fullscreen-btn').forEach(function (button) {
       button.addEventListener('click', function () {
         var iframe = document.getElementById(this.dataset.target);
-
         if (!iframe) {
           return;
         }
-
         var requestFullscreen =
           iframe.requestFullscreen ||
           iframe.webkitRequestFullscreen ||
           iframe.msRequestFullscreen;
-
         if (requestFullscreen) {
           requestFullscreen.call(iframe);
         }
@@ -491,23 +426,20 @@
     // ==========================================================
     // 3. TOGGLE BILINGUE
     // ==========================================================
-
     document.querySelectorAll('.text-bilingue').forEach(function (section) {
       var buttons = section.querySelectorAll('.lingua-btn');
       var contents = section.querySelectorAll('[data-lingua-content]');
-
+      
       if (!buttons.length || !contents.length) {
         return;
       }
-
+      
       buttons.forEach(function (button) {
         button.addEventListener('click', function () {
           var lingua = this.dataset.lingua;
-
           buttons.forEach(function (b) {
             b.classList.toggle('lingua-btn--active', b === button);
           });
-
           contents.forEach(function (content) {
             content.style.display =
               content.dataset.linguaContent === lingua ? '' : 'none';
@@ -517,23 +449,20 @@
     });
 
     // ==========================================================
-    // 4. CITAZIONI
+    // 4. CITAZIONI (MODIFICATO: div invece di textarea, copia avanzata)
     // ==========================================================
-
     document.querySelectorAll('.citazione-link[data-citazioni-id]').forEach(function (toggleButton) {
       var id = toggleButton.dataset.citazioniId;
-
       var panel = document.getElementById('citazione-pannello-' + id);
-      var textarea = document.getElementById('citazione-testo-' + id);
+      var textElement = document.getElementById('citazione-testo-' + id);
       var copyButton = document.getElementById('citazione-copia-' + id);
       var dataElement = document.getElementById('citazioni-dati-' + id);
-
-      if (!panel || !textarea) {
+      
+      if (!panel || !textElement) {
         return;
       }
-
+      
       var payload = null;
-
       if (dataElement) {
         try {
           payload = JSON.parse(dataElement.textContent);
@@ -541,97 +470,105 @@
           console.warn('Errore parsing citazioni:', e);
         }
       }
-
+      
       var citations = null;
-
       var hasTabs = Boolean(panel.querySelector('.citazione-tab'));
       var defaultFormat = 'semplice';
-
+      
       if (payload && payload.mode === 'bibliografica' && hasTabs) {
         defaultFormat = 'chicago';
       }
-
+      
       var currentFormat = defaultFormat;
-
+      
       function updateTabs() {
         var tabs = panel.querySelectorAll('.citazione-tab');
-
         tabs.forEach(function (tab) {
           var active = tab.dataset.formato === currentFormat;
-
           tab.classList.toggle('citazione-tab--active', active);
           tab.setAttribute('aria-selected', active ? 'true' : 'false');
         });
       }
-
+      
       function renderFormat() {
         if (!citations) {
           citations = buildCitations(payload);
         }
-
-        textarea.value = citations[currentFormat] || citations.semplice || '';
+        textElement.innerHTML = citations[currentFormat] || citations.semplice || '';
         updateTabs();
       }
-
+      
       var tabs = panel.querySelectorAll('.citazione-tab');
-
       tabs.forEach(function (tab) {
         tab.addEventListener('click', function () {
           currentFormat = this.dataset.formato;
-
           if (!citations) {
             citations = buildCitations(payload);
           }
-
           renderFormat();
         });
       });
-
+      
       toggleButton.addEventListener('click', function () {
         var isHidden = panel.style.display === 'none' || !panel.style.display;
-
         if (isHidden) {
           // Ricostruisce le citazioni all'apertura, così la data
           // di consultazione è quella del momento effettivo.
           citations = buildCitations(payload);
           renderFormat();
         }
-
         panel.style.display = isHidden ? '' : 'none';
         toggleButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
       });
-
+      
       if (copyButton) {
         copyButton.setAttribute('aria-live', 'polite');
-
         copyButton.addEventListener('click', function () {
-          if (!textarea.value) {
+          if (!textElement.innerHTML) {
             citations = buildCitations(payload);
             renderFormat();
           }
-
-          textarea.select();
-
+          
+          var htmlContent = textElement.innerHTML;
+          var plainText = textElement.innerText;
           var originalText = copyButton.textContent;
-
+          
           function showCopied() {
             copyButton.textContent = '✅ Copiato!';
-
             setTimeout(function () {
               copyButton.textContent = originalText;
             }, 1500);
           }
-
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(textarea.value)
+          
+          // Usa la Clipboard API avanzata per copiare sia HTML che Testo Puro
+          if (navigator.clipboard && window.ClipboardItem) {
+            var htmlBlob = new Blob([htmlContent], { type: 'text/html' });
+            var textBlob = new Blob([plainText], { type: 'text/plain' });
+            var clipboardItem = new ClipboardItem({
+              'text/html': htmlBlob,
+              'text/plain': textBlob
+            });
+            navigator.clipboard.write([clipboardItem])
               .then(showCopied)
-              .catch(function () {
-                document.execCommand('copy');
-                showCopied();
-              });
+              .catch(fallbackCopy);
           } else {
-            document.execCommand('copy');
-            showCopied();
+            fallbackCopy();
+          }
+          
+          function fallbackCopy() {
+            // Fallback per browser vecchi: seleziona il contenuto del div
+            var range = document.createRange();
+            range.selectNodeContents(textElement);
+            var selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+              document.execCommand('copy');
+              showCopied();
+            } catch (err) {
+              console.error('Copia fallita', err);
+            }
+            selection.removeAllRanges();
           }
         });
       }
