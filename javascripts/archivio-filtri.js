@@ -105,6 +105,39 @@ function precompilaRicercaDaURL() {
 }
 
 // ============================================================
+// ISTOGRAMMA CRONOLOGICO (stile Internet Archive)
+// ============================================================
+// Conta i documenti per anno (usando il campo 'anno' già presente in
+// documenti.json) e disegna una barra per ogni anno tra annoMin e
+// annoMax, con altezza proporzionale al conteggio. Barre senza
+// documenti restano a un'altezza minima, come "asse" visivo.
+function costruisciIstogramma() {
+    const histContainer = document.getElementById('slider-histogram');
+    if (!histContainer) return;
+
+    const conteggioAnni = {};
+    documenti.forEach(doc => {
+        if (doc.anno) {
+            conteggioAnni[doc.anno] = (conteggioAnni[doc.anno] || 0) + 1;
+        }
+    });
+
+    const conteggiValori = Object.values(conteggioAnni);
+    const maxConteggio = conteggiValori.length ? Math.max(...conteggiValori) : 1;
+
+    let html = '';
+    for (let anno = annoMin; anno <= annoMax; anno++) {
+        const conteggio = conteggioAnni[anno] || 0;
+        const altezzaPercento = conteggio > 0
+            ? Math.max(8, Math.round((conteggio / maxConteggio) * 100))
+            : 2;
+        const etichetta = conteggio === 1 ? '1 documento' : `${conteggio} documenti`;
+        html += `<div class="hist-bar" data-anno="${anno}" style="height:${altezzaPercento}%" title="${anno}: ${etichetta}"></div>`;
+    }
+    histContainer.innerHTML = html;
+}
+
+// ============================================================
 // INIZIALIZZAZIONE FILTRI
 // ============================================================
 function inizializzaFiltri() {
@@ -141,6 +174,10 @@ function inizializzaFiltri() {
     maxSlider.value = annoMax;
     minLabel.textContent = annoMin;
     maxLabel.textContent = annoMax;
+
+    // 🔥 ISTOGRAMMA: va costruito DOPO aver fissato annoMin/annoMax,
+    // e PRIMA di aggiornaTrack() (che evidenzia le barre nel range).
+    costruisciIstogramma();
     
     //  CREA LE PILLOLE PER I VALORI DEGLI ANNI
     const minPill = document.createElement('span');
@@ -179,6 +216,16 @@ function inizializzaFiltri() {
         if (maxPillEl) {
             maxPillEl.style.left = (100 - rightPercent) + '%';
             maxPillEl.textContent = max;
+        }
+
+        // 🔥 ISTOGRAMMA: evidenzia le barre comprese nell'intervallo selezionato
+        const histogram = document.getElementById('slider-histogram');
+        if (histogram) {
+            const bars = histogram.querySelectorAll('.hist-bar');
+            bars.forEach(bar => {
+                const anno = parseInt(bar.dataset.anno, 10);
+                bar.classList.toggle('hist-bar--in-range', anno >= min && anno <= max);
+            });
         }
     }
     
@@ -512,6 +559,14 @@ function resetFiltri() {
     }
     if (minPillReset) minPillReset.style.left = leftPercent + '%';
     if (maxPillReset) maxPillReset.style.left = (100 - rightPercent) + '%';
+
+    // 🔥 ISTOGRAMMA: al reset tutte le barre tornano "in range"
+    const histogram = document.getElementById('slider-histogram');
+    if (histogram) {
+        histogram.querySelectorAll('.hist-bar').forEach(bar => {
+            bar.classList.add('hist-bar--in-range');
+        });
+    }
     
     currentPage = 1;
     applicaFiltri();
