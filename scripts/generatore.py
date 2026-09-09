@@ -427,7 +427,7 @@ def main():
     # ================================================================
     print("\n[GEN] Generazione home page...")
     try:
-        genera_home(df, persone, OUTPUT_DIR)
+        genera_home(df, persone, OUTPUT_DIR, organizzazioni)
         print(f"[OK] Home page generata")
     except Exception as e:
         print(f"[ERROR] Errore generazione home: {e}")

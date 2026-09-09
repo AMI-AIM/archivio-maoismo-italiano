@@ -2,6 +2,7 @@ import os
 import json
 import html
 import hashlib
+import sys
 from datetime import datetime
 
 import pandas as pd
@@ -515,6 +516,16 @@ def update_sitemap(argomenti):
 # ============================================================
 
 def genera_argomenti():
+    """
+    Genera le pagine degli argomenti (percorsi tematici).
+
+    Returns:
+        int: 0 se la generazione è andata a buon fine (incluso il caso limite
+             di un foglio vuoto o senza argomenti validi trovati),
+             1 se si è verificato un errore bloccante (file non trovato,
+             errore di lettura, colonne obbligatorie mancanti, ecc.) che
+             deve interrompere Launcher.py.
+    """
     print('\n🏷️ Generazione delle pagine degli argomenti...')
 
     catalogo_path = os.path.join(DATA_DIR, 'dati.xlsx')
@@ -528,14 +539,14 @@ def genera_argomenti():
         df_catalogo.columns = df_catalogo.columns.str.strip().str.lower()
     except FileNotFoundError:
         print(f'   ❌ ERRORE: Non trovo {catalogo_path}.')
-        return
+        return 1
     except Exception as e:
         print(f"   ❌ ERRORE durante la lettura del foglio 'Catalogo' in dati.xlsx: {e}")
-        return
+        return 1
 
     if df_catalogo.empty:
         print("   ⚠️ Il foglio 'Catalogo' in dati.xlsx è vuoto.")
-        return
+        return 0
 
     # Colonna argomenti: stessa logica condivisa usata da core/schede.py,
     # cosi' le due generazioni restano sempre sincronizzate anche se il
@@ -544,11 +555,11 @@ def genera_argomenti():
 
     if not topic_column:
         print("   ❌ ERRORE: nessuna colonna argomento trovata (cercavo 'Serie', 'Argomenti', 'Argomento', 'Tag', 'Tags').")
-        return
+        return 1
 
     if 'id' not in df_catalogo.columns:
         print("   ❌ ERRORE: La colonna 'ID' non è presente nel foglio 'Catalogo'.")
-        return
+        return 1
 
     print(f"   📊 Caricati {len(df_catalogo)} documenti dal foglio 'Catalogo' di dati.xlsx")
     print(f"   📊 Uso la colonna '{topic_column}' come fonte degli argomenti")
@@ -613,7 +624,7 @@ def genera_argomenti():
 
     if not argomenti_map:
         print('   ⚠️ Nessun argomento valido trovato.')
-        return
+        return 0
 
     # ----------------------------------------------------------------
     # INDICE CONDIVISO: label + slug deterministici (coerenti con schede.py)
@@ -671,11 +682,13 @@ def genera_argomenti():
 
     print('   ✅ Generazione pagine argomenti completata.')
 
+    return 0
+
 
 def main():
     print('🚀 Avvio del generatore di schede argomenti...')
-    genera_argomenti()
+    return genera_argomenti()
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
