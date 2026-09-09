@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 # ============================================================================
 
 COLONNE_OBBLIGATORIE_CATALOGO = ['id', 'titolo', 'tipo']
+
 COLONNE_OPZIONALI_CATALOGO = [
     'autore', 'organizzazione', 'luogo', 'editore', 'provenienza',
     'persone_collegate', 'organizzazioni_collegate', 'data', 'anno',
@@ -34,6 +35,9 @@ URL_IA_PATTERN = re.compile(r'^https?://(www\.)?archive\.org/details/[a-zA-Z0-9_
 
 # Pattern per validazione ID documento (solo caratteri alfanumerici e trattini)
 ID_PATTERN = re.compile(r'^[a-zA-Z0-9_-]+$')
+
+# FIX BUG F: Pattern per verificare la conformità alla convenzione AMI-####
+AMI_CONVENTION_PATTERN = re.compile(r'^AMI-\d{4,}$')
 
 # Anni validi per documenti storici (range ragionevole)
 ANNO_MINIMO = 1900
@@ -112,11 +116,11 @@ class AdvancedValidator:
     Sistema avanzato di validazione dati per AMI.
 
     Funzionalità:
-    - Validazione struttura colonne
-    - Controllo duplicati e valori nulli
-    - Validazione formati (URL, date, ID)
-    - Controllo coerenza referenziale
-    - Report dettagliato con statistiche
+     - Validazione struttura colonne
+     - Controllo duplicati e valori nulli
+     - Validazione formati (URL, date, ID)
+     - Controllo coerenza referenziale
+     - Report dettagliato con statistiche
     """
 
     def __init__(self, strict_mode: bool = False):
@@ -162,7 +166,6 @@ class AdvancedValidator:
 
         # 1. Controllo colonne essenziali
         self._check_required_columns(df, COLONNE_OBBLIGATORIE_CATALOGO, "Catalogo")
-
         if not self.result.is_valid:
             self.result.stats['righe_totali'] = len(df)
             return self.result.is_valid, self.result.to_dict()
@@ -212,12 +215,10 @@ class AdvancedValidator:
             Tuple[bool, Dict]: (Successo, Report completo)
         """
         self.result = ValidationResult()
-
         df = self._normalize_columns(df.copy())
 
         # 1. Controllo colonna nome
         self._check_required_columns(df, COLONNE_OBBLIGATORIE_SOGGETTI, tipo)
-
         if not self.result.is_valid:
             return self.result.is_valid, self.result.to_dict()
 
@@ -315,6 +316,17 @@ class AdvancedValidator:
         if not invalidi.empty:
             self.result.add_warning(f"ID con formato sospetto: {invalidi['id'].tolist()[:10]}")
 
+        # FIX BUG F: Verifica conformità alla convenzione AMI-####.
+        # Non è un errore bloccante (l'ID potrebbe comunque essere valido
+        # sintatticamente), ma un info per segnalare incoerenza visiva
+        # con il resto dell'archivio.
+        mask_conforme = df['id'].astype(str).str.match(AMI_CONVENTION_PATTERN)
+        non_conformi = df[~mask_conforme & df['id'].notna() & (df['id'] != '')]
+        if not non_conformi.empty:
+            self.result.add_info(
+                f"ID non conformi alla convenzione AMI-####: {non_conformi['id'].tolist()[:10]}"
+            )
+
     def _validate_titoli(self, df: pd.DataFrame):
         """Valida i titoli dei documenti."""
         if 'titolo' not in df.columns:
@@ -402,7 +414,6 @@ class AdvancedValidator:
         """Valida riferimenti incrociati (persone, organizzazioni collegate)."""
         # Controllo sintassi liste con separatori misti (',' e ';')
         col_lista = ['persone_collegate', 'organizzazioni_collegate', 'serie']
-
         for col in col_lista:
             if col not in df.columns:
                 continue
@@ -437,7 +448,6 @@ class AdvancedValidator:
         """
         Controlla che i nomi elencati in `col` (separati da ';' o ',', come
         fatto da split_nomi in utils.py) esistano tutti in `nomi_validi`.
-
         Se `nomi_validi` è None, il controllo viene saltato (permette di
         chiamare il validatore del Catalogo senza dover sempre caricare
         anche Persone/Organizzazioni).
@@ -447,6 +457,7 @@ class AdvancedValidator:
 
         mancanti: Dict[str, List[str]] = {}
         mask = df[col].notna() & (df[col] != '')
+
         for idx, valore in df.loc[mask, col].items():
             for nome in split_nomi(valore):
                 if nome not in nomi_validi:
@@ -495,7 +506,6 @@ def run_validation(data_dir: str) -> Dict[str, Any]:
     reports = {}
 
     excel_path = Path(data_dir) / 'dati.xlsx'
-
     if not excel_path.exists():
         return {
             'success': False,
@@ -522,6 +532,7 @@ def run_validation(data_dir: str) -> Dict[str, Any]:
             valido, report = validator.validate_persone(df_pers)
             reports['persone'] = report
             print(f"Persone: {'✅ VALIDO' if valido else '❌ INVALIDO'}")
+
             df_pers_norm = validator._normalize_columns(df_pers.copy())
             if 'nome' in df_pers_norm.columns:
                 nomi_persone = {n.strip() for n in df_pers_norm['nome'] if str(n).strip() not in ('', 'nan', 'None')}
@@ -532,6 +543,7 @@ def run_validation(data_dir: str) -> Dict[str, Any]:
             valido, report = validator.validate_organizzazioni(df_org)
             reports['organizzazioni'] = report
             print(f"Organizzazioni: {'✅ VALIDO' if valido else '❌ INVALIDO'}")
+
             df_org_norm = validator._normalize_columns(df_org.copy())
             if 'nome' in df_org_norm.columns:
                 nomi_organizzazioni = {n.strip() for n in df_org_norm['nome'] if str(n).strip() not in ('', 'nan', 'None')}
