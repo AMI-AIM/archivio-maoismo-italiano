@@ -71,9 +71,6 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
         if org:
             parti_sommario.append(org)
         sommario = ' \u00b7 '.join(parti_sommario) if parti_sommario else 'Documento storico'
-        # FIX: tipo_display e org sono dati d'archivio (colonne 'tipo' e
-        # 'organizzazione'), non testo interno controllato: vanno
-        # escapati prima di finire dentro i tag <span>.
         meta_html_parts = []
         if tipo_display:
             meta_html_parts.append(f'<span class="doc-type-chip">{html.escape(tipo_display)}</span>')
@@ -339,14 +336,8 @@ hide:
         for rank, (nome, conteggio) in enumerate(organizzazioni_top, start=1):
             info_org = (organizzazioni or {}).get(nome, {})
             slug = info_org.get('slug', slugify(nome))
-            data_range = str(info_org.get('data_range', '')).strip()
-            if data_range in ['nan', 'None']:
-                data_range = ''
             etichetta_conteggio = "1 documento collegato" if conteggio == 1 else f"{conteggio} documenti collegati"
-            # FIX: nome, data_range e le iniziali derivate da nome sono
-            # dati d'archivio non escapati.
             nome_html = html.escape(nome)
-            data_range_html = html.escape(data_range)
             iniziali_html = html.escape(estrai_iniziali(nome))
             home_content += f"""
       <div class="doc-row doc-row-persona">
@@ -357,7 +348,6 @@ hide:
         <div class="doc-contenuto">
           <div class="doc-titolo"><a href="organizzazioni/{slug}/">{nome_html}</a></div>
           <div class="doc-sommario">{etichetta_conteggio}</div>
-          {f'<div class="persona-date">{data_range_html}</div>' if data_range_html else ''}
         </div>
       </div>
 """
@@ -381,11 +371,6 @@ hide:
 """
 
     # STILI
-    # NOTA: il blocco "DROPDOWN SUGGERIMENTI RICERCA HERO" è stato
-    # rimosso: vive in stylesheets/extra.css (sezione 15). Il <style>
-    # inline della home viene iniettato DOPO extra.css nel DOM e con
-    # la stessa specificità lo avrebbe sovrascritto: tenerlo qui e in
-    # extra.css insieme avrebbe creato derive.
     home_content += """
 <style>
 /* Nasconde il titolo "Home" nella pagina */
