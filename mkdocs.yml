@@ -69,7 +69,7 @@ meta:
   - property: og:description
     content: Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia.
 
-  social:
-    - icon: fontawesome/brands/internet-archive
-      link: https://archive.org/details/@ivan_masci/lists/1/archivio-del-maoismo-italiano
-      name: Internet Archive
+social:
+  - icon: fontawesome/brands/internet-archive
+    link: https://archive.org/details/@ivan_masci/lists/1/archivio-del-maoismo-italiano
+    name: Internet Archive
