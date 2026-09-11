@@ -106,24 +106,6 @@ Sitemap: https://ami-aim.github.io/archivio-maoismo-italiano/sitemap.txt
         print(f"   [WARNING] Trovato {assets_robots} - verrà rimosso per evitare conflitti")
         os.remove(assets_robots)
 
-    # 2. File di verifica Search Console (google*.html):
-    #    copiati dalla root del repo (o da static/) dentro build/
-    sorgenti = []
-    sorgenti += glob.glob(os.path.join(ROOT_DIR, 'google*.html'))
-    sorgenti += glob.glob(os.path.join(ROOT_DIR, 'static', 'google*.html'))
-
-    if not sorgenti:
-        print("   [INFO] Nessun file google*.html nella root: se devi verificare "
-              "la Search Console, lascia il file di verifica nella root del repo "
-              "e verrà copiato automaticamente.")
-        return
-
-    for src in sorgenti:
-        dst = os.path.join(OUTPUT_DIR, os.path.basename(src))
-        shutil.copyfile(src, dst)
-        print(f"   [OK] Copiato {os.path.basename(src)} → build/")
-
-
 def genera_sitemap(output_dir, df, persone, organizzazioni):
     """
     Genera sitemap.xml e sitemap.txt per SEO (Google, Bing, etc).
