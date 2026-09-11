@@ -56,6 +56,19 @@ nav:
 extra:
   homepage: /archivio-maoismo-italiano/
   generator: false
+
+meta:
+  - property: og:type
+    content: website
+  - property: og:site_name
+    content: AMI - Archivio del Maoismo Italiano
+  - property: og:url
+    content: https://ami-aim.github.io/archivio-maoismo-italiano/
+  - property: og:title
+    content: Archivio del Maoismo Italiano
+  - property: og:description
+    content: Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia.
+
   social:
     - icon: fontawesome/brands/internet-archive
       link: https://archive.org/details/@ivan_masci/lists/1/archivio-del-maoismo-italiano
