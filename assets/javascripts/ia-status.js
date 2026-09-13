@@ -61,7 +61,7 @@
   var IMG_ERROR_THRESHOLD = 2;        // n. errori immagine IA per scattare
   var IMG_ERROR_WINDOW_MS = 15000;    // finestra temporale per il conteggio
 
-  var IFRAME_TIMEOUT_MS = 12000;      // tempo massimo di attesa per l'iframe
+  var IFRAME_TIMEOUT_MS = 15000;      // tempo massimo di attesa per l'iframe
 
   var DISMISS_KEY = 'ami_ia_status_dismissed';
 
