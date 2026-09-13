@@ -77,8 +77,29 @@ async function caricaDati() {
     }
 }
 
+// ============================================================
+// PERSISTENZA FILTRI NELL'URL
+// ============================================================
+// Ogni filtro attivo nella sidebar viene riflesso come parametro
+// query nell'URL (senza aggiungere voci alla cronologia, tramite
+// history.replaceState), cosi' un link copiato riproduce esattamente
+// la stessa combinazione di filtri. Mappatura parametri <-> filtri:
+//   q              -> filtro-testo
+//   organizzazione -> filtro-organizzazione (valori multipli, separati da virgola)
+//   persona        -> filtro-persona        (valori multipli, separati da virgola)
+//   tipo           -> filtro-tipo           (valori multipli, separati da virgola)
+//   serie          -> filtro-argomento      (valori multipli, separati da virgola)
+//   anno_min / anno_max -> range anni (solo se diverso dal range completo)
+const URL_PARAM_PER_SELECT = {
+    'filtro-organizzazione': 'organizzazione',
+    'filtro-persona': 'persona',
+    'filtro-tipo': 'tipo',
+    'filtro-argomento': 'serie'
+};
+
 function precompilaRicercaDaURL() {
     const params = new URLSearchParams(window.location.search);
+
     const query = params.get('q');
     if (query) {
         const campoTesto = document.getElementById('filtro-testo');
@@ -86,22 +107,98 @@ function precompilaRicercaDaURL() {
             campoTesto.value = query;
         }
     }
-    
-    const serie = params.get('serie');
-    if (serie) {
-        const select = document.getElementById('filtro-argomento');
-        if (select) {
-            Array.from(select.options).forEach(opt => opt.selected = false);
-            let found = false;
-            for (let opt of select.options) {
-                if (opt.value === serie) {
-                    opt.selected = true;
-                    found = true;
-                    break;
-                }
+
+    // Filtri multi-select: ogni parametro puo' contenere piu' valori
+    // separati da virgola (ognuno individualmente URL-encoded, cosi'
+    // un nome che contenesse una virgola non spezza il parsing).
+    Object.keys(URL_PARAM_PER_SELECT).forEach(selectId => {
+        const paramName = URL_PARAM_PER_SELECT[selectId];
+        const raw = params.get(paramName);
+        if (!raw) return;
+
+        const valoriRichiesti = raw.split(',').map(v => {
+            try {
+                return decodeURIComponent(v);
+            } catch (e) {
+                return v;
             }
+        }).filter(Boolean);
+
+        if (!valoriRichiesti.length) return;
+
+        const select = document.getElementById(selectId);
+        if (!select) return;
+
+        Array.from(select.options).forEach(opt => opt.selected = false);
+        let almenoUnoTrovato = false;
+        Array.from(select.options).forEach(opt => {
+            if (valoriRichiesti.includes(opt.value)) {
+                opt.selected = true;
+                almenoUnoTrovato = true;
+            }
+        });
+
+        // Se nessuno dei valori richiesti esiste tra le opzioni
+        // disponibili (es. link generato da un catalogo precedente),
+        // ripiega su "Tutte/Tutti" invece di lasciare il select vuoto.
+        if (!almenoUnoTrovato) {
+            const allOption = select.querySelector('option[value="all"]');
+            if (allOption) allOption.selected = true;
+        }
+    });
+
+    // Range anni: entrambi i parametri devono essere presenti e validi
+    // per essere applicati, altrimenti si tiene il range completo.
+    const annoMinParam = parseInt(params.get('anno_min'), 10);
+    const annoMaxParam = parseInt(params.get('anno_max'), 10);
+    if (!isNaN(annoMinParam) && !isNaN(annoMaxParam)) {
+        const minSlider = document.getElementById('filtro-anno-min');
+        const maxSlider = document.getElementById('filtro-anno-max');
+        if (minSlider && maxSlider) {
+            const minClamp = Math.max(annoMin, Math.min(annoMinParam, annoMax));
+            const maxClamp = Math.max(annoMin, Math.min(annoMaxParam, annoMax));
+            minSlider.value = Math.min(minClamp, maxClamp);
+            maxSlider.value = Math.max(minClamp, maxClamp);
+            document.getElementById('anno-min-label').textContent = minSlider.value;
+            document.getElementById('anno-max-label').textContent = maxSlider.value;
+            aggiornaTrackSlider();
         }
     }
+}
+
+// Ricostruisce l'URL corrente in base allo stato attuale dei filtri.
+// Usa replaceState (non pushState) per non intasare la cronologia del
+// browser a ogni singola interazione con i filtri.
+function aggiornaURLFiltri() {
+    const params = new URLSearchParams();
+
+    const campoTesto = document.getElementById('filtro-testo');
+    if (campoTesto && campoTesto.value.trim()) {
+        params.set('q', campoTesto.value.trim());
+    }
+
+    Object.keys(URL_PARAM_PER_SELECT).forEach(selectId => {
+        const paramName = URL_PARAM_PER_SELECT[selectId];
+        const valori = getSelectedValues(selectId);
+        if (valori.length) {
+            params.set(paramName, valori.map(v => encodeURIComponent(v)).join(','));
+        }
+    });
+
+    const minSlider = document.getElementById('filtro-anno-min');
+    const maxSlider = document.getElementById('filtro-anno-max');
+    if (minSlider && maxSlider) {
+        const minVal = parseInt(minSlider.value, 10);
+        const maxVal = parseInt(maxSlider.value, 10);
+        if (minVal !== annoMin || maxVal !== annoMax) {
+            params.set('anno_min', minVal);
+            params.set('anno_max', maxVal);
+        }
+    }
+
+    const queryString = params.toString();
+    const nuovoURL = window.location.pathname + (queryString ? `?${queryString}` : '');
+    window.history.replaceState(null, '', nuovoURL);
 }
 
 // ============================================================
@@ -135,6 +232,52 @@ function costruisciIstogramma() {
         html += `<div class="hist-bar" data-anno="${anno}" style="height:${altezzaPercento}%" title="${anno}: ${etichetta}"></div>`;
     }
     histContainer.innerHTML = html;
+}
+
+// ============================================================
+// SLIDER ANNO — TRACK/PILLOLE (estratto in funzione a se' stante:
+// serve sia all'evento input dello slider sia alla precompilazione
+// da URL, che deve poter aggiornare l'aspetto visivo dello slider
+// senza duplicare la logica)
+// ============================================================
+function aggiornaTrackSlider() {
+    const minSlider = document.getElementById('filtro-anno-min');
+    const maxSlider = document.getElementById('filtro-anno-max');
+    if (!minSlider || !maxSlider) return;
+
+    const min = parseInt(minSlider.value);
+    const max = parseInt(maxSlider.value);
+    const minVal = parseInt(minSlider.min);
+    const maxVal = parseInt(maxSlider.max);
+    const range = maxVal - minVal;
+    const leftPercent = range ? ((min - minVal) / range) * 100 : 0;
+    const rightPercent = range ? ((maxVal - max) / range) * 100 : 0;
+
+    const track = document.getElementById('slider-track-fill');
+    if (track) {
+        track.style.left = leftPercent + '%';
+        track.style.right = rightPercent + '%';
+    }
+
+    const minPillEl = document.getElementById('anno-min-pill');
+    const maxPillEl = document.getElementById('anno-max-pill');
+    if (minPillEl) {
+        minPillEl.style.left = leftPercent + '%';
+        minPillEl.textContent = min;
+    }
+    if (maxPillEl) {
+        maxPillEl.style.left = (100 - rightPercent) + '%';
+        maxPillEl.textContent = max;
+    }
+
+    const histogram = document.getElementById('slider-histogram');
+    if (histogram) {
+        const bars = histogram.querySelectorAll('.hist-bar');
+        bars.forEach(bar => {
+            const anno = parseInt(bar.dataset.anno, 10);
+            bar.classList.toggle('hist-bar--in-range', anno >= min && anno <= max);
+        });
+    }
 }
 
 // ============================================================
@@ -176,7 +319,7 @@ function inizializzaFiltri() {
     maxLabel.textContent = annoMax;
 
     // 🔥 ISTOGRAMMA: va costruito DOPO aver fissato annoMin/annoMax,
-    // e PRIMA di aggiornaTrack() (che evidenzia le barre nel range).
+    // e PRIMA di aggiornaTrackSlider() (che evidenzia le barre nel range).
     costruisciIstogramma();
     
     //  CREA LE PILLOLE PER I VALORI DEGLI ANNI
@@ -192,49 +335,12 @@ function inizializzaFiltri() {
     maxPill.textContent = annoMax;
     maxSlider.parentNode.appendChild(maxPill);
     
-    function aggiornaTrack() {
-        const min = parseInt(minSlider.value);
-        const max = parseInt(maxSlider.value);
-        const minVal = parseInt(minSlider.min);
-        const maxVal = parseInt(maxSlider.max);
-        const range = maxVal - minVal;
-        const leftPercent = ((min - minVal) / range) * 100;
-        const rightPercent = ((maxVal - max) / range) * 100;
-        
-        const track = document.getElementById('slider-track-fill');
-        if (track) {
-            track.style.left = leftPercent + '%';
-            track.style.right = rightPercent + '%';
-        }
-        
-        const minPillEl = document.getElementById('anno-min-pill');
-        const maxPillEl = document.getElementById('anno-max-pill');
-        if (minPillEl) {
-            minPillEl.style.left = leftPercent + '%';
-            minPillEl.textContent = min;
-        }
-        if (maxPillEl) {
-            maxPillEl.style.left = (100 - rightPercent) + '%';
-            maxPillEl.textContent = max;
-        }
-
-        // 🔥 ISTOGRAMMA: evidenzia le barre comprese nell'intervallo selezionato
-        const histogram = document.getElementById('slider-histogram');
-        if (histogram) {
-            const bars = histogram.querySelectorAll('.hist-bar');
-            bars.forEach(bar => {
-                const anno = parseInt(bar.dataset.anno, 10);
-                bar.classList.toggle('hist-bar--in-range', anno >= min && anno <= max);
-            });
-        }
-    }
-    
     minSlider.addEventListener('input', function () {
         const val = parseInt(this.value);
         const maxVal = parseInt(maxSlider.value);
         if (val > maxVal) this.value = maxVal;
         document.getElementById('anno-min-label').textContent = this.value;
-        aggiornaTrack();
+        aggiornaTrackSlider();
         applicaFiltri();
     });
     
@@ -243,11 +349,11 @@ function inizializzaFiltri() {
         const minVal = parseInt(minSlider.value);
         if (val < minVal) this.value = minVal;
         document.getElementById('anno-max-label').textContent = this.value;
-        aggiornaTrack();
+        aggiornaTrackSlider();
         applicaFiltri();
     });
     
-    aggiornaTrack();
+    aggiornaTrackSlider();
     
     document.querySelectorAll('select, input').forEach(el => el.addEventListener('change', applicaFiltri));
     document.getElementById('filtro-testo').addEventListener('input', applicaFiltri);
@@ -369,6 +475,7 @@ function applicaFiltri() {
     currentPage = 1; // 🔥 Reset pagina alla prima quando i filtri cambiano
     mostraRisultati(calcolaRisultati());
     renderFiltriAttivi(); // 🔥 Aggiorna la riga di chip riepilogo filtri
+    aggiornaURLFiltri();  // 🔥 Riflette lo stato corrente dei filtri nell'URL
 }
 
 function getSelectedValues(id) {
@@ -449,26 +556,7 @@ function resetFiltroAnno() {
     document.getElementById('anno-min-label').textContent = annoMin;
     document.getElementById('anno-max-label').textContent = annoMax;
 
-    const minPill = document.getElementById('anno-min-pill');
-    const maxPill = document.getElementById('anno-max-pill');
-    if (minPill) minPill.textContent = annoMin;
-    if (maxPill) maxPill.textContent = annoMax;
-
-    const track = document.getElementById('slider-track-fill');
-    if (track) {
-        track.style.left = '0%';
-        track.style.right = '0%';
-    }
-    if (minPill) minPill.style.left = '0%';
-    if (maxPill) maxPill.style.left = '100%';
-
-    const histogram = document.getElementById('slider-histogram');
-    if (histogram) {
-        histogram.querySelectorAll('.hist-bar').forEach(bar => {
-            bar.classList.add('hist-bar--in-range');
-        });
-    }
-
+    aggiornaTrackSlider();
     applicaFiltri();
 }
 
@@ -686,37 +774,8 @@ function resetFiltri() {
     document.getElementById('filtro-anno-max').value = annoMax;
     document.getElementById('anno-min-label').textContent = annoMin;
     document.getElementById('anno-max-label').textContent = annoMax;
-    
-    const minPillReset = document.getElementById('anno-min-pill');
-    const maxPillReset = document.getElementById('anno-max-pill');
-    if (minPillReset) minPillReset.textContent = annoMin;
-    if (maxPillReset) maxPillReset.textContent = annoMax;
-    
-    const minSlider = document.getElementById('filtro-anno-min');
-    const maxSlider = document.getElementById('filtro-anno-max');
-    const min = parseInt(minSlider.value);
-    const max = parseInt(maxSlider.value);
-    const minVal = parseInt(minSlider.min);
-    const maxVal = parseInt(maxSlider.max);
-    const range = maxVal - minVal;
-    const leftPercent = ((min - minVal) / range) * 100;
-    const rightPercent = ((maxVal - max) / range) * 100;
-    
-    const track = document.getElementById('slider-track-fill');
-    if (track) {
-        track.style.left = leftPercent + '%';
-        track.style.right = rightPercent + '%';
-    }
-    if (minPillReset) minPillReset.style.left = leftPercent + '%';
-    if (maxPillReset) maxPillReset.style.left = (100 - rightPercent) + '%';
 
-    // 🔥 ISTOGRAMMA: al reset tutte le barre tornano "in range"
-    const histogram = document.getElementById('slider-histogram');
-    if (histogram) {
-        histogram.querySelectorAll('.hist-bar').forEach(bar => {
-            bar.classList.add('hist-bar--in-range');
-        });
-    }
+    aggiornaTrackSlider();
     
     currentPage = 1;
     applicaFiltri();
