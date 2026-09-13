@@ -64,20 +64,10 @@ async function caricaDati() {
         documenti = data.documenti;
         annoMin = data.anno_min || 1900;
         annoMax = data.anno_max || 2025;
-
+        
         inizializzaFiltri();
         precompilaRicercaDaURL();
-
-        // 🔥 CONDIVISIONE RICERCA: la pagina va ripristinata DOPO
-        // precompilaRicercaDaURL(), perché quest'ultima puo' innescare
-        // applicaFiltri() (tramite i listener 'input' degli slider anno)
-        // che altrimenti riporterebbe sempre currentPage a 1.
-        const paramsIniziali = new URLSearchParams(window.location.search);
-        const paginaParam = parseInt(paramsIniziali.get('pagina'), 10);
-        currentPage = (!isNaN(paginaParam) && paginaParam > 0) ? paginaParam : 1;
-
-        mostraRisultati(calcolaRisultati());
-        aggiornaURL();
+        applicaFiltri();
     } catch (error) {
         console.error('Errore nel caricamento dei dati:', error);
         const container = document.getElementById('risultati-container');
@@ -87,47 +77,8 @@ async function caricaDati() {
     }
 }
 
-// ============================================================
-// CONDIVISIONE RICERCA: lettura filtri dall'URL
-// ============================================================
-// Ogni filtro multi-valore (select multiple) viene letto come lista
-// separata da virgole, per permettere di condividere anche ricerche
-// con più organizzazioni/persone/tipi/argomenti selezionati insieme.
-function leggiListaDaURL(params, nome) {
-    const valore = params.get(nome);
-    if (!valore) return [];
-    return valore.split(',').map(v => v.trim()).filter(Boolean);
-}
-
-function selezionaValoriInSelect(id, valori) {
-    if (!valori.length) return;
-    const select = document.getElementById(id);
-    if (!select) return;
-    const valoriSet = new Set(valori);
-    let trovatoAlmenoUno = false;
-
-    Array.from(select.options).forEach(opt => {
-        if (opt.value === 'all') return;
-        if (valoriSet.has(opt.value)) {
-            opt.selected = true;
-            trovatoAlmenoUno = true;
-        } else {
-            opt.selected = false;
-        }
-    });
-
-    // Se abbiamo trovato almeno un valore valido dall'URL, disattiva
-    // l'opzione "Tutte/i" (che altrimenti resterebbe selezionata di
-    // default insieme ai valori specifici).
-    if (trovatoAlmenoUno) {
-        const allOpt = select.querySelector('option[value="all"]');
-        if (allOpt) allOpt.selected = false;
-    }
-}
-
 function precompilaRicercaDaURL() {
     const params = new URLSearchParams(window.location.search);
-
     const query = params.get('q');
     if (query) {
         const campoTesto = document.getElementById('filtro-testo');
@@ -135,81 +86,22 @@ function precompilaRicercaDaURL() {
             campoTesto.value = query;
         }
     }
-
-    // Filtri multi-select: organizzazione, persona, tipo. Per l'argomento
-    // si mantiene il nome parametro storico 'serie', già usato altrove nel
-    // sito (es. i link dalle pagine Argomenti e dalle schede documento
-    // puntano a documenti/?serie=...): cambiarlo romperebbe quei link.
-    selezionaValoriInSelect('filtro-organizzazione', leggiListaDaURL(params, 'organizzazione'));
-    selezionaValoriInSelect('filtro-persona', leggiListaDaURL(params, 'persona'));
-    selezionaValoriInSelect('filtro-tipo', leggiListaDaURL(params, 'tipo'));
-    selezionaValoriInSelect('filtro-argomento', leggiListaDaURL(params, 'serie'));
-
-    // Intervallo anni: applicato tramite gli slider esistenti, disponibili
-    // solo dopo inizializzaFiltri() (chiamata prima di questa funzione in
-    // caricaDati()). Il dispatch dell'evento 'input' riusa la logica di
-    // aggiornamento track/pill/istogramma già collegata agli slider.
-    const minSlider = document.getElementById('filtro-anno-min');
-    const maxSlider = document.getElementById('filtro-anno-max');
-    const annoMinParam = parseInt(params.get('anno_min'), 10);
-    const annoMaxParam = parseInt(params.get('anno_max'), 10);
-
-    if (minSlider && !isNaN(annoMinParam)) {
-        minSlider.value = Math.min(Math.max(annoMinParam, annoMin), annoMax);
-        const minLabel = document.getElementById('anno-min-label');
-        if (minLabel) minLabel.textContent = minSlider.value;
-        minSlider.dispatchEvent(new Event('input'));
+    
+    const serie = params.get('serie');
+    if (serie) {
+        const select = document.getElementById('filtro-argomento');
+        if (select) {
+            Array.from(select.options).forEach(opt => opt.selected = false);
+            let found = false;
+            for (let opt of select.options) {
+                if (opt.value === serie) {
+                    opt.selected = true;
+                    found = true;
+                    break;
+                }
+            }
+        }
     }
-    if (maxSlider && !isNaN(annoMaxParam)) {
-        maxSlider.value = Math.max(Math.min(annoMaxParam, annoMax), annoMin);
-        const maxLabel = document.getElementById('anno-max-label');
-        if (maxLabel) maxLabel.textContent = maxSlider.value;
-        maxSlider.dispatchEvent(new Event('input'));
-    }
-}
-
-// ============================================================
-// CONDIVISIONE RICERCA: scrittura filtri nell'URL
-// ============================================================
-// Riflette lo stato corrente di tutti i filtri (testo, organizzazione,
-// persona, tipo, argomento, intervallo anni, pagina) nella query string,
-// così un utente può copiare l'URL e condividere una ricerca precisa.
-// Usa replaceState (non pushState) per non intasare la cronologia del
-// browser a ogni keystroke o cambio filtro.
-function aggiornaURL() {
-    const params = new URLSearchParams();
-
-    const testo = document.getElementById('filtro-testo')?.value.trim();
-    if (testo) params.set('q', testo);
-
-    const org = getSelectedValues('filtro-organizzazione');
-    if (org.length) params.set('organizzazione', org.join(','));
-
-    const persona = getSelectedValues('filtro-persona');
-    if (persona.length) params.set('persona', persona.join(','));
-
-    const tipo = getSelectedValues('filtro-tipo');
-    if (tipo.length) params.set('tipo', tipo.join(','));
-
-    // Nome parametro 'serie' mantenuto per compatibilità con i link
-    // esistenti verso /documenti/?serie=... generati altrove nel sito.
-    const argomento = getSelectedValues('filtro-argomento');
-    if (argomento.length) params.set('serie', argomento.join(','));
-
-    const minSlider = document.getElementById('filtro-anno-min');
-    const maxSlider = document.getElementById('filtro-anno-max');
-    if (minSlider && maxSlider) {
-        const annoMinVal = parseInt(minSlider.value, 10);
-        const annoMaxVal = parseInt(maxSlider.value, 10);
-        if (annoMinVal !== annoMin) params.set('anno_min', annoMinVal);
-        if (annoMaxVal !== annoMax) params.set('anno_max', annoMaxVal);
-    }
-
-    if (currentPage > 1) params.set('pagina', currentPage);
-
-    const queryString = params.toString();
-    const nuovoUrl = window.location.pathname + (queryString ? '?' + queryString : '');
-    window.history.replaceState(null, '', nuovoUrl);
 }
 
 // ============================================================
@@ -476,7 +368,7 @@ function calcolaRisultati() {
 function applicaFiltri() {
     currentPage = 1; // 🔥 Reset pagina alla prima quando i filtri cambiano
     mostraRisultati(calcolaRisultati());
-    aggiornaURL();
+    renderFiltriAttivi(); // 🔥 Aggiorna la riga di chip riepilogo filtri
 }
 
 function getSelectedValues(id) {
@@ -487,6 +379,155 @@ function getSelectedValues(id) {
         return [];
     }
     return selected.map(opt => opt.value);
+}
+
+// ============================================================
+// CHIP FILTRI ATTIVI
+// ============================================================
+// Riepilogo cliccabile dei filtri correntemente applicati, mostrato
+// sopra i risultati. Ogni chip rappresenta UN singolo valore
+// selezionato (non l'intero gruppo di filtro) ed e' rimovibile
+// singolarmente cliccando la ✕, senza dover aprire l'accordion
+// corrispondente nella sidebar.
+const FILTRO_LABELS = {
+    'filtro-organizzazione': 'Organizzazione',
+    'filtro-persona': 'Persona',
+    'filtro-tipo': 'Tipologia',
+    'filtro-argomento': 'Argomento'
+};
+
+function creaChip(labelHtml, onRemove) {
+    const chip = document.createElement('span');
+    chip.className = 'filtro-chip';
+
+    const labelSpan = document.createElement('span');
+    labelSpan.className = 'filtro-chip-label';
+    labelSpan.innerHTML = labelHtml;
+    chip.appendChild(labelSpan);
+
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'filtro-chip-remove';
+    removeBtn.setAttribute('aria-label', 'Rimuovi filtro');
+    removeBtn.textContent = '✕';
+    removeBtn.addEventListener('click', onRemove);
+    chip.appendChild(removeBtn);
+
+    return chip;
+}
+
+function rimuoviValoreSelezionato(selectId, valore) {
+    const select = document.getElementById(selectId);
+    if (!select) return;
+
+    let restanoSelezionati = false;
+    Array.from(select.options).forEach(opt => {
+        if (opt.value === valore) {
+            opt.selected = false;
+        } else if (opt.value !== 'all' && opt.selected) {
+            restanoSelezionati = true;
+        }
+    });
+
+    // Se non resta nessun valore selezionato, riporta il select su
+    // "Tutte/Tutti" per coerenza con lo stato di reset del filtro.
+    if (!restanoSelezionati) {
+        const allOption = select.querySelector('option[value="all"]');
+        if (allOption) allOption.selected = true;
+    }
+
+    applicaFiltri();
+}
+
+function resetFiltroAnno() {
+    const minSlider = document.getElementById('filtro-anno-min');
+    const maxSlider = document.getElementById('filtro-anno-max');
+    if (!minSlider || !maxSlider) return;
+
+    minSlider.value = annoMin;
+    maxSlider.value = annoMax;
+    document.getElementById('anno-min-label').textContent = annoMin;
+    document.getElementById('anno-max-label').textContent = annoMax;
+
+    const minPill = document.getElementById('anno-min-pill');
+    const maxPill = document.getElementById('anno-max-pill');
+    if (minPill) minPill.textContent = annoMin;
+    if (maxPill) maxPill.textContent = annoMax;
+
+    const track = document.getElementById('slider-track-fill');
+    if (track) {
+        track.style.left = '0%';
+        track.style.right = '0%';
+    }
+    if (minPill) minPill.style.left = '0%';
+    if (maxPill) maxPill.style.left = '100%';
+
+    const histogram = document.getElementById('slider-histogram');
+    if (histogram) {
+        histogram.querySelectorAll('.hist-bar').forEach(bar => {
+            bar.classList.add('hist-bar--in-range');
+        });
+    }
+
+    applicaFiltri();
+}
+
+function resetFiltroTesto() {
+    const campoTesto = document.getElementById('filtro-testo');
+    if (campoTesto) campoTesto.value = '';
+    applicaFiltri();
+}
+
+function renderFiltriAttivi() {
+    const container = document.getElementById('filtri-attivi');
+    if (!container) return;
+
+    container.innerHTML = '';
+    let numeroFiltri = 0;
+
+    // --- Filtri multi-select (organizzazione, persona, tipo, argomento) ---
+    Object.keys(FILTRO_LABELS).forEach(selectId => {
+        const valori = getSelectedValues(selectId);
+        valori.forEach(valore => {
+            const labelHtml = `<strong>${escapeHtml(FILTRO_LABELS[selectId])}:</strong> ${escapeHtml(valore)}`;
+            const chip = creaChip(labelHtml, () => rimuoviValoreSelezionato(selectId, valore));
+            container.appendChild(chip);
+            numeroFiltri++;
+        });
+    });
+
+    // --- Filtro anno (solo se diverso dal range completo) ---
+    const minSlider = document.getElementById('filtro-anno-min');
+    const maxSlider = document.getElementById('filtro-anno-max');
+    if (minSlider && maxSlider) {
+        const minVal = parseInt(minSlider.value);
+        const maxVal = parseInt(maxSlider.value);
+        if (minVal !== annoMin || maxVal !== annoMax) {
+            const labelHtml = `<strong>Anni:</strong> ${minVal}–${maxVal}`;
+            const chip = creaChip(labelHtml, resetFiltroAnno);
+            container.appendChild(chip);
+            numeroFiltri++;
+        }
+    }
+
+    // --- Filtro testo ---
+    const campoTesto = document.getElementById('filtro-testo');
+    if (campoTesto && campoTesto.value.trim()) {
+        const labelHtml = `<strong>Testo:</strong> "${escapeHtml(campoTesto.value.trim())}"`;
+        const chip = creaChip(labelHtml, resetFiltroTesto);
+        container.appendChild(chip);
+        numeroFiltri++;
+    }
+
+    // --- Pulsante "rimuovi tutti", solo se ci sono almeno 2 filtri attivi ---
+    if (numeroFiltri > 1) {
+        const resetBtn = document.createElement('button');
+        resetBtn.type = 'button';
+        resetBtn.className = 'filtri-attivi-reset';
+        resetBtn.textContent = 'Rimuovi tutti i filtri';
+        resetBtn.addEventListener('click', resetFiltri);
+        container.appendChild(resetBtn);
+    }
 }
 
 // ============================================================
@@ -615,7 +656,6 @@ function generaIterfacciaPaginazione(container, current, total) {
                 currentPage = page;
                 const risultati = calcolaRisultati();
                 mostraRisultati(risultati);
-                aggiornaURL();
                 
                 // Riporta la vista in cima ai risultati: i pulsanti di paginazione
                 // sono in fondo alla lista, senza questo l'utente resterebbe

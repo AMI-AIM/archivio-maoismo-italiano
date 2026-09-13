@@ -181,6 +181,7 @@ hide:
 
     <!-- RISULTATI -->
     <main class="risultati-main">
+        <div id="filtri-attivi" class="filtri-attivi"></div>
         <div id="risultati-container">
             {risultati_html}
         </div>
@@ -487,6 +488,91 @@ hide:
     min-width: 0;
 }}
 
+/* ------------------------------------------------------------
+   CHIP FILTRI ATTIVI
+   Riepilogo dei filtri correntemente applicati, mostrato sopra i
+   risultati. Ogni chip rappresenta un singolo valore selezionato
+   (non l'intero gruppo) ed è rimovibile singolarmente cliccando
+   la ✕, senza dover aprire l'accordion corrispondente nella
+   sidebar. Popolato/aggiornato via JS in archivio-filtri.js.
+   ------------------------------------------------------------ */
+.filtri-attivi {{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}}
+
+.filtri-attivi:empty {{
+    display: none;
+    margin-bottom: 0;
+}}
+
+.filtro-chip {{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--md-code-bg-color);
+    border: 1px solid var(--md-primary-fg-color);
+    color: var(--md-primary-fg-color);
+    border-radius: 20px;
+    padding: 0.25rem 0.5rem 0.25rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.3;
+    max-width: 100%;
+}}
+
+.filtro-chip-label {{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}}
+
+.filtro-chip-label strong {{
+    font-weight: 700;
+}}
+
+.filtro-chip-remove {{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: var(--md-primary-fg-color);
+    font-size: 0.85rem;
+    line-height: 1;
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+    transition: background 0.15s;
+}}
+
+.filtro-chip-remove:hover {{
+    background: rgba(183, 28, 28, 0.15);
+}}
+
+.filtri-attivi-reset {{
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--md-default-fg-color--light);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0.25rem 0;
+}}
+
+.filtri-attivi-reset:hover {{
+    color: var(--md-primary-fg-color);
+}}
+
 .risultato-card {{
     display: flex;
     flex-direction: column;
@@ -669,6 +755,9 @@ hide:
         padding: 0.2rem 0.5rem;
         font-size: 0.75rem;
         min-width: 30px;
+    }}
+    .filtro-chip {{
+        font-size: 0.75rem;
     }}
 }}
 </style>
