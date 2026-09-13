@@ -31,6 +31,7 @@ extra_javascript:
   - javascripts/archivio-filtri.js
   - javascripts/lazy-loading.js
   - javascripts/galleria.js
+  - javascripts/ia-status.js
 
 plugins:
   - search
