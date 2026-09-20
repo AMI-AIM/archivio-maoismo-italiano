@@ -7,6 +7,7 @@ Il modulo NON inserisce più la data di build nelle citazioni.
 """
 import json
 import re
+
 from .site_config import site_url
 from .utils import split_nomi
 

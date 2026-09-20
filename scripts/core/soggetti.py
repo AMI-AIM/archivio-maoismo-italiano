@@ -1,9 +1,12 @@
 import html
-import pandas as pd
-import os
 import json
-from .utils import slugify, split_nomi
+import os
+
+import pandas as pd
+
 from .site_config import site_path
+from .utils import slugify, split_nomi
+
 
 def carica_soggetti(data_dir):
     persone = {}

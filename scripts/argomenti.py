@@ -1,20 +1,20 @@
-import os
-import json
-import html
 import hashlib
+import html
+import json
+import os
 import sys
 from datetime import datetime
 
 import pandas as pd
 
-from core.utils import slugify, formatta_data
-from core.site_config import site_path
 from core.argomenti import (
     build_argomenti_index,
     find_topic_column,
     normalize_key,
     split_argomenti,
 )
+from core.site_config import site_path
+from core.utils import formatta_data, slugify
 
 try:
     from core.site_config import SITE_URL

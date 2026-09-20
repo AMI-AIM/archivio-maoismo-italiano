@@ -1,9 +1,7 @@
-import os
-import json
 import hashlib
-import pickle
+import json
+from datetime import datetime
 from pathlib import Path
-from datetime import datetime, timedelta
 
 
 class CacheManager:
@@ -268,7 +266,7 @@ class CacheManager:
 
     def print_stats(self):
         """Stampa statistiche cache."""
-        print(f"\n[STATS] Statistiche cache:")
+        print("\n[STATS] Statistiche cache:")
         print(f"   - Metadati IA: {len(self.ia_cache)} entries")
         print(f"   - File tracciati: {len(self.file_hashes)} entries")
         print(f"   - Documenti: {len(self.metadata_cache)} entries")

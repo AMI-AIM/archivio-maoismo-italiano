@@ -9,7 +9,6 @@ import re
 from pathlib import Path
 from urllib.parse import urlparse
 
-
 _ROOT_DIR = Path(__file__).resolve().parents[2]
 _MKDOCS_CONFIG = _ROOT_DIR / "mkdocs.yml"
 

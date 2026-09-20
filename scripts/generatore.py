@@ -1,23 +1,17 @@
 import os
-import re
-import json
-import glob
-import shutil
-import pandas as pd
-from pathlib import Path
 from datetime import datetime
+
+import pandas as pd
+
+from core.archivio import genera_indice
+from core.home import genera_home
+from core.json_export import genera_json
+from core.json_optimizer import JSONOptimizer
+from core.schede import crea_schede
 
 # Import moduli core
 from core.soggetti import carica_soggetti, genera_json_soggetti
-from core.schede import crea_schede
-from core.archivio import genera_indice
-from core.json_export import genera_json
-from core.home import genera_home
-from core.cache_manager import CacheManager
-from core.json_optimizer import JSONOptimizer
-from core.site_config import SITE_URL
 from core.utils import get_cache_manager
-
 
 # ========================================================================
 # CONFIGURAZIONE GLOBALE
@@ -62,7 +56,7 @@ def copia_immagini_profili():
                 try:
                     font = ImageFont.truetype(font_name, 40)
                     break
-                except (IOError, OSError):
+                except OSError:
                     continue
 
             if font is None:
@@ -75,7 +69,7 @@ def copia_immagini_profili():
 
             draw.text((50, 50), "?", fill='white', anchor="mm", font=font)
             img.save(placeholder_path, 'WEBP')
-            print(f"   [OK] Creato placeholder.webp in 'docs/immagini/profili/'")
+            print("   [OK] Creato placeholder.webp in 'docs/immagini/profili/'")
 
         except ImportError:
             print("   [WARN] Pillow non installato. Usa placeholder.webp esistente.")
@@ -239,7 +233,7 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
     else:
         print(f"   [WARN] sitemap.txt: prima riga inattesa: {prima_riga!r}")
 
-    print(f"   [INFO] Entrambi i file pronti per essere serviti da GitHub Pages")
+    print("   [INFO] Entrambi i file pronti per essere serviti da GitHub Pages")
 
 
 def ottimizza_json(output_dir):
@@ -388,7 +382,7 @@ def main():
     try:
         # Passa cache_mgr a genera_indice per caching descrizioni IA
         genera_indice(df, OUTPUT_DIR, cache_manager=cache_mgr)
-        print(f"[OK] Indice archivio generato")
+        print("[OK] Indice archivio generato")
     except Exception as e:
         print(f"[ERROR] Errore generazione indice: {e}")
         raise
@@ -399,7 +393,7 @@ def main():
     print("\n[EXPORT] Esportazione JSON documenti...")
     try:
         genera_json(df, persone, organizzazioni, OUTPUT_DIR)
-        print(f"[OK] JSON documenti esportato")
+        print("[OK] JSON documenti esportato")
     except Exception as e:
         print(f"[ERROR] Errore esportazione JSON: {e}")
         raise
@@ -410,7 +404,7 @@ def main():
     print("\n[GEN] Generazione home page...")
     try:
         genera_home(df, persone, OUTPUT_DIR, organizzazioni)
-        print(f"[OK] Home page generata")
+        print("[OK] Home page generata")
     except Exception as e:
         print(f"[ERROR] Errore generazione home: {e}")
         raise

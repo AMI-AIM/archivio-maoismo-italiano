@@ -1,9 +1,10 @@
-import pandas as pd
-import re
 import logging
-from typing import List, Tuple, Dict, Any, Optional, Set
+import re
 from datetime import datetime
 from pathlib import Path
+from typing import Any
+
+import pandas as pd
 
 from .utils import split_nomi
 
@@ -48,10 +49,10 @@ class ValidationResult:
     """Classe per incapsulare il risultato della validazione."""
 
     def __init__(self):
-        self.errors: List[str] = []
-        self.warnings: List[str] = []
-        self.info: List[str] = []
-        self.stats: Dict[str, Any] = {}
+        self.errors: list[str] = []
+        self.warnings: list[str] = []
+        self.info: list[str] = []
+        self.stats: dict[str, Any] = {}
 
     @property
     def is_valid(self) -> bool:
@@ -69,7 +70,7 @@ class ValidationResult:
         self.info.append(message)
         logger.info(f"ℹ️ {message}")
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             'is_valid': self.is_valid,
             'errors': self.errors,
@@ -89,7 +90,7 @@ class ValidationResult:
         else:
             print("❌ VALIDAZIONE FALLITA")
 
-        print(f"\n📊 STATISTICHE:")
+        print("\n📊 STATISTICHE:")
         for key, value in self.stats.items():
             print(f"   • {key}: {value}")
 
@@ -141,9 +142,9 @@ class AdvancedValidator:
     def validate_catalogo(
         self,
         df: pd.DataFrame,
-        nomi_persone: Optional[Set[str]] = None,
-        nomi_organizzazioni: Optional[Set[str]] = None,
-    ) -> Tuple[bool, Dict[str, Any]]:
+        nomi_persone: set[str] | None = None,
+        nomi_organizzazioni: set[str] | None = None,
+    ) -> tuple[bool, dict[str, Any]]:
         """
         Valida il DataFrame del Catalogo completo.
 
@@ -203,7 +204,7 @@ class AdvancedValidator:
 
         return self.result.is_valid, self.result.to_dict()
 
-    def validate_soggetti(self, df: pd.DataFrame, tipo: str = "Soggetto") -> Tuple[bool, Dict[str, Any]]:
+    def validate_soggetti(self, df: pd.DataFrame, tipo: str = "Soggetto") -> tuple[bool, dict[str, Any]]:
         """
         Valida DataFrame Persone o Organizzazioni.
 
@@ -246,7 +247,7 @@ class AdvancedValidator:
 
         return self.result.is_valid, self.result.to_dict()
 
-    def validate_persone(self, df: pd.DataFrame) -> Tuple[bool, Dict[str, Any]]:
+    def validate_persone(self, df: pd.DataFrame) -> tuple[bool, dict[str, Any]]:
         """Validazione specifica per persone."""
         df = self._normalize_columns(df.copy())
         valido, report = self.validate_soggetti(df, "Persone")
@@ -267,7 +268,7 @@ class AdvancedValidator:
 
         return self.result.is_valid, self.result.to_dict()
 
-    def validate_organizzazioni(self, df: pd.DataFrame) -> Tuple[bool, Dict[str, Any]]:
+    def validate_organizzazioni(self, df: pd.DataFrame) -> tuple[bool, dict[str, Any]]:
         """Validazione specifica per organizzazioni."""
         df = self._normalize_columns(df.copy())
         valido, report = self.validate_soggetti(df, "Organizzazioni")
@@ -286,7 +287,7 @@ class AdvancedValidator:
     # METODI DI VALIDAZIONE INTERNI
     # =========================================================================
 
-    def _check_required_columns(self, df: pd.DataFrame, required: List[str], sheet_name: str):
+    def _check_required_columns(self, df: pd.DataFrame, required: list[str], sheet_name: str):
         """Verifica presenza colonne obbligatorie."""
         mancanti = [col for col in required if col not in df.columns]
         if mancanti:
@@ -408,8 +409,8 @@ class AdvancedValidator:
     def _validate_riferimenti(
         self,
         df: pd.DataFrame,
-        nomi_persone: Optional[Set[str]] = None,
-        nomi_organizzazioni: Optional[Set[str]] = None,
+        nomi_persone: set[str] | None = None,
+        nomi_organizzazioni: set[str] | None = None,
     ):
         """Valida riferimenti incrociati (persone, organizzazioni collegate)."""
         # Controllo sintassi liste con separatori misti (',' e ';')
@@ -442,7 +443,7 @@ class AdvancedValidator:
         self,
         df: pd.DataFrame,
         col: str,
-        nomi_validi: Optional[Set[str]],
+        nomi_validi: set[str] | None,
         foglio_riferimento: str,
     ):
         """
@@ -455,7 +456,7 @@ class AdvancedValidator:
         if col not in df.columns or nomi_validi is None:
             return
 
-        mancanti: Dict[str, List[str]] = {}
+        mancanti: dict[str, list[str]] = {}
         mask = df[col].notna() & (df[col] != '')
 
         for idx, valore in df.loc[mask, col].items():
@@ -492,7 +493,7 @@ class AdvancedValidator:
                         self.result.add_warning(f"Colonna '{col}': trovati {mask.sum()} placeholder '{pattern}'")
 
 
-def run_validation(data_dir: str) -> Dict[str, Any]:
+def run_validation(data_dir: str) -> dict[str, Any]:
     """
     Esegue validazione completa su tutti i fogli Excel.
 

@@ -1,14 +1,15 @@
-import html
-import os
-import json
 import hashlib
+import html
+import json
+import os
 import sys
+
 import pandas as pd
 
-from core.utils import escape_yaml_string, slugify, formatta_data, split_nomi
-from core.site_config import site_path
 from core.catalog_indexer import CatalogIndexer
 from core.schema_generator import SchemaGenerator
+from core.site_config import site_path
+from core.utils import escape_yaml_string, formatta_data, slugify
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
@@ -348,19 +349,19 @@ hide:
 
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
 
-            lines.append(f'    <div class="top-card">')
+            lines.append('    <div class="top-card">')
             lines.append(f'        <a href="{slug}/" class="top-card-link">')
-            lines.append(f'            <div class="top-card-image-wrapper">')
+            lines.append('            <div class="top-card-image-wrapper">')
             lines.append(f'                {avatar_html}')
-            lines.append(f'            </div>')
-            lines.append(f'            <div class="top-card-text">')
+            lines.append('            </div>')
+            lines.append('            <div class="top-card-text">')
             lines.append(f'                <div class="top-card-tipo">{categoria_html}</div>')
             lines.append(f'                <div class="top-card-name">{nome_html}</div>')
             lines.append(f'                <div class="top-card-dates">{date_range_html}</div>')
             lines.append(f'                <div class="top-card-count">{count_text}</div>')
-            lines.append(f'            </div>')
-            lines.append(f'        </a>')
-            lines.append(f'    </div>')
+            lines.append('            </div>')
+            lines.append('        </a>')
+            lines.append('    </div>')
         lines.append('</div>')
 
     lines.append('<div class="filtri-organizzazioni">')
@@ -397,8 +398,8 @@ hide:
             lines.append(f'        <div class="org-name">{nome_html}</div>')
             lines.append(f'        <div class="org-dates">{date_range_html}</div>')
             lines.append(f'        <div class="org-count">{count_text}</div>')
-            lines.append(f'    </a>')
-            lines.append(f'</div>')
+            lines.append('    </a>')
+            lines.append('</div>')
         lines.append('</div>')
     else:
         lines.append('<p style="padding: 1rem 0; color: var(--md-default-fg-color--light);">Nessuna organizzazione aggiuntiva.</p>')

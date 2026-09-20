@@ -1,5 +1,5 @@
-import re
 import html as html_lib
+import re
 from datetime import datetime
 
 from .cache_manager import CacheManager

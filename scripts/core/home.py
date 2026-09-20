@@ -2,8 +2,9 @@ import html
 import os
 import re
 from collections import Counter
-from .utils import formatta_data, split_nomi, slugify
+
 from .site_config import site_path
+from .utils import formatta_data, slugify, split_nomi
 
 # DOCUMENTI IN EVIDENZA: inserisci qui gli ID dei documenti che vuoi mostrare
 EVIDENZA_IDS = [

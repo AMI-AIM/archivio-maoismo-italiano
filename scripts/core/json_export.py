@@ -1,9 +1,11 @@
-import os
-import json
-import re
 import html as html_mod
+import json
+import os
+import re
+
 import pandas as pd
-from .utils import formatta_data, split_nomi, scarica_descrizione_ia
+
+from .utils import formatta_data, scarica_descrizione_ia, split_nomi
 
 
 def pulisci_html(testo):

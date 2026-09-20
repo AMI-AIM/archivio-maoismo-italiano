@@ -1,6 +1,8 @@
 import os
 import re
-from .utils import formatta_data, split_nomi, scarica_descrizione_ia
+
+from .utils import formatta_data, scarica_descrizione_ia, split_nomi
+
 
 def genera_indice(df, output_dir, cache_manager=None):
     print("\n📑 Generazione della pagina Archivio con filtri...")

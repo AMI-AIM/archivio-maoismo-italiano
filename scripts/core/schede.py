@@ -2,7 +2,9 @@ import html
 import os
 import re
 import urllib.parse
+
 import pandas as pd
+
 from .argomenti import build_argomenti_index, find_topic_column, get_argomento_slug
 from .citazioni import (
     CITAZIONI_TEMPLATE_VERSION,
@@ -12,7 +14,7 @@ from .citazioni import (
     yaml_value,
 )
 from .schema_generator import SchemaGenerator
-from .site_config import site_path, site_url
+from .site_config import site_path
 from .soggetti import crea_link, link_lista
 from .utils import (
     formatta_data,
@@ -21,6 +23,7 @@ from .utils import (
     scarica_testo_ia,
     split_nomi,
 )
+
 
 def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
     """

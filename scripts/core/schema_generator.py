@@ -3,7 +3,6 @@ Generazione schema.org JSON-LD per migliorare ricercabilità.
 Aiuta Google a comprendere la struttura dei dati.
 """
 
-import json
 from core.site_config import SITE_URL
 
 
