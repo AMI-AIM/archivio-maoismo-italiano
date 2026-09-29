@@ -49,6 +49,14 @@
    * Crea elemento skeleton placeholder
    */
   function createSkeleton(img) {
+    // Nota: qui lo stile inline e necessario perche lo skeleton viene
+    // creato a runtime dopo il CSS: le regole di extra.css (.lazy-skeleton)
+    // hanno specificita inferiore rispetto a style="" quando JS deve
+    // sovrascrivere stati dinamici (es. errore). Per la grafica statica
+    // (gradient/animazione/arrotondamento) si fa comunque riferimento alle
+    // variabili CSS definite in :root dentro extra.css, cosi i valori sono
+    // regolati da un'unica fonte.
+    const css = getComputedStyle(document.documentElement);
     const skeleton = document.createElement('div');
     skeleton.className = CONFIG.skeletonClass;
 
@@ -59,10 +67,12 @@
     skeleton.style.height = typeof height === 'number' ? height + 'px' : height;
     skeleton.style.display = 'inline-block';
     skeleton.style.verticalAlign = 'middle';
-    skeleton.style.background = 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)';
+    skeleton.style.background = css.getPropertyValue('--ami-skeleton-bg').trim()
+      || 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)';
     skeleton.style.backgroundSize = '200% 100%';
     skeleton.style.animation = 'skeleton-loading 1.5s infinite';
-    skeleton.style.borderRadius = img.style.borderRadius || '4px';
+    skeleton.style.borderRadius = img.style.borderRadius
+      || css.getPropertyValue('--ami-skeleton-radius').trim() || '4px';
     return skeleton;
   }
 
@@ -186,15 +196,16 @@
       return;
     }
 
-    // Fallback generico: skeleton con messaggio di errore
+    // Fallback generico: skeleton con messaggio di errore (classe CSS in
+    // extra.css - .lazy-skeleton.error-state - perche l'elemento e gia nel
+    // DOM quando scatta l'errore, quindi le regole esterne si applicano).
     if (hasSkeleton) {
-      skeleton.style.background = '#ffebee';
-      skeleton.innerHTML = '<span style="color:#d32f2f;font-size:12px;">⚠️ Img non disponibile</span>';
+      skeleton.classList.add('error-state');
       skeleton.style.display = 'flex';
       skeleton.style.alignItems = 'center';
       skeleton.style.justifyContent = 'center';
       skeleton.style.textAlign = 'center';
-      skeleton.style.padding = '10px';
+      skeleton.innerHTML = '';
     }
 
     // Nascondi immagine rotta
