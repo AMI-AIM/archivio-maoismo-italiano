@@ -45,6 +45,21 @@ L'ordine degli script (`sync_assets → persone → org → generatore → argom
 e' replicato in `Launcher.py` e in `.github/workflows/deploy.yml`. Modificare
 entrambi sempre in coppia (oppure estrarre uno script unico invocato da entrambi).
 
+**Aggiornamento 29/09/2026 — scelta: mantenere la duplicazione.** Un modulo
+comune che invochi gli script funzionerebbe solo nel job di build, ma la CI ha
+step separati con fallimento selettivo per fase (utile nei log di Actions);
+inoltre la pipeline locale deve poter girare senza dipendenze da runner. La
+coppia Launcher/deploy.yml resta quindi intenzionale: ogni modifica all'ordine
+degli step va applicata a entrambi i file nello stesso commit. Il Launcher usa
+gia` `sys.executable` (niente hardcoding `python`), quindi l'unica regola
+operativa e' la coppia dei file.
+
+### Pubblicazione git del Launcher
+`git_sync_pubblicazione()` esegue `pull --rebase --autostash → add -A → commit → push`:
+recupera i commit fatti altrove (es. merge GitHub) prima di spingere, evitando il
+rifiuto non-fast-forward. Testato con remoto bare locale (storia divergente +
+worktree sporco: rebase lineare, modifiche preservate, push ricevuto).
+
 ## 5. Date
 Convenzione di data entry italiana `gg/mm/aaaa`. In `utils.formatta_data`
 `%m/%d/%Y` esiste solo come fallback estremo dopo `%d/%m/%Y` (vedi commento in
@@ -54,11 +69,20 @@ le date anglofone vanno convertite in `gg/mm/aaaa` direttamente nel foglio.
 Non aggiungere formati ambigui prima di questi.
 
 ## 6. Dipendenze Python
-Sorgente unica: `requirements.txt` (pandas, openpyxl, requests, Pillow,
-mkdocs-material). `requests` e `Pillow` erano usati ma non dichiarati: ora
-presenti. La CI installa SOLO mkdocs-material: se in futuro il validatore o
-altri moduli core useranno nuove librerie, aggiornare anche
-`.github/workflows/deploy.yml`.
+Sorgente unica: `requirements.txt` (pandas, openpyxl, requests, mkdocs-material).
+**Pillow e' FACOLTATIVO e va tenuto fuori da requirements.txt**: lo usa solo
+`generatore.py` per creare il placeholder.webp se manca, e il codice gestisce
+l'ImportError ripiegando sul file gia presente nel repo (scelta del manutentore:
+semplicita'). `requests` era usato ma non dichiarato: ora presente. La CI
+installa i requisiti da requirements.txt (`pip install -r`, deploy.yml): se in
+futuro il validatore o altri moduli core useranno nuove librerie, aggiornare
+requirements.txt (non serve toccare deploy.yml, che legge il file).
+
+### Versione Python
+La CI fissa Python **3.12** (setup-python in deploy.yml). Richiesta minima
+consigliata per l'ambiente locale: **>= 3.10**, coerente con la sintassi usata
+(type hint moderni, f-string). Non ci sono pin espliciti altrove: se si introduce
+un `.python-version` o constraint `python_requires`, aggiornare qui e nel README.
 
 ## 7. Naming IT/EN misto
 Funzioni/pubblico in italiano (`formatta_data`, `scarica_descrizione_ia`),

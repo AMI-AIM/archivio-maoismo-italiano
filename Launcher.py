@@ -168,6 +168,41 @@ def esegui_validazione(bloccante=True):
         print("Dati validati correttamente.")
 
 
+def git_sync_pubblicazione():
+    """Sincronizza e pubblica: pull rebase -> add -> commit -> push.
+
+    Il `git pull --rebase --autostash` iniziale recupera eventuali commit
+    fatti altrove (es. merge su GitHub del ramo di lavoro, o un secondo
+    aggiornamento) ed evita il rifiuto del push con storia divergente. In caso
+    di conflitto irrisolvibile il comando fallisce: ErroreComando blocca la
+    sequenza e il commit locale resta integro, pronto per essere risolto a
+    mano.
+    """
+    # 1. Recupera gli aggiornamenti remoti RIAPPLICANDO i commit locali sopra
+    #    (niente merge commit; --autostash protegge da worktree sporco).
+    #    Non usare descrizione: non deve rientrare nel blocco "Git ...".
+    esegui(["git", "pull", "--rebase", "--autostash"],
+           descrizione="Sincronizzazione col remoto (rebase)")
+
+    # 2. Commit delle modifiche rigenerate (se ancora presenti dopo il pull).
+    if not git_ci_sono_modifiche():
+        print("Nessuna modifica da committare dopo la sincronizzazione.")
+        return False
+    if not messaggio_globale["testo"]:
+        messaggio_globale["testo"] = (
+            f"Aggiornamento automatico del sito — {datetime.now().strftime('%d/%m/%Y %H:%M')}"
+        )
+    esegui(["git", "add", "-A"], descrizione="Git add")
+    esegui(["git", "commit", "-m", messaggio_globale["testo"]], descrizione="Git commit")
+
+    # 3. Push.
+    esegui(["git", "push"], descrizione="Git push")
+    return True
+
+
+messaggio_globale = {"testo": None}  # messaggio commit impostato in aggiorna()
+
+
 def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
     stampa_titolo("Aggiornamento del sito AMI")
     verifica_dipendenze()
@@ -217,19 +252,15 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
     esegui([sys.executable, "galleria.py"], cwd=SCRIPTS_DIR,
            descrizione="Generazione galleria fotografica (build/galleria/)")
 
-    # 6. Pubblicazione
+    # 6. Pubblicazione (pull --rebase -> add -> commit -> push)
     stampa_titolo("Pubblicazione")
     if not git_ci_sono_modifiche():
-        print("ℹ  Nessuna modifica rispetto all'ultimo commit: niente da pubblicare.")
+        print("Nessuna modifica rispetto all'ultimo commit: niente da pubblicare.")
         stampa_titolo("Completato (nessuna modifica)")
         return
 
-    if not messaggio:
-        messaggio = f"Aggiornamento automatico del sito — {datetime.now().strftime('%d/%m/%Y %H:%M')}"
-
-    esegui(["git", "add", "-A"], descrizione="Git add")
-    esegui(["git", "commit", "-m", messaggio], descrizione="Git commit")
-    esegui(["git", "push"], descrizione="Git push")
+    messaggio_globale["testo"] = messaggio  # None -> default nel sync
+    git_sync_pubblicazione()
 
     stampa_titolo("Sito aggiornato e pubblicato!")
     print("GitHub Actions builderà e pubblicherà automaticamente su GitHub Pages")
