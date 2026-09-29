@@ -1,5 +1,8 @@
 pandas
 openpyxl
 requests
-Pillow
+# Pillow e' FACOLTATIVO: usato solo da scripts/generatore.py per creare
+# docs/immagini/profili/placeholder.webp se assente. Il codice gestisce il
+# mancato import (ImportError -> usa il placeholder.webp gia presente nel
+# repo), quindi non e' dichiarato tra le dipendenze obbligatorie.
 mkdocs-material

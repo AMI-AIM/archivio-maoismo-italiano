@@ -52,3 +52,16 @@ python Launcher.py --cache-stats
 ### Aiuto
 
 python Launcher.py --help
+
+---
+
+## Note operative
+
+- Il Launcher, prima di committare, sincronizza col remoto con
+  `git pull --rebase --autostash`: se hai fatto merge o push altrove (es. da
+  GitHub) non servono operazioni manuali, e la storia resta lineare.
+- A fine esecuzione il Launcher attende INVIO ("Premi INVIO per chiudere"):
+  comodo dal doppio click su Windows; nei terminali automatizzati/CI l'attesa
+  viene saltata automaticamente (stdin chiuso).
+- Pillow non e' tra le dipendenze obbligatorie: serve solo a generare il
+  placeholder.webp se manca (il file e' gia nel repo). Vedi CONVENZIONI.md §6.
