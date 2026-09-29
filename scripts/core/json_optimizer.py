@@ -26,7 +26,7 @@ class JSONOptimizer:
         size_comp = os.path.getsize(output_path)
         ratio = round((1 - size_comp/size_orig) * 100, 1)
         
-        print(f"   [COMPRESS] {Path(input_path).name}: {size_orig}B → {size_comp}B ({ratio}% riduzione)")
+        print(f"[COMPRESS] {Path(input_path).name}: {size_orig}B → {size_comp}B ({ratio}% riduzione)")
         return output_path
     
     @staticmethod
@@ -49,5 +49,5 @@ class JSONOptimizer:
         size_min = os.path.getsize(output_path)
         ratio = round((1 - size_min/size_orig) * 100, 1)
         
-        print(f"   [MINIFY] {Path(input_path).name}: {size_orig}B → {size_min}B ({ratio}% riduzione)")
+        print(f"[MINIFY] {Path(input_path).name}: {size_orig}B → {size_min}B ({ratio}% riduzione)")
         return output_path

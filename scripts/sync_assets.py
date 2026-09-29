@@ -11,10 +11,10 @@ def sincronizza():
     eventuali versioni precedenti. Va eseguito PRIMA degli script di
     generazione (persone.py, org.py, generatore.py), che scrivono il
     resto dei contenuti direttamente in build/."""
-    print("\n🔄 Sincronizzazione file statici (assets/ → build/)...")
+    print("\nSincronizzazione file statici (assets/ → build/)...")
 
     if not os.path.isdir(ASSETS_DIR):
-        print(f"   ⚠️ Cartella '{ASSETS_DIR}' non trovata: nessun file statico da copiare.")
+        print(f"Cartella '{ASSETS_DIR}' non trovata: nessun file statico da copiare.")
         return
 
     os.makedirs(BUILD_DIR, exist_ok=True)
@@ -29,7 +29,7 @@ def sincronizza():
             shutil.copy2(sorgente, destinazione)
             contatore += 1
 
-    print(f"   ✅ Copiati {contatore} file statici in '{BUILD_DIR}'")
+    print(f"Copiati {contatore} file statici in '{BUILD_DIR}'")
 
 
 def main():

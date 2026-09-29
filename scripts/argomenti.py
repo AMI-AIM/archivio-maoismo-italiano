@@ -249,7 +249,7 @@ def generate_single_page(item):
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(content)
 
-    print(f'   ✅ Creata scheda argomento {label} → {slug}.md')
+    print(f'Creata scheda argomento {label} → {slug}.md')
 
 
 # ============================================================
@@ -426,7 +426,7 @@ def generate_index(argomenti):
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines))
 
-    print(f'   ✅ Indice argomenti generato come elenco di {len(argomenti)} hero card.')
+    print(f'Indice argomenti generato come elenco di {len(argomenti)} hero card.')
 
 
 # ============================================================
@@ -472,9 +472,9 @@ def update_sitemap(argomenti):
             )
             with open(xml_path, 'w', encoding='utf-8') as f:
                 f.write(content)
-            print(f'   ✅ sitemap.xml aggiornata con {len(blocks)} URL argomento.')
+            print(f'sitemap.xml aggiornata con {len(blocks)} URL argomento.')
         else:
-            print('   ℹ️ sitemap.xml già contiene le pagine argomento o non è modificabile.')
+            print('ℹ sitemap.xml già contiene le pagine argomento o non è modificabile.')
     else:
         xml_lines = [
             '<?xml version="1.0" encoding="UTF-8"?>',
@@ -490,7 +490,7 @@ def update_sitemap(argomenti):
         xml_lines.append('</urlset>')
         with open(xml_path, 'w', encoding='utf-8') as f:
             f.write('\n'.join(xml_lines))
-        print(f'   ✅ sitemap.xml creata con {len(urls)} URL argomento.')
+        print(f'sitemap.xml creata con {len(urls)} URL argomento.')
 
     txt_path = os.path.join(OUTPUT_DIR, 'sitemap.txt')
     existing_lines = set()
@@ -502,12 +502,12 @@ def update_sitemap(argomenti):
             with open(txt_path, 'a', encoding='utf-8') as f:
                 for url in missing:
                     f.write(url + '\n')
-            print(f'   ✅ sitemap.txt aggiornata con {len(missing)} URL argomento.')
+            print(f'sitemap.txt aggiornata con {len(missing)} URL argomento.')
     else:
         with open(txt_path, 'w', encoding='utf-8') as f:
             for url in urls:
                 f.write(url + '\n')
-        print(f'   ✅ sitemap.txt creata con {len(urls)} URL argomento.')
+        print(f'sitemap.txt creata con {len(urls)} URL argomento.')
 
 
 # ============================================================
@@ -525,7 +525,7 @@ def genera_argomenti():
              errore di lettura, colonne obbligatorie mancanti, ecc.) che
              deve interrompere Launcher.py.
     """
-    print('\n🏷️ Generazione delle pagine degli argomenti...')
+    print('\nGenerazione delle pagine degli argomenti...')
 
     catalogo_path = os.path.join(DATA_DIR, 'dati.xlsx')
 
@@ -537,14 +537,14 @@ def genera_argomenti():
         ).fillna('')
         df_catalogo.columns = df_catalogo.columns.str.strip().str.lower()
     except FileNotFoundError:
-        print(f'   ❌ ERRORE: Non trovo {catalogo_path}.')
+        print(f'ERRORE: Non trovo {catalogo_path}.')
         return 1
     except Exception as e:
-        print(f"   ❌ ERRORE durante la lettura del foglio 'Catalogo' in dati.xlsx: {e}")
+        print(f"ERRORE durante la lettura del foglio 'Catalogo' in dati.xlsx: {e}")
         return 1
 
     if df_catalogo.empty:
-        print("   ⚠️ Il foglio 'Catalogo' in dati.xlsx è vuoto.")
+        print("Il foglio 'Catalogo' in dati.xlsx è vuoto.")
         return 0
 
     # Colonna argomenti: stessa logica condivisa usata da core/schede.py,
@@ -553,15 +553,15 @@ def genera_argomenti():
     topic_column = find_topic_column(df_catalogo)
 
     if not topic_column:
-        print("   ❌ ERRORE: nessuna colonna argomento trovata (cercavo 'Serie', 'Argomenti', 'Argomento', 'Tag', 'Tags').")
+        print("ERRORE: nessuna colonna argomento trovata (cercavo 'Serie', 'Argomenti', 'Argomento', 'Tag', 'Tags').")
         return 1
 
     if 'id' not in df_catalogo.columns:
-        print("   ❌ ERRORE: La colonna 'ID' non è presente nel foglio 'Catalogo'.")
+        print("ERRORE: La colonna 'ID' non è presente nel foglio 'Catalogo'.")
         return 1
 
-    print(f"   📊 Caricati {len(df_catalogo)} documenti dal foglio 'Catalogo' di dati.xlsx")
-    print(f"   📊 Uso la colonna '{topic_column}' come fonte degli argomenti")
+    print(f"Caricati {len(df_catalogo)} documenti dal foglio 'Catalogo' di dati.xlsx")
+    print(f"Uso la colonna '{topic_column}' come fonte degli argomenti")
 
     os.makedirs(ARGOMENTI_DIR, exist_ok=True)
     clean_argomenti_dir()
@@ -622,7 +622,7 @@ def genera_argomenti():
                 argomenti_map[key].append(doc)
 
     if not argomenti_map:
-        print('   ⚠️ Nessun argomento valido trovato.')
+        print('Nessun argomento valido trovato.')
         return 0
 
     # ----------------------------------------------------------------
@@ -651,7 +651,7 @@ def genera_argomenti():
             'num_doc': len(docs),
         })
 
-    print(f'   📊 Trovati {len(argomenti)} argomenti con documenti associati.')
+    print(f'Trovati {len(argomenti)} argomenti con documenti associati.')
 
     # ----------------------------------------------------------------
     # IMMAGINI
@@ -661,13 +661,13 @@ def genera_argomenti():
         item['immagine'] = immagine_url
         item['immagine_file'] = immagine_file
 
-    print('   🖼️  Stato immagini argomenti:')
+    print('Stato immagini argomenti:')
     for item in sorted(argomenti, key=lambda x: x['label'].lower()):
         if item['immagine']:
-            print(f"      ✅ {item['label']}: {item['immagine_file']}")
+            print(f"{item['label']}: {item['immagine_file']}")
         else:
-            print(f"      ⚠️  {item['label']}: nessuna immagine → fallback colorato.")
-            print(f"          File atteso: assets/immagini/argomenti/{item['slug']}.webp (oppure .jpg/.jpeg/.png)")
+            print(f"{item['label']}: nessuna immagine → fallback colorato.")
+            print(f"File atteso: assets/immagini/argomenti/{item['slug']}.webp (oppure .jpg/.jpeg/.png)")
 
     # ----------------------------------------------------------------
     # GENERAZIONE PAGINE
@@ -679,13 +679,13 @@ def genera_argomenti():
 
     update_sitemap(argomenti)
 
-    print('   ✅ Generazione pagine argomenti completata.')
+    print('Generazione pagine argomenti completata.')
 
     return 0
 
 
 def main():
-    print('🚀 Avvio del generatore di schede argomenti...')
+    print('Avvio del generatore di schede argomenti...')
     return genera_argomenti()
 
 

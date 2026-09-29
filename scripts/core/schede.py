@@ -39,7 +39,7 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
     Returns:
         tuple: (schede_generate, schede_saltate)
     """
-    print("📄 Creazione delle schede dei documenti...")
+    print("Creazione delle schede dei documenti...")
     documenti_dir = os.path.join(output_dir, "documenti")
     os.makedirs(documenti_dir, exist_ok=True)
     # Colonna argomenti/serie: stessa logica condivisa usata da
@@ -72,7 +72,7 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
             cached_hash = (cached_data or {}).get("data", {}).get("source_hash")
             if cached_hash == row_hash:
                 contatore_saltati += 1
-                print(f"   ⏭️ Saltato {ami_id} (cache valido)")
+                print(f"Saltato {ami_id} (cache valido)")
                 continue
         
         # =====================================================================
@@ -174,10 +174,10 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
                         .get("description")
                     )
                 if not descrizione_ia:
-                    print(f"   📡 Descrizione {identifier} scaricata da IA (cache vuota)")
+                    print(f"Descrizione {identifier} scaricata da IA (cache vuota)")
                     descrizione_ia = scarica_descrizione_ia(identifier)
             else:
-                print(f"   📡 Descrizione {identifier} scaricata da IA (nessun cache manager)")
+                print(f"Descrizione {identifier} scaricata da IA (nessun cache manager)")
                 descrizione_ia = scarica_descrizione_ia(identifier)
             
             if descrizione_ia and cache_manager:
@@ -589,10 +589,10 @@ hide:
             )
         
         contatore_generati += 1
-        print(f"   ✅ Creata scheda per {ami_id} (tipo: {tipo})")
+        print(f"Creata scheda per {ami_id} (tipo: {tipo})")
     
     print(
-        "\n✅ Schede documento: "
+        "\n Schede documento: "
         f"{contatore_generati} generate, "
         f"{contatore_saltati} saltate (da cache)"
     )

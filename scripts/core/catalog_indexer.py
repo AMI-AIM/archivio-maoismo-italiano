@@ -11,7 +11,7 @@ class CatalogIndexer:
 
     def __init__(self, df_catalogo):
         """
-        Inizializza gli indici dal DataFrame catalogo.
+       Inizializza gli indici dal DataFrame catalogo.
 
         Args:
             df_catalogo: DataFrame con colonne 'id', 'autore', 'persone_collegate',

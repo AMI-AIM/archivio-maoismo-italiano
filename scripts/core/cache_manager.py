@@ -12,7 +12,7 @@ class CacheManager:
 
     def __init__(self, cache_dir=None):
         """
-        Inizializza il manager cache.
+       Inizializza il manager cache.
 
         Args:
             cache_dir: Directory cache. Default: scripts/.cache (relativo al repo, non al cwd)
@@ -51,7 +51,7 @@ class CacheManager:
             with open(file_path, 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
         except Exception as e:
-            print(f"   [WARNING] Errore salvataggio cache: {e}")
+            print(f"[WARNING] Errore salvataggio cache: {e}")
 
     @staticmethod
     def _hash_file(file_path):
@@ -91,10 +91,10 @@ class CacheManager:
             age_days = (datetime.now() - cached_time).days
 
             if age_days < max_age_days:
-                print(f"   [CACHE] Metadati {identifier} (eta: {age_days}d)")
+                print(f"[CACHE] Metadati {identifier} (eta: {age_days}d)")
                 return cached.get('data')
             else:
-                print(f"   [EXPIRED] Metadati {identifier} (eta: {age_days}d)")
+                print(f"[EXPIRED] Metadati {identifier} (eta: {age_days}d)")
                 del self.ia_cache[cache_key]
 
         return None
@@ -137,7 +137,7 @@ class CacheManager:
         old_hash = self.get_file_hash(file_path)
 
         if old_hash is None:
-            print(f"   [NEW] Prima volta: {file_path.name}")
+            print(f"[NEW] Prima volta: {file_path.name}")
             # FIX BUG D: salva l'hash anche alla prima esecuzione, così se lo
             # script si interrompe prima della fine, la prossima esecuzione
             # non considererà di nuovo tutto "cambiato".
@@ -145,11 +145,11 @@ class CacheManager:
             return True
 
         if new_hash != old_hash:
-            print(f"   [CHANGED] Modificato: {file_path.name}")
+            print(f"[CHANGED] Modificato: {file_path.name}")
             self.set_file_hash(file_path, new_hash)
             return True
 
-        print(f"   [OK] Invariato: {file_path.name}")
+        print(f"[OK] Invariato: {file_path.name}")
         return False
 
     # ============================================================
@@ -197,7 +197,7 @@ class CacheManager:
         if doc_ids is None:
             self.metadata_cache = {}
             self._save_json(self.metadata_cache_file, self.metadata_cache)
-            print("   [CLEAN] Cache metadati documenti svuotata")
+            print("[CLEAN] Cache metadati documenti svuotata")
             return
 
         rimossi = 0
@@ -208,7 +208,7 @@ class CacheManager:
                 rimossi += 1
 
         self._save_json(self.metadata_cache_file, self.metadata_cache)
-        print(f"   [CLEAN] Invalidati metadati per {rimossi}/{len(doc_ids)} documenti")
+        print(f"[CLEAN] Invalidati metadati per {rimossi}/{len(doc_ids)} documenti")
 
     # ============================================================
     # CACHE PULIZIA
@@ -218,7 +218,7 @@ class CacheManager:
         """Svuota cache Internet Archive."""
         self.ia_cache = {}
         self._save_json(self.ia_cache_file, self.ia_cache)
-        print("   [CLEAN] Cache IA svuotata")
+        print("[CLEAN] Cache IA svuotata")
 
     def clear_ia_metadata(self, identifiers=None):
         """
@@ -252,7 +252,7 @@ class CacheManager:
                 rimossi += 1
 
         self._save_json(self.ia_cache_file, self.ia_cache)
-        print(f"   [CLEAN] Invalidate {rimossi} voci di cache per {len(identifiers)} identifier IA")
+        print(f"[CLEAN] Invalidate {rimossi} voci di cache per {len(identifiers)} identifier IA")
 
     def clear_all(self):
         """Svuota tutto il cache."""
@@ -262,11 +262,11 @@ class CacheManager:
         self._save_json(self.metadata_cache_file, self.metadata_cache)
         self._save_json(self.ia_cache_file, self.ia_cache)
         self._save_json(self.hashes_file, self.file_hashes)
-        print("   [CLEAN] Cache completamente svuotato")
+        print("[CLEAN] Cache completamente svuotato")
 
     def print_stats(self):
         """Stampa statistiche cache."""
         print("\n[STATS] Statistiche cache:")
-        print(f"   - Metadati IA: {len(self.ia_cache)} entries")
-        print(f"   - File tracciati: {len(self.file_hashes)} entries")
-        print(f"   - Documenti: {len(self.metadata_cache)} entries")
+        print(f"- Metadati IA: {len(self.ia_cache)} entries")
+        print(f"- File tracciati: {len(self.file_hashes)} entries")
+        print(f"- Documenti: {len(self.metadata_cache)} entries")

@@ -26,11 +26,11 @@ def carica_soggetti(data_dir):
                     'morte': str(row.get('morte', '')).strip(),
                     'cognome': str(row.get('cognome', '')).strip()
                 }
-        print(f"   ✅ Caricate {len(persone)} persone dal foglio 'Persone' di dati.xlsx")
+        print(f"Caricate {len(persone)} persone dal foglio 'Persone' di dati.xlsx")
     except FileNotFoundError:
-        print("   ⚠️ File data/dati.xlsx non trovato. Le persone non saranno linkate.")
+        print("File data/dati.xlsx non trovato. Le persone non saranno linkate.")
     except Exception as e:
-        print(f"   ⚠️ Errore durante il caricamento del foglio 'Persone' in dati.xlsx: {e}")
+        print(f"Errore durante il caricamento del foglio 'Persone' in dati.xlsx: {e}")
     
     try:
         org_path = os.path.join(data_dir, 'dati.xlsx')
@@ -45,11 +45,11 @@ def carica_soggetti(data_dir):
                     'categoria': str(row.get('categoria', '')).strip(),
                     'fondazione': str(row.get('fondazione', '')).strip()
                 }
-        print(f"   ✅ Caricate {len(organizzazioni)} organizzazioni dal foglio 'Organizzazioni' di dati.xlsx")
+        print(f"Caricate {len(organizzazioni)} organizzazioni dal foglio 'Organizzazioni' di dati.xlsx")
     except FileNotFoundError:
-        print("   ⚠️ File data/dati.xlsx non trovato. Le organizzazioni non saranno linkate.")
+        print("File data/dati.xlsx non trovato. Le organizzazioni non saranno linkate.")
     except Exception as e:
-        print(f"   ⚠️ Errore durante il caricamento del foglio 'Organizzazioni' in dati.xlsx: {e}")
+        print(f"Errore durante il caricamento del foglio 'Organizzazioni' in dati.xlsx: {e}")
     
     return persone, organizzazioni
 
@@ -102,7 +102,7 @@ def genera_json_soggetti(persone, organizzazioni, output_dir):
     """Esporta persone e organizzazioni in un JSON, usato dalla ricerca
     istantanea nella home (hero-search.js) per suggerire anche schede
     di persone/organizzazioni, non solo documenti."""
-    print("\n👤 Generazione del JSON di persone e organizzazioni (per la ricerca)...")
+    print("\nGenerazione del JSON di persone e organizzazioni (per la ricerca)...")
 
     persone_json = []
     for nome, info in persone.items():
@@ -133,4 +133,4 @@ def genera_json_soggetti(persone, organizzazioni, output_dir):
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-    print(f"   ✅ soggetti.json generato con {len(persone_json)} persone e {len(organizzazioni_json)} organizzazioni.")
+    print(f"soggetti.json generato con {len(persone_json)} persone e {len(organizzazioni_json)} organizzazioni.")

@@ -4,7 +4,7 @@ from datetime import datetime
 
 from .cache_manager import CacheManager
 
-# ✨ Inizializza cache globale
+# Inizializza cache globale
 _cache_manager = None
 
 
@@ -45,7 +45,7 @@ def formatta_data(data_str):
             5: 'maggio', 6: 'giugno', 7: 'luglio', 8: 'agosto',
             9: 'settembre', 10: 'ottobre', 11: 'novembre', 12: 'dicembre'}
 
-    # 🔥 SOLO MESE/ANNO scritto come testo puro (es. "10/1967" o "1967-10"):
+    # SOLO MESE/ANNO scritto come testo puro (es. "10/1967" o "1967-10"):
     # va riconosciuto ESPLICITAMENTE prima del parsing con strptime, perche'
     # altrimenti nessun formato della lista sottostante corrisponde e il
     # valore verrebbe mostrato grezzo senza essere formattato ne' ordinato
@@ -95,7 +95,7 @@ def split_nomi(nomi_str):
 def scarica_descrizione_ia(identifier):
     """
     Scarica descrizione da Internet Archive, con cache.
-    ✨ NUOVO: Usa CacheManager per evitare download ripetuti
+    NUOVO: Usa CacheManager per evitare download ripetuti
     """
     if not identifier:
         return None
@@ -129,7 +129,7 @@ def scarica_descrizione_ia(identifier):
                 return desc.strip()
 
     except Exception as e:
-        print(f"   ⚠️ Errore scaricando descrizione per {identifier}: {e}")
+        print(f"Errore scaricando descrizione per {identifier}: {e}")
 
     return None
 
@@ -137,7 +137,7 @@ def scarica_descrizione_ia(identifier):
 def scarica_testo_ia(identifier, nome_file=None):
     """
     Scarica testo da Internet Archive, con cache.
-    ✨ NUOVO: Cache dei download testuali
+    NUOVO: Cache dei download testuali
     """
     if not identifier:
         return None
@@ -151,7 +151,7 @@ def scarica_testo_ia(identifier, nome_file=None):
     # 1. Controlla cache
     cached_text = cache_mgr.ia_cache.get(f"ia_text_{cache_key}")
     if cached_text:
-        print(f"   💾 Cache: testo {identifier}/{nome_file}")
+        print(f"Cache: testo {identifier}/{nome_file}")
         return cached_text.get('data')
 
     # 2. Download
@@ -172,10 +172,10 @@ def scarica_testo_ia(identifier, nome_file=None):
 
             return testo
         else:
-            print(f"   ⚠️ Testo non trovato per {identifier} ({response.status_code})")
+            print(f"Testo non trovato per {identifier} ({response.status_code})")
 
     except Exception as e:
-        print(f"   ⚠️ Errore scaricando testo per {identifier}: {e}")
+        print(f"Errore scaricando testo per {identifier}: {e}")
 
     return None
 
