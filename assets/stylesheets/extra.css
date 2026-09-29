@@ -3,6 +3,10 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 ============================================================ */
 :root {
   --ami-header-height: 80px;
+  /* Token skeleton lazy-loading (usati anche da lazy-loading.js via
+     getComputedStyle: unica fonte dei valori grafici) */
+  --ami-skeleton-bg: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  --ami-skeleton-radius: 4px;
 }
 
 /* ------------------------------------------------------------
@@ -1025,15 +1029,6 @@ archivio-filtri.js), senza più stili inline Word */
     }
 }
 
-@keyframes skeleton-pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.6;
-    }
-}
-
 /* ==========================================================================
    SKELETON PLACEHOLDER BASE
    ========================================================================== */
@@ -1041,17 +1036,12 @@ archivio-filtri.js), senza più stili inline Word */
 .lazy-skeleton {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background: var(--ami-skeleton-bg);
     background-size: 200% 100%;
     animation: skeleton-loading 1.5s infinite;
-    border-radius: 4px;
+    border-radius: var(--ami-skeleton-radius);
     display: inline-block;
     vertical-align: middle;
-}
-
-/* Variante con pulse più sottile */
-.lazy-skeleton.pulse {
-    animation: skeleton-pulse 2s ease-in-out infinite;
 }
 
 /* ==========================================================================
@@ -1095,25 +1085,17 @@ archivio-filtri.js), senza più stili inline Word */
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background: linear-gradient(90deg, #f5f5f5 25%, #e8e8e8 50%, #f5f5f5 75%);
 }
 
 /* ==========================================================================
    CONTESTI SPECIFICI - ARCHIVIO/GALLERIA
    ========================================================================== */
 
-/* Card documento nell'archivio */
+/* Card documento nell'archivio (classe usata da archivio-filtri.js) */
 .archive-card .lazy-skeleton {
     width: 100%;
     padding-top: 66%; /* Aspect ratio 3:2 */
     border-radius: 6px;
-}
-
-/* Galleria immagini */
-.gallery-item .lazy-skeleton {
-    width: 100%;
-    height: 200px;
-    border-radius: 8px;
 }
 
 /* Documenti in evidenza (home) */
@@ -1122,16 +1104,6 @@ archivio-filtri.js), senza più stili inline Word */
     height: 100% !important;
     border-radius: 8px;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-}
-
-/* Grid layout skeletons */
-.skeleton-grid {
-    display: grid;
-    gap: 1rem;
-}
-
-.skeleton-grid .lazy-skeleton {
-    background: linear-gradient(90deg, #f8f8f8 25%, #ececec 50%, #f8f8f8 75%);
 }
 
 /* ==========================================================================
