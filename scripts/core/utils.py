@@ -58,6 +58,12 @@ def formatta_data(data_str):
             return f"{mesi[mese]} {anno}", (anno, mese, 1)
 
     try:
+        # NOTA sull'ordine dei formati: %m/%d/%Y e' volutamente per ULTIMO.
+        # Il data entry del catalogo segue la convenzione italiana gg/mm/aaaa,
+        # quindi %d/%m/%Y deve avere priorita'. %m/%d/%Y resta solo come
+        # fallback estremo (es. date esportate da fonti anglofone) per i casi
+        # non parsabili in nessun altro modo; su date ambigue (entrambi i
+        # numeri <= 12) la lettura resta comunque quella italiana.
         for fmt in ['%Y-%m-%d %H:%M:%S', '%Y-%m-%d', '%Y-%m', '%d/%m/%Y %H:%M:%S', '%d/%m/%Y', '%m/%d/%Y']:
             try:
                 dt = datetime.strptime(data_str, fmt)
@@ -67,14 +73,14 @@ def formatta_data(data_str):
                     return f"{mesi[dt.month]} {dt.year}", (dt.year, dt.month, 1)
             except ValueError:
                 continue
-    except:
+    except Exception:
         pass
 
     try:
         if isinstance(data_str, (int, float)):
             dt = datetime.fromordinal(datetime(1900, 1, 1).toordinal() + int(data_str) - 2)
             return f"{dt.day} {mesi[dt.month]} {dt.year}", (dt.year, dt.month, dt.day)
-    except:
+    except Exception:
         pass
 
     return data_str, (9999, 1, 1)

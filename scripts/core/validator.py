@@ -484,11 +484,20 @@ class AdvancedValidator:
                     self.result.add_info(f"Colonna '{col}': {mask_spazi.sum()} valori sono solo spazi bianchi")
 
         # Controllo placeholder text
+        # NOTA: regex=False perche' i pattern sono stringhe letterali. Senza,
+        # '??' viene interpretato come regex (? quantificatore senza antecedente)
+        # e str.contains solleva "re.error: nothing to repeat at position 0",
+        # facendo fallire l'intera validazione. 'N/D' richiede inoltre match
+        # esatto (case-insensitive): il semplice contains intercetterebbe anche
+        # parole legittime che contengono la sequenza (es. URL o sigle).
         placeholder_patterns = ['TODO', 'DA FARE', 'INSERIRE', '??', 'N/D']
         for col in df.columns:
             if df[col].dtype == object:
                 for pattern in placeholder_patterns:
-                    mask = df[col].str.contains(pattern, case=False, na=False)
+                    if pattern == 'N/D':
+                        mask = df[col].str.strip().str.lower().eq('n/d')
+                    else:
+                        mask = df[col].str.contains(pattern, case=False, na=False, regex=False)
                     if mask.any():
                         self.result.add_warning(f"Colonna '{col}': trovati {mask.sum()} placeholder '{pattern}'")
 

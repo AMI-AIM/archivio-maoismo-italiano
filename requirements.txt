@@ -1,3 +1,5 @@
 pandas
 openpyxl
+requests
+Pillow
 mkdocs-material
