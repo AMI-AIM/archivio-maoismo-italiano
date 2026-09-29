@@ -239,13 +239,18 @@ def genera_organizzazioni():
 
         # FIX: title/description del frontmatter YAML ora passano da
         # escape_yaml_string() (utils.py), stessa correzione di persone.py.
+        # FIX (regressione titolo): 'hide: - title' non e' una chiave valida
+        # del frontmatter MkDocs/Material. La pagina contiene gia' il proprio
+        # <h1 class="person-name">, quindi il titolo renderizzato dal tema va
+        # nascosto con la direttiva corretta 'hide_title: true'. Il valore
+        # errato impediva l'override della pagina e causava l'assenza del nome.
         frontmatter = f"""---
 title: "{escape_yaml_string(nome)}"
 description: "Documenti relativi a {escape_yaml_string(nome)}"
 hide:
   - navigation
   - toc
-  - title
+hide_title: true
 ---
 
 <link rel="stylesheet" href="{site_path('stylesheets/soggetti.css')}">

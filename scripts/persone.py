@@ -214,13 +214,18 @@ def genera_persone():
         # escape_yaml_string() (utils.py), che raddoppia backslash e
         # virgolette: un nome con una virgolette doppia avrebbe altrimenti
         # rotto il parsing YAML della pagina.
+        # FIX (regressione titolo): 'hide: - title' non e' una chiave valida
+        # del frontmatter MkDocs/Material. La pagina contiene gia' il proprio
+        # <h1 class="person-name">, quindi il titolo renderizzato dal tema va
+        # nascosto con la direttiva corretta 'hide_title: true'. Il valore
+        # errato impediva l'override della pagina e causava l'assenza del nome.
         frontmatter = f"""---
 title: "{escape_yaml_string(nome)}"
 description: "Scheda biografica e documenti di {escape_yaml_string(nome)}"
 hide:
   - navigation
   - toc
-  - title
+hide_title: true
 ---
 
 <link rel="stylesheet" href="{site_path('stylesheets/soggetti.css')}">
