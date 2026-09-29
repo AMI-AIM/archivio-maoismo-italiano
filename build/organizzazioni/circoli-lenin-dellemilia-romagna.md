@@ -4,7 +4,7 @@ description: "Documenti relativi a Circoli Lenin dell'Emilia Romagna"
 hide:
   - navigation
   - toc
-  - title
+hide_title: true
 ---
 
 <link rel="stylesheet" href="/archivio-maoismo-italiano/stylesheets/soggetti.css">

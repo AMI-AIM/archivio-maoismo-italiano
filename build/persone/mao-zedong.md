@@ -4,7 +4,7 @@ description: "Scheda biografica e documenti di Mao Zedong"
 hide:
   - navigation
   - toc
-  - title
+hide_title: true
 ---
 
 <link rel="stylesheet" href="/archivio-maoismo-italiano/stylesheets/soggetti.css">

@@ -4,7 +4,7 @@ description: "Documenti relativi a Lavoro Politico"
 hide:
   - navigation
   - toc
-  - title
+hide_title: true
 ---
 
 <link rel="stylesheet" href="/archivio-maoismo-italiano/stylesheets/soggetti.css">

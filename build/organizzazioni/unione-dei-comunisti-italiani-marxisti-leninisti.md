@@ -4,7 +4,7 @@ description: "Documenti relativi a Unione dei Comunisti Italiani (marxisti-lenin
 hide:
   - navigation
   - toc
-  - title
+hide_title: true
 ---
 
 <link rel="stylesheet" href="/archivio-maoismo-italiano/stylesheets/soggetti.css">
