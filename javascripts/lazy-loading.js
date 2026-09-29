@@ -52,8 +52,8 @@
     // Lo skeleton riceve SOLO la classe e le dimensioni intrinseche
     // dell'immagine (valori specifici per istanza, non espressibili in
     // CSS statico). Colori, gradient, animazione e arrotondamento - sia i
-    // default globali sia le varianti della home (es. grigio scuro
-    // body:first-of-type .lazy-skeleton) - sono delegati interamente alle
+    // default globali sia la variante della home (grigio scuro via
+    // body:has(.banner-content-home) .lazy-skeleton) - sono delegati interamente alle
     // regole di extra.css: niente piu stili inline hardcoded qui, che
     // vincevano contro qualunque regola CSS causando la regressione del
     // bianco sulla home.
