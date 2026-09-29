@@ -252,7 +252,13 @@ hide:
 }
 
 /* ------------------------------------------------------------
-   BANNER
+   BANNER — NOTA: le regole banner-* complete (base + responsive)
+   vivono in stylesheets/extra.css (sezioni 6 e 8), che viene
+   caricato dopo il <style> inline di questa pagina. Qui sotto
+   restano solo i duplicati di sicurezza, resi vincolanti con
+   !important (l'HTML del banner usa style attribute inline).
+   Consolidamento definitivo: migrazione a extra.css alla prima
+   revisione grafica (vedi scripts/CONVENZIONI.md).
 ------------------------------------------------------------ */
 .banner-full {
   position: relative;
@@ -504,21 +510,21 @@ hide:
 }
 
 /* ------------------------------------------------------------
-   SKELETON HOME - grigio scuro solido (no gradient)
+   SKELETON HOME - grigio chiaro solido (no gradient/animazione),
+   coerente con lo sfondo bianco delle card "in evidenza".
+   Nota: il selettore .home-page non esiste nel markup ed e stato
+   rimosso; body:first-of-type e l'unico aggancio reale alla home.
 ------------------------------------------------------------ */
-.home-page .lazy-skeleton,
 body:first-of-type .lazy-skeleton {
-  background: #2d2d2d !important;
+  background: #ececec !important;
   background-image: none !important;
   animation: none !important;
   border-radius: 4px;
 }
 
 /* Per la sezione documenti in evidenza specificamente */
-.home-page .evidenza-thumbnail .lazy-skeleton,
 body:first-of-type .evidenza-thumbnail .lazy-skeleton {
-  background: #1a1a1a !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  background: #f0f0f0 !important;
 }
 
 /* ------------------------------------------------------------
@@ -683,16 +689,19 @@ body:first-of-type .evidenza-thumbnail .lazy-skeleton {
     font-size: 0.8rem;
   }
 
+  /* Nota: i selettori banner-* hanno style inline nell'HTML della home,
+     quindi qui servono !important per vincerli (in extra.css la stessa
+     regola era senza !important ed era di fatto inerte). */
   .banner-full {
-    height: 240px;
-    min-height: 200px;
-    overflow: hidden;
+    height: 240px !important;
+    min-height: 200px !important;
+    overflow: hidden !important;
   } 
   .banner-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
   }
   .banner-content[style] {
     bottom: 0.3rem !important;
@@ -701,8 +710,11 @@ body:first-of-type .evidenza-thumbnail .lazy-skeleton {
     max-width: none !important;
     padding: 0.3rem 0.6rem !important;
   }
+  /* Valore allineato a extra.css (469): la duplicazione dei blocchi
+     banner responsive e in via di consolidamento, ma finche entrambe
+     le fonti esistono non devono divergere. */
   .banner-content p[style] {
-    font-size: 0.85rem !important;
+    font-size: 0.8rem !important;
     margin: 0 0 0.3rem 0 !important;
     line-height: 1.3 !important;
   }
@@ -775,11 +787,11 @@ body:first-of-type .evidenza-thumbnail .lazy-skeleton {
     max-height: 150px !important;
   }
   .banner-full {
-    height: 180px;
-    min-height: 150px;
+    height: 180px !important;
+    min-height: 150px !important;
   }
   .banner-content p[style] {
-    font-size: 0.75rem !important;
+    font-size: 0.7rem !important;
   }
   .banner-button[style] {
     padding: 0.2rem 0.6rem !important;

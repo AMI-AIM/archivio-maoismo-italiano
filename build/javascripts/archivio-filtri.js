@@ -57,7 +57,7 @@ function tronca(testo, max) {
 
 async function caricaDati() {
     try {
-        // 🔥 CARICAMENTO COMPLETO: ignora il lazy loader e carica tutti i documenti subito
+        // CARICAMENTO COMPLETO: ignora il lazy loader e carica tutti i documenti subito
         const response = await fetch(`${baseUrl}/documenti.json`);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = await response.json();
@@ -318,7 +318,7 @@ function inizializzaFiltri() {
     minLabel.textContent = annoMin;
     maxLabel.textContent = annoMax;
 
-    // 🔥 ISTOGRAMMA: va costruito DOPO aver fissato annoMin/annoMax,
+    // ISTOGRAMMA: va costruito DOPO aver fissato annoMin/annoMax,
     // e PRIMA di aggiornaTrackSlider() (che evidenzia le barre nel range).
     costruisciIstogramma();
     
@@ -472,10 +472,10 @@ function calcolaRisultati() {
 }
 
 function applicaFiltri() {
-    currentPage = 1; // 🔥 Reset pagina alla prima quando i filtri cambiano
+    currentPage = 1; // Reset pagina alla prima quando i filtri cambiano
     mostraRisultati(calcolaRisultati());
-    renderFiltriAttivi(); // 🔥 Aggiorna la riga di chip riepilogo filtri
-    aggiornaURLFiltri();  // 🔥 Riflette lo stato corrente dei filtri nell'URL
+    renderFiltriAttivi(); // Aggiorna la riga di chip riepilogo filtri
+    aggiornaURLFiltri();  // Riflette lo stato corrente dei filtri nell'URL
 }
 
 function getSelectedValues(id) {
@@ -648,7 +648,7 @@ function mostraRisultati(risultati) {
     const end = Math.min(start + DOCS_PER_PAGE, totale);
     const paginaCorrente = risultati.slice(start, end);
     
-    // Aggiorna conteggio - 🔥 RIMOSSO "tra X di Y caricati"
+    // Aggiorna conteggio - RIMOSSO "tra X di Y caricati"
     if (conteggio) {
         conteggio.textContent = `${totale} documenti (pagina ${currentPage} di ${totalPages})`;
     }
@@ -689,7 +689,7 @@ function mostraRisultati(risultati) {
     
     container.innerHTML = html;
     
-    // Genera paginazione - 🔥 RIMOSSO BOTTONE "CARICA ALTRI DOCUMENTI"
+    // Genera paginazione - RIMOSSO BOTTONE "CARICA ALTRI DOCUMENTI"
     if (paginazioneContainer) {
         generaIterfacciaPaginazione(paginazioneContainer, currentPage, totalPages);
         // Bottone "Carica altri documenti" rimosso: tutti i documenti sono già caricati

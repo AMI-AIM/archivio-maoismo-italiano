@@ -3,6 +3,10 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 ============================================================ */
 :root {
   --ami-header-height: 80px;
+  /* Token skeleton lazy-loading (usati anche da lazy-loading.js via
+     getComputedStyle: unica fonte dei valori grafici) */
+  --ami-skeleton-bg: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  --ami-skeleton-radius: 4px;
 }
 
 /* ------------------------------------------------------------
@@ -447,17 +451,20 @@ STILE PERSONALIZZATO — TEMA MATERIAL
     position: relative;
     z-index: 1;
   }
+  /* Allineato ai duplicati vincolanti in home.py (i selettori
+     banner-* hanno style attribute inline: senza !important queste
+     regole erano inerti). */
   .banner-full {
-    margin-bottom: 0;
-    height: 240px;
-    min-height: 200px;
-    overflow: hidden;
+    margin-bottom: 0 !important;
+    height: 240px !important;
+    min-height: 200px !important;
+    overflow: hidden !important;
   }
   .banner-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
   }
   .banner-content[style] {
     bottom: 0.3rem !important;
@@ -648,8 +655,8 @@ STILE PERSONALIZZATO — TEMA MATERIAL
     max-width: 120px;
   }
   .banner-full {
-    height: 180px;
-    min-height: 150px;
+    height: 180px !important;
+    min-height: 150px !important;
   }
   .banner-content p[style] {
     font-size: 0.7rem !important;
@@ -1022,15 +1029,6 @@ archivio-filtri.js), senza più stili inline Word */
     }
 }
 
-@keyframes skeleton-pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.6;
-    }
-}
-
 /* ==========================================================================
    SKELETON PLACEHOLDER BASE
    ========================================================================== */
@@ -1038,17 +1036,12 @@ archivio-filtri.js), senza più stili inline Word */
 .lazy-skeleton {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background: var(--ami-skeleton-bg);
     background-size: 200% 100%;
     animation: skeleton-loading 1.5s infinite;
-    border-radius: 4px;
+    border-radius: var(--ami-skeleton-radius);
     display: inline-block;
     vertical-align: middle;
-}
-
-/* Variante con pulse più sottile */
-.lazy-skeleton.pulse {
-    animation: skeleton-pulse 2s ease-in-out infinite;
 }
 
 /* ==========================================================================
@@ -1080,38 +1073,13 @@ archivio-filtri.js), senza più stili inline Word */
     border-radius: 8px;
 }
 
-/* Immagini small (thumbnail) */
-.doc-thumbnail .lazy-skeleton {
-    width: 120px;
-    height: 160px;
-    border-radius: 4px;
-}
-
-/* Immagini profilo soggetti */
-.subject-avatar .lazy-skeleton {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: linear-gradient(90deg, #f5f5f5 25%, #e8e8e8 50%, #f5f5f5 75%);
-}
+/* Nota: i contesti doc-thumbnail / subject-avatar / archive-card non sono
+   mai presenti nel markup generato (le card archivio usano .risultato-card,
+   che non contiene skeleton) ed erano codice morto: rimossi. */
 
 /* ==========================================================================
-   CONTESTI SPECIFICI - ARCHIVIO/GALLERIA
+   CONTESTI SPECIFICI - HOME
    ========================================================================== */
-
-/* Card documento nell'archivio */
-.archive-card .lazy-skeleton {
-    width: 100%;
-    padding-top: 66%; /* Aspect ratio 3:2 */
-    border-radius: 6px;
-}
-
-/* Galleria immagini */
-.gallery-item .lazy-skeleton {
-    width: 100%;
-    height: 200px;
-    border-radius: 8px;
-}
 
 /* Documenti in evidenza (home) */
 .evidenza-thumbnail .lazy-skeleton {
@@ -1119,16 +1087,6 @@ archivio-filtri.js), senza più stili inline Word */
     height: 100% !important;
     border-radius: 8px;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-}
-
-/* Grid layout skeletons */
-.skeleton-grid {
-    display: grid;
-    gap: 1rem;
-}
-
-.skeleton-grid .lazy-skeleton {
-    background: linear-gradient(90deg, #f8f8f8 25%, #ececec 50%, #f8f8f8 75%);
 }
 
 /* ==========================================================================
@@ -1152,25 +1110,10 @@ archivio-filtri.js), senza più stili inline Word */
     font-weight: 500;
 }
 
-/* ==========================================================================
-   DARK MODE SUPPORT (MkDocs Material)
-   ========================================================================== */
-
-[data-md-color-scheme="slate"] .lazy-skeleton {
-    background: linear-gradient(90deg, #2d2d2d 25%, #3a3a3a 50%, #2d2d2d 75%);
-}
-
-[data-md-color-scheme="slate"] .skeleton-grid .lazy-skeleton {
-    background: linear-gradient(90deg, #333 25%, #404040 50%, #333 75%);
-}
-
-[data-md-color-scheme="slate"] .lazy-skeleton.error-state {
-    background: #3a1c1c;
-}
-
-[data-md-color-scheme="slate"] .lazy-skeleton.error-state::after {
-    color: #ef5350;
-}
+/* Nota: il supporto dark mode (selettori [data-md-color-scheme="slate"]) e'
+   stato rimosso perche' il sito e' intenzionalmente solo light mode
+   (mkdocs.yml fissa scheme: default e non espone toggle). Rimossi anche i
+   selettori orfani .skeleton-grid e .gallery-item (classi mai generate). */
 
 /* ==========================================================================
    RESPONSIVE
@@ -1179,10 +1122,6 @@ archivio-filtri.js), senza più stili inline Word */
 @media (max-width: 768px) {
     .photo-viewer .lazy-skeleton {
         min-height: 200px;
-    }
-
-    .gallery-item .lazy-skeleton {
-        height: 150px;
     }
 }
 
@@ -1196,52 +1135,6 @@ archivio-filtri.js), senza più stili inline Word */
         animation: none;
         background: #e0e0e0;
     }
-
-    [data-md-color-scheme="slate"] .lazy-skeleton {
-        background: #3a3a3a;
-    }
-}
-
-/* ==========================================================================
-   UTILITY CLASSES
-   ========================================================================== */
-
-/* Forza aspect ratio specifico */
-.lazy-skeleton.aspect-16-9 {
-    padding-top: 56.25%;
-    height: 0;
-}
-
-.lazy-skeleton.aspect-4-3 {
-    padding-top: 75%;
-    height: 0;
-}
-
-.lazy-skeleton.aspect-1-1 {
-    padding-top: 100%;
-    height: 0;
-}
-
-.lazy-skeleton.aspect-3-4 {
-    padding-top: 133.33%;
-    height: 0;
-}
-
-/* Larghezze predefinite */
-.lazy-skeleton.w-small {
-    width: 150px;
-}
-
-.lazy-skeleton.w-medium {
-    width: 300px;
-}
-
-.lazy-skeleton.w-large {
-    width: 600px;
-}
-
-.lazy-skeleton.w-full {
-    width: 100%;
 }
 
 /* ==========================================================================
