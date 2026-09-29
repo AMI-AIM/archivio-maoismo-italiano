@@ -6,7 +6,6 @@ import sys
 from datetime import datetime
 
 import pandas as pd
-
 from core.argomenti import (
     build_argomenti_index,
     find_topic_column,

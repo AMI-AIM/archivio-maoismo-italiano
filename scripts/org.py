@@ -5,7 +5,6 @@ import os
 import sys
 
 import pandas as pd
-
 from core.catalog_indexer import CatalogIndexer
 from core.schema_generator import SchemaGenerator
 from core.site_config import site_path

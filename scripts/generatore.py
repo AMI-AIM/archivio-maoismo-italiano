@@ -2,7 +2,6 @@ import os
 from datetime import datetime
 
 import pandas as pd
-
 from core.archivio import genera_indice
 from core.home import genera_home
 from core.json_export import genera_json
