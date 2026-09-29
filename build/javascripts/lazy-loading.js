@@ -49,14 +49,14 @@
    * Crea elemento skeleton placeholder
    */
   function createSkeleton(img) {
-    // Nota: qui lo stile inline e necessario perche lo skeleton viene
-    // creato a runtime dopo il CSS: le regole di extra.css (.lazy-skeleton)
-    // hanno specificita inferiore rispetto a style="" quando JS deve
-    // sovrascrivere stati dinamici (es. errore). Per la grafica statica
-    // (gradient/animazione/arrotondamento) si fa comunque riferimento alle
-    // variabili CSS definite in :root dentro extra.css, cosi i valori sono
-    // regolati da un'unica fonte.
-    const css = getComputedStyle(document.documentElement);
+    // Lo skeleton riceve SOLO la classe e le dimensioni intrinseche
+    // dell'immagine (valori specifici per istanza, non espressibili in
+    // CSS statico). Colori, gradient, animazione e arrotondamento - sia i
+    // default globali sia la variante della home (grigio scuro via
+    // body:has(.banner-content-home) .lazy-skeleton) - sono delegati interamente alle
+    // regole di extra.css: niente piu stili inline hardcoded qui, che
+    // vincevano contro qualunque regola CSS causando la regressione del
+    // bianco sulla home.
     const skeleton = document.createElement('div');
     skeleton.className = CONFIG.skeletonClass;
 
@@ -65,14 +65,6 @@
     const height = img.getAttribute('height') || img.offsetHeight || '200px';
     skeleton.style.width = typeof width === 'number' ? width + 'px' : width;
     skeleton.style.height = typeof height === 'number' ? height + 'px' : height;
-    skeleton.style.display = 'inline-block';
-    skeleton.style.verticalAlign = 'middle';
-    skeleton.style.background = css.getPropertyValue('--ami-skeleton-bg').trim()
-      || 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)';
-    skeleton.style.backgroundSize = '200% 100%';
-    skeleton.style.animation = 'skeleton-loading 1.5s infinite';
-    skeleton.style.borderRadius = img.style.borderRadius
-      || css.getPropertyValue('--ami-skeleton-radius').trim() || '4px';
     return skeleton;
   }
 
@@ -196,15 +188,12 @@
       return;
     }
 
-    // Fallback generico: skeleton con messaggio di errore (classe CSS in
-    // extra.css - .lazy-skeleton.error-state - perche l'elemento e gia nel
-    // DOM quando scatta l'errore, quindi le regole esterne si applicano).
+    // Fallback generico: skeleton con messaggio di errore (classi CSS in
+    // extra.css - .lazy-skeleton.error-state e il suo display:flex, perche
+    // l'elemento e gia nel DOM quando scatta l'errore, quindi le regole
+    // esterne si applicano senza bisogno di stili inline).
     if (hasSkeleton) {
       skeleton.classList.add('error-state');
-      skeleton.style.display = 'flex';
-      skeleton.style.alignItems = 'center';
-      skeleton.style.justifyContent = 'center';
-      skeleton.style.textAlign = 'center';
       skeleton.innerHTML = '';
     }
 
@@ -267,31 +256,11 @@
    * Inizializza sistema lazy loading
    */
   function init() {
-    // Aggiungi CSS per animazioni se non esiste
-    if (!document.getElementById('lazy-load-styles')) {
-      const style = document.createElement('style');
-      style.id = 'lazy-load-styles';
-      style.textContent = `
-        @keyframes skeleton-loading {
-          0% { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
-        .lazy-skeleton {
-          position: relative;
-          overflow: hidden;
-        }
-        .lazy-img {
-          transition: opacity 300ms ease-in-out;
-        }
-        .lazy-img.lazy-loaded {
-          /* Immagine completamente caricata */
-        }
-        .lazy-img.lazy-error {
-          /* Gestione errore - immagine nascosta */
-        }
-      `;
-      document.head.appendChild(style);
-    }
+    // Nota: prima qui veniva iniettato un <style> duplicato (keyframes +
+    // regole base skeleton) a copertura dei vecchi stili inline del JS. Ora
+    // createSkeleton() applica solo classe e dimensioni, quindi le regole
+    // statiche di extra.css (.lazy-skeleton, @keyframes skeleton-loading,
+    // varianti home) sono l'unica fonte: niente CSS duplicato a runtime.
 
     // Usa native lazy load se disponibile, altrimenti IntersectionObserver
     if (hasNativeLazyLoad) {
