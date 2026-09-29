@@ -3,8 +3,10 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 ============================================================ */
 :root {
   --ami-header-height: 80px;
-  /* Token skeleton lazy-loading (usati anche da lazy-loading.js via
-     getComputedStyle: unica fonte dei valori grafici) */
+  /* Token skeleton lazy-loading: unica fonte dei valori grafici degli
+     skeleton creati da lazy-loading.js (che non applica piu stili inline
+     propri; la variante home scura e definita nella sezione
+     "CONTESTI SPECIFICI - HOME" in fondo al file). */
   --ami-skeleton-bg: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   --ami-skeleton-radius: 4px;
 }
@@ -1089,18 +1091,44 @@ archivio-filtri.js), senza più stili inline Word */
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
 }
 
+/* Skeleton HOME: grigio scuro solido (no gradient/animazione), deciso dal
+   manutentore per ridurre il contrasto sulla home. Il selettore
+   body:first-of-type e l'unico aggancio reale alla home (.home-page non
+   esiste nel markup). Regole migrate qui dall'inline di core/home.py:
+   extra.css viene caricato dopo il <style> inline della pagina, quindi
+   queste regole vincono comunque; gli !important sono mantenuti come rete
+   di sicurezza contro eventuali stili inline del JS. */
+body:first-of-type .lazy-skeleton {
+    background: #2b2b2b !important;
+    background-image: none !important;
+    animation: none !important;
+    border-radius: 4px;
+}
+
+/* Coerente col sopra: anche le thumbnail "in evidenza" usano il grigio scuro
+   (prima era un #f0f0f0 chiaro divergente definito nell'inline di home.py). */
+body:first-of-type .evidenza-thumbnail .lazy-skeleton {
+    background: #2b2b2b !important;
+}
+
 /* ==========================================================================
    ERROR STATE
    ========================================================================== */
 
 .lazy-skeleton.error-state {
-    background: #ffebee;
-    animation: none;
+    background: #ffebee !important;
+    animation: none !important;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 1rem;
+}
+
+/* Priorita' sul grigio scuro della home (body:first-of-type, specificita
+   pari): lo stato di errore deve restare visibile su tutte le pagine. */
+body:first-of-type .lazy-skeleton.error-state {
+    background: #ffebee !important;
 }
 
 .lazy-skeleton.error-state::after {
