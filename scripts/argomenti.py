@@ -203,11 +203,9 @@ def generate_single_page(item):
     fm.append('---')
     fm.append(f'title: {yaml_string(label)}')
     fm.append(f'description: {yaml_string(description)}')
-    # FIX (regressione titolo): vedi commento in persone.py. La pagina ha il
-    # proprio <h1 class="person-name"> nel contenuto; senza chiave 'hide:'
-    # Material genera un h1 duplicato che viene nascosto al posto del nome
-    # dal selettore home.css 'h1:first-of-type'. Lista hide valida = nessun
-    # h1 auto-generato.
+    # FIX (regressione titolo): vedi commento esteso in persone.py (h1
+    # auto-generato senza 'hide:' valido + regola home.css prima globale,
+    # ora limitata alla home). Lista hide valida = nessun h1 auto-generato.
     fm.append('hide:')
     fm.append('  - navigation')
     fm.append('  - toc')
