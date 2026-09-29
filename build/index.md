@@ -10,7 +10,7 @@ hide:
 ---
 
 
-<div class="banner-full" style="margin-bottom: 0;">
+<div class="banner-full">
   <img src="/archivio-maoismo-italiano/immagini/banner.webp"
        alt="Archivio del Maoismo Italiano"
        class="banner-image">

@@ -203,14 +203,14 @@ def generate_single_page(item):
     fm.append('---')
     fm.append(f'title: {yaml_string(label)}')
     fm.append(f'description: {yaml_string(description)}')
-    # FIX (regressione titolo): 'hide: - title' non e' una chiave valida del
-    # frontmatter MkDocs/Material. La pagina contiene gia' il proprio
-    # <h1 class="person-name">, quindi il titolo renderizzato dal tema va
-    # nascosto con la direttiva corretta 'hide_title: true'.
+    # FIX (regressione titolo): vedi commento in persone.py. La pagina ha il
+    # proprio <h1 class="person-name"> nel contenuto; senza chiave 'hide:'
+    # Material genera un h1 duplicato che viene nascosto al posto del nome
+    # dal selettore home.css 'h1:first-of-type'. Lista hide valida = nessun
+    # h1 auto-generato.
     fm.append('hide:')
     fm.append('  - navigation')
     fm.append('  - toc')
-    fm.append('hide_title: true')
     fm.append('---')
     fm.append('')
 

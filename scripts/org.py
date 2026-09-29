@@ -239,18 +239,18 @@ def genera_organizzazioni():
 
         # FIX: title/description del frontmatter YAML ora passano da
         # escape_yaml_string() (utils.py), stessa correzione di persone.py.
-        # FIX (regressione titolo): 'hide: - title' non e' una chiave valida
-        # del frontmatter MkDocs/Material. La pagina contiene gia' il proprio
-        # <h1 class="person-name">, quindi il titolo renderizzato dal tema va
-        # nascosto con la direttiva corretta 'hide_title: true'. Il valore
-        # errato impediva l'override della pagina e causava l'assenza del nome.
+        # FIX (regressione titolo): vedi commento in persone.py. In assenza
+        # di chiave 'hide:' Material 9.x genera un h1 proprio che, insieme
+        # all'h1 custom '<h1 class="org-name">', finisce sotto il selettore
+        # home.css '.md-content article h1:first-of-type' (che nasconde il
+        # PRIMO dei due = il nome). La lista hide con sottovoci valide evita
+        # l'h1 auto-generato e mantiene visibile quello nel contenuto.
         frontmatter = f"""---
 title: "{escape_yaml_string(nome)}"
 description: "Documenti relativi a {escape_yaml_string(nome)}"
 hide:
   - navigation
   - toc
-hide_title: true
 ---
 
 <link rel="stylesheet" href="{site_path('stylesheets/soggetti.css')}">

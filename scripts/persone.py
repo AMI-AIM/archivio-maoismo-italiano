@@ -214,18 +214,23 @@ def genera_persone():
         # escape_yaml_string() (utils.py), che raddoppia backslash e
         # virgolette: un nome con una virgolette doppia avrebbe altrimenti
         # rotto il parsing YAML della pagina.
-        # FIX (regressione titolo): 'hide: - title' non e' una chiave valida
-        # del frontmatter MkDocs/Material. La pagina contiene gia' il proprio
-        # <h1 class="person-name">, quindi il titolo renderizzato dal tema va
-        # nascosto con la direttiva corretta 'hide_title: true'. Il valore
-        # errato impediva l'override della pagina e causava l'assenza del nome.
+        # FIX (regressione titolo): in Material 9.x, quando il frontmatter
+        # NON contiene alcuna chiave 'hide:', il tema inserisce un h1
+        # auto-generato ("Osvaldo Pesce") PRIMA del contenuto della pagina;
+        # l'h1 custom '<h1 class="person-name">' convive con esso e il
+        # selettore home.css '.md-content article h1:first-of-type' nasconde
+        # il PRIMO dei due, cioe' proprio il nome della persona.
+        # Mantenere 'hide:' con sottovoci valide (navigation/toc) attiva la
+        # modalita' 'content' di Material: nessun h1 auto-generato, resta
+        # solo quello nel contenuto. 'hide_title: true' era la forma usata
+        # nelle pagine index (che hanno '# Titolo' markdown), ma per le
+        # schede con HTML inline la soluzione uniforme e' la lista hide.
         frontmatter = f"""---
 title: "{escape_yaml_string(nome)}"
 description: "Scheda biografica e documenti di {escape_yaml_string(nome)}"
 hide:
   - navigation
   - toc
-hide_title: true
 ---
 
 <link rel="stylesheet" href="{site_path('stylesheets/soggetti.css')}">
