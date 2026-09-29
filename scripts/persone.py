@@ -214,17 +214,19 @@ def genera_persone():
         # escape_yaml_string() (utils.py), che raddoppia backslash e
         # virgolette: un nome con una virgolette doppia avrebbe altrimenti
         # rotto il parsing YAML della pagina.
-        # FIX (regressione titolo): in Material 9.x, quando il frontmatter
-        # NON contiene alcuna chiave 'hide:', il tema inserisce un h1
-        # auto-generato ("Osvaldo Pesce") PRIMA del contenuto della pagina;
-        # l'h1 custom '<h1 class="person-name">' convive con esso e il
-        # selettore home.css '.md-content article h1:first-of-type' nasconde
-        # il PRIMO dei due, cioe' proprio il nome della persona.
-        # Mantenere 'hide:' con sottovoci valide (navigation/toc) attiva la
-        # modalita' 'content' di Material: nessun h1 auto-generato, resta
-        # solo quello nel contenuto. 'hide_title: true' era la forma usata
-        # nelle pagine index (che hanno '# Titolo' markdown), ma per le
-        # schede con HTML inline la soluzione uniforme e' la lista hide.
+        # FIX (regressione titolo, doppia causa):
+        # 1) In Material 9.x, senza chiave 'hide:' valida il tema inserisce
+        #    un h1 auto-generato PRIMA del contenuto; l'h1 custom
+        #    '<h1 class="person-name">' convive con esso e il selettore
+        #    home.css nascondeva il PRIMO dei due. Lista hide con sottovoci
+        #    valide (navigation/toc) attiva la modalita' 'content': nessun
+        #    h1 auto-generato, resta solo quello nel contenuto.
+        # 2) Causa RADICE della sparizione TOTALE dei titoli: il link a
+        #    home.css nella home viene promosso da MkDocs nell'<head> di
+        #    TUTTE le pagine, quindi la regola 'h1:first-of-type {display:
+        #    none}' si applicava ovunque, nascondendo l'unico h1 delle
+        #    schede anche con hide: corretto. Rimedio definitivo: home.css
+        #    ora scopa la regola alla sola home (body:has(.banner-full)).
         frontmatter = f"""---
 title: "{escape_yaml_string(nome)}"
 description: "Scheda biografica e documenti di {escape_yaml_string(nome)}"
