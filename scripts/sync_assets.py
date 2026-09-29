@@ -31,6 +31,25 @@ def sincronizza():
 
     print(f"Copiati {contatore} file statici in '{BUILD_DIR}'")
 
+    # Guardia sui CSS delle pagine principali (home.css e archivio.css):
+    # dal consolidamento CSS sono asset statici versionati in
+    # assets/stylesheets/, NON piu' blocchi <style> inline nel markdown.
+    # Se mancano, la pagina sarebbe senza layout: si fallisce in modo
+    # esplicito invece di pubblicare una home scarna.
+    stylesheets_build = os.path.join(BUILD_DIR, 'stylesheets')
+    for nome in ('home.css', 'archivio.css'):
+        dest = os.path.join(stylesheets_build, nome)
+        if os.path.exists(dest):
+            continue
+        fonte = os.path.join(ASSETS_DIR, 'stylesheets', nome)
+        if os.path.exists(fonte):
+            shutil.copy2(fonte, dest)
+            print(f"Ripristinato {nome} mancante in build/ (fonte: assets/)")
+        else:
+            raise FileNotFoundError(
+                f"{nome} mancante sia in build/ sia in assets/stylesheets/: "
+                "ripristinarlo dal repository (e' un asset versionato)")
+
 
 def main():
     sincronizza()
