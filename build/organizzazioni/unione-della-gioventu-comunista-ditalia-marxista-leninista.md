@@ -4,7 +4,6 @@ description: "Documenti relativi a Unione della gioventù comunista d’Italia (
 hide:
   - navigation
   - toc
-hide_title: true
 ---
 
 <link rel="stylesheet" href="/archivio-maoismo-italiano/stylesheets/soggetti.css">

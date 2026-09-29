@@ -4,7 +4,6 @@ description: "Documenti relativi a Stella Rossa - Fronte Rivoluzionario Marxista
 hide:
   - navigation
   - toc
-hide_title: true
 ---
 
 <link rel="stylesheet" href="/archivio-maoismo-italiano/stylesheets/soggetti.css">

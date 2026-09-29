@@ -4,7 +4,6 @@ description: "Scheda biografica e documenti di Zhou Enlai"
 hide:
   - navigation
   - toc
-hide_title: true
 ---
 
 <link rel="stylesheet" href="/archivio-maoismo-italiano/stylesheets/soggetti.css">

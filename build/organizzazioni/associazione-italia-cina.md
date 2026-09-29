@@ -4,7 +4,6 @@ description: "Documenti relativi a Associazione Italia-Cina"
 hide:
   - navigation
   - toc
-hide_title: true
 ---
 
 <link rel="stylesheet" href="/archivio-maoismo-italiano/stylesheets/soggetti.css">
