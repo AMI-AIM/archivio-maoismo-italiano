@@ -1,22 +1,27 @@
 /* ============================================================
    SOGGETTI (Persone/Organizzazioni) - Schede individuali
-   Stili comuni per biografia e documento
+   Stili comuni per biografia e documento.
+   Token tipografici (--fs-*, --fw-*) definiti in extra.css §13.
    ============================================================ */
 
 .md-typeset h1.person-name,
 .md-typeset h1.org-name {
-    font-size: 2.4rem;
-    font-weight: 700;
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-title);
     margin: 0 0 0.2rem 0;
     color: var(--md-primary-fg-color);
 }
 
+/* Date di vita / fondazione sotto il nome. Un solo valore per persone e
+   organizzazioni (prima .org-dates veniva ridotto a 0.7rem da
+   soggetti-indice.css, caricato dopo): la variante "card" dell'indice e'
+   ora scopata su .org-card in soggetti-indice.css. */
 .person-dates,
 .org-dates {
-    font-size: 1rem;
+    font-size: var(--fs-md);
     color: var(--md-default-fg-color--light);
     margin: 0 0 0.8rem 0;
-    font-weight: 400;
+    font-weight: var(--fw-text);
 }
 
 /* Biografia/Storia con foto (testo a sinistra, foto a destra) */
@@ -100,9 +105,9 @@
 
 .doc-data {
     flex: 0 0 140px;
-    font-size: 0.9rem;
+    font-size: var(--fs-md);
     color: var(--md-primary-fg-color);
-    font-weight: 500;
+    font-weight: var(--fw-emph);
     white-space: nowrap;
     padding-top: 0.05rem;
 }
@@ -113,8 +118,8 @@
 }
 
 .doc-titolo {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-emph);
 }
 
 .doc-titolo a {
@@ -133,8 +138,8 @@
 
 .ruolo-badge {
     display: inline-block;
-    font-size: 0.65rem;
-    font-weight: 600;
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-label);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: #ffffff !important;
@@ -168,16 +173,16 @@
     .doc-data {
         flex: 0 0 auto;
         white-space: normal;
-        font-size: 0.8rem;
+        font-size: var(--fs-sm);
     }
 
     .person-name,
     .org-name {
-        font-size: 1.6rem;
+        font-size: var(--fs-3xl-sm);
     }
 
     .person-dates,
     .org-dates {
-        font-size: 0.85rem;
+        font-size: var(--fs-sm);
     }
 }
