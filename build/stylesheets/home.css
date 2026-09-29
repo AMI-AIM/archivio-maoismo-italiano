@@ -7,8 +7,20 @@
    pagina durante il consolidamento CSS.
    ============================================================ */
 
-/* Nasconde il titolo "Home" nella pagina */
-.md-content article h1:first-of-type {
+/* Nasconde il titolo "Home" nella pagina.
+   FISSATO (regressione titoli): prima usava il selettore globale
+   '.md-content article h1:first-of-type', che nascondeva il PRIMO h1 di
+   OGNI pagina del sito (home.css e' referenziato con <link> nel
+   markdown generato da core/home.py, che MkDocs converte in tag <link>
+   globali nell'<head> di TUTTE le pagine): sulle schede senza h1
+   auto-generato dal tema (hide: navigation/toc) l'unico h1 presente era
+   quello nel contenuto, cioe' il NOME della persona/organizzazione o il
+   titolo del documento — da cui la sparizione dei titoli. Ora il
+   selettore e' limitato alla home tramite :has() sul banner (.banner-full
+   esiste solo nella home). L'h1 auto-generato dal tema sulla home
+   (frontmatter con hide: [toc], modalita' 'toc') resta catturato perche'
+   anch'esso e' un h1 dentro .md-content article. */
+body:has(.banner-full) .md-content article h1:first-of-type {
   display: none !important;
 }
 
