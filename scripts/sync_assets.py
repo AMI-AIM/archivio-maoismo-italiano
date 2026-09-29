@@ -31,13 +31,13 @@ def sincronizza():
 
     print(f"Copiati {contatore} file statici in '{BUILD_DIR}'")
 
-    # Guardia sui CSS delle pagine principali (home.css e archivio.css):
-    # dal consolidamento CSS sono asset statici versionati in
+    # Guardia sui CSS delle pagine migrate (home, archivio, argomenti):
+    # dalla migrazione CSS sono asset statici versionati in
     # assets/stylesheets/, NON piu' blocchi <style> inline nel markdown.
     # Se mancano, la pagina sarebbe senza layout: si fallisce in modo
     # esplicito invece di pubblicare una home scarna.
     stylesheets_build = os.path.join(BUILD_DIR, 'stylesheets')
-    for nome in ('home.css', 'archivio.css'):
+    for nome in ('home.css', 'archivio.css', 'argomenti.css'):
         dest = os.path.join(stylesheets_build, nome)
         if os.path.exists(dest):
             continue
