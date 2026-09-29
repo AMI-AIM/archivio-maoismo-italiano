@@ -139,21 +139,21 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
     # NOTA: gli stili del dropdown dei suggerimenti (.hero-search-*)
     # vivono in stylesheets/extra.css (sezione 15), non qui.
     banner_html = f"""
-<div class="banner-full" style="margin-bottom: 0;">
+<div class="banner-full">
   <img src="{site_path('immagini/banner.webp')}"
        alt="Archivio del Maoismo Italiano"
        class="banner-image">
   <div class="banner-overlay"></div>
-  <div class="banner-content banner-content-home" style="position: absolute; bottom: 0.5rem; left: 0.5rem; z-index: 1; text-align: left; color: #ffffff; max-width: 700px; padding: 0.5rem 1rem;">
-    <p style="font-size: 1.4rem; font-weight: 600; opacity: 1; margin: 0 0 0.8rem 0; line-height: 1.45; text-shadow: 0 2px 14px rgba(0,0,0,0.65), 0 1px 3px rgba(0,0,0,0.5);">Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia</p>
-    <div class="banner-actions" style="display: flex; align-items: center; flex-wrap: nowrap; gap: 0.6rem;">
-      <a href="documenti/" class="banner-button" style="display: inline-block; padding: 0.5rem 1.2rem; background-color: #ffffff; color: #b71c1c !important; font-weight: 600; font-size: 0.9rem; border-radius: 6px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 12px rgba(0,0,0,0.25); white-space: nowrap; flex-shrink: 0;">Esplora l'archivio</a>
-      <form class="banner-search" id="hero-search-form" action="documenti/" method="get" style="display: flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); border-radius: 24px; padding: 0.3rem 0.8rem; backdrop-filter: blur(2px); transition: background 0.2s, border-color 0.2s; position: relative; flex: 1 1 auto; min-width: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="banner-search-icon" aria-hidden="true" style="width: 1.1rem; height: 1.1rem; fill: #ffffff; flex-shrink: 0;">
+  <div class="banner-content banner-content-home">
+    <p>Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia</p>
+    <div class="banner-actions">
+      <a href="documenti/" class="banner-button">Esplora l'archivio</a>
+      <form class="banner-search" id="hero-search-form" action="documenti/" method="get">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="banner-search-icon" aria-hidden="true">
           <path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5s2 4.5 4.5 4.5S14 9.5 14 4.5 12 5 9.5 5z"/>
         </svg>
-        <input type="text" id="hero-search-input" name="q" placeholder="Cerca nell'archivio..." aria-label="Cerca nell'archivio" autocomplete="off" style="background: transparent; border: none; outline: none; color: #ffffff; font-size: 0.9rem; width: 100%; min-width: 140px; flex: 1 1 auto;">
-        <button type="submit" aria-label="Cerca" style="background: none; border: none; color: #ffffff; font-weight: 600; font-size: 0.85rem; cursor: pointer; padding: 0.2rem 0.4rem; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; flex-shrink: 0;">Cerca</button>
+        <input type="text" id="hero-search-input" name="q" placeholder="Cerca nell'archivio..." aria-label="Cerca nell'archivio" autocomplete="off">
+        <button type="submit" class="banner-search-submit" aria-label="Cerca">Cerca</button>
         <div class="hero-search-results" id="hero-search-results"></div>
       </form>
     </div>

@@ -285,7 +285,15 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 
 /* ------------------------------------------------------------
-6. BANNER
+6. BANNER (SOLO HOME)
+
+   Fonte UNICA degli stili banner. Gli attributi style="..."
+   inline nel markup generato (scripts/core/home.py) sono stati
+   rimossi nella migrazione CSS complessiva: di conseguenza i
+   selettori responsive non hanno piu' bisogno ne' del
+   qualificatore [style] ne' di !important per prevalere
+   sull'inline. home.css contiene solo le override responsive
+   della home (caricata dopo extra.css).
 ------------------------------------------------------------ */
 .banner-full {
   position: relative;
@@ -308,6 +316,88 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.45);
+}
+.banner-content {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  z-index: 1;
+  text-align: left;
+  color: #ffffff;
+  max-width: 700px;
+  padding: 0.5rem 1rem;
+}
+.banner-content p {
+  font-size: 1.4rem;
+  font-weight: 600;
+  opacity: 1;
+  margin: 0 0 0.8rem 0;
+  line-height: 1.45;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65), 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.banner-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0.6rem;
+}
+.banner-button {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  background-color: #ffffff;
+  color: #b71c1c !important; /* serve: vince su .md-typeset a (rosso link Material) */
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.banner-search {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 24px;
+  padding: 0.3rem 0.8rem;
+  backdrop-filter: blur(2px);
+  transition: background 0.2s, border-color 0.2s;
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.banner-search-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: #ffffff;
+  flex-shrink: 0;
+}
+.banner-search input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 0.9rem;
+  width: 100%;
+  min-width: 140px;
+  flex: 1 1 auto;
+}
+.banner-search-submit {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 /* Placeholder ricerca più leggibile */
 #hero-search-input::placeholder {
@@ -453,57 +543,56 @@ STILE PERSONALIZZATO — TEMA MATERIAL
     position: relative;
     z-index: 1;
   }
-  /* Allineato ai duplicati vincolanti in home.py (i selettori
-     banner-* hanno style attribute inline: senza !important queste
-     regole erano inerti). */
+  /* Banner mobile: niente [style] ne' !important, gli inline sono
+     stati rimossi dal markup (vedi sezione 6). */
   .banner-full {
-    margin-bottom: 0 !important;
-    height: 240px !important;
-    min-height: 200px !important;
-    overflow: hidden !important;
+    margin-bottom: 0;
+    height: 240px;
+    min-height: 200px;
+    overflow: hidden;
   }
   .banner-image {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center center !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
   }
-  .banner-content[style] {
-    bottom: 0.3rem !important;
-    left: 0.3rem !important;
-    right: 0.3rem !important;
-    max-width: none !important;
-    padding: 0.3rem 0.6rem !important;
+  .banner-content {
+    bottom: 0.3rem;
+    left: 0.3rem;
+    right: 0.3rem;
+    max-width: none;
+    padding: 0.3rem 0.6rem;
   }
-  .banner-content p[style] {
-    font-size: 0.8rem !important;
-    margin: 0 0 0.3rem 0 !important;
-    line-height: 1.3 !important;
+  .banner-content p {
+    font-size: 0.8rem;
+    margin: 0 0 0.3rem 0;
+    line-height: 1.3;
   }
-  .banner-actions[style] {
-    flex-wrap: wrap !important;
-    gap: 0.3rem !important;
+  .banner-actions {
+    flex-wrap: wrap;
+    gap: 0.3rem;
   }
-  .banner-button[style] {
-    padding: 0.3rem 0.8rem !important;
-    font-size: 0.75rem !important;
+  .banner-button {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.75rem;
   }
-  .banner-search[style] {
-    flex: 1 1 100% !important;
-    padding: 0.2rem 0.6rem !important;
-    gap: 0.3rem !important;
+  .banner-search {
+    flex: 1 1 100%;
+    padding: 0.2rem 0.6rem;
+    gap: 0.3rem;
   }
-  .banner-search input[style] {
-    min-width: 80px !important;
-    font-size: 0.75rem !important;
+  .banner-search input {
+    min-width: 80px;
+    font-size: 0.75rem;
   }
-  .banner-search button[style] {
-    font-size: 0.7rem !important;
-    padding: 0.1rem 0.3rem !important;
+  .banner-search-submit {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.3rem;
   }
-  .banner-search-icon[style] {
-    width: 0.9rem !important;
-    height: 0.9rem !important;
+  .banner-search-icon {
+    width: 0.9rem;
+    height: 0.9rem;
   }
 }
 
@@ -657,22 +746,22 @@ STILE PERSONALIZZATO — TEMA MATERIAL
     max-width: 120px;
   }
   .banner-full {
-    height: 180px !important;
-    min-height: 150px !important;
+    height: 180px;
+    min-height: 150px;
   }
-  .banner-content p[style] {
-    font-size: 0.7rem !important;
+  .banner-content p {
+    font-size: 0.7rem;
   }
-  .banner-button[style] {
-    padding: 0.2rem 0.6rem !important;
-    font-size: 0.65rem !important;
+  .banner-button {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.65rem;
   }
-  .banner-search input[style] {
-    font-size: 0.7rem !important;
-    min-width: 60px !important;
+  .banner-search input {
+    font-size: 0.7rem;
+    min-width: 60px;
   }
-  .banner-search button[style] {
-    font-size: 0.65rem !important;
+  .banner-search-submit {
+    font-size: 0.65rem;
   }
 }
 
@@ -838,7 +927,7 @@ che restano l'UNICO accento tipografico ammesso per riga */
 .doc-type-chip,
 .ami-footer__links-title,
 .ami-footer__links-list a,
-.banner-search button,
+.banner-search-submit,
 .hero-search-count,
 .hero-search-item-tag {
   font-family: var(--ami-font-label);
