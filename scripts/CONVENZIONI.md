@@ -18,22 +18,28 @@ consigliata per i nuovi contributi.
   verificare quale dei due canali la eredita.
 
 ## 2. Stile CSS — tre fonti
-1. Token e layout in `assets/stylesheets/*.css` (variabili `--ami-*`, dark mode slate).
+1. Token e layout in `assets/stylesheets/*.css` (variabili `--ami-*`).
 2. Blocchi `<style>` inline nei generatori: `core/home.py` (~550 righe),
    `core/archivio.py` (~570), `argomenti.py`, `overrides/partials/footer.html`.
 3. Stili `style="..."` direttamente nell'HTML generato (banner, bottoni).
-Problemi noti:
+Decisioni prese (set. 2026):
+- **Solo light mode**: il tema scuro MkDocs slate e' abbandonato; `mkdocs.yml`
+  fissa `scheme: default` senza toggle e i selettori slate sono stati rimossi
+  da `extra.css`. Non reintrodurli.
+- **Rosso brand = `#b71c1c`** ovunque (hard-coded in `home.py`, `404.html`,
+  `galleria.css`); `palette.primary: red` di MkDocs resta solo per i componenti
+  nativi del tema.
+Problemi aperti (migrazione rinviata):
 - Il blocco inline di home duplica sezioni di `extra.css` con valori divergenti
   (es. `.banner-content p[style] { font-size: 0.85rem }` inline vs `0.8rem` in
   `extra.css:469`; vince l'inline perche' successivo nel `<head>`).
-- I colori hard-coded (`#b71c1c` in `home.py`, `404.html`, `galleria.css`) non
-  sono sincronizzati con `palette.primary: red` di MkDocs ne' tra loro.
-- Gli stili inline non conoscono `[data-md-color-scheme="slate"]`: le regole
-  slate di `extra.css` risultano neutralizzate dove un blocco inline definisce
-  lo stesso selettore.
 Regola: nuovo CSS va in `assets/stylesheets/`, parametrizzato con `--ami-*`;
 i blocchi inline vanno progressivamente migrati (la migrazione completa richiede
-un confronto visivo pagina per pagina).
+un confronto visivo pagina per pagina). Codice morto CSS rimosso: selettori mai
+presenti nel markup generato (`.doc-thumbnail`, `.subject-avatar`,
+`.archive-card`, `.skeleton-grid`, `.gallery-item`, utility aspect/w-*,
+`.home-page`) — prima di aggiungere una regola, verificare che la classe esista
+negli output dei generatori.
 
 ## 3. Frontend JavaScript
 - Idiom misto: `getElementById` (archivio-filtri.js ~50 occorrenze) contro

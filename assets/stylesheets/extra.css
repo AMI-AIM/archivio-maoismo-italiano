@@ -1073,30 +1073,13 @@ archivio-filtri.js), senza più stili inline Word */
     border-radius: 8px;
 }
 
-/* Immagini small (thumbnail) */
-.doc-thumbnail .lazy-skeleton {
-    width: 120px;
-    height: 160px;
-    border-radius: 4px;
-}
-
-/* Immagini profilo soggetti */
-.subject-avatar .lazy-skeleton {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-}
+/* Nota: i contesti doc-thumbnail / subject-avatar / archive-card non sono
+   mai presenti nel markup generato (le card archivio usano .risultato-card,
+   che non contiene skeleton) ed erano codice morto: rimossi. */
 
 /* ==========================================================================
-   CONTESTI SPECIFICI - ARCHIVIO/GALLERIA
+   CONTESTI SPECIFICI - HOME
    ========================================================================== */
-
-/* Card documento nell'archivio (classe usata da archivio-filtri.js) */
-.archive-card .lazy-skeleton {
-    width: 100%;
-    padding-top: 66%; /* Aspect ratio 3:2 */
-    border-radius: 6px;
-}
 
 /* Documenti in evidenza (home) */
 .evidenza-thumbnail .lazy-skeleton {
@@ -1127,25 +1110,10 @@ archivio-filtri.js), senza più stili inline Word */
     font-weight: 500;
 }
 
-/* ==========================================================================
-   DARK MODE SUPPORT (MkDocs Material)
-   ========================================================================== */
-
-[data-md-color-scheme="slate"] .lazy-skeleton {
-    background: linear-gradient(90deg, #2d2d2d 25%, #3a3a3a 50%, #2d2d2d 75%);
-}
-
-[data-md-color-scheme="slate"] .skeleton-grid .lazy-skeleton {
-    background: linear-gradient(90deg, #333 25%, #404040 50%, #333 75%);
-}
-
-[data-md-color-scheme="slate"] .lazy-skeleton.error-state {
-    background: #3a1c1c;
-}
-
-[data-md-color-scheme="slate"] .lazy-skeleton.error-state::after {
-    color: #ef5350;
-}
+/* Nota: il supporto dark mode (selettori [data-md-color-scheme="slate"]) e'
+   stato rimosso perche' il sito e' intenzionalmente solo light mode
+   (mkdocs.yml fissa scheme: default e non espone toggle). Rimossi anche i
+   selettori orfani .skeleton-grid e .gallery-item (classi mai generate). */
 
 /* ==========================================================================
    RESPONSIVE
@@ -1154,10 +1122,6 @@ archivio-filtri.js), senza più stili inline Word */
 @media (max-width: 768px) {
     .photo-viewer .lazy-skeleton {
         min-height: 200px;
-    }
-
-    .gallery-item .lazy-skeleton {
-        height: 150px;
     }
 }
 
@@ -1171,52 +1135,6 @@ archivio-filtri.js), senza più stili inline Word */
         animation: none;
         background: #e0e0e0;
     }
-
-    [data-md-color-scheme="slate"] .lazy-skeleton {
-        background: #3a3a3a;
-    }
-}
-
-/* ==========================================================================
-   UTILITY CLASSES
-   ========================================================================== */
-
-/* Forza aspect ratio specifico */
-.lazy-skeleton.aspect-16-9 {
-    padding-top: 56.25%;
-    height: 0;
-}
-
-.lazy-skeleton.aspect-4-3 {
-    padding-top: 75%;
-    height: 0;
-}
-
-.lazy-skeleton.aspect-1-1 {
-    padding-top: 100%;
-    height: 0;
-}
-
-.lazy-skeleton.aspect-3-4 {
-    padding-top: 133.33%;
-    height: 0;
-}
-
-/* Larghezze predefinite */
-.lazy-skeleton.w-small {
-    width: 150px;
-}
-
-.lazy-skeleton.w-medium {
-    width: 300px;
-}
-
-.lazy-skeleton.w-large {
-    width: 600px;
-}
-
-.lazy-skeleton.w-full {
-    width: 100%;
 }
 
 /* ==========================================================================
