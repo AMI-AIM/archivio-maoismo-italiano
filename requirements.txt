@@ -1,8 +1,7 @@
 pandas
 openpyxl
 requests
-# Pillow e' FACOLTATIVO: usato solo da scripts/generatore.py per creare
-# docs/immagini/profili/placeholder.webp se assente. Il codice gestisce il
-# mancato import (ImportError -> usa il placeholder.webp gia presente nel
-# repo), quindi non e' dichiarato tra le dipendenze obbligatorie.
+# Nota: Pillow NON e' una dipendenza del progetto. Il placeholder.webp degli
+# avatar e' un asset statico versionato in assets/immagini/profili/ e copiato
+# in build/ da sync_assets.py: nessun file viene generato a runtime.
 mkdocs-material
