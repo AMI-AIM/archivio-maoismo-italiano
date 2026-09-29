@@ -69,7 +69,7 @@
     
   
 
-  <!-- AMI-MAIN-ATTIVO v4 -->
+  <!-- AMI-MAIN-ATTIVO v5 -->
   <meta name="ami-base-url" content="..">
 
   <!-- Verifica Google Search Console -->
@@ -85,12 +85,17 @@
   <link rel="icon" href="../favicon.ico" sizes="any">
   <link rel="manifest" href="../site.webmanifest">
 
-  <!-- Font d'archivio -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <!-- Font d'archivio -->
+  <!-- Font d'archivio
+       Fraunces: asse wght CONTINUO 400..900 (+ opsz), cosi' ogni peso richiesto
+       dai CSS (600, 700, 750, 800, 850...) esiste davvero invece di essere
+       agganciato al piu' vicino tra 400/600/900 (che trasformava ogni
+       "grassetto" in Black). Corsivo: solo 400 (l'unico usato).
+       Archivo: 500..700 continuo (nav, etichette, badge).
+       Courier Prime: solo 400 + corsivo 400 (metadati e citazioni; il 700
+       non e' usato da nessuna regola). -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=Archivo:wght@500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400&family=Archivo:wght@500..700&family=Courier+Prime:ital,wght@0,400;1,400&display=swap">
 
   <!-- Preload hero (LCP) -->
   <link rel="preload" as="image" href="../immagini/banner.webp" fetchpriority="high">
