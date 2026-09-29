@@ -5,7 +5,7 @@ from .utils import formatta_data, scarica_descrizione_ia, split_nomi
 
 
 def genera_indice(df, output_dir, cache_manager=None):
-    print("\n📑 Generazione della pagina Archivio con filtri...")
+    print("\nGenerazione della pagina Archivio con filtri...")
     
     schede = []
     anni_valori = []
@@ -28,7 +28,7 @@ def genera_indice(df, output_dir, cache_manager=None):
         if tipo_raw in ['nan', 'None']:
             tipo_raw = ''
         tipo = tipo_raw.lower()
-        # 🔥 tipo_display: "testo_bilingue" diventa "testo" con maiuscola
+        # tipo_display: "testo_bilingue" diventa "testo" con maiuscola
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
         tipo_display = tipo_display.capitalize() if tipo_display else ''
         
@@ -83,7 +83,7 @@ def genera_indice(df, output_dir, cache_manager=None):
     anno_min = min(anni_valori) if anni_valori else 1900
     anno_max = max(anni_valori) if anni_valori else 2025
     
-    # 🔥 I risultati saranno generati da JavaScript (paginazione)
+    # I risultati saranno generati da JavaScript (paginazione)
     risultati_html = '<div id="risultati-loading" class="loading">Caricamento in corso...</div>'
     
     index_content = f"""---
@@ -187,7 +187,7 @@ hide:
         <div id="risultati-container">
             {risultati_html}
         </div>
-        <!-- 🔥 PAGINAZIONE -->
+        <!-- PAGINAZIONE -->
         <div id="paginazione" class="paginazione-container"></div>
     </main>
 
@@ -615,7 +615,7 @@ hide:
     margin: 0.1rem 0;
 }}
 
-/* 🔥 RISULTATO-DESC: NORMALIZZAZIONE COMPLETA */
+/* RISULTATO-DESC: NORMALIZZAZIONE COMPLETA */
 .risultato-desc {{
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -769,5 +769,5 @@ hide:
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(index_content)
     
-    print(f"   ✅ Pagina Archivio generata con {len(schede)} schede.")
-    print(f"   📅 Intervallo anni: {anno_min} - {anno_max}")
+    print(f"Pagina Archivio generata con {len(schede)} schede.")
+    print(f"Intervallo anni: {anno_min} - {anno_max}")

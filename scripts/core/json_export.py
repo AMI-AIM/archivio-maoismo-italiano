@@ -29,7 +29,7 @@ def pulisci_html(testo):
 
 
 def genera_json(df, persone, organizzazioni, output_dir):
-    print("\n📊 Generazione del file JSON per i filtri...")
+    print("\nGenerazione del file JSON per i filtri...")
     documenti_json = []
     anni_valori = []
 
@@ -69,12 +69,12 @@ def genera_json(df, persone, organizzazioni, output_dir):
         tipo = tipo_raw.lower()
         if tipo == 'fotografia':
             tipo = 'foto'
-        # 🔥 PER I FILTRI: "testo_bilingue" viene mostrato come "testo"
+        # PER I FILTRI: "testo_bilingue" viene mostrato come "testo"
         tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
-        # 🔥 METTE LA MAIUSCOLA INIZIALE PER I FILTRI
+        # METTE LA MAIUSCOLA INIZIALE PER I FILTRI
         tipo_display = tipo_display.capitalize() if tipo_display else ''
 
-        # 🔥 SPLITTA LA SERIE PER ";" E PULISCE GLI SPAZI
+        # SPLITTA LA SERIE PER ";" E PULISCE GLI SPAZI
         serie_raw = str(row.get('serie', '')).strip()
         if serie_raw and serie_raw not in ['nan', 'None']:
             serie_tags = [s.strip() for s in serie_raw.split(';') if s.strip()]
@@ -139,13 +139,13 @@ def genera_json(df, persone, organizzazioni, output_dir):
             'data': data_formattata,
             'anno': anno,
             'data_ordine': list(data_ordine) if data_ordine else [9999, 1, 1],
-            'tipo': tipo_display,      # 🔥 ORA CON MAIUSCOLA
-            'serie': serie_tags,       # 🔥 ORA È UNA LISTA DI TAG
+            'tipo': tipo_display,      # ORA CON MAIUSCOLA
+            'serie': serie_tags,       # ORA È UNA LISTA DI TAG
             'url_ia': url_ia,
             'persone': persone_lista,
             'organizzazioni': organizzazioni_lista,
             'descrizione': descrizione if descrizione else '',
-            # 🔥 Testo puro (senza HTML/stili inline) per ricerca e
+            # Testo puro (senza HTML/stili inline) per ricerca e
             # snippet frontend: evita artefatti e match dentro i tag.
             'descrizione_testo': pulisci_html(descrizione) if descrizione else ''
         }
@@ -163,5 +163,5 @@ def genera_json(df, persone, organizzazioni, output_dir):
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(json_data, f, ensure_ascii=False, indent=2)
 
-    print(f"   ✅ JSON generato con {len(documenti_json)} documenti (incluse descrizioni)")
-    print(f"   📅 Intervallo anni: {json_data['anno_min']} - {json_data['anno_max']}")
+    print(f"JSON generato con {len(documenti_json)} documenti (incluse descrizioni)")
+    print(f"Intervallo anni: {json_data['anno_min']} - {json_data['anno_max']}")

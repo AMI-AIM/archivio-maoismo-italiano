@@ -927,4 +927,4 @@ body:first-of-type .evidenza-thumbnail .lazy-skeleton {
     index_path = os.path.join(output_dir, 'index.md')
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(home_content)
-    print(f"   ✅ Home generata con {len(ultime_tre)} ultimi documenti.")
+    print(f"Home generata con {len(ultime_tre)} ultimi documenti.")

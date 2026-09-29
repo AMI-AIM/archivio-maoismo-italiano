@@ -63,7 +63,7 @@ def esegui(comando, cwd=None, descrizione=None):
 
 
 def verifica_dipendenze():
-    stampa_titolo("🔎 Verifica dipendenze")
+    stampa_titolo("Verifica dipendenze")
     mancanti = []
     requirements_path = ROOT_DIR / "requirements.txt"
     mappa_moduli = {
@@ -77,22 +77,22 @@ def verifica_dipendenze():
             if riga.strip() and not riga.strip().startswith("#")
         ]
     else:
-        print(f"   ⚠️ '{requirements_path.name}' non trovato, uso elenco di fallback.")
+        print(f"'{requirements_path.name}' non trovato, uso elenco di fallback.")
         pacchetti = list(mappa_moduli.keys())
 
     for pacchetto in pacchetti:
         modulo = mappa_moduli.get(pacchetto, pacchetto.replace("-", "_"))
         try:
             __import__(modulo)
-            print(f"   ✅ {pacchetto}")
+            print(f"{pacchetto}")
         except ImportError:
-            print(f"   ❌ {pacchetto} non installato")
+            print(f"{pacchetto} non installato")
             mancanti.append(pacchetto)
 
     if shutil.which("git"):
-        print("   ✅ git")
+        print("git")
     else:
-        print("   ❌ git non trovato nel PATH")
+        print("git non trovato nel PATH")
         mancanti.append("git")
 
     if mancanti:
@@ -133,7 +133,7 @@ def identifier_ia_per_documento(ami_id):
         match = re.search(r'/details/([^/?#]+)', url)
         return match.group(1) if match else None
     except Exception as e:
-        print(f"   ⚠️ Impossibile leggere l'identifier IA per {ami_id}: {e}")
+        print(f"Impossibile leggere l'identifier IA per {ami_id}: {e}")
         return None
 
 
@@ -147,14 +147,14 @@ def esegui_validazione(bloccante=True):
             validazione fallisce. Se False, mostra comunque il report ma
             prosegue (utile con --skip-validation).
     """
-    stampa_titolo("🔍 Validazione dati (data/dati.xlsx)")
+    stampa_titolo("Validazione dati (data/dati.xlsx)")
     esito = run_validation(str(ROOT_DIR / "data"))
 
     if esito.get('error'):
         messaggio = f"Impossibile completare la validazione: {esito['error']}"
         if bloccante:
             raise ErroreComando(messaggio)
-        print(f"   ⚠️ {messaggio} (proseguo comunque, --skip-validation attivo)")
+        print(f"{messaggio} (proseguo comunque, --skip-validation attivo)")
         return
 
     if not esito.get('success', False):
@@ -163,13 +163,13 @@ def esegui_validazione(bloccante=True):
                 "la validazione dei dati è fallita (vedi errori sopra). "
                 "Correggi data/dati.xlsx oppure rilancia con --skip-validation per pubblicare comunque."
             )
-        print("   ⚠️ Validazione fallita, ma proseguo comunque (--skip-validation attivo).")
+        print("Validazione fallita, ma proseguo comunque (--skip-validation attivo).")
     else:
-        print("   ✅ Dati validati correttamente.")
+        print("Dati validati correttamente.")
 
 
 def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
-    stampa_titolo("🚀 Aggiornamento del sito AMI")
+    stampa_titolo("Aggiornamento del sito AMI")
     verifica_dipendenze()
 
     # 0bis. Validazione dei dati (blocca la pubblicazione se ci sono errori)
@@ -177,51 +177,51 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
 
     # -1. Rigenerazione mirata di specifiche schede documento
     if only:
-        stampa_titolo("🎯 Rigenerazione mirata")
+        stampa_titolo("Rigenerazione mirata")
         cache_mgr = CacheManager()
         cache_mgr.clear_doc_metadata(only)
         identifiers = [i for i in (identifier_ia_per_documento(d) for d in only) if i]
         if identifiers:
             cache_mgr.clear_ia_metadata(identifiers)
-            print(f"   Verranno rigenerate: {', '.join(only)} (IA: {', '.join(identifiers)})")
+            print(f"Verranno rigenerate: {', '.join(only)} (IA: {', '.join(identifiers)})")
         else:
-            print(f"   Verranno rigenerate: {', '.join(only)} (nessun identifier IA trovato/collegato)")
+            print(f"Verranno rigenerate: {', '.join(only)} (nessun identifier IA trovato/collegato)")
 
     # -1bis. Invalidazione mirata/globale cache IA, se richiesta a parte
     if refresh_ia:
-        stampa_titolo("♻️  Invalidazione cache Internet Archive")
+        stampa_titolo("Invalidazione cache Internet Archive")
         cache_mgr = CacheManager()
         if refresh_ia == 'all':
             cache_mgr.clear_ia_metadata()
-            print("   Tutti i documenti verranno ri-scaricati da Internet Archive.")
+            print("Tutti i documenti verranno ri-scaricati da Internet Archive.")
         else:
             cache_mgr.clear_ia_metadata(refresh_ia)
-            print(f"   Verranno ri-scaricati solo: {', '.join(refresh_ia)}")
+            print(f"Verranno ri-scaricati solo: {', '.join(refresh_ia)}")
 
     # 0. Sincronizzazione file statici (deve girare per primo)
     esegui([sys.executable, "sync_assets.py"], cwd=SCRIPTS_DIR,
-           descrizione="🔄 Sincronizzazione file statici (assets/ → build/)")
+           descrizione="Sincronizzazione file statici (assets/ → build/)")
 
     # 1-5. Rigenerazione contenuti.
     # Ordine: persone/org PRIMA di generatore; argomenti DOPO generatore,
     # così argomenti.py può aggiornare la sitemap appena creata;
     # galleria DOPO argomenti, come in .github/workflows/deploy.yml.
     esegui([sys.executable, "persone.py"], cwd=SCRIPTS_DIR,
-           descrizione="👤 Generazione schede persone")
+           descrizione="Generazione schede persone")
     esegui([sys.executable, "org.py"], cwd=SCRIPTS_DIR,
-           descrizione="🏛️  Generazione schede organizzazioni")
+           descrizione="Generazione schede organizzazioni")
     esegui([sys.executable, "generatore.py"], cwd=SCRIPTS_DIR,
-           descrizione="📑 Generazione documenti, archivio, home, sitemap")
+           descrizione="Generazione documenti, archivio, home, sitemap")
     esegui([sys.executable, "argomenti.py"], cwd=SCRIPTS_DIR,
-           descrizione="🏷️  Generazione pagine argomenti")
+           descrizione="Generazione pagine argomenti")
     esegui([sys.executable, "galleria.py"], cwd=SCRIPTS_DIR,
-           descrizione="🖼️  Generazione galleria fotografica (build/galleria/)")
+           descrizione="Generazione galleria fotografica (build/galleria/)")
 
     # 6. Pubblicazione
-    stampa_titolo("📤 Pubblicazione")
+    stampa_titolo("Pubblicazione")
     if not git_ci_sono_modifiche():
-        print("   ℹ️  Nessuna modifica rispetto all'ultimo commit: niente da pubblicare.")
-        stampa_titolo("✅ Completato (nessuna modifica)")
+        print("ℹ  Nessuna modifica rispetto all'ultimo commit: niente da pubblicare.")
+        stampa_titolo("Completato (nessuna modifica)")
         return
 
     if not messaggio:
@@ -231,24 +231,24 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
     esegui(["git", "commit", "-m", messaggio], descrizione="Git commit")
     esegui(["git", "push"], descrizione="Git push")
 
-    stampa_titolo("🎉 Sito aggiornato e pubblicato!")
-    print("   GitHub Actions builderà e pubblicherà automaticamente su GitHub Pages")
-    print("   (di solito ci vuole qualche minuto prima che sia visibile online).")
+    stampa_titolo("Sito aggiornato e pubblicato!")
+    print("GitHub Actions builderà e pubblicherà automaticamente su GitHub Pages")
+    print("(di solito ci vuole qualche minuto prima che sia visibile online).")
 
 
 def mostra_cache_stats():
     """Mostra statistiche cache."""
-    stampa_titolo("📊 Statistiche Cache")
+    stampa_titolo("Statistiche Cache")
     cache_mgr = CacheManager()
     cache_mgr.print_stats()
 
 
 def svuota_cache():
     """Svuota cache."""
-    stampa_titolo("🗑️ Pulizia Cache")
+    stampa_titolo("Pulizia Cache")
     cache_mgr = CacheManager()
     cache_mgr.clear_all()
-    print("   ✅ Cache completamente svuotata")
+    print("Cache completamente svuotata")
 
 
 def main():
@@ -296,11 +296,11 @@ def main():
                  skip_validation=skip_validation)
 
     except ErroreComando as e:
-        print(f"\n❌ ERRORE: {e}")
-        print("   Il sito NON è stato pubblicato: correggi l'errore sopra e rilancia lo script.")
+        print(f"\nERRORE: {e}")
+        print("Il sito NON è stato pubblicato: correggi l'errore sopra e rilancia lo script.")
         codice_uscita = 1
     except KeyboardInterrupt:
-        print("\n\n⏹️  Interrotto manualmente.")
+        print("\n\nInterrotto manualmente.")
         codice_uscita = 1
     finally:
         print()

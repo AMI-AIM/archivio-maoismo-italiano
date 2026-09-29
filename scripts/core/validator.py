@@ -60,15 +60,15 @@ class ValidationResult:
 
     def add_error(self, message: str):
         self.errors.append(message)
-        logger.error(f"❌ {message}")
+        logger.error(f"{message}")
 
     def add_warning(self, message: str):
         self.warnings.append(message)
-        logger.warning(f"⚠️ {message}")
+        logger.warning(f"{message}")
 
     def add_info(self, message: str):
         self.info.append(message)
-        logger.info(f"ℹ️ {message}")
+        logger.info(f"ℹ {message}")
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -86,28 +86,28 @@ class ValidationResult:
         print("=" * 70)
 
         if self.is_valid:
-            print("✅ VALIDAZIONE SUPERATA CON SUCCESSO")
+            print("VALIDAZIONE SUPERATA CON SUCCESSO")
         else:
-            print("❌ VALIDAZIONE FALLITA")
+            print("VALIDAZIONE FALLITA")
 
-        print("\n📊 STATISTICHE:")
+        print("\nSTATISTICHE:")
         for key, value in self.stats.items():
-            print(f"   • {key}: {value}")
+            print(f"• {key}: {value}")
 
         if self.errors:
-            print(f"\n❌ ERRORI ({len(self.errors)}):")
+            print(f"\nERRORI ({len(self.errors)}):")
             for i, error in enumerate(self.errors, 1):
-                print(f"   {i}. {error}")
+                print(f"{i}. {error}")
 
         if self.warnings:
-            print(f"\n⚠️ WARNING ({len(self.warnings)}):")
+            print(f"\nWARNING ({len(self.warnings)}):")
             for i, warning in enumerate(self.warnings, 1):
-                print(f"   {i}. {warning}")
+                print(f"{i}. {warning}")
 
         if self.info:
-            print(f"\nℹ️ INFO ({len(self.info)}):")
+            print(f"\nℹ INFO ({len(self.info)}):")
             for i, info in enumerate(self.info, 1):
-                print(f"   {i}. {info}")
+                print(f"{i}. {info}")
 
         print("=" * 70 + "\n")
 
@@ -126,7 +126,7 @@ class AdvancedValidator:
 
     def __init__(self, strict_mode: bool = False):
         """
-        Inizializza il validatore.
+       Inizializza il validatore.
 
         Args:
             strict_mode: Se True, i warning diventano errori bloccanti
@@ -528,8 +528,8 @@ def run_validation(data_dir: str) -> dict[str, Any]:
         xls = pd.ExcelFile(excel_path)
         sheet_names = xls.sheet_names
 
-        print(f"\n🔍 VALIDAZIONE DATI - {excel_path}")
-        print(f"📋 Fogli rilevati: {', '.join(sheet_names)}\n")
+        print(f"\nVALIDAZIONE DATI - {excel_path}")
+        print(f"Fogli rilevati: {', '.join(sheet_names)}\n")
 
         # Carica Persone e Organizzazioni PRIMA del Catalogo: servono per il
         # controllo di integrità referenziale su persone_collegate/organizzazioni_collegate.
@@ -541,7 +541,7 @@ def run_validation(data_dir: str) -> dict[str, Any]:
             df_pers = pd.read_excel(excel_path, sheet_name='Persone', dtype=str).fillna('')
             valido, report = validator.validate_persone(df_pers)
             reports['persone'] = report
-            print(f"Persone: {'✅ VALIDO' if valido else '❌ INVALIDO'}")
+            print(f"Persone: {'VALIDO' if valido else 'INVALIDO'}")
 
             df_pers_norm = validator._normalize_columns(df_pers.copy())
             if 'nome' in df_pers_norm.columns:
@@ -552,7 +552,7 @@ def run_validation(data_dir: str) -> dict[str, Any]:
             df_org = pd.read_excel(excel_path, sheet_name='Organizzazioni', dtype=str).fillna('')
             valido, report = validator.validate_organizzazioni(df_org)
             reports['organizzazioni'] = report
-            print(f"Organizzazioni: {'✅ VALIDO' if valido else '❌ INVALIDO'}")
+            print(f"Organizzazioni: {'VALIDO' if valido else 'INVALIDO'}")
 
             df_org_norm = validator._normalize_columns(df_org.copy())
             if 'nome' in df_org_norm.columns:
@@ -563,16 +563,16 @@ def run_validation(data_dir: str) -> dict[str, Any]:
             df_cat = pd.read_excel(excel_path, sheet_name='Catalogo', dtype=str).fillna('')
             valido, report = validator.validate_catalogo(df_cat, nomi_persone, nomi_organizzazioni)
             reports['catalogo'] = report
-            print(f"Catalogo: {'✅ VALIDO' if valido else '❌ INVALIDO'}")
+            print(f"Catalogo: {'VALIDO' if valido else 'INVALIDO'}")
 
         # Report finale
         tutti_validi = all(r.get('is_valid', False) for r in reports.values())
 
         print("\n" + "=" * 70)
         if tutti_validi:
-            print("✅ TUTTE LE VALIDAZIONI SONO STATE SUPERATE")
+            print("TUTTE LE VALIDAZIONI SONO STATE SUPERATE")
         else:
-            print("❌ ALMENO UNA VALIDAZIONE È FALLITA - RIVEDERE I DATI")
+            print("ALMENO UNA VALIDAZIONE È FALLITA - RIVEDERE I DATI")
         print("=" * 70)
 
         return {

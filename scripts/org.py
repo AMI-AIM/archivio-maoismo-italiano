@@ -64,21 +64,21 @@ def genera_organizzazioni():
              1 se si è verificato un errore bloccante (file non trovato,
              errore di lettura, ecc.) che deve interrompere Launcher.py.
     """
-    print("\n🏛️ Generazione delle pagine delle organizzazioni...")
+    print("\nGenerazione delle pagine delle organizzazioni...")
 
     try:
         org_path = os.path.join(DATA_DIR, 'dati.xlsx')
         df_org = pd.read_excel(org_path, sheet_name='Organizzazioni', dtype=str).fillna('')
         df_org.columns = df_org.columns.str.strip().str.lower()
     except FileNotFoundError:
-        print(f"   ❌ ERRORE: Non trovo '{org_path}'.")
+        print(f"ERRORE: Non trovo '{org_path}'.")
         return 1
     except Exception as e:
-        print(f"   ❌ ERRORE durante la lettura del foglio 'Organizzazioni' in dati.xlsx: {e}")
+        print(f"ERRORE durante la lettura del foglio 'Organizzazioni' in dati.xlsx: {e}")
         return 1
 
     if df_org.empty:
-        print("   ⚠️ Il foglio 'Organizzazioni' in dati.xlsx è vuoto.")
+        print("Il foglio 'Organizzazioni' in dati.xlsx è vuoto.")
         return 0
 
     try:
@@ -86,21 +86,21 @@ def genera_organizzazioni():
         df_catalogo = pd.read_excel(catalogo_path, sheet_name='Catalogo', dtype=str).fillna('')
         df_catalogo.columns = df_catalogo.columns.str.strip().str.lower()
     except FileNotFoundError:
-        print(f"   ❌ ERRORE: Non trovo '{catalogo_path}'.")
+        print(f"ERRORE: Non trovo '{catalogo_path}'.")
         return 1
     except Exception as e:
-        print(f"   ❌ ERRORE durante la lettura del foglio 'Catalogo' in dati.xlsx: {e}")
+        print(f"ERRORE durante la lettura del foglio 'Catalogo' in dati.xlsx: {e}")
         return 1
 
-    print(f"   📊 Caricate {len(df_org)} organizzazioni dal foglio 'Organizzazioni' di dati.xlsx")
-    print(f"   📊 Caricati {len(df_catalogo)} documenti dal foglio 'Catalogo' di dati.xlsx")
+    print(f"Caricate {len(df_org)} organizzazioni dal foglio 'Organizzazioni' di dati.xlsx")
+    print(f"Caricati {len(df_catalogo)} documenti dal foglio 'Catalogo' di dati.xlsx")
 
     # ============================================================
     # CREAZIONE INDEXER (lookup O(1))
     # ============================================================
-    print("   🔍 Creazione indici catalogo...")
+    print("Creazione indici catalogo...")
     indexer = CatalogIndexer(df_catalogo)
-    print("   ✅ Indici creati")
+    print("Indici creati")
 
     organizzazioni = {}
 
@@ -196,10 +196,10 @@ def genera_organizzazioni():
             }
 
     if not organizzazioni:
-        print("   ⚠️ Nessuna organizzazione ha documenti associati nel catalogo.")
+        print("Nessuna organizzazione ha documenti associati nel catalogo.")
         return 0
 
-    print(f"   📊 Trovate {len(organizzazioni)} organizzazioni con documenti associati.")
+    print(f"Trovate {len(organizzazioni)} organizzazioni con documenti associati.")
 
     org_dir = os.path.join(OUTPUT_DIR, 'organizzazioni')
     os.makedirs(org_dir, exist_ok=True)
@@ -305,7 +305,7 @@ hide:
 """
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(frontmatter + content)
-        print(f"   ✅ Creata scheda per {nome} → {slug}.md")
+        print(f"Creata scheda per {nome} → {slug}.md")
 
     # ============================================================
     # INDICE ORGANIZZAZIONI CON RICERCA + FILTRO ALFABETICO
@@ -462,13 +462,13 @@ hide:
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(index_content)
 
-    print(f"   ✅ Indice organizzazioni generato con {len(organizzazioni)} organizzazioni (top 3 in evidenza, resto con filtri).")
+    print(f"Indice organizzazioni generato con {len(organizzazioni)} organizzazioni (top 3 in evidenza, resto con filtri).")
 
     return 0
 
 
 def main():
-    print("🚀 Avvio del generatore di schede organizzazioni...")
+    print("Avvio del generatore di schede organizzazioni...")
     return genera_organizzazioni()
 
 

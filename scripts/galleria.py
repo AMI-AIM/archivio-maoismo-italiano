@@ -230,7 +230,7 @@ def generate_gallery():
 
     empty_state = df_gal.empty
     if empty_state:
-        print("⚠️ Nessun documento con tipo Foto/Fotografia/Manifesto: pagina in stato vuoto.")
+        print("Nessun documento con tipo Foto/Fotografia/Manifesto: pagina in stato vuoto.")
     else:
         df_gal["anno"] = df_gal["data"].apply(parse_year)
         df_gal["anno_sort"] = df_gal["anno"].fillna(9999).astype(int)

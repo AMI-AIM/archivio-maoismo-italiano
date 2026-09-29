@@ -68,14 +68,14 @@ def copia_immagini_profili():
 
             draw.text((50, 50), "?", fill='white', anchor="mm", font=font)
             img.save(placeholder_path, 'WEBP')
-            print("   [OK] Creato placeholder.webp in 'docs/immagini/profili/'")
+            print("[OK] Creato placeholder.webp in 'docs/immagini/profili/'")
 
         except ImportError:
-            print("   [WARN] Pillow non installato. Usa placeholder.webp esistente.")
+            print("[WARN] Pillow non installato. Usa placeholder.webp esistente.")
         except Exception as e:
-            print(f"   [WARN] Impossibile creare placeholder.webp: {e}")
+            print(f"[WARN] Impossibile creare placeholder.webp: {e}")
     else:
-        print("   [OK] placeholder.webp gia presente")
+        print("[OK] placeholder.webp gia presente")
 
 
 def pubblica_file_seo():
@@ -91,12 +91,12 @@ Sitemap: https://ami-aim.github.io/archivio-maoismo-italiano/sitemap.txt
 """
     with open(robots_path, 'w', encoding='utf-8') as f:
         f.write(robots_content)
-    print("   [OK] robots.txt scritto in build/")
+    print("[OK] robots.txt scritto in build/")
 
     # Verifica che non ci siano file robots.txt in assets/ che potrebbero sovrascriverlo
     assets_robots = os.path.join(ROOT_DIR, 'assets', 'robots.txt')
     if os.path.exists(assets_robots):
-        print(f"   [WARNING] Trovato {assets_robots} - verrà rimosso per evitare conflitti")
+        print(f"[WARNING] Trovato {assets_robots} - verrà rimosso per evitare conflitti")
         os.remove(assets_robots)
 
 def genera_sitemap(output_dir, df, persone, organizzazioni):
@@ -136,7 +136,7 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
     if os.path.exists(progetto_path):
         pagine.append({"loc": f"{base_url}/progetto/", "priority": "0.8", "changefreq": "monthly"})
     else:
-        print("   [INFO] progetto.md non trovato, escluso dalla sitemap")
+        print("[INFO] progetto.md non trovato, escluso dalla sitemap")
 
     # Pagine che esistono sempre (generate dagli script)
     pagine.extend([
@@ -219,20 +219,20 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
         primo_xml = f.read(5)
 
     if primo_xml == '<?xml':
-        print(f"   [OK] sitemap.xml generata ({len(pagine)} URL)")
+        print(f"[OK] sitemap.xml generata ({len(pagine)} URL)")
     else:
-        print(f"   [WARN] sitemap.xml: primi caratteri inattesi: {primo_xml!r}")
+        print(f"[WARN] sitemap.xml: primi caratteri inattesi: {primo_xml!r}")
 
     # Verifica TXT (prima riga deve essere un URL)
     with open(sitemap_txt_path, 'r', encoding='utf-8') as f:
         prima_riga = f.readline().strip()
 
     if prima_riga.startswith('http'):
-        print(f"   [OK] sitemap.txt generata ({len(pagine)} URL)")
+        print(f"[OK] sitemap.txt generata ({len(pagine)} URL)")
     else:
-        print(f"   [WARN] sitemap.txt: prima riga inattesa: {prima_riga!r}")
+        print(f"[WARN] sitemap.txt: prima riga inattesa: {prima_riga!r}")
 
-    print("   [INFO] Entrambi i file pronti per essere serviti da GitHub Pages")
+    print("[INFO] Entrambi i file pronti per essere serviti da GitHub Pages")
 
 
 def ottimizza_json(output_dir):
