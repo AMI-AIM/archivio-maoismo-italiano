@@ -447,17 +447,20 @@ STILE PERSONALIZZATO — TEMA MATERIAL
     position: relative;
     z-index: 1;
   }
+  /* Allineato ai duplicati vincolanti in home.py (i selettori
+     banner-* hanno style attribute inline: senza !important queste
+     regole erano inerti). */
   .banner-full {
-    margin-bottom: 0;
-    height: 240px;
-    min-height: 200px;
-    overflow: hidden;
+    margin-bottom: 0 !important;
+    height: 240px !important;
+    min-height: 200px !important;
+    overflow: hidden !important;
   }
   .banner-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
   }
   .banner-content[style] {
     bottom: 0.3rem !important;
@@ -648,8 +651,8 @@ STILE PERSONALIZZATO — TEMA MATERIAL
     max-width: 120px;
   }
   .banner-full {
-    height: 180px;
-    min-height: 150px;
+    height: 180px !important;
+    min-height: 150px !important;
   }
   .banner-content p[style] {
     font-size: 0.7rem !important;
