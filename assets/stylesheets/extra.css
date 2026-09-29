@@ -1175,3 +1175,139 @@ body:has(.banner-content-home) .lazy-skeleton {
 .lazy-img[style*="opacity"] {
     contain: paint;
 }
+
+
+/* ============================================================
+   FOOTER — stili migrati dal blocco <style> inline di
+   overrides/partials/footer.html (migrazione CSS complessiva).
+   Caricati globalmente via extra_css di mkdocs.yml.
+   NOTA: qui dentro i !important sono deliberati: neutralizzano
+   bordi/ombre del tema Material sul footer (reset esteso).
+   ============================================================ */
+/* ------------------------------------------------------------
+RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
+------------------------------------------------------------ */
+.md-footer,
+.md-footer *,
+.md-footer::before,
+.md-footer::after,
+.md-footer *::before,
+.md-footer *::after {
+    box-shadow: none !important;
+    outline: none !important;
+}
+.md-footer,
+.md-footer > *,
+.ami-footer,
+.ami-footer > * {
+    border-top: none !important;
+}
+/* [FIX] elimina la linea grigia: azzera il margin-top che
+   .md-typeset > *:first-child darebbe alla griglia */
+.ami-footer.md-typeset > *:first-child {
+    margin-top: 0 !important;
+}
+.ami-footer {
+    background-color: var(--md-footer-bg-color);
+    color: var(--md-footer-fg-color);
+}
+.ami-footer__grid {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 1.25rem;
+    padding: 0.9rem 0 0.75rem;
+    align-items: start;
+}
+.ami-footer__brand {
+    max-width: 26rem;
+}
+/* [FIX] line-height 1.2: ripristina la compattazione delle righe
+   che prima viveva nel vecchio extra.css */
+.md-footer-copyright__text {
+    font-weight: 700;
+    font-size: 0.9rem;
+    line-height: 1.2;
+    color: var(--md-footer-fg-color);
+    margin-bottom: 0.2rem;
+}
+.md-footer-copyright__subtext {
+    font-size: 0.65rem;
+    line-height: 1.2;
+    color: var(--md-footer-fg-color--light);
+    margin-bottom: 0.2rem;
+}
+.md-footer-copyright__email {
+    line-height: 1.2;
+}
+.md-footer-copyright__email a {
+    font-size: 0.65rem;
+    color: var(--md-footer-fg-color);
+    text-decoration: underline;
+    opacity: 0.85;
+}
+.md-footer-copyright__email a:hover {
+    opacity: 1;
+}
+.ami-footer__social {
+    margin-top: 0.6rem;
+}
+.ami-footer__social-link {
+    display: inline-flex;
+}
+.ami-footer__ia-logo {
+    height: 44px !important;
+    width: auto !important;
+    max-width: 130px !important;
+    object-fit: contain;
+    display: block;
+    opacity: 0.9;
+    transition: opacity 0.15s ease;
+}
+.ami-footer__social-link:hover .ami-footer__ia-logo {
+    opacity: 1;
+}
+.ami-footer__links-title {
+    display: block;
+    font-weight: 700;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--md-footer-fg-color--light);
+    margin-bottom: 0.5rem;
+}
+.ami-footer__links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+.ami-footer__links-list a {
+    font-size: 0.68rem;
+    color: var(--md-footer-fg-color);
+    text-decoration: none;
+    width: max-content;
+    opacity: 0.85;
+}
+.ami-footer__links-list a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+.ami-footer__divider {
+    height: 1px;
+    background-color: var(--md-footer-fg-color--lighter);
+    opacity: 0.3;
+    border: none;
+}
+.ami-footer__bottom {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+    font-size: 0.65rem;
+    font-weight: 300;
+    color: var(--md-footer-fg-color--light);
+}
+@media (max-width: 44rem) {
+    .ami-footer__grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}

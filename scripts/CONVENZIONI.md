@@ -20,13 +20,17 @@ consigliata per i nuovi contributi.
 ## 2. Stile CSS — due fonti (dopo la migrazione)
 1. Fogli in `assets/stylesheets/*.css` (token `--ami-*`): extra.css,
    documenti.css, galleria.css, soggetti.css, soggetti-indice.css e i nuovi
-   **home.css** e **archivio.css** (migrati dai blocchi `<style>` inline di
-   `core/home.py` e `core/archivio.py`, set. 2026). Sono asset statici
+   **home.css**, **archivio.css** e **argomenti.css** (migrati dai blocchi
+   `<style>` inline di `core/home.py`, `core/archivio.py` e `argomenti.py`,
+   set. 2026). Gli stili del footer sono migrati da
+   `overrides/partials/footer.html` a fondo `extra.css`. Sono asset statici
    versionati, modificabili a mano; `sync_assets.py` li copia in `build/` e
-   verifica che home.css/archivio.css esistano (fallisce se mancano).
+   verifica che home.css/archivio.css/argomenti.css esistano (fallisce se
+   mancano).
    Canali di caricamento: extra/documenti/galleria via `extra_css` di
-   mkdocs.yml; home.css/archivio.css/soggetti.css via `<link>` nel markdown
-   generato (in coda alla pagina, per conservare la cascata post-extra.css).
+   mkdocs.yml; home.css/archivio.css/soggetti.css/argomenti.css via `<link>`
+   nel markdown generato (in coda alla pagina, per conservare la cascata
+   post-extra.css).
 2. Stili `style="..."` direttamente nell'HTML generato (banner, bottoni):
    residui storici, da migrare solo insieme alle regole `[style]` correlate.
 Decisioni prese (set. 2026):
@@ -41,8 +45,10 @@ Problemi aperti (rinviati):
   (es. `.banner-content p[style]` 0.85rem vs 0.8rem in `extra.css:469`): ora
   il duplicato vive nei due file invece che inline, ma la cascata e' invariata
   (home.css arriva dopo). Da consolidare con confronto visivo.
-- Blocchi `<style>` superstiti: `argomenti.py` e `overrides/partials/footer.html`
-  (contenuti piccoli, candidati alla prossima migrazione).
+- ~~Blocchi `<style>` superstiti~~: **esauriti** (ott. 2026). Nessuno script
+  generatore ne template `overrides/` contiene piu' blocchi `<style>`; lo
+  stile inline residuo e' solo negli attributi `style="..."` dell'HTML
+  generato (banner hero, pannelli display:none) — vedi punto 2 sopra.
 Regola: nuovo CSS va in `assets/stylesheets/`, parametrizzato con `--ami-*`;
 i blocchi inline vanno progressivamente migrati (la migrazione completa richiede
 un confronto visivo pagina per pagina). Codice morto CSS rimosso: selettori mai
