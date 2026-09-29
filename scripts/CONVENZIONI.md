@@ -17,11 +17,18 @@ consigliata per i nuovi contributi.
   sono linkati esplicitamente dai generatori: quando si sposta una regola,
   verificare quale dei due canali la eredita.
 
-## 2. Stile CSS — tre fonti
-1. Token e layout in `assets/stylesheets/*.css` (variabili `--ami-*`).
-2. Blocchi `<style>` inline nei generatori: `core/home.py` (~550 righe),
-   `core/archivio.py` (~570), `argomenti.py`, `overrides/partials/footer.html`.
-3. Stili `style="..."` direttamente nell'HTML generato (banner, bottoni).
+## 2. Stile CSS — due fonti (dopo la migrazione)
+1. Fogli in `assets/stylesheets/*.css` (token `--ami-*`): extra.css,
+   documenti.css, galleria.css, soggetti.css, soggetti-indice.css e i nuovi
+   **home.css** e **archivio.css** (migrati dai blocchi `<style>` inline di
+   `core/home.py` e `core/archivio.py`, set. 2026). Sono asset statici
+   versionati, modificabili a mano; `sync_assets.py` li copia in `build/` e
+   verifica che home.css/archivio.css esistano (fallisce se mancano).
+   Canali di caricamento: extra/documenti/galleria via `extra_css` di
+   mkdocs.yml; home.css/archivio.css/soggetti.css via `<link>` nel markdown
+   generato (in coda alla pagina, per conservare la cascata post-extra.css).
+2. Stili `style="..."` direttamente nell'HTML generato (banner, bottoni):
+   residui storici, da migrare solo insieme alle regole `[style]` correlate.
 Decisioni prese (set. 2026):
 - **Solo light mode**: il tema scuro MkDocs slate e' abbandonato; `mkdocs.yml`
   fissa `scheme: default` senza toggle e i selettori slate sono stati rimossi
@@ -29,10 +36,13 @@ Decisioni prese (set. 2026):
 - **Rosso brand = `#b71c1c`** ovunque (hard-coded in `home.py`, `404.html`,
   `galleria.css`); `palette.primary: red` di MkDocs resta solo per i componenti
   nativi del tema.
-Problemi aperti (migrazione rinviata):
-- Il blocco inline di home duplica sezioni di `extra.css` con valori divergenti
-  (es. `.banner-content p[style] { font-size: 0.85rem }` inline vs `0.8rem` in
-  `extra.css:469`; vince l'inline perche' successivo nel `<head>`).
+Problemi aperti (rinviati):
+- home.css duplica ancora alcune sezioni di `extra.css` con valori divergenti
+  (es. `.banner-content p[style]` 0.85rem vs 0.8rem in `extra.css:469`): ora
+  il duplicato vive nei due file invece che inline, ma la cascata e' invariata
+  (home.css arriva dopo). Da consolidare con confronto visivo.
+- Blocchi `<style>` superstiti: `argomenti.py` e `overrides/partials/footer.html`
+  (contenuti piccoli, candidati alla prossima migrazione).
 Regola: nuovo CSS va in `assets/stylesheets/`, parametrizzato con `--ami-*`;
 i blocchi inline vanno progressivamente migrati (la migrazione completa richiede
 un confronto visivo pagina per pagina). Codice morto CSS rimosso: selettori mai

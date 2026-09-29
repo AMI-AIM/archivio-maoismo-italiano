@@ -1092,24 +1092,21 @@ archivio-filtri.js), senza più stili inline Word */
 }
 
 /* Skeleton HOME: grigio scuro solido (no gradient/animazione), deciso dal
-   manutentore per ridurre il contrasto sulla home. Il selettore
-   body:first-of-type e l'unico aggancio reale alla home (.home-page non
-   esiste nel markup). Regole migrate qui dall'inline di core/home.py:
-   extra.css viene caricato dopo il <style> inline della pagina, quindi
-   queste regole vincono comunque; gli !important sono mantenuti come rete
-   di sicurezza contro eventuali stili inline del JS. */
-body:first-of-type .lazy-skeleton {
-    background: #2b2b2b !important;
-    background-image: none !important;
-    animation: none !important;
-    border-radius: 4px;
+   manutentore per ridurre il contrasto sulla home. Aggancio reale: la
+   classe .banner-content-home, presente SOLO nel banner della home
+   (generata in scripts/core/home.py) — stessa tecnica gia' usata per
+   .has-hero-search. Le pagine documento/galleria NON hanno il banner in
+   alto, quindi mantengono lo skeleton chiaro di default. Regole migrate
+   qui dall'inline di core/home.py; niente !important perche' nessun JS
+   applica piu' stili inline agli skeleton (vedi lazy-loading.js). */
+body:has(.banner-content-home) .lazy-skeleton {
+    background: #2b2b2b;
 }
 
 /* Coerente col sopra: anche le thumbnail "in evidenza" usano il grigio scuro
-   (prima era un #f0f0f0 chiaro divergente definito nell'inline di home.py). */
-body:first-of-type .evidenza-thumbnail .lazy-skeleton {
-    background: #2b2b2b !important;
-}
+   (prima era un #f0f0f0 chiaro divergente definito nell'inline di home.py).
+   Selettore specifico non necessario: la regola generale sopra copre gia'
+   i discendenti di .evidenza-thumbnail. */
 
 /* ==========================================================================
    ERROR STATE
@@ -1125,11 +1122,10 @@ body:first-of-type .evidenza-thumbnail .lazy-skeleton {
     padding: 1rem;
 }
 
-/* Priorita' sul grigio scuro della home (body:first-of-type, specificita
-   pari): lo stato di errore deve restare visibile su tutte le pagine. */
-body:first-of-type .lazy-skeleton.error-state {
-    background: #ffebee !important;
-}
+/* Nessuna regola "home-only" per error-state e' necessaria: la base
+   .lazy-skeleton.error-state qui sopra ha !important e vince sempre, sia
+   sullo skeleton chiaro di default sia sul grigio scuro della home
+   (body:has(.banner-content-home), che non usa !important). */
 
 .lazy-skeleton.error-state::after {
     content: '⚠️ Immagine non disponibile';
