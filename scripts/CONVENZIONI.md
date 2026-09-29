@@ -70,10 +70,13 @@ Non aggiungere formati ambigui prima di questi.
 
 ## 6. Dipendenze Python
 Sorgente unica: `requirements.txt` (pandas, openpyxl, requests, mkdocs-material).
-**Pillow e' FACOLTATIVO e va tenuto fuori da requirements.txt**: lo usa solo
-`generatore.py` per creare il placeholder.webp se manca, e il codice gestisce
-l'ImportError ripiegando sul file gia presente nel repo (scelta del manutentore:
-semplicita'). `requests` era usato ma non dichiarato: ora presente. La CI
+**Pillow NON e' una dipendenza del progetto** (scelta del manutentore:
+semplicita'). L'avatar `placeholder.webp` delle schede senza foto e' un asset
+statico versionato in `assets/immagini/profili/`, copiato in `build/` da
+`sync_assets.py`: nessun file immagine viene generato a runtime (in passato
+`generatore.py` conteneva codice Pillow opzionale per crearlo se mancante —
+rimosso; ora `verifica_placeholder_profili()` si limita a controllare che
+l'asset esista). `requests` era usato ma non dichiarato: ora presente. La CI
 installa i requisiti da requirements.txt (`pip install -r`, deploy.yml): se in
 futuro il validatore o altri moduli core useranno nuove librerie, aggiornare
 requirements.txt (non serve toccare deploy.yml, che legge il file).

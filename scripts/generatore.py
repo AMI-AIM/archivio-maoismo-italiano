@@ -25,57 +25,18 @@ OUTPUT_DIR = os.path.join(ROOT_DIR, 'build')
 # UTILITY FUNCTIONS
 # ========================================================================
 
-def copia_immagini_profili():
+def verifica_placeholder_profili():
     """
-    Garantisce che placeholder.webp esista in docs/immagini/profili/
-    per avatar predefiniti di persone/organizzazioni senza foto.
+    Verifica che assets/immagini/profili/placeholder.webp esista nel repo.
+    E' l'avatar predefinito delle schede persona/organizzazione senza foto:
+    viene copiato in build/ da sync_assets.py (unica fonte: assets/, mai
+    generato a runtime — vedi CONVENZIONI.md §6).
     """
-    dst_dir = os.path.join(OUTPUT_DIR, 'immagini', 'profili')
-    os.makedirs(dst_dir, exist_ok=True)
-
-    placeholder_path = os.path.join(dst_dir, 'placeholder.webp')
-
-    if not os.path.exists(placeholder_path):
-        try:
-            from PIL import Image, ImageDraw, ImageFont
-
-            img = Image.new('RGB', (100, 100), color='#888888')
-            draw = ImageDraw.Draw(img)
-
-            # FIX BUG G: Prova più font per garantire compatibilità
-            # cross-platform (Windows locale, Ubuntu GitHub Actions).
-            font = None
-            font_candidates = [
-                "arial.ttf",                                            # Windows
-                "DejaVuSans.ttf",                                       # Linux (nome breve)
-                "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",      # Ubuntu/Debian
-                "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",  # alternativa Linux
-            ]
-            for font_name in font_candidates:
-                try:
-                    font = ImageFont.truetype(font_name, 40)
-                    break
-                except OSError:
-                    continue
-
-            if font is None:
-                # Fallback: usa il font di default di Pillow.
-                # Su Pillow >= 9.2 si può specificare la dimensione.
-                try:
-                    font = ImageFont.load_default(size=40)
-                except TypeError:
-                    font = ImageFont.load_default()
-
-            draw.text((50, 50), "?", fill='white', anchor="mm", font=font)
-            img.save(placeholder_path, 'WEBP')
-            print("[OK] Creato placeholder.webp in 'docs/immagini/profili/'")
-
-        except ImportError:
-            print("[WARN] Pillow non installato. Usa placeholder.webp esistente.")
-        except Exception as e:
-            print(f"[WARN] Impossibile creare placeholder.webp: {e}")
+    placeholder_src = os.path.join(ROOT_DIR, 'assets', 'immagini', 'profili', 'placeholder.webp')
+    if os.path.exists(placeholder_src):
+        print("[OK] placeholder.webp presente in 'assets/immagini/profili/'")
     else:
-        print("[OK] placeholder.webp gia presente")
+        print(f"[WARN] Manca {placeholder_src}: le schede senza foto avranno un avatar rotto.")
 
 
 def pubblica_file_seo():
@@ -316,7 +277,7 @@ def main():
     # PREPARAZIONE: Immagini profilo + file SEO statici
     # ================================================================
     print("\n[PREP] Preparazione risorse...")
-    copia_immagini_profili()
+    verifica_placeholder_profili()
     pubblica_file_seo()
 
     # ================================================================

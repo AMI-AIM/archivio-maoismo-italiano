@@ -63,5 +63,6 @@ python Launcher.py --help
 - A fine esecuzione il Launcher attende INVIO ("Premi INVIO per chiudere"):
   comodo dal doppio click su Windows; nei terminali automatizzati/CI l'attesa
   viene saltata automaticamente (stdin chiuso).
-- Pillow non e' tra le dipendenze obbligatorie: serve solo a generare il
-  placeholder.webp se manca (il file e' gia nel repo). Vedi CONVENZIONI.md §6.
+- Pillow non e' una dipendenza del progetto: l'avatar placeholder.webp e' un
+  asset statico in assets/immagini/profili/, copiato in build/ da sync_assets.py.
+  Vedi CONVENZIONI.md §6.
