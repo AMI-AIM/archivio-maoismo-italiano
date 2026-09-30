@@ -49,6 +49,17 @@ Problemi aperti (rinviati):
   generatore ne template `overrides/` contiene piu' blocchi `<style>`; lo
   stile inline residuo e' solo negli attributi `style="..."` dell'HTML
   generato (banner hero, pannelli display:none) — vedi punto 2 sopra.
+### 2.1 Scala tipografica unificata (token `--ami-font-size-*`)
+Definita in `extra.css` nel blocco `:root`. Tutti i CSS custom usano i token,
+non valori grezzi rem/px:
+- font-size: xs 0.75 · sm 0.875 · base 1 · md 1.125 · lg 1.25 · xl 1.5 · 2xl 2 · 3xl 2.5 (rem)
+- line-height: tight 1.2 · snug 1.35 · normal 1.5 · relaxed 1.6
+- letter-spacing: tighter -0.02 · tight -0.01 · normal 0 · wide 0.03 · wider 0.05 (em)
+Migrazione completata ott. 2026 su extra/home/archivio/argomenti/documenti/
+soggetti/soggetti-indice/galleria. Valori fuori scala arrotondati al token piu'
+vicino (es. 0.95→md, 0.8→sm, 0.65→xs): differenza ≤ 2px, da verificare visivamente.
+Eccezioni deliberate NON tokenizzate: display enormi di argomenti.css (5.5rem,
+4rem), `line-height: 1`/`2` strutturali, px nei componenti nativi del tema.
 Regola: nuovo CSS va in `assets/stylesheets/`, parametrizzato con `--ami-*`;
 i blocchi inline vanno progressivamente migrati (la migrazione completa richiede
 un confronto visivo pagina per pagina). Codice morto CSS rimosso: selettori mai

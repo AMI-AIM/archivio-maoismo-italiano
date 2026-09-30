@@ -5,7 +5,7 @@
 
 .md-typeset h1.person-name,
 .md-typeset h1.org-name {
-    font-size: 2.4rem;
+    font-size: var(--ami-font-size-2xl);
     font-weight: 700;
     margin: 0 0 0.2rem 0;
     color: var(--md-primary-fg-color);
@@ -13,7 +13,7 @@
 
 .person-dates,
 .org-dates {
-    font-size: 1rem;
+    font-size: var(--ami-font-size-base);
     color: var(--md-default-fg-color--light);
     margin: 0 0 0.8rem 0;
     font-weight: 400;
@@ -100,7 +100,7 @@
 
 .doc-data {
     flex: 0 0 140px;
-    font-size: 0.9rem;
+    font-size: var(--ami-font-size-sm);
     color: var(--md-primary-fg-color);
     font-weight: 500;
     white-space: nowrap;
@@ -113,7 +113,7 @@
 }
 
 .doc-titolo {
-    font-size: 1rem;
+    font-size: var(--ami-font-size-base);
     font-weight: 500;
 }
 
@@ -133,10 +133,10 @@
 
 .ruolo-badge {
     display: inline-block;
-    font-size: 0.65rem;
+    font-size: var(--ami-font-size-xs);
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: var(--ami-tracking-wider);
     color: #ffffff !important;
     background: var(--md-primary-fg-color);
     padding: 0.15rem 0.4rem;
@@ -168,16 +168,16 @@
     .doc-data {
         flex: 0 0 auto;
         white-space: normal;
-        font-size: 0.8rem;
+        font-size: var(--ami-font-size-sm);
     }
 
     .person-name,
     .org-name {
-        font-size: 1.6rem;
+        font-size: var(--ami-font-size-xl);
     }
 
     .person-dates,
     .org-dates {
-        font-size: 0.85rem;
+        font-size: var(--ami-font-size-sm);
     }
 }

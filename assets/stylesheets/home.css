@@ -63,7 +63,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   margin: 0 0 1.5rem 0;
 }
 .section-title {
-  font-size: 1.5rem;
+  font-size: var(--ami-font-size-xl); /* 24px */
   font-weight: 600;
   display: block;
   color: #ffffff;
@@ -155,7 +155,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 }
 .evidenza-placeholder {
   color: #ffffff;
-  font-size: 2.5rem;
+  font-size: var(--ami-font-size-3xl); /* 40px */
   opacity: 0.5;
 }
 .evidenza-titolo {
@@ -164,9 +164,9 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   left: 0 !important;
   right: 0 !important;
   margin-top: 0.75rem !important;
-  font-size: 0.85rem;
+  font-size: var(--ami-font-size-sm); /* 14px */
   font-weight: 500;
-  line-height: 1.3;
+  line-height: var(--ami-line-height-snug);
   color: rgba(255, 255, 255, 0.92);
   text-align: center;
   white-space: nowrap;
@@ -203,7 +203,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 }
 .doc-data {
   flex: 0 0 150px;
-  font-size: 0.9rem;
+  font-size: var(--ami-font-size-sm); /* 14px */
   font-weight: 500;
   color: var(--md-primary-fg-color);
   white-space: nowrap;
@@ -214,7 +214,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   min-width: 0;
 }
 .doc-titolo {
-  font-size: 1.05rem;
+  font-size: var(--ami-font-size-base); /* 16px */
   font-weight: 600;
   margin-bottom: 0.1rem;
 }
@@ -234,10 +234,10 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   margin-top: 0.15rem;
 }
 .doc-type-chip {
-  font-size: 0.68rem; 
+  font-size: var(--ami-font-size-xs); /* 12px - etichetta */
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--ami-tracking-wide);
   color: var(--md-primary-fg-color);
   background: rgba(183, 28, 28, 0.1);
   padding: 0.15rem 0.55rem;
@@ -245,11 +245,11 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   white-space: nowrap;
 }
 .doc-org {
-  font-size: 0.88rem;
+  font-size: var(--ami-font-size-sm); /* 14px */
   color: var(--md-default-fg-color--light);
 }
 .doc-sommario {
-  font-size: 0.9rem;
+  font-size: var(--ami-font-size-sm); /* 14px */
   color: var(--md-default-fg-color--light);
 }
 .recent-container {
@@ -287,7 +287,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 .home-column h2 {
   margin-top: 0;
   margin-bottom: 0.6rem;
-  font-size: 1.3rem;
+  font-size: var(--ami-font-size-lg); /* 20px */
   display: block;
   padding-bottom: 0.5rem;
   position: relative;
@@ -337,9 +337,9 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 .persona-avatar--3 { background: #8d6e63; }
 .persona-iniziali {
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: var(--ami-font-size-md); /* 18px */
   color: #ffffff;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--ami-tracking-wider);
   user-select: none;
 }
 .persona-rank-badge {
@@ -352,7 +352,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
+  font-size: var(--ami-font-size-xs); /* 12px */
   font-weight: 700;
   color: #1a1a1a;
   border: 2px solid var(--md-code-bg-color);
@@ -362,7 +362,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 .persona-rank-badge--2 { background: linear-gradient(135deg, #dde3e6, #9aa5ab); }
 .persona-rank-badge--3 { background: linear-gradient(135deg, #d7a06e, #a05a2c); }
 .persona-date {
-  font-size: 0.8rem;
+  font-size: var(--ami-font-size-sm); /* 14px */
   color: var(--md-default-fg-color--light);
   font-style: italic;
 }
@@ -419,14 +419,14 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   }
   .evidenza-band .section-title {
     margin: 0 0 1.2rem 0;
-    font-size: 1.25rem;
+    font-size: var(--ami-font-size-lg); /* 20px */
   }
   .evidenza-thumbnail {
     height: 200px !important;
     max-height: 200px !important;
   }
   .evidenza-titolo {
-    font-size: 0.8rem;
+    font-size: var(--ami-font-size-sm); /* 14px */
   }
 
   /* Banner responsive: fonte unica extra.css (sezione 6 e relativi
@@ -455,19 +455,19 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   .doc-data {
     flex: 0 0 auto;
     white-space: normal;
-    font-size: 0.8rem;
+    font-size: var(--ami-font-size-sm); /* 14px */
   }
   .doc-titolo {
-    font-size: 0.95rem;
+    font-size: var(--ami-font-size-base); /* 16px */
   }
   .doc-sommario {
-    font-size: 0.8rem;
+    font-size: var(--ami-font-size-sm); /* 14px */
   }
 }
 
 @media (max-width: 480px) {
   .section-title {
-    font-size: 1.2rem;
+    font-size: var(--ami-font-size-md); /* 18px */
   }
   .evidenza-thumbnail {
     height: 150px !important;

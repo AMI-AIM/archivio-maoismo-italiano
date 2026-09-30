@@ -117,7 +117,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 .md-header__nav-link {
   position: relative;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: var(--ami-font-size-base);
   font-weight: 500;
   color: rgba(255, 255, 255, 0.85);
   transition: color 0.15s;
@@ -230,7 +230,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   display: block;
   padding: 0.55rem 1.1rem;
   font-family: var(--ami-font-label);
-  font-size: 0.95rem;
+  font-size: var(--ami-font-size-md);
   font-weight: 600;
   color: #1a1a1a;
   text-decoration: none;
@@ -259,10 +259,10 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   display: block;
   padding: 0.6rem 1rem 0.3rem 1rem;
   font-family: var(--ami-font-label);
-  font-size: 0.8rem;
+  font-size: var(--ami-font-size-sm);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--ami-tracking-wider);
   color: var(--md-default-fg-color--light);
 }
 
@@ -274,7 +274,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 
 .md-drawer__subitem .md-drawer__link {
   padding-left: 2.2rem;
-  font-size: 0.95rem;
+  font-size: var(--ami-font-size-md);
 }
 
 /* ------------------------------------------------------------
@@ -328,11 +328,11 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   padding: 0.5rem 1rem;
 }
 .banner-content p {
-  font-size: 1.4rem;
+  font-size: var(--ami-font-size-xl);
   font-weight: 600;
   opacity: 1;
   margin: 0 0 0.8rem 0;
-  line-height: 1.45;
+  line-height: var(--ami-line-height-normal);
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65), 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 .banner-actions {
@@ -347,7 +347,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   background-color: #ffffff;
   color: #b71c1c !important; /* serve: vince su .md-typeset a (rosso link Material) */
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: var(--ami-font-size-sm);
   border-radius: 6px;
   text-decoration: none;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -381,7 +381,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   border: none;
   outline: none;
   color: #ffffff;
-  font-size: 0.9rem;
+  font-size: var(--ami-font-size-sm);
   width: 100%;
   min-width: 140px;
   flex: 1 1 auto;
@@ -391,7 +391,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   border: none;
   color: #ffffff;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: var(--ami-font-size-sm);
   cursor: pointer;
   padding: 0.2rem 0.4rem;
   text-decoration: underline;
@@ -478,7 +478,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 .md-drawer__link {
   display: block;
   padding: 0.6rem 1rem;
-  font-size: 1rem;
+  font-size: var(--ami-font-size-base);
   font-weight: 500;
   color: var(--md-default-fg-color);
   text-decoration: none;
@@ -565,9 +565,9 @@ STILE PERSONALIZZATO — TEMA MATERIAL
     padding: 0.3rem 0.6rem;
   }
   .banner-content p {
-    font-size: 0.8rem;
+    font-size: var(--ami-font-size-sm);
     margin: 0 0 0.3rem 0;
-    line-height: 1.3;
+    line-height: var(--ami-line-height-snug);
   }
   .banner-actions {
     flex-wrap: wrap;
@@ -575,7 +575,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   }
   .banner-button {
     padding: 0.3rem 0.8rem;
-    font-size: 0.75rem;
+    font-size: var(--ami-font-size-xs);
   }
   .banner-search {
     flex: 1 1 100%;
@@ -584,10 +584,10 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   }
   .banner-search input {
     min-width: 80px;
-    font-size: 0.75rem;
+    font-size: var(--ami-font-size-xs);
   }
   .banner-search-submit {
-    font-size: 0.7rem;
+    font-size: var(--ami-font-size-xs);
     padding: 0.1rem 0.3rem;
   }
   .banner-search-icon {
@@ -620,7 +620,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 .doc-data {
   flex: 0 0 150px;
-  font-size: 0.9rem;
+  font-size: var(--ami-font-size-sm);
   font-weight: 500;
   color: var(--md-primary-fg-color);
   white-space: nowrap;
@@ -631,7 +631,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   min-width: 0;
 }
 .doc-titolo {
-  font-size: 1.05rem;
+  font-size: var(--ami-font-size-md);
   font-weight: 600;
   margin-bottom: 0.1rem;
 }
@@ -644,11 +644,11 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   color: var(--md-primary-fg-color);
 }
 .doc-sommario {
-  font-size: 0.9rem;
+  font-size: var(--ami-font-size-sm);
   color: var(--md-default-fg-color--light);
 }
 .doc-keywords {
-  font-size: 0.8rem;
+  font-size: var(--ami-font-size-sm);
   color: var(--md-primary-fg-color--light);
   font-style: italic;
 }
@@ -687,31 +687,31 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   .doc-data {
     flex: 0 0 auto;
     white-space: normal;
-    font-size: 0.8rem;
+    font-size: var(--ami-font-size-sm);
   }
   .doc-titolo {
-    font-size: 0.95rem;
+    font-size: var(--ami-font-size-md);
   }
   .doc-sommario {
-    font-size: 0.8rem;
+    font-size: var(--ami-font-size-sm);
   }
   .doc-keywords {
-    font-size: 0.75rem;
+    font-size: var(--ami-font-size-xs);
   }
   .risultato-card {
     padding: 0.6rem 0.4rem;
   }
   .risultato-titolo {
-    font-size: 0.95rem;
+    font-size: var(--ami-font-size-md);
   }
   .risultato-meta {
-    font-size: 0.75rem;
+    font-size: var(--ami-font-size-xs);
   }
   .risultato-desc {
-    font-size: 0.8rem;
+    font-size: var(--ami-font-size-sm);
   }
   .risultato-data {
-    font-size: 0.8rem;
+    font-size: var(--ami-font-size-sm);
   }
   .people-grid,
   .org-grid {
@@ -724,7 +724,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   }
   .people-name,
   .org-name {
-    font-size: 0.85rem;
+    font-size: var(--ami-font-size-sm);
   }
 }
 
@@ -750,18 +750,18 @@ STILE PERSONALIZZATO — TEMA MATERIAL
     min-height: 150px;
   }
   .banner-content p {
-    font-size: 0.7rem;
+    font-size: var(--ami-font-size-xs);
   }
   .banner-button {
     padding: 0.2rem 0.6rem;
-    font-size: 0.65rem;
+    font-size: var(--ami-font-size-xs);
   }
   .banner-search input {
-    font-size: 0.7rem;
+    font-size: var(--ami-font-size-xs);
     min-width: 60px;
   }
   .banner-search-submit {
-    font-size: 0.65rem;
+    font-size: var(--ami-font-size-xs);
   }
 }
 
@@ -814,7 +814,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   }
   .evidenza-band .section-title {
     margin: 0 0 1.2rem 0 !important;
-    font-size: 1.25rem;
+    font-size: var(--ami-font-size-lg);
   }
   .evidenza-thumbnail {
     height: 200px !important;
@@ -835,7 +835,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
     left: 0 !important;
     right: 0 !important;
     margin-top: 0.75rem !important;
-    font-size: 0.8rem !important;
+    font-size: var(--ami-font-size-sm) !important;
   }
 }
 @media (max-width: 600px) {
@@ -876,6 +876,29 @@ Courier Prime → RISERVATO a codice e blocchi isolati (mai in riga
   --ami-font-mono: "Courier Prime", "Courier New", monospace;
   --md-text-font-family: "Fraunces", Georgia, "Times New Roman", serif;
   --md-code-font-family: "Courier Prime", "Courier New", monospace;
+
+  /* Scala tipografica unificata (rem) — valori di riferimento per tutti i CSS custom. */
+  --ami-font-size-xs: 0.75rem;   /* 12px - etichette piccole */
+  --ami-font-size-sm: 0.875rem;  /* 14px - testo secondario */
+  --ami-font-size-base: 1rem;    /* 16px - corpo standard */
+  --ami-font-size-md: 1.125rem;  /* 18px - enfasi */
+  --ami-font-size-lg: 1.25rem;   /* 20px - sottotitoli */
+  --ami-font-size-xl: 1.5rem;    /* 24px - titoli sezione */
+  --ami-font-size-2xl: 2rem;     /* 32px - hero H1 */
+  --ami-font-size-3xl: 2.5rem;   /* 40px - banner principale */
+
+  /* Interlinea proporzionale alla scala tipografica */
+  --ami-line-height-tight: 1.2;   /* titoli compatti */
+  --ami-line-height-snug: 1.35;   /* UI e liste */
+  --ami-line-height-normal: 1.5;  /* corpo testo */
+  --ami-line-height-relaxed: 1.6; /* paragrafi lunghi */
+
+  /* Letter-spacing gerarchico (em) */
+  --ami-tracking-tighter: -0.02em; /* titoli grandi */
+  --ami-tracking-tight: -0.01em;   /* H1-H3 */
+  --ami-tracking-normal: 0;        /* corpo */
+  --ami-tracking-wide: 0.03em;     /* etichette/badge */
+  --ami-tracking-wider: 0.05em;    /* maiuscoletto/nav */
 }
 /* Corpo: Fraunces regolare, con ottimizzazione automatica della
 dimensione ottica del disegno (variable font) */
@@ -883,6 +906,7 @@ body,
 .md-typeset {
   font-family: var(--ami-font-text) !important;
   font-optical-sizing: auto;
+  line-height: var(--ami-line-height-normal);
 }
 /* Titoli di sezione: Fraunces peso 900 — stessa famiglia del corpo,
 cambia solo il peso: zero salto di "scheletro" tra titolo e testo */
@@ -894,7 +918,8 @@ cambia solo il peso: zero salto di "scheletro" tra titolo e testo */
 .home-column h2 {
   font-family: var(--ami-font-display) !important;
   font-weight: 900 !important;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--ami-tracking-tight);
+  line-height: var(--ami-line-height-tight);
 }
 /* Titoli di riga (schede, elenchi, card): Fraunces peso 600 —
 restano nella stessa famiglia del corpo, non nel font etichette */
@@ -944,7 +969,7 @@ che restano l'UNICO accento tipografico ammesso per riga */
 }
 .doc-type-chip {
   font-weight: 700;
-  letter-spacing: 0.03em;
+  letter-spacing: var(--ami-tracking-wide);
 }
 .ami-footer__links-title {
   font-weight: 700;
@@ -1025,17 +1050,17 @@ root font-size del tema.
 }
 .hero-search-count {
   padding: 0.45rem 1rem;
-  font-size: 11px;
+  font-size: var(--ami-font-size-xs); /* 12px - etichetta piccola */
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--ami-tracking-wider);
   color: #6b6b6b;
   background: #f5f5f5;
   border-bottom: 1px solid #eaeaea;
 }
 .hero-search-empty {
   padding: 0.8rem 1rem;
-  font-size: 13px;
+  font-size: var(--ami-font-size-sm); /* 14px - testo secondario */
   color: #6b6b6b;
   text-align: center;
 }
@@ -1053,10 +1078,10 @@ root font-size del tema.
   background: #f7f7f7;
 }
 .hero-search-item-title {
-  font-size: 15px;
+  font-size: var(--ami-font-size-base); /* 16px - corpo */
   font-weight: 600;
   color: #1a1a1a;
-  line-height: 1.35;
+  line-height: var(--ami-line-height-snug);
   margin-bottom: 0.1rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1066,10 +1091,10 @@ root font-size del tema.
 .hero-search-item-tag {
   display: inline-block;
   vertical-align: middle;
-  font-size: 10px;
+  font-size: var(--ami-font-size-xs); /* 12px - etichetta */
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: var(--ami-tracking-wide);
   padding: 0.1rem 0.45rem;
   border-radius: 10px;
   color: #ffffff;
@@ -1080,9 +1105,9 @@ root font-size del tema.
 .hero-search-item-tag--organizzazione { background: #1565c0; }
 .hero-search-item-tag--documento { background: #b71c1c; }
 .hero-search-item-snippet {
-  font-size: 13.5px;
+  font-size: var(--ami-font-size-sm); /* 14px - testo secondario */
   color: #666666;
-  line-height: 1.45;
+  line-height: var(--ami-line-height-normal);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -1097,9 +1122,9 @@ root font-size del tema.
 /* Descrizione nei risultati Archivio: ora testo puro (pulito in
 archivio-filtri.js), senza più stili inline Word */
 .risultato-desc {
-  font-size: 0.85rem;
+  font-size: var(--ami-font-size-sm); /* 14px */
   color: var(--md-default-fg-color--light);
-  line-height: 1.5;
+  line-height: var(--ami-line-height-normal);
   margin-top: 0.2rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -1219,7 +1244,7 @@ body:has(.banner-content-home) .lazy-skeleton {
 .lazy-skeleton.error-state::after {
     content: '⚠️ Immagine non disponibile';
     color: #d32f2f;
-    font-size: 0.875rem;
+    font-size: var(--ami-font-size-sm);
     font-weight: 500;
 }
 
@@ -1314,22 +1339,22 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
    che prima viveva nel vecchio extra.css */
 .md-footer-copyright__text {
     font-weight: 700;
-    font-size: 0.9rem;
-    line-height: 1.2;
+    font-size: var(--ami-font-size-sm);
+    line-height: var(--ami-line-height-tight);
     color: var(--md-footer-fg-color);
     margin-bottom: 0.2rem;
 }
 .md-footer-copyright__subtext {
-    font-size: 0.65rem;
-    line-height: 1.2;
+    font-size: var(--ami-font-size-xs);
+    line-height: var(--ami-line-height-tight);
     color: var(--md-footer-fg-color--light);
     margin-bottom: 0.2rem;
 }
 .md-footer-copyright__email {
-    line-height: 1.2;
+    line-height: var(--ami-line-height-tight);
 }
 .md-footer-copyright__email a {
-    font-size: 0.65rem;
+    font-size: var(--ami-font-size-xs);
     color: var(--md-footer-fg-color);
     text-decoration: underline;
     opacity: 0.85;
@@ -1358,9 +1383,9 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
 .ami-footer__links-title {
     display: block;
     font-weight: 700;
-    font-size: 0.6rem;
+    font-size: var(--ami-font-size-xs);
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: var(--ami-tracking-wide);
     color: var(--md-footer-fg-color--light);
     margin-bottom: 0.5rem;
 }
@@ -1370,7 +1395,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
     gap: 0.3rem;
 }
 .ami-footer__links-list a {
-    font-size: 0.68rem;
+    font-size: var(--ami-font-size-xs);
     color: var(--md-footer-fg-color);
     text-decoration: none;
     width: max-content;
@@ -1390,7 +1415,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
     display: flex;
     justify-content: center;
     padding: 0.5rem 0;
-    font-size: 0.65rem;
+    font-size: var(--ami-font-size-xs);
     font-weight: 300;
     color: var(--md-footer-fg-color--light);
 }
