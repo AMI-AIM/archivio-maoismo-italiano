@@ -3,190 +3,157 @@
 {% block extrahead %}
   {{ super() }}
 
-  {# ============================================================
-     Variabili sicure per JSON-LD e metadata
-     ============================================================ #}
+  <!-- AMI-MAIN-ATTIVO v5 -->
+  <meta name="ami-base-url" content="{{ base_url }}">
 
-  {% set t = "" %}
-  {% if page and page.title %}
-    {% set t = page.title | replace('"', '') | replace('\n', ' ') %}
-  {% endif %}
+  <!-- Verifica Google Search Console -->
+  <meta name="google-site-verification" content="xQJUU2SqHoWn5hhMjxbMHx7rZMFU5ZoCgKhG1u-J8hg" />
 
-  {% set d = config.site_description | default("", true) %}
-  {% if page and page.meta and page.meta.description %}
-    {% set d = page.meta.description %}
-  {% endif %}
-  {% set d = d | replace('"', '') | replace('\n', ' ') %}
+  <!-- Cloudflare Web Analytics -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "c0b870001ff5495ca9adab13a161bab3"}'></script>
 
-  {% set page_url = config.site_url %}
-  {% if page and page.canonical_url %}
-    {% set page_url = page.canonical_url %}
-  {% endif %}
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ base_url }}/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ base_url }}/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ base_url }}/favicon-16x16.png">
+  <link rel="icon" href="{{ base_url }}/favicon.ico" sizes="any">
+  <link rel="manifest" href="{{ base_url }}/site.webmanifest">
 
-  {% set path = "" %}
-  {% if page and page.url %}
-    {% set path = page.url | trim("/") %}
-  {% endif %}
+  <!-- Font d'archivio
+       Fraunces: asse wght CONTINUO 400..900 (+ opsz), cosi' ogni peso richiesto
+       dai CSS (600, 700, 750, 800, 850...) esiste davvero invece di essere
+       agganciato al piu' vicino tra 400/600/900 (che trasformava ogni
+       "grassetto" in Black). Corsivo: solo 400 (l'unico usato).
+       Archivo: 500..700 continuo (nav, etichette, badge).
+       Courier Prime: solo 400 + corsivo 400 (metadati e citazioni; il 700
+       non e' usato da nessuna regola).
 
-  {% set parts = path.split("/") if path else [] %}
-  {% set sezione = parts[0] if parts else "" %}
+  <!-- Preload hero (LCP) -->
+  <link rel="preload" as="image" href="{{ base_url }}/immagini/banner.webp" fetchpriority="high">
+
+  {# ----- Variabili sicure (gestisce page=None) ----- #}
+  {% set t = (page.title | default('', true)) | replace('"', '') | replace('\n', ' ') if page else '' %}
+  {% set d = (page.meta.description | default('', true) if (page and page.meta) else '') | replace('"', '') | replace('\n', ' ') or (config.site_description | default('', true) | replace('"', '')) %}
+  {% set page_url = page.canonical_url | default(config.site_url ~ (page.url | default('', true)), true) if page else config.site_url %}
+  {% set banner_img = config.site_url ~ 'immagini/banner.webp' %}
+  {% set path = (page.url | default('', true)) | trim('/') if page else '' %}
+  {% set parts = path.split('/') if path else [] %}
+  {% set sezione = parts[0] if parts else '' %}
   {% set is_scheda = parts | length > 1 %}
   {% set is_sezione = parts | length == 1 %}
-  {% set is_home = path == "" %}
+  {% set is_home = (path == '') %}
+  {% set nomi = {'documenti': 'Archivio', 'persone': 'Persone', 'organizzazioni': 'Organizzazioni', 'progetto': 'Il progetto', 'galleria': 'Galleria'} %}
 
-  {% set nomi = {
-    "documenti": "Archivio",
-    "persone": "Persone",
-    "organizzazioni": "Organizzazioni",
-    "progetto": "Il progetto",
-    "galleria": "Galleria",
-    "argomenti": "Percorsi tematici"
-  } %}
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Archivio del Maoismo Italiano">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:title" content="{% if is_home %}Archivio del Maoismo Italiano{% else %}{{ t or config.site_name }}{% endif %}">
+  <meta property="og:description" content="{{ d }}">
+  <meta property="og:url" content="{{ page_url }}">
+  <meta property="og:image" content="{{ banner_img }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
-  {% set section_name = nomi.get(sezione, sezione | capitalize) if sezione else "" %}
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if is_home %}Archivio del Maoismo Italiano{% else %}{{ t or config.site_name }}{% endif %}">
+  <meta name="twitter:description" content="{{ d }}">
+  <meta name="twitter:image" content="{{ banner_img }}">
 
-  {# ============================================================
-     Preload dei font self-hosted critici
-     ============================================================ #}
-
-  <link
-    rel="preload"
-    href="{{ 'fonts/s/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxC9TeA.woff2' | url }}"
-    as="font"
-    type="font/woff2"
-    crossorigin
-  >
-
-  <link
-    rel="preload"
-    href="{{ 'fonts/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2' | url }}"
-    as="font"
-    type="font/woff2"
-    crossorigin
-  >
-
-  <link
-    rel="preload"
-    href="{{ 'fonts/s/courierprime/v11/u-450q2lgwslOqpF_6gQ8kELawFpWg.woff2' | url }}"
-    as="font"
-    type="font/woff2"
-    crossorigin
-  >
-
-  {# ============================================================
-     WebSite: solo homepage
-     ============================================================ #}
-
+  {# ===== WebSite + SearchAction: SOLO sulla homepage (linea guida Google) ===== #}
   {% if page and is_home %}
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": {{ config.site_name | tojson | safe }},
-      "alternateName": "AMI - Archivio del Maoismo Italiano",
-      "url": {{ page_url | tojson | safe }},
-      "description": {{ d | tojson | safe }},
-      "inLanguage": "it"
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Archivio del Maoismo Italiano",
+    "alternateName": "AMI - Archivio Maoismo Italiano",
+    "url": "{{ config.site_url }}",
+    "inLanguage": "it",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "{{ config.site_url }}documenti/?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
     }
-    </script>
+  }
+  </script>
   {% endif %}
 
-  {# ============================================================
-     BreadcrumbList + entità: pagine interne
-     ============================================================ #}
-
+  {# ===== BreadcrumbList + entità (solo pagine interne) ===== #}
   {% if page and is_scheda %}
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": {{ config.site_url | tojson | safe }}
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": {{ section_name | tojson | safe }},
-          "item": {{ (config.site_url ~ sezione ~ "/") | tojson | safe }}
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": {{ t | tojson | safe }},
-          "item": {{ page_url | tojson | safe }}
-        }
-      ]
-    }
-    </script>
-
-    {% if sezione == "documenti" %}
-      <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "CreativeWork",
-        "name": {{ t | tojson | safe }},
-        "url": {{ page_url | tojson | safe }},
-        "description": {{ d | tojson | safe }},
-        "inLanguage": "it"
-      }
-      </script>
-    {% elif sezione == "persone" %}
-      <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": {{ t | tojson | safe }},
-        "url": {{ page_url | tojson | safe }},
-        "description": {{ d | tojson | safe }}
-      }
-      </script>
-    {% elif sezione == "organizzazioni" %}
-      <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": {{ t | tojson | safe }},
-        "url": {{ page_url | tojson | safe }},
-        "description": {{ d | tojson | safe }}
-      }
-      </script>
-    {% else %}
-      <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": {{ t | tojson | safe }},
-        "url": {{ page_url | tojson | safe }},
-        "description": {{ d | tojson | safe }},
-        "inLanguage": "it"
-      }
-      </script>
-    {% endif %}
-
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ config.site_url }}"},
+      {"@type": "ListItem", "position": 2, "name": "{{ nomi.get(sezione, sezione) }}", "item": "{{ config.site_url }}{{ sezione }}/"},
+      {"@type": "ListItem", "position": 3, "name": "{{ t }}", "item": "{{ page_url }}"}
+    ]
+  }
+  </script>
+  {% if sezione == 'documenti' %}
+  <!-- CreativeWork -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "{{ t }}",
+    "description": "{{ d }}",
+    "url": "{{ page_url }}",
+    "inLanguage": "it",
+    "isPartOf": {"@type": "Collection", "name": "Archivio del Maoismo Italiano", "url": "{{ config.site_url }}"}
+  }
+  </script>
+  {% elif sezione == 'persone' %}
+  <!-- Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{ t }}",
+    "description": "{{ d }}",
+    "url": "{{ page_url }}"
+  }
+  </script>
+  {% elif sezione == 'organizzazioni' %}
+  <!-- Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "{{ t }}",
+    "description": "{{ d }}",
+    "url": "{{ page_url }}"
+  }
+  </script>
+  {% endif %}
   {% elif page and is_sezione %}
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": {{ config.site_url | tojson | safe }}
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": {{ section_name | tojson | safe }},
-          "item": {{ page_url | tojson | safe }}
-        }
-      ]
-    }
-    </script>
+  <!-- BreadcrumbList a 2 livelli -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ config.site_url }}"},
+      {"@type": "ListItem", "position": 2, "name": "{{ nomi.get(sezione, sezione) }}", "item": "{{ page_url }}"}
+    ]
+  }
+  </script>
+  <!-- CollectionPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "{{ t }}",
+    "description": "{{ d }}",
+    "url": "{{ page_url }}",
+    "inLanguage": "it"
+  }
+  </script>
   {% endif %}
 {% endblock %}
