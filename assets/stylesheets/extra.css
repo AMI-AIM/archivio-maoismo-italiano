@@ -687,31 +687,31 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   .doc-data {
     flex: 0 0 auto;
     white-space: normal;
-    font-size: 0.8rem;
+    font-size: var(--fs-sm);
   }
   .doc-titolo {
-    font-size: 0.95rem;
+    font-size: var(--fs-md);
   }
   .doc-sommario {
-    font-size: 0.8rem;
+    font-size: var(--fs-sm);
   }
   .doc-keywords {
-    font-size: 0.75rem;
+    font-size: var(--fs-xs);
   }
   .risultato-card {
     padding: 0.6rem 0.4rem;
   }
   .risultato-titolo {
-    font-size: 0.95rem;
+    font-size: var(--fs-md);
   }
   .risultato-meta {
-    font-size: 0.75rem;
+    font-size: var(--fs-xs);
   }
   .risultato-desc {
-    font-size: 0.8rem;
+    font-size: var(--fs-sm);
   }
   .risultato-data {
-    font-size: 0.8rem;
+    font-size: var(--fs-sm);
   }
   .people-grid,
   .org-grid {
@@ -724,7 +724,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   }
   .people-name,
   .org-name {
-    font-size: 0.85rem;
+    font-size: var(--fs-md);
   }
 }
 
@@ -814,7 +814,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   }
   .evidenza-band .section-title {
     margin: 0 0 1.2rem 0 !important;
-    font-size: 1.25rem;
+    font-size: var(--fs-xl);
   }
   .evidenza-thumbnail {
     height: 200px !important;
@@ -835,7 +835,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
     left: 0 !important;
     right: 0 !important;
     margin-top: 0.75rem !important;
-    font-size: 0.8rem !important;
+    font-size: var(--fs-sm) !important;
   }
 }
 @media (max-width: 600px) {
@@ -899,6 +899,7 @@ overrides/main.html): ogni peso dichiarato nei CSS esiste davvero.
   --fs-xl: 1.3rem;    /* 26px  titoli di sezione */
   --fs-2xl: 1.8rem;   /* 36px  data grande scheda */
   --fs-3xl: 2.4rem;   /* 48px  titolo pagina */
+  --fs-3xl-sm: 1.6rem; /* 32px  titolo pagina su mobile (<=768px) */
 
   /* Pesi semantici */
   --fw-text: 400;

@@ -385,11 +385,11 @@ MOBILE
 ------------------------------------------------------------ */
 @media (max-width: 600px) {
   .doc-date-large {
-    font-size: 1.3rem;
+    font-size: var(--fs-xl);
   }
   
   .doc-title-large {
-    font-size: 1.6rem;
+    font-size: var(--fs-3xl-sm);
   }
   
   .universal-embed {
