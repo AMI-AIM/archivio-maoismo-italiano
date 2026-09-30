@@ -1,6 +1,7 @@
 /* ============================================================
    SOGGETTI (Persone/Organizzazioni) - Schede individuali
-   Stili comuni per biografia e documento
+   Stili comuni per biografia e documento.
+   Token tipografici (--fs-*, --fw-*) definiti in extra.css §13.
    ============================================================ */
 
 .md-typeset h1.person-name,
@@ -11,12 +12,16 @@
     color: var(--md-primary-fg-color);
 }
 
+/* Date di vita / fondazione sotto il nome. Un solo valore per persone e
+   organizzazioni (prima .org-dates veniva ridotto a 0.7rem da
+   soggetti-indice.css, caricato dopo): la variante "card" dell'indice e'
+   ora scopata su .org-card in soggetti-indice.css. */
 .person-dates,
 .org-dates {
     font-size: var(--ami-font-size-base);
     color: var(--md-default-fg-color--light);
     margin: 0 0 0.8rem 0;
-    font-weight: 400;
+    font-weight: var(--fw-text);
 }
 
 /* Biografia/Storia con foto (testo a sinistra, foto a destra) */
@@ -140,7 +145,6 @@
     color: #ffffff !important;
     background: var(--md-primary-fg-color);
     padding: 0.15rem 0.4rem;
-    border-radius: 3px;
 }
 
 /* Media query per tablet e mobile */

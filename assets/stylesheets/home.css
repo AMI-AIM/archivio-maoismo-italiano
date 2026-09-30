@@ -5,6 +5,7 @@
    e copiato in build/ da sync_assets.py, che ne verifica anche
    la presenza. Migrato dal blocco <style> inline storico della
    pagina durante il consolidamento CSS.
+   Token tipografici (--fs-*, --fw-*) definiti in extra.css §13.
    ============================================================ */
 
 /* Nasconde il titolo "Home" nella pagina.
@@ -62,6 +63,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 .evidenza-band .section-title {
   margin: 0 0 1.5rem 0;
 }
+/* Titolo di sezione: stesso ruolo di ".home-column h2" (--fs-xl) */
 .section-title {
   font-size: var(--ami-font-size-xl); /* 24px */
   font-weight: 600;
@@ -158,6 +160,8 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   font-size: var(--ami-font-size-3xl); /* 40px */
   opacity: 0.5;
 }
+/* Titolo su fondo scuro: testo chiaro, leggermente piu' pesante e con
+   piu' interlinea (compensazione light-on-dark). */
 .evidenza-titolo {
   position: absolute !important;
   top: 100% !important;
@@ -175,29 +179,9 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 }
 
 /* ------------------------------------------------------------
-   CATALOGO
+   CATALOGO (home): riga documento, badge e pulsanti sono in extra.css.
+   Qui restano solo le varianti proprie della home.
 ------------------------------------------------------------ */
-.catalogo-lista {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-.doc-row {
-  display: flex;
-  align-items: flex-start;
-  padding: 0.75rem 0.9rem;
-  border-bottom: 1px solid var(--md-default-fg-color--lightest);
-  border-left: 3px solid transparent;
-  transition: background-color 0.15s, border-left-color 0.15s;
-  gap: 1.5rem;
-}
-.doc-row:last-child {
-  border-bottom: none;
-}
-.doc-row:hover {
-  background-color: var(--md-code-bg-color);
-  border-left-color: var(--md-primary-fg-color);
-}
 .doc-row-persona {
   gap: 1rem;
 }
@@ -284,6 +268,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   display: flex;
   flex-direction: column;
 }
+/* Titolo di sezione della home: stesso token di ".section-title" */
 .home-column h2 {
   margin-top: 0;
   margin-bottom: 0.6rem;
@@ -366,21 +351,6 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   color: var(--md-default-fg-color--light);
   font-style: italic;
 }
-.md-button {
-  display: inline-block;
-  padding: 0.6rem 1.5rem;
-  border-radius: 0.25rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.2s;
-}
-.md-button--primary {
-  background-color: var(--md-primary-fg-color);
-  color: var(--md-primary-bg-color) !important;
-}
-.md-button--primary:hover {
-  background-color: var(--md-primary-fg-color--dark);
-}
 
 /* ------------------------------------------------------------
    RESPONSIVE
@@ -397,6 +367,10 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 }
 
 @media (max-width: 768px) {
+  .doc-row-persona {
+    flex-direction: row;
+    gap: 1rem;
+  }
   /* Le due colonne diventano impilate */
   .home-columns {
     grid-template-columns: 1fr;
@@ -477,5 +451,6 @@ body:has(.banner-full) .md-content article h1:first-of-type {
     max-height: 150px !important;
   }
   /* Banner 480px: delegato a extra.css (sezione "Responsive extra"),
-     duplicato rimosso con la migrazione CSS. */
+     duplicato rimosso con la migrazione CSS. Il titolo di sezione resta
+     --fs-xl (prima scendeva a 1.2rem, un terzo valore per lo stesso ruolo). */
 }

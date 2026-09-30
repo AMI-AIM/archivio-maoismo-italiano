@@ -5,6 +5,7 @@
    <link> e copiato in build/ da sync_assets.py, che ne verifica
    anche la presenza. Migrato dal blocco <style> inline storico
    della pagina durante il consolidamento CSS.
+   Token tipografici (--fs-*, --fw-*) definiti in extra.css §13.
    ============================================================ */
 
 .archivio-layout {
@@ -346,7 +347,7 @@
 }
 
 .filtro-chip-label strong {
-    font-weight: 700;
+    font-weight: var(--fw-label);
 }
 
 .filtro-chip-remove {
@@ -448,7 +449,7 @@
 
 .risultato-desc strong,
 .risultato-desc b {
-    font-weight: 600;
+    font-weight: var(--fw-emph);
 }
 
 .risultato-desc em,

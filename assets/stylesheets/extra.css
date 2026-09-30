@@ -603,13 +603,21 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  margin-top: 0.5rem;
 }
+
+/* RIGA DOCUMENTO — fonte unica (prima duplicata in extra.css, home.css e
+   soggetti.css con padding diversi; a vincere era il foglio caricato per
+   ultimo). Base = variante compatta, quella vista in tutte le pagine di
+   Persone/Organizzazioni/Argomenti. La variante "comoda" della home vive in
+   home.css (.recent-container .doc-row). */
 .doc-row {
   display: flex;
   align-items: flex-start;
-  padding: 0.6rem 0.8rem;
+  padding: 0.4rem 0.6rem;
   border-bottom: 1px solid var(--md-default-fg-color--lightest);
-  transition: background-color 0.15s;
+  border-left: 3px solid transparent;
+  transition: background-color 0.15s, border-left-color 0.15s;
   gap: 1.5rem;
 }
 .doc-row:last-child {
@@ -617,6 +625,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 .doc-row:hover {
   background-color: var(--md-code-bg-color);
+  border-left-color: var(--md-primary-fg-color);
 }
 .doc-data {
   flex: 0 0 150px;
@@ -652,13 +661,37 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   color: var(--md-primary-fg-color--light);
   font-style: italic;
 }
-.recent-container {
-  background: var(--md-code-bg-color);
-  border-radius: 12px;
-  padding: 0.5rem 0.5rem 0.2rem 0.5rem;
-  margin: 1.5rem 0 1rem 0;
-  border: 1px solid var(--md-default-fg-color--lightest);
+@media (max-width: 768px) {
+  .doc-row {
+    flex-direction: column;
+    gap: 0.1rem;
+    padding: 0.6rem 0.2rem;
+  }
+  .doc-data {
+    flex: 0 0 auto;
+    white-space: normal;
+    font-size: var(--fs-sm);
+  }
 }
+
+/* BADGE-ETICHETTA — tre usi identici (ruolo nella riga documento, tipo nelle
+   top-card, categoria nelle org-card): maiuscoletto bianco su rosso.
+   Le sole differenze restano nei rispettivi fogli (padding, margini). */
+.ruolo-badge,
+.top-card-tipo,
+.org-tipo {
+  display: inline-block;
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-label);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #ffffff !important;
+  background: var(--md-primary-fg-color);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+}
+
+/* PULSANTE — fonte unica (era duplicato in home.css) */
 .md-button {
   display: inline-block;
   padding: 0.6rem 1.5rem;
@@ -766,7 +799,9 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 
 /* ------------------------------------------------------------
-12. OVERRIDE MOBILE PER LA HOME — DOCUMENTI IN EVIDENZA
+12. OVERRIDE MOBILE — LOGO E BANNER
+(le regole delle "Documenti in evidenza" erano duplicati identici di quelle
+in home.css, che le definisce da sola: rimosse)
 ------------------------------------------------------------ */
 @media (max-width: 768px) {
   .md-header__button.md-logo {
@@ -851,23 +886,28 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   .md-header__button.md-logo img {
     height: 32px !important;
   }
-  .evidenza-thumbnail {
-    height: 150px !important;
-    max-height: 150px !important;
-  }
-  .evidenza-thumbnail-img {
-    max-height: 150px !important;
-  }
 }
 
 /* ------------------------------------------------------------
 13. TIPOGRAFIA — SISTEMA FONT D'ARCHIVIO (kit armonizzato)
-Fraunces      → titoli E corpo: stessa famiglia, cambia solo peso
-                e dimensione ottica
-Archivo       → etichette, nav, bottoni, badge — unico accento
-                grottesco ammesso, un solo "accento" per riga
-Courier Prime → RISERVATO a codice e blocchi isolati (mai in riga
-                con altro testo, es. pannello citazioni — vedi documenti.css)
+
+RUOLI
+  titolo     Fraunces  900  (--fw-title)  — h1..h4, titoli sezione
+  testo      Fraunces  400  (--fw-text)   — corpo, abstract, biografie
+  enfasi     Fraunces  600  (--fw-emph)   — titoli di riga, <strong>
+  etichetta  Archivo   700  (--fw-label)  — nav, bottoni, badge, chip
+  metadato   Courier Prime 400            — valori dei metadati, testo
+             trascritto e blocchi di citazione: look "macchina da
+             scrivere" voluto. MAI in riga con altro testo corrente.
+
+SCALA (token --fs-*). ATTENZIONE: Material imposta html a 125%
+(~20px; sale a 137.5%/150% sui viewport molto larghi), quindi
+1rem qui NON e' 16px. I px nei commenti valgono per la root al 125%
+e sono da verificare a schermo. Il corpo di Material
+(.md-typeset = .8rem) e' 16px = --fs-sm.
+
+PESI: Fraunces e' caricato con asse wght continuo 400..900 (vedi
+overrides/main.html): ogni peso dichiarato nei CSS esiste davvero.
 ------------------------------------------------------------ */
 :root {
   --ami-font-display: "Fraunces", Georgia, "Times New Roman", serif;
@@ -900,6 +940,15 @@ Courier Prime → RISERVATO a codice e blocchi isolati (mai in riga
   --ami-tracking-wide: 0.03em;     /* etichette/badge */
   --ami-tracking-wider: 0.05em;    /* maiuscoletto/nav */
 }
+
+/* Grigio "light" di Material (54% nero = #757575) su sfondo #f5f5f5
+   arriva a ~4.3:1, sotto AA per il testo lungo. #5c5c5c: ~6:1 su
+   #f5f5f5 e ~6.9:1 su bianco. Un solo override migliora tutte le date,
+   i meta e gli abstract. */
+body[data-md-color-scheme="default"] {
+  --md-default-fg-color--light: #5c5c5c;
+}
+
 /* Corpo: Fraunces regolare, con ottimizzazione automatica della
 dimensione ottica del disegno (variable font) */
 body,
@@ -907,6 +956,11 @@ body,
   font-family: var(--ami-font-text) !important;
   font-optical-sizing: auto;
   line-height: var(--ami-line-height-normal);
+}
+/* Enfasi nel corpo: 600, non Black (Material userebbe 700) */
+.md-typeset strong,
+.md-typeset b {
+  font-weight: var(--fw-emph);
 }
 /* Titoli di sezione: Fraunces peso 900 — stessa famiglia del corpo,
 cambia solo il peso: zero salto di "scheletro" tra titolo e testo */
@@ -933,14 +987,20 @@ restano nella stessa famiglia del corpo, non nel font etichette */
 .risultato-titolo,
 .hero-search-item-title-text {
   font-family: var(--ami-font-text) !important;
-  font-weight: 600 !important;
+  font-weight: var(--fw-emph) !important;
 }
-/* Date delle liste: stessa famiglia del corpo. Il colore rosso resta
-l'unico segnale distintivo — niente cambio di famiglia in riga */
+/* Date delle liste: stessa famiglia del corpo, cifre tabulari cosi'
+le colonne di date si allineano. Il colore rosso resta l'unico
+segnale distintivo — niente cambio di famiglia in riga */
+.doc-data,
+.persona-date,
+.risultato-data {
+  font-variant-numeric: tabular-nums;
+}
 .doc-data,
 .persona-date {
   font-family: var(--ami-font-text) !important;
-  font-weight: 600 !important;
+  font-weight: var(--fw-emph) !important;
   letter-spacing: 0;
 }
 /* Etichette e UI: Archivo — riservato a nav, bottoni e badge/chip,
@@ -972,17 +1032,17 @@ che restano l'UNICO accento tipografico ammesso per riga */
   letter-spacing: var(--ami-tracking-wide);
 }
 .ami-footer__links-title {
-  font-weight: 700;
+  font-weight: var(--fw-label);
 }
 /* Date di vita e parole chiave: Fraunces italic (elegante, da libro) */
 .persona-date,
 .doc-keywords {
   font-family: var(--ami-font-text);
   font-style: italic;
-  font-weight: 400;
+  font-weight: var(--fw-text);
 }
-/* Courier Prime: solo codice e blocchi isolati (mai in riga con
-altro testo, es. pannello citazioni — vedi documenti.css) */
+/* Courier Prime: metadati, testo trascritto, blocchi isolati di
+citazione (vedi documenti.css) e codice. Mai in riga con altro testo. */
 .md-typeset code,
 .md-typeset kbd,
 .md-typeset pre {
@@ -999,7 +1059,7 @@ Gli !important vincono sui <style> inline generati dai generatori
 .top-card-tipo,
 .org-tipo {
   font-family: var(--ami-font-label) !important;
-  font-weight: 700 !important;
+  font-weight: var(--fw-label) !important;
 }
 /* UI di filtro (barra alfabetica, contatori): Archivo */
 .lettera-btn,
@@ -1014,17 +1074,17 @@ Gli !important vincono sui <style> inline generati dai generatori
 .people-dates {
   font-family: var(--ami-font-text);
   font-style: italic;
-  font-weight: 400;
+  font-weight: var(--fw-text);
 }
 /* Risultati archivio: titolo già Fraunces 600 (sez. 13);
 data in Fraunces 600, meta in Archivo 700 */
 .risultato-data {
   font-family: var(--ami-font-text) !important;
-  font-weight: 600 !important;
+  font-weight: var(--fw-emph) !important;
 }
 .risultato-meta {
   font-family: var(--ami-font-label) !important;
-  font-weight: 700 !important;
+  font-weight: var(--fw-label) !important;
 }
 
 /* ------------------------------------------------------------
@@ -1297,6 +1357,8 @@ body:has(.banner-content-home) .lazy-skeleton {
    Caricati globalmente via extra_css di mkdocs.yml.
    NOTA: qui dentro i !important sono deliberati: neutralizzano
    bordi/ombre del tema Material sul footer (reset esteso).
+   TIPOGRAFIA: le dimensioni del footer erano 0.6-0.68rem con peso 300
+   (non caricato): ora minimo --fs-xs e peso 400.
    ============================================================ */
 /* ------------------------------------------------------------
 RESET ESTESO: elimina qualunque bordo/ombra residuo del tema

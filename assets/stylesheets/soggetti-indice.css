@@ -1,6 +1,11 @@
 /* ============================================================
    SOGGETTI-INDICE (Persone/Organizzazioni) - Pagine indice
-   Stili comuni per persone/index.md e organizzazioni/index.md
+   Stili comuni per persone/index.md e organizzazioni/index.md.
+   Token tipografici (--fs-*, --fw-*) definiti in extra.css §13.
+   NOTA: .org-name / .org-dates sono anche le classi della scheda
+   singola (soggetti.css): qui sono scopate su .org-card per non
+   sovrascriverle (prima le date delle organizzazioni scendevano a
+   0.7rem, diverse da quelle delle persone).
    ============================================================ */
 
 /* Top cards row - Persone/Organizzazioni in evidenza */
@@ -83,7 +88,7 @@
 .top-card-count {
     font-size: var(--ami-font-size-xs);
     color: var(--md-default-fg-color--light);
-    font-weight: 400;
+    font-weight: var(--fw-text);
 }
 
 /* Filtri container */
@@ -123,7 +128,7 @@
     font-size: var(--ami-font-size-sm);
     color: var(--md-default-fg-color--light);
     white-space: nowrap;
-    font-weight: 500;
+    font-weight: var(--fw-emph);
 }
 
 /* Alphabet bar */
@@ -222,6 +227,7 @@
 .org-dates {
     font-size: var(--ami-font-size-xs);
     color: var(--md-default-fg-color--light);
+    margin: 0;
 }
 
 .people-count,
