@@ -29,7 +29,6 @@ extra_css:
   - stylesheets/home.css
   - stylesheets/soggetti.css
   - stylesheets/soggetti-indice.css
-  - stylesheets/fonts.css
 
 extra_javascript:
   - javascripts/hero-search.js

@@ -19,18 +19,15 @@
   <link rel="icon" href="{{ base_url }}/favicon.ico" sizes="any">
   <link rel="manifest" href="{{ base_url }}/site.webmanifest">
 
-  <!-- Font self-hosted con font-display: block (fonts.css): niente CSS
-       bloccante su dominio esterno e font reale sempre visibile. I woff2
-       critici sono preloaded qui nel <head>, quindi il browser li scarica
-       in parallelo all'HTML: il "blocco" dura pochi ms (stesso server,
-       file piccoli) e il testo appare direttamente in Fraunces/Archivo.
-       fonts.css è precaricato come stile per accorciare la catena di
-       scoperta dei font. -->
+  <!-- Font self-hosted (fonts.css + woff2 in assets/fonts/).
+       Fraunces e Archivo sono font variabili: UN file per famiglia copre tutti
+       i pesi, quindi bastano 2 preload (prima: 3 file identici per famiglia,
+       2 precaricati e 1 no). crossorigin e' obbligatorio anche same-origin.
+       fonts.css e' caricato SOLO da qui (non ripeterlo in mkdocs.yml). -->
   <link rel="preload" href="{{ base_url }}/stylesheets/fonts.css" as="style">
   <link rel="stylesheet" href="{{ base_url }}/stylesheets/fonts.css">
-  <link rel="preload" href="{{ base_url }}/fonts/fraunces-900-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="{{ base_url }}/fonts/fraunces-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="{{ base_url }}/fonts/archivo-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ base_url }}/fonts/fraunces-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ base_url }}/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Preload hero (LCP) -->
   <link rel="preload" as="image" href="{{ base_url }}/immagini/banner.webp" fetchpriority="high">
