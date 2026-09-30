@@ -11,9 +11,13 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   --ami-skeleton-radius: 4px;
 }
 
+/* ============================================================
+FONTS PERSONALIZZATI
+============================================================ */
+
 /* vietnamese */
 @font-face {
-  font-family: 'Archivo', 'Archivo fallback', Arial, sans-serif;
+  font-family: 'Archivo';
   font-style: normal;
   font-weight: 500 700;
   font-stretch: 100%;
@@ -23,7 +27,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 /* latin-ext */
 @font-face {
-  font-family: 'Archivo', 'Archivo fallback', Arial, sans-serif;
+  font-family: 'Archivo';
   font-style: normal;
   font-weight: 500 700;
   font-stretch: 100%;
@@ -33,7 +37,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 /* latin */
 @font-face {
-  font-family: 'Archivo', 'Archivo fallback', Arial, sans-serif;
+  font-family: 'Archivo';
   font-style: normal;
   font-weight: 500 700;
   font-stretch: 100%;
@@ -43,7 +47,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 /* latin-ext */
 @font-face {
-  font-family: 'Courier Prime', 'Courier Prime fallback', 'Courier New', monospace;
+  font-family: 'Courier Prime';
   font-style: italic;
   font-weight: 400;
   font-display: swap;
@@ -52,7 +56,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 /* latin */
 @font-face {
-  font-family: 'Courier Prime', 'Courier Prime fallback', 'Courier New', monospace;
+  font-family: 'Courier Prime';
   font-style: italic;
   font-weight: 400;
   font-display: swap;
@@ -61,7 +65,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 /* latin-ext */
 @font-face {
-  font-family: 'Courier Prime', 'Courier Prime fallback', 'Courier New', monospace;
+  font-family: 'Courier Prime';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -70,7 +74,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 /* latin */
 @font-face {
-  font-family: 'Courier Prime', 'Courier Prime fallback', 'Courier New', monospace;
+  font-family: 'Courier Prime';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -79,7 +83,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 /* vietnamese */
 @font-face {
-  font-family: 'Fraunces', 'Fraunces fallback', Georgia, serif;
+  font-family: 'Fraunces';
   font-style: normal;
   font-weight: 400 900;
   font-display: swap;
@@ -88,7 +92,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 /* latin-ext */
 @font-face {
-  font-family: 'Fraunces', 'Fraunces fallback', Georgia, serif;
+  font-family: 'Fraunces';
   font-style: normal;
   font-weight: 400 900;
   font-display: swap;
@@ -97,7 +101,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 /* latin */
 @font-face {
-  font-family: 'Fraunces', 'Fraunces fallback', Georgia, serif;
+  font-family: 'Fraunces';
   font-style: normal;
   font-weight: 400 900;
   font-display: swap;
@@ -107,8 +111,6 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 
 /* ============================================================
    FALLBACK METRICS (Anti-CLS)
-   Questi blocchi creano font di fallback locali che occupano
-   esattamente lo stesso spazio dei font web, azzerando il layout shift.
    ============================================================ */
 @font-face {
   font-family: 'Fraunces fallback';
@@ -959,12 +961,12 @@ PESI: Fraunces e' caricato con asse wght continuo 400..900 (vedi
 overrides/main.html): ogni peso dichiarato nei CSS esiste davvero.
 ------------------------------------------------------------ */
 :root {
-  --ami-font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --ami-font-text: "Fraunces", Georgia, "Times New Roman", serif;
-  --ami-font-label: "Archivo", "Arial Narrow", sans-serif;
-  --ami-font-mono: "Courier Prime", "Courier New", monospace;
-  --md-text-font-family: "Fraunces", Georgia, "Times New Roman", serif;
-  --md-code-font-family: "Courier Prime", "Courier New", monospace;
+  --ami-font-display: 'Fraunces', 'Fraunces fallback', Georgia, 'Times New Roman', serif;
+  --ami-font-text: 'Fraunces', 'Fraunces fallback', Georgia, 'Times New Roman', serif;
+  --ami-font-label: 'Archivo', 'Archivo fallback', 'Arial Narrow', sans-serif;
+  --ami-font-mono: 'Courier Prime', 'Courier Prime fallback', 'Courier New', monospace;
+  --md-text-font-family: 'Fraunces', 'Fraunces fallback', Georgia, 'Times New Roman', serif;
+  --md-code-font-family: 'Courier Prime', 'Courier Prime fallback', 'Courier New', monospace;
 
   /* Scala dimensioni per ruolo (px = root 20px) */
   --fs-2xs: 0.65rem;  /* 13px  micro-etichette maiuscole (badge, tag) */
