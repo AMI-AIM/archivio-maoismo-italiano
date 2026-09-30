@@ -1,1 +1,88 @@
-(empty)
+# ----------------------------------------------
+# 1. Build e output MkDocs
+# ----------------------------------------------
+build/
+site/
+.cache/
+
+# ----------------------------------------------
+# 2. Python - Cache e artefatti
+# ----------------------------------------------
+__pycache__/
+scripts/.cache/
+scripts/__pycache__/
+scripts/core/__pycache__/
+
+# ----------------------------------------------
+# 3. Environment e configurazioni sensibili
+# ----------------------------------------------
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# ----------------------------------------------
+# 4. Database e file temporanei
+# ----------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+*.log
+*.tmp
+*.temp
+*~
+
+# ----------------------------------------------
+# 5. IDE, Editor e Sistema Operativo
+# ----------------------------------------------
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm / JetBrains
+.idea/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+# ----------------------------------------------
+# 6. File di backup e recovery
+# ----------------------------------------------
+*.bak
+*.backup
+*.old
+*.orig
+*.swp
+*.swo
+
+# ----------------------------------------------
+# 7. Copertura test e profiling
+# ----------------------------------------------
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/

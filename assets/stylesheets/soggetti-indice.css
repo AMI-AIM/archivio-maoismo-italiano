@@ -1,6 +1,11 @@
 /* ============================================================
    SOGGETTI-INDICE (Persone/Organizzazioni) - Pagine indice
-   Stili comuni per persone/index.md e organizzazioni/index.md
+   Stili comuni per persone/index.md e organizzazioni/index.md.
+   Token tipografici (--fs-*, --fw-*) definiti in extra.css §13.
+   NOTA: .org-name / .org-dates sono anche le classi della scheda
+   singola (soggetti.css): qui sono scopate su .org-card per non
+   sovrascriverle (prima le date delle organizzazioni scendevano a
+   0.7rem, diverse da quelle delle persone).
    ============================================================ */
 
 /* Top cards row - Persone/Organizzazioni in evidenza */
@@ -56,34 +61,25 @@
 }
 
 .top-card-tipo {
-    font-size: 0.6rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.2rem 0.4rem;
-    border-radius: 3px;
-    display: inline-block;
     margin-bottom: 0.3rem;
 }
 
 .top-card-name {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-emph);
     color: var(--md-default-fg-color);
     line-height: 1.2;
 }
 
 .top-card-dates {
-    font-size: 0.8rem;
+    font-size: var(--fs-sm);
     color: var(--md-default-fg-color--light);
 }
 
 .top-card-count {
-    font-size: 0.75rem;
+    font-size: var(--fs-xs);
     color: var(--md-default-fg-color--light);
-    font-weight: 400;
+    font-weight: var(--fw-text);
 }
 
 /* Filtri container */
@@ -111,7 +107,7 @@
     border-radius: 6px;
     background: var(--md-default-bg-color);
     color: var(--md-default-fg-color);
-    font-size: 0.9rem;
+    font-size: var(--fs-md);
 }
 
 .search-bar input:focus {
@@ -120,10 +116,10 @@
 }
 
 .search-counter {
-    font-size: 0.8rem;
+    font-size: var(--fs-sm);
     color: var(--md-default-fg-color--light);
     white-space: nowrap;
-    font-weight: 500;
+    font-weight: var(--fw-emph);
 }
 
 /* Alphabet bar */
@@ -138,8 +134,8 @@
     border: 1px solid var(--md-default-fg-color--lightest);
     border-radius: 4px;
     padding: 0.2rem 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-emph);
     cursor: pointer;
     transition: background-color 0.15s, border-color 0.15s, color 0.15s;
     color: var(--md-default-fg-color);
@@ -197,36 +193,28 @@
 }
 
 .org-tipo {
-    font-size: 0.6rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.2rem 0.4rem;
-    border-radius: 3px;
-    display: inline-block;
     margin-bottom: 0.3rem;
     width: fit-content;
 }
 
 .people-name,
-.org-name {
-    font-size: 0.95rem;
-    font-weight: 600;
+.org-card .org-name {
+    font-size: var(--fs-md);
+    font-weight: var(--fw-emph);
     color: var(--md-default-fg-color);
     line-height: 1.3;
 }
 
 .people-dates,
-.org-dates {
-    font-size: 0.7rem;
+.org-card .org-dates {
+    font-size: var(--fs-xs);
     color: var(--md-default-fg-color--light);
+    margin: 0;
 }
 
 .people-count,
 .org-count {
-    font-size: 0.75rem;
+    font-size: var(--fs-xs);
     color: var(--md-default-fg-color--light);
 }
 
@@ -260,12 +248,12 @@
     }
 
     .people-name,
-    .org-name {
-        font-size: 0.9rem;
+    .org-card .org-name {
+        font-size: var(--fs-md);
     }
 
     .people-dates,
-    .org-dates {
-        font-size: 0.65rem;
+    .org-card .org-dates {
+        font-size: var(--fs-xs);
     }
 }

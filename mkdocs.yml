@@ -24,6 +24,11 @@ extra_css:
   - stylesheets/extra.css
   - stylesheets/documenti.css
   - stylesheets/galleria.css
+  - stylesheets/archivio.css
+  - stylesheets/argomenti.css
+  - stylesheets/home.css
+  - stylesheets/soggetti.css
+  - stylesheets/soggetti-indice.css
 
 extra_javascript:
   - javascripts/hero-search.js

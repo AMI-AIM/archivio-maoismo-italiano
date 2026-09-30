@@ -147,9 +147,9 @@ L'AMI è concepito come un archivio in costante accrescimento. Nuove acquisizion
 
 .progetto-card-titolo {
 
-&#x20;   font-weight: 700;
+&#x20;   font-weight: var(--fw-emph);
 
-&#x20;   font-size: 1rem;
+&#x20;   font-size: var(--fs-lg);
 
 &#x20;   color: var(--md-primary-fg-color);
 
@@ -161,7 +161,7 @@ L'AMI è concepito come un archivio in costante accrescimento. Nuove acquisizion
 
 .progetto-card-testo {
 
-&#x20;   font-size: 0.88rem;
+&#x20;   font-size: var(--fs-md);
 
 &#x20;   color: var(--md-default-fg-color);
 
@@ -189,9 +189,11 @@ L'AMI è concepito come un archivio in costante accrescimento. Nuove acquisizion
 
 &#x20;   display: inline-block;
 
-&#x20;   font-size: 0.75rem;
+&#x20;   font-family: var(--ami-font-label);
 
-&#x20;   font-weight: 600;
+&#x20;   font-size: var(--fs-xs);
+
+&#x20;   font-weight: var(--fw-label);
 
 &#x20;   color: var(--md-primary-fg-color);
 
@@ -249,9 +251,11 @@ L'AMI è concepito come un archivio in costante accrescimento. Nuove acquisizion
 
 .progetto-bibliografia p {
 
-&#x20;   font-size: 0.9rem;
+&#x20;   font-size: var(--fs-md);
 
-&#x20;   line-height: 1.6;
+&#x20;   line-height: var(--lh-text);
+
+&#x20;   max-width: var(--measure);
 
 &#x20;   margin: 0 0 0.9rem 1.5rem;
 
