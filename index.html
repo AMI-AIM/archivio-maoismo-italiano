@@ -87,17 +87,18 @@
   <link rel="icon" href="./favicon.ico" sizes="any">
   <link rel="manifest" href="./site.webmanifest">
 
-  <!-- Font d'archivio
-       Fraunces: asse wght CONTINUO 400..900 (+ opsz), cosi' ogni peso richiesto
-       dai CSS (600, 700, 750, 800, 850...) esiste davvero invece di essere
-       agganciato al piu' vicino tra 400/600/900 (che trasformava ogni
-       "grassetto" in Black). Corsivo: solo 400 (l'unico usato).
-       Archivo: 500..700 continuo (nav, etichette, badge).
-       Courier Prime: solo 400 + corsivo 400 (metadati e citazioni; il 700
-       non e' usato da nessuna regola). -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400&family=Archivo:wght@500..700&family=Courier+Prime:ital,wght@0,400;1,400&display=swap">
+  <!-- Font self-hosted con font-display: block (fonts.css): niente CSS
+       bloccante su dominio esterno e font reale sempre visibile. I woff2
+       critici sono preloaded qui nel <head>, quindi il browser li scarica
+       in parallelo all'HTML: il "blocco" dura pochi ms (stesso server,
+       file piccoli) e il testo appare direttamente in Fraunces/Archivo.
+       fonts.css è precaricato come stile per accorciare la catena di
+       scoperta dei font. -->
+  <link rel="preload" href="./stylesheets/fonts.css" as="style">
+  <link rel="stylesheet" href="./stylesheets/fonts.css">
+  <link rel="preload" href="./fonts/fraunces-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./fonts/fraunces-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./fonts/archivo-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Preload hero (LCP) -->
   <link rel="preload" as="image" href="./immagini/banner.webp" fetchpriority="high">
