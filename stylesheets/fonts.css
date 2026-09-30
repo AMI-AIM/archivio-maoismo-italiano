@@ -1,43 +1,46 @@
-/* AMI - font self-hosted (Fraunces, Archivo, Courier Prime)
-/* Subset latin, generato da scripts/fonti_locali.py */
+/* AMI - font self-hosted (Fraunces, Archivo, Courier Prime). Subset latin.
+
+   FRAUNCES e ARCHIVO sono font VARIABILI: un solo file per famiglia copre
+   tutti i pesi (Fraunces: assi opsz 9-144 e wght 100-900; Archivo: wght
+   100-900). Prima erano dichiarati 3 @font-face per famiglia che puntavano
+   a 3 copie identiche (stesso md5) dello stesso file: il browser le
+   scaricava come 3 risorse diverse (~200 KB invece di ~67 KB per Fraunces)
+   e, con font-display: block, il testo dei pesi non precaricati restava
+   invisibile finche' non arrivava la propria copia. Con l'intervallo di
+   pesi anche 500, 700, ecc. sono pesi reali (non piu' agganciati a 600/900).
+
+   COURIER PRIME e' statico: 400, 700 e corsivo 400 (file separati). */
 
 @font-face {
-  font-family: 'Archivo';
+  font-family: 'Fraunces';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 100 900;
   font-display: block;
-  src: url(../fonts/archivo-500-normal.woff2) format('woff2');
+  src: url(../fonts/fraunces-variable.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
-  font-family: 'Archivo';
-  font-style: normal;
-  font-weight: 600;
-  font-display: block;
-  src: url(../fonts/archivo-600-normal.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Archivo';
-  font-style: normal;
-  font-weight: 700;
-  font-display: block;
-  src: url(../fonts/archivo-700-normal.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Courier Prime';
+  font-optical-sizing: auto;
+  font-family: 'Fraunces';
   font-style: italic;
   font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/fraunces-400-italic.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 100 900;
   font-display: block;
-  src: url(../fonts/courier-prime-400-italic.woff2) format('woff2');
+  src: url(../fonts/archivo-variable.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
   font-family: 'Courier Prime';
   font-style: normal;
   font-weight: 400;
-  font-display: block;
+  font-display: swap;
   src: url(../fonts/courier-prime-400-normal.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
@@ -45,43 +48,15 @@
   font-family: 'Courier Prime';
   font-style: normal;
   font-weight: 700;
-  font-display: block;
+  font-display: swap;
   src: url(../fonts/courier-prime-700-normal.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
-  font-optical-sizing: auto;
-  font-family: 'Fraunces';
+  font-family: 'Courier Prime';
   font-style: italic;
   font-weight: 400;
-  font-display: block;
-  src: url(../fonts/fraunces-400-italic.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-optical-sizing: auto;
-  font-family: 'Fraunces';
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url(../fonts/fraunces-400-normal.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-optical-sizing: auto;
-  font-family: 'Fraunces';
-  font-style: normal;
-  font-weight: 600;
-  font-display: block;
-  src: url(../fonts/fraunces-600-normal.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-optical-sizing: auto;
-  font-family: 'Fraunces';
-  font-style: normal;
-  font-weight: 900;
-  font-display: block;
-  src: url(../fonts/fraunces-900-normal.woff2) format('woff2');
+  font-display: swap;
+  src: url(../fonts/courier-prime-400-italic.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }

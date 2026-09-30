@@ -914,6 +914,27 @@ overrides/main.html): ogni peso dichiarato nei CSS esiste davvero.
   --ami-font-text: "Fraunces", Georgia, "Times New Roman", serif;
   --ami-font-label: "Archivo", "Arial Narrow", sans-serif;
   --ami-font-mono: "Courier Prime", "Courier New", monospace;
+
+  /* ---- Token tipografici di ruolo -------------------------------------
+     Usati da extra.css, progetto.md e dai fogli di pagina. NON rimuoverli
+     senza rimuovere anche gli usi: una var() non definita rende invalida la
+     dichiarazione (font-weight/font-size tornano al valore ereditato,
+     anche se la regola e' !important).
+     Pesi: coincidono con le facce di fonts.css (Fraunces 400/600/900,
+     Archivo 500/600/700). */
+  --fw-title: 900;  /* Fraunces  - h1..h4, titoli sezione */
+  --fw-text: 400;   /* Fraunces  - corpo, abstract, biografie */
+  --fw-emph: 600;   /* Fraunces  - titoli di riga, <strong> */
+  --fw-label: 700;  /* Archivo   - nav, bottoni, badge, chip */
+
+  /* Scala per ruolo (rem di Material: html=125%, quindi 1rem ~ 20px) */
+  --fs-2xs: 0.65rem;
+  --fs-xs: 0.7rem;
+  --fs-sm: 0.8rem;
+  --fs-md: 0.9rem;
+  --fs-lg: 1.05rem;
+  --lh-text: 1.6;
+  --measure: 70ch;
   --md-text-font-family: "Fraunces", Georgia, "Times New Roman", serif;
   --md-code-font-family: "Courier Prime", "Courier New", monospace;
 
