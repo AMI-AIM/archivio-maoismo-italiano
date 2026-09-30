@@ -5,20 +5,20 @@ Courier Prime resta la voce dei METADATI e dei blocchi di citazione/testo
 trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
 ============================================================ */
 .doc-date-large {
-  font-size: var(--fs-2xl);
+  font-size: var(--ami-font-size-xl);
   font-weight: 700;
   color: var(--md-primary-fg-color);
   margin: 0.5rem 0 0 0;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: var(--ami-line-height-tight);
+  letter-spacing: var(--ami-tracking-tighter);
 }
 
 .doc-title-large {
-  font-size: var(--fs-3xl);
+  font-size: var(--ami-font-size-2xl);
   font-weight: 700;
   margin: 0.2rem 0 1.5rem 0;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: var(--ami-line-height-tight);
+  letter-spacing: var(--ami-tracking-tighter);
   color: var(--md-default-fg-color);
   text-wrap: balance;
 }
@@ -87,7 +87,7 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
   flex-wrap: wrap;
   gap: 1.2rem;
   padding: 0.5rem 1rem 0.8rem 1rem;
-  font-size: var(--fs-md);
+  font-size: var(--ami-font-size-sm);
   background: var(--md-code-bg-color);
   border-top: 1px solid var(--md-default-fg-color--lightest);
 }
@@ -100,7 +100,7 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
   color: var(--md-primary-fg-color);
   text-decoration: none;
   font-weight: 500;
-  font-size: var(--fs-md);
+  font-size: var(--ami-font-size-sm);
   cursor: pointer;
   font-family: inherit;
 }
@@ -119,8 +119,8 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
   background: var(--md-code-bg-color);
   border-left: 4px solid var(--md-primary-fg-color);
   border-radius: 4px;
-  font-size: var(--fs-md);
-  line-height: var(--lh-text);
+  font-size: var(--ami-font-size-md);
+  line-height: var(--ami-line-height-relaxed);
   color: var(--md-default-fg-color--light);
 }
 
@@ -169,16 +169,16 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
 }
 
 .metadata-label {
-  font-size: var(--fs-xs);
+  font-size: var(--ami-font-size-xs);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--ami-tracking-wider);
   color: var(--md-default-fg-color--light);
   margin-bottom: 0.1rem;
 }
 
 .metadata-value {
-  font-size: var(--fs-meta);
+  font-size: var(--ami-font-size-md);
   font-weight: 500;
   color: var(--md-default-fg-color);
   word-break: break-word;
@@ -198,8 +198,8 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
   word-wrap: break-word;
   overflow-wrap: break-word;
   font-family: inherit;
-  font-size: var(--fs-md);
-  line-height: var(--lh-text);
+  font-size: var(--ami-font-size-md);
+  line-height: var(--ami-line-height-relaxed);
   padding: 1.5rem;
   margin: 0;
   max-height: 600px;
@@ -221,7 +221,7 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
   border: 2px solid transparent;
   border-radius: 4px;
   padding: 0.3rem 1rem;
-  font-size: var(--fs-meta);
+  font-size: var(--ami-font-size-sm);
   font-weight: 600;
   color: var(--md-default-fg-color--light);
   cursor: pointer;
@@ -261,8 +261,8 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
   width: 100%;
   box-sizing: border-box;
   font-family: var(--ami-font-mono, 'Courier Prime', 'Courier New', monospace) !important;
-  font-size: var(--fs-meta);
-  line-height: 1.5;
+  font-size: var(--ami-font-size-sm);
+  line-height: var(--ami-line-height-normal);
   padding: 0.7rem 0.9rem;
   border-radius: 6px;
   border: 1px solid var(--md-default-fg-color--lightest);
@@ -294,7 +294,7 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
   border: 1px solid var(--md-default-fg-color--lightest);
   border-radius: 20px;
   padding: 0.2rem 0.8rem;
-  font-size: var(--fs-xs);
+  font-size: var(--ami-font-size-xs);
   font-weight: 600;
   color: var(--md-default-fg-color--light);
   cursor: pointer;
@@ -318,7 +318,7 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
   border: none;
   border-radius: 6px;
   padding: 0.4rem 1.2rem;
-  font-size: var(--fs-meta);
+  font-size: var(--ami-font-size-sm);
   font-weight: 600;
   cursor: pointer;
   transition: background 0.15s;
@@ -331,7 +331,7 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
 
 .citazione-noscript-msg {
   margin: 0;
-  font-size: var(--fs-meta);
+  font-size: var(--ami-font-size-sm);
   color: var(--md-default-fg-color--light);
 }
 
@@ -341,8 +341,8 @@ TIPOGRAFIA — SCHEDA DOCUMENTO
 .doc-date-large,
 .doc-title-large {
   font-family: var(--ami-font-display, 'Fraunces', Georgia, serif) !important;
-  font-weight: var(--fw-title) !important;
-  letter-spacing: -0.01em;
+  font-weight: 900 !important;
+  letter-spacing: var(--ami-tracking-tight);
 }
 
 .doc-date-large {
@@ -363,7 +363,7 @@ TIPOGRAFIA — SCHEDA DOCUMENTO
 .metadata-value {
   font-family: var(--ami-font-mono, 'Courier Prime', 'Courier New', monospace) !important;
   font-weight: 400 !important;
-  font-size: var(--fs-meta) !important;
+  font-size: var(--ami-font-size-sm) !important;
 }
 
 .text-preview {
@@ -385,11 +385,11 @@ MOBILE
 ------------------------------------------------------------ */
 @media (max-width: 600px) {
   .doc-date-large {
-    font-size: var(--fs-xl);
+    font-size: var(--ami-font-size-xl);
   }
   
   .doc-title-large {
-    font-size: var(--fs-3xl-sm);
+    font-size: var(--ami-font-size-xl);
   }
   
   .universal-embed {
@@ -408,18 +408,18 @@ MOBILE
   
   .doc-abstract {
     padding: 0.8rem 1rem;
-    font-size: var(--fs-sm);
+    font-size: var(--ami-font-size-sm);
     margin: 1rem 0;
   }
   
   .text-preview {
-    font-size: var(--fs-sm);
+    font-size: var(--ami-font-size-sm);
     padding: 1rem;
     max-height: 400px;
   }
   
   .lingua-content .text-preview {
-    font-size: var(--fs-sm);
+    font-size: var(--ami-font-size-sm);
     padding: 1rem;
     max-height: 400px;
   }
@@ -431,7 +431,7 @@ MOBILE
   
   .lingua-btn {
     padding: 0.2rem 0.6rem;
-    font-size: var(--fs-xs);
+    font-size: var(--ami-font-size-xs);
   }
   
   .metadata-grid {
@@ -448,15 +448,15 @@ MOBILE
   
   .metadata-label {
     min-width: 100px;
-    font-size: var(--fs-xs);
+    font-size: var(--ami-font-size-xs);
   }
   
   .metadata-value {
-    font-size: var(--fs-sm) !important;
+    font-size: var(--ami-font-size-sm);
   }
   
   .citazione-testo {
-    font-size: var(--fs-sm);
+    font-size: var(--ami-font-size-xs);
   }
   
   .citazione-copia {

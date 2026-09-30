@@ -79,16 +79,16 @@ come da CONVENZIONI.md (niente extra_css globale).
 }
 
 .hero-card-nome {
-    font-size: 1.5rem;
+    font-size: var(--ami-font-size-xl);
     font-weight: 700;
-    line-height: 1.25;
+    line-height: var(--ami-line-height-snug);
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
     overflow-wrap: anywhere;
 }
 
 .hero-card-meta {
     margin-top: 0.25rem;
-    font-size: 0.95rem;
+    font-size: var(--ami-font-size-md);
     color: rgba(255, 255, 255, 0.85);
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
@@ -100,7 +100,7 @@ come da CONVENZIONI.md (niente extra_css globale).
     }
 
     .hero-card-nome {
-        font-size: 1.2rem;
+        font-size: var(--ami-font-size-lg);
     }
 
     .hero-card-content {

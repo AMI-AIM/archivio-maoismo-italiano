@@ -65,8 +65,8 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 }
 /* Titolo di sezione: stesso ruolo di ".home-column h2" (--fs-xl) */
 .section-title {
-  font-size: var(--fs-xl);
-  font-weight: var(--fw-title); /* coerente con extra.css §13 (h1-h4, .section-title) */
+  font-size: var(--ami-font-size-xl); /* 24px */
+  font-weight: 600;
   display: block;
   color: #ffffff;
   padding-bottom: 0.5rem;
@@ -157,7 +157,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 }
 .evidenza-placeholder {
   color: #ffffff;
-  font-size: 2.5rem;
+  font-size: var(--ami-font-size-3xl); /* 40px */
   opacity: 0.5;
 }
 /* Titolo su fondo scuro: testo chiaro, leggermente piu' pesante e con
@@ -168,10 +168,9 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   left: 0 !important;
   right: 0 !important;
   margin-top: 0.75rem !important;
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-emph);
-  line-height: 1.35;
-  letter-spacing: 0.01em;
+  font-size: var(--ami-font-size-sm); /* 14px */
+  font-weight: 500;
+  line-height: var(--ami-line-height-snug);
   color: rgba(255, 255, 255, 0.92);
   text-align: center;
   white-space: nowrap;
@@ -186,17 +185,30 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 .doc-row-persona {
   gap: 1rem;
 }
-/* Variante "comoda" della riga documento nei riquadri della home */
-@media (min-width: 769px) {
-  .recent-container .doc-row {
-    padding: 0.75rem 0.9rem;
-  }
-  .recent-container .doc-data {
-    flex-basis: 150px;
-  }
-  .recent-container .doc-titolo {
-    margin-bottom: 0.1rem;
-  }
+.doc-data {
+  flex: 0 0 150px;
+  font-size: var(--ami-font-size-sm); /* 14px */
+  font-weight: 500;
+  color: var(--md-primary-fg-color);
+  white-space: nowrap;
+  padding-top: 0.05rem;
+}
+.doc-contenuto {
+  flex: 1;
+  min-width: 0;
+}
+.doc-titolo {
+  font-size: var(--ami-font-size-base); /* 16px */
+  font-weight: 600;
+  margin-bottom: 0.1rem;
+}
+.doc-titolo a {
+  text-decoration: none;
+  color: var(--md-default-fg-color);
+}
+.doc-titolo a:hover {
+  text-decoration: underline;
+  color: var(--md-primary-fg-color);
 }
 .doc-meta {
   display: flex;
@@ -206,10 +218,10 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   margin-top: 0.15rem;
 }
 .doc-type-chip {
-  font-size: var(--fs-xs);
-  font-weight: var(--fw-label);
+  font-size: var(--ami-font-size-xs); /* 12px - etichetta */
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--ami-tracking-wide);
   color: var(--md-primary-fg-color);
   background: rgba(183, 28, 28, 0.1);
   padding: 0.15rem 0.55rem;
@@ -217,7 +229,11 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   white-space: nowrap;
 }
 .doc-org {
-  font-size: var(--fs-md);
+  font-size: var(--ami-font-size-sm); /* 14px */
+  color: var(--md-default-fg-color--light);
+}
+.doc-sommario {
+  font-size: var(--ami-font-size-sm); /* 14px */
   color: var(--md-default-fg-color--light);
 }
 .recent-container {
@@ -256,7 +272,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 .home-column h2 {
   margin-top: 0;
   margin-bottom: 0.6rem;
-  font-size: var(--fs-xl);
+  font-size: var(--ami-font-size-lg); /* 20px */
   display: block;
   padding-bottom: 0.5rem;
   position: relative;
@@ -305,10 +321,10 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 .persona-avatar--2 { background: #424242; }
 .persona-avatar--3 { background: #8d6e63; }
 .persona-iniziali {
-  font-weight: var(--fw-label);
-  font-size: var(--fs-lg);
+  font-weight: 700;
+  font-size: var(--ami-font-size-md); /* 18px */
   color: #ffffff;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--ami-tracking-wider);
   user-select: none;
 }
 .persona-rank-badge {
@@ -321,8 +337,8 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--fs-xs);
-  font-weight: var(--fw-label);
+  font-size: var(--ami-font-size-xs); /* 12px */
+  font-weight: 700;
   color: #1a1a1a;
   border: 2px solid var(--md-code-bg-color);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -331,7 +347,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 .persona-rank-badge--2 { background: linear-gradient(135deg, #dde3e6, #9aa5ab); }
 .persona-rank-badge--3 { background: linear-gradient(135deg, #d7a06e, #a05a2c); }
 .persona-date {
-  font-size: var(--fs-sm);
+  font-size: var(--ami-font-size-sm); /* 14px */
   color: var(--md-default-fg-color--light);
   font-style: italic;
 }
@@ -377,14 +393,14 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   }
   .evidenza-band .section-title {
     margin: 0 0 1.2rem 0;
-    font-size: var(--fs-xl);
+    font-size: var(--ami-font-size-lg); /* 20px */
   }
   .evidenza-thumbnail {
     height: 200px !important;
     max-height: 200px !important;
   }
   .evidenza-titolo {
-    font-size: var(--fs-sm);
+    font-size: var(--ami-font-size-sm); /* 14px */
   }
 
   /* Banner responsive: fonte unica extra.css (sezione 6 e relativi
@@ -401,9 +417,32 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   .evidenza-thumbnail-img {
     max-height: 170px !important;
   }
+  .doc-row {
+    flex-direction: column;
+    gap: 0.1rem;
+    padding: 0.6rem 0.2rem;
+  }
+  .doc-row-persona {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .doc-data {
+    flex: 0 0 auto;
+    white-space: normal;
+    font-size: var(--ami-font-size-sm); /* 14px */
+  }
+  .doc-titolo {
+    font-size: var(--ami-font-size-base); /* 16px */
+  }
+  .doc-sommario {
+    font-size: var(--ami-font-size-sm); /* 14px */
+  }
 }
 
 @media (max-width: 480px) {
+  .section-title {
+    font-size: var(--ami-font-size-md); /* 18px */
+  }
   .evidenza-thumbnail {
     height: 150px !important;
     max-height: 150px !important;
