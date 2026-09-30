@@ -914,8 +914,27 @@ overrides/main.html): ogni peso dichiarato nei CSS esiste davvero.
   --ami-font-text: "Fraunces", Georgia, "Times New Roman", serif;
   --ami-font-label: "Archivo", "Arial Narrow", sans-serif;
   --ami-font-mono: "Courier Prime", "Courier New", monospace;
-  --md-text-font-family: "Fraunces", Georgia, "Times New Roman", serif;
-  --md-code-font-family: "Courier Prime", "Courier New", monospace;
+
+  /* Override del tema: il selettore DEVE essere body perche' Material
+     ridefinisce --md-text-font-family proprio su body (regola nel CSS del
+     tema). Un valore dichiarato solo in :root viene vinto e l'header/
+     drawer custom — che non hanno font-family esplicita ed ereditano da
+     body — resterebbero in Helvetica/Arial. Era la causa dell'etichetta
+     "Archivio" con font diverso rispetto al resto del sito. */
+  body {
+    --md-text-font-family: "Fraunces", Georgia, "Times New Roman", serif;
+    --md-code-font-family: "Courier Prime", "Courier New", monospace;
+  }
+
+  /* Pesi tipografici (gerarchia dichiarata nel commento della sezione 13).
+     File caricati (fonts.css): Fraunces 400/600/900 + italic 400;
+     Archivo 500/600/700; Courier Prime 400/700 + italic 400.
+     NON usare 300: nessun file a peso 300 esiste. */
+  --fw-title: 900;              /* Fraunces — h1..h4, titoli sezione */
+  --fw-text: 400;               /* Fraunces — corpo, abstract, biografie */
+  --fw-emph: 600;               /* Fraunces — titoli di riga, <strong> */
+  --fw-label: 700;              /* Archivo — nav, bottoni, badge, chip */
+  --fw-nav: 500;                /* Archivo — voci di navigazione */
 
   /* Scala tipografica unificata (rem) — valori di riferimento per tutti i CSS custom. */
   --ami-font-size-xs: 0.75rem;   /* 12px - etichette piccole */
