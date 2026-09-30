@@ -119,3 +119,24 @@ nel modulo che si tocca.
 Il riferimento completo dei comandi e' il docstring di `Launcher.py` e
 `comandi.txt`. `README.md` elenca solo i casi d'uso principali: alla fine di
 questa sezione c'e' il rimando. Aggiornare `comandi.txt` a ogni nuova opzione.
+
+### 7. Font: self-hosted, niente Google Fonts a runtime (anti-FOUT)
+
+I font (Fraunces, Archivo, Courier Prime) sono serviti in locale da
+`assets/fonts/*.woff2` + `assets/stylesheets/fonts.css`, caricati nel
+`<head>` di `overrides/main.html`. Vietato reintrodurre link a
+`fonts.googleapis.com`/`fonts.gstatic.com`: il CSS remoto e' render-blocking
+e causava il FOUT (testo Georgia -> ridisegno al carico dei woff2).
+
+Strategia adottata (richiesta del manutentore: il font reale deve comparire
+SUBITO): `font-display: block` + preload dei tre file piu' critici
+(fraunces-900 titolo hero, fraunces-400 corpo, archivo-500 UI). Con i font
+self-hosted e preloaded il blocco iniziale dura pochi ms (stesso server,
+file piccoli) e non c'e' mai ridisegnamento a testo gia' visibile: niente
+FOUT e font corretto dalla prima visita. Nota: `optional` era la strategia
+precedente (font reale solo dalla seconda visita) - NON ripristinarla senza
+nuova decisione del manutentore.
+
+Per cambiare pesi/famiglie: modificare `API_URL` in `scripts/fonti_locali.py`
+ed eseguirlo (`--force` per riscrivere i file). `sync_assets.py` copiare
+`fonts/` in `build/` e fallisce se `fonts.css` o i woff2 mancano.

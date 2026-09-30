@@ -239,12 +239,12 @@ def genera_organizzazioni():
 
         # FIX: title/description del frontmatter YAML ora passano da
         # escape_yaml_string() (utils.py), stessa correzione di persone.py.
-        # FIX (regressione titolo): vedi commento in persone.py. In assenza
-        # di chiave 'hide:' Material 9.x genera un h1 proprio che, insieme
-        # all'h1 custom '<h1 class="org-name">', finisce sotto il selettore
-        # home.css '.md-content article h1:first-of-type' (che nasconde il
-        # PRIMO dei due = il nome). La lista hide con sottovoci valide evita
-        # l'h1 auto-generato e mantiene visibile quello nel contenuto.
+        # FIX (regressione titolo): vedi commento esteso in persone.py
+        # (doppia causa: h1 auto-generato SENZA hide valido + regola globale
+        # h1:first-of-type di home.css promossa nell'<head> di tutte le
+        # pagine da MkDocs, ora limitata alla home con body:has()). La lista
+        # hide con sottovoci valide evita l'h1 auto-generato e mantiene
+        # visibile '<h1 class="org-name">' nel contenuto.
         frontmatter = f"""---
 title: "{escape_yaml_string(nome)}"
 description: "Documenti relativi a {escape_yaml_string(nome)}"
