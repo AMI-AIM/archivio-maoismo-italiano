@@ -61,15 +61,6 @@
 }
 
 .top-card-tipo {
-    font-size: var(--fs-2xs);
-    font-weight: var(--fw-label);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.2rem 0.4rem;
-    border-radius: 3px;
-    display: inline-block;
     margin-bottom: 0.3rem;
 }
 
@@ -202,15 +193,6 @@
 }
 
 .org-tipo {
-    font-size: var(--fs-2xs);
-    font-weight: var(--fw-label);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.2rem 0.4rem;
-    border-radius: 3px;
-    display: inline-block;
     margin-bottom: 0.3rem;
     width: fit-content;
 }

@@ -180,56 +180,23 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 }
 
 /* ------------------------------------------------------------
-   CATALOGO
+   CATALOGO (home): riga documento, badge e pulsanti sono in extra.css.
+   Qui restano solo le varianti proprie della home.
 ------------------------------------------------------------ */
-.catalogo-lista {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-.doc-row {
-  display: flex;
-  align-items: flex-start;
-  padding: 0.75rem 0.9rem;
-  border-bottom: 1px solid var(--md-default-fg-color--lightest);
-  border-left: 3px solid transparent;
-  transition: background-color 0.15s, border-left-color 0.15s;
-  gap: 1.5rem;
-}
-.doc-row:last-child {
-  border-bottom: none;
-}
-.doc-row:hover {
-  background-color: var(--md-code-bg-color);
-  border-left-color: var(--md-primary-fg-color);
-}
 .doc-row-persona {
   gap: 1rem;
 }
-.doc-data {
-  flex: 0 0 150px;
-  font-size: var(--fs-md);
-  font-weight: var(--fw-emph);
-  color: var(--md-primary-fg-color);
-  white-space: nowrap;
-  padding-top: 0.05rem;
-}
-.doc-contenuto {
-  flex: 1;
-  min-width: 0;
-}
-.doc-titolo {
-  font-size: var(--fs-lg);
-  font-weight: var(--fw-emph);
-  margin-bottom: 0.1rem;
-}
-.doc-titolo a {
-  text-decoration: none;
-  color: var(--md-default-fg-color);
-}
-.doc-titolo a:hover {
-  text-decoration: underline;
-  color: var(--md-primary-fg-color);
+/* Variante "comoda" della riga documento nei riquadri della home */
+@media (min-width: 769px) {
+  .recent-container .doc-row {
+    padding: 0.75rem 0.9rem;
+  }
+  .recent-container .doc-data {
+    flex-basis: 150px;
+  }
+  .recent-container .doc-titolo {
+    margin-bottom: 0.1rem;
+  }
 }
 .doc-meta {
   display: flex;
@@ -250,10 +217,6 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   white-space: nowrap;
 }
 .doc-org {
-  font-size: var(--fs-md);
-  color: var(--md-default-fg-color--light);
-}
-.doc-sommario {
   font-size: var(--fs-md);
   color: var(--md-default-fg-color--light);
 }
@@ -372,21 +335,6 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   color: var(--md-default-fg-color--light);
   font-style: italic;
 }
-.md-button {
-  display: inline-block;
-  padding: 0.6rem 1.5rem;
-  border-radius: 0.25rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.2s;
-}
-.md-button--primary {
-  background-color: var(--md-primary-fg-color);
-  color: var(--md-primary-bg-color) !important;
-}
-.md-button--primary:hover {
-  background-color: var(--md-primary-fg-color--dark);
-}
 
 /* ------------------------------------------------------------
    RESPONSIVE
@@ -403,6 +351,10 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 }
 
 @media (max-width: 768px) {
+  .doc-row-persona {
+    flex-direction: row;
+    gap: 1rem;
+  }
   /* Le due colonne diventano impilate */
   .home-columns {
     grid-template-columns: 1fr;
@@ -448,26 +400,6 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   }
   .evidenza-thumbnail-img {
     max-height: 170px !important;
-  }
-  .doc-row {
-    flex-direction: column;
-    gap: 0.1rem;
-    padding: 0.6rem 0.2rem;
-  }
-  .doc-row-persona {
-    flex-direction: row;
-    gap: 1rem;
-  }
-  .doc-data {
-    flex: 0 0 auto;
-    white-space: normal;
-    font-size: var(--fs-sm);
-  }
-  .doc-titolo {
-    font-size: var(--fs-md);
-  }
-  .doc-sommario {
-    font-size: var(--fs-sm);
   }
 }
 
