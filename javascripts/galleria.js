@@ -53,8 +53,10 @@
         var img = card.querySelector(".galleria-img");
         if (!media || !img) return;
 
-        var aw = img.naturalWidth;
-        var ah = img.naturalHeight;
+        // Con le miniature locali width/height sono gia' nell'HTML: la card
+        // si impagina subito, prima che l'immagine arrivi.
+        var aw = img.naturalWidth || parseInt(img.getAttribute("width"), 10) || 0;
+        var ah = img.naturalHeight || parseInt(img.getAttribute("height"), 10) || 0;
 
         if (aw && ah) {
           card.classList.remove("card-error");
@@ -374,6 +376,14 @@
       dialog.classList.remove("is-loading");
     });
     lbImg.addEventListener("error", function () {
+      // Originale su Internet Archive non raggiungibile: si mostra almeno la
+      // miniatura locale (una volta sola, per non entrare in un ciclo).
+      var card = cards[currentIndex];
+      var thumb = card && card.getAttribute("data-thumb-src");
+      if (thumb && lbImg.getAttribute("src") !== thumb) {
+        lbImg.src = thumb;
+        return;
+      }
       dialog.classList.remove("is-loading");
       dialog.classList.add("is-error");
     });
