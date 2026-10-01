@@ -382,7 +382,7 @@
         return;
       }
       
-      if (label.textContent.trim() !== 'Argomenti') {
+      if (label.textContent.trim() !== 'Percorsi tematici') {
         return;
       }
       

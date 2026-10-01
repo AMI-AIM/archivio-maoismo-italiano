@@ -395,7 +395,7 @@ function aggiornaOpzioniFiltri() {
     popolaSpunte('filtro-organizzazione', organizzazioni, 'organizzazioni');
     popolaSpunte('filtro-persona', persone, 'persone');
     popolaSpunte('filtro-tipo', tipi, 'tipologie');
-    popolaSpunte('filtro-argomento', argomenti, 'argomenti');
+    popolaSpunte('filtro-argomento', argomenti, 'percorsi tematici');
 }
 
 // Elenco di caselle con nome completo (va a capo, mai troncato) e numero
@@ -538,7 +538,7 @@ const FILTRO_LABELS = {
     'filtro-organizzazione': 'Organizzazione',
     'filtro-persona': 'Persona',
     'filtro-tipo': 'Tipologia',
-    'filtro-argomento': 'Argomento'
+    'filtro-argomento': 'Percorso tematico'
 };
 
 function creaChip(labelHtml, onRemove) {

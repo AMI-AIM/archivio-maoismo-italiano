@@ -51,11 +51,6 @@ body:has(.banner-full) .md-content article h1:first-of-type {
    selettori [style] per il banner.
 ------------------------------------------------------------ */
 
-/* Placeholder ricerca più leggibile */
-#hero-search-input::placeholder {
-  color: var(--ami-su-colore-attenuato) !important;
-  opacity: 1 !important;
-}
 
 /* ------------------------------------------------------------
    SEZIONE DOCUMENTI IN EVIDENZA
