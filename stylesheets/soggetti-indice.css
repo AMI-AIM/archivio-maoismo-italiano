@@ -24,7 +24,6 @@
 }
 
 .top-card {
-    aspect-ratio: 1 / 1;
     background: var(--md-code-bg-color);
     border-radius: 12px;
     border: 1px solid var(--md-default-fg-color--lightest);
@@ -46,8 +45,11 @@
     height: 100%;
 }
 
+/* Immagine a proporzione fissa: le tre schede allineano le immagini
+   anche quando nome e date occupano un numero diverso di righe. */
 .top-card-image-wrapper {
-    flex: 1;
+    flex: none;
+    aspect-ratio: 4 / 3;
     overflow: hidden;
     background: var(--md-code-bg-color);
     display: flex;
@@ -64,7 +66,7 @@
     padding: 0.6rem 1rem 0.8rem 1rem;
     background: var(--md-code-bg-color);
     border-top: 1px solid var(--md-default-fg-color--lightest);
-    flex-shrink: 0;
+    flex: 1 0 auto;
 }
 
 /* Badge: solo il margine. Tipografia e colori in extra.css. */

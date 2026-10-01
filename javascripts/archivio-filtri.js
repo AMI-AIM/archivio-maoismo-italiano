@@ -719,7 +719,7 @@ function mostraRisultati(risultati) {
         
         html += `
             <div class="risultato-card">
-                <div class="risultato-data">${escapeHtml(doc.data || 'n.d.')}</div>
+                <div class="risultato-data">${escapeHtml(doc.data || 's.d.')}</div>
                 <div class="risultato-contenuto">
                     <div class="risultato-titolo">
                         <a href="${baseUrl}/documenti/${doc.id}/">${escapeHtml(doc.titolo)}</a>
