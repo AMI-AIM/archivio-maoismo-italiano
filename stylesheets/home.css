@@ -233,14 +233,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   margin-top: 0.15rem;
 }
 :where(.home-column) .doc-type-chip {
-  font-size: var(--ami-font-size-xs); /* 12px - etichetta */
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: var(--ami-tracking-wide);
-  color: var(--md-primary-fg-color);
-  background: color-mix(in srgb, var(--md-primary-fg-color) 10%, transparent);
-  padding: 0.15rem 0.55rem;
-  border-radius: 20px;
+  /* Tipografia e colore: etichetta unica in extra.css */
   white-space: nowrap;
 }
 :where(.home-column) .doc-org {

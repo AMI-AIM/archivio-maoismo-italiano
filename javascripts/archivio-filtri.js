@@ -115,6 +115,12 @@ const URL_PARAM_PER_SELECT = {
 function precompilaRicercaDaURL() {
     const params = new URLSearchParams(window.location.search);
 
+    const ordineParam = params.get('ordine');
+    const ordina = document.getElementById('ordina-risultati');
+    if (ordina && ordineParam && Array.from(ordina.options).some(o => o.value === ordineParam)) {
+        ordina.value = ordineParam;
+    }
+
     const query = params.get('q');
     if (query) {
         const campoTesto = document.getElementById('filtro-testo');
@@ -209,6 +215,11 @@ function aggiornaURLFiltri() {
             params.set('anno_min', minVal);
             params.set('anno_max', maxVal);
         }
+    }
+
+    const ordina = document.getElementById('ordina-risultati');
+    if (ordina && ordina.value !== 'data') {
+        params.set('ordine', ordina.value);
     }
 
     const queryString = params.toString();
@@ -419,9 +430,14 @@ function popolaSelect(id, items) {
         const opt = document.createElement('option');
         opt.value = item;
         opt.textContent = item;
+        opt.title = item; // nome completo se la riga e' troncata
         opt.selected = selectedValues.includes(item);
         select.appendChild(opt);
     });
+
+    // Elenco visibile senza scorrimento interno fino a 8 voci (prima il
+    // browser ne mostrava 4 e gli elenchi lunghi andavano scorsi a tentoni).
+    select.size = Math.min(select.options.length, 8);
 }
 
 // ============================================================
@@ -475,14 +491,24 @@ function calcolaRisultati() {
         return true;
     });
     
-    // ORDINA CRONOLOGICAMENTE (data_ordine)
-    risultati.sort((a, b) => {
+    // ORDINAMENTO: cronologico (predefinito), cronologico inverso o per
+    // titolo. I documenti senza data restano sempre in fondo.
+    const ordine = (document.getElementById('ordina-risultati') || {}).value || 'data';
+    const perData = (a, b) => {
         const da = a.data_ordine || [9999, 1, 1];
         const db = b.data_ordine || [9999, 1, 1];
         if (da[0] !== db[0]) return da[0] - db[0];
         if (da[1] !== db[1]) return da[1] - db[1];
-        if (da[2] !== db[2]) return da[2] - db[2];
-        return a.titolo.localeCompare(b.titolo);
+        return da[2] - db[2];
+    };
+    const perTitolo = (a, b) => (a.titolo || '').localeCompare(b.titolo || '', 'it', { sensitivity: 'base' });
+    risultati.sort((a, b) => {
+        if (ordine === 'titolo') return perTitolo(a, b);
+        const senzaA = !a.data_ordine || a.data_ordine[0] === 9999;
+        const senzaB = !b.data_ordine || b.data_ordine[0] === 9999;
+        if (senzaA !== senzaB) return senzaA ? 1 : -1;
+        const c = ordine === 'data-desc' ? perData(b, a) : perData(a, b);
+        return c || perTitolo(a, b);
     });
     
     return risultati;
@@ -667,7 +693,8 @@ function mostraRisultati(risultati) {
     
     // Aggiorna conteggio - RIMOSSO "tra X di Y caricati"
     if (conteggio) {
-        conteggio.textContent = `${totale} documenti (pagina ${currentPage} di ${totalPages})`;
+        const quanti = totale === 1 ? '1 documento' : `${totale} documenti`;
+        conteggio.textContent = totalPages > 1 ? `${quanti} · pagina ${currentPage} di ${totalPages}` : quanti;
     }
     
     // Costruisci HTML dei risultati (tutto escapato: i dati sono testo,
