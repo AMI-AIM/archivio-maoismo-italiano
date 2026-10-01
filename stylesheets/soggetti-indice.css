@@ -121,7 +121,7 @@
 .search-bar input:focus {
     border-color: var(--md-primary-fg-color);
     outline: none;
-    box-shadow: 0 0 0 2px rgba(183, 28, 28, 0.2);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--md-primary-fg-color) 20%, transparent);
 }
 
 .search-counter {
@@ -150,13 +150,13 @@
 
 .lettera-btn:hover:not(.lettera-btn--disabled) {
     background: var(--md-primary-fg-color);
-    color: #ffffff;
+    color: var(--ami-su-colore);
     border-color: var(--md-primary-fg-color);
 }
 
 .lettera-btn--active {
     background: var(--md-primary-fg-color);
-    color: #ffffff !important;
+    color: var(--ami-su-colore) !important;
     border-color: var(--md-primary-fg-color);
 }
 

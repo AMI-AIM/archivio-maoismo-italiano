@@ -1,3 +1,6 @@
+/* Le regole .doc-* / .catalogo-lista qui sotto NON valgono nella home
+   (:where(:not(.home-column *)): stessa specificita', niente conflitti con
+   home.css indipendentemente dall'ordine di caricamento dei fogli). */
 /* ============================================================
    SOGGETTI (Persone/Organizzazioni/Argomenti) - Schede individuali
    Stili comuni per biografia e documento.
@@ -114,14 +117,14 @@
 }
 
 /* Lista catalogo - Documenti associati (solo layout: tipografia in extra.css) */
-.catalogo-lista {
+.catalogo-lista:where(:not(.home-column *)) {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
     margin-top: 0.5rem;
 }
 
-.doc-row {
+.doc-row:where(:not(.home-column *)) {
     display: flex;
     align-items: flex-start;
     padding: 0.4rem 0.6rem;
@@ -130,33 +133,33 @@
     gap: 1.5rem;
 }
 
-.doc-row:hover {
+.doc-row:where(:not(.home-column *)):hover {
     background-color: var(--md-code-bg-color);
 }
 
-.doc-data {
+.doc-data:where(:not(.home-column *)) {
     flex: 0 0 140px;
     color: var(--md-primary-fg-color);
     white-space: nowrap;
     padding-top: 0.05rem;
 }
 
-.doc-contenuto {
+.doc-contenuto:where(:not(.home-column *)) {
     flex: 1;
     min-width: 0;
 }
 
-.doc-titolo a {
+.doc-titolo:where(:not(.home-column *)) a {
     text-decoration: none;
     color: var(--md-default-fg-color);
 }
 
-.doc-titolo a:hover {
+.doc-titolo:where(:not(.home-column *)) a:hover {
     text-decoration: underline;
     color: var(--md-primary-fg-color);
 }
 
-.doc-ruoli {
+.doc-ruoli:where(:not(.home-column *)) {
     margin-top: 0.1rem;
 }
 
@@ -186,13 +189,13 @@
         max-height: 300px;
     }
 
-    .doc-row {
+    .doc-row:where(:not(.home-column *)) {
         flex-direction: column;
         gap: 0.1rem;
         padding: 0.6rem 0.2rem;
     }
 
-    .doc-data {
+    .doc-data:where(:not(.home-column *)) {
         flex: 0 0 auto;
         white-space: normal;
     }

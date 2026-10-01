@@ -3,6 +3,35 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 ============================================================ */
 :root {
   --ami-header-height: 80px;
+
+  /* --------------------------------------------------------------
+     PALETTE: unico punto in cui sono scritti i colori del sito.
+     Rosso, grigi del testo e fondo "carta" sono i token di Material
+     (--md-primary-fg-color, --md-default-fg-color--light,
+     --md-code-bg-color, sezione 3 e 13); qui il resto. I fogli di pagina
+     usano solo queste variabili (le trasparenze di ombre e velature
+     restano scritte dove servono).
+     -------------------------------------------------------------- */
+  --ami-su-colore: #ffffff;            /* testo e icone su rosso, nero, foto */
+  --ami-su-colore-attenuato: #e0e0e0;  /* testo secondario su fondo scuro */
+  --ami-superficie: #ffffff;           /* tendine, pannelli e pulsanti chiari */
+  --ami-inchiostro: #1a1a1a;           /* testo su superfici chiare sospese */
+  --ami-rosso-tenue: #f9ecec;          /* evidenziazione chiara nel rosso */
+  --ami-notte: #0d0d0d;                /* fascia "Documenti in evidenza" */
+  --ami-notte-2: #1c1c1c;              /* superfici sul fondo notte */
+  --ami-notte-3: #2b2b2b;              /* segnaposto sul fondo notte */
+  --ami-skeleton-fermo: #e0e0e0;       /* segnaposto senza animazione */
+  --ami-errore: #d32f2f;
+  --ami-errore-tenue: #ffebee;
+  /* Etichette dei risultati di ricerca (tipo di voce) */
+  --ami-tipo-persona: #6a1b9a;
+  --ami-tipo-organizzazione: #1565c0;
+  /* Home: avatar e "medaglie" delle persone piu' citate */
+  --ami-avatar-2: #424242;
+  --ami-avatar-3: #8d6e63;
+  --ami-medaglia-oro: linear-gradient(135deg, #f6d365, #c9911d);
+  --ami-medaglia-argento: linear-gradient(135deg, #dde3e6, #9aa5ab);
+  --ami-medaglia-bronzo: linear-gradient(135deg, #d7a06e, #a05a2c);
   /* Token skeleton lazy-loading: unica fonte dei valori grafici degli
      skeleton creati da lazy-loading.js (che non applica piu stili inline
      propri; la variante home scura e definita nella sezione
@@ -57,7 +86,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 ------------------------------------------------------------ */
 .md-header {
   background: var(--md-primary-fg-color);
-  color: #ffffff;
+  color: var(--ami-su-colore);
   height: var(--ami-header-height);
   display: flex;
   align-items: center;
@@ -123,10 +152,10 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   transition: color 0.15s;
 }
 .md-header__nav-link:hover {
-  color: #ffffff;
+  color: var(--ami-su-colore);
 }
 .md-header__nav-link--active {
-  color: #ffffff !important;
+  color: var(--ami-su-colore) !important;
 }
 .md-header__nav-link::after {
   content: "";
@@ -136,7 +165,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   bottom: -0.2rem;
   height: 2px;
   border-radius: 2px;
-  background: #ffffff;
+  background: var(--ami-su-colore);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -193,7 +222,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   margin: 0;
   padding: 0.4rem 0;
   list-style: none;
-  background: #ffffff;
+  background: var(--ami-superficie);
   border-radius: 10px;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
   z-index: 1000;
@@ -248,14 +277,14 @@ button.md-header__nav-link--dropdown {
   font-family: var(--ami-font-label);
   font-size: var(--ami-font-size-base);
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--ami-inchiostro);
   text-decoration: none;
   white-space: nowrap;
   transition: background 0.15s, color 0.15s;
 }
 
 .md-header__dropdown-link:hover {
-  background: #f5f5f5;
+  background: var(--md-code-bg-color);
   color: var(--md-primary-fg-color);
 }
 
@@ -342,7 +371,7 @@ button.md-header__nav-link--dropdown {
   left: 0.5rem;
   z-index: 1;
   text-align: left;
-  color: #ffffff;
+  color: var(--ami-su-colore);
   max-width: 700px;
   padding: 0.5rem 1rem;
 }
@@ -366,8 +395,8 @@ button.md-header__nav-link--dropdown {
 .banner-button {
   display: inline-block;
   padding: 0.5rem 1.2rem;
-  background-color: #ffffff;
-  color: #b71c1c !important; /* serve: vince su .md-typeset a (rosso link Material) */
+  background-color: var(--ami-superficie);
+  color: var(--md-primary-fg-color) !important; /* serve: vince su .md-typeset a (rosso link Material) */
   font-weight: 600;
   font-size: var(--ami-font-size-sm);
   border-radius: 6px;
@@ -395,7 +424,7 @@ button.md-header__nav-link--dropdown {
 .banner-search-icon {
   width: 1.1rem;
   height: 1.1rem;
-  fill: #ffffff;
+  fill: var(--ami-su-colore);
   flex-shrink: 0;
 }
 /* Campo di input: mai sotto il corpo base (16px). Sotto i 16px iOS Safari
@@ -404,7 +433,7 @@ button.md-header__nav-link--dropdown {
   background: transparent;
   border: none;
   outline: none;
-  color: #ffffff;
+  color: var(--ami-su-colore);
   font-size: var(--ami-font-size-base);
   width: 100%;
   min-width: 140px;
@@ -413,7 +442,7 @@ button.md-header__nav-link--dropdown {
 .banner-search-submit {
   background: none;
   border: none;
-  color: #ffffff;
+  color: var(--ami-su-colore);
   font-weight: 600;
   font-size: var(--ami-font-size-sm);
   cursor: pointer;
@@ -425,7 +454,7 @@ button.md-header__nav-link--dropdown {
 }
 /* Placeholder ricerca più leggibile */
 #hero-search-input::placeholder {
-  color: #e0e0e0 !important;
+  color: var(--ami-su-colore-attenuato) !important;
   opacity: 1 !important;
 }
 
@@ -560,12 +589,12 @@ button.md-header__nav-link--dropdown {
     background: none;
     border: none;
     cursor: pointer;
-    color: #ffffff;
+    color: var(--ami-su-colore);
   }
   .md-header__button--menu svg {
     width: 1.8rem;
     height: 1.8rem;
-    fill: #ffffff;
+    fill: var(--ami-su-colore);
   }
   .md-header__nav {
     display: none !important;
@@ -717,7 +746,7 @@ button.md-header__nav-link--dropdown {
   text-transform: uppercase;
   letter-spacing: var(--ami-tracking-wider);
   line-height: 1.3;
-  color: #ffffff !important;
+  color: var(--ami-su-colore) !important;
   background: var(--md-primary-fg-color);
   padding: 0.2rem 0.4rem;
   border-radius: 3px;
@@ -1278,8 +1307,8 @@ body, fuori da .md-typeset, ma usa gli stessi token).
   max-height: 60vh;
   max-width: 90vw;
   overflow-y: auto;
-  background: #ffffff;
-  color: #1a1a1a;
+  background: var(--ami-superficie);
+  color: var(--ami-inchiostro);
   border-radius: 10px;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
   z-index: 9999;
@@ -1294,33 +1323,33 @@ body, fuori da .md-typeset, ma usa gli stessi token).
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: var(--ami-tracking-wider);
-  color: #6b6b6b;
-  background: #f5f5f5;
-  border-bottom: 1px solid #eaeaea;
+  color: var(--md-default-fg-color--light);
+  background: var(--md-code-bg-color);
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
 }
 .hero-search-empty {
   padding: 0.8rem 1rem;
   font-size: var(--ami-font-size-sm); /* 15px - testo secondario */
-  color: #6b6b6b;
+  color: var(--md-default-fg-color--light);
   text-align: center;
 }
 .hero-search-item {
   display: block;
   padding: 0.55rem 1rem;
   text-decoration: none;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
   color: inherit;
 }
 .hero-search-item:last-child {
   border-bottom: none;
 }
 .hero-search-item:hover {
-  background: #f7f7f7;
+  background: var(--ami-rosso-tenue);
 }
 .hero-search-item-title {
   font-size: var(--ami-font-size-base); /* 16px - corpo */
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--ami-inchiostro);
   line-height: var(--ami-line-height-snug);
   margin-bottom: 0.1rem;
   display: -webkit-box;
@@ -1337,16 +1366,16 @@ body, fuori da .md-typeset, ma usa gli stessi token).
   letter-spacing: var(--ami-tracking-wide);
   padding: 0.1rem 0.45rem;
   border-radius: 10px;
-  color: #ffffff;
+  color: var(--ami-su-colore);
   white-space: nowrap;
   margin-left: 0.4em;
 }
-.hero-search-item-tag--persona { background: #6a1b9a; }
-.hero-search-item-tag--organizzazione { background: #1565c0; }
-.hero-search-item-tag--documento { background: #b71c1c; }
+.hero-search-item-tag--persona { background: var(--ami-tipo-persona); }
+.hero-search-item-tag--organizzazione { background: var(--ami-tipo-organizzazione); }
+.hero-search-item-tag--documento { background: var(--md-primary-fg-color); }
 .hero-search-item-snippet {
   font-size: var(--ami-font-size-sm); /* 15px - testo secondario */
-  color: #666666;
+  color: var(--md-default-fg-color--light);
   line-height: var(--ami-line-height-normal);
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1356,7 +1385,7 @@ body, fuori da .md-typeset, ma usa gli stessi token).
 .hero-search-item mark,
 .hero-search-item-snippet mark {
   background: transparent;
-  color: #b71c1c;
+  color: var(--md-primary-fg-color);
   font-weight: 700;
 }
 /* Descrizione nei risultati Archivio: testo puro (pulito in
@@ -1374,7 +1403,7 @@ archivio-filtri.js), senza piu' stili inline Word */
 
 /* Superfici del browser: selezione e cursore nei colori del sito */
 ::selection {
-  background: rgba(183, 28, 28, 0.2);
+  background: color-mix(in srgb, var(--md-primary-fg-color) 20%, transparent);
   color: inherit;
 }
 input,
@@ -1382,7 +1411,7 @@ textarea {
   caret-color: var(--md-primary-fg-color);
 }
 .banner-search input {
-  caret-color: #ffffff;
+  caret-color: var(--ami-su-colore);
 }
 
 /* ==========================================================================
@@ -1467,7 +1496,7 @@ textarea {
    qui dall'inline di core/home.py; niente !important perche' nessun JS
    applica piu' stili inline agli skeleton (vedi lazy-loading.js). */
 body:has(.banner-content-home) .lazy-skeleton {
-    background: #2b2b2b;
+    background: var(--ami-notte-3);
 }
 
 /* ==========================================================================
@@ -1475,7 +1504,7 @@ body:has(.banner-content-home) .lazy-skeleton {
    ========================================================================== */
 
 .lazy-skeleton.error-state {
-    background: #ffebee !important;
+    background: var(--ami-errore-tenue) !important;
     animation: none !important;
     display: flex;
     align-items: center;
@@ -1491,7 +1520,7 @@ body:has(.banner-content-home) .lazy-skeleton {
 
 .lazy-skeleton.error-state::after {
     content: 'Immagine non disponibile';
-    color: #d32f2f;
+    color: var(--ami-errore);
     font-size: var(--ami-font-size-sm);
     font-weight: 500;
 }
@@ -1519,7 +1548,7 @@ body:has(.banner-content-home) .lazy-skeleton {
 @media (prefers-reduced-motion: reduce) {
     .lazy-skeleton {
         animation: none;
-        background: #e0e0e0;
+        background: var(--ami-skeleton-fermo);
     }
 }
 
@@ -1694,7 +1723,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
 .banner-content :focus-visible,
 .evidenza-band :focus-visible,
 .ami-footer :focus-visible {
-  outline: 2px solid #ffffff;
+  outline: 2px solid var(--ami-su-colore);
   outline-offset: 3px;
   border-radius: 3px;
 }
@@ -1712,8 +1741,8 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
    sulla "pillola" che lo contiene. */
 .banner-search:focus-within {
   background: rgba(255, 255, 255, 0.22);
-  border-color: #ffffff;
-  box-shadow: 0 0 0 2px #ffffff, 0 2px 8px rgba(0, 0, 0, 0.2);
+  border-color: var(--ami-su-colore);
+  box-shadow: 0 0 0 2px var(--ami-su-colore), 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 .banner-search input:focus-visible {
   outline: none; /* l'anello e' sulla pillola (sopra) */
@@ -1732,7 +1761,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   border: 0;
   border-radius: 50%;
   background: none;
-  color: #ffffff;
+  color: var(--ami-su-colore);
   cursor: pointer;
   transition: background 0.15s;
 }
@@ -1754,14 +1783,14 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
    Stesso trattamento dell'hover: fondo tinto e titolo nel rosso del sito. */
 .hero-search-item:hover,
 .hero-search-item.is-active {
-  background: #f9ecec;
+  background: var(--ami-rosso-tenue);
 }
 .hero-search-item.is-active .hero-search-item-title-text,
 .hero-search-item:hover .hero-search-item-title-text {
   color: var(--md-primary-fg-color);
 }
 .hero-search-empty--errore {
-  color: #8e0000;
+  color: var(--md-primary-fg-color--dark);
 }
 
 /* --- Solo per lettori di schermo -------------------------------------- */
@@ -1948,7 +1977,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
    Il riquadro rosa con testo rosso (pensato per fondo chiaro) urtava sul
    nero: qui diventa una "scheda vuota" in tono con la fascia. */
 .evidenza-thumbnail .lazy-skeleton.error-state {
-  background: #1c1c1c !important;
+  background: var(--ami-notte-2) !important;
   border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: none;
 }
@@ -2000,7 +2029,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   border: 0;
   border-radius: 6px;
   background: var(--md-primary-fg-color);
-  color: #ffffff;
+  color: var(--ami-su-colore);
   font-family: var(--ami-font-label);
   font-weight: 600;
   font-size: var(--ami-font-size-sm);
@@ -2011,7 +2040,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
 .md-typeset .ami-404__primario:hover,
 .ami-404__campo button:hover {
   background: var(--md-primary-fg-color--dark);
-  color: #ffffff;
+  color: var(--ami-su-colore);
 }
 .md-typeset .ami-404__secondario {
   font-family: var(--ami-font-label);

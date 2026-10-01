@@ -343,7 +343,7 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
 }
 
 .citazione-tab--active {
-  color: #ffffff;
+  color: var(--ami-su-colore);
   background: var(--md-primary-fg-color);
   border-color: var(--md-primary-fg-color);
 }
@@ -351,7 +351,7 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
 .citazione-copia {
   align-self: flex-end;
   background: var(--md-primary-fg-color);
-  color: #ffffff;
+  color: var(--ami-su-colore);
   border: none;
   border-radius: 6px;
   padding: 0.4rem 1.2rem;

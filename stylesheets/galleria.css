@@ -8,12 +8,21 @@
    Fraunces. Tracking mai sotto -0.04em.
    ============================================================ */
 
-:root {
+:root,
+[data-md-color-primary] {
   --gal-bg: #f7f8fa;
   --gal-ink: #111217;
   --gal-muted: #626873;
-  --gal-accent: #b71c1c;
-  --gal-accent-dark: #8e0000;
+  --gal-accent: var(--md-primary-fg-color);
+  --gal-accent-dark: var(--md-primary-fg-color--dark);
+  --gal-linea: #d7dbe3;          /* bordi delle chip e dei pulsanti */
+  --gal-chip-ink: #424854;
+  --gal-azione-ink: #33383f;
+  --gal-segnaposto: #e7eaf0;     /* fondo delle immagini in caricamento */
+  --gal-notte: #101013;          /* fondo del visualizzatore */
+  --gal-notte-skel: linear-gradient(90deg, #1c1c20 25%, #2a2a30 50%, #1c1c20 75%);
+  --gal-su-scuro: #fff;
+  --gal-errore-su-scuro: #ffb4b4;
   --gal-gap: 14px;   /* sincronizzato con CARD_PAD in galleria.js */
   --gal-radius: 2px;
 }
@@ -98,10 +107,10 @@
   justify-content: center;
   min-height: 28px;
   padding: 5px 12px;
-  border: 1px solid #d7dbe3;
+  border: 1px solid var(--gal-linea);
   border-radius: 999px;
-  background: #fff;
-  color: #424854 !important;
+  background: var(--md-default-bg-color);
+  color: var(--gal-chip-ink) !important;
   font-size: var(--ami-font-size-xs);
   font-weight: 750;
   line-height: 1;
@@ -117,7 +126,7 @@
 }
 .galleria-timeline .timeline-link.is-active,
 .galleria-timeline .timeline-link.active {
-  color: #fff !important;
+  color: var(--gal-su-scuro) !important;
   background: var(--gal-accent);
   border-color: var(--gal-accent);
 }
@@ -199,14 +208,14 @@
   position: relative;
   overflow: hidden;
   border-radius: var(--gal-radius);
-  background: #e7eaf0;
+  background: var(--gal-segnaposto);
 }
 
 .galleria-img {
   display: block;
   width: 100%;
   height: auto;
-  background: #e7eaf0;
+  background: var(--gal-segnaposto);
   transition: transform .35s ease, filter .35s ease;
 }
 .card-link:hover .galleria-img,
@@ -243,13 +252,13 @@
   right: 10px;
   width: 22px;
   height: 22px;
-  fill: #fff;
+  fill: var(--gal-su-scuro);
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .45));
 }
 
 /* Testo chiaro su fondo scuro: peso 600 e interlinea 1.3 (compensazione) */
 .overlay-title {
-  color: #fff;
+  color: var(--gal-su-scuro);
   font-size: var(--ami-font-size-sm);
   font-weight: 760;
   line-height: var(--ami-line-height-snug);
@@ -314,10 +323,10 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   min-height: 0;
   display: flex;
   overflow: hidden;
-  background: #101013;
+  background: var(--gal-notte);
 }
 .galleria-lightbox.is-loading .lightbox-media {
-  background: linear-gradient(90deg, #1c1c20 25%, #2a2a30 50%, #1c1c20 75%);
+  background: var(--gal-notte-skel);
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s infinite;
 }
@@ -333,7 +342,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
 .galleria-lightbox.is-error .lightbox-media::after {
   content: '⚠️ Immagine non disponibile';
   margin: auto;
-  color: #ffb4b4;
+  color: var(--gal-errore-su-scuro);
   font-family: var(--ami-font-label, sans-serif);
   font-size: var(--ami-font-size-md);
   font-weight: 600;
@@ -348,7 +357,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   padding: 4px 10px;
   border-radius: 999px;
   background: rgba(0, 0, 0, .55);
-  color: #fff;
+  color: var(--gal-su-scuro);
   font-family: var(--ami-font-label, sans-serif);
   font-size: var(--ami-font-size-xs);
   font-weight: 600;
@@ -365,7 +374,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   border: 0;
   border-radius: 999px;
   background: rgba(0, 0, 0, .45);
-  color: #fff;
+  color: var(--gal-su-scuro);
   font-size: var(--ami-font-size-xl);
   line-height: 1;
   cursor: pointer;
@@ -379,7 +388,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
 }
 .lightbox-nav[disabled]:hover { background: rgba(0, 0, 0, .45); }
 .lightbox-nav:focus-visible {
-  outline: 3px solid #fff;
+  outline: 3px solid var(--gal-su-scuro);
   outline-offset: 2px;
 }
 
@@ -393,14 +402,14 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   border: 0;
   border-radius: 999px;
   background: rgba(0, 0, 0, .55);
-  color: #fff;
+  color: var(--gal-su-scuro);
   font-size: var(--ami-font-size-md);
   line-height: 1;
   cursor: pointer;
 }
 .lightbox-close:hover { background: var(--gal-accent); }
 .lightbox-close:focus-visible {
-  outline: 3px solid #fff;
+  outline: 3px solid var(--gal-su-scuro);
   outline-offset: 2px;
 }
 
@@ -470,10 +479,10 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   align-items: center;
   gap: .35rem;
   padding: 5px 10px;
-  border: 1px solid #d7dbe3;
+  border: 1px solid var(--gal-linea);
   border-radius: 999px;
-  background: #fff;
-  color: #33383f;
+  background: var(--md-default-bg-color);
+  color: var(--gal-azione-ink);
   font-size: var(--ami-font-size-xs);
   font-weight: 700;
   text-decoration: none;
@@ -489,7 +498,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
 .lightbox-action--scheda:hover {
   background: var(--gal-accent);
   border-color: var(--gal-accent);
-  color: #fff;
+  color: var(--gal-su-scuro);
 }
 .lightbox-action--scheda:hover { background: var(--gal-accent-dark); }
 .lightbox-action--cite[aria-expanded="true"] {
@@ -521,12 +530,12 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   font-weight: 700;
 }
 /* Colori pulsanti sopra .md-typeset a (0-1-1): bianco sul rosso per Scheda */
-.md-typeset .galleria-lightbox .lightbox-action { color: #33383f; }
+.md-typeset .galleria-lightbox .lightbox-action { color: var(--gal-azione-ink); }
 .md-typeset .galleria-lightbox .lightbox-action:hover { color: var(--gal-accent); }
 .md-typeset .galleria-lightbox .lightbox-action--scheda,
 .md-typeset .galleria-lightbox .lightbox-action--scheda:hover,
 .md-typeset .galleria-lightbox .lightbox-action--scheda:visited,
-.md-typeset .galleria-lightbox .lightbox-action--scheda:focus-visible { color: #fff; }
+.md-typeset .galleria-lightbox .lightbox-action--scheda:focus-visible { color: var(--gal-su-scuro); }
 
 /* ------------------------------------------------------------
    RESPONSIVE

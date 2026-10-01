@@ -506,7 +506,7 @@
     border: 0;
     border-radius: 6px;
     background: var(--md-primary-fg-color);
-    color: #ffffff;
+    color: var(--ami-su-colore);
     cursor: pointer;
     transition: background 0.15s;
 }
@@ -553,13 +553,13 @@
 
 .pag-btn:hover:not(.pag-btn--disabled) {
     background: var(--md-primary-fg-color);
-    color: #ffffff;
+    color: var(--ami-su-colore);
     border-color: var(--md-primary-fg-color);
 }
 
 .pag-btn--active {
     background: var(--md-primary-fg-color);
-    color: #ffffff !important;
+    color: var(--ami-su-colore) !important;
     border-color: var(--md-primary-fg-color);
 }
 
@@ -612,7 +612,7 @@
     padding: 0.1rem 0.5rem;
     border-radius: 999px;
     background: var(--md-primary-fg-color);
-    color: #ffffff;
+    color: var(--ami-su-colore);
     font-size: var(--ami-font-size-xs);
     font-variant-numeric: tabular-nums;
 }
