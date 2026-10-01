@@ -1,11 +1,18 @@
 /* ============================================================
    SOGGETTI-INDICE (Persone/Organizzazioni) - Pagine indice
    Stili comuni per persone/index.md e organizzazioni/index.md.
-   Token tipografici (--fs-*, --fw-*) definiti in extra.css §13.
-   NOTA: .org-name / .org-dates sono anche le classi della scheda
-   singola (soggetti.css): qui sono scopate su .org-card per non
-   sovrascriverle (prima le date delle organizzazioni scendevano a
-   0.7rem, diverse da quelle delle persone).
+   Token tipografici definiti in extra.css §13 (1rem = 20px reali).
+
+   Ruoli (card)
+     nome       Fraunces 600, 18px  (--ami-font-size-md)
+     date       Fraunces corsivo, 15px
+     conteggio  14px
+     badge      definito in extra.css (13px Archivo 700 maiuscolo)
+
+   SCOPING: .org-name / .org-dates sono anche le classi della scheda singola
+   (soggetti.css). Qui sono VERAMENTE scopate su .org-card / .people-card
+   (il commento precedente lo dichiarava, ma i selettori erano globali e
+   funzionavano solo grazie all'ordine dei <link>).
    ============================================================ */
 
 /* Top cards row - Persone/Organizzazioni in evidenza */
@@ -60,24 +67,15 @@
     flex-shrink: 0;
 }
 
+/* Badge: solo il margine. Tipografia e colori in extra.css. */
 .top-card-tipo {
-    font-size: var(--ami-font-size-xs);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: var(--ami-tracking-wider);
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.2rem 0.4rem;
-    border-radius: 3px;
-    display: inline-block;
     margin-bottom: 0.3rem;
 }
 
 .top-card-name {
-    font-size: var(--ami-font-size-base);
-    font-weight: 600;
+    font-size: var(--ami-font-size-md);
     color: var(--md-default-fg-color);
-    line-height: var(--ami-line-height-tight);
+    line-height: var(--ami-line-height-snug);
 }
 
 .top-card-dates {
@@ -101,7 +99,8 @@
     border: 1px solid var(--md-default-fg-color--lightest);
 }
 
-/* Search bar */
+/* Search bar. Il campo e' a 16px (corpo): sotto, iOS ingrandisce la pagina
+   al focus. */
 .search-bar {
     display: flex;
     align-items: center;
@@ -116,19 +115,19 @@
     border-radius: 6px;
     background: var(--md-default-bg-color);
     color: var(--md-default-fg-color);
-    font-size: var(--ami-font-size-sm);
+    font-size: var(--ami-font-size-base);
 }
 
 .search-bar input:focus {
     border-color: var(--md-primary-fg-color);
     outline: none;
+    box-shadow: 0 0 0 2px rgba(183, 28, 28, 0.2);
 }
 
 .search-counter {
     font-size: var(--ami-font-size-sm);
     color: var(--md-default-fg-color--light);
     white-space: nowrap;
-    font-weight: var(--fw-emph);
 }
 
 /* Alphabet bar */
@@ -144,7 +143,6 @@
     border-radius: 4px;
     padding: 0.2rem 0.5rem;
     font-size: var(--ami-font-size-xs);
-    font-weight: 600;
     cursor: pointer;
     transition: background-color 0.15s, border-color 0.15s, color 0.15s;
     color: var(--md-default-fg-color);
@@ -201,37 +199,28 @@
     gap: 0.05rem;
 }
 
-.org-tipo {
-    font-size: var(--ami-font-size-xs);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: var(--ami-tracking-wider);
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.2rem 0.4rem;
-    border-radius: 3px;
-    display: inline-block;
+/* Badge categoria: solo layout. Tipografia e colori in extra.css. */
+.org-card .org-tipo {
     margin-bottom: 0.3rem;
     width: fit-content;
 }
 
-.people-name,
-.org-name {
+.people-card .people-name,
+.org-card .org-name {
     font-size: var(--ami-font-size-md);
-    font-weight: 600;
     color: var(--md-default-fg-color);
     line-height: var(--ami-line-height-snug);
 }
 
-.people-dates,
-.org-dates {
-    font-size: var(--ami-font-size-xs);
+.people-card .people-dates,
+.org-card .org-dates {
+    font-size: var(--ami-font-size-sm);
     color: var(--md-default-fg-color--light);
     margin: 0;
 }
 
-.people-count,
-.org-count {
+.people-card .people-count,
+.org-card .org-count {
     font-size: var(--ami-font-size-xs);
     color: var(--md-default-fg-color--light);
 }
@@ -265,13 +254,13 @@
         grid-template-columns: 1fr;
     }
 
-    .people-name,
-    .org-name {
-        font-size: var(--ami-font-size-sm);
+    .people-card .people-name,
+    .org-card .org-name {
+        font-size: var(--ami-font-size-base);
     }
 
-    .people-dates,
-    .org-dates {
+    .people-card .people-dates,
+    .org-card .org-dates {
         font-size: var(--ami-font-size-xs);
     }
 }
