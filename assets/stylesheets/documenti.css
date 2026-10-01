@@ -134,8 +134,15 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
   font-size: var(--ami-font-size-base);
   line-height: 1.65;
   color: var(--md-default-fg-color--light);
-  max-width: calc(var(--measure) + 3rem + 4px);
   text-wrap: pretty;
+}
+
+/* Il BOX segue la larghezza dell'iframe sovrastante (.embed-container);
+   solo il TESTO al suo interno e' limitato a --measure, cosi' le righe non
+   superano i ~68 caratteri. Per far correre il testo a tutta larghezza,
+   elimina questa regola. */
+.doc-abstract > * {
+  max-width: var(--measure);
 }
 
 .doc-abstract p {
