@@ -70,6 +70,7 @@ def verifica_dipendenze():
         "pandas": "pandas",
         "openpyxl": "openpyxl",
         "mkdocs-material": "mkdocs",
+        "Pillow": "PIL",
     }
     if requirements_path.exists():
         pacchetti = [

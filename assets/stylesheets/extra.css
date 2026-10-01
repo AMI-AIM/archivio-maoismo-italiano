@@ -1860,6 +1860,23 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   background: var(--md-primary-fg-color--dark);
 }
 
+/* --- Righe documento sotto i 768px -------------------------------------
+   Sotto i 768px la riga passa in colonna (data sopra, titolo sotto), ma
+   home.css e soggetti.css, caricati dopo, rimettevano alla data la base
+   flessibile di 150/140px: in colonna quella base diventa un'ALTEZZA, da
+   cui il vuoto di ~150px tra data e titolo fra 600 e 768px. Specificita'
+   piu' alta per valere qualunque sia l'ordine dei fogli nella pagina. */
+@media (max-width: 768px) {
+  .md-typeset .doc-row:not(.doc-row-persona) {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .md-typeset .doc-row:not(.doc-row-persona) .doc-data {
+    flex: 0 0 auto;
+    white-space: normal;
+  }
+}
+
 /* --- Ricerca hero: tutta la "pillola" e' il bersaglio ------------------- */
 .banner-search {
   min-height: 44px;

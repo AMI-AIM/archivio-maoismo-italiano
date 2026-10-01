@@ -3,6 +3,7 @@ import os
 import re
 from collections import Counter
 
+from .miniature import miniatura
 from .site_config import site_path
 from .utils import formatta_data, slugify, split_nomi
 
@@ -187,7 +188,16 @@ hide:
             # FIX: titolo e' dato d'archivio non escapato; viene usato sia
             # come testo visibile sia come attributo (alt/title).
             titolo_html = html.escape(doc['titolo'], quote=True)
-            if doc.get('copertina'):
+            # Copertina servita dal sito (miniatura locale, 340px = 170px
+            # a schermo x2 per i display ad alta densita'); se non e'
+            # disponibile si torna all'immagine remota di Internet Archive.
+            mini = miniatura(doc['id'], [doc['copertina']], 340) if doc.get('copertina') else None
+            if mini:
+                img_html = (
+                    f'              <img src="{mini["url"]}" width="{mini["width"]}" height="{mini["height"]}" '
+                    'alt="" class="evidenza-thumbnail-img" loading="lazy" decoding="async">'
+                )
+            elif doc.get('copertina'):
                 img_html = f'              <img data-src="{doc["copertina"]}" alt="" class="lazy-img evidenza-thumbnail-img">'
             else:
                 img_html = '              <span class="evidenza-placeholder"></span>'

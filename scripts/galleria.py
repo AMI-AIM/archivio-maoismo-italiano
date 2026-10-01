@@ -6,6 +6,8 @@ from urllib.parse import quote
 
 import pandas as pd
 
+from core.miniature import miniatura
+
 ROOT_DIR = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT_DIR / "data" / "dati.xlsx"
 OUTPUT_DIR = ROOT_DIR / "build" / "galleria"
@@ -137,6 +139,14 @@ def gallery_card(row):
     doc_id = clean_value(row.get("id"))
 
     primary, fallback = get_image_urls(row)
+    # Miniatura locale da 1200px (riquadri fino a ~500px a schermo, ~1000 per
+    # le immagini orizzontali a tutta riga, x2 sui display ad alta densita'
+    # entro un peso ragionevole): la griglia non scarica piu' gli originali a
+    # piena risoluzione e resta visibile anche con Internet Archive
+    # irraggiungibile. L'originale resta nel lightbox.
+    mini = None
+    if doc_id and "services/img/default" not in primary:
+        mini = miniatura(doc_id, [primary, fallback], 1200)
     link_url = sanitize_url(row.get("url"))
     scheda_url = f"../documenti/{quote(doc_id, safe='')}/" if doc_id else ""
 
@@ -157,13 +167,27 @@ def gallery_card(row):
         f' data-ia-url="{html.escape(link_url, quote=True)}"'
         f' data-scheda-url="{html.escape(scheda_url, quote=True)}"'
         f' data-full-src="{primary_esc}"'
+        + (f' data-thumb-src="{html.escape(mini["url"], quote=True)}"' if mini else "")
     )
+    if mini:
+        # width/height reali: il browser riserva lo spazio e la griglia si
+        # impagina subito, senza aspettare il caricamento (niente salti).
+        img_html = (
+            f'<img class="galleria-img" src="{html.escape(mini["url"], quote=True)}" '
+            f'width="{mini["width"]}" height="{mini["height"]}" alt="{titolo_attr}" '
+            'loading="lazy" decoding="async">\n'
+        )
+    else:
+        img_html = (
+            f'<img class="galleria-img lazy-img" src="{primary_esc}" data-src="{primary_esc}"'
+            f'{fallback_attr} alt="{titolo_attr}" loading="lazy" decoding="async">\n'
+        )
 
     return (
         f'<article class="galleria-card"{card_id}{data_attrs}>\n'
         f'<a class="card-link" href="{html.escape(link_url, quote=True)}" target="_blank" rel="noopener noreferrer">\n'
         '<div class="card-media">\n'
-        f'<img class="galleria-img lazy-img" src="{primary_esc}" data-src="{primary_esc}"{fallback_attr} alt="{titolo_attr}" loading="lazy" decoding="async">\n'
+        f'{img_html}'
         '<div class="img-overlay">\n'
         '<svg class="overlay-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
         '<path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm2.5-4h-2v2H9v-2H7V9h2V7h1v2h2v1z"/>'
