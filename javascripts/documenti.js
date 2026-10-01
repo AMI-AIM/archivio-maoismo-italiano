@@ -544,12 +544,16 @@
           
           var htmlContent = textElement.innerHTML;
           var plainText = textElement.innerText;
-          var originalText = copyButton.textContent;
+          // Si cambia solo l'etichetta: l'icona SVG nel pulsante resta.
+          var etichetta = copyButton.querySelector('.citazione-copia__etichetta') || copyButton;
+          var originalText = etichetta.textContent;
           
           function showCopied() {
-            copyButton.textContent = '✅ Copiato!';
+            etichetta.textContent = 'Copiato';
+            copyButton.classList.add('is-copiato');
             setTimeout(function () {
-              copyButton.textContent = originalText;
+              etichetta.textContent = originalText;
+              copyButton.classList.remove('is-copiato');
             }, 1500);
           }
           

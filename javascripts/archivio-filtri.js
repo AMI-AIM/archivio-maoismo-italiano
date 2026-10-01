@@ -801,4 +801,53 @@ function resetFiltri() {
 // ============================================================
 // AVVIO
 // ============================================================
-document.addEventListener('DOMContentLoaded', caricaDati);
+// ============================================================
+// FILTRI RICHIUDIBILI SU MOBILE
+// ============================================================
+// Sotto i 768px il pannello filtri occupava l'intero primo schermo e i
+// risultati partivano sotto la piega. Su mobile i cinque gruppi di
+// filtro partono chiusi dietro un pulsante (resta visibile la ricerca
+// testuale, la piu' usata); il pulsante mostra quanti filtri sono attivi.
+// Senza JS la classe non viene mai applicata: tutto resta visibile.
+function inizializzaFiltriMobile() {
+    const sidebar = document.getElementById('filtri-sidebar');
+    const bottone = document.getElementById('filtri-mostra');
+    const conteggio = document.getElementById('filtri-mostra-conteggio');
+    const chips = document.getElementById('filtri-attivi');
+    if (!sidebar || !bottone) return;
+
+    const etichetta = bottone.querySelector('.filtri-mostra__etichetta');
+    const mq = window.matchMedia('(max-width: 768px)');
+
+    function imposta(chiusi) {
+        sidebar.classList.toggle('filtri--chiusi', chiusi);
+        bottone.setAttribute('aria-expanded', chiusi ? 'false' : 'true');
+        if (etichetta) etichetta.textContent = chiusi ? 'Mostra filtri' : 'Nascondi filtri';
+    }
+
+    function aggiornaConteggio() {
+        if (!conteggio || !chips) return;
+        const n = chips.querySelectorAll('.filtro-chip').length;
+        conteggio.textContent = n ? `${n} attiv${n === 1 ? 'o' : 'i'}` : '';
+    }
+
+    bottone.addEventListener('click', function () {
+        imposta(!sidebar.classList.contains('filtri--chiusi'));
+    });
+
+    // Su desktop il pannello e' sempre aperto; si richiude tornando su mobile.
+    const suCambio = function () { imposta(mq.matches); };
+    if (mq.addEventListener) mq.addEventListener('change', suCambio);
+    else if (mq.addListener) mq.addListener(suCambio);
+    imposta(mq.matches);
+
+    if (chips && 'MutationObserver' in window) {
+        new MutationObserver(aggiornaConteggio).observe(chips, { childList: true, subtree: true });
+    }
+    aggiornaConteggio();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    inizializzaFiltriMobile();
+    caricaDati();
+});
