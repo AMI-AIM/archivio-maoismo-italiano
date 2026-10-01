@@ -464,7 +464,7 @@ hide:
             fs_id = f"ia-embed-{ami_id}"
             
             content += f"""
-<iframe id="{fs_id}" src="{embed_url_attr}" class="universal-embed" allowfullscreen></iframe>
+<iframe id="{fs_id}" src="{embed_url_attr}" class="universal-embed" title="Visore Internet Archive: {titolo_html}" loading="lazy" allowfullscreen></iframe>
 <div class="embed-footer">
 {citazione_bottone_html}
 <button class="fullscreen-btn" data-target="{fs_id}" type="button">⛶ Schermo intero</button>

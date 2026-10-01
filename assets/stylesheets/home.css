@@ -388,6 +388,14 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   .evidenza-card {
     scroll-snap-align: start;
   }
+  /* Su mobile la card prende la larghezza della copertina. Finche' la
+     copertina non c'e' (caricamento) o se non arriva (Internet Archive
+     irraggiungibile) la larghezza veniva dal solo messaggio di errore e
+     la card collassava a ~70px, col titolo spezzato lettera per lettera.
+     Proporzione di un opuscolo (5:7) finche' resta lo skeleton. */
+  .evidenza-thumbnail:has(> .lazy-skeleton) {
+    aspect-ratio: 5 / 7;
+  }
   .evidenza-band {
     padding: 0.9rem 0 1rem;
   }

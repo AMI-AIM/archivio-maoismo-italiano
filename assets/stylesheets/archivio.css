@@ -27,7 +27,13 @@
     overflow-y: auto;
 }
 
-.filtri-sidebar h4 {
+/* Titolo "Filtri": e' un <h2> (prima <h4>, salto di livello segnalato dai
+   validatori). Stesso aspetto di prima: Fraunces 600, 16px. Specificita'
+   alta per vincere su .md-typeset h2 di Material/extra.css. */
+.md-typeset .filtri-sidebar .filtri-titolo {
+    font-family: var(--ami-font-display);
+    letter-spacing: 0;
+    line-height: var(--ami-line-height-snug);
     margin: 0 0 1rem 0;
     font-size: var(--ami-font-size-base); /* 16px */
     font-weight: 600;
@@ -481,6 +487,32 @@
     text-align: center;
     padding: 2rem;
     color: var(--md-default-fg-color--light);
+}
+
+/* Errore di caricamento del catalogo: messaggio + pulsante Riprova */
+.nessun-risultato--errore p {
+    margin: 0 auto 1rem;
+    max-width: 40ch;
+}
+.riprova-btn {
+    font-family: var(--ami-font-label);
+    font-size: var(--ami-font-size-sm);
+    font-weight: 600;
+    min-height: 44px;
+    padding: 0.5rem 1.4rem;
+    border: 0;
+    border-radius: 6px;
+    background: var(--md-primary-fg-color);
+    color: #ffffff;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.riprova-btn:hover {
+    background: var(--md-primary-fg-color--dark);
+}
+.riprova-btn:disabled {
+    opacity: 0.7;
+    cursor: progress;
 }
 
 .loading {

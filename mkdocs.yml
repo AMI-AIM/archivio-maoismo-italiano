@@ -31,6 +31,7 @@ extra_css:
   - stylesheets/soggetti-indice.css
 
 extra_javascript:
+  - javascripts/navigazione.js
   - javascripts/hero-search.js
   - javascripts/documenti.js
   - javascripts/archivio-filtri.js

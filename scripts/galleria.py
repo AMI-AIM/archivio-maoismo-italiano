@@ -279,7 +279,7 @@ def generate_gallery():
     out.append('</ul>\n')
     out.append('</nav>\n')
 
-    out.append('<main class="galleria-content">\n')
+    out.append('<div class="galleria-content">\n')  # niente <main>: e' gia' quello di Material
 
     if empty_state:
         out.append('<p class="galleria-empty">Nessun documento visivo disponibile al momento.</p>\n')
@@ -304,7 +304,7 @@ def generate_gallery():
         out.append('</div>\n')
         out.append('</section>\n')
 
-    out.append('</main>\n')
+    out.append('</div>\n')
     out.append('</div>\n')
 
     # Lightbox fuori dal wrapper: nessuna interferenza di antenati CSS

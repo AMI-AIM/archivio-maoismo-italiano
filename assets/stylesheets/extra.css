@@ -210,15 +210,30 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   height: 0.5rem;
 }
 
-/* Apertura: al passaggio del mouse OPPURE al click/focus (touch e tastiera) */
-.md-header__nav-item--dropdown:hover .md-header__dropdown-menu,
-.md-header__nav-item--dropdown:focus-within .md-header__dropdown-menu {
+/* Apertura: la governa javascripts/navigazione.js (classe .is-open e
+   aria-expanded sincronizzati; hover, clic, tastiera, Esc). Senza JS
+   (html.no-js di Material) resta il comportamento CSS hover/focus. */
+.md-header__nav-item--dropdown.is-open .md-header__dropdown-menu,
+.no-js .md-header__nav-item--dropdown:hover .md-header__dropdown-menu,
+.no-js .md-header__nav-item--dropdown:focus-within .md-header__dropdown-menu {
   display: block;
 }
 
-.md-header__nav-item--dropdown:hover .md-header__dropdown-caret,
-.md-header__nav-item--dropdown:focus-within .md-header__dropdown-caret {
+.md-header__nav-item--dropdown.is-open .md-header__dropdown-caret,
+.no-js .md-header__nav-item--dropdown:hover .md-header__dropdown-caret,
+.no-js .md-header__nav-item--dropdown:focus-within .md-header__dropdown-caret {
   transform: rotate(180deg);
+}
+
+/* Il trigger e' un <button>: si azzerano gli stili del browser, il resto
+   (famiglia, corpo, peso, colore) viene da .md-header__nav-link. */
+button.md-header__nav-link--dropdown {
+  background: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+  letter-spacing: inherit;
 }
 
 /* Singola voce del menu */
@@ -427,7 +442,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
-  z-index: 98;
+  z-index: 1001; /* sopra l'avviso Internet Archive (sticky, z 1000) */
   cursor: pointer;
 }
 .md-drawer {
@@ -438,8 +453,11 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   width: 280px;
   background: var(--md-default-bg-color);
   transform: translateX(-100%);
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 99;
+  /* Chiuso = visibility:hidden (dopo la transizione): i link fuori schermo
+     non devono ricevere il focus da tastiera ne' essere letti. */
+  visibility: hidden;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.25s;
+  z-index: 1002;
   overflow-y: auto;
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
   display: flex;
@@ -452,10 +470,11 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 .md-drawer__header {
   background: var(--md-primary-fg-color);
-  padding: 0.8rem 1rem;
+  padding: 0.8rem 0.5rem 0.8rem 1rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 0.5rem;
   flex-shrink: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -505,6 +524,15 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 #__drawer:checked ~ .md-drawer {
   transform: translateX(0);
+  visibility: visible;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .md-drawer,
+  #__drawer:checked ~ .md-drawer,
+  .md-drawer-overlay {
+    transition: none;
+  }
 }
 
 /* ------------------------------------------------------------
@@ -515,12 +543,12 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   .md-drawer {
     display: none !important;
   }
-  .md-header__button[for="__drawer"] {
+  .md-header__button--menu {
     display: none !important;
   }
 }
 @media (max-width: 768px) {
-  .md-header__button[for="__drawer"] {
+  .md-header__button--menu {
     display: flex !important;
     align-items: center;
     justify-content: center;
@@ -531,7 +559,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
     cursor: pointer;
     color: #ffffff;
   }
-  .md-header__button[for="__drawer"] svg {
+  .md-header__button--menu svg {
     width: 1.8rem;
     height: 1.8rem;
     fill: #ffffff;
@@ -1459,7 +1487,7 @@ body:has(.banner-content-home) .lazy-skeleton {
    (body:has(.banner-content-home), che non usa !important). */
 
 .lazy-skeleton.error-state::after {
-    content: '⚠️ Immagine non disponibile';
+    content: 'Immagine non disponibile';
     color: #d32f2f;
     font-size: var(--ami-font-size-sm);
     font-weight: 500;
@@ -1526,7 +1554,6 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
 .md-footer *::before,
 .md-footer *::after {
     box-shadow: none !important;
-    outline: none !important;
 }
 .md-footer,
 .md-footer > *,
@@ -1642,4 +1669,122 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
         grid-template-columns: 1fr;
         gap: 1rem;
     }
+}
+
+/* ==========================================================================
+   HARDEN: FOCUS, MENU, RICERCA
+   Stati che il mouse non vede: focus da tastiera, menu mobile, ricerca
+   con suggerimenti, testo per lettori di schermo.
+   ========================================================================== */
+
+/* --- Focus visibile: base per tutto il sito ----------------------------
+   :where() = specificita' zero: ogni anello gia' disegnato altrove
+   (galleria, card argomenti) continua a vincere. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--md-primary-fg-color);
+  outline-offset: 2px;
+}
+
+/* Su fondi rossi, scuri o fotografici l'anello e' bianco */
+.md-header :focus-visible,
+.md-drawer__header :focus-visible,
+.banner-content :focus-visible,
+.evidenza-band :focus-visible,
+.ami-footer :focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+.md-header .md-header__dropdown-menu :focus-visible {
+  /* menu bianco dentro l'header rosso: anello rosso, interno alla voce */
+  outline-color: var(--md-primary-fg-color);
+  outline-offset: -3px;
+}
+.evidenza-band .evidenza-link:focus-visible {
+  outline-offset: 6px;
+  border-radius: 10px;
+}
+
+/* Campo di ricerca della hero: l'input non ha bordo proprio, l'anello va
+   sulla "pillola" che lo contiene. */
+.banner-search:focus-within {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px #ffffff, 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.banner-search input:focus-visible {
+  outline: none; /* l'anello e' sulla pillola (sopra) */
+}
+
+/* --- Drawer: pulsante di chiusura ------------------------------------ */
+.md-drawer__close {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.md-drawer__close:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+.md-drawer__close svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: currentColor;
+}
+/* Hamburger: area di tocco minima 44x44 */
+.md-header__button--menu {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* --- Ricerca hero: suggerimento evidenziato da tastiera ----------------
+   Stesso trattamento dell'hover: fondo tinto e titolo nel rosso del sito. */
+.hero-search-item:hover,
+.hero-search-item.is-active {
+  background: #f9ecec;
+}
+.hero-search-item.is-active .hero-search-item-title-text,
+.hero-search-item:hover .hero-search-item-title-text {
+  color: var(--md-primary-fg-color);
+}
+.hero-search-empty--errore {
+  color: #8e0000;
+}
+
+/* --- Solo per lettori di schermo -------------------------------------- */
+.ami-sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* --- Copertine in errore nelle card strette (home) -------------------- */
+/* L'immagine fallita resta nascosta anche qui: .evidenza-thumbnail-img ha
+   display:block !important (home.css) e vinceva su .lazy-img.lazy-error,
+   lasciando un'<img> rotta che si prendeva meta' della card. */
+.evidenza-thumbnail .lazy-img.lazy-error {
+  display: none !important;
+}
+.evidenza-thumbnail .lazy-skeleton.error-state {
+  padding: 0.6rem;
+}
+.evidenza-thumbnail .lazy-skeleton.error-state::after {
+  font-size: var(--ami-font-size-xs);
+  line-height: var(--ami-line-height-snug);
 }

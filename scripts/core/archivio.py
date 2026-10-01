@@ -100,60 +100,60 @@ hide:
 
     <!-- SIDEBAR FILTRI -->
     <aside class="filtri-sidebar" id="filtri-sidebar">
-        <h4>Filtri</h4>
+        <h2 class="filtri-titolo">Filtri</h2>
         
         <div class="filtro-gruppo collapsible">
-            <button class="filtro-toggle" id="toggle-organizzazione">
+            <button type="button" class="filtro-toggle" id="toggle-organizzazione" aria-expanded="false" aria-controls="filtro-organizzazione-container">
                 <span>Organizzazione</span>
-                <span class="toggle-icon">▼</span>
+                <span class="toggle-icon" aria-hidden="true">▼</span>
             </button>
             <div class="filtro-contenuto" id="filtro-organizzazione-container">
-                <select id="filtro-organizzazione" multiple>
+                <select id="filtro-organizzazione" multiple aria-label="Filtra per organizzazione">
                     <option value="all">Tutte</option>
                 </select>
             </div>
         </div>
         
         <div class="filtro-gruppo collapsible">
-            <button class="filtro-toggle" id="toggle-persona">
+            <button type="button" class="filtro-toggle" id="toggle-persona" aria-expanded="false" aria-controls="filtro-persona-container">
                 <span>Persona</span>
-                <span class="toggle-icon">▼</span>
+                <span class="toggle-icon" aria-hidden="true">▼</span>
             </button>
             <div class="filtro-contenuto" id="filtro-persona-container">
-                <select id="filtro-persona" multiple>
+                <select id="filtro-persona" multiple aria-label="Filtra per persona">
                     <option value="all">Tutte</option>
                 </select>
             </div>
         </div>
         
         <div class="filtro-gruppo collapsible">
-            <button class="filtro-toggle" id="toggle-tipo">
+            <button type="button" class="filtro-toggle" id="toggle-tipo" aria-expanded="false" aria-controls="filtro-tipo-container">
                 <span>Tipologia</span>
-                <span class="toggle-icon">▼</span>
+                <span class="toggle-icon" aria-hidden="true">▼</span>
             </button>
             <div class="filtro-contenuto" id="filtro-tipo-container">
-                <select id="filtro-tipo" multiple>
+                <select id="filtro-tipo" multiple aria-label="Filtra per tipologia">
                     <option value="all">Tutte</option>
                 </select>
             </div>
         </div>
         
         <div class="filtro-gruppo collapsible">
-            <button class="filtro-toggle" id="toggle-argomento">
+            <button type="button" class="filtro-toggle" id="toggle-argomento" aria-expanded="false" aria-controls="filtro-argomento-container">
                 <span>Argomenti</span>
-                <span class="toggle-icon">▼</span>
+                <span class="toggle-icon" aria-hidden="true">▼</span>
             </button>
             <div class="filtro-contenuto" id="filtro-argomento-container">
-                <select id="filtro-argomento" multiple>
+                <select id="filtro-argomento" multiple aria-label="Filtra per argomenti">
                     <option value="all">Tutti</option>
                 </select>
             </div>
         </div>
         
         <div class="filtro-gruppo collapsible">
-            <button class="filtro-toggle" id="toggle-anno">
+            <button type="button" class="filtro-toggle" id="toggle-anno" aria-expanded="false" aria-controls="filtro-anno-container">
                 <span>Anno</span>
-                <span class="toggle-icon">▼</span>
+                <span class="toggle-icon" aria-hidden="true">▼</span>
             </button>
             <div class="filtro-contenuto" id="filtro-anno-container">
                 <div class="slider-container" id="slider-container">
@@ -161,8 +161,8 @@ hide:
                     <div class="slider-track">
                         <div class="slider-track-fill" id="slider-track-fill"></div>
                     </div>
-                    <input type="range" id="filtro-anno-min" min="{anno_min}" max="{anno_max}" value="{anno_min}">
-                    <input type="range" id="filtro-anno-max" min="{anno_min}" max="{anno_max}" value="{anno_max}">
+                    <input type="range" id="filtro-anno-min" min="{anno_min}" max="{anno_max}" value="{anno_min}" aria-label="Anno iniziale">
+                    <input type="range" id="filtro-anno-max" min="{anno_min}" max="{anno_max}" value="{anno_max}" aria-label="Anno finale">
                     <div class="slider-labels">
                         <span id="anno-min-label">{anno_min}</span>
                         <span id="anno-max-label">{anno_max}</span>
@@ -177,20 +177,20 @@ hide:
         </div>
         
         <div class="filtri-azioni">
-            <button id="reset-filtri">↺ Reset</button>
-            <span id="risultati-conteggio"></span>
+            <button type="button" id="reset-filtri"><span aria-hidden="true">↺</span> Reset</button>
+            <span id="risultati-conteggio" role="status" aria-live="polite"></span>
         </div>
     </aside>
 
     <!-- RISULTATI -->
-    <main class="risultati-main">
+    <div class="risultati-main">
         <div id="filtri-attivi" class="filtri-attivi"></div>
         <div id="risultati-container">
             {risultati_html}
         </div>
         <!-- PAGINAZIONE -->
-        <div id="paginazione" class="paginazione-container"></div>
-    </main>
+        <nav id="paginazione" class="paginazione-container" aria-label="Pagine dei risultati"></nav>
+    </div>
 
 </div>
 
