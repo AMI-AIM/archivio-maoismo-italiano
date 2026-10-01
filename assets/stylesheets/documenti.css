@@ -618,11 +618,21 @@ necessario. La data resta a 21px: titolo (29px+) e data si distinguono.
   letter-spacing: 0.06em;
   color: var(--md-default-fg-color--light);
 }
+/* Il valore accanto all'etichetta e' un dato di catalogo: Courier Prime,
+   come i valori della colonna Scheda. Un nome lungo va a capo intero,
+   non spezzato dopo la prima parola. */
+.md-typeset .doc-correlati__gruppo h3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.6rem;
+}
 .doc-correlati__chiave {
-  margin-left: 0.35rem;
+  font-family: var(--ami-font-mono);
+  font-size: var(--ami-font-size-sm);
   text-transform: none;
   letter-spacing: 0;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--md-default-fg-color);
 }
 .md-typeset ul.doc-correlati__lista {
@@ -638,6 +648,21 @@ necessario. La data resta a 21px: titolo (29px+) e data si distinguono.
   padding: 0.45rem 0;
   border-bottom: 1px solid var(--md-default-fg-color--lightest);
   line-height: var(--ami-line-height-snug);
+}
+/* Le date hanno lunghezza variabile ("1967", "s.d.", "31 agosto 1968"):
+   l'elenco e' una griglia la cui prima colonna e' larga quanto la data piu'
+   lunga DI QUELL'ELENCO, e ogni riga la eredita (subgrid), cosi' i titoli
+   restano allineati. Senza subgrid resta la colonna fissa qui sotto. */
+@supports (grid-template-columns: subgrid) {
+  .md-typeset ul.doc-correlati__lista {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    column-gap: 1.25rem;
+  }
+  .md-typeset ul.doc-correlati__lista > li {
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+  }
 }
 .doc-correlati__data {
   font-size: var(--ami-font-size-sm);

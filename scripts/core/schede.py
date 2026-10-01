@@ -57,7 +57,7 @@ def _link_ia(url_attr, etichetta="Apri su Internet Archive"):
 # Versione dell'impaginazione della scheda: entra nell'hash della cache,
 # cosi' un cambio di template rigenera tutte le schede anche se i dati
 # della riga non sono cambiati.
-SCHEDA_TEMPLATE_VERSION = "2026-10-catalogo-2"
+SCHEDA_TEMPLATE_VERSION = "2026-10-catalogo-3"
 
 _MAX_CORRELATI = 4
 
@@ -616,23 +616,23 @@ hide:
         tabs_html = ""
         if is_bibliografico:
             tabs_html = """
-<div class="citazione-tabs">
-<button class="citazione-tab citazione-tab--active" data-formato="chicago" type="button">Chicago</button>
-<button class="citazione-tab" data-formato="mla" type="button">MLA</button>
-<button class="citazione-tab" data-formato="bibtex" type="button">BibTeX</button>
-<button class="citazione-tab" data-formato="semplice" type="button">Semplice</button>
+<div class="citazione-tabs" role="group" aria-label="Formato della citazione">
+<button class="citazione-tab citazione-tab--active" data-formato="chicago" type="button" aria-pressed="true">Chicago</button>
+<button class="citazione-tab" data-formato="mla" type="button" aria-pressed="false">MLA</button>
+<button class="citazione-tab" data-formato="bibtex" type="button" aria-pressed="false">BibTeX</button>
+<button class="citazione-tab" data-formato="semplice" type="button" aria-pressed="false">Semplice</button>
 </div>
 """
         
         content += f"""
-<div class="citazione-pannello" id="citazione-pannello-{citazione_id}" style="display:none;">
+<div class="citazione-pannello" id="citazione-pannello-{citazione_id}" role="region" aria-label="Cita questo documento" style="display:none;">
 {tabs_html}
-<div class="citazione-testo" id="citazione-testo-{citazione_id}" role="textbox" aria-readonly="true"></div>
+<div class="citazione-testo" id="citazione-testo-{citazione_id}" aria-live="polite"></div>
 <button class="citazione-copia" id="citazione-copia-{citazione_id}" type="button">{_icona("copia")}<span class="citazione-copia__etichetta">Copia</span></button>
 </div>
 <noscript>
 <div class="citazione-pannello citazione-pannello--noscript">
-<div class="citazione-testo" role="textbox" aria-readonly="true"></div>
+<div class="citazione-testo"></div>
 <p class="citazione-noscript-msg">Abilita JavaScript per vedere e copiare la citazione completa con data di consultazione.</p>
 </div>
 </noscript>

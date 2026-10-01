@@ -748,7 +748,8 @@ function generaIterfacciaPaginazione(container, current, total) {
     
     for (let i = startPage; i <= endPage; i++) {
         const active = i === current ? 'pag-btn--active' : '';
-        html += `<button class="pag-btn ${active}" data-page="${i}">${i}</button>`;
+        const corrente = i === current ? ' aria-current="page"' : '';
+        html += `<button class="pag-btn ${active}" data-page="${i}" aria-label="Pagina ${i}"${corrente}>${i}</button>`;
     }
     
     if (endPage < total) {

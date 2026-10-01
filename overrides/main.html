@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
+{% block header %}
+  {% if not (page and page.toc | first is defined) %}
+    <a href="#ami-contenuto" class="md-skip">Vai al contenuto</a>
+  {% endif %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+  <span id="ami-contenuto" class="ami-ancora-contenuto" tabindex="-1"></span>
+  {{ super() }}
+{% endblock %}
+
 {% block extrahead %}
   {{ super() }}
 

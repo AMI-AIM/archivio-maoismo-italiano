@@ -498,7 +498,7 @@
         tabs.forEach(function (tab) {
           var active = tab.dataset.formato === currentFormat;
           tab.classList.toggle('citazione-tab--active', active);
-          tab.setAttribute('aria-selected', active ? 'true' : 'false');
+          tab.setAttribute('aria-pressed', active ? 'true' : 'false');
         });
       }
       
@@ -522,16 +522,38 @@
         });
       });
       
+      function chiudiPannello(ridaiFocus) {
+        panel.style.display = 'none';
+        toggleButton.setAttribute('aria-expanded', 'false');
+        if (ridaiFocus) toggleButton.focus();
+      }
+
       toggleButton.addEventListener('click', function () {
         var isHidden = panel.style.display === 'none' || !panel.style.display;
-        if (isHidden) {
-          // Ricostruisce le citazioni all'apertura, così la data
-          // di consultazione è quella del momento effettivo.
-          citations = buildCitations(payload);
-          renderFormat();
+        if (!isHidden) {
+          chiudiPannello(false);
+          return;
         }
-        panel.style.display = isHidden ? '' : 'none';
-        toggleButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+        // Ricostruisce le citazioni all'apertura, così la data
+        // di consultazione è quella del momento effettivo.
+        citations = buildCitations(payload);
+        renderFormat();
+        panel.style.display = '';
+        toggleButton.setAttribute('aria-expanded', 'true');
+        // Il pannello si apre sotto il visore, spesso fuori schermo: lo si
+        // porta in vista e il focus va sul formato attivo (o su Copia).
+        var riduci = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        panel.scrollIntoView({ behavior: riduci ? 'auto' : 'smooth', block: 'nearest' });
+        var primo = panel.querySelector('.citazione-tab--active') || copyButton;
+        if (primo) primo.focus({ preventScroll: true });
+      });
+
+      // Esc chiude il pannello e riporta il focus su "Cita questo documento".
+      panel.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          chiudiPannello(true);
+        }
       });
       
       if (copyButton) {
