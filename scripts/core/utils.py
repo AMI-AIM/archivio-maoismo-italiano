@@ -32,11 +32,40 @@ def slugify(name):
     return name.strip('-')
 
 
+# Convenzione per le date incerte del catalogo:
+#   "????"  (anno del tutto ignoto)        -> "s.d."      (in fondo agli ordinamenti)
+#   "201?"  (cifre finali ignote)          -> "ca. 2010"  (ordinato come 2010)
+DATA_SENZA = 's.d.'
+_DATE_ASSENTI = {'', 'nan', 'None', 'NaT', 'n.d.', 's.d.'}
+
+
+def formatta_estremo(valore):
+    """Estremo cronologico di una persona o organizzazione (nascita, morte,
+    fondazione, scioglimento), con la stessa convenzione delle date incerte:
+    "????" -> "s.d.", "201?" -> "ca. 2010"; ogni altro valore resta com'e'."""
+    v = str(valore or '').strip()
+    if v in ('nan', 'None', 'NaT'):
+        return ''
+    if re.fullmatch(r'\?{4}', v):
+        return DATA_SENZA
+    if len(v) == 4 and re.fullmatch(r'(\d{1,3})(\?{1,3})', v):
+        return f"ca. {v.replace('?', '0')}"
+    return v
+
+
 def formatta_data(data_str):
-    if not data_str or data_str in ['nan', 'None', 'n.d.']:
-        return 'n.d.', (9999, 1, 1)
+    if data_str is None or str(data_str).strip() in _DATE_ASSENTI:
+        return DATA_SENZA, (9999, 1, 1)
 
     data_str = str(data_str).strip()
+
+    if re.fullmatch(r'\?{4}', data_str):
+        return DATA_SENZA, (9999, 1, 1)
+
+    match_incerta = re.fullmatch(r'(\d{1,3})(\?{1,3})', data_str)
+    if match_incerta and len(data_str) == 4:
+        anno = int(data_str.replace('?', '0'))
+        return f"ca. {anno}", (anno, 1, 1)
 
     if re.match(r'^\d{4}$', data_str):
         return data_str, (int(data_str), 1, 1)

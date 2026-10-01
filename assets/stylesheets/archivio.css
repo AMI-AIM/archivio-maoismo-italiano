@@ -139,10 +139,11 @@
    ------------------------------------------------------------ */
 .slider-container {
     position: relative;
-    width: 100%;
-    margin-top: 1.7rem;
-    margin-bottom: 0.5rem;
-    height: 64px;
+    /* Rientro laterale: le etichette degli anni sono centrate sulle
+       maniglie agli estremi e devono restare dentro la colonna filtri. */
+    width: auto;
+    margin: 1.7rem 1.4rem 0.5rem;
+    height: 52px;
 }
 
 .slider-histogram {

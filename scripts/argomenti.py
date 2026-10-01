@@ -79,7 +79,7 @@ def formatta_data_sicura(raw):
     """Wrapper sicuro attorno a formatta_data."""
     raw = str(raw).strip()
     if not raw or raw in ['nan', 'None']:
-        return 'n.d.', (9999, 1, 1)
+        return 's.d.', (9999, 1, 1)
     try:
         return formatta_data(raw)
     except Exception:

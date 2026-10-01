@@ -109,7 +109,7 @@ def _correlati(doc, indice):
 def _lista_correlati(docs):
     righe = []
     for d in docs:
-        data = d["data"] if d["data"] and d["data"] != "n.d." else "s.d."
+        data = d["data"] if d["data"] and d["data"] not in ("n.d.", "s.d.") else "s.d."
         url = site_path("documenti/" + d["id"] + "/")
         righe.append(
             f'<li><span class="doc-correlati__data">{html.escape(data)}</span>'
@@ -432,7 +432,7 @@ hide:
         # =====================================================================
         data_display_html = html.escape(
             data_formattata
-            if data_formattata and data_formattata != "n.d."
+            if data_formattata and data_formattata not in ("n.d.", "s.d.")
             else "Data non disponibile"
         )
         titolo_html = html.escape(titolo)
@@ -443,7 +443,7 @@ hide:
         # dentro il testo della citazione.
         segnatura_data = (
             html.escape(data_formattata)
-            if data_formattata and data_formattata != "n.d."
+            if data_formattata and data_formattata not in ("n.d.", "s.d.")
             else '<abbr title="senza data">s.d.</abbr>'
         )
         segnatura_parti = [f'<span class="doc-segnatura__id">{html.escape(ami_id)}</span>']
@@ -662,7 +662,7 @@ hide:
             ("Organizzazione", org_html),
             ("Persone collegate", persone_collegate_html),
             ("Organizzazioni collegate", organizzazioni_collegate_html),
-            ("Data", html.escape(data_formattata) if data_formattata and data_formattata != "n.d." else ""),
+            ("Data", html.escape(data_formattata) if data_formattata and data_formattata not in ("n.d.", "s.d.") else ""),
             ("Luogo", html.escape(luogo_raw)),
             ("Editore", html.escape(editore_raw)),
             ("Tipologia", html.escape(tipo_display)),

@@ -22,6 +22,12 @@ def parse_year(date_str):
     if not s:
         return None
 
+    if re.fullmatch(r"\?{4}", s):
+        return None
+    m = re.fullmatch(r"(\d{1,3})(\?{1,3})", s)
+    if m and len(s) == 4:
+        return int(s.replace("?", "0"))
+
     m = re.search(r"\b(19\d{2}|20\d{2})\b", s)
     if m:
         return int(m.group(1))
@@ -67,6 +73,11 @@ def format_data(valore):
     s = clean_value(valore)
     if not s:
         return ""
+    if re.fullmatch(r"\?{4}", s):
+        return "s.d."
+    m = re.fullmatch(r"(\d{1,3})(\?{1,3})", s)
+    if m and len(s) == 4:
+        return f"ca. {s.replace('?', '0')}"
 
     m = re.match(
         r"^(\d{4})-(\d{1,2})-(\d{1,2})"

@@ -200,7 +200,7 @@ hide:
             <div class="risultati-ordina">
                 <label for="ordina-risultati">Ordina per</label>
                 <select id="ordina-risultati">
-                    <option value="data">Data, dalla più antica</option>
+                    <option value="data">Data, dalla più vecchia</option>
                     <option value="data-desc">Data, dalla più recente</option>
                     <option value="titolo">Titolo, A–Z</option>
                 </select>

@@ -235,7 +235,7 @@ def costruisci_payload_citazione(
     citation_key = sanitize_citation_id(ami_id)
     
     data_display = str(data_formattata or "").strip()
-    if data_display in ("", "nan", "None", "n.d."):
+    if data_display in ("", "nan", "None", "n.d.", "s.d."):
         data_display = "s.d."
     
     year = str(anno_pubblicazione or "").strip()

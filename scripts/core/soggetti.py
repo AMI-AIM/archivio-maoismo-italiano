@@ -5,7 +5,7 @@ import os
 import pandas as pd
 
 from .site_config import site_path
-from .utils import slugify, split_nomi
+from .utils import formatta_estremo, slugify, split_nomi
 
 
 def carica_soggetti(data_dir):
@@ -110,8 +110,8 @@ def genera_json_soggetti(persone, organizzazioni, output_dir):
             'nome': nome,
             'slug': info.get('slug', ''),
             'biografia': info.get('biografia', ''),
-            'nascita': info.get('nascita', ''),
-            'morte': info.get('morte', '')
+            'nascita': formatta_estremo(info.get('nascita', '')),
+            'morte': formatta_estremo(info.get('morte', ''))
         })
 
     organizzazioni_json = []
@@ -121,7 +121,7 @@ def genera_json_soggetti(persone, organizzazioni, output_dir):
             'slug': info.get('slug', ''),
             'storia': info.get('storia', ''),
             'categoria': info.get('categoria', ''),
-            'fondazione': info.get('fondazione', '')
+            'fondazione': formatta_estremo(info.get('fondazione', ''))
         })
 
     data = {

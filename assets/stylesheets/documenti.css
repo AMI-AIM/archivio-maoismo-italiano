@@ -594,7 +594,8 @@ necessario. La data resta a 21px: titolo (29px+) e data si distinguono.
 }
 .md-typeset .doc-scheda__campo dd {
   margin: 0;
-  font-size: var(--ami-font-size-base);
+  font-family: var(--ami-font-mono);
+  font-size: var(--ami-font-size-sm);
   line-height: var(--ami-line-height-snug);
   overflow-wrap: anywhere;
 }

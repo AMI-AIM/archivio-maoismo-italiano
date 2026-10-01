@@ -9,7 +9,7 @@ from core.catalog_indexer import CatalogIndexer
 from core.liste import GRUPPI_ORGANIZZAZIONE, elenco_per_ruolo
 from core.schema_generator import SchemaGenerator
 from core.site_config import site_path
-from core.utils import escape_yaml_string, formatta_data, slugify
+from core.utils import escape_yaml_string, formatta_data, formatta_estremo, slugify
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
@@ -137,6 +137,8 @@ def genera_organizzazioni():
         else:
             immagine_url = None
 
+        fondazione = formatta_estremo(fondazione)
+        scioglimento = formatta_estremo(scioglimento)
         if fondazione and scioglimento:
             data_range = f"{fondazione} – {scioglimento}"
         elif fondazione:
@@ -169,7 +171,7 @@ def genera_organizzazioni():
             if data_raw and data_raw not in ['nan', 'None']:
                 data_form, data_ordine = formatta_data(data_raw)
             else:
-                data_form = 'n.d.'
+                data_form = 's.d.'
                 data_ordine = (9999, 1, 1)
 
             ruoli = indexer.get_roles_for_organization(nome, doc)
