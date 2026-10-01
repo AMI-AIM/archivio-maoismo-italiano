@@ -226,11 +226,12 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   list-style: none;
 }
 
+/* Voce di menu: stesso corpo della nav (base), non piu' md */
 .md-header__dropdown-link {
   display: block;
   padding: 0.55rem 1.1rem;
   font-family: var(--ami-font-label);
-  font-size: var(--ami-font-size-md);
+  font-size: var(--ami-font-size-base);
   font-weight: 600;
   color: #1a1a1a;
   text-decoration: none;
@@ -259,7 +260,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   display: block;
   padding: 0.6rem 1rem 0.3rem 1rem;
   font-family: var(--ami-font-label);
-  font-size: var(--ami-font-size-sm);
+  font-size: var(--ami-font-size-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: var(--ami-tracking-wider);
@@ -274,7 +275,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 
 .md-drawer__subitem .md-drawer__link {
   padding-left: 2.2rem;
-  font-size: var(--ami-font-size-md);
+  font-size: var(--ami-font-size-base);
 }
 
 /* ------------------------------------------------------------
@@ -327,12 +328,15 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   max-width: 700px;
   padding: 0.5rem 1rem;
 }
+/* Testo chiaro su immagine scura: leggero aumento di interlinea e
+   tracking (compensazione light-on-dark). */
 .banner-content p {
   font-size: var(--ami-font-size-xl);
   font-weight: 600;
   opacity: 1;
   margin: 0 0 0.8rem 0;
-  line-height: var(--ami-line-height-normal);
+  line-height: 1.4;
+  letter-spacing: 0.005em;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65), 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 .banner-actions {
@@ -376,12 +380,14 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   fill: #ffffff;
   flex-shrink: 0;
 }
+/* Campo di input: mai sotto il corpo base (16px). Sotto i 16px iOS Safari
+   ingrandisce la pagina al focus. */
 .banner-search input {
   background: transparent;
   border: none;
   outline: none;
   color: #ffffff;
-  font-size: var(--ami-font-size-sm);
+  font-size: var(--ami-font-size-base);
   width: 100%;
   min-width: 140px;
   flex: 1 1 auto;
@@ -584,7 +590,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   }
   .banner-search input {
     min-width: 80px;
-    font-size: var(--ami-font-size-xs);
+    font-size: var(--ami-font-size-base);
   }
   .banner-search-submit {
     font-size: var(--ami-font-size-xs);
@@ -606,11 +612,9 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   margin-top: 0.5rem;
 }
 
-/* RIGA DOCUMENTO — fonte unica (prima duplicata in extra.css, home.css e
-   soggetti.css con padding diversi; a vincere era il foglio caricato per
-   ultimo). Base = variante compatta, quella vista in tutte le pagine di
-   Persone/Organizzazioni/Argomenti. La variante "comoda" della home vive in
-   home.css (.recent-container .doc-row). */
+/* RIGA DOCUMENTO — fonte unica del LAYOUT (la tipografia delle righe e'
+   definita nei RUOLI della sezione 13, con specificita' sufficiente a
+   prevalere sui fogli di pagina). */
 .doc-row {
   display: flex;
   align-items: flex-start;
@@ -656,11 +660,6 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   font-size: var(--ami-font-size-sm);
   color: var(--md-default-fg-color--light);
 }
-.doc-keywords {
-  font-size: var(--ami-font-size-sm);
-  color: var(--md-primary-fg-color--light);
-  font-style: italic;
-}
 @media (max-width: 768px) {
   .doc-row {
     flex-direction: column;
@@ -670,21 +669,23 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   .doc-data {
     flex: 0 0 auto;
     white-space: normal;
-    font-size: var(--fs-sm);
+    font-size: var(--ami-font-size-sm);
   }
 }
 
-/* BADGE-ETICHETTA — tre usi identici (ruolo nella riga documento, tipo nelle
-   top-card, categoria nelle org-card): maiuscoletto bianco su rosso.
-   Le sole differenze restano nei rispettivi fogli (padding, margini). */
+/* BADGE-ETICHETTA — fonte UNICA di tutti i badge (ruolo nella riga documento,
+   tipo nelle top-card, categoria nelle org-card): maiuscoletto bianco su
+   rosso, 13px, Archivo 700. I fogli di pagina non ridefiniscono piu' la
+   tipografia dei badge. */
 .ruolo-badge,
 .top-card-tipo,
 .org-tipo {
   display: inline-block;
-  font-size: var(--fs-2xs);
+  font-size: var(--ami-font-size-2xs);
   font-weight: var(--fw-label);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--ami-tracking-wider);
+  line-height: 1.3;
   color: #ffffff !important;
   background: var(--md-primary-fg-color);
   padding: 0.2rem 0.4rem;
@@ -728,9 +729,6 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   .doc-sommario {
     font-size: var(--ami-font-size-sm);
   }
-  .doc-keywords {
-    font-size: var(--ami-font-size-xs);
-  }
   .risultato-card {
     padding: 0.6rem 0.4rem;
   }
@@ -757,7 +755,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   }
   .people-name,
   .org-name {
-    font-size: var(--ami-font-size-sm);
+    font-size: var(--ami-font-size-base);
   }
 }
 
@@ -790,7 +788,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
     font-size: var(--ami-font-size-xs);
   }
   .banner-search input {
-    font-size: var(--ami-font-size-xs);
+    font-size: var(--ami-font-size-base);
     min-width: 60px;
   }
   .banner-search-submit {
@@ -889,143 +887,234 @@ in home.css, che le definisce da sola: rimosse)
 }
 
 /* ------------------------------------------------------------
-13. TIPOGRAFIA — SISTEMA FONT D'ARCHIVIO (kit armonizzato)
+13. TIPOGRAFIA — SISTEMA FONT D'ARCHIVIO
 
-RUOLI
-  titolo     Fraunces  900  (--fw-title)  — h1..h4, titoli sezione
-  testo      Fraunces  400  (--fw-text)   — corpo, abstract, biografie
-  enfasi     Fraunces  600  (--fw-emph)   — titoli di riga, <strong>
-  etichetta  Archivo   700  (--fw-label)  — nav, bottoni, badge, chip
-  metadato   Courier Prime 400            — valori dei metadati, testo
-             trascritto e blocchi di citazione: look "macchina da
-             scrivere" voluto. MAI in riga con altro testo corrente.
+FAMIGLIE (tutte necessarie, ciascuna con un ruolo che solo lei svolge)
+  Fraunces      titoli e testo corrente (stessa famiglia: cambia il peso,
+                non lo "scheletro")
+  Archivo       etichette e UI: nav, bottoni, badge, chip, filtri
+  Courier Prime metadati, testo trascritto, blocchi di citazione: look
+                "macchina da scrivere" voluto. MAI in riga con altro testo.
 
-SCALA (token --fs-*). ATTENZIONE: Material imposta html a 125%
-(~20px; sale a 137.5%/150% sui viewport molto larghi), quindi
-1rem qui NON e' 16px. I px nei commenti valgono per la root al 125%
-e sono da verificare a schermo. Il corpo di Material
-(.md-typeset = .8rem) e' 16px = --fs-sm.
+PESI PER RUOLO
+  900 titolo di pagina (h1)        750 sezione (h2)     650 sottosezione (h3)
+  600 enfasi / titolo di riga      400 testo            700 etichette Archivo
+  I pesi esistono davvero: Fraunces e Archivo sono variabili 100-900.
 
-PESI: Fraunces e' caricato con asse wght continuo 400..900 (vedi
-overrides/main.html): ogni peso dichiarato nei CSS esiste davvero.
+SCALA (valori REALI a schermo)
+  ATTENZIONE: Material imposta html a 125%, quindi 1rem = 20px (sale a
+  137.5% sopra 100em e a 150% sopra 125em). Il corpo di Material
+  (.md-typeset = .8rem) e' 16px: la scala qui sotto parte da li'.
+  I commenti in px valgono per root = 125%.
+
+  2xs 13px  badge maiuscoli          xs  14px  etichette, chip, contatori
+  sm  15px  testo secondario, meta   base 16px CORPO (misura 45-75ch)
+  md  18px  titoli di riga           lg  21px  sottosezioni
+  xl  26px  titoli di sezione        2xl 36px / 3xl 44px  display
+  h1 fluido 29-38px (--ami-size-h1)
+
+REGOLE DI SPECIFICITA'
+  home.css, soggetti*.css e archivio.css sono caricati globalmente E
+  ri-linkati nel corpo di alcune pagine: l'ordine della cascata cambia da
+  pagina a pagina. Per questo i RUOLI condivisi (sezione 14) usano il
+  prefisso .md-typeset, che vince sempre sui selettori a singola classe.
 ------------------------------------------------------------ */
 :root {
   --ami-font-display: "Fraunces", Georgia, "Times New Roman", serif;
   --ami-font-text: "Fraunces", Georgia, "Times New Roman", serif;
-  --ami-font-label: "Archivo", "Arial Narrow", sans-serif;
+  /* Fallback Archivo: Arial/Helvetica (stessa larghezza); "Arial Narrow",
+     usato in precedenza, e' piu' stretto e fa riflusso al caricamento. */
+  --ami-font-label: "Archivo", Arial, "Helvetica Neue", sans-serif;
   --ami-font-mono: "Courier Prime", "Courier New", monospace;
 
-  /* ---- Token tipografici di ruolo -------------------------------------
-     Usati da extra.css, progetto.md e dai fogli di pagina. NON rimuoverli
-     senza rimuovere anche gli usi: una var() non definita rende invalida la
-     dichiarazione (font-weight/font-size tornano al valore ereditato,
-     anche se la regola e' !important).
-     Pesi: coincidono con le facce di fonts.css (Fraunces 400/600/900,
-     Archivo 500/600/700). */
-  --fw-title: 900;  /* Fraunces  - h1..h4, titoli sezione */
-  --fw-text: 400;   /* Fraunces  - corpo, abstract, biografie */
-  --fw-emph: 600;   /* Fraunces  - titoli di riga, <strong> */
-  --fw-label: 700;  /* Archivo   - nav, bottoni, badge, chip */
+  /* Pesi per ruolo */
+  --fw-title: 900;   /* Fraunces - h1 */
+  --fw-heading: 750; /* Fraunces - h2 */
+  --fw-emph: 600;    /* Fraunces - titoli di riga, <strong> */
+  --fw-text: 400;    /* Fraunces - corpo, abstract, biografie */
+  --fw-label: 700;   /* Archivo  - badge, nav, chip */
 
-  /* Scala per ruolo (rem di Material: html=125%, quindi 1rem ~ 20px) */
-  --fs-2xs: 0.65rem;
-  --fs-xs: 0.7rem;
-  --fs-sm: 0.8rem;
-  --fs-md: 0.9rem;
-  --fs-lg: 1.05rem;
-  --lh-text: 1.6;
-  --measure: 70ch;
-  --md-text-font-family: "Fraunces", Georgia, "Times New Roman", serif;
-  --md-code-font-family: "Courier Prime", "Courier New", monospace;
+  /* Scala unica (rem di Material: html=125%, 1rem = 20px) */
+  --ami-font-size-2xs: 0.65rem; /* 13px - badge maiuscoli */
+  --ami-font-size-xs: 0.7rem;   /* 14px - etichette, chip, contatori */
+  --ami-font-size-sm: 0.75rem;  /* 15px - testo secondario, metadati */
+  --ami-font-size-base: 0.8rem; /* 16px - corpo e campi di input */
+  --ami-font-size-md: 0.9rem;   /* 18px - titoli di riga */
+  --ami-font-size-lg: 1.05rem;  /* 21px - sottosezioni */
+  --ami-font-size-xl: 1.3rem;   /* 26px - titoli di sezione */
+  --ami-font-size-2xl: 1.8rem;  /* 36px - display */
+  --ami-font-size-3xl: 2.2rem;  /* 44px - display grande */
+  /* Titolo di pagina fluido (29px su telefono, 38px su desktop) */
+  --ami-size-h1: clamp(1.45rem, 1.05rem + 1.5vw, 1.9rem);
 
-  /* Scala tipografica unificata (rem) — valori di riferimento per tutti i CSS custom. */
-  --ami-font-size-xs: 0.75rem;   /* 12px - etichette piccole */
-  --ami-font-size-sm: 0.875rem;  /* 14px - testo secondario */
-  --ami-font-size-base: 1rem;    /* 16px - corpo standard */
-  --ami-font-size-md: 1.125rem;  /* 18px - enfasi */
-  --ami-font-size-lg: 1.25rem;   /* 20px - sottotitoli */
-  --ami-font-size-xl: 1.5rem;    /* 24px - titoli sezione */
-  --ami-font-size-2xl: 2rem;     /* 32px - hero H1 */
-  --ami-font-size-3xl: 2.5rem;   /* 40px - banner principale */
+  /* ALIAS legacy (--fs-*): puntano alla scala unica. Esistevano due scale
+     parallele con valori diversi per lo stesso ruolo. Non aggiungerne. */
+  --fs-2xs: var(--ami-font-size-2xs);
+  --fs-xs: var(--ami-font-size-xs);
+  --fs-sm: var(--ami-font-size-sm);
+  --fs-md: var(--ami-font-size-md);
+  --fs-lg: var(--ami-font-size-lg);
 
-  /* Interlinea proporzionale alla scala tipografica */
-  --ami-line-height-tight: 1.2;   /* titoli compatti */
+  /* Interlinea: inversamente proporzionale alla misura */
+  --ami-line-height-tight: 1.2;   /* titoli */
   --ami-line-height-snug: 1.35;   /* UI e liste */
-  --ami-line-height-normal: 1.5;  /* corpo testo */
-  --ami-line-height-relaxed: 1.6; /* paragrafi lunghi */
+  --ami-line-height-normal: 1.5;  /* testo di interfaccia */
+  --ami-line-height-relaxed: 1.6; /* prosa */
+  --lh-text: 1.6;
+  --measure: 68ch;
 
-  /* Letter-spacing gerarchico (em) */
+  /* Letter-spacing (em). Pavimento -0.04em, mai superato. */
   --ami-tracking-tighter: -0.02em; /* titoli grandi */
-  --ami-tracking-tight: -0.01em;   /* H1-H3 */
+  --ami-tracking-tight: -0.01em;   /* h2-h3 */
   --ami-tracking-normal: 0;        /* corpo */
   --ami-tracking-wide: 0.03em;     /* etichette/badge */
   --ami-tracking-wider: 0.05em;    /* maiuscoletto/nav */
+
+  --md-text-font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  --md-code-font-family: "Courier Prime", "Courier New", monospace;
 }
 
 /* Grigio "light" di Material (54% nero = #757575) su sfondo #f5f5f5
    arriva a ~4.3:1, sotto AA per il testo lungo. #5c5c5c: ~6:1 su
-   #f5f5f5 e ~6.9:1 su bianco. Un solo override migliora tutte le date,
-   i meta e gli abstract. */
+   #f5f5f5 e ~6.9:1 su bianco. */
 body[data-md-color-scheme="default"] {
   --md-default-fg-color--light: #5c5c5c;
 }
 
-/* Corpo: Fraunces regolare, con ottimizzazione automatica della
-dimensione ottica del disegno (variable font) */
+/* Corpo: Fraunces regolare con dimensione ottica automatica.
+   font-synthesis-weight: none impedisce il grassetto sintetico (ad esempio
+   su Fraunces corsivo, che esiste solo a 400). */
 body,
 .md-typeset {
   font-family: var(--ami-font-text) !important;
   font-optical-sizing: auto;
+  font-synthesis-weight: none;
   line-height: var(--ami-line-height-normal);
 }
-/* Enfasi nel corpo: 600, non Black (Material userebbe 700) */
+/* Prosa diretta (pagina "Il progetto", testi liberi): misura limitata e
+   interlinea da lettura. I blocchi UI non sono figli diretti: non cambiano. */
+.md-typeset > p,
+.md-typeset > ul,
+.md-typeset > ol {
+  max-width: var(--measure);
+  line-height: var(--ami-line-height-relaxed);
+  text-wrap: pretty;
+}
 .md-typeset strong,
 .md-typeset b {
   font-weight: var(--fw-emph);
 }
-/* Titoli di sezione: Fraunces peso 900 — stessa famiglia del corpo,
-cambia solo il peso: zero salto di "scheletro" tra titolo e testo */
+
+/* --- Titoli: stessa famiglia del corpo, gerarchia per PESO ------------
+   Nessun !important: le classi di pagina (es. h1.person-name) possono
+   rifinire. Le dimensioni di h2-h4 restano quelle di Material o dei fogli
+   di pagina (galleria, home) e non vengono toccate qui. */
 .md-typeset h1,
 .md-typeset h2,
 .md-typeset h3,
 .md-typeset h4,
 .section-title,
 .home-column h2 {
-  font-family: var(--ami-font-display) !important;
-  font-weight: 900 !important;
+  font-family: var(--ami-font-display);
   letter-spacing: var(--ami-tracking-tight);
   line-height: var(--ami-line-height-tight);
+  text-wrap: balance;
 }
-/* Titoli di riga (schede, elenchi, card): Fraunces peso 600 —
-restano nella stessa famiglia del corpo, non nel font etichette */
-.doc-titolo,
-.doc-titolo a,
+.md-typeset h1 {
+  font-weight: var(--fw-title);
+  letter-spacing: var(--ami-tracking-tighter);
+  color: var(--md-default-fg-color);
+}
+.md-typeset h2,
+.section-title,
+.home-column h2 {
+  font-weight: var(--fw-heading);
+}
+.md-typeset h3 {
+  font-weight: 650;
+}
+.md-typeset h4 {
+  font-weight: var(--fw-emph);
+}
+/* Titoli di sezione della home: un solo ruolo (prima 26px nel band scuro e
+   21px nelle colonne, per lo stesso scopo). */
+.md-typeset .section-title,
+.md-typeset .home-column h2 {
+  font-size: var(--ami-font-size-xl);
+}
+/* Su fondo scuro: un gradino di peso in piu' (compensazione light-on-dark) */
+.md-typeset .evidenza-band .section-title {
+  font-weight: 800;
+  letter-spacing: 0;
+}
+@media (max-width: 768px) {
+  .md-typeset .section-title,
+  .md-typeset .home-column h2 {
+    font-size: var(--ami-font-size-lg);
+  }
+}
+/* Gli <h2> delle schede persona/organizzazione/argomento sono generati con
+   style="font-size:1.2rem;font-weight:bold" inline (persone.py, org.py,
+   argomenti.py). Fino a quando i generatori non useranno una classe, questa
+   regola riporta quei titoli al ruolo "sottosezione". */
+.md-typeset h2[style] {
+  font-size: var(--ami-font-size-lg) !important;
+  font-weight: var(--fw-heading) !important;
+}
+/* Galleria: i pesi/tracking dichiarati in galleria.css perdevano contro
+   .md-typeset h1/h2. Si ripristina l'intento (numeri d'anno in Black) senza
+   toccare le dimensioni. */
+.md-typeset .galleria-wrapper .galleria-main-title,
+.md-typeset .galleria-wrapper .galleria-year-title {
+  font-weight: var(--fw-title);
+  letter-spacing: var(--ami-tracking-tighter);
+}
+
+/* --- Titoli di riga (schede, elenchi, card): Fraunces 600 ------------ */
+.md-typeset .doc-titolo,
+.md-typeset .doc-titolo a,
+.md-typeset .risultato-titolo,
+.md-typeset .top-card-name,
+.md-typeset .people-card .people-name,
+.md-typeset .org-card .org-name,
 .evidenza-titolo,
-.people-name,
-.org-name,
-.top-card-name,
-.person-name,
-.risultato-titolo,
 .hero-search-item-title-text {
-  font-family: var(--ami-font-text) !important;
-  font-weight: var(--fw-emph) !important;
+  font-family: var(--ami-font-text);
+  font-weight: var(--fw-emph);
 }
-/* Date delle liste: stessa famiglia del corpo, cifre tabulari cosi'
-le colonne di date si allineano. Il colore rosso resta l'unico
-segnale distintivo — niente cambio di famiglia in riga */
-.doc-data,
+.md-typeset .doc-titolo {
+  font-size: var(--ami-font-size-md);
+  line-height: var(--ami-line-height-snug);
+}
+/* Titolo su fondo scuro: piu' interlinea e un filo di tracking */
+.evidenza-titolo {
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+/* --- Date e metadati di riga: stessa famiglia del corpo, cifre
+   tabulari cosi' le colonne si allineano. Il rosso e' l'unico segnale. --- */
+.md-typeset .doc-data,
 .persona-date,
 .risultato-data {
   font-variant-numeric: tabular-nums;
 }
-.doc-data,
+.md-typeset .doc-data,
 .persona-date {
-  font-family: var(--ami-font-text) !important;
-  font-weight: var(--fw-emph) !important;
+  font-family: var(--ami-font-text);
+  font-weight: var(--fw-emph);
   letter-spacing: 0;
 }
-/* Etichette e UI: Archivo — riservato a nav, bottoni e badge/chip,
-che restano l'UNICO accento tipografico ammesso per riga */
+.md-typeset .doc-data {
+  font-size: var(--ami-font-size-sm);
+}
+.md-typeset .doc-sommario,
+.md-typeset .doc-org {
+  font-size: var(--ami-font-size-sm);
+}
+
+/* --- Etichette e UI: Archivo. Nav, bottoni, badge, chip, controlli di
+   filtro. E' l'unico accento tipografico ammesso per riga. ------------- */
 .md-header__nav-link,
 .md-drawer__link,
 .md-button,
@@ -1035,7 +1124,14 @@ che restano l'UNICO accento tipografico ammesso per riga */
 .ami-footer__links-list a,
 .banner-search-submit,
 .hero-search-count,
-.hero-search-item-tag {
+.hero-search-item-tag,
+.filtro-toggle,
+.filtro-gruppo label,
+#reset-filtri,
+.filtro-chip,
+.filtri-attivi-reset,
+.slider-value-pill,
+.pag-btn {
   font-family: var(--ami-font-label);
 }
 .md-header__nav-link {
@@ -1055,10 +1151,24 @@ che restano l'UNICO accento tipografico ammesso per riga */
 .ami-footer__links-title {
   font-weight: var(--fw-label);
 }
-/* Date di vita e parole chiave: Fraunces italic (elegante, da libro) */
-.persona-date,
-.doc-keywords {
+/* Titolo della sidebar filtri: e' un'etichetta, non un titolo editoriale
+   (prima ereditava Fraunces 900 dalla regola degli h4). */
+.md-typeset .filtri-sidebar h4 {
+  font-family: var(--ami-font-label);
+  font-size: var(--ami-font-size-base);
+  font-weight: var(--fw-label);
+  letter-spacing: var(--ami-tracking-normal);
+}
+/* Campi di input: mai sotto 16px (iOS ingrandisce la pagina al focus) */
+.md-typeset .filtro-gruppo select,
+.md-typeset .filtro-gruppo input[type="text"],
+.md-typeset .search-bar input {
   font-family: var(--ami-font-text);
+  font-size: var(--ami-font-size-base);
+}
+
+/* Date di vita: Fraunces corsivo (elegante, da libro) */
+.persona-date {
   font-style: italic;
   font-weight: var(--fw-text);
 }
@@ -1072,23 +1182,14 @@ citazione (vedi documenti.css) e codice. Mai in riga con altro testo. */
 
 /* ------------------------------------------------------------
 14. TIPOGRAFIA — PAGINE INTERNE (Persone, Organizzazioni, Archivio)
-Gli !important vincono sui <style> inline generati dai generatori
-(persone.py, org.py) senza dover toccare il markup.
 ------------------------------------------------------------ */
-/* Badge ruolo e categoria: Archivo 700 (sistema etichette) */
-.ruolo-badge,
-.top-card-tipo,
-.org-tipo {
-  font-family: var(--ami-font-label) !important;
-  font-weight: var(--fw-label) !important;
-}
 /* UI di filtro (barra alfabetica, contatori): Archivo */
 .lettera-btn,
 .search-counter {
   font-family: var(--ami-font-label);
   font-weight: 600;
 }
-/* Date di vita nelle card e sotto i titoli: Fraunces italic */
+/* Date di vita nelle card e sotto i titoli: Fraunces corsivo */
 .person-dates,
 .org-dates,
 .top-card-dates,
@@ -1097,23 +1198,24 @@ Gli !important vincono sui <style> inline generati dai generatori
   font-style: italic;
   font-weight: var(--fw-text);
 }
-/* Risultati archivio: titolo già Fraunces 600 (sez. 13);
-data in Fraunces 600, meta in Archivo 700 */
+/* Risultati archivio: titolo Fraunces 600 (sez. 13); data Fraunces 600;
+   meta in Archivo 500 (prima 700: una riga di meta in grassetto per ogni
+   risultato pesava piu' del titolo). */
 .risultato-data {
-  font-family: var(--ami-font-text) !important;
-  font-weight: var(--fw-emph) !important;
+  font-family: var(--ami-font-text);
+  font-weight: var(--fw-emph);
 }
 .risultato-meta {
-  font-family: var(--ami-font-label) !important;
-  font-weight: var(--fw-label) !important;
+  font-family: var(--ami-font-label);
+  font-weight: 500;
 }
 
 /* ------------------------------------------------------------
 15. DROPDOWN SUGGERIMENTI RICERCA HERO (spostato qui da home.py:
 fonte unica, modificabile senza rigenerare la home) + descrizione
 testuale dei risultati Archivio.
-Misure in px: uniformi su tutti i breakpoint, non scalano con la
-root font-size del tema.
+Misure in rem coerenti con la scala unica (il dropdown e' figlio del
+body, fuori da .md-typeset, ma usa gli stessi token).
 ------------------------------------------------------------ */
 .hero-search-results {
   display: none;
@@ -1125,13 +1227,14 @@ root font-size del tema.
   border-radius: 10px;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
   z-index: 9999;
+  font-family: var(--ami-font-text);
 }
 .hero-search-results.is-open {
   display: block;
 }
 .hero-search-count {
   padding: 0.45rem 1rem;
-  font-size: var(--ami-font-size-xs); /* 12px - etichetta piccola */
+  font-size: var(--ami-font-size-xs); /* 14px - etichetta */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: var(--ami-tracking-wider);
@@ -1141,7 +1244,7 @@ root font-size del tema.
 }
 .hero-search-empty {
   padding: 0.8rem 1rem;
-  font-size: var(--ami-font-size-sm); /* 14px - testo secondario */
+  font-size: var(--ami-font-size-sm); /* 15px - testo secondario */
   color: #6b6b6b;
   text-align: center;
 }
@@ -1172,7 +1275,7 @@ root font-size del tema.
 .hero-search-item-tag {
   display: inline-block;
   vertical-align: middle;
-  font-size: var(--ami-font-size-xs); /* 12px - etichetta */
+  font-size: var(--ami-font-size-2xs); /* 13px - badge maiuscolo */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: var(--ami-tracking-wide);
@@ -1186,7 +1289,7 @@ root font-size del tema.
 .hero-search-item-tag--organizzazione { background: #1565c0; }
 .hero-search-item-tag--documento { background: #b71c1c; }
 .hero-search-item-snippet {
-  font-size: var(--ami-font-size-sm); /* 14px - testo secondario */
+  font-size: var(--ami-font-size-sm); /* 15px - testo secondario */
   color: #666666;
   line-height: var(--ami-line-height-normal);
   display: -webkit-box;
@@ -1200,10 +1303,10 @@ root font-size del tema.
   color: #b71c1c;
   font-weight: 700;
 }
-/* Descrizione nei risultati Archivio: ora testo puro (pulito in
-archivio-filtri.js), senza più stili inline Word */
+/* Descrizione nei risultati Archivio: testo puro (pulito in
+archivio-filtri.js), senza piu' stili inline Word */
 .risultato-desc {
-  font-size: var(--ami-font-size-sm); /* 14px */
+  font-size: var(--ami-font-size-sm); /* 15px */
   color: var(--md-default-fg-color--light);
   line-height: var(--ami-line-height-normal);
   margin-top: 0.2rem;
@@ -1211,6 +1314,19 @@ archivio-filtri.js), senza più stili inline Word */
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Superfici del browser: selezione e cursore nei colori del sito */
+::selection {
+  background: rgba(183, 28, 28, 0.2);
+  color: inherit;
+}
+input,
+textarea {
+  caret-color: var(--md-primary-fg-color);
+}
+.banner-search input {
+  caret-color: #ffffff;
 }
 
 /* ==========================================================================
@@ -1298,11 +1414,6 @@ body:has(.banner-content-home) .lazy-skeleton {
     background: #2b2b2b;
 }
 
-/* Coerente col sopra: anche le thumbnail "in evidenza" usano il grigio scuro
-   (prima era un #f0f0f0 chiaro divergente definito nell'inline di home.py).
-   Selettore specifico non necessario: la regola generale sopra copre gia'
-   i discendenti di .evidenza-thumbnail. */
-
 /* ==========================================================================
    ERROR STATE
    ========================================================================== */
@@ -1378,8 +1489,7 @@ body:has(.banner-content-home) .lazy-skeleton {
    Caricati globalmente via extra_css di mkdocs.yml.
    NOTA: qui dentro i !important sono deliberati: neutralizzano
    bordi/ombre del tema Material sul footer (reset esteso).
-   TIPOGRAFIA: le dimensioni del footer erano 0.6-0.68rem con peso 300
-   (non caricato): ora minimo --fs-xs e peso 400.
+   TIPOGRAFIA: minimo 14px (--ami-font-size-xs) e peso 400 (era 300).
    ============================================================ */
 /* ------------------------------------------------------------
 RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
@@ -1499,7 +1609,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
     justify-content: center;
     padding: 0.5rem 0;
     font-size: var(--ami-font-size-xs);
-    font-weight: 300;
+    font-weight: 400;
     color: var(--md-footer-fg-color--light);
 }
 @media (max-width: 44rem) {

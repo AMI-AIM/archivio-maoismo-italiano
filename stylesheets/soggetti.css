@@ -1,27 +1,40 @@
 /* ============================================================
-   SOGGETTI (Persone/Organizzazioni) - Schede individuali
+   SOGGETTI (Persone/Organizzazioni/Argomenti) - Schede individuali
    Stili comuni per biografia e documento.
-   Token tipografici (--fs-*, --fw-*) definiti in extra.css §13.
+   Token tipografici definiti in extra.css §13 (1rem = 20px reali).
+
+   Ruoli
+     nome (h1)   Fraunces 900, 29-38px fluido, rosso (--ami-size-h1)
+     date        Fraunces corsivo 400, 16px (15px su mobile)
+     biografia   Fraunces 400, 16px, interlinea 1.6, misura 68ch
+   La tipografia delle RIGHE DOCUMENTO (.doc-titolo, .doc-data, badge)
+   vive in extra.css §13: qui restano solo layout e colori.
+
+   NOTA: il nome e' dichiarato come ".md-typeset h1.person-name" (0,2,1).
+   Il vecchio override mobile ".person-name, .org-name" (0,1,0) non aveva
+   mai effetto, perche' perdeva contro questo selettore: ora il titolo e'
+   fluido con clamp() e non serve nessun override.
    ============================================================ */
 
 .md-typeset h1.person-name,
 .md-typeset h1.org-name {
-    font-size: var(--ami-font-size-2xl);
-    font-weight: 700;
+    font-size: var(--ami-size-h1);
+    font-weight: var(--fw-title);
+    line-height: var(--ami-line-height-tight);
+    letter-spacing: var(--ami-tracking-tighter);
     margin: 0 0 0.2rem 0;
     color: var(--md-primary-fg-color);
+    text-wrap: balance;
+    overflow-wrap: anywhere;
 }
 
-/* Date di vita / fondazione sotto il nome. Un solo valore per persone e
-   organizzazioni (prima .org-dates veniva ridotto a 0.7rem da
-   soggetti-indice.css, caricato dopo): la variante "card" dell'indice e'
-   ora scopata su .org-card in soggetti-indice.css. */
+/* Date di vita / fondazione sotto il nome (e conteggio nelle pagine
+   argomento). Un solo valore per persone e organizzazioni. */
 .person-dates,
 .org-dates {
     font-size: var(--ami-font-size-base);
     color: var(--md-default-fg-color--light);
     margin: 0 0 0.8rem 0;
-    font-weight: var(--fw-text);
 }
 
 /* Biografia/Storia con foto (testo a sinistra, foto a destra) */
@@ -37,15 +50,27 @@
     align-items: flex-start;
 }
 
+/* Testo di biografia: corpo 16px, interlinea 1.6, misura 68ch (prima, senza
+   foto, le righe superavano i 100 caratteri). */
+.person-bio-text,
+.org-bio-text,
+.person-bio-full,
+.org-bio-full {
+    font-size: var(--ami-font-size-base);
+    line-height: var(--ami-line-height-relaxed);
+}
+
 .person-bio-text,
 .org-bio-text {
     flex: 1;
     min-width: 0;
+    max-width: var(--measure);
 }
 
 .person-bio-text p,
 .org-bio-text p {
     margin: 0.5rem 0;
+    text-wrap: pretty;
 }
 
 .person-bio-image,
@@ -67,7 +92,7 @@
     display: block;
 }
 
-/* Biografia/Storia senza foto (tutta larghezza) */
+/* Biografia/Storia senza foto (tutta larghezza, testo a misura) */
 .person-bio-full,
 .org-bio-full {
     margin: 1rem 0 1.5rem 0;
@@ -77,12 +102,18 @@
     border-left: 4px solid var(--md-primary-fg-color);
 }
 
+.person-bio-full > *,
+.org-bio-full > * {
+    max-width: var(--measure);
+}
+
 .person-bio-full p,
 .org-bio-full p {
     margin: 0.5rem 0;
+    text-wrap: pretty;
 }
 
-/* Lista catalogo - Documenti associati */
+/* Lista catalogo - Documenti associati (solo layout: tipografia in extra.css) */
 .catalogo-lista {
     display: flex;
     flex-direction: column;
@@ -105,9 +136,7 @@
 
 .doc-data {
     flex: 0 0 140px;
-    font-size: var(--ami-font-size-sm);
     color: var(--md-primary-fg-color);
-    font-weight: 500;
     white-space: nowrap;
     padding-top: 0.05rem;
 }
@@ -115,11 +144,6 @@
 .doc-contenuto {
     flex: 1;
     min-width: 0;
-}
-
-.doc-titolo {
-    font-size: var(--ami-font-size-base);
-    font-weight: 500;
 }
 
 .doc-titolo a {
@@ -136,16 +160,9 @@
     margin-top: 0.1rem;
 }
 
-.ruolo-badge {
-    display: inline-block;
-    font-size: var(--ami-font-size-xs);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: var(--ami-tracking-wider);
-    color: #ffffff !important;
-    background: var(--md-primary-fg-color);
-    padding: 0.15rem 0.4rem;
-}
+/* .ruolo-badge: definito UNA volta in extra.css (badge 13px Archivo 700
+   maiuscolo). La copia che stava qui (con dimensione diversa) e' stata
+   rimossa. */
 
 /* Media query per tablet e mobile */
 @media (max-width: 768px) {
@@ -153,6 +170,12 @@
     .org-bio-with-image {
         flex-direction: column;
         align-items: center;
+    }
+
+    .person-bio-text,
+    .org-bio-text {
+        align-self: stretch;
+        max-width: none;
     }
 
     .person-bio-image,
@@ -172,12 +195,6 @@
     .doc-data {
         flex: 0 0 auto;
         white-space: normal;
-        font-size: var(--ami-font-size-sm);
-    }
-
-    .person-name,
-    .org-name {
-        font-size: var(--ami-font-size-xl);
     }
 
     .person-dates,

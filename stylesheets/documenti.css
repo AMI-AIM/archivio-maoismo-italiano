@@ -1,26 +1,37 @@
 /* ============================================================
 STILE SCHEDE DOCUMENTO
-Token tipografici (--fs-*, --fw-*, --measure) definiti in extra.css §13.
-Courier Prime resta la voce dei METADATI e dei blocchi di citazione/testo
-trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
+Token tipografici (--ami-font-size-*, --fw-*, --measure) definiti in
+extra.css §13. Scala reale: 1rem = 20px (Material html=125%).
+
+Ruoli della scheda
+  data       Fraunces 900, 21px, rosso   (--ami-font-size-lg)
+  titolo h1  Fraunces 900, 29-38px fluido (--ami-size-h1)
+  abstract   Fraunces 400, 16px, misura 68ch, interlinea 1.65
+  etichetta  Archivo 700, 14px maiuscolo
+  metadato   Courier Prime 400, 15px (voce "macchina da scrivere")
+  citazione  Courier Prime 400, 15px (14px su mobile)
+
+NOTA SULLA SPECIFICITA': Material imposta .md-typeset h1 (0,1,1), che
+batte una singola classe (0,1,0): i vecchi selettori ".doc-title-large"
+non avevano effetto su dimensione e margini. Per questo il titolo e'
+dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
 ============================================================ */
 .doc-date-large {
-  font-size: var(--ami-font-size-xl);
-  font-weight: 700;
+  font-size: var(--ami-font-size-lg);
   color: var(--md-primary-fg-color);
   margin: 0.5rem 0 0 0;
   line-height: var(--ami-line-height-tight);
-  letter-spacing: var(--ami-tracking-tighter);
+  letter-spacing: var(--ami-tracking-tight);
 }
 
-.doc-title-large {
-  font-size: var(--ami-font-size-2xl);
-  font-weight: 700;
+.md-typeset h1.doc-title-large {
+  font-size: var(--ami-size-h1);
   margin: 0.2rem 0 1.5rem 0;
   line-height: var(--ami-line-height-tight);
   letter-spacing: var(--ami-tracking-tighter);
   color: var(--md-default-fg-color);
   text-wrap: balance;
+  overflow-wrap: anywhere;
 }
 
 .embed-container {
@@ -110,24 +121,29 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
   text-decoration: underline;
 }
 
-/* Abstract: e' il testo lungo principale della scheda. Misura limitata
-   (--measure), colore --md-default-fg-color--light gia' scurito in extra.css
-   (>= 4.5:1 anche su fondo #f5f5f5), leading 1.6. */
+/* Abstract: e' il testo lungo principale della scheda. Corpo 16px (come
+   ogni altra prosa del sito), misura limitata a --measure (68ch: prima il
+   commento la prometteva ma il codice non la applicava) e interlinea 1.65.
+   Colore --md-default-fg-color--light (#5c5c5c, >= 4.5:1 anche su #f5f5f5). */
 .doc-abstract {
   margin: 1.5rem 0;
   padding: 1rem 1.5rem;
   background: var(--md-code-bg-color);
   border-left: 4px solid var(--md-primary-fg-color);
   border-radius: 4px;
-  font-size: var(--ami-font-size-md);
-  line-height: var(--ami-line-height-relaxed);
+  font-size: var(--ami-font-size-base);
+  line-height: 1.65;
   color: var(--md-default-fg-color--light);
+  max-width: calc(var(--measure) + 3rem + 4px);
+  text-wrap: pretty;
 }
 
 .doc-abstract p {
   margin: 0;
 }
 
+/* Difesa dall'HTML esportato da Word/Internet Archive: dimensioni, famiglia,
+   colore, interlinea e sfondi inline vengono neutralizzati. */
 .doc-abstract * {
   font-size: inherit !important;
   font-weight: inherit !important;
@@ -136,6 +152,20 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
   color: inherit !important;
   line-height: inherit !important;
   background: none !important;
+}
+
+/* ...ma l'enfasi SEMANTICA si conserva: in un archivio storico i titoli di
+   opere e periodici in corsivo e i grassetti portano significato (la regola
+   precedente li appiattiva tutti). Specificita' (0,1,1) + !important vince
+   sul reset qui sopra (0,1,0). */
+.doc-abstract em,
+.doc-abstract i,
+.doc-abstract cite {
+  font-style: italic !important;
+}
+.doc-abstract strong,
+.doc-abstract b {
+  font-weight: var(--fw-emph) !important;
 }
 
 .doc-abstract p,
@@ -178,7 +208,7 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
 }
 
 .metadata-value {
-  font-size: var(--ami-font-size-md);
+  font-size: var(--ami-font-size-sm);
   font-weight: 500;
   color: var(--md-default-fg-color);
   word-break: break-word;
@@ -193,12 +223,14 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
   border: 1px solid var(--md-default-fg-color--lightest);
 }
 
+/* Testo trascritto: monospazio a 15px (18px reali nella versione
+   precedente erano 22,5px, troppo per un blocco di lettura lunga). */
 .text-preview {
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
   font-family: inherit;
-  font-size: var(--ami-font-size-md);
+  font-size: var(--ami-font-size-sm);
   line-height: var(--ami-line-height-relaxed);
   padding: 1.5rem;
   margin: 0;
@@ -256,7 +288,7 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
   margin-top: 1rem;
 }
 
-/* MODIFICATO: .citazione-testo ora è un div, non un textarea */
+/* .citazione-testo e' un div (non un textarea) per supportare <em> */
 .citazione-testo {
   width: 100%;
   box-sizing: border-box;
@@ -277,7 +309,7 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
   user-select: text;
 }
 
-/* NUOVO: stili per il corsivo nelle citazioni */
+/* Corsivo nelle citazioni (Courier Prime ha il corsivo reale) */
 .citazione-testo em {
   font-style: italic;
   color: inherit;
@@ -336,13 +368,12 @@ trascritto: look "macchina da scrivere" voluto (scheda d'archivio).
 }
 
 /* ------------------------------------------------------------
-TIPOGRAFIA — SCHEDA DOCUMENTO
+TIPOGRAFIA — SCHEDA DOCUMENTO (famiglie e pesi)
 ------------------------------------------------------------ */
 .doc-date-large,
-.doc-title-large {
+.md-typeset h1.doc-title-large {
   font-family: var(--ami-font-display, 'Fraunces', Georgia, serif) !important;
-  font-weight: 900 !important;
-  letter-spacing: var(--ami-tracking-tight);
+  font-weight: var(--fw-title) !important;
 }
 
 .doc-date-large {
@@ -363,7 +394,6 @@ TIPOGRAFIA — SCHEDA DOCUMENTO
 .metadata-value {
   font-family: var(--ami-font-mono, 'Courier Prime', 'Courier New', monospace) !important;
   font-weight: 400 !important;
-  font-size: var(--ami-font-size-sm) !important;
 }
 
 .text-preview {
@@ -382,83 +412,76 @@ TIPOGRAFIA — SCHEDA DOCUMENTO
 
 /* ------------------------------------------------------------
 MOBILE
+Il titolo e' fluido (--ami-size-h1): nessun override di dimensione
+necessario. La data resta a 21px: titolo (29px+) e data si distinguono.
 ------------------------------------------------------------ */
 @media (max-width: 600px) {
-  .doc-date-large {
-    font-size: var(--ami-font-size-xl);
-  }
-  
-  .doc-title-large {
-    font-size: var(--ami-font-size-xl);
-  }
-  
   .universal-embed {
     height: 65vh;
     min-height: 420px;
     max-height: 550px;
   }
-  
+
   .photo-embed {
     max-height: 50vh;
   }
-  
+
   .photo-viewer {
     padding: 0.5rem;
   }
-  
+
   .doc-abstract {
     padding: 0.8rem 1rem;
-    font-size: var(--ami-font-size-sm);
     margin: 1rem 0;
   }
-  
+
   .text-preview {
-    font-size: var(--ami-font-size-sm);
+    font-size: var(--ami-font-size-xs);
     padding: 1rem;
     max-height: 400px;
   }
-  
+
   .lingua-content .text-preview {
-    font-size: var(--ami-font-size-sm);
+    font-size: var(--ami-font-size-xs);
     padding: 1rem;
     max-height: 400px;
   }
-  
+
   .lingua-toggle {
     padding: 0.4rem 0.8rem;
     gap: 0.3rem;
   }
-  
+
   .lingua-btn {
     padding: 0.2rem 0.6rem;
     font-size: var(--ami-font-size-xs);
   }
-  
+
   .metadata-grid {
     grid-template-columns: 1fr;
     gap: 0.3rem;
   }
-  
+
   .metadata-item {
     flex-direction: row;
     gap: 0.5rem;
     padding: 0.2rem 0;
     border-bottom: 1px solid var(--md-default-fg-color--lightest);
   }
-  
+
   .metadata-label {
     min-width: 100px;
     font-size: var(--ami-font-size-xs);
   }
-  
+
   .metadata-value {
     font-size: var(--ami-font-size-sm);
   }
-  
+
   .citazione-testo {
     font-size: var(--ami-font-size-xs);
   }
-  
+
   .citazione-copia {
     align-self: stretch;
   }
