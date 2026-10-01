@@ -899,7 +899,8 @@ FAMIGLIE (tutte necessarie, ciascuna con un ruolo che solo lei svolge)
 PESI PER RUOLO
   900 titolo di pagina (h1)        750 sezione (h2)     650 sottosezione (h3)
   600 enfasi / titolo di riga      400 testo            700 etichette Archivo
-  I pesi esistono davvero: Fraunces e Archivo sono variabili 100-900.
+  I pesi esistono davvero: Fraunces e Archivo sono variabili 100-900
+  (assets/fonts/fraunces-variable.woff2, archivo-variable.woff2).
 
 SCALA (valori REALI a schermo)
   ATTENZIONE: Material imposta html a 125%, quindi 1rem = 20px (sale a
@@ -920,8 +921,12 @@ REGOLE DI SPECIFICITA'
   prefisso .md-typeset, che vince sempre sui selettori a singola classe.
 ------------------------------------------------------------ */
 :root {
-  --ami-font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --ami-font-text: "Fraunces", Georgia, "Times New Roman", serif;
+  /* Dopo i serif latini: serif CJK di sistema per i materiali in cinese
+     (Fraunces copre solo il latino). Senza questa coda il browser sceglie
+     un sans qualunque e i testi cinesi stonano col resto della pagina. */
+  --ami-font-cjk: "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", "SimSun";
+  --ami-font-display: "Fraunces", Georgia, "Times New Roman", var(--ami-font-cjk), serif;
+  --ami-font-text: "Fraunces", Georgia, "Times New Roman", var(--ami-font-cjk), serif;
   /* Fallback Archivo: Arial/Helvetica (stessa larghezza); "Arial Narrow",
      usato in precedenza, e' piu' stretto e fa riflusso al caricamento. */
   --ami-font-label: "Archivo", Arial, "Helvetica Neue", sans-serif;
@@ -970,7 +975,7 @@ REGOLE DI SPECIFICITA'
   --ami-tracking-wide: 0.03em;     /* etichette/badge */
   --ami-tracking-wider: 0.05em;    /* maiuscoletto/nav */
 
-  --md-text-font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  --md-text-font-family: var(--ami-font-text);
   --md-code-font-family: "Courier Prime", "Courier New", monospace;
 }
 
@@ -1003,6 +1008,26 @@ body,
 .md-typeset strong,
 .md-typeset b {
   font-weight: var(--fw-emph);
+}
+
+/* --- Link nella prosa -------------------------------------------------
+   Dentro un paragrafo o una voce di elenco il link non puo' affidarsi al
+   solo colore: il rosso del sito ha appena 2.5:1 contro il testo scuro
+   (WCAG 1.4.1). Sottolineatura sottile e staccata dalle discendenti, che
+   si fa piena al passaggio. Solo link SENZA classe: card, titoli di riga,
+   pulsanti e badge hanno classi proprie e restano come sono. */
+.md-typeset :is(p, li) > a:not([class]) {
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  text-decoration-skip-ink: auto;
+  transition: text-decoration-color 0.15s, text-decoration-thickness 0.15s;
+}
+.md-typeset :is(p, li) > a:not([class]):hover,
+.md-typeset :is(p, li) > a:not([class]):focus-visible {
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 0.09em;
 }
 
 /* --- Titoli: stessa famiglia del corpo, gerarchia per PESO ------------
