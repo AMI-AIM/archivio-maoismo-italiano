@@ -370,7 +370,7 @@ hide:
 
     lines.append('<div class="filtri-organizzazioni">')
     lines.append('    <div class="search-bar">')
-    lines.append('        <input type="text" id="search-input" placeholder="🔍 Cerca per nome..." aria-label="Cerca organizzazioni">')
+    lines.append('        <input type="text" id="search-input" placeholder="Cerca per nome…" aria-label="Cerca organizzazioni">')
     lines.append('        <span id="search-counter" class="search-counter"></span>')
     lines.append('    </div>')
     lines.append('    <div class="alfabeto-bar">')

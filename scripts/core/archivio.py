@@ -100,8 +100,15 @@ hide:
 
     <!-- SIDEBAR FILTRI -->
     <aside class="filtri-sidebar" id="filtri-sidebar">
-        <h2 class="filtri-titolo">Filtri</h2>
+        <div class="filtri-testata">
+            <h2 class="filtri-titolo">Filtri</h2>
+            <button type="button" class="filtri-mostra" id="filtri-mostra" aria-expanded="true" aria-controls="filtri-corpo">
+                <span class="filtri-mostra__etichetta">Nascondi</span>
+                <span class="filtri-mostra__conteggio" id="filtri-mostra-conteggio"></span>
+            </button>
+        </div>
         
+        <div class="filtri-corpo" id="filtri-corpo">
         <div class="filtro-gruppo collapsible">
             <button type="button" class="filtro-toggle" id="toggle-organizzazione" aria-expanded="false" aria-controls="filtro-organizzazione-container">
                 <span>Organizzazione</span>
@@ -169,6 +176,8 @@ hide:
                     </div>
                 </div>
             </div>
+        </div>
+        
         </div>
         
         <div class="filtro-gruppo">

@@ -21,8 +21,21 @@
    esiste solo nella home). L'h1 auto-generato dal tema sulla home
    (frontmatter con hide: [toc], modalita' 'toc') resta catturato perche'
    anch'esso e' un h1 dentro .md-content article. */
+/* Nessun titolo VISIBILE in home (scelta editoriale), ma l'h1 resta per
+   lettori di schermo e motori di ricerca: visually-hidden, non display:none
+   (che lo toglierebbe anche dall'albero di accessibilita'). home.py scrive
+   un proprio <h1 class="ami-sr-only">; questa regola copre l'eventuale h1
+   automatico del tema. */
 body:has(.banner-full) .md-content article h1:first-of-type {
-  display: none !important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 /* ------------------------------------------------------------

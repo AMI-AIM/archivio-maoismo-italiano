@@ -25,6 +25,35 @@ from .utils import (
 )
 
 
+# Icone delle azioni della scheda (Material Design Icons, Apache 2.0):
+# SVG inline al posto delle emoji, che cambiavano aspetto da un sistema
+# operativo all'altro. aria-hidden: il testo del pulsante resta l'etichetta.
+_ICONE = {
+    "cita": "M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z",
+    "schermo": "M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z",
+    "esterno": "M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z",
+    "copia": "M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z",
+}
+
+
+def _icona(nome):
+    return (
+        '<svg class="ami-icona" viewBox="0 0 24 24" aria-hidden="true" '
+        f'focusable="false"><path d="{_ICONE[nome]}"/></svg>'
+    )
+
+
+_NUOVA_SCHEDA = '<span class="ami-sr-only"> (si apre in una nuova scheda)</span>'
+
+
+def _link_ia(url_attr, etichetta="Apri su Internet Archive"):
+    """Azione "apri su Internet Archive" della barra sotto il visore."""
+    return (
+        f'<a class="embed-azione" href="{url_attr}" target="_blank" rel="noopener">'
+        f'{_icona("esterno")}<span>{etichetta}</span>{_NUOVA_SCHEDA}</a>'
+    )
+
+
 def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
     """
     Crea le schede documento.
@@ -273,11 +302,11 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
         citazioni_json = json_per_script(payload_citazione)
         
         citazione_bottone_html = (
-            '<button class="citazione-link" type="button" '
+            '<button class="citazione-link embed-azione" type="button" '
             f'data-citazioni-id="{citazione_id}" '
             f'aria-controls="citazione-pannello-{citazione_id}" '
             'aria-expanded="false">'
-            "📑 Cita questo documento</button>"
+            f'{_icona("cita")}<span>Cita questo documento</span></button>'
         )
         
         # =====================================================================
@@ -376,11 +405,11 @@ hide:
 <div class="photo-viewer">
 {img_tag}
 <div class="photo-fallback" style="display:none; padding:1rem; text-align:center;">
-<p>🔗 <a href="{url_ia_attr}" target="_blank" rel="noopener">{label_ia}</a></p>
+<p><a href="{url_ia_attr}" target="_blank" rel="noopener">{label_ia}</a></p>
 </div>
 <div class="embed-footer">
 {citazione_bottone_html}
-<a href="{url_ia_attr}" target="_blank" rel="noopener">🔗 Apri su Internet Archive</a>
+{_link_ia(url_ia_attr)}
 </div>
 </div>
 """
@@ -422,7 +451,7 @@ hide:
 </div>
 <div class="embed-footer">
 {citazione_bottone_html}
-<a href="{url_ia_attr}" target="_blank" rel="noopener">🔗 Apri su Internet Archive</a>
+{_link_ia(url_ia_attr)}
 </div>
 """
         
@@ -438,13 +467,13 @@ hide:
             else:
                 content += f"""
 <div class="text-fallback">
-<p>🔗 <a href="{url_ia_attr}" target="_blank" rel="noopener">Visualizza il testo su Internet Archive</a></p>
+<p><a href="{url_ia_attr}" target="_blank" rel="noopener">Visualizza il testo su Internet Archive</a></p>
 </div>
 """
             content += f"""
 <div class="embed-footer">
 {citazione_bottone_html}
-<a href="{url_ia_attr}" target="_blank" rel="noopener">🔗 Apri su Internet Archive</a>
+{_link_ia(url_ia_attr)}
 </div>
 """
         
@@ -467,8 +496,8 @@ hide:
 <iframe id="{fs_id}" src="{embed_url_attr}" class="universal-embed" title="Visore Internet Archive: {titolo_html}" loading="lazy" allowfullscreen></iframe>
 <div class="embed-footer">
 {citazione_bottone_html}
-<button class="fullscreen-btn" data-target="{fs_id}" type="button">⛶ Schermo intero</button>
-<a href="{url_ia_attr}" target="_blank" rel="noopener">🔗 Apri su Internet Archive</a>
+<button class="fullscreen-btn embed-azione" data-target="{fs_id}" type="button">{_icona("schermo")}<span>Schermo intero</span></button>
+{_link_ia(url_ia_attr)}
 </div>
 """
         
@@ -503,7 +532,7 @@ hide:
 <div class="citazione-pannello" id="citazione-pannello-{citazione_id}" style="display:none;">
 {tabs_html}
 <div class="citazione-testo" id="citazione-testo-{citazione_id}" role="textbox" aria-readonly="true"></div>
-<button class="citazione-copia" id="citazione-copia-{citazione_id}" type="button">📋 Copia</button>
+<button class="citazione-copia" id="citazione-copia-{citazione_id}" type="button">{_icona("copia")}<span class="citazione-copia__etichetta">Copia</span></button>
 </div>
 <noscript>
 <div class="citazione-pannello citazione-pannello--noscript">

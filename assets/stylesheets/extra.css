@@ -271,14 +271,17 @@ button.md-header__nav-link--dropdown {
   padding: 0.1rem 0;
 }
 
+/* Titolo di sezione nel drawer ("Archivio"): stessa famiglia, corpo e
+   maiuscole/minuscole delle voci, come nella barra desktop. Lo distinguono
+   dalle voci cliccabili solo il peso e il grigio. (Prima: maiuscolo,
+   14px, 700 e spaziatura larga, che lo facevano sembrare un altro font.) */
 .md-drawer__section-title {
   display: block;
   padding: 0.6rem 1rem 0.3rem 1rem;
   font-family: var(--ami-font-label);
-  font-size: var(--ami-font-size-xs);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: var(--ami-tracking-wider);
+  font-size: var(--ami-font-size-base);
+  font-weight: 600;
+  letter-spacing: 0;
   color: var(--md-default-fg-color--light);
 }
 
@@ -1787,4 +1790,251 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
 .evidenza-thumbnail .lazy-skeleton.error-state::after {
   font-size: var(--ami-font-size-xs);
   line-height: var(--ami-line-height-snug);
+}
+
+/* ==========================================================================
+   ADAPT + POLISH
+   Target di tocco, centratura del contenuto, icone delle azioni,
+   stati di errore sul fondo scuro, pagina 404.
+   ========================================================================== */
+
+/* --- Centratura e sbordo orizzontale -----------------------------------
+   Material, sopra i 76.25em, da' a .md-content__inner margini asimmetrici
+   (24px a sinistra, 16 a destra: lascia spazio a una sidebar che qui e'
+   nascosta). Il contenuto risultava spostato di 4px e il banner a tutta
+   larghezza (calcolato sul centro del contenitore) sbordava a destra.
+   Con margini simmetrici il centro torna quello della finestra; overflow-x:
+   clip assorbe la larghezza della barra di scorrimento inclusa in 100vw
+   (Windows), senza creare un contenitore di scroll (sticky continua a
+   funzionare). */
+@media screen and (min-width: 76.25em) {
+  .md-content__inner {
+    margin-right: 1.2rem;
+  }
+}
+.md-container {
+  overflow-x: clip;
+}
+
+/* --- Azioni sotto il visore della scheda --------------------------------
+   Icona + etichetta, area cliccabile alta almeno 36px (44 al tocco). */
+.md-typeset .embed-footer {
+  gap: 0.25rem 0.75rem;
+  padding: 0.25rem 0.5rem;
+}
+.md-typeset .embed-footer .embed-azione {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 36px;
+  padding: 0 0.5rem;
+  border-radius: 6px;
+  font-family: var(--ami-font-label);
+  font-weight: 600;
+  text-decoration: none;
+}
+.md-typeset .embed-footer .embed-azione:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.ami-icona {
+  flex-shrink: 0;
+  width: 1.15em;
+  height: 1.15em;
+  fill: currentColor;
+}
+@media (max-width: 600px) {
+  .md-typeset .embed-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 0.25rem 0.25rem;
+  }
+}
+.citazione-copia {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.citazione-copia.is-copiato {
+  background: var(--md-primary-fg-color--dark);
+}
+
+/* --- Ricerca hero: tutta la "pillola" e' il bersaglio ------------------- */
+.banner-search {
+  min-height: 44px;
+  padding-block: 0;
+  cursor: text;
+}
+.banner-search input {
+  align-self: stretch;
+}
+.banner-search-submit {
+  align-self: stretch;
+  padding-inline: 0.6rem;
+}
+
+/* --- Persone / organizzazioni: icona di ricerca nel campo -------------- */
+.md-typeset .search-bar input,
+.search-bar input {
+  padding-left: 2.4rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%235c5c5c' d='M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 0.8rem center;
+  background-size: 1.15rem;
+}
+
+/* --- Footer: link con area minima 24px (WCAG 2.5.8) --------------------- */
+.ami-footer__links-list {
+  gap: 0;
+}
+.ami-footer__links-list a,
+.md-footer-copyright__email a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+}
+
+/* --- Dispositivi touch: 44px per tutti i controlli ricorrenti ----------- */
+@media (pointer: coarse) {
+  .md-typeset .embed-footer .embed-azione,
+  .citazione-tab,
+  .citazione-copia,
+  .lingua-btn,
+  .pag-btn,
+  .lettera-btn,
+  .filtro-toggle,
+  #reset-filtri,
+  .filtri-attivi-reset,
+  .ami-footer__links-list a,
+  .md-footer-copyright__email a,
+  .banner-button,
+  #filtro-testo,
+  .md-typeset .galleria-timeline a.timeline-link {
+    min-height: 44px;
+  }
+  .banner-button {
+    display: inline-flex;
+    align-items: center;
+  }
+  .pag-btn,
+  .lettera-btn {
+    min-width: 44px;
+  }
+  .alfabeto-bar,
+  .paginazione-container {
+    gap: 0.35rem;
+  }
+}
+
+/* --- Copertina non disponibile sulla fascia scura della home -----------
+   Il riquadro rosa con testo rosso (pensato per fondo chiaro) urtava sul
+   nero: qui diventa una "scheda vuota" in tono con la fascia. */
+.evidenza-thumbnail .lazy-skeleton.error-state {
+  background: #1c1c1c !important;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: none;
+}
+.evidenza-thumbnail .lazy-skeleton.error-state::after {
+  content: 'Copertina non disponibile';
+  color: rgba(255, 255, 255, 0.62);
+  font-family: var(--ami-font-label);
+  font-weight: 500;
+}
+
+/* --- PAGINA 404 --------------------------------------------------------- */
+.ami-404 {
+  max-width: 40rem;
+  margin: 3rem auto;
+  padding: 1rem;
+  text-align: center;
+}
+.md-typeset .ami-404__codice {
+  margin: 0 0 0.5rem;
+  font-family: var(--ami-font-display);
+  font-weight: var(--fw-title);
+  font-size: clamp(4rem, 12vw, 6rem);
+  line-height: 1;
+  letter-spacing: var(--ami-tracking-tight);
+  color: var(--md-primary-fg-color);
+}
+.md-typeset .ami-404__titolo {
+  margin: 0 0 1rem;
+}
+.md-typeset .ami-404__testo {
+  max-width: 34rem;
+  margin: 0 auto 2rem;
+  color: var(--md-default-fg-color--light);
+  line-height: var(--ami-line-height-relaxed);
+}
+.ami-404__azioni {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+.md-typeset .ami-404__primario,
+.ami-404__campo button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1.6rem;
+  border: 0;
+  border-radius: 6px;
+  background: var(--md-primary-fg-color);
+  color: #ffffff;
+  font-family: var(--ami-font-label);
+  font-weight: 600;
+  font-size: var(--ami-font-size-sm);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.md-typeset .ami-404__primario:hover,
+.ami-404__campo button:hover {
+  background: var(--md-primary-fg-color--dark);
+  color: #ffffff;
+}
+.md-typeset .ami-404__secondario {
+  font-family: var(--ami-font-label);
+  font-weight: 600;
+  font-size: var(--ami-font-size-sm);
+  color: var(--md-primary-fg-color);
+  text-decoration: none;
+}
+.md-typeset .ami-404__secondario:hover {
+  text-decoration: underline;
+}
+.ami-404__ricerca {
+  max-width: 26rem;
+  margin: 2.5rem auto 0;
+  text-align: left;
+}
+.ami-404__ricerca label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: var(--ami-font-label);
+  font-weight: var(--fw-label);
+  font-size: var(--ami-font-size-xs);
+  letter-spacing: var(--ami-tracking-wider);
+  text-transform: uppercase;
+  color: var(--md-default-fg-color--light);
+}
+.ami-404__campo {
+  display: flex;
+  gap: 0.4rem;
+}
+.ami-404__campo input {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 0.9rem;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: 6px;
+  font-family: var(--ami-font-text);
+  font-size: var(--ami-font-size-base);
+}
+.ami-404__campo input:focus {
+  border-color: var(--md-primary-fg-color);
 }

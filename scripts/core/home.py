@@ -139,10 +139,11 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
     # NOTA: gli stili del dropdown dei suggerimenti (.hero-search-*)
     # vivono in stylesheets/extra.css (sezione 15), non qui.
     banner_html = f"""
+<h1 class="ami-sr-only">Archivio del Maoismo Italiano</h1>
 <div class="banner-full">
   <img src="{site_path('immagini/banner.webp')}"
-       alt="Archivio del Maoismo Italiano"
-       class="banner-image">
+       alt="Prime pagine di periodici marxisti-leninisti italiani degli anni Sessanta: Rivoluzione proletaria, Gioventù marxista-leninista, Nuova Unità"
+       class="banner-image" width="1920" height="828" fetchpriority="high">
   <div class="banner-overlay"></div>
   <div class="banner-content banner-content-home">
     <p>Documenti, periodici, opuscoli e fonti del movimento "filo-cinese" in Italia</p>
@@ -185,7 +186,7 @@ hide:
             # come testo visibile sia come attributo (alt/title).
             titolo_html = html.escape(doc['titolo'], quote=True)
             if doc.get('copertina'):
-                img_html = f'              <img data-src="{doc["copertina"]}" alt="{titolo_html}" class="lazy-img evidenza-thumbnail-img">'
+                img_html = f'              <img data-src="{doc["copertina"]}" alt="" class="lazy-img evidenza-thumbnail-img">'
             else:
                 img_html = '              <span class="evidenza-placeholder"></span>'
             home_content += f"""

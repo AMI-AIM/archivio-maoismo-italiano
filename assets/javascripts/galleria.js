@@ -351,7 +351,7 @@
       var originale = lbCiteCopy.textContent;
 
       function feedback() {
-        lbCiteCopy.textContent = "Copiato ✓";
+        lbCiteCopy.textContent = "Copiato";
         setTimeout(function () {
           lbCiteCopy.textContent = originale;
         }, 1500);

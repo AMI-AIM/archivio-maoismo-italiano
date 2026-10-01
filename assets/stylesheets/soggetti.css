@@ -46,7 +46,7 @@
     padding: 1rem;
     background: var(--md-code-bg-color);
     border-radius: 8px;
-    border-left: 4px solid var(--md-primary-fg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
     align-items: flex-start;
 }
 
@@ -99,7 +99,7 @@
     padding: 1rem;
     background: var(--md-code-bg-color);
     border-radius: 8px;
-    border-left: 4px solid var(--md-primary-fg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
 }
 
 .person-bio-full > *,
