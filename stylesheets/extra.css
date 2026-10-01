@@ -2151,3 +2151,70 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   margin: 0 0.6rem;
   color: var(--md-default-fg-color--lighter);
 }
+
+/* ==========================================================================
+   HARDEN + ADAPT — SECONDO GIRO
+   ========================================================================== */
+
+/* Ancora del link "Vai al contenuto": riceve il focus ma non lo mostra. */
+.ami-ancora-contenuto:focus {
+  outline: none;
+}
+
+/* Slider anno: con la tastiera si vede QUALE maniglia ha il focus (prima
+   l'anello circondava l'intero campo, uguale per le due maniglie). */
+.slider-container input[type="range"]:focus-visible {
+  outline: none;
+}
+.slider-container input[type="range"]:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 2px var(--md-default-bg-color), 0 0 0 4px var(--md-primary-fg-color);
+}
+.slider-container input[type="range"]:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 2px var(--md-default-bg-color), 0 0 0 4px var(--md-primary-fg-color);
+}
+
+/* Footer: su mobile il testo toccava il bordo dello schermo. */
+.ami-footer__grid {
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+}
+
+/* Carosello "in evidenza": lo scatto si ferma col margine, non a filo. */
+.evidenza-grid {
+  scroll-padding-inline: 1rem;
+}
+
+/* Indici Persone/Organizzazioni: il contatore va a capo invece di uscire
+   dal riquadro ("17 organiz…" a 390px). */
+.search-bar {
+  flex-wrap: wrap;
+}
+.search-bar input {
+  min-width: 0;
+  flex: 1 1 12rem;
+}
+
+/* Progetto: le tre schede restavano su tre colonne anche sul telefono. */
+@media (max-width: 900px) {
+  .md-typeset .progetto-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .md-typeset .progetto-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Schermi touch: maniglie dello slider piu' larghe da afferrare (24px). */
+@media (pointer: coarse) {
+  .filtri-sidebar .slider-container input[type="range"]::-webkit-slider-thumb {
+    width: 18px;
+  }
+  .filtri-sidebar .slider-container input[type="range"]::-moz-range-thumb {
+    width: 18px;
+  }
+  .paginazione-container .pag-btn {
+    min-width: 44px;
+  }
+}

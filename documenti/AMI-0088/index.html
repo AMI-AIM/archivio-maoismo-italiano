@@ -190,6 +190,10 @@
     </div>
     
     
+  
+    <a href="#ami-contenuto" class="md-skip">Vai al contenuto</a>
+  
+  
       <!-- overrides/partials/header.html -->
 <!-- Stato del drawer (menu laterale): checkbox nascosto, letto da Material
      e dal CSS (#__drawer:checked ~ .md-drawer). Lo comanda il pulsante
@@ -451,6 +455,7 @@
   </div>
 </nav>
     
+
     <div class="md-container" data-md-component="container">
       
       
@@ -761,6 +766,8 @@
               
               <article class="md-content__inner md-typeset">
                 
+  <span id="ami-contenuto" class="ami-ancora-contenuto" tabindex="-1"></span>
+  
                   
   
 
@@ -782,21 +789,21 @@
 
 </div>
 
-<div class="citazione-pannello" id="citazione-pannello-ami_0088" style="display:none;">
+<div class="citazione-pannello" id="citazione-pannello-ami_0088" role="region" aria-label="Cita questo documento" style="display:none;">
 
-<div class="citazione-tabs">
-<button class="citazione-tab citazione-tab--active" data-formato="chicago" type="button">Chicago</button>
-<button class="citazione-tab" data-formato="mla" type="button">MLA</button>
-<button class="citazione-tab" data-formato="bibtex" type="button">BibTeX</button>
-<button class="citazione-tab" data-formato="semplice" type="button">Semplice</button>
+<div class="citazione-tabs" role="group" aria-label="Formato della citazione">
+<button class="citazione-tab citazione-tab--active" data-formato="chicago" type="button" aria-pressed="true">Chicago</button>
+<button class="citazione-tab" data-formato="mla" type="button" aria-pressed="false">MLA</button>
+<button class="citazione-tab" data-formato="bibtex" type="button" aria-pressed="false">BibTeX</button>
+<button class="citazione-tab" data-formato="semplice" type="button" aria-pressed="false">Semplice</button>
 </div>
 
-<div class="citazione-testo" id="citazione-testo-ami_0088" role="textbox" aria-readonly="true"></div>
+<div class="citazione-testo" id="citazione-testo-ami_0088" aria-live="polite"></div>
 <button class="citazione-copia" id="citazione-copia-ami_0088" type="button"><svg class="ami-icona" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span class="citazione-copia__etichetta">Copia</span></button>
 </div>
 <noscript>
 <div class="citazione-pannello citazione-pannello--noscript">
-<div class="citazione-testo" role="textbox" aria-readonly="true"></div>
+<div class="citazione-testo"></div>
 <p class="citazione-noscript-msg">Abilita JavaScript per vedere e copiare la citazione completa con data di consultazione.</p>
 </div>
 </noscript>
@@ -848,6 +855,7 @@
 
 
                 
+
               </article>
             </div>
           

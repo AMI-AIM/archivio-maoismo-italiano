@@ -22,7 +22,12 @@
     flex: 0 0 300px;
     min-width: 0;
     background: none;
-    padding: 0 1.5rem 1.5rem 0;
+    /* Il pannello scorre (overflow-y), quindi taglia anche in orizzontale:
+       un piccolo margine interno a sinistra, compensato da un margine
+       negativo, lascia spazio agli anelli di focus e alle etichette
+       dell'anno senza spostare l'allineamento della colonna. */
+    padding: 0 1.5rem 1.5rem 0.35rem;
+    margin-left: -0.35rem;
     border-radius: 0;
     border: 0;
     border-right: 1px solid var(--md-default-fg-color--lightest);
@@ -239,7 +244,7 @@
     /* Rientro laterale: le etichette degli anni sono centrate sulle
        maniglie agli estremi e devono restare dentro la colonna filtri. */
     width: auto;
-    margin: 1.7rem 1.4rem 0.5rem;
+    margin: 1.7rem 1.9rem 0.5rem;
     height: 52px;
 }
 
@@ -770,7 +775,9 @@
         flex: 0 0 auto;
         position: static;
         max-height: none;
+        overflow: visible;
         width: 100%;
+        margin-left: 0;
         padding: 0 0 0.5rem;
         border-right: 0;
         border-bottom: 1px solid var(--md-default-fg-color--lightest);
