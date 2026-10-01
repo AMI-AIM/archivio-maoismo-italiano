@@ -194,7 +194,7 @@ def generate_single_page(item):
     num_doc = item['num_doc']
 
     file_path = os.path.join(ARGOMENTI_DIR, f'{slug}.md')
-    description = f"Documenti dell'Archivio del Maoismo Italiano collegati all'argomento {label}."
+    description = f"Documenti dell'Archivio del Maoismo Italiano nel percorso tematico {label}."
 
     back_url = site_path('argomenti/')
 
@@ -212,14 +212,20 @@ def generate_single_page(item):
     fm.append('')
 
     body = []
-    body.append(f'<p style="margin: 0 0 1rem; font-size: 0.92rem;"><a href="{back_url}">← Tutti gli argomenti</a></p>')
+    archivio_url = site_path('documenti/')
+    body.append(
+        '<nav class="doc-percorso" aria-label="Percorso">'
+        f'<a href="{archivio_url}">Archivio</a>'
+        '<span class="doc-percorso__sep" aria-hidden="true">›</span>'
+        f'<a href="{back_url}">Percorsi tematici</a></nav>'
+    )
     body.append(f'<h1 class="person-name">{escape_html(label)}</h1>')
     body.append(f'<div class="org-dates">{count_text(num_doc)}</div>')
-    body.append('<p style="margin: 0.5rem 0 1rem 0; color: var(--md-default-fg-color--light);">')
-    body.append('Documenti catalogati con questo argomento.')
+    body.append('<p class="percorso-intro">')
+    body.append('Documenti catalogati in questo percorso tematico.')
     body.append('</p>')
     body.append('')
-    body.append('<h2 style="font-weight: bold; font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0;">Documenti</h2>')
+    body.append('<h2 class="soggetto-sezione">Documenti</h2>')
     body.append('')
     body.append('<div class="catalogo-lista">')
 

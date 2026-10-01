@@ -271,7 +271,7 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
 .lingua-btn--active {
   color: var(--md-primary-fg-color);
   border-color: var(--md-primary-fg-color);
-  background: rgba(183, 28, 28, 0.08);
+  background: color-mix(in srgb, var(--md-primary-fg-color) 8%, transparent);
 }
 
 .lingua-content {

@@ -146,11 +146,11 @@ hide:
         
         <div class="filtro-gruppo collapsible">
             <button type="button" class="filtro-toggle" id="toggle-argomento" aria-expanded="false" aria-controls="filtro-argomento-container">
-                <span>Argomenti<span class="filtro-toggle__attivi" id="attivi-argomento"></span></span>
+                <span>Percorsi tematici<span class="filtro-toggle__attivi" id="attivi-argomento"></span></span>
                 <span class="toggle-icon" aria-hidden="true">▼</span>
             </button>
             <div class="filtro-contenuto" id="filtro-argomento-container">
-                <div class="filtro-spunte" id="filtro-argomento" role="group" aria-label="Filtra per argomenti"></div>
+                <div class="filtro-spunte" id="filtro-argomento" role="group" aria-label="Filtra per percorso tematico"></div>
             </div>
         </div>
         

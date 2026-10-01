@@ -80,6 +80,13 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   --md-primary-fg-color--light: #e53935;
   --md-primary-fg-color--dark: #8e0000;
 }
+/* Accento (passaggio del mouse, pulsanti): rosso scuro, 9,6:1 su bianco
+   e col testo bianco sopra. L'accento "red" di Material (#ff1947) si
+   fermava a 3,8:1. */
+[data-md-color-accent="red"] {
+  --md-accent-fg-color: #8e0000;
+  --md-accent-fg-color--transparent: rgba(142, 0, 0, 0.1);
+}
 
 /* ------------------------------------------------------------
 4. HEADER
@@ -2217,4 +2224,30 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   .paginazione-container .pag-btn {
     min-width: 44px;
   }
+}
+
+/* CLASSI AL POSTO DEGLI STILI IN LINEA (generatori Python) */
+.md-typeset .soggetto-sezione {
+  margin: 1.5rem 0 0.5rem;
+  font-size: var(--ami-font-size-lg, 1.2rem);
+  font-weight: 700;
+}
+.md-typeset .ami-vuoto {
+  padding: 0.8rem 0;
+  color: var(--md-default-fg-color--light);
+}
+.home-azione {
+  text-align: center;
+  margin-top: 1rem;
+}
+.md-typeset .percorso-intro {
+  margin: 0.5rem 0 1rem;
+  color: var(--md-default-fg-color--light);
+}
+/* Il link verso Internet Archive quando il visore non c'e': icona SVG
+   (prima un'emoji). */
+.no-embed__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }

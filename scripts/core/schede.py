@@ -57,7 +57,7 @@ def _link_ia(url_attr, etichetta="Apri su Internet Archive"):
 # Versione dell'impaginazione della scheda: entra nell'hash della cache,
 # cosi' un cambio di template rigenera tutte le schede anche se i dati
 # della riga non sono cambiati.
-SCHEDA_TEMPLATE_VERSION = "2026-10-catalogo-3"
+SCHEDA_TEMPLATE_VERSION = "2026-10-catalogo-4"
 
 _MAX_CORRELATI = 4
 
@@ -600,7 +600,7 @@ hide:
         else:
             content += f"""
 <div class="no-embed">
-<p>📄 <a href="{url_ia_attr}" target="_blank" rel="noopener">Visualizza il documento su Internet Archive</a></p>
+<p><a class="no-embed__link" href="{url_ia_attr}" target="_blank" rel="noopener">{_icona("esterno")}<span>Visualizza il documento su Internet Archive</span>{_NUOVA_SCHEDA}</a></p>
 </div>
 <div class="embed-footer">
 {citazione_bottone_html}
@@ -666,7 +666,7 @@ hide:
             ("Luogo", html.escape(luogo_raw)),
             ("Editore", html.escape(editore_raw)),
             ("Tipologia", html.escape(tipo_display)),
-            ("Argomenti", argomento_html),
+            ("Percorsi tematici", argomento_html),
             ("Provenienza", html.escape(provenienza_raw)),
         ]
         righe_scheda = "".join(

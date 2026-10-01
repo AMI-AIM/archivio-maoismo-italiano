@@ -289,7 +289,7 @@
     position: absolute;
     top: 0;
     bottom: 14px;
-    background: rgba(183, 28, 28, 0.08);
+    background: color-mix(in srgb, var(--md-primary-fg-color) 8%, transparent);
     border-left: 2px solid var(--md-primary-fg-color);
     border-right: 2px solid var(--md-primary-fg-color);
     left: 0%;
@@ -520,7 +520,7 @@
 }
 
 .filtro-chip-remove:hover {
-    background: rgba(183, 28, 28, 0.15);
+    background: color-mix(in srgb, var(--md-primary-fg-color) 15%, transparent);
 }
 
 .filtri-attivi-reset {

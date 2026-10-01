@@ -25,7 +25,7 @@
        title="{{ config.site_name | e }}"
        class="md-header__button md-logo"
        aria-label="{{ config.site_name }} - Home">
-      {% include "partials/logo.html" %}
+      <img src="{{ config.theme.logo | url }}" alt="">
     </a>
 
     <!-- NAVIGAZIONE a destra (desktop) -->

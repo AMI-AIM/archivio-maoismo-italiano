@@ -268,11 +268,13 @@ hide:
         dates_html = f'<div class="person-dates">{data_range_html}</div>' if data['data_range'] else ''
 
         nome_html = html.escape(nome)
+        percorso_html = f'<nav class="doc-percorso" aria-label="Percorso"><a href="{site_path("persone/")}">Persone</a></nav>'
         content = f"""
+{percorso_html}
 <h1 class="person-name">{nome_html}</h1>
 {dates_html}
 {bio_section}
-<h2 style="font-weight: bold; font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0;">Documenti</h2>
+<h2 class="soggetto-sezione">Documenti</h2>
 """
         # Documenti divisi per ruolo (core/liste.py): il ruolo diventa il
         # titolo del gruppo invece di un'etichetta ripetuta su ogni riga.
@@ -369,7 +371,7 @@ hide:
             lines.append('</div>')
         lines.append('</div>')
     else:
-        lines.append('<p style="padding: 1rem 0; color: var(--md-default-fg-color--light);">Nessuna persona aggiuntiva.</p>')
+        lines.append('<p class="ami-vuoto">Nessuna persona aggiuntiva.</p>')
 
     lines.append('')
     lines.append('<script>')

@@ -340,7 +340,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
 }
 .galleria-lightbox.is-error .lightbox-img { display: none; }
 .galleria-lightbox.is-error .lightbox-media::after {
-  content: '⚠️ Immagine non disponibile';
+  content: 'Immagine non disponibile';
   margin: auto;
   color: var(--gal-errore-su-scuro);
   font-family: var(--ami-font-label, sans-serif);
