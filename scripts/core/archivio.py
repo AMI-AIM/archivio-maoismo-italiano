@@ -102,8 +102,8 @@ hide:
     <aside class="filtri-sidebar" id="filtri-sidebar">
         <div class="filtri-testata">
             <h2 class="filtri-titolo">Filtri</h2>
-            <button type="button" class="filtri-mostra" id="filtri-mostra" aria-expanded="true" aria-controls="filtri-corpo">
-                <span class="filtri-mostra__etichetta">Nascondi</span>
+            <button type="button" class="filtri-mostra" id="filtri-mostra" aria-expanded="false" aria-controls="filtri-corpo">
+                <span class="filtri-mostra__etichetta">Mostra filtri</span>
                 <span class="filtri-mostra__conteggio" id="filtri-mostra-conteggio"></span>
             </button>
         </div>

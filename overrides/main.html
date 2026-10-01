@@ -4,6 +4,11 @@
   {{ super() }}
 
   <!-- AMI-MAIN-ATTIVO v5 -->
+  <!-- Segnala subito (prima del rendering) che JavaScript e' attivo: il CSS
+       puo' cosi' impostare gli stati iniziali dei componenti interattivi
+       (es. filtri chiusi su mobile) senza spostamenti di layout quando gli
+       script, caricati in fondo alla pagina, arrivano. -->
+  <script>document.documentElement.classList.add("ami-js")</script>
   <meta name="ami-base-url" content="{{ base_url }}">
 
   <!-- Verifica Google Search Console -->
@@ -29,8 +34,6 @@
   <link rel="preload" href="{{ base_url }}/fonts/fraunces-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ base_url }}/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- Preload hero (LCP) -->
-  <link rel="preload" as="image" href="{{ base_url }}/immagini/banner.webp" fetchpriority="high">
 
   {# ----- Variabili sicure (gestisce page=None) ----- #}
   {% set t = (page.title | default('', true)) | replace('"', '') | replace('\n', ' ') if page else '' %}
@@ -44,6 +47,16 @@
   {% set is_sezione = parts | length == 1 %}
   {% set is_home = (path == '') %}
   {% set nomi = {'documenti': 'Archivio', 'persone': 'Persone', 'organizzazioni': 'Organizzazioni', 'progetto': 'Il progetto', 'galleria': 'Galleria'} %}
+
+  {# Preload del banner (LCP) SOLO in home: prima veniva scaricato su ogni
+     pagina del sito (~190 KB inutili e in concorrenza con il contenuto).
+     imagesrcset = stesso srcset dell'<img> in core/home.py: il telefono
+     precarica la variante da 960px. #}
+  {% if page and is_home %}
+  <link rel="preload" as="image" href="{{ base_url }}/immagini/banner.webp"
+        imagesrcset="{{ base_url }}/immagini/banner-960.webp 960w, {{ base_url }}/immagini/banner.webp 1920w"
+        imagesizes="100vw" fetchpriority="high">
+  {% endif %}
 
   <!-- Open Graph -->
   <meta property="og:site_name" content="Archivio del Maoismo Italiano">

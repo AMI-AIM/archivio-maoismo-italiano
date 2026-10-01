@@ -142,6 +142,8 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
 <h1 class="ami-sr-only">Archivio del Maoismo Italiano</h1>
 <div class="banner-full">
   <img src="{site_path('immagini/banner.webp')}"
+       srcset="{site_path('immagini/banner-960.webp')} 960w, {site_path('immagini/banner.webp')} 1920w"
+       sizes="100vw"
        alt="Prime pagine di periodici marxisti-leninisti italiani degli anni Sessanta: Rivoluzione proletaria, Gioventù marxista-leninista, Nuova Unità"
        class="banner-image" width="1920" height="828" fetchpriority="high">
   <div class="banner-overlay"></div>

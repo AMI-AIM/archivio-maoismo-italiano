@@ -269,7 +269,7 @@ hide:
 {storia_text}
     </div>
     <div class="org-bio-image">
-        <img src="{img_url}" alt="Logo di {nome_attr}, organizzazione nel maoismo italiano" class="org-bio-img" loading="lazy">
+        <img src="{img_url}" alt="Logo di {nome_attr}, organizzazione nel maoismo italiano" class="org-bio-img" fetchpriority="high" decoding="async">
     </div>
 </div>
 '''
@@ -347,9 +347,9 @@ hide:
             categoria_html = html.escape(categoria)
 
             if data.get('immagine'):
-                avatar_html = f'<img src="{data["immagine"]}" alt="{nome_html}" class="top-card-avatar-img" loading="lazy">'
+                avatar_html = f'<img src="{data["immagine"]}" alt="{nome_html}" class="top-card-avatar-img" decoding="async">'
             else:
-                avatar_html = f'<img src="{PLACEHOLDER_URL}" alt="{nome_html}" class="top-card-avatar-img" loading="lazy">'
+                avatar_html = f'<img src="{PLACEHOLDER_URL}" alt="{nome_html}" class="top-card-avatar-img" decoding="async">'
 
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
 

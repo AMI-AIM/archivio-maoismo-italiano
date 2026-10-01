@@ -819,8 +819,11 @@ function inizializzaFiltriMobile() {
     const etichetta = bottone.querySelector('.filtri-mostra__etichetta');
     const mq = window.matchMedia('(max-width: 768px)');
 
+    // Lo stato CHIUSO e' quello predefinito e lo applica il CSS (html.ami-js,
+    // impostato nel <head>): niente salto di layout all'arrivo dello script.
+    // Qui si aggiunge/toglie solo la classe che APRE il pannello.
     function imposta(chiusi) {
-        sidebar.classList.toggle('filtri--chiusi', chiusi);
+        sidebar.classList.toggle('filtri--aperti', !chiusi);
         bottone.setAttribute('aria-expanded', chiusi ? 'false' : 'true');
         if (etichetta) etichetta.textContent = chiusi ? 'Mostra filtri' : 'Nascondi filtri';
     }
@@ -832,7 +835,7 @@ function inizializzaFiltriMobile() {
     }
 
     bottone.addEventListener('click', function () {
-        imposta(!sidebar.classList.contains('filtri--chiusi'));
+        imposta(sidebar.classList.contains('filtri--aperti'));
     });
 
     // Su desktop il pannello e' sempre aperto; si richiude tornando su mobile.
@@ -847,7 +850,10 @@ function inizializzaFiltriMobile() {
     aggiornaConteggio();
 }
 
+// Lo script e' incluso in tutte le pagine (mkdocs.yml): il catalogo
+// (documenti.json, ~100 KB) si scarica solo dove c'e' l'elenco dei risultati.
 document.addEventListener('DOMContentLoaded', function () {
+    if (!document.getElementById('risultati-container')) return;
     inizializzaFiltriMobile();
     caricaDati();
 });

@@ -251,7 +251,7 @@ hide:
 {bio_text}
     </div>
     <div class="person-bio-image">
-        <img src="{img_url}" alt="Foto di {nome_attr}, persona nel maoismo italiano" class="person-bio-img" loading="lazy">
+        <img src="{img_url}" alt="Foto di {nome_attr}, persona nel maoismo italiano" class="person-bio-img" width="720" height="720" fetchpriority="high" decoding="async">
     </div>
 </div>
 '''
@@ -327,9 +327,9 @@ hide:
             date_vita_html = html.escape(date_vita)
 
             if data.get('immagine'):
-                avatar_html = f'<img src="{data["immagine"]}" alt="{nome_html}" class="top-card-avatar-img" loading="lazy">'
+                avatar_html = f'<img src="{data["immagine"]}" alt="{nome_html}" class="top-card-avatar-img" width="500" height="500" decoding="async">'
             else:
-                avatar_html = f'<img src="{PLACEHOLDER_URL}" alt="{nome_html}" class="top-card-avatar-img" loading="lazy">'
+                avatar_html = f'<img src="{PLACEHOLDER_URL}" alt="{nome_html}" class="top-card-avatar-img" width="500" height="500" decoding="async">'
 
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
 
