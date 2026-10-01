@@ -305,7 +305,6 @@ hide:
       <div class="doc-row doc-row-persona">
         <div class="persona-avatar persona-avatar--{rank}">
           <span class="persona-iniziali">{iniziali_html}</span>
-          <span class="persona-rank-badge persona-rank-badge--{rank}">{rank}</span>
         </div>
         <div class="doc-contenuto">
           <div class="doc-titolo"><a href="persone/{slug}/">{nome_html}</a></div>
@@ -358,7 +357,6 @@ hide:
       <div class="doc-row doc-row-persona">
         <div class="persona-avatar persona-avatar--{rank}">
           <span class="persona-iniziali">{iniziali_html}</span>
-          <span class="persona-rank-badge persona-rank-badge--{rank}">{rank}</span>
         </div>
         <div class="doc-contenuto">
           <div class="doc-titolo"><a href="organizzazioni/{slug}/">{nome_html}</a></div>

@@ -1995,6 +1995,8 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   .md-footer-copyright__email a,
   .banner-button,
   #filtro-testo,
+  .spunte-cerca,
+  .spunte-elenco .spunta,
   .risultati-ordina select,
   .md-typeset .galleria-timeline a.timeline-link {
     min-height: 44px;
@@ -2123,4 +2125,29 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
 }
 .ami-404__campo input:focus {
   border-color: var(--md-primary-fg-color);
+}
+
+/* PROGETTO — CAMPI DEL CATALOGO
+   Le voci "Tipologia, Titolo, Autore…" non sono azioni: niente bordo rosso
+   ne' fondo, stessa etichetta grigia del resto del catalogo. Specificita'
+   (0,2,0) per vincere sul blocco <style> della pagina (0,1,0). */
+.md-typeset .progetto-badge-list {
+  gap: 0.35rem 0;
+}
+.md-typeset .progetto-badge {
+  font-family: var(--ami-font-label);
+  font-size: var(--ami-font-size-2xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--md-default-fg-color--light);
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+.md-typeset .progetto-badge:not(:last-child)::after {
+  content: "·";
+  margin: 0 0.6rem;
+  color: var(--md-default-fg-color--lighter);
 }

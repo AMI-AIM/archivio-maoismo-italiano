@@ -147,25 +147,11 @@ function precompilaRicercaDaURL() {
 
         if (!valoriRichiesti.length) return;
 
-        const select = document.getElementById(selectId);
-        if (!select) return;
-
-        Array.from(select.options).forEach(opt => opt.selected = false);
-        let almenoUnoTrovato = false;
-        Array.from(select.options).forEach(opt => {
-            if (valoriRichiesti.includes(opt.value)) {
-                opt.selected = true;
-                almenoUnoTrovato = true;
-            }
+        // Valori sconosciuti (link da un catalogo precedente) vengono
+        // semplicemente ignorati: nessuna casella spuntata = nessun filtro.
+        caselle(selectId).forEach(c => {
+            c.checked = valoriRichiesti.includes(c.value);
         });
-
-        // Se nessuno dei valori richiesti esiste tra le opzioni
-        // disponibili (es. link generato da un catalogo precedente),
-        // ripiega su "Tutte/Tutti" invece di lasciare il select vuoto.
-        if (!almenoUnoTrovato) {
-            const allOption = select.querySelector('option[value="all"]');
-            if (allOption) allOption.selected = true;
-        }
     });
 
     // Range anni: entrambi i parametri devono essere presenti e validi
@@ -383,61 +369,76 @@ function inizializzaFiltri() {
     
     aggiornaTrackSlider();
     
-    document.querySelectorAll('select, input').forEach(el => el.addEventListener('change', applicaFiltri));
+    document.querySelectorAll('#archivio-container select, #archivio-container input:not([data-solo-elenco])')
+        .forEach(el => el.addEventListener('change', applicaFiltri));
     document.getElementById('filtro-testo').addEventListener('input', applicaFiltri);
     document.getElementById('reset-filtri').addEventListener('click', resetFiltri);
 }
 
 function aggiornaOpzioniFiltri() {
-    const organizzazioni = new Set();
-    const persone = new Set();
-    const tipi = new Set();
-    const argomenti = new Set();
-    
+    // Valore -> numero di documenti dell'archivio che lo contengono.
+    const organizzazioni = new Map();
+    const persone = new Map();
+    const tipi = new Map();
+    const argomenti = new Map();
+    const conta = (mappa, v) => { if (v) mappa.set(v, (mappa.get(v) || 0) + 1); };
+
     documenti.forEach(doc => {
-        doc.organizzazioni.forEach(org => organizzazioni.add(org));
-        doc.persone.forEach(persona => persone.add(persona));
-        if (doc.tipo) tipi.add(doc.tipo);
+        new Set(doc.organizzazioni).forEach(org => conta(organizzazioni, org));
+        new Set(doc.persone).forEach(persona => conta(persone, persona));
+        conta(tipi, doc.tipo);
         if (doc.serie && Array.isArray(doc.serie)) {
-            doc.serie.forEach(tag => argomenti.add(tag));
+            new Set(doc.serie).forEach(tag => conta(argomenti, tag));
         }
     });
     
-    popolaSelect('filtro-organizzazione', organizzazioni);
-    popolaSelect('filtro-persona', persone);
-    popolaSelect('filtro-tipo', tipi);
-    popolaSelect('filtro-argomento', argomenti);
+    popolaSpunte('filtro-organizzazione', organizzazioni, 'organizzazioni');
+    popolaSpunte('filtro-persona', persone, 'persone');
+    popolaSpunte('filtro-tipo', tipi, 'tipologie');
+    popolaSpunte('filtro-argomento', argomenti, 'argomenti');
 }
 
-function popolaSelect(id, items) {
-    const select = document.getElementById(id);
-    if (!select) return;
-    const selectedValues = Array.from(select.selectedOptions).map(opt => opt.value);
-    const sorted = Array.from(items).sort();
-    const allOption = select.querySelector('option[value="all"]');
-    
-    select.innerHTML = '';
-    if (allOption) {
-        select.appendChild(allOption);
-    } else {
-        const opt = document.createElement('option');
-        opt.value = 'all';
-        opt.textContent = id === 'filtro-argomento' ? 'Tutti' : 'Tutte';
-        select.appendChild(opt);
-    }
-    
-    sorted.forEach(item => {
-        const opt = document.createElement('option');
-        opt.value = item;
-        opt.textContent = item;
-        opt.title = item; // nome completo se la riga e' troncata
-        opt.selected = selectedValues.includes(item);
-        select.appendChild(opt);
-    });
+// Elenco di caselle con nome completo (va a capo, mai troncato) e numero
+// di documenti. Prima era un <select multiple>: i nomi lunghi venivano
+// tagliati (due correnti del PCd'I risultavano identiche) e la scelta
+// multipla richiedeva Ctrl/Cmd-clic, mai spiegato.
+// Sopra le 10 voci compare un campo per restringere l'elenco.
+function caselle(id) {
+    const gruppo = document.getElementById(id);
+    return gruppo ? Array.from(gruppo.querySelectorAll('input[type="checkbox"]')) : [];
+}
 
-    // Elenco visibile senza scorrimento interno fino a 8 voci (prima il
-    // browser ne mostrava 4 e gli elenchi lunghi andavano scorsi a tentoni).
-    select.size = Math.min(select.options.length, 8);
+function popolaSpunte(id, conteggi, nomePlurale) {
+    const gruppo = document.getElementById(id);
+    if (!gruppo) return;
+    const selezionati = getSelectedValues(id);
+    const voci = Array.from(conteggi.keys()).sort((a, b) => a.localeCompare(b, 'it', { sensitivity: 'base' }));
+
+    let html = '';
+    if (voci.length > 10) {
+        html += `<input type="search" class="spunte-cerca" aria-label="Restringi l'elenco delle ${escapeHtml(nomePlurale)}" placeholder="Restringi l'elenco…" data-solo-elenco>`;
+    }
+    html += '<ul class="spunte-elenco">';
+    voci.forEach((voce, i) => {
+        const n = conteggi.get(voce);
+        const idCasella = `${id}-${i}`;
+        html += `<li class="spunta"><input type="checkbox" id="${idCasella}" value="${escapeHtml(voce)}"${selezionati.includes(voce) ? ' checked' : ''}>` +
+            `<label for="${idCasella}"><span class="spunta__nome">${escapeHtml(voce)}</span>` +
+            `<span class="spunta__conteggio" aria-label="${n === 1 ? '1 documento' : n + ' documenti'}">${n}</span></label></li>`;
+    });
+    html += '</ul>';
+    gruppo.innerHTML = html;
+
+    const cerca = gruppo.querySelector('.spunte-cerca');
+    if (cerca) {
+        cerca.addEventListener('input', function () {
+            const q = this.value.trim().toLocaleLowerCase('it');
+            gruppo.querySelectorAll('.spunta').forEach(li => {
+                const nome = li.querySelector('.spunta__nome').textContent.toLocaleLowerCase('it');
+                li.hidden = q !== '' && !nome.includes(q);
+            });
+        });
+    }
 }
 
 // ============================================================
@@ -522,13 +523,7 @@ function applicaFiltri() {
 }
 
 function getSelectedValues(id) {
-    const select = document.getElementById(id);
-    if (!select) return [];
-    const selected = Array.from(select.selectedOptions);
-    if (selected.some(opt => opt.value === 'all')) {
-        return [];
-    }
-    return selected.map(opt => opt.value);
+    return caselle(id).filter(c => c.checked).map(c => c.value);
 }
 
 // ============================================================
@@ -567,25 +562,9 @@ function creaChip(labelHtml, onRemove) {
 }
 
 function rimuoviValoreSelezionato(selectId, valore) {
-    const select = document.getElementById(selectId);
-    if (!select) return;
-
-    let restanoSelezionati = false;
-    Array.from(select.options).forEach(opt => {
-        if (opt.value === valore) {
-            opt.selected = false;
-        } else if (opt.value !== 'all' && opt.selected) {
-            restanoSelezionati = true;
-        }
+    caselle(selectId).forEach(c => {
+        if (c.value === valore) c.checked = false;
     });
-
-    // Se non resta nessun valore selezionato, riporta il select su
-    // "Tutte/Tutti" per coerenza con lo stato di reset del filtro.
-    if (!restanoSelezionati) {
-        const allOption = select.querySelector('option[value="all"]');
-        if (allOption) allOption.selected = true;
-    }
-
     applicaFiltri();
 }
 
@@ -619,6 +598,8 @@ function renderFiltriAttivi() {
     // --- Filtri multi-select (organizzazione, persona, tipo, argomento) ---
     Object.keys(FILTRO_LABELS).forEach(selectId => {
         const valori = getSelectedValues(selectId);
+        const attivi = document.getElementById('attivi-' + selectId.replace('filtro-', ''));
+        if (attivi) attivi.textContent = valori.length ? ` · ${valori.length}` : '';
         valori.forEach(valore => {
             const labelHtml = `<strong>${escapeHtml(FILTRO_LABELS[selectId])}:</strong> ${escapeHtml(valore)}`;
             const chip = creaChip(labelHtml, () => rimuoviValoreSelezionato(selectId, valore));
@@ -719,7 +700,7 @@ function mostraRisultati(risultati) {
         
         html += `
             <div class="risultato-card">
-                <div class="risultato-data">${escapeHtml(doc.data || 's.d.')}</div>
+                <div class="risultato-data">${escapeHtml(doc.data || 's.d.')}<span class="risultato-segnatura">${escapeHtml(doc.id)}</span></div>
                 <div class="risultato-contenuto">
                     <div class="risultato-titolo">
                         <a href="${baseUrl}/documenti/${doc.id}/">${escapeHtml(doc.titolo)}</a>
@@ -805,12 +786,10 @@ function generaIterfacciaPaginazione(container, current, total) {
 // RESET FILTRI
 // ============================================================
 function resetFiltri() {
-    document.querySelectorAll('select').forEach(sel => {
-        const allOpt = sel.querySelector('option[value="all"]');
-        if (allOpt) {
-            Array.from(sel.options).forEach(opt => opt.selected = false);
-            allOpt.selected = true;
-        }
+    Object.keys(URL_PARAM_PER_SELECT).forEach(id => caselle(id).forEach(c => { c.checked = false; }));
+    document.querySelectorAll('.spunte-cerca').forEach(campo => {
+        campo.value = '';
+        campo.dispatchEvent(new Event('input'));
     });
     
     document.getElementById('filtro-testo').value = '';

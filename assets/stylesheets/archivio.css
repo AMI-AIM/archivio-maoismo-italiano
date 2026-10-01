@@ -100,7 +100,8 @@
 }
 
 .filtro-gruppo select,
-.filtro-gruppo input[type="text"] {
+.filtro-gruppo input[type="text"],
+.filtro-gruppo input[type="search"] {
     width: 100%;
     padding: 0.3rem 0.5rem;
     border: 1px solid var(--md-default-fg-color--lightest);
@@ -110,16 +111,112 @@
     font-size: var(--ami-font-size-sm); /* 14px */
 }
 
-.filtro-gruppo select[multiple] {
-    height: auto;
-    min-height: 60px;
-    padding: 0.2rem 0;
+/* Ricerca testuale in cima al pannello: e' il filtro piu' usato. */
+.filtro-gruppo--testo {
+    padding-bottom: 0.9rem;
+    margin-bottom: 0.3rem;
+}
+.filtro-gruppo #filtro-testo {
+    padding: 0.45rem 0.6rem;
     font-size: var(--ami-font-size-base);
-    line-height: var(--ami-line-height-snug);
 }
 
-.filtro-gruppo select[multiple] option {
+/* Numero di voci attive accanto al nome del gruppo ("Organizzazione · 2") */
+.filtro-toggle__attivi {
+    color: var(--md-primary-fg-color);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ELENCHI A SPUNTA — nome completo che va a capo, conteggio a destra in
+   Courier come le segnature. Nessun riquadro: righe nude sul fondo. */
+.spunte-cerca {
+    width: 100%;
+    margin: 0 0 0.4rem;
     padding: 0.3rem 0.5rem;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 4px;
+    background: var(--md-default-bg-color);
+    color: var(--md-default-fg-color);
+    font-family: var(--ami-font-label);
+    font-size: var(--ami-font-size-sm);
+}
+.md-typeset .spunte-elenco,
+.spunte-elenco {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.spunte-elenco .spunta[hidden] {
+    display: none;
+}
+.spunte-elenco .spunta {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0.25rem 0;
+}
+.spunta input[type="checkbox"] {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    margin: 0.15rem 0 0;
+    accent-color: var(--md-primary-fg-color);
+    cursor: pointer;
+}
+.filtro-gruppo .spunta label {
+    flex: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin: 0;
+    font-family: var(--ami-font-label);
+    font-size: var(--ami-font-size-sm);
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: var(--ami-line-height-snug);
+    color: var(--md-default-fg-color);
+    cursor: pointer;
+}
+.spunta__nome {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+.spunta__conteggio {
+    flex: none;
+    font-family: var(--ami-font-mono);
+    font-size: var(--ami-font-size-xs);
+    color: var(--md-default-fg-color--light);
+    font-variant-numeric: tabular-nums;
+}
+.spunta input:checked + label .spunta__nome {
+    color: var(--md-primary-fg-color);
+    font-weight: 600;
+}
+.spunta:hover .spunta__nome {
+    color: var(--md-primary-fg-color);
+}
+.spunta input:focus-visible {
+    outline: 2px solid var(--md-primary-fg-color);
+    outline-offset: 2px;
+}
+
+/* Segnatura AMI accanto alla data nei risultati */
+.risultato-segnatura {
+    margin-left: 0.6rem;
+    font-family: var(--ami-font-mono);
+    font-size: var(--ami-font-size-xs);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--md-default-fg-color--light);
+}
+.risultato-segnatura::before {
+    content: "·";
+    margin-right: 0.6rem;
+    color: var(--md-default-fg-color--lighter);
 }
 
 .filtro-gruppo select[multiple] option:checked {

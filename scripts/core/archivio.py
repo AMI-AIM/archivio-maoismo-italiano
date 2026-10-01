@@ -108,52 +108,49 @@ hide:
             </button>
         </div>
         
+        <div class="filtro-gruppo filtro-gruppo--testo">
+            <label for="filtro-testo">Cerca nel testo</label>
+            <input type="search" id="filtro-testo" placeholder="Titolo, autore, descrizione…">
+        </div>
+
         <div class="filtri-corpo" id="filtri-corpo">
         <div class="filtro-gruppo collapsible">
             <button type="button" class="filtro-toggle" id="toggle-organizzazione" aria-expanded="false" aria-controls="filtro-organizzazione-container">
-                <span>Organizzazione</span>
+                <span>Organizzazione<span class="filtro-toggle__attivi" id="attivi-organizzazione"></span></span>
                 <span class="toggle-icon" aria-hidden="true">▼</span>
             </button>
             <div class="filtro-contenuto" id="filtro-organizzazione-container">
-                <select id="filtro-organizzazione" multiple aria-label="Filtra per organizzazione">
-                    <option value="all">Tutte</option>
-                </select>
+                <div class="filtro-spunte" id="filtro-organizzazione" role="group" aria-label="Filtra per organizzazione"></div>
             </div>
         </div>
         
         <div class="filtro-gruppo collapsible">
             <button type="button" class="filtro-toggle" id="toggle-persona" aria-expanded="false" aria-controls="filtro-persona-container">
-                <span>Persona</span>
+                <span>Persona<span class="filtro-toggle__attivi" id="attivi-persona"></span></span>
                 <span class="toggle-icon" aria-hidden="true">▼</span>
             </button>
             <div class="filtro-contenuto" id="filtro-persona-container">
-                <select id="filtro-persona" multiple aria-label="Filtra per persona">
-                    <option value="all">Tutte</option>
-                </select>
+                <div class="filtro-spunte" id="filtro-persona" role="group" aria-label="Filtra per persona"></div>
             </div>
         </div>
         
         <div class="filtro-gruppo collapsible">
             <button type="button" class="filtro-toggle" id="toggle-tipo" aria-expanded="false" aria-controls="filtro-tipo-container">
-                <span>Tipologia</span>
+                <span>Tipologia<span class="filtro-toggle__attivi" id="attivi-tipo"></span></span>
                 <span class="toggle-icon" aria-hidden="true">▼</span>
             </button>
             <div class="filtro-contenuto" id="filtro-tipo-container">
-                <select id="filtro-tipo" multiple aria-label="Filtra per tipologia">
-                    <option value="all">Tutte</option>
-                </select>
+                <div class="filtro-spunte" id="filtro-tipo" role="group" aria-label="Filtra per tipologia"></div>
             </div>
         </div>
         
         <div class="filtro-gruppo collapsible">
             <button type="button" class="filtro-toggle" id="toggle-argomento" aria-expanded="false" aria-controls="filtro-argomento-container">
-                <span>Argomenti</span>
+                <span>Argomenti<span class="filtro-toggle__attivi" id="attivi-argomento"></span></span>
                 <span class="toggle-icon" aria-hidden="true">▼</span>
             </button>
             <div class="filtro-contenuto" id="filtro-argomento-container">
-                <select id="filtro-argomento" multiple aria-label="Filtra per argomenti">
-                    <option value="all">Tutti</option>
-                </select>
+                <div class="filtro-spunte" id="filtro-argomento" role="group" aria-label="Filtra per argomenti"></div>
             </div>
         </div>
         
@@ -179,11 +176,7 @@ hide:
         </div>
         
         </div>
-        
-        <div class="filtro-gruppo">
-            <label for="filtro-testo">Cerca nel testo</label>
-            <input type="text" id="filtro-testo" placeholder="Cerca titolo, autore...">
-        </div>
+
         
         <div class="filtri-azioni">
             <button type="button" id="reset-filtri"><span aria-hidden="true">↺</span> Reset</button>

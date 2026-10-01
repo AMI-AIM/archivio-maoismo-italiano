@@ -7,7 +7,7 @@
    Token tipografici definiti in extra.css §13 (1rem = 20px reali).
 
    Ruoli
-     nome (h1)   Fraunces 900, 29-38px fluido, rosso (--ami-size-h1)
+     nome (h1)   Fraunces 900, 29-38px fluido, inchiostro (--ami-size-h1)
      date        Fraunces corsivo 400, 16px (15px su mobile)
      biografia   Fraunces 400, 16px, interlinea 1.6, misura 68ch
    La tipografia delle RIGHE DOCUMENTO (.doc-titolo, .doc-data, badge)
@@ -25,8 +25,8 @@
     font-weight: var(--fw-title);
     line-height: var(--ami-line-height-tight);
     letter-spacing: var(--ami-tracking-tighter);
-    margin: 0 0 0.2rem 0;
-    color: var(--md-primary-fg-color);
+    margin: 0.8rem 0 0.2rem 0;
+    color: var(--md-default-fg-color);
     text-wrap: balance;
     overflow-wrap: anywhere;
 }
