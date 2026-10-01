@@ -122,7 +122,9 @@
       '}',
       '.ia-status-banner__icon {',
       '  flex: 0 0 auto;',
-      '  font-size: 1.1rem;',
+      '  width: 1.2rem;',
+      '  height: 1.2rem;',
+      '  fill: currentColor;',
       '}',
       '.ia-status-banner__testo {',
       '  flex: 1;',
@@ -131,14 +133,27 @@
       '}',
       '.ia-status-banner__chiudi {',
       '  flex: 0 0 auto;',
+      '  display: inline-flex;',
+      '  align-items: center;',
+      '  justify-content: center;',
+      '  width: 44px;',
+      '  height: 44px;',
+      '  margin: -0.4rem -0.4rem -0.4rem 0;',
+      '  padding: 0;',
       '  background: transparent;',
-      '  border: 1px solid rgba(255,255,255,0.5);',
+      '  border: 0;',
       '  color: inherit;',
-      '  border-radius: 4px;',
-      '  padding: 0.15rem 0.5rem;',
-      '  font-size: 0.8rem;',
+      '  border-radius: 50%;',
       '  cursor: pointer;',
-      '  line-height: 1;',
+      '}',
+      '.ia-status-banner__chiudi svg {',
+      '  width: 1.25rem;',
+      '  height: 1.25rem;',
+      '  fill: currentColor;',
+      '}',
+      '.ia-status-banner__chiudi:focus-visible {',
+      '  outline: 2px solid #fff8ec;',
+      '  outline-offset: 0;',
       '}',
       '.ia-status-banner__chiudi:hover {',
       '  background: rgba(255,255,255,0.15);',
@@ -167,12 +182,18 @@
     banner.setAttribute('aria-live', 'polite');
     banner.innerHTML =
       '<div class="ia-status-banner__inner">' +
-        '<span class="ia-status-banner__icon" aria-hidden="true">⚠️</span>' +
+        '<svg class="ia-status-banner__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+          '<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>' +
+        '</svg>' +
         '<span class="ia-status-banner__testo">' +
           'I documenti di questo archivio sono ospitati su Internet Archive, piattaforma al momento instabile o irraggiungibile. ' +
           'Se i documenti non si caricano, il problema è temporaneo e non riguarda il solo sito AMI. Riprovare più tardi.' +
         '</span>' +
-        '<button type="button" class="ia-status-banner__chiudi" aria-label="Chiudi avviso">✕</button>' +
+        '<button type="button" class="ia-status-banner__chiudi" aria-label="Chiudi avviso">' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+            '<path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>' +
+          '</svg>' +
+        '</button>' +
       '</div>';
 
     document.body.insertBefore(banner, document.body.firstChild);

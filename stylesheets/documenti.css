@@ -137,13 +137,11 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
   text-wrap: pretty;
 }
 
-/* Il BOX segue la larghezza dell'iframe sovrastante (.embed-container);
-   solo il TESTO al suo interno e' limitato a --measure, cosi' le righe non
-   superano i ~68 caratteri. Per far correre il testo a tutta larghezza,
-   elimina questa regola. */
-.doc-abstract > * {
-  max-width: var(--measure);
-}
+/* Il testo della descrizione occupa tutta la larghezza del box (che segue
+   l'iframe sovrastante). In precedenza i blocchi figli erano limitati a
+   --measure (68ch), ma il testo "nudo" esportato da Internet Archive (non
+   avvolto in <div>/<p>) correva comunque a tutta larghezza: due misure
+   diverse nella stessa descrizione. */
 
 .doc-abstract p {
   margin: 0;

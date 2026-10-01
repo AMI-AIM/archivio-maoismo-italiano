@@ -72,7 +72,22 @@ async function caricaDati() {
         console.error('Errore nel caricamento dei dati:', error);
         const container = document.getElementById('risultati-container');
         if (container) {
-            container.innerHTML = '<p class="nessun-risultato">Errore nel caricamento dei dati.</p>';
+            // Errore con via d'uscita: il catalogo e' un file statico, quindi
+            // quasi sempre si tratta di rete assente o instabile.
+            container.innerHTML =
+                '<div class="nessun-risultato nessun-risultato--errore" role="alert">' +
+                '<p>Non è stato possibile caricare il catalogo dei documenti. ' +
+                'Controlla la connessione e riprova.</p>' +
+                '<button type="button" class="riprova-btn">Riprova</button>' +
+                '</div>';
+            const riprova = container.querySelector('.riprova-btn');
+            if (riprova) {
+                riprova.addEventListener('click', function () {
+                    riprova.disabled = true;
+                    riprova.textContent = 'Caricamento…';
+                    caricaDati();
+                });
+            }
         }
     }
 }
@@ -292,12 +307,14 @@ function inizializzaFiltri() {
         if (!container || !container.classList.contains('filtro-contenuto')) return;
         container.classList.remove('open');
         button.classList.remove('open');
+        button.setAttribute('aria-expanded', 'false');
         button.addEventListener('click', function (e) {
             e.stopPropagation();
             const target = this.nextElementSibling;
             if (target && target.classList.contains('filtro-contenuto')) {
-                target.classList.toggle('open');
-                this.classList.toggle('open');
+                const aperto = target.classList.toggle('open');
+                this.classList.toggle('open', aperto);
+                this.setAttribute('aria-expanded', aperto ? 'true' : 'false');
             }
         });
     });
