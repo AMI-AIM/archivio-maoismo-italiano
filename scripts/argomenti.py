@@ -196,7 +196,6 @@ def generate_single_page(item):
     file_path = os.path.join(ARGOMENTI_DIR, f'{slug}.md')
     description = f"Documenti dell'Archivio del Maoismo Italiano collegati all'argomento {label}."
 
-    css_url = site_path('stylesheets/soggetti.css')
     back_url = site_path('argomenti/')
 
     fm = []
@@ -213,8 +212,6 @@ def generate_single_page(item):
     fm.append('')
 
     body = []
-    body.append(f'<link rel="stylesheet" href="{css_url}">')
-    body.append('')
     body.append(f'<p style="margin: 0 0 1rem; font-size: 0.92rem;"><a href="{back_url}">← Tutti gli argomenti</a></p>')
     body.append(f'<h1 class="person-name">{escape_html(label)}</h1>')
     body.append(f'<div class="org-dates">{count_text(num_doc)}</div>')
@@ -279,11 +276,7 @@ def generate_index(argomenti):
     lines.append('---')
     lines.append('')
 
-    # Stili hero card migrati in assets/stylesheets/argomenti.css
-    # (migrazione CSS complessiva). Link diretto: niente extra_css globale.
-    css_url = site_path('stylesheets/argomenti.css')
-    lines.append(f'<link rel="stylesheet" href="{css_url}">')
-    lines.append('')
+    # Stili delle hero card in assets/stylesheets/argomenti.css, foglio caricato una sola volta da mkdocs.yml (extra_css).
 
     lines.append('<div class="hero-stack">')
 

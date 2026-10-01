@@ -235,7 +235,6 @@ hide:
   - toc
 ---
 
-<link rel="stylesheet" href="{site_path('stylesheets/soggetti.css')}">
 <script type="application/ld+json">
 {schema_json}
 </script>
@@ -434,8 +433,6 @@ hide:
     lines.append('    filtra();')
     lines.append('})();')
     lines.append('</script>')
-    lines.append('')
-    lines.append('<link rel="stylesheet" href="../stylesheets/soggetti-indice.css">')
     lines.append('')
 
     index_content = "\n".join(lines)

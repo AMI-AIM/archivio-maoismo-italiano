@@ -385,17 +385,8 @@ hide:
 </div>
 """
 
-    # Gli stili della home (circa 550 righe storiche) sono migrati in
-    # assets/stylesheets/home.css: niente piu CSS inline nel markdown.
-    # Il <link> va in coda al contenuto, DOPO le sezioni che usano le
-    # classi banner-*: il file e' caricato dopo extra.css (che arriva
-    # nell'<head> del tema), quindi mantiene la stessa cascata che il
-    # blocco inline aveva prima della migrazione -- in particolare per
-    # body:has(.banner-content-home) .lazy-skeleton (skeleton grigio
-    # scuro della home, definito in extra.css).
-    home_content += f"""
-<link rel="stylesheet" href="{site_path('stylesheets/home.css')}">
-"""
+    # Stili della home in assets/stylesheets/home.css, foglio caricato una sola volta da mkdocs.yml (extra_css):
+    # nessun <link> nel contenuto.
 
 
     index_path = os.path.join(output_dir, 'index.md')

@@ -1,3 +1,5 @@
+/* Le regole .doc-* qui sotto valgono SOLO per le righe della home
+   (:where(.home-column): stessa specificita' di prima, ambito limitato). */
 /* ============================================================
    HOME — stili specifici della pagina principale
    Asset statico versionato: modificabile qui direttamente. E'
@@ -51,7 +53,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 
 /* Placeholder ricerca più leggibile */
 #hero-search-input::placeholder {
-  color: #e0e0e0 !important;
+  color: var(--ami-su-colore-attenuato) !important;
   opacity: 1 !important;
 }
 
@@ -70,7 +72,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   bottom: 0;
   left: calc(-50vw + 50%);
   right: calc(-50vw + 50%);
-  background: #0d0d0d;
+  background: var(--ami-notte);
   z-index: -1;
 }
 .evidenza-band .section-title {
@@ -81,7 +83,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   font-size: var(--ami-font-size-xl); /* 24px */
   font-weight: 600;
   display: block;
-  color: #ffffff;
+  color: var(--ami-su-colore);
   padding-bottom: 0.5rem;
   position: relative;
 }
@@ -90,7 +92,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   display: block;
   width: 60px;
   height: 3px;
-  background: #b71c1c;
+  background: var(--md-primary-fg-color);
   margin-top: 0.4rem;
   border-radius: 2px;
 }
@@ -169,7 +171,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   }
 }
 .evidenza-placeholder {
-  color: #ffffff;
+  color: var(--ami-su-colore);
   font-size: var(--ami-font-size-3xl); /* 40px */
   opacity: 0.5;
 }
@@ -195,10 +197,10 @@ body:has(.banner-full) .md-content article h1:first-of-type {
    CATALOGO (home): riga documento, badge e pulsanti sono in extra.css.
    Qui restano solo le varianti proprie della home.
 ------------------------------------------------------------ */
-.doc-row-persona {
+:where(.home-column) .doc-row-persona {
   gap: 1rem;
 }
-.doc-data {
+:where(.home-column) .doc-data {
   flex: 0 0 150px;
   font-size: var(--ami-font-size-sm); /* 14px */
   font-weight: 500;
@@ -206,46 +208,46 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   white-space: nowrap;
   padding-top: 0.05rem;
 }
-.doc-contenuto {
+:where(.home-column) .doc-contenuto {
   flex: 1;
   min-width: 0;
 }
-.doc-titolo {
+:where(.home-column) .doc-titolo {
   font-size: var(--ami-font-size-base); /* 16px */
   font-weight: 600;
   margin-bottom: 0.1rem;
 }
-.doc-titolo a {
+:where(.home-column) .doc-titolo a {
   text-decoration: none;
   color: var(--md-default-fg-color);
 }
-.doc-titolo a:hover {
+:where(.home-column) .doc-titolo a:hover {
   text-decoration: underline;
   color: var(--md-primary-fg-color);
 }
-.doc-meta {
+:where(.home-column) .doc-meta {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.4rem;
   margin-top: 0.15rem;
 }
-.doc-type-chip {
+:where(.home-column) .doc-type-chip {
   font-size: var(--ami-font-size-xs); /* 12px - etichetta */
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: var(--ami-tracking-wide);
   color: var(--md-primary-fg-color);
-  background: rgba(183, 28, 28, 0.1);
+  background: color-mix(in srgb, var(--md-primary-fg-color) 10%, transparent);
   padding: 0.15rem 0.55rem;
   border-radius: 20px;
   white-space: nowrap;
 }
-.doc-org {
+:where(.home-column) .doc-org {
   font-size: var(--ami-font-size-sm); /* 14px */
   color: var(--md-default-fg-color--light);
 }
-.doc-sommario {
+:where(.home-column) .doc-sommario {
   font-size: var(--ami-font-size-sm); /* 14px */
   color: var(--md-default-fg-color--light);
 }
@@ -295,7 +297,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   display: block;
   width: 60px;
   height: 3px;
-  background: #b71c1c;
+  background: var(--md-primary-fg-color);
   margin-top: 0.4rem;
   border-radius: 2px;
 }
@@ -330,13 +332,13 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
 }
-.persona-avatar--1 { background: #b71c1c; }
-.persona-avatar--2 { background: #424242; }
-.persona-avatar--3 { background: #8d6e63; }
+.persona-avatar--1 { background: var(--md-primary-fg-color); }
+.persona-avatar--2 { background: var(--ami-avatar-2); }
+.persona-avatar--3 { background: var(--ami-avatar-3); }
 .persona-iniziali {
   font-weight: 700;
   font-size: var(--ami-font-size-md); /* 18px */
-  color: #ffffff;
+  color: var(--ami-su-colore);
   letter-spacing: var(--ami-tracking-wider);
   user-select: none;
 }
@@ -352,13 +354,13 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   justify-content: center;
   font-size: var(--ami-font-size-xs); /* 12px */
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--ami-inchiostro);
   border: 2px solid var(--md-code-bg-color);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
-.persona-rank-badge--1 { background: linear-gradient(135deg, #f6d365, #c9911d); }
-.persona-rank-badge--2 { background: linear-gradient(135deg, #dde3e6, #9aa5ab); }
-.persona-rank-badge--3 { background: linear-gradient(135deg, #d7a06e, #a05a2c); }
+.persona-rank-badge--1 { background: var(--ami-medaglia-oro); }
+.persona-rank-badge--2 { background: var(--ami-medaglia-argento); }
+.persona-rank-badge--3 { background: var(--ami-medaglia-bronzo); }
 .persona-date {
   font-size: var(--ami-font-size-sm); /* 14px */
   color: var(--md-default-fg-color--light);
@@ -380,7 +382,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 }
 
 @media (max-width: 768px) {
-  .doc-row-persona {
+  :where(.home-column) .doc-row-persona {
     flex-direction: row;
     gap: 1rem;
   }
@@ -438,24 +440,24 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   .evidenza-thumbnail-img {
     max-height: 170px !important;
   }
-  .doc-row {
+  :where(.home-column) .doc-row {
     flex-direction: column;
     gap: 0.1rem;
     padding: 0.6rem 0.2rem;
   }
-  .doc-row-persona {
+  :where(.home-column) .doc-row-persona {
     flex-direction: row;
     gap: 1rem;
   }
-  .doc-data {
+  :where(.home-column) .doc-data {
     flex: 0 0 auto;
     white-space: normal;
     font-size: var(--ami-font-size-sm); /* 14px */
   }
-  .doc-titolo {
+  :where(.home-column) .doc-titolo {
     font-size: var(--ami-font-size-base); /* 16px */
   }
-  .doc-sommario {
+  :where(.home-column) .doc-sommario {
     font-size: var(--ami-font-size-sm); /* 14px */
   }
 }

@@ -202,8 +202,6 @@ hide:
     </div>
 
 </div>
-
-<link rel="stylesheet" href="{site_path('stylesheets/archivio.css')}">
 """
     
     index_path = os.path.join(output_dir, 'documenti', 'index.md')
