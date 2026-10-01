@@ -235,7 +235,7 @@ def generate_single_page(item):
 
         if doc.get('badge'):
             badge_html = escape_html(doc['badge'])
-            body.append(f'        <div class="doc-ruoli"><span class="ruolo-badge">{badge_html}</span></div>')
+            body.append(f'        <div class="doc-meta-riga">{badge_html}</div>')
 
         body.append('    </div>')
         body.append('</div>')

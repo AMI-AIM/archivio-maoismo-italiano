@@ -15,12 +15,17 @@
     margin-top: 1rem;
 }
 
+/* Pannello filtri in stile catalogo: niente riquadro grigio, una colonna
+   piu' larga (i nomi delle organizzazioni si leggono per intero) separata
+   dai risultati da un filetto. */
 .filtri-sidebar {
-    flex: 0 0 260px;
-    background: var(--md-code-bg-color);
-    padding: 1.2rem 1.2rem 1.5rem 1.2rem;
-    border-radius: 8px;
-    border: 1px solid var(--md-default-fg-color--lightest);
+    flex: 0 0 300px;
+    min-width: 0;
+    background: none;
+    padding: 0 1.5rem 1.5rem 0;
+    border-radius: 0;
+    border: 0;
+    border-right: 1px solid var(--md-default-fg-color--lightest);
     position: sticky;
     top: 1.5rem;
     max-height: 90vh;
@@ -108,10 +113,13 @@
 .filtro-gruppo select[multiple] {
     height: auto;
     min-height: 60px;
+    padding: 0.2rem 0;
+    font-size: var(--ami-font-size-base);
+    line-height: var(--ami-line-height-snug);
 }
 
 .filtro-gruppo select[multiple] option {
-    padding: 0.15rem 0.3rem;
+    padding: 0.3rem 0.5rem;
 }
 
 .filtro-gruppo select[multiple] option:checked {
@@ -299,10 +307,41 @@
     background: var(--md-default-fg-color--lighter);
 }
 
+/* Testata dei risultati: conteggio a sinistra, ordinamento a destra */
+.risultati-testata {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid var(--md-default-fg-color--lighter);
+}
 #risultati-conteggio {
-    font-size: var(--ami-font-size-sm); /* 14px */
+    font-family: var(--ami-font-label);
+    font-size: var(--ami-font-size-sm);
+    font-weight: 600;
+    color: var(--md-default-fg-color);
+    font-variant-numeric: tabular-nums;
+}
+.risultati-ordina {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--ami-font-label);
+    font-size: var(--ami-font-size-sm);
+    color: var(--md-default-fg-color--light);
+}
+.risultati-ordina select {
+    min-height: 36px;
+    padding: 0 0.5rem;
+    border: 1px solid var(--md-default-fg-color--lighter);
+    border-radius: 4px;
+    background: var(--md-default-bg-color);
+    color: var(--md-default-fg-color);
+    font: inherit;
     font-weight: 500;
-    color: var(--md-primary-fg-color);
 }
 
 .risultati-main {
@@ -634,6 +673,9 @@
         position: static;
         max-height: none;
         width: 100%;
+        padding: 0 0 0.5rem;
+        border-right: 0;
+        border-bottom: 1px solid var(--md-default-fg-color--lightest);
     }
     .risultato-card {
         padding: 0.6rem 0.4rem;

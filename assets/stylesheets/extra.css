@@ -733,23 +733,62 @@ button.md-header__nav-link--dropdown {
   }
 }
 
-/* BADGE-ETICHETTA — fonte UNICA di tutti i badge (ruolo nella riga documento,
-   tipo nelle top-card, categoria nelle org-card): maiuscoletto bianco su
-   rosso, 13px, Archivo 700. I fogli di pagina non ridefiniscono piu' la
-   tipografia dei badge. */
+/* ETICHETTA — fonte UNICA delle etichette (ruolo secondario nella riga
+   documento, tipo nelle top-card, categoria nelle org-card, tipologia nella
+   home). Stile "catalogo d'archivio": maiuscoletto grigio, senza fondo.
+   Prima erano blocchi rossi pieni: su schede con decine di righe pesavano
+   piu' dei titoli. Il rosso resta per date e link. */
 .ruolo-badge,
 .top-card-tipo,
-.org-tipo {
+.org-tipo,
+.md-typeset .doc-type-chip {
   display: inline-block;
+  font-family: var(--ami-font-label);
   font-size: var(--ami-font-size-2xs);
-  font-weight: var(--fw-label);
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: var(--ami-tracking-wider);
+  letter-spacing: 0.06em;
   line-height: 1.3;
-  color: var(--ami-su-colore) !important;
-  background: var(--md-primary-fg-color);
-  padding: 0.2rem 0.4rem;
-  border-radius: 3px;
+  color: var(--md-default-fg-color--light) !important;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Metadato di riga (percorsi tematici: "organizzazione · tipologia") */
+.doc-meta-riga {
+  margin-top: 0.15rem;
+  font-family: var(--ami-font-label);
+  font-size: var(--ami-font-size-sm);
+  font-weight: 500;
+  line-height: var(--ami-line-height-snug);
+  color: var(--md-default-fg-color--light);
+}
+
+/* Gruppi per ruolo nelle schede di persone e organizzazioni */
+.doc-gruppo + .doc-gruppo {
+  margin-top: 1.75rem;
+}
+.md-typeset .doc-gruppo__titolo {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.25rem 0 0.25rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lighter);
+  font-family: var(--ami-font-display);
+  font-size: var(--ami-font-size-md);
+  font-weight: var(--fw-emph);
+  letter-spacing: 0;
+}
+.doc-gruppo__conteggio {
+  flex-shrink: 0;
+  font-family: var(--ami-font-label);
+  font-size: var(--ami-font-size-xs);
+  font-weight: 500;
+  color: var(--md-default-fg-color--light);
+  font-variant-numeric: tabular-nums;
 }
 
 /* PULSANTE — fonte unica (era duplicato in home.css) */
@@ -1956,6 +1995,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   .md-footer-copyright__email a,
   .banner-button,
   #filtro-testo,
+  .risultati-ordina select,
   .md-typeset .galleria-timeline a.timeline-link {
     min-height: 44px;
   }

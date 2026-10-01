@@ -187,12 +187,25 @@ hide:
         
         <div class="filtri-azioni">
             <button type="button" id="reset-filtri"><span aria-hidden="true">↺</span> Reset</button>
-            <span id="risultati-conteggio" role="status" aria-live="polite"></span>
         </div>
     </aside>
 
     <!-- RISULTATI -->
     <div class="risultati-main">
+        <!-- Testata dei risultati: quanti sono e in che ordine. Il conteggio
+             stava nel pannello filtri, lontano dalla lista (e nascosto su
+             mobile quando i filtri sono chiusi). -->
+        <div class="risultati-testata">
+            <span id="risultati-conteggio" role="status" aria-live="polite"></span>
+            <div class="risultati-ordina">
+                <label for="ordina-risultati">Ordina per</label>
+                <select id="ordina-risultati">
+                    <option value="data">Data, dalla più antica</option>
+                    <option value="data-desc">Data, dalla più recente</option>
+                    <option value="titolo">Titolo, A–Z</option>
+                </select>
+            </div>
+        </div>
         <div id="filtri-attivi" class="filtri-attivi"></div>
         <div id="risultati-container">
             {risultati_html}

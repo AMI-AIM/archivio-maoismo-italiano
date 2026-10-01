@@ -37,9 +37,9 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
 .embed-container {
   margin: 1.5rem 0;
   background: var(--md-code-bg-color);
-  border-radius: 8px;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   min-height: 100px;
 }
 
@@ -125,15 +125,14 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
    ogni altra prosa del sito), misura limitata a --measure (68ch: prima il
    commento la prometteva ma il codice non la applicava) e interlinea 1.65.
    Colore --md-default-fg-color--light (#5c5c5c, >= 4.5:1 anche su #f5f5f5). */
+/* La descrizione e' il testo principale della scheda: niente riquadro
+   (sembrava una nota a margine), colore pieno del testo. */
 .doc-abstract {
-  margin: 1.5rem 0;
-  padding: 1rem 1.5rem;
-  background: var(--md-code-bg-color);
-  border: 1px solid var(--md-default-fg-color--lightest);
-  border-radius: 6px;
+  margin: 0;
+  padding: 0;
   font-size: var(--ami-font-size-base);
   line-height: 1.65;
-  color: var(--md-default-fg-color--light);
+  color: var(--md-default-fg-color);
   text-wrap: pretty;
 }
 
@@ -435,10 +434,6 @@ necessario. La data resta a 21px: titolo (29px+) e data si distinguono.
     padding: 0.5rem;
   }
 
-  .doc-abstract {
-    padding: 0.8rem 1rem;
-    margin: 1rem 0;
-  }
 
   .text-preview {
     font-size: var(--ami-font-size-xs);
@@ -489,5 +484,196 @@ necessario. La data resta a 21px: titolo (29px+) e data si distinguono.
 
   .citazione-copia {
     align-self: stretch;
+  }
+}
+
+
+/* ============================================================
+   SCHEDA DOCUMENTO — STILE "CATALOGO D'ARCHIVIO"
+   Percorso, segnatura, descrizione + scheda catalografica,
+   documenti vicini. Filetti sottili al posto dei riquadri, etichette
+   in maiuscoletto grigio, rosso solo per link e segnatura.
+   ============================================================ */
+
+/* Percorso (Archivio › Tipologia) */
+.md-typeset .doc-percorso {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+  margin: 0.75rem 0 0.25rem;
+  font-family: var(--ami-font-label);
+  font-size: var(--ami-font-size-sm);
+  font-weight: 500;
+}
+.md-typeset .doc-percorso a {
+  color: var(--md-default-fg-color--light);
+  text-decoration: none;
+}
+.md-typeset .doc-percorso a:hover {
+  color: var(--md-primary-fg-color);
+  text-decoration: underline;
+}
+.doc-percorso__sep {
+  color: var(--md-default-fg-color--lighter);
+}
+
+/* Segnatura: AMI-0043 · Opuscolo · 1968 — come l'etichetta di un faldone */
+.md-typeset .doc-segnatura {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.6rem;
+  margin: 1rem 0 0.35rem;
+  font-family: var(--ami-font-mono);
+  font-size: var(--ami-font-size-base);
+  letter-spacing: 0.02em;
+  color: var(--md-default-fg-color--light);
+  font-variant-numeric: tabular-nums;
+}
+.doc-segnatura__id {
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+}
+.doc-segnatura__sep {
+  color: var(--md-default-fg-color--lighter);
+}
+.md-typeset .doc-segnatura abbr {
+  text-decoration: none;
+  cursor: help;
+}
+
+/* Titoli di sezione della scheda: Fraunces 600 su filetto */
+.md-typeset .doc-sezione {
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lighter);
+  font-family: var(--ami-font-display);
+  font-size: var(--ami-font-size-md);
+  font-weight: var(--fw-emph);
+  letter-spacing: 0;
+  line-height: var(--ami-line-height-snug);
+}
+
+/* Descrizione + scheda catalografica affiancate su desktop */
+.doc-corpo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 20rem);
+  gap: 2.5rem;
+  align-items: start;
+  margin: 2rem 0 0;
+}
+.doc-corpo:not(:has(.doc-corpo__testo)) {
+  grid-template-columns: minmax(0, 1fr);
+}
+.doc-corpo:not(:has(.doc-corpo__testo)) .doc-scheda__campi {
+  columns: 2 18rem;
+  column-gap: 2.5rem;
+}
+
+/* Scheda catalografica: righe etichetta/valore su filetti */
+.md-typeset .doc-scheda__campi {
+  margin: 0;
+}
+.doc-scheda__campo {
+  break-inside: avoid;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+.doc-scheda__campo:first-child {
+  padding-top: 0;
+}
+.md-typeset .doc-scheda__campo dt {
+  margin: 0 0 0.1rem;
+  font-family: var(--ami-font-label);
+  font-size: var(--ami-font-size-2xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--md-default-fg-color--light);
+}
+.md-typeset .doc-scheda__campo dd {
+  margin: 0;
+  font-size: var(--ami-font-size-base);
+  line-height: var(--ami-line-height-snug);
+  overflow-wrap: anywhere;
+}
+
+/* Nell'archivio: documenti vicini per organizzazione e per anno */
+.doc-correlati {
+  margin: 3rem 0 1rem;
+}
+.doc-correlati__colonne {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 1.5rem 2.5rem;
+}
+.md-typeset .doc-correlati__gruppo h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--ami-font-label);
+  font-size: var(--ami-font-size-2xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--md-default-fg-color--light);
+}
+.doc-correlati__chiave {
+  margin-left: 0.35rem;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 500;
+  color: var(--md-default-fg-color);
+}
+.md-typeset ul.doc-correlati__lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.md-typeset ul.doc-correlati__lista > li {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  line-height: var(--ami-line-height-snug);
+}
+.doc-correlati__data {
+  font-size: var(--ami-font-size-sm);
+  color: var(--md-primary-fg-color);
+  font-variant-numeric: tabular-nums;
+}
+.md-typeset .doc-correlati__lista a {
+  color: var(--md-default-fg-color);
+  text-decoration: none;
+  font-weight: var(--fw-emph);
+}
+.md-typeset .doc-correlati__lista a:hover {
+  color: var(--md-primary-fg-color);
+  text-decoration: underline;
+}
+.md-typeset .doc-correlati__tutti {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-family: var(--ami-font-label);
+  font-size: var(--ami-font-size-sm);
+  font-weight: 600;
+  color: var(--md-primary-fg-color);
+  text-decoration: none;
+}
+.md-typeset .doc-correlati__tutti:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .doc-corpo {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+}
+@media (max-width: 480px) {
+  .md-typeset ul.doc-correlati__lista > li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.1rem;
   }
 }

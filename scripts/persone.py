@@ -6,6 +6,7 @@ import sys
 
 import pandas as pd
 from core.catalog_indexer import CatalogIndexer
+from core.liste import GRUPPI_PERSONA, elenco_per_ruolo
 from core.schema_generator import SchemaGenerator
 from core.site_config import site_path
 from core.utils import escape_yaml_string, formatta_data, slugify
@@ -270,25 +271,10 @@ hide:
 {dates_html}
 {bio_section}
 <h2 style="font-weight: bold; font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0;">Documenti</h2>
-<div class="catalogo-lista">
 """
-        for doc in data['documenti']:
-            ruoli_text = html.escape(", ".join(doc['ruoli']))
-            doc_url = site_path(f"documenti/{doc['id']}/")
-            doc_data_html = html.escape(doc['data'])
-            doc_titolo_html = html.escape(doc['titolo'])
-            content += f"""
-<div class="doc-row">
-    <div class="doc-data">{doc_data_html}</div>
-    <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="{doc_url}">{doc_titolo_html}</a></div>
-        <div class="doc-ruoli"><span class="ruolo-badge">{ruoli_text}</span></div>
-    </div>
-</div>
-"""
-        content += """
-</div>
-"""
+        # Documenti divisi per ruolo (core/liste.py): il ruolo diventa il
+        # titolo del gruppo invece di un'etichetta ripetuta su ogni riga.
+        content += elenco_per_ruolo(data['documenti'], GRUPPI_PERSONA)
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(frontmatter + content)
         print(f"Creata scheda per {nome} → {slug}.md")

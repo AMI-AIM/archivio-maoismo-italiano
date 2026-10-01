@@ -54,6 +54,70 @@ def _link_ia(url_attr, etichetta="Apri su Internet Archive"):
     )
 
 
+# Versione dell'impaginazione della scheda: entra nell'hash della cache,
+# cosi' un cambio di template rigenera tutte le schede anche se i dati
+# della riga non sono cambiati.
+SCHEDA_TEMPLATE_VERSION = "2026-10-catalogo-2"
+
+_MAX_CORRELATI = 4
+
+
+def _indice_documenti(df):
+    """Dati minimi di ogni documento, per i blocchi "nell'archivio"."""
+    indice = []
+    for _, riga in df.iterrows():
+        ami_id = str(riga.get("id", "")).strip()
+        if not ami_id or pd.isna(riga.get("id")):
+            continue
+        titolo = str(riga.get("titolo", "")).strip()
+        if titolo in ("nan", "None", ""):
+            titolo = "Senza titolo"
+        org = str(riga.get("organizzazione", "")).strip()
+        orgs = split_nomi(org) if org not in ("nan", "None") else []
+        data_raw = str(riga.get("data", riga.get("anno", ""))).strip()
+        if data_raw in ("nan", "None"):
+            data_raw = ""
+        data_fmt, ordine = formatta_data(data_raw)
+        anno = ordine[0] if ordine and ordine[0] != 9999 else None
+        indice.append({
+            "id": ami_id, "titolo": titolo, "org": orgs[0] if orgs else "",
+            "anno": anno, "ordine": ordine, "data": data_fmt,
+        })
+    return indice
+
+
+def _correlati(doc, indice):
+    """Fino a 4 documenti della stessa organizzazione (i piu' vicini nel
+    tempo) e fino a 4 dello stesso anno (esclusi quelli gia' elencati)."""
+    stessa_org = []
+    if doc["org"]:
+        stessa_org = [d for d in indice if d["org"] == doc["org"] and d["id"] != doc["id"]]
+        stessa_org.sort(key=lambda d: (
+            abs(d["anno"] - doc["anno"]) if d["anno"] and doc["anno"] else 9999,
+            d["ordine"], d["titolo"]))
+        stessa_org = stessa_org[:_MAX_CORRELATI]
+    gia = {d["id"] for d in stessa_org}
+    stesso_anno = []
+    if doc["anno"]:
+        stesso_anno = [d for d in indice if d["anno"] == doc["anno"]
+                       and d["id"] != doc["id"] and d["id"] not in gia]
+        stesso_anno.sort(key=lambda d: (d["ordine"], d["titolo"]))
+        stesso_anno = stesso_anno[:_MAX_CORRELATI]
+    return stessa_org, stesso_anno
+
+
+def _lista_correlati(docs):
+    righe = []
+    for d in docs:
+        data = d["data"] if d["data"] and d["data"] != "n.d." else "s.d."
+        url = site_path("documenti/" + d["id"] + "/")
+        righe.append(
+            f'<li><span class="doc-correlati__data">{html.escape(data)}</span>'
+            f'<a class="doc-correlati__titolo" href="{url}">{html.escape(d["titolo"])}</a></li>'
+        )
+    return '<ul class="doc-correlati__lista">' + "".join(righe) + "</ul>"
+
+
 def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
     """
     Crea le schede documento.
@@ -80,6 +144,8 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
     argomenti_index = build_argomenti_index(df, topic_column=topic_column)
     contatore_generati = 0
     contatore_saltati = 0
+    indice_documenti = _indice_documenti(df)
+    indice_per_id = {d["id"]: d for d in indice_documenti}
     
     for index, row in df.iterrows():
         ami_id = str(row.get("id", "")).strip()
@@ -87,12 +153,20 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
             continue
         
         file_path = os.path.join(documenti_dir, f"{ami_id}.md")
+        doc_indice = indice_per_id.get(ami_id)
+        correlati_org, correlati_anno = (
+            _correlati(doc_indice, indice_documenti) if doc_indice else ([], [])
+        )
         
         row_hash = None
         if cache_manager:
             hash_input = {
                 "source": row.to_dict(),
                 "template_version": CITAZIONI_TEMPLATE_VERSION,
+                "scheda_version": SCHEDA_TEMPLATE_VERSION,
+                # i correlati dipendono dalle ALTRE righe: se cambiano,
+                # la scheda va rigenerata anche se la sua riga e' identica
+                "correlati": [d["id"] for d in correlati_org + correlati_anno],
             }
             row_hash = cache_manager.hash_data(hash_input)
         
@@ -364,8 +438,30 @@ hide:
         titolo_html = html.escape(titolo)
         url_ia_attr = html.escape(url_ia, quote=True)
         
+        # Intestazione da catalogo: percorso, segnatura (identificativo AMI ·
+        # tipologia · data) e titolo. La segnatura prima compariva solo
+        # dentro il testo della citazione.
+        segnatura_data = (
+            html.escape(data_formattata)
+            if data_formattata and data_formattata != "n.d."
+            else '<abbr title="senza data">s.d.</abbr>'
+        )
+        segnatura_parti = [f'<span class="doc-segnatura__id">{html.escape(ami_id)}</span>']
+        if tipo_display:
+            segnatura_parti.append(html.escape(tipo_display))
+        segnatura_parti.append(segnatura_data)
+        segnatura_html = '<span class="doc-segnatura__sep" aria-hidden="true">·</span>'.join(segnatura_parti)
+        percorso_html = f'<a href="{site_path("documenti/")}">Archivio</a>'
+        if tipo_display:
+            url_tipo = site_path("documenti/") + "?tipo=" + urllib.parse.quote(tipo_display, safe="")
+            percorso_html += (
+                '<span class="doc-percorso__sep" aria-hidden="true">›</span>'
+                f'<a href="{html.escape(url_tipo, quote=True)}">{html.escape(tipo_display)}</a>'
+            )
+        
         content = f"""<script type="application/ld+json">{document_schema_json}</script>
-<div class="doc-date-large">{data_display_html}</div>
+<nav class="doc-percorso" aria-label="Percorso">{percorso_html}</nav>
+<p class="doc-segnatura">{segnatura_html}</p>
 <h1 class="doc-title-large">{titolo_html}</h1>
 <div class="embed-container">
 """
@@ -546,57 +642,76 @@ hide:
         # =====================================================================
         # ABSTRACT IA
         # =====================================================================
+        corpo_testo = ""
         if descrizione_ia:
-            content += f"""
+            corpo_testo = f"""<div class="doc-corpo__testo">
+<h2 class="doc-sezione" id="descrizione-{citazione_id}">Descrizione</h2>
 <div class="doc-abstract">
 {descrizione_ia}
+</div>
 </div>
 """
         
         # =====================================================================
         # METADATI
         # =====================================================================
-        provenienza_html = html.escape(provenienza_raw) if provenienza_raw else "N/A"
-        tipo_display_html = html.escape(tipo_display) if tipo_display else "N/A"
-        data_metadata_html = html.escape(data_formattata) if data_formattata else "N/A"
+        # Scheda catalografica: solo i campi compilati (prima i campi vuoti
+        # comparivano come "N/A", cioe' come se fossero dati).
+        campi = [
+            ("Autore", autore_html),
+            ("Organizzazione", org_html),
+            ("Persone collegate", persone_collegate_html),
+            ("Organizzazioni collegate", organizzazioni_collegate_html),
+            ("Data", html.escape(data_formattata) if data_formattata and data_formattata != "n.d." else ""),
+            ("Luogo", html.escape(luogo_raw)),
+            ("Editore", html.escape(editore_raw)),
+            ("Tipologia", html.escape(tipo_display)),
+            ("Argomenti", argomento_html),
+            ("Provenienza", html.escape(provenienza_raw)),
+        ]
+        righe_scheda = "".join(
+            f'<div class="doc-scheda__campo"><dt>{etichetta}</dt><dd>{valore}</dd></div>'
+            for etichetta, valore in campi
+            if valore and valore != "N/A"
+        )
         
         content += f"""
-<div class="doc-metadata">
-<div class="metadata-grid">
-<div class="metadata-item">
-<span class="metadata-label">Autore</span>
-<span class="metadata-value">{autore_html}</span>
+<div class="doc-corpo">
+{corpo_testo}<aside class="doc-scheda" aria-labelledby="scheda-{citazione_id}">
+<h2 class="doc-sezione" id="scheda-{citazione_id}">Scheda</h2>
+<dl class="doc-scheda__campi">{righe_scheda}</dl>
+</aside>
 </div>
-<div class="metadata-item">
-<span class="metadata-label">Organizzazione</span>
-<span class="metadata-value">{org_html}</span>
+"""
+        
+        # Nell'archivio: documenti vicini per organizzazione e per anno
+        if correlati_org or correlati_anno:
+            colonne = ""
+            if correlati_org:
+                org_nome = doc_indice["org"]
+                url_org = (site_path("documenti/") + "?organizzazione="
+                           + urllib.parse.quote(urllib.parse.quote(org_nome, safe=""), safe=""))
+                colonne += f"""<div class="doc-correlati__gruppo">
+<h3>Stessa organizzazione <span class="doc-correlati__chiave">{html.escape(org_nome)}</span></h3>
+{_lista_correlati(correlati_org)}
+<a class="doc-correlati__tutti" href="{html.escape(url_org, quote=True)}">Tutti i documenti di {html.escape(org_nome)}</a>
 </div>
-<div class="metadata-item">
-<span class="metadata-label">Persone collegate</span>
-<span class="metadata-value">{persone_collegate_html}</span>
+"""
+            if correlati_anno:
+                anno = doc_indice["anno"]
+                url_anno = site_path("documenti/") + f"?anno_min={anno}&amp;anno_max={anno}"
+                colonne += f"""<div class="doc-correlati__gruppo">
+<h3>Stesso anno <span class="doc-correlati__chiave">{anno}</span></h3>
+{_lista_correlati(correlati_anno)}
+<a class="doc-correlati__tutti" href="{url_anno}">Tutti i documenti del {anno}</a>
 </div>
-<div class="metadata-item">
-<span class="metadata-label">Organizzazioni collegate</span>
-<span class="metadata-value">{organizzazioni_collegate_html}</span>
-</div>
-<div class="metadata-item">
-<span class="metadata-label">Data</span>
-<span class="metadata-value">{data_metadata_html}</span>
-</div>
-<div class="metadata-item">
-<span class="metadata-label">Provenienza</span>
-<span class="metadata-value">{provenienza_html}</span>
-</div>
-<div class="metadata-item">
-<span class="metadata-label">Tipologia</span>
-<span class="metadata-value">{tipo_display_html}</span>
-</div>
-<div class="metadata-item">
-<span class="metadata-label">Argomenti</span>
-<span class="metadata-value">{argomento_html}</span>
-</div>
-</div>
-</div>
+"""
+            content += f"""
+<section class="doc-correlati" aria-labelledby="correlati-{citazione_id}">
+<h2 class="doc-sezione" id="correlati-{citazione_id}">Nell'archivio</h2>
+<div class="doc-correlati__colonne">
+{colonne}</div>
+</section>
 """
         
         # =====================================================================
