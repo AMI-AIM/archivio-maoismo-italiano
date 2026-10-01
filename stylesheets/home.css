@@ -244,13 +244,11 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   font-size: var(--ami-font-size-sm); /* 14px */
   color: var(--md-default-fg-color--light);
 }
+/* Elenchi della home in stile catalogo: righe su filetti, senza
+   riquadro e senza ombra (come le liste di persone e organizzazioni). */
 .recent-container {
-  background: var(--md-code-bg-color);
-  border-radius: 14px;
-  padding: 0.5rem 0.5rem 0.2rem 0.5rem;
   margin: 1rem 0;
-  border: 1px solid var(--md-default-fg-color--lightest);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-top: 1px solid var(--md-default-fg-color--lighter);
 }
 
 /* ------------------------------------------------------------
@@ -311,7 +309,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 }
 
 /* ------------------------------------------------------------
-   AVATAR con iniziali + badge rank (persone E organizzazioni)
+   AVATAR con iniziali (persone E organizzazioni)
 ------------------------------------------------------------ */
 .persona-avatar {
   position: relative;
@@ -335,25 +333,6 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   letter-spacing: var(--ami-tracking-wider);
   user-select: none;
 }
-.persona-rank-badge {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--ami-font-size-xs); /* 12px */
-  font-weight: 700;
-  color: var(--ami-inchiostro);
-  border: 2px solid var(--md-code-bg-color);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-.persona-rank-badge--1 { background: var(--ami-medaglia-oro); }
-.persona-rank-badge--2 { background: var(--ami-medaglia-argento); }
-.persona-rank-badge--3 { background: var(--ami-medaglia-bronzo); }
 .persona-date {
   font-size: var(--ami-font-size-sm); /* 14px */
   color: var(--md-default-fg-color--light);
