@@ -72,6 +72,11 @@
   
 
   <!-- AMI-MAIN-ATTIVO v5 -->
+  <!-- Segnala subito (prima del rendering) che JavaScript e' attivo: il CSS
+       puo' cosi' impostare gli stati iniziali dei componenti interattivi
+       (es. filtri chiusi su mobile) senza spostamenti di layout quando gli
+       script, caricati in fondo alla pagina, arrivano. -->
+  <script>document.documentElement.classList.add("ami-js")</script>
   <meta name="ami-base-url" content=".">
 
   <!-- Verifica Google Search Console -->
@@ -97,8 +102,6 @@
   <link rel="preload" href="./fonts/fraunces-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="./fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- Preload hero (LCP) -->
-  <link rel="preload" as="image" href="./immagini/banner.webp" fetchpriority="high">
 
   
   
@@ -111,6 +114,13 @@
   
   
   
+  
+
+  
+  
+  <link rel="preload" as="image" href="./immagini/banner.webp"
+        imagesrcset="./immagini/banner-960.webp 960w, ./immagini/banner.webp 1920w"
+        imagesizes="100vw" fetchpriority="high">
   
 
   <!-- Open Graph -->
@@ -767,6 +777,8 @@
 <h1 class="ami-sr-only">Archivio del Maoismo Italiano</h1>
 <div class="banner-full">
   <img src="/archivio-maoismo-italiano/immagini/banner.webp"
+       srcset="/archivio-maoismo-italiano/immagini/banner-960.webp 960w, /archivio-maoismo-italiano/immagini/banner.webp 1920w"
+       sizes="100vw"
        alt="Prime pagine di periodici marxisti-leninisti italiani degli anni Sessanta: Rivoluzione proletaria, Gioventù marxista-leninista, Nuova Unità"
        class="banner-image" width="1920" height="828" fetchpriority="high">
   <div class="banner-overlay"></div>
@@ -1056,6 +1068,7 @@
              class="ami-footer__social-link">
             <img src="./immagini/internet-archive-logo.png"
                  alt="Internet Archive"
+                 width="44" height="44" loading="lazy" decoding="async"
                  class="ami-footer__ia-logo">
           </a>
         </div>

@@ -308,6 +308,9 @@
 .risultati-main {
     flex: 1;
     min-width: 0;
+    /* Riserva spazio mentre il catalogo si carica: senza, il footer saliva
+       nella prima schermata e poi veniva spinto giu' dai risultati (CLS). */
+    min-height: 100vh;
 }
 
 /* ------------------------------------------------------------
@@ -618,10 +621,12 @@
     .archivio-layout {
         flex-direction: column;
     }
-    .filtri-mostra {
+    /* Solo con JS attivo (html.ami-js): senza JS i filtri restano tutti
+       visibili e il pulsante non compare. */
+    .ami-js .filtri-mostra {
         display: inline-flex;
     }
-    .filtri-sidebar.filtri--chiusi .filtri-corpo {
+    .ami-js .filtri-sidebar:not(.filtri--aperti) .filtri-corpo {
         display: none;
     }
     .filtri-sidebar {

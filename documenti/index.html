@@ -70,6 +70,11 @@
   
 
   <!-- AMI-MAIN-ATTIVO v5 -->
+  <!-- Segnala subito (prima del rendering) che JavaScript e' attivo: il CSS
+       puo' cosi' impostare gli stati iniziali dei componenti interattivi
+       (es. filtri chiusi su mobile) senza spostamenti di layout quando gli
+       script, caricati in fondo alla pagina, arrivano. -->
+  <script>document.documentElement.classList.add("ami-js")</script>
   <meta name="ami-base-url" content="..">
 
   <!-- Verifica Google Search Console -->
@@ -95,8 +100,6 @@
   <link rel="preload" href="../fonts/fraunces-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- Preload hero (LCP) -->
-  <link rel="preload" as="image" href="../immagini/banner.webp" fetchpriority="high">
 
   
   
@@ -108,6 +111,9 @@
   
   
   
+  
+  
+
   
   
 
@@ -772,8 +778,8 @@
     <aside class="filtri-sidebar" id="filtri-sidebar">
         <div class="filtri-testata">
             <h2 class="filtri-titolo">Filtri</h2>
-            <button type="button" class="filtri-mostra" id="filtri-mostra" aria-expanded="true" aria-controls="filtri-corpo">
-                <span class="filtri-mostra__etichetta">Nascondi</span>
+            <button type="button" class="filtri-mostra" id="filtri-mostra" aria-expanded="false" aria-controls="filtri-corpo">
+                <span class="filtri-mostra__etichetta">Mostra filtri</span>
                 <span class="filtri-mostra__conteggio" id="filtri-mostra-conteggio"></span>
             </button>
         </div>
@@ -930,6 +936,7 @@
              class="ami-footer__social-link">
             <img src="../immagini/internet-archive-logo.png"
                  alt="Internet Archive"
+                 width="44" height="44" loading="lazy" decoding="async"
                  class="ami-footer__ia-logo">
           </a>
         </div>

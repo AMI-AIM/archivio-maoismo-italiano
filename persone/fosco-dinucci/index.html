@@ -70,6 +70,11 @@
   
 
   <!-- AMI-MAIN-ATTIVO v5 -->
+  <!-- Segnala subito (prima del rendering) che JavaScript e' attivo: il CSS
+       puo' cosi' impostare gli stati iniziali dei componenti interattivi
+       (es. filtri chiusi su mobile) senza spostamenti di layout quando gli
+       script, caricati in fondo alla pagina, arrivano. -->
+  <script>document.documentElement.classList.add("ami-js")</script>
   <meta name="ami-base-url" content="../..">
 
   <!-- Verifica Google Search Console -->
@@ -95,8 +100,6 @@
   <link rel="preload" href="../../fonts/fraunces-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../../fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- Preload hero (LCP) -->
-  <link rel="preload" as="image" href="../../immagini/banner.webp" fetchpriority="high">
 
   
   
@@ -108,6 +111,9 @@
   
   
   
+  
+  
+
   
   
 
@@ -772,7 +778,7 @@
 <p><em>Scheda biografica in fase di redazione. Nel frattempo, consulta i documenti collegati a Fosco Dinucci qui sotto.</em></p>
     </div>
     <div class="person-bio-image">
-        <img src="/archivio-maoismo-italiano/immagini/profili/dinucci.webp" alt="Foto di Fosco Dinucci, persona nel maoismo italiano" class="person-bio-img" loading="lazy">
+        <img src="/archivio-maoismo-italiano/immagini/profili/dinucci.webp" alt="Foto di Fosco Dinucci, persona nel maoismo italiano" class="person-bio-img" width="720" height="720" fetchpriority="high" decoding="async">
     </div>
 </div>
 
@@ -852,6 +858,7 @@
              class="ami-footer__social-link">
             <img src="../../immagini/internet-archive-logo.png"
                  alt="Internet Archive"
+                 width="44" height="44" loading="lazy" decoding="async"
                  class="ami-footer__ia-logo">
           </a>
         </div>

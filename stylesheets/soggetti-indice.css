@@ -245,6 +245,14 @@
         min-height: 200px;
     }
 
+    /* Area dell'immagine riservata (quadrata) prima del caricamento:
+       prima l'altezza nasceva dall'immagine e le schede si allungavano
+       di ~250px a caricamento avvenuto, spingendo giu' tutta la pagina. */
+    .top-card-image-wrapper {
+        flex: none;
+        aspect-ratio: 1 / 1;
+    }
+
     .top-card-text {
         padding: 0.4rem 0.8rem 0.6rem 0.8rem;
     }
