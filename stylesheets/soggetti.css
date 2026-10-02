@@ -239,3 +239,13 @@
     font-size: var(--ami-font-size-2xs);
     color: var(--md-default-fg-color--light);
 }
+
+/* Scheda ISAD(G) della raccolta nella pagina "Il progetto"
+   (scripts/core/raccolta.py): stessa scheda dei metadati dei documenti. */
+.scheda-raccolta {
+    margin: 1rem 0 2rem;
+}
+.scheda-raccolta .doc-scheda__campi {
+    columns: 2 18rem;
+    column-gap: 2.5rem;
+}
