@@ -239,7 +239,9 @@
         return campo.includes(q);
       })
       .map((p) => {
-        const dateVita = [p.nascita, p.morte].filter(Boolean).join(" – ");
+        const dateVita = (p.nascita === "s.d." && p.morte === "s.d.")
+            ? "s.d."
+            : [p.nascita, p.morte].filter(Boolean).join(" – ");
         return {
           tipo: "persona",
           etichetta: "Persona",
