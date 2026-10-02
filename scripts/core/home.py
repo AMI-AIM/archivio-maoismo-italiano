@@ -5,7 +5,7 @@ from collections import Counter
 
 from .miniature import miniatura
 from .site_config import site_path
-from .utils import formatta_data, slugify, split_nomi
+from .utils import formatta_data, formatta_intervallo, slugify, split_nomi
 
 # DOCUMENTI IN EVIDENZA: inserisci qui gli ID dei documenti che vuoi mostrare
 EVIDENZA_IDS = [
@@ -295,7 +295,7 @@ hide:
             slug = info_persona.get('slug', slugify(nome))
             nascita = str(info_persona.get('nascita', '')).strip()
             morte = str(info_persona.get('morte', '')).strip()
-            date_vita = ' \u2013 '.join([d for d in [nascita, morte] if d and d not in ['nan', 'None', '']])
+            date_vita = formatta_intervallo(nascita, morte)
             etichetta_conteggio = "1 documento collegato" if conteggio == 1 else f"{conteggio} documenti collegati"
             # FIX: nome, date_vita e le iniziali derivate da nome sono
             # dati d'archivio non escapati.

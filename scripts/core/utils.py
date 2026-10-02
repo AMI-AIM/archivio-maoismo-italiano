@@ -53,6 +53,24 @@ def formatta_estremo(valore):
     return v
 
 
+
+def formatta_intervallo(inizio, fine):
+    """Estremi cronologici di una persona o organizzazione come intervallo
+    ("1921 – 1993"), formattati con formatta_estremo(). Se entrambi gli
+    estremi sono ignoti ("????") basta un solo "s.d." invece di
+    "s.d. – s.d."."""
+    a = formatta_estremo(inizio)
+    b = formatta_estremo(fine)
+    if a == DATA_SENZA and b == DATA_SENZA:
+        return DATA_SENZA
+    if a and b:
+        return f"{a} – {b}"
+    if a:
+        return f"{a} – "
+    if b:
+        return f"? – {b}"
+    return ''
+
 def formatta_data(data_str):
     if data_str is None or str(data_str).strip() in _DATE_ASSENTI:
         return DATA_SENZA, (9999, 1, 1)

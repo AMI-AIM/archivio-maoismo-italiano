@@ -11,7 +11,7 @@ from core.catalog_indexer import CatalogIndexer
 from core.liste import GRUPPI_ORGANIZZAZIONE, elenco_per_ruolo, iniziali, valore_pulito
 from core.schema_generator import SchemaGenerator
 from core.site_config import site_path
-from core.utils import escape_yaml_string, formatta_data, formatta_estremo, slugify
+from core.utils import escape_yaml_string, formatta_data, formatta_estremo, formatta_intervallo, slugify
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
@@ -144,14 +144,7 @@ def genera_organizzazioni():
 
         fondazione = formatta_estremo(fondazione)
         scioglimento = formatta_estremo(scioglimento)
-        if fondazione and scioglimento:
-            data_range = f"{fondazione} – {scioglimento}"
-        elif fondazione:
-            data_range = f"{fondazione} – "
-        elif scioglimento:
-            data_range = f"? – {scioglimento}"
-        else:
-            data_range = ''
+        data_range = formatta_intervallo(fondazione, scioglimento)
 
         # ========================================================
         # DOCUMENTI COLLEGATI (con deduplicazione per ID)

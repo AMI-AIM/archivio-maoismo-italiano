@@ -11,7 +11,7 @@ from core.catalog_indexer import CatalogIndexer
 from core.liste import GRUPPI_PERSONA, elenco_per_ruolo, iniziali, valore_pulito
 from core.schema_generator import SchemaGenerator
 from core.site_config import site_path
-from core.utils import escape_yaml_string, formatta_data, formatta_estremo, slugify
+from core.utils import escape_yaml_string, formatta_data, formatta_estremo, formatta_intervallo, slugify
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
@@ -118,14 +118,7 @@ def genera_persone():
 
         nascita = formatta_estremo(nascita)
         morte = formatta_estremo(morte)
-        if nascita and morte:
-            data_range = f"{nascita} – {morte}"
-        elif nascita:
-            data_range = f"{nascita} – "
-        elif morte:
-            data_range = f"? – {morte}"
-        else:
-            data_range = ''
+        data_range = formatta_intervallo(nascita, morte)
 
         # ========================================================
         # DOCUMENTI COLLEGATI (con deduplicazione per ID)
