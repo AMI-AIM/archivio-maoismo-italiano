@@ -26,12 +26,9 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   /* Etichette dei risultati di ricerca (tipo di voce) */
   --ami-tipo-persona: #6a1b9a;
   --ami-tipo-organizzazione: #1565c0;
-  /* Home: avatar e "medaglie" delle persone piu' citate */
+  /* Home: avatar delle persone e organizzazioni piu' citate */
   --ami-avatar-2: #424242;
   --ami-avatar-3: #8d6e63;
-  --ami-medaglia-oro: linear-gradient(135deg, #f6d365, #c9911d);
-  --ami-medaglia-argento: linear-gradient(135deg, #dde3e6, #9aa5ab);
-  --ami-medaglia-bronzo: linear-gradient(135deg, #d7a06e, #a05a2c);
   /* Token skeleton lazy-loading: unica fonte dei valori grafici degli
      skeleton creati da lazy-loading.js (che non applica piu stili inline
      propri; la variante home scura e definita nella sezione
@@ -999,8 +996,9 @@ FAMIGLIE (tutte necessarie, ciascuna con un ruolo che solo lei svolge)
   Fraunces      titoli e testo corrente (stessa famiglia: cambia il peso,
                 non lo "scheletro")
   Archivo       etichette e UI: nav, bottoni, badge, chip, filtri
-  Courier Prime metadati, testo trascritto, blocchi di citazione: look
-                "macchina da scrivere" voluto. MAI in riga con altro testo.
+  Courier Prime dati d'archivio: segnature, valori della Scheda, chiavi
+                di "Nell'archivio", conteggi. Mai per link e azioni.
+                Regole complete in DESIGN.md (radice del progetto).
 
 PESI PER RUOLO
   900 titolo di pagina (h1)        750 sezione (h2)     650 sottosezione (h3)
@@ -2250,4 +2248,305 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+}
+
+/* ==========================================================================
+   COERENZA DEL SISTEMA (CRITIQUE 3) — vedi DESIGN.md
+   ========================================================================== */
+
+/* --- Focus: anello bianco su fondi scuri e fotografici -------------------
+   Material colora l'anello dei link con l'accento (.md-typeset a:focus-visible,
+   specificita' 0,2,1): sul nero della fascia "in evidenza" il rosso scuro
+   spariva (circa 1,5:1). */
+.md-typeset .evidenza-band a:focus-visible,
+.md-typeset .banner-content a:focus-visible,
+.md-typeset .banner-content button:focus-visible,
+.md-typeset.ami-footer a:focus-visible,
+.ami-footer a:focus-visible {
+  outline: 2px solid var(--ami-su-colore);
+  outline-color: var(--ami-su-colore);
+}
+
+/* --- "x" del campo di ricerca: grigia, non il blu del browser ----------- */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0.8rem;
+  height: 0.8rem;
+  cursor: pointer;
+  background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%235c5c5c' d='M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3E%3C/svg%3E");
+}
+
+/* --- Riga di catalogo unica ---------------------------------------------
+   Home, percorsi tematici, persone e organizzazioni: data in Fraunces
+   regolare in una colonna larga quanto la data piu' lunga dell'elenco
+   (subgrid), titolo, poi tipologia e organizzazione. Niente striscia rossa
+   al passaggio: solo il fondo carta. */
+.md-typeset .doc-data,
+.risultato-data,
+.doc-correlati__data {
+  font-weight: 400;
+}
+.md-typeset .doc-row,
+.md-typeset .doc-row:hover {
+  border-left: 0;
+}
+.md-typeset .doc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.6rem;
+  margin-top: 0.15rem;
+  font-family: var(--ami-font-label);
+  font-size: var(--ami-font-size-sm);
+  line-height: var(--ami-line-height-snug);
+  color: var(--md-default-fg-color--light);
+}
+.md-typeset .doc-meta .doc-org {
+  font-family: var(--ami-font-label);
+  font-size: var(--ami-font-size-sm);
+}
+@supports (grid-template-columns: subgrid) and selector(:has(*)) {
+  .md-typeset .catalogo-lista:not(:has(.doc-row-persona)) {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    column-gap: 1.5rem;
+    row-gap: 0;
+  }
+  .md-typeset .catalogo-lista:not(:has(.doc-row-persona)) > .doc-row {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    align-items: baseline;
+    gap: 0 1.5rem;
+    padding: 0.55rem 0.6rem;
+  }
+  .md-typeset .catalogo-lista:not(:has(.doc-row-persona)) > .doc-row > .doc-data {
+    flex: none;
+    width: auto;
+    padding-top: 0;
+  }
+  @media (max-width: 600px) {
+    .md-typeset .catalogo-lista:not(:has(.doc-row-persona)) {
+      display: flex;
+      flex-direction: column;
+    }
+    .md-typeset .catalogo-lista:not(:has(.doc-row-persona)) > .doc-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      padding: 0.6rem 0.2rem;
+    }
+  }
+}
+
+/* --- Gerarchia: le sezioni superano i titoli di riga --------------------
+   h1 38px/900 > sezione 26px/750 > gruppo 21px/650 > titolo di riga 18px/600 */
+.md-typeset h2.doc-sezione,
+.md-typeset h2.soggetto-sezione {
+  font-family: var(--ami-font-display);
+  font-size: var(--ami-font-size-xl);
+  font-weight: var(--fw-heading);
+  letter-spacing: var(--ami-tracking-tight);
+  line-height: var(--ami-line-height-tight);
+}
+.md-typeset h3.doc-gruppo__titolo {
+  font-size: var(--ami-font-size-lg);
+  font-weight: 650;
+}
+
+/* --- Rosso solo su cio' che si clicca (Red Pencil Rule) ----------------- */
+.md-typeset .section-icon {
+  fill: currentColor;
+  opacity: 0.55;
+}
+.md-typeset .section-title::after,
+.md-typeset .home-column h2::after {
+  background: currentColor;
+}
+.md-typeset .persona-avatar--1,
+.md-typeset .persona-avatar--2,
+.md-typeset .persona-avatar--3 {
+  background: var(--ami-avatar-2);
+}
+.md-typeset .progetto-card-titolo {
+  color: var(--md-default-fg-color);
+}
+.md-typeset .progetto-card-testo {
+  font-size: var(--ami-font-size-base);
+}
+.md-typeset .progetto-info-box {
+  border-left: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* --- Passaggio del mouse: sempre rosso scuro (Darker Hover Rule) -------- */
+.md-typeset .doc-titolo a:hover,
+.md-typeset .risultato-titolo a:hover,
+.md-typeset .doc-correlati__lista a:hover,
+.md-typeset .doc-correlati__tutti:hover,
+.citazione-link:hover,
+.fullscreen-btn:hover {
+  color: var(--md-accent-fg-color);
+}
+.md-typeset .banner-button:hover {
+  color: var(--md-accent-fg-color) !important;
+  background-color: var(--ami-rosso-tenue);
+}
+
+/* --- Pagine di persone e organizzazioni senza testo curatoriale ---------- */
+.soggetto-testata {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 0.5rem;
+}
+.soggetto-testata__testo {
+  flex: 1;
+  min-width: 0;
+}
+.soggetto-testata__img {
+  flex: none;
+  width: 9rem;
+  height: 9rem;
+  margin-top: 1.2rem;
+  border-radius: 8px;
+}
+.soggetto-testata__img--cover {
+  object-fit: cover;
+}
+.soggetto-testata__img--contain {
+  object-fit: contain;
+}
+.md-typeset .soggetto-nota {
+  margin: 0.2rem 0 0;
+  font-size: var(--ami-font-size-sm);
+  font-style: italic;
+  color: var(--md-default-fg-color--light);
+}
+.md-typeset .soggetto-azione {
+  margin: 0.6rem 0 0.4rem;
+}
+@media (max-width: 600px) {
+  .soggetto-testata {
+    gap: 1rem;
+  }
+  .soggetto-testata__img {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+}
+
+/* --- Percorsi tematici: la fotografia dell'indice come testata ---------- */
+.md-typeset .percorso-testata {
+  margin: 0.6rem 0 1rem;
+  aspect-ratio: 3 / 1;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--md-code-bg-color);
+}
+.percorso-testata__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 600px) {
+  .md-typeset .percorso-testata {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* --- Indici: card in evidenza in una striscia orizzontale su mobile ------ */
+@media (max-width: 768px) {
+  .md-typeset .top-row {
+    display: flex;
+    gap: 0.8rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0.2rem;
+    padding-bottom: 0.4rem;
+  }
+  .md-typeset .top-row .top-card {
+    flex: 0 0 72%;
+    scroll-snap-align: start;
+    min-height: 0;
+  }
+  .top-row .top-card-image-wrapper {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* --- Ricerca della home: fondo piu' scuro, testo leggibile ---------------- */
+.banner-search {
+  background: rgba(13, 13, 13, 0.55);
+}
+.banner-search:focus-within {
+  background: rgba(13, 13, 13, 0.7);
+}
+
+/* --- Archivio: guida alla lettura, frecce SVG, nessun risultato ---------- */
+.md-typeset details.archivio-guida {
+  margin: 0 0 1rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  font-size: var(--ami-font-size-sm);
+}
+.md-typeset details.archivio-guida > summary {
+  display: inline-block;
+  min-height: 44px;
+  line-height: 44px;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: 0;
+  font-size: var(--ami-font-size-sm);
+  font-family: var(--ami-font-label);
+  font-weight: 600;
+  color: var(--md-primary-fg-color);
+  cursor: pointer;
+}
+.md-typeset details.archivio-guida > summary::before,
+.md-typeset details.archivio-guida > summary::after {
+  display: none;
+}
+.md-typeset details.archivio-guida > summary:hover {
+  color: var(--md-accent-fg-color);
+}
+.md-typeset details.archivio-guida > ul {
+  max-width: var(--measure);
+  margin: 0.2rem 0 0.8rem;
+}
+.filtro-toggle .toggle-icon {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+  flex: none;
+}
+.md-typeset .nessun-risultato p {
+  margin: 0 auto 0.6rem;
+  max-width: 44ch;
+}
+
+/* --- Spazio sopra il titolo di pagina ------------------------------------
+   Il primo elemento visibile e' quello dopo l'ancora di "Vai al contenuto". */
+.md-typeset > .ami-ancora-contenuto + :not(.ami-sr-only):not(.banner-full) {
+  margin-top: 1rem !important;
+}
+
+/* --- ALLINEAMENTO GALLERIA E PROGETTO -----------------------------------
+   Stesso margine sinistro delle altre pagine (126px a 1440, 16px su
+   telefono). Progetto non nasconde le barre laterali e Material gli dava
+   24px; la galleria usava un contenitore proprio di 1240px. */
+@media screen and (min-width: 76.25em) {
+  .md-content__inner:has(.progetto-grid) {
+    margin-left: 0.8rem !important;
+    margin-right: 0.8rem !important;
+  }
+}
+.md-typeset .galleria-wrapper {
+  width: min(1188px, calc(100vw - 32px));
 }

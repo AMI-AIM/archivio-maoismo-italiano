@@ -188,7 +188,9 @@ function aggiornaURLFiltri() {
         const paramName = URL_PARAM_PER_SELECT[selectId];
         const valori = getSelectedValues(selectId);
         if (valori.length) {
-            params.set(paramName, valori.map(v => encodeURIComponent(v)).join(','));
+            // Solo virgola e percento vanno protetti (la virgola separa i
+            // valori): il resto lo codifica URLSearchParams una volta sola.
+            params.set(paramName, valori.map(v => v.replace(/%/g, '%25').replace(/,/g, '%2C')).join(','));
         }
     });
 
@@ -659,7 +661,14 @@ function mostraRisultati(risultati) {
     
     const totale = risultati.length;
     if (totale === 0) {
-        container.innerHTML = '<p class="nessun-risultato">Nessun documento trovato con i filtri selezionati.</p>';
+        container.innerHTML =
+            '<div class="nessun-risultato">' +
+            '<p><strong>Nessun documento corrisponde a questa ricerca.</strong></p>' +
+            '<p>Prova a togliere un filtro, ad allargare l\'intervallo di anni o a cercare un termine più generico.</p>' +
+            '<button type="button" class="riprova-btn" id="nessun-risultato-reset">Rimuovi tutti i filtri</button>' +
+            '</div>';
+        const azzera = document.getElementById('nessun-risultato-reset');
+        if (azzera) azzera.addEventListener('click', resetFiltri);
         if (conteggio) conteggio.textContent = '0 documenti';
         if (paginazioneContainer) paginazioneContainer.innerHTML = '';
         return;
