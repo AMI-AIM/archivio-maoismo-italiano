@@ -96,16 +96,6 @@ hide:
 
 # Archivio
 
-<details class="archivio-guida">
-<summary>Come leggere le schede</summary>
-<ul>
-<li><strong>Segnatura.</strong> Ogni documento ha un codice <code>AMI-0000</code>: è il suo identificativo stabile nell'archivio e compare nella scheda e accanto alla data nei risultati.</li>
-<li><strong>Date.</strong> La data è quella del documento conservato: per traduzioni e ristampe, l'edizione. La data di stesura, se diversa, può essere indicata nella descrizione. <em>s.d.</em> indica un documento senza data, <em>ca. 2010</em> un anno noto solo in parte.</li>
-<li><strong>Filtri.</strong> Più voci dello stesso gruppo si sommano; gruppi diversi si combinano tra loro. Il numero accanto a ogni voce indica quanti documenti dell'archivio la contengono.</li>
-<li><strong>Citare.</strong> Nella scheda, «Cita questo documento» genera la citazione in Chicago, MLA, BibTeX o forma semplice, con il link stabile e la data di consultazione.</li>
-</ul>
-</details>
-
 <div id="archivio-container" class="archivio-layout">
 
     <!-- SIDEBAR FILTRI -->

@@ -125,7 +125,9 @@ Un rosso da timbro su fondo carta, con neutri caldi e un nero profondo per le fa
 - **Errore** (`errore`): messaggi di errore e stati non riusciti.
 
 ### Named Rules
-**The Red Pencil Rule.** Il rosso segna solo ciò che si clicca o che data un documento: link, date, pulsanti primari, selezione. Etichette, badge e categorie non sono mai rossi.
+**The Red Pencil Rule.** Nel registro catalogo il rosso segna solo ciò che si clicca o che data un documento: link, date, pulsanti primari, selezione. Etichette, badge e categorie non sono mai rossi.
+
+**The Press Accent Rule.** Nel registro manifesto (home) il rosso torna accento di stampa: barrette sotto i titoli di sezione, icone dei titoli, avatar con iniziali "a timbro" (cerchio bianco, bordo e iniziali rossi). Senza questi accenti la home diventa anonima.
 
 **The Darker Hover Rule.** Al passaggio del mouse il rosso si scurisce (rosso inchiostro), non si schiarisce. Un rosso più chiaro perde contrasto sul bianco.
 
@@ -188,7 +190,7 @@ Angoli diritti o appena arrotondati nel catalogo, morbidi nelle vetrine.
 - **Riquadri di nota** (8px): pannelli di ricerca negli indici.
 - **Card-vetrina** (12px): card di persone, organizzazioni e percorsi.
 - **Pillole** (999px): chip dei filtri attivi, pillole degli anni nello slider.
-- **Cerchi**: avatar con iniziali in home, in grigio scuro (`#424242`), mai rossi.
+- **Cerchi**: avatar con iniziali in home "a timbro": fondo bianco, bordo di 2px e iniziali in rosso catalogo.
 
 ## Components
 
@@ -248,7 +250,7 @@ Con testo curatoriale: biografia o storia su fondo carta accanto all'immagine. S
 - **Don't** usare blocchi o badge rossi pieni per etichette, ruoli o categorie: sono grigi, in maiuscoletto, senza fondo.
 - **Don't** aggiungere ombre o riquadri nelle pagine di consultazione (The Two Registers Rule).
 - **Don't** usare Courier Prime per link e azioni (unica eccezione: i valori della Scheda).
-- **Don't** mettere titoli di pagina in rosso, né colorare di rosso icone decorative, barrette, avatar o titoli di card non cliccabili.
+- **Don't** mettere titoli di pagina in rosso, né colorare di rosso titoli di card non cliccabili; nel registro catalogo niente rosso decorativo (in home sì: The Press Accent Rule).
 - **Don't** usare emoji come icone: le icone sono SVG con lo stesso tratto.
 - **Don't** troncare i nomi nei filtri: vanno a capo interi.
 - **Don't** mostrare un titolo visibile in home (resta solo quello per i lettori di schermo) e non rimuovere l'avviso sullo stato di Internet Archive in cima alla pagina.
