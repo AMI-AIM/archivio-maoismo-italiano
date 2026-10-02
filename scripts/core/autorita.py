@@ -69,10 +69,19 @@ def carica_autorita(path):
             dati['_sezione'] = sezione
             record[nome] = dati
 
+    # Le relazioni si risolvono tramite l'identificativo del record
+    # (ID_entita_A/B): se la forma autorizzata del nome viene corretta nei
+    # fogli Persone/Organizzazioni, il collegamento resta valido. Il nome
+    # scritto nel foglio Relazioni serve solo come ripiego se l'ID manca.
+    nome_da_id = {d['id_autorita']: n for n, d in record.items() if d.get('id_autorita')}
     relazioni = []
     df_rel = _leggi_foglio(path, 'Relazioni')
     for _, riga in df_rel.iterrows():
         dati = {k: _pulito(v) for k, v in riga.items()}
+        for lato in ('a', 'b'):
+            nome_id = nome_da_id.get(dati.get(f'id_entita_{lato}', ''))
+            if nome_id:
+                dati[f'entita_{lato}'] = nome_id
         if dati.get('entita_a') and dati.get('entita_b'):
             relazioni.append(dati)
     return record, relazioni
