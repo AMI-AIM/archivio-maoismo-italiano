@@ -66,7 +66,7 @@ def _link_ia(url_attr, etichetta="Apri su Internet Archive"):
 # Versione dell'impaginazione della scheda: entra nell'hash della cache,
 # cosi' un cambio di template rigenera tutte le schede anche se i dati
 # della riga non sono cambiati.
-SCHEDA_TEMPLATE_VERSION = "2026-10-isad-2"
+SCHEDA_TEMPLATE_VERSION = "2026-10-isad-3"
 
 _MAX_CORRELATI = 4
 
@@ -392,6 +392,7 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
             identifier=identifier or "",
             persone=persone,
             organizzazioni=organizzazioni,
+            titolo_attribuito=titolo_attribuito,
         )
         
         is_bibliografico = payload_citazione.get("mode") == "bibliografica"

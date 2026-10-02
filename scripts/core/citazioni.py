@@ -12,7 +12,7 @@ from .site_config import site_url
 from .utils import split_nomi
 
 # VERSIONE AGGIORNATA: invalida cache per applicare modifiche HTML/JS
-CITAZIONI_TEMPLATE_VERSION = "2025-01-20-citazioni-div-corsivo-escape-1"
+CITAZIONI_TEMPLATE_VERSION = "2026-10-02-citazioni-standard-1"
 
 ARCHIVE_NAME = "Archivio del Maoismo Italiano"
 
@@ -183,8 +183,16 @@ def costruisci_autori_citazione(
                     "corporate": True,
                 })
             elif nome in persone:
+                # name: ordine naturale ("Renzo Del Carria", "Mao Zedong");
+                # sort_name: forma invertita per BibTeX e per il primo autore
+                # in Chicago/MLA ("Del Carria, Renzo"); surname_first: nomi
+                # in cui il cognome precede gia' il nome (es. cinesi), che
+                # Chicago e MLA non invertono e non separano con la virgola.
+                cognome = str(persone[nome].get("cognome", "") or "").strip()
                 authors.append({
-                    "name": formatta_autore_bibliografico(nome, persone),
+                    "name": nome,
+                    "sort_name": formatta_autore_bibliografico(nome, persone),
+                    "surname_first": bool(cognome) and nome.startswith(cognome + " "),
                     "corporate": False,
                 })
             else:
@@ -192,6 +200,8 @@ def costruisci_autori_citazione(
                 # Non lo marchiamo come corporate per prudenza.
                 authors.append({
                     "name": nome,
+                    "sort_name": nome,
+                    "surname_first": False,
                     "corporate": False,
                 })
     elif org_raw:
@@ -219,6 +229,7 @@ def costruisci_payload_citazione(
     identifier: str,
     persone: dict,
     organizzazioni: dict,
+    titolo_attribuito: bool = False,
 ):
     """
     Costruisce il payload JSON usato da documenti.js per generare
@@ -286,6 +297,7 @@ def costruisci_payload_citazione(
             "citation_key": citation_key,
             "type": tipo,
             "title": titolo,
+            "title_devised": bool(titolo_attribuito),
             "date_display": data_display,
             "year": year,
             "url": permalink,

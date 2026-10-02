@@ -56,6 +56,20 @@
       .replace(/\^/g, '\\textasciicircum{}');
   }
 
+  // ------------------------------------------------------------
+  // CITAZIONI
+  // Norme di riferimento:
+  //  - Chicago Manual of Style (notes-bibliography, voce di bibliografia),
+  //    adattata all'italiano ("e", "consultato il");
+  //  - MLA Handbook, 9a ed. (container: titolo della risorsa, poi
+  //    l'archivio come secondo container);
+  //  - BibTeX (campi url/urldate supportati da biblatex e natbib);
+  //  - "Semplice": tutti gli elementi separati solo da virgole.
+  // I nomi in cui il cognome precede il nome (es. cinesi: "Mao Zedong")
+  // non vengono invertiti in Chicago e MLA.
+  // ------------------------------------------------------------
+  var ARCHIVIO_SEP = ', ';
+
   function authorNames(authors) {
     return (authors || [])
       .map(function (author) {
@@ -64,176 +78,266 @@
       .filter(Boolean);
   }
 
-  function buildAuthorPart(authors, skipName) {
-    var names = authorNames(authors).filter(function (name) {
-      return name !== skipName;
+  function validAuthors(authors, skipName) {
+    return (authors || []).filter(function (a) {
+      return a && safeText(a.name) && safeText(a.name) !== skipName;
     });
-    if (!names.length) {
+  }
+
+  // Primo autore: forma invertita "Cognome, Nome" (se nota e se il nome
+  // non e' gia' nell'ordine cognome-nome); gli altri in ordine naturale.
+  function displayName(author, first) {
+    if (author.corporate || !first || author.surname_first) {
+      return safeText(author.name);
+    }
+    return safeText(author.sort_name) || safeText(author.name);
+  }
+
+  function joinItalian(list) {
+    if (list.length <= 1) {
+      return list.join('');
+    }
+    return list.slice(0, -1).join(', ') + ' e ' + list[list.length - 1];
+  }
+
+  function chicagoAuthors(authors) {
+    return joinItalian(authors.map(function (a, i) {
+      return escapeHtml(displayName(a, i === 0));
+    }));
+  }
+
+  function mlaAuthors(authors) {
+    if (!authors.length) {
       return '';
     }
-    return escapeHtml(names.join('; ')) + '. ';
+    var first = escapeHtml(displayName(authors[0], true));
+    if (authors.length === 1) {
+      return first;
+    }
+    if (authors.length === 2) {
+      var inverted = first.indexOf(',') !== -1;
+      return first + (inverted ? ', e ' : ' e ') + escapeHtml(displayName(authors[1], false));
+    }
+    return first + ', et al';
   }
 
-  function buildArchivePart(doc) {
-    return escapeHtml(doc.archive) + ' (' + escapeHtml(doc.ami_id) + ')';
+  function endWithPeriod(text) {
+    return /[.!?]$/.test(text) ? text : text + '.';
   }
 
-  function buildAccessPart(date) {
-    return 'Data di consultazione: ' + escapeHtml(date.it) + '.';
+  // Titolo: corsivo se e' il titolo proprio; tra parentesi quadre e in
+  // tondo se e' attribuito dal catalogatore (ISAD 3.1.2).
+  function titleHtml(doc) {
+    if (doc.title_devised) {
+      return '[' + escapeHtml(doc.title) + ']';
+    }
+    return '<em>' + escapeHtml(doc.title) + '</em>';
   }
 
-  function buildPublisherPartChicago(doc) {
-    var place = safeText(doc.place);
-    var publisher = safeText(doc.publisher);
-    if (place && publisher) {
-      return escapeHtml(place) + ': ' + escapeHtml(publisher) + ', ';
-    }
-    if (publisher) {
-      return escapeHtml(publisher) + ', ';
-    }
-    if (place) {
-      return escapeHtml(place) + ', ';
-    }
-    return '';
+  function dateText(doc) {
+    return escapeHtml(doc.date_display) || 's.d.';
   }
 
-  function buildPeriodicalParts(doc) {
-    var parts = [];
-    if (doc.volume) {
-      parts.push('anno ' + escapeHtml(doc.volume));
+  function accessText(date) {
+    return 'consultato il ' + escapeHtml(date.it);
+  }
+
+  function romanToArabic(value) {
+    var s = safeText(value).trim().toUpperCase();
+    if (/^\d+$/.test(s) || !/^[IVXLCDM]+$/.test(s)) {
+      return safeText(value);
     }
-    if (doc.issue) {
-      parts.push('no. ' + escapeHtml(doc.issue));
+    var map = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
+    var total = 0;
+    for (var i = 0; i < s.length; i++) {
+      var cur = map[s[i]];
+      var next = map[s[i + 1]] || 0;
+      total += cur < next ? -cur : cur;
     }
-    return parts;
+    return String(total);
+  }
+
+  function issueText(doc) {
+    var issue = safeText(doc.issue);
+    if (!issue) {
+      return '';
+    }
+    var supp = issue.match(/^suppl\.\s*(.+)$/);
+    if (supp) {
+      return 'suppl. al no. ' + escapeHtml(supp[1]);
+    }
+    return 'no. ' + escapeHtml(issue);
   }
 
   function getPeriodicalTitle(doc) {
     return safeText(doc.container_title) || safeText(doc.title);
   }
 
-  function buildChicago(doc, date) {
-    var access = buildAccessPart(date);
-    var archive = buildArchivePart(doc);
-    
-    if (doc.is_periodical) {
-      var journal = getPeriodicalTitle(doc);
-      var authorPart = buildAuthorPart(doc.authors, journal);
-      var parts = buildPeriodicalParts(doc);
-      var core = authorPart + '<em>' + escapeHtml(journal) + '</em>';
-      if (parts.length) {
-        core += ', ' + parts.join(', ');
-      }
-      core += ', ' + (escapeHtml(doc.date_display) || 's.d.') + '.';
-      return core + ' ' + archive + '. ' + escapeHtml(doc.url) + '. ' + access;
-    }
-    
-    var author = buildAuthorPart(doc.authors);
-    var publisher = buildPublisherPartChicago(doc);
-    return (
-      author +
-      '<em>' + escapeHtml(doc.title) + '</em>. ' +
-      publisher +
-      (escapeHtml(doc.date_display) || 's.d.') + '. ' +
-      archive + '. ' +
-      escapeHtml(doc.url) + '. ' +
-      access
-    );
+  // Autori di un periodico: si omette l'ente che coincide con la testata.
+  function periodicalAuthors(doc) {
+    return validAuthors(doc.authors, getPeriodicalTitle(doc));
   }
 
-  function buildMLA(doc, date) {
-    var access = buildAccessPart(date);
-    var archive = buildArchivePart(doc);
-    
+  // ---------------- Chicago ----------------
+  // Libro:     Cognome, Nome. Titolo. Luogo: Editore, Anno. Archivio, ID.
+  //            Consultato il … URL.
+  // Fascicolo: Ente. Testata 3, no. 1 (data). Archivio, ID. Consultato il … URL.
+  function buildChicago(doc, date) {
+    var parts = [];
+    var tail = escapeHtml(doc.archive) + ARCHIVIO_SEP + escapeHtml(doc.ami_id) + '. ' +
+      'Consultato il ' + escapeHtml(date.it) + '. ' + escapeHtml(doc.url) + '.';
+
     if (doc.is_periodical) {
-      var journal = getPeriodicalTitle(doc);
-      var authorPart = buildAuthorPart(doc.authors, journal);
-      var parts = buildPeriodicalParts(doc);
-      var core = authorPart + '<em>' + escapeHtml(journal) + '</em>';
-      if (parts.length) {
-        core += ', ' + parts.join(', ');
+      var authorsP = periodicalAuthors(doc);
+      if (authorsP.length) {
+        parts.push(endWithPeriod(chicagoAuthors(authorsP)));
       }
-      core += ', ' + (escapeHtml(doc.date_display) || 's.d.') + '.';
-      return core + ' ' + archive + ', ' + escapeHtml(doc.url) + '. ' + access;
+      var core = '<em>' + escapeHtml(getPeriodicalTitle(doc)) + '</em>';
+      var vol = safeText(doc.volume) ? escapeHtml(romanToArabic(doc.volume)) : '';
+      var iss = issueText(doc);
+      if (vol) {
+        core += ' ' + vol + (iss ? ', ' + iss : '');
+      } else if (iss) {
+        core += ', ' + iss;
+      }
+      core += ' (' + dateText(doc) + ').';
+      parts.push(core);
+      parts.push(tail);
+      return parts.join(' ');
     }
-    
-    var author = buildAuthorPart(doc.authors);
-    var publisher = safeText(doc.publisher) || safeText(doc.place);
-    if (publisher) {
-      publisher = escapeHtml(publisher) + ', ';
-    } else {
-      publisher = '';
+
+    var authors = validAuthors(doc.authors);
+    if (authors.length) {
+      parts.push(endWithPeriod(chicagoAuthors(authors)));
     }
-    return (
-      author +
-      '<em>' + escapeHtml(doc.title) + '</em>. ' +
-      publisher +
-      (escapeHtml(doc.date_display) || 's.d.') + '. ' +
-      archive + ', ' +
-      escapeHtml(doc.url) + '. ' +
-      access
-    );
+    parts.push(endWithPeriod(titleHtml(doc)));
+    var place = safeText(doc.place);
+    var publisher = safeText(doc.publisher);
+    var pub = '';
+    if (place && publisher) {
+      pub = escapeHtml(place) + ': ' + escapeHtml(publisher) + ', ';
+    } else if (publisher || place) {
+      pub = escapeHtml(publisher || place) + ', ';
+    }
+    parts.push(pub + dateText(doc) + '.');
+    parts.push(tail);
+    return parts.join(' ');
+  }
+
+  // ---------------- MLA (9a ed.) ----------------
+  // Libro:     Cognome, Nome. Titolo. Editore, Anno. Archivio, ID, URL.
+  //            Consultato il ….
+  // Fascicolo: Testata, vol. 3, no. 1, data. Archivio, ID, URL. Consultato il ….
+  // Se l'autore coincide con l'editore, MLA lo omette e parte dal titolo.
+  function buildMLA(doc, date) {
+    var parts = [];
+    var tail = '<em>' + escapeHtml(doc.archive) + '</em>, ' + escapeHtml(doc.ami_id) + ', ' +
+      escapeHtml(doc.url) + '. Consultato il ' + escapeHtml(date.it) + '.';
+
+    if (doc.is_periodical) {
+      var authorsP = periodicalAuthors(doc);
+      if (authorsP.length) {
+        parts.push(endWithPeriod(mlaAuthors(authorsP)));
+      }
+      var seg = ['<em>' + escapeHtml(getPeriodicalTitle(doc)) + '</em>'];
+      if (safeText(doc.volume)) {
+        seg.push('vol. ' + escapeHtml(romanToArabic(doc.volume)));
+      }
+      if (issueText(doc)) {
+        seg.push(issueText(doc));
+      }
+      seg.push(dateText(doc));
+      parts.push(seg.join(', ') + '.');
+      parts.push(tail);
+      return parts.join(' ');
+    }
+
+    var publisher = safeText(doc.publisher);
+    var authors = validAuthors(doc.authors);
+    if (authors.length === 1 && authors[0].corporate && safeText(authors[0].name) === publisher) {
+      authors = [];
+    }
+    if (authors.length) {
+      parts.push(endWithPeriod(mlaAuthors(authors)));
+    }
+    parts.push(endWithPeriod(titleHtml(doc)));
+    parts.push((publisher ? escapeHtml(publisher) + ', ' : '') + dateText(doc) + '.');
+    parts.push(tail);
+    return parts.join(' ');
+  }
+
+  // ---------------- Semplice ----------------
+  // Tutti gli elementi separati solo da virgole:
+  // Cognome, Nome, Titolo, Luogo, Editore, Data, Archivio, ID, URL, consultato il ….
+  function simpleAuthors(authors) {
+    return joinItalian(authors.map(function (a, i) {
+      return escapeHtml(displayName(a, i === 0));
+    }));
   }
 
   function buildSemplice(doc, date) {
-    var access = buildAccessPart(date);
-    var archive = buildArchivePart(doc);
-    
+    var el = [];
     if (doc.is_periodical) {
-      var journal = getPeriodicalTitle(doc);
-      var parts = buildPeriodicalParts(doc);
-      var core = '<em>' + escapeHtml(journal) + '</em>';
-      if (parts.length) {
-        core += ', ' + parts.join(', ');
+      var authorsP = periodicalAuthors(doc);
+      if (authorsP.length) {
+        el.push(simpleAuthors(authorsP));
       }
-      core += ' (' + (escapeHtml(doc.date_display) || 's.d.') + ')';
-      var author = buildAuthorPart(doc.authors, journal).replace(/\.\s*$/, '');
-      if (author) {
-        core += '. ' + author;
+      el.push('<em>' + escapeHtml(getPeriodicalTitle(doc)) + '</em>');
+      if (safeText(doc.volume)) {
+        el.push('anno ' + escapeHtml(doc.volume));
       }
-      return core + '. ' + archive + '. ' + escapeHtml(doc.url) + '. ' + access;
+      if (issueText(doc)) {
+        el.push(issueText(doc));
+      }
+    } else {
+      var authors = validAuthors(doc.authors);
+      if (authors.length) {
+        el.push(simpleAuthors(authors));
+      }
+      el.push(titleHtml(doc));
+      if (safeText(doc.place)) {
+        el.push(escapeHtml(doc.place));
+      }
+      if (safeText(doc.publisher)) {
+        el.push(escapeHtml(doc.publisher));
+      }
     }
-    
-    var author = buildAuthorPart(doc.authors).replace(/\.\s*$/, '');
-    var details = [];
-    if (doc.place && doc.publisher) {
-      details.push(escapeHtml(doc.place) + ': ' + escapeHtml(doc.publisher));
-    } else if (doc.publisher) {
-      details.push(escapeHtml(doc.publisher));
-    } else if (doc.place) {
-      details.push(escapeHtml(doc.place));
-    }
-    
-    var text = '';
-    if (author) {
-      text += author + ', ';
-    }
-    text += '<em>' + escapeHtml(doc.title) + '</em>';
-    if (details.length) {
-      text += ', ' + details.join(', ');
-    }
-    text += ', ' + (escapeHtml(doc.date_display) || 's.d.');
-    return text + '. ' + archive + '. ' + escapeHtml(doc.url) + '. ' + access;
+    el.push(dateText(doc));
+    el.push(escapeHtml(doc.archive));
+    el.push(escapeHtml(doc.ami_id));
+    el.push(escapeHtml(doc.url));
+    el.push(accessText(date));
+    return el.join(', ') + '.';
   }
 
+  // Documenti non bibliografici (foto, volantini, manifesti…): stessa
+  // forma della citazione semplice, senza editore.
   function buildMinima(doc, date) {
-    var access = buildAccessPart(date);
-    var archive = buildArchivePart(doc);
-    return (
-      '<em>' + escapeHtml(doc.title) + '</em>, ' +
-      (escapeHtml(doc.date_display) || 's.d.') + '. ' +
-      archive + '. ' +
-      escapeHtml(doc.url) + '. ' +
-      access
-    );
+    var el = [];
+    var authors = validAuthors(doc.authors);
+    if (authors.length) {
+      el.push(simpleAuthors(authors));
+    }
+    el.push(titleHtml(doc));
+    if (safeText(doc.place)) {
+      el.push(escapeHtml(doc.place));
+    }
+    el.push(dateText(doc));
+    el.push(escapeHtml(doc.archive));
+    el.push(escapeHtml(doc.ami_id));
+    el.push(escapeHtml(doc.url));
+    el.push(accessText(date));
+    return el.join(', ') + '.';
   }
 
+  // ---------------- BibTeX ----------------
+  // Persone: "Cognome, Nome"; enti tra graffe singole, cosi' BibTeX non
+  // li scompone in nome e cognome: author = {{Renmin Ribao} and {Hongqi}}.
   function bibtexAuthor(author) {
-    var name = escapeBibtex(author.name);
     if (author.corporate) {
-      return '{{' + name + '}}';
+      return '{' + escapeBibtex(author.name) + '}';
     }
-    return name;
+    return escapeBibtex(safeText(author.sort_name) || safeText(author.name));
   }
 
   function buildBibtex(doc, date) {

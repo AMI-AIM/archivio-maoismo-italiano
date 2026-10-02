@@ -7,6 +7,7 @@ from urllib.parse import quote
 import pandas as pd
 
 from core.miniature import miniatura
+from core.utils import soggetto_produttore
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT_DIR / "data" / "dati.xlsx"
@@ -148,6 +149,9 @@ def gallery_card(row):
     tipo = clean_value(row.get("tipo"))
     data_str = format_data(row.get("data"))
     doc_id = clean_value(row.get("id"))
+    # Per la citazione: soggetto produttore (regola AMI) e titolo attribuito
+    produttore = soggetto_produttore(clean_value(row.get("autore")), org).replace(";", " e")
+    attribuito = clean_value(row.get("titolo_attribuito")).lower() in ("sì", "si", "s", "yes", "true", "1")
 
     primary, fallback = get_image_urls(row)
     # Miniatura locale da 1200px (riquadri fino a ~500px a schermo, ~1000 per
@@ -174,6 +178,9 @@ def gallery_card(row):
         f' data-titolo="{titolo_attr}"'
         f' data-data="{html.escape(data_str, quote=True)}"'
         f' data-org="{html.escape(org, quote=True)}"'
+        f' data-produttore="{html.escape(produttore, quote=True)}"'
+        f' data-luogo="{html.escape(clean_value(row.get("luogo")), quote=True)}"'
+        f' data-attribuito="{"1" if attribuito else ""}"'
         f' data-tipo="{html.escape(tipo, quote=True)}"'
         f' data-ia-url="{html.escape(link_url, quote=True)}"'
         f' data-scheda-url="{html.escape(scheda_url, quote=True)}"'
