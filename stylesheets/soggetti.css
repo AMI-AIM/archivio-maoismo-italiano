@@ -205,3 +205,37 @@
         font-size: var(--ami-font-size-sm);
     }
 }
+
+/* ==========================================================================
+   Record d'autorità ISAAR(CPF) in fondo alle schede di persone e
+   organizzazioni (scripts/core/autorita.py). Registro catalogo: piatto,
+   righe su filetti, stessa scheda dei metadati dei documenti.
+   ========================================================================== */
+.soggetto-autorita {
+    margin: 3rem 0 1rem;
+}
+.soggetto-autorita .doc-scheda__campi {
+    columns: 2 18rem;
+    column-gap: 2.5rem;
+}
+.md-typeset .autorita-rel {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.md-typeset .autorita-rel li {
+    margin: 0 0 0.35rem;
+}
+.md-typeset .autorita-rel li:last-child {
+    margin-bottom: 0;
+}
+.autorita-rel__nota {
+    color: var(--md-default-fg-color--light);
+    font-size: var(--ami-font-size-2xs);
+}
+.md-typeset .autorita-nota {
+    margin: 0.8rem 0 0;
+    font-family: var(--ami-font-label);
+    font-size: var(--ami-font-size-2xs);
+    color: var(--md-default-fg-color--light);
+}

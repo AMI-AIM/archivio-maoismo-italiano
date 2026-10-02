@@ -115,6 +115,8 @@ https://ami-aim.github.io/archivio-maoismo-italiano/persone/jiang-qing/
 https://ami-aim.github.io/archivio-maoismo-italiano/persone/angiolo-gracci/
 https://ami-aim.github.io/archivio-maoismo-italiano/persone/giorgio-zucchetti/
 https://ami-aim.github.io/archivio-maoismo-italiano/persone/liu-shaoqi/
+https://ami-aim.github.io/archivio-maoismo-italiano/persone/renzo-del-carria/
+https://ami-aim.github.io/archivio-maoismo-italiano/persone/arnaldo-bressan/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/associazione-italia-cina/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/casa-editrice-in-lingue-estere/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/edizioni-oriente/
@@ -136,7 +138,13 @@ https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/avanguardia-p
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/partito-comunista-marxista-leninista-italiano/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/lavoro-politico/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/partito-comunista-unificato-ditalia/
-https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/circoli-lenin-dellemilia-romagna/https://ami-aim.github.io/archivio-maoismo-italiano/argomenti/
+https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/circoli-lenin-dellemilia-romagna/
+https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/centro-karl-marx/
+https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/organizzazione-comunista-marxista-leninista-fronte-unito/
+https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/movimento-studentesco/
+https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/organizzazione-dei-comunisti-marxisti-leninisti-ditalia/
+https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/partito-comunista-marxista-leninista-ditalia-lotta-di-lunga-durata/
+https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/partito-marxista-leninista-maoista-italiano/https://ami-aim.github.io/archivio-maoismo-italiano/argomenti/
 https://ami-aim.github.io/archivio-maoismo-italiano/argomenti/materiali-cinesi/
 https://ami-aim.github.io/archivio-maoismo-italiano/argomenti/fondamenti-del-maoismo/
 https://ami-aim.github.io/archivio-maoismo-italiano/argomenti/libretti-rossi/
