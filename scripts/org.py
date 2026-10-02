@@ -6,6 +6,7 @@ import os
 import sys
 
 import pandas as pd
+from core.autorita import arricchisci_schema, blocco_autorita, carica_autorita
 from core.catalog_indexer import CatalogIndexer
 from core.liste import GRUPPI_ORGANIZZAZIONE, elenco_per_ruolo, iniziali, valore_pulito
 from core.schema_generator import SchemaGenerator
@@ -103,6 +104,9 @@ def genera_organizzazioni():
     print("Creazione indici catalogo...")
     indexer = CatalogIndexer(df_catalogo)
     print("Indici creati")
+
+    # Record d'autorità ISAAR(CPF) e relazioni (core/autorita.py)
+    record_aut, relazioni_aut = carica_autorita(os.path.join(DATA_DIR, 'dati.xlsx'))
 
     organizzazioni = {}
 
@@ -241,6 +245,7 @@ def genera_organizzazioni():
             num_doc=data['num_doc'],
             data_range=data['data_range']
         )
+        schema = arricchisci_schema(schema, nome, record_aut, (data['fondazione'], data['scioglimento']))
         schema_json = json.dumps(schema, ensure_ascii=False)
 
         # FIX: title/description del frontmatter YAML ora passano da
@@ -323,6 +328,7 @@ hide:
         # Documenti divisi per ruolo (core/liste.py): il ruolo diventa il
         # titolo del gruppo invece di un'etichetta ripetuta su ogni riga.
         content += elenco_per_ruolo(data['documenti'], GRUPPI_ORGANIZZAZIONE, escludi_org=nome)
+        content += blocco_autorita(nome, data['data_range'], record_aut, relazioni_aut, indexer)
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(frontmatter + content)
         print(f"Creata scheda per {nome} → {slug}.md")

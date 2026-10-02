@@ -75,6 +75,42 @@ L'AMI è concepito come un archivio in costante accrescimento. Nuove acquisizion
 
 
 
+<h2 id="norme-di-descrizione">Norme di descrizione</h2>
+
+Le persone e gli enti collegati ai documenti (militanti, dirigenti, partiti, gruppi, case editrici, testate) sono descritti in **record d'autorità** redatti secondo lo standard internazionale ISAAR(CPF) del Consiglio Internazionale degli Archivi. Ogni record è separato dalle schede dei documenti e collegato a esse: uno stesso soggetto ha così un'unica descrizione di riferimento in tutto l'archivio, consultabile in fondo alla sua pagina nella sezione "Record d'autorità".
+
+Ogni record contiene i quattro elementi essenziali previsti dallo standard:
+
+<div class="progetto-badge-list">
+
+<span class="progetto-badge">Identificativo del record</span>
+
+<span class="progetto-badge">Tipo di entità</span>
+
+<span class="progetto-badge">Forma autorizzata del nome</span>
+
+<span class="progetto-badge">Date di esistenza</span>
+
+</div>
+
+A questi si aggiungono, quando disponibili, le altre forme del nome attestate nelle fonti, la biografia o la storia dell'ente, le relazioni con altri soggetti (cariche, appartenenze, articolazioni interne), ciascuna accompagnata dalla fonte che la attesta, e i dati di controllo del record: norme applicate e data di redazione.
+
+<div class="progetto-info-box">
+
+<p><strong>Convenzioni.</strong> Gli identificativi hanno la forma <code>AMI-P-001</code> per le persone e <code>AMI-O-001</code> per gli enti. I nomi cinesi sono registrati in trascrizione pinyin; le grafie storiche, come quelle delle edizioni italiane dell'epoca (per esempio "Mao Tse-tung"), sono riportate tra le altre forme del nome.</p>
+
+</div>
+
+La descrizione dei singoli documenti segue per ora il tracciato catalografico indicato sopra; il suo adeguamento allo standard ISAD(G) è in programma.
+
+<div class="progetto-bibliografia">
+
+<p>INTERNATIONAL COUNCIL ON ARCHIVES, <em>ISAAR(CPF): International Standard Archival Authority Record for Corporate Bodies, Persons and Families</em>, 2nd ed., Paris: International Council on Archives, 2004.</p>
+
+</div>
+
+
+
 <h2>Consultazione</h2>
 
 
