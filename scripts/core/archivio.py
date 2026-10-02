@@ -178,8 +178,8 @@ hide:
         </div>
 
         
-        <div class="filtri-azioni">
-            <button type="button" id="reset-filtri"><span aria-hidden="true">↺</span> Reset</button>
+        <div class="filtri-azioni" id="filtri-azioni" hidden>
+            <button type="button" id="reset-filtri">Azzera filtri</button>
         </div>
     </aside>
 

@@ -303,7 +303,7 @@ hide:
 """
         if not data['storia']:
             # Nessun testo curatoriale ancora: testata compatta.
-            img_html = f'<div class="soggetto-testata__timbro" aria-hidden="true">{html.escape(iniziali(nome))}</div>'
+            img_html = ''
             if data.get('immagine'):
                 img_html = (f'<img src="{data["immagine"]}" alt="Logo di {nome_attr}" '
                             f'class="soggetto-testata__img soggetto-testata__img--contain" decoding="async">')

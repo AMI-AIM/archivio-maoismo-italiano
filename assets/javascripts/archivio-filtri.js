@@ -633,15 +633,10 @@ function renderFiltriAttivi() {
         numeroFiltri++;
     }
 
-    // --- Pulsante "rimuovi tutti", solo se ci sono almeno 2 filtri attivi ---
-    if (numeroFiltri > 1) {
-        const resetBtn = document.createElement('button');
-        resetBtn.type = 'button';
-        resetBtn.className = 'filtri-attivi-reset';
-        resetBtn.textContent = 'Rimuovi tutti i filtri';
-        resetBtn.addEventListener('click', resetFiltri);
-        container.appendChild(resetBtn);
-    }
+    // Un solo comando per azzerare: "Azzera filtri" nel pannello, mostrato
+    // solo quando c'e' qualcosa da azzerare (ogni chip ha gia' la sua x).
+    const azioni = document.getElementById('filtri-azioni');
+    if (azioni) azioni.hidden = numeroFiltri === 0;
 }
 
 // ============================================================
@@ -665,7 +660,7 @@ function mostraRisultati(risultati) {
             '<div class="nessun-risultato">' +
             '<p><strong>Nessun documento corrisponde a questa ricerca.</strong></p>' +
             '<p>Prova a togliere un filtro, ad allargare l\'intervallo di anni o a cercare un termine più generico.</p>' +
-            '<button type="button" class="riprova-btn" id="nessun-risultato-reset">Rimuovi tutti i filtri</button>' +
+            '<button type="button" class="riprova-btn" id="nessun-risultato-reset">Azzera filtri</button>' +
             '</div>';
         const azzera = document.getElementById('nessun-risultato-reset');
         if (azzera) azzera.addEventListener('click', resetFiltri);

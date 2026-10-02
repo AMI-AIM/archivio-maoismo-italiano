@@ -234,7 +234,7 @@ Un solo componente in home, percorsi tematici, persone e organizzazioni: data ro
 - **Variante estesa** (risultati dell'archivio): data · segnatura in Courier, titolo, autore · organizzazione · tipologia, estratto della descrizione.
 
 ### Testata di persona e organizzazione
-Con testo curatoriale: biografia o storia su fondo carta accanto all'immagine. Senza testo: nessun riquadro, immagine di 180px subito accanto al blocco di nome e date, una riga "in fase di redazione". Senza immagine: iniziali "a timbro" (cerchio con bordo e iniziali rosse), mai la sagoma grigia. Sempre il link "Vedi questi documenti nell'archivio" (archivio già filtrato).
+Con testo curatoriale: biografia o storia su fondo carta accanto all'immagine. Senza testo: nessun riquadro, immagine di 180px subito accanto al blocco di nome e date, una riga "in fase di redazione". Senza immagine: solo nome e date, nessun segnaposto (le iniziali "a timbro" servono solo nelle card "In evidenza" degli indici). Sempre il link "Vedi questi documenti nell'archivio" (archivio già filtrato).
 
 ## Do's and Don'ts
 
