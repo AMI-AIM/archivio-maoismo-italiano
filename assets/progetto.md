@@ -43,70 +43,57 @@ Ad oggi, il patrimonio dell'AMI è composto da:
 
 <h2>Catalogazione</h2>
 
-
-
-Ogni documento è descritto mediante un insieme uniforme di metadati:
-
-
-
-<div class="progetto-badge-list">
-
-&#x20;   <span class="progetto-badge">Tipologia</span>
-
-&#x20;   <span class="progetto-badge">Titolo</span>
-
-&#x20;   <span class="progetto-badge">Autore</span>
-
-&#x20;   <span class="progetto-badge">Data</span>
-
-&#x20;   <span class="progetto-badge">Luogo</span>
-
-&#x20;   <span class="progetto-badge">Organizzazioni collegate</span>
-
-&#x20;   <span class="progetto-badge">Persone collegate</span>
-
-&#x20;   <span class="progetto-badge">ID univoco</span>
-
-</div>
-
-
-
 L'AMI è concepito come un archivio in costante accrescimento. Nuove acquisizioni e integrazioni vengono aggiunte progressivamente, mantenendo criteri descrittivi uniformi e privilegiando, ove possibile, la consultazione di copie complete e di buona qualità.
-
-
 
 <h2 id="norme-di-descrizione">Norme di descrizione</h2>
 
-Le persone e gli enti collegati ai documenti (militanti, dirigenti, partiti, gruppi, case editrici, testate) sono descritti in **record d'autorità** redatti secondo lo standard internazionale ISAAR(CPF) del Consiglio Internazionale degli Archivi. Ogni record è separato dalle schede dei documenti e collegato a esse: uno stesso soggetto ha così un'unica descrizione di riferimento in tutto l'archivio, consultabile in fondo alla sua pagina nella sezione "Record d'autorità".
+La descrizione segue gli standard internazionali del Consiglio Internazionale degli Archivi: ISAD(G) per i documenti, ISAAR(CPF) per le persone e gli enti.
+
+<h3>Documenti</h3>
+
+I documenti sono descritti secondo ISAD(G) su due livelli: la **raccolta**, cioè l'AMI nel suo insieme, e la singola **unità**, a cui corrisponde ciascuna scheda dell'archivio. Gli elementi essenziali previsti dallo standard sono:
+
+<div class="progetto-badge-list">
+<span class="progetto-badge">Segnatura</span>
+<span class="progetto-badge">Titolo</span>
+<span class="progetto-badge">Data</span>
+<span class="progetto-badge">Livello di descrizione</span>
+<span class="progetto-badge">Consistenza</span>
+<span class="progetto-badge">Soggetto produttore</span>
+</div>
+
+A questi si aggiungono, quando disponibili, la descrizione del contenuto, la lingua, il luogo e l'editore, la tipologia, le persone e le organizzazioni collegate, la provenienza e i percorsi tematici.
+
+<div class="progetto-info-box">
+<p><strong>Convenzioni.</strong> Il soggetto produttore è l'autore del documento; quando l'autore è assente o anonimo, è l'organizzazione di riferimento. I titoli redatti dal catalogatore, come quelli delle fotografie, sono indicati come attribuiti. Le date incerte sono precedute da "ca.", quelle ignote sono indicate con "s.d.".</p>
+</div>
+
+<h3>Scheda della raccolta</h3>
+
+<!-- SCHEDA-RACCOLTA -->
+
+<h3>Persone ed enti</h3>
+
+Le persone e gli enti collegati ai documenti (militanti, dirigenti, partiti, gruppi, case editrici, testate) sono descritti in **record d'autorità** redatti secondo ISAAR(CPF). Ogni record è separato dalle schede dei documenti e collegato a esse: uno stesso soggetto ha così un'unica descrizione di riferimento in tutto l'archivio, consultabile in fondo alla sua pagina nella sezione "Record d'autorità".
 
 Ogni record contiene i quattro elementi essenziali previsti dallo standard:
 
 <div class="progetto-badge-list">
-
 <span class="progetto-badge">Identificativo del record</span>
-
 <span class="progetto-badge">Tipo di entità</span>
-
 <span class="progetto-badge">Forma autorizzata del nome</span>
-
 <span class="progetto-badge">Date di esistenza</span>
-
 </div>
 
 A questi si aggiungono, quando disponibili, le altre forme del nome attestate nelle fonti, la biografia o la storia dell'ente, le relazioni con altri soggetti (cariche, appartenenze, articolazioni interne), ciascuna accompagnata dalla fonte che la attesta, e i dati di controllo del record: norme applicate e data di redazione.
 
 <div class="progetto-info-box">
-
 <p><strong>Convenzioni.</strong> Gli identificativi hanno la forma <code>AMI-P-001</code> per le persone e <code>AMI-O-001</code> per gli enti. I nomi cinesi sono registrati in trascrizione pinyin; le grafie storiche, come quelle delle edizioni italiane dell'epoca (per esempio "Mao Tse-tung"), sono riportate tra le altre forme del nome.</p>
-
 </div>
 
-La descrizione dei singoli documenti segue per ora il tracciato catalografico indicato sopra; il suo adeguamento allo standard ISAD(G) è in programma.
-
 <div class="progetto-bibliografia">
-
+<p>INTERNATIONAL COUNCIL ON ARCHIVES, <em>ISAD(G): General International Standard Archival Description</em>, 2nd ed., Ottawa: International Council on Archives, 2000.</p>
 <p>INTERNATIONAL COUNCIL ON ARCHIVES, <em>ISAAR(CPF): International Standard Archival Authority Record for Corporate Bodies, Persons and Families</em>, 2nd ed., Paris: International Council on Archives, 2004.</p>
-
 </div>
 
 

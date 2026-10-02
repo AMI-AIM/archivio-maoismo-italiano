@@ -2,7 +2,7 @@ import os
 import re
 
 from .site_config import site_path
-from .utils import formatta_data, scarica_descrizione_ia, split_nomi
+from .utils import descrizione_da_catalogo, formatta_data, scarica_descrizione_ia, split_nomi
 
 
 def genera_indice(df, output_dir, cache_manager=None):
@@ -41,8 +41,9 @@ def genera_indice(df, output_dir, cache_manager=None):
             autore_raw = ''
         
         url_ia = str(row.get('url', '#')).strip()
-        descrizione = None
-        if url_ia and url_ia != '#':
+        # Descrizione: prima la colonna 'Descrizione' del Catalogo, poi IA
+        descrizione = descrizione_da_catalogo(row)
+        if not descrizione and url_ia and url_ia != '#':
             match = re.search(r'/details/([^/?#]+)', url_ia)
             if match:
                 identifier = match.group(1)

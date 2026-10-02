@@ -5,7 +5,7 @@ import re
 
 import pandas as pd
 
-from .utils import formatta_data, scarica_descrizione_ia, split_nomi
+from .utils import descrizione_da_catalogo, formatta_data, scarica_descrizione_ia, split_nomi
 
 
 def pulisci_html(testo):
@@ -93,8 +93,9 @@ def genera_json(df, persone, organizzazioni, output_dir):
             anno = int(data_raw)
             anni_valori.append(anno)
 
-        descrizione = None
-        if url_ia and url_ia != '#':
+        # Descrizione: prima la colonna 'Descrizione' del Catalogo, poi IA
+        descrizione = descrizione_da_catalogo(row)
+        if not descrizione and url_ia and url_ia != '#':
             match = re.search(r'/details/([^/?#]+)', url_ia)
             if match:
                 identifier = match.group(1)

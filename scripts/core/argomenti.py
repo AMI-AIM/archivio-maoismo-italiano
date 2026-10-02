@@ -34,7 +34,7 @@ RESERVED_SLUGS = {
 
 # Alias accettati per la colonna argomenti/serie nel foglio Catalogo,
 # in ordine di preferenza.
-CANDIDATE_TOPIC_COLUMNS = ['serie', 'argomenti', 'argomento', 'tag', 'tags']
+CANDIDATE_TOPIC_COLUMNS = ['percorsi', 'serie', 'argomenti', 'argomento', 'tag', 'tags']
 
 
 def find_topic_column(df, candidates=None):

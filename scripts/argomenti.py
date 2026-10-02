@@ -460,7 +460,7 @@ def genera_argomenti():
     topic_column = find_topic_column(df_catalogo)
 
     if not topic_column:
-        print("ERRORE: nessuna colonna argomento trovata (cercavo 'Serie', 'Argomenti', 'Argomento', 'Tag', 'Tags').")
+        print("ERRORE: nessuna colonna argomento trovata (cercavo 'Percorsi', 'Serie', 'Argomenti', 'Argomento', 'Tag', 'Tags').")
         return 1
 
     if 'id' not in df_catalogo.columns:

@@ -1,3 +1,4 @@
+import html
 import html as html_lib
 import re
 from datetime import datetime
@@ -250,3 +251,27 @@ def escape_yaml_string(testo):
     if not testo:
         return ''
     return testo.replace('\\', '\\\\').replace('"', '\\"')
+
+
+def descrizione_da_catalogo(row):
+    """Descrizione del documento (ISAD(G) 3.3.1, Ambito e contenuto) dalla
+    colonna 'Descrizione' del foglio Catalogo, come HTML: ogni riga del
+    testo diventa un paragrafo, con escape. Restituisce None se la cella
+    e' vuota: in quel caso i chiamanti ricadono sulla descrizione di
+    Internet Archive."""
+    testo = str(row.get('descrizione', '') or '').strip()
+    if testo in ('', 'nan', 'None'):
+        return None
+    righe = [r.strip() for r in testo.splitlines() if r.strip()]
+    return ''.join(f'<p>{html.escape(r)}</p>' for r in righe)
+
+
+def soggetto_produttore(autore_raw, org_raw):
+    """Soggetto produttore (ISAD(G) 3.2.1) secondo la regola dell'AMI:
+    l'autore; se assente o anonimo, l'organizzazione di riferimento.
+    Restituisce la stringa dei nomi (separati da ';') o ''."""
+    autore = (autore_raw or '').strip()
+    if autore and autore.lower() not in ('anonimo', 'anonima', 'n/a', 'nan', 'none'):
+        return autore
+    org = (org_raw or '').strip()
+    return '' if org.lower() in ('nan', 'none', 'n/a') else org

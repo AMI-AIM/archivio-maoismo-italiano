@@ -90,7 +90,8 @@ class SchemaGenerator:
     
     @staticmethod
     def document_schema(ami_id, titolo, descrizione, tipo, autori, organizzazioni,
-                         data_pubblicazione, keywords, url_ia=None, immagine_url=None):
+                         data_pubblicazione, keywords, url_ia=None, immagine_url=None,
+                         lingue=None, editori=None, enti=None):
         """
         Schema per un documento d'archivio.
 
@@ -112,6 +113,13 @@ class SchemaGenerator:
             keywords: lista di argomenti/serie collegati al documento
             url_ia: URL della fonte primaria su Internet Archive, se presente
             immagine_url: URL di un'immagine rappresentativa, se presente
+            lingue: codici BCP 47 delle lingue del documento (es. ['zh', 'it']);
+                default ['it']
+            editori: lista di nomi degli editori (schema.org publisher); se
+                assente, publisher non viene indicato
+            enti: insieme dei nomi registrati come enti (foglio
+                Organizzazioni): gli autori che vi compaiono sono tipizzati
+                come Organization invece che Person
 
         Returns:
             dict: Schema.org CreativeWork (o Article)
@@ -130,17 +138,23 @@ class SchemaGenerator:
                 "name": "Archivio del Maoismo Italiano",
                 "url": SITE_URL
             },
-            "inLanguage": "it",
+            "inLanguage": (lingue[0] if lingue and len(lingue) == 1 else (lingue or "it")),
         }
 
         if descrizione and descrizione.strip():
             schema["description"] = descrizione[:300]
 
         if autori:
-            schema["author"] = [{"@type": "Person", "name": nome} for nome in autori]
+            enti = enti or set()
+            schema["author"] = [
+                {"@type": "Organization" if nome in enti else "Person", "name": nome}
+                for nome in autori
+            ]
 
-        if organizzazioni:
-            schema["publisher"] = [{"@type": "Organization", "name": nome} for nome in organizzazioni]
+        # publisher = editore del documento (prima veniva usato per errore il
+        # campo Organizzazione, che indica l'ente di riferimento).
+        if editori:
+            schema["publisher"] = [{"@type": "Organization", "name": nome} for nome in editori]
 
         if data_pubblicazione and str(data_pubblicazione).strip():
             schema["datePublished"] = str(data_pubblicazione).strip()

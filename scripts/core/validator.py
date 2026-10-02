@@ -19,8 +19,10 @@ COLONNE_OBBLIGATORIE_CATALOGO = ['id', 'titolo', 'tipo']
 COLONNE_OPZIONALI_CATALOGO = [
     'autore', 'organizzazione', 'luogo', 'editore', 'provenienza',
     'persone_collegate', 'organizzazioni_collegate', 'data', 'anno',
-    'serie', 'url', 'url_ia', 'nome_file', 'nome_file_originale',
-    'nome_file_traduzione', 'descrizione', 'note'
+    'serie', 'percorsi', 'url', 'url_ia', 'nome_file', 'nome_file_originale',
+    'nome_file_traduzione', 'descrizione', 'note',
+    # elementi ISAD(G)
+    'livello', 'titolo_attribuito', 'data_normalizzata', 'consistenza', 'lingua'
 ]
 
 TIPI_DOCUMENTO_VALIDI = [
@@ -414,7 +416,7 @@ class AdvancedValidator:
     ):
         """Valida riferimenti incrociati (persone, organizzazioni collegate)."""
         # Controllo sintassi liste con separatori misti (',' e ';')
-        col_lista = ['persone_collegate', 'organizzazioni_collegate', 'serie']
+        col_lista = ['persone_collegate', 'organizzazioni_collegate', 'serie', 'percorsi']
         for col in col_lista:
             if col not in df.columns:
                 continue

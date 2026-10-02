@@ -17,13 +17,22 @@ from .schema_generator import SchemaGenerator
 from .site_config import site_path
 from .soggetti import crea_link, link_lista
 from .utils import (
+    descrizione_da_catalogo,
     formatta_data,
+    soggetto_produttore,
     pulisci_per_meta_description,
     scarica_descrizione_ia,
     scarica_testo_ia,
     split_nomi,
 )
 
+
+
+# Lingue (colonna 'Lingua', ISAD 3.4.3) -> codici BCP 47 per schema.org
+_CODICI_LINGUA = {
+    "italiano": "it", "cinese": "zh", "inglese": "en", "francese": "fr",
+    "tedesco": "de", "spagnolo": "es", "russo": "ru", "albanese": "sq",
+}
 
 # Icone delle azioni della scheda (Material Design Icons, Apache 2.0):
 # SVG inline al posto delle emoji, che cambiavano aspetto da un sistema
@@ -57,7 +66,7 @@ def _link_ia(url_attr, etichetta="Apri su Internet Archive"):
 # Versione dell'impaginazione della scheda: entra nell'hash della cache,
 # cosi' un cambio di template rigenera tutte le schede anche se i dati
 # della riga non sono cambiati.
-SCHEDA_TEMPLATE_VERSION = "2026-10-catalogo-5"
+SCHEDA_TEMPLATE_VERSION = "2026-10-isad-2"
 
 _MAX_CORRELATI = 4
 
@@ -253,6 +262,17 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
         nome_file_traduzione = str(row.get("nome_file_traduzione", "")).strip()
         if nome_file_traduzione in ("nan", "None"):
             nome_file_traduzione = ""
+
+        # Elementi ISAD(G) del foglio Catalogo
+        def _campo_isad(nome_colonna):
+            valore = str(row.get(nome_colonna, "")).strip()
+            return "" if valore in ("nan", "None") else valore
+
+        livello_raw = _campo_isad("livello")                  # 3.1.4
+        titolo_attribuito = _campo_isad("titolo_attribuito").lower() in ("sì", "si", "s", "yes", "true", "1")  # 3.1.2
+        consistenza_raw = _campo_isad("consistenza")          # 3.1.5
+        lingua_raw = _campo_isad("lingua")                    # 3.4.3
+        produttore_raw = soggetto_produttore(autore_raw, org_raw)  # 3.2.1
         
         # =====================================================================
         # IDENTIFIER INTERNET ARCHIVE
@@ -266,8 +286,10 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
         # =====================================================================
         # DESCRIZIONE IA
         # =====================================================================
-        descrizione_ia = None
-        if identifier:
+        # Descrizione (ISAD 3.3.1): colonna 'Descrizione' del Catalogo; la
+        # descrizione di Internet Archive resta solo come ripiego.
+        descrizione_ia = descrizione_da_catalogo(row)
+        if identifier and not descrizione_ia:
             if cache_manager:
                 cached_metadata = cache_manager.get_ia_metadata(identifier)
                 if cached_metadata:
@@ -406,6 +428,10 @@ def crea_schede(df, persone, organizzazioni, output_dir, cache_manager=None):
             keywords=serie_tags,
             url_ia=url_ia,
             immagine_url=immagine_url_schema,
+            lingue=[_CODICI_LINGUA[l.strip().lower()] for l in lingua_raw.split(";")
+                    if l.strip().lower() in _CODICI_LINGUA] or None,
+            editori=split_nomi(editore_raw) if editore_raw else None,
+            enti=set(organizzazioni),
         )
         document_schema_json = json_per_script(document_schema)
         
@@ -657,15 +683,27 @@ hide:
         # =====================================================================
         # Scheda catalografica: solo i campi compilati (prima i campi vuoti
         # comparivano come "N/A", cioe' come se fossero dati).
+        # Ordine e nomi dei campi seguono ISAD(G). Il soggetto produttore
+        # (3.2.1) e' l'autore o, in sua assenza, l'organizzazione: la riga
+        # "Autore" compare solo quando non coincide con il produttore.
+        produttore_html = link_lista(produttore_raw, persone, organizzazioni) if produttore_raw else ""
+        autore_riga = autore_html if autore_raw and autore_raw != produttore_raw else ""
+        livello_html = html.escape(livello_raw.capitalize()) if livello_raw else ""
+        org_riga = org_html if org_raw and org_raw != produttore_raw else ""
         campi = [
-            ("Autore", autore_html),
-            ("Organizzazione", org_html),
+            ("Soggetto produttore", produttore_html),
+            ("Autore", autore_riga),
+            ("Organizzazione", org_riga),
             ("Persone collegate", persone_collegate_html),
             ("Organizzazioni collegate", organizzazioni_collegate_html),
             ("Data", html.escape(data_formattata) if data_formattata and data_formattata not in ("n.d.", "s.d.") else ""),
             ("Luogo", html.escape(luogo_raw)),
             ("Editore", html.escape(editore_raw)),
             ("Tipologia", html.escape(tipo_display)),
+            ("Consistenza", html.escape(consistenza_raw)),
+            ("Lingua", html.escape(lingua_raw)),
+            ("Livello di descrizione", livello_html),
+            ("Titolo", "Attribuito" if titolo_attribuito else ""),
             ("Percorsi tematici", argomento_html),
             ("Provenienza", html.escape(provenienza_raw)),
         ]

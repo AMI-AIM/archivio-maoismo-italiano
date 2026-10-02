@@ -4,6 +4,7 @@ from datetime import datetime
 import pandas as pd
 from core.archivio import genera_indice
 from core.home import genera_home
+from core.raccolta import inserisci_scheda_raccolta
 from core.json_export import genera_json
 from core.json_optimizer import JSONOptimizer
 from core.schede import crea_schede
@@ -314,6 +315,10 @@ def main():
 
     # Normalizza colonne
     df.columns = df.columns.str.strip().str.lower()
+    # La colonna 'Percorsi' (percorsi tematici) e' letta internamente come
+    # 'serie', chiave usata dal JSON e dai filtri (?serie=) del sito.
+    if 'percorsi' in df.columns and 'serie' not in df.columns:
+        df = df.rename(columns={'percorsi': 'serie'})
 
     print(f"[OK] Caricate {len(df)} righe e {len(df.columns)} colonne")
     print(f"[INFO] Colonne: {', '.join(list(df.columns)[:5])}...")
@@ -357,6 +362,18 @@ def main():
     except Exception as e:
         print(f"[ERROR] Errore esportazione JSON: {e}")
         raise
+
+    # ================================================================
+    # GENERAZIONE: Scheda ISAD(G) della raccolta (pagina Il progetto)
+    # ================================================================
+    print("\n[GEN] Scheda della raccolta (ISAD)...")
+    try:
+        if inserisci_scheda_raccolta(OUTPUT_DIR, catalogo_path, df):
+            print("[OK] Scheda della raccolta inserita in progetto.md")
+        else:
+            print("[INFO] Segnaposto della scheda raccolta non trovato in progetto.md")
+    except Exception as e:
+        print(f"[WARN] Errore scheda raccolta: {e}")
 
     # ================================================================
     # GENERAZIONE: Home page
