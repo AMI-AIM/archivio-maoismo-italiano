@@ -1,3 +1,12 @@
+{#- Stato di una voce di menu: "page" se e' la pagina corrente, "true" se la
+    pagina corrente sta nella sua sezione (es. una scheda documento sotto
+    "Tutti i documenti"), vuoto altrimenti. -#}
+{%- macro stato_voce(item, page) -%}
+  {%- if item.active -%}page
+  {%- elif item.is_link and page and item.url and item.url not in ['', '/', './'] and page.url.startswith(item.url.lstrip('./')) -%}
+    {%- if page.url == item.url.lstrip('./') -%}page{%- else -%}true{%- endif -%}
+  {%- endif -%}
+{%- endmacro -%}
 <!-- overrides/partials/header.html -->
 <!-- Stato del drawer (menu laterale): checkbox nascosto, letto da Material
      e dal CSS (#__drawer:checked ~ .md-drawer). Lo comanda il pulsante
@@ -35,7 +44,9 @@
 
           {% if nav_item.is_section %}
             {# ==================== VOCE DI SEZIONE: DROPDOWN ==================== #}
-            {% set sezione_attiva = nav_item.children | selectattr("active") | list | length > 0 %}
+            {% set ns = namespace(attiva=false) %}
+            {% for child in nav_item.children %}{% if stato_voce(child, page) | trim %}{% set ns.attiva = true %}{% endif %}{% endfor %}
+            {% set sezione_attiva = ns.attiva %}
             <li class="md-header__nav-item md-header__nav-item--dropdown">
               <button type="button"
                       class="md-header__nav-link md-header__nav-link--dropdown{% if sezione_attiva %} md-header__nav-link--active{% endif %}"
@@ -52,9 +63,10 @@
               <ul class="md-header__dropdown-menu" id="nav-menu-{{ loop.index }}">
                 {% for child in nav_item.children %}
                   <li class="md-header__dropdown-item">
+                    {% set stato = stato_voce(child, page) | trim %}
                     <a href="{{ child.url | url }}"
-                       class="md-header__dropdown-link{% if child.active %} md-header__dropdown-link--active{% endif %}"
-                       {% if child.active %}aria-current="page"{% endif %}>
+                       class="md-header__dropdown-link{% if stato %} md-header__dropdown-link--active{% endif %}"
+                       {% if stato %}aria-current="{{ stato }}"{% endif %}>
                       {{ child.title }}
                     </a>
                   </li>
@@ -65,9 +77,10 @@
           {% else %}
             {# ==================== VOCE SINGOLA: LINK PIATTO ==================== #}
             <li class="md-header__nav-item">
+              {% set stato = stato_voce(nav_item, page) | trim %}
               <a href="{{ nav_item.url | url }}"
-                 class="md-header__nav-link{% if nav_item.active %} md-header__nav-link--active{% endif %}"
-                 {% if nav_item.active %}aria-current="page"{% endif %}>
+                 class="md-header__nav-link{% if stato %} md-header__nav-link--active{% endif %}"
+                 {% if stato %}aria-current="{{ stato }}"{% endif %}>
                 {{ nav_item.title }}
               </a>
             </li>
@@ -116,9 +129,10 @@
             <ul class="md-drawer__sublist" aria-labelledby="drawer-sezione-{{ loop.index }}">
               {% for child in nav_item.children %}
                 <li class="md-drawer__subitem">
+                  {% set stato = stato_voce(child, page) | trim %}
                   <a href="{{ child.url | url }}"
-                     class="md-drawer__link{% if child.active %} md-drawer__link--active{% endif %}"
-                     {% if child.active %}aria-current="page"{% endif %}>
+                     class="md-drawer__link{% if stato %} md-drawer__link--active{% endif %}"
+                     {% if stato %}aria-current="{{ stato }}"{% endif %}>
                     {{ child.title }}
                   </a>
                 </li>
@@ -128,9 +142,10 @@
 
         {% else %}
           <li class="md-drawer__item">
+            {% set stato = stato_voce(nav_item, page) | trim %}
             <a href="{{ nav_item.url | url }}"
-               class="md-drawer__link{% if nav_item.active %} md-drawer__link--active{% endif %}"
-               {% if nav_item.active %}aria-current="page"{% endif %}>
+               class="md-drawer__link{% if stato %} md-drawer__link--active{% endif %}"
+               {% if stato %}aria-current="{{ stato }}"{% endif %}>
               {{ nav_item.title }}
             </a>
           </li>

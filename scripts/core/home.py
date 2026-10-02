@@ -53,7 +53,7 @@ def genera_home(df, persone, output_dir, organizzazioni=None):
         if tipo_raw in ['nan', 'None']:
             tipo_raw = ''
         tipo = tipo_raw.lower()
-        tipo_display = 'testo' if tipo == 'testo_bilingue' else tipo
+        tipo_display = 'testo' if tipo.lower() == 'testo_bilingue' else tipo
         tipo_display = tipo_display.capitalize() if tipo_display else ''
         org = str(row.get('organizzazione', '')).strip()
         if org in ['nan', 'None']:

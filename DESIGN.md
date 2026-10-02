@@ -206,7 +206,7 @@ Netti, rossi, senza ornamenti.
 
 ### Cards / Containers
 - **Corner Style:** 12px.
-- **Background:** fondo carta, immagine a proporzione fissa (4:3) in alto, testo sotto un filetto.
+- **Background:** fondo carta, immagine a proporzione fissa (4:3) in alto, testo sotto un filetto. Senza immagine: iniziali a timbro al centro dell'area, mai una sagoma generica.
 - **Shadow Strategy:** vedi Elevation & Depth, solo registro manifesto.
 - **Border:** filetto di 1px.
 - **Internal Padding:** circa 0,6 × 1rem nella parte testuale.
@@ -217,7 +217,8 @@ Netti, rossi, senza ornamenti.
 - **Filtri a spunta:** caselle native colorate di rosso, nome completo che va a capo, conteggio in Courier a destra; la voce selezionata diventa rossa e in grassetto. Sopra le 10 voci compare un campo per restringere l'elenco.
 
 ### Navigation
-- **Header:** fascia rossa piena, voci in Archivo 600 bianche, voce attiva sottolineata; menu "Archivio" a tendina (Tutti i documenti, Percorsi tematici, Galleria).
+- **Header:** fascia rossa piena, voci in Archivo 600 bianche, voce attiva sottolineata anche nelle pagine interne della sezione (una scheda documento accende "Archivio", una persona accende "Persone"); menu "Archivio" a tendina (Tutti i documenti, Percorsi tematici, Galleria).
+- **Avviso Internet Archive:** sempre in cima. Su desktop fisso, su telefono una riga breve che scorre via con la pagina e non copre l'header.
 - **Percorso di navigazione:** sopra il titolo, in Archivo grigio con separatore "›" ("Archivio › Opuscolo", "Persone", "Archivio › Percorsi tematici").
 - **Mobile:** menu laterale con intestazione rossa e logo; link "Vai al contenuto" come primo elemento raggiungibile da tastiera.
 
@@ -233,7 +234,7 @@ Un solo componente in home, percorsi tematici, persone e organizzazioni: data ro
 - **Variante estesa** (risultati dell'archivio): data · segnatura in Courier, titolo, autore · organizzazione · tipologia, estratto della descrizione.
 
 ### Testata di persona e organizzazione
-Con testo curatoriale: biografia o storia su fondo carta accanto all'immagine. Senza testo: nessun riquadro, immagine di 180px accanto a nome e date, una riga "in fase di redazione". Sempre il link "Vedi questi documenti nell'archivio" (archivio già filtrato).
+Con testo curatoriale: biografia o storia su fondo carta accanto all'immagine. Senza testo: nessun riquadro, immagine di 180px subito accanto al blocco di nome e date, una riga "in fase di redazione". Senza immagine: iniziali "a timbro" (cerchio con bordo e iniziali rosse), mai la sagoma grigia. Sempre il link "Vedi questi documenti nell'archivio" (archivio già filtrato).
 
 ## Do's and Don'ts
 

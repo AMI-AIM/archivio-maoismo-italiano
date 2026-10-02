@@ -7,7 +7,7 @@ import sys
 
 import pandas as pd
 from core.catalog_indexer import CatalogIndexer
-from core.liste import GRUPPI_ORGANIZZAZIONE, elenco_per_ruolo, valore_pulito
+from core.liste import GRUPPI_ORGANIZZAZIONE, elenco_per_ruolo, iniziali, valore_pulito
 from core.schema_generator import SchemaGenerator
 from core.site_config import site_path
 from core.utils import escape_yaml_string, formatta_data, formatta_estremo, slugify
@@ -303,7 +303,7 @@ hide:
 """
         if not data['storia']:
             # Nessun testo curatoriale ancora: testata compatta.
-            img_html = ''
+            img_html = f'<div class="soggetto-testata__timbro" aria-hidden="true">{html.escape(iniziali(nome))}</div>'
             if data.get('immagine'):
                 img_html = (f'<img src="{data["immagine"]}" alt="Logo di {nome_attr}" '
                             f'class="soggetto-testata__img soggetto-testata__img--contain" decoding="async">')
@@ -331,10 +331,9 @@ hide:
     # INDICE ORGANIZZAZIONI CON RICERCA + FILTRO ALFABETICO
     # ============================================================
     org_top = sorted(organizzazioni.items(), key=lambda x: x[1]['num_doc'], reverse=True)[:3]
-    org_resto = sorted(
-        [item for item in organizzazioni.items() if item[0] not in [o[0] for o in org_top]],
-        key=lambda x: x[0].lower()
-    )
+    # "In evidenza" mette in risalto, non separa: l'elenco completo (e la
+    # ricerca per nome) comprende anche le voci in evidenza.
+    org_resto = sorted(organizzazioni.items(), key=lambda x: x[0].lower())
 
     lettere_presenti = sorted(set([nome[0].upper() for nome, _ in org_resto]))
     tutte_lettere = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
@@ -366,7 +365,7 @@ hide:
             if data.get('immagine'):
                 avatar_html = f'<img src="{data["immagine"]}" alt="{nome_html}" class="top-card-avatar-img" decoding="async">'
             else:
-                avatar_html = f'<img src="{PLACEHOLDER_URL}" alt="{nome_html}" class="top-card-avatar-img" decoding="async">'
+                avatar_html = f'<div class="top-card-timbro" aria-hidden="true"><span>{html.escape(iniziali(nome))}</span></div>'
 
             count_text = "1 documento collegato" if num_doc == 1 else f"{num_doc} documenti collegati"
 
@@ -389,7 +388,7 @@ hide:
     lines.append('<div class="filtri-organizzazioni">')
     lines.append('    <div class="search-bar">')
     lines.append('        <input type="text" id="search-input" placeholder="Cerca per nome…" aria-label="Cerca organizzazioni">')
-    lines.append('        <span id="search-counter" class="search-counter"></span>')
+    lines.append('        <span id="search-counter" class="search-counter" aria-live="polite"></span>')
     lines.append('    </div>')
     lines.append('    <div class="alfabeto-bar">')
     lines.append('        <button class="lettera-btn lettera-btn--active" data-lettera="all">Tutte</button>')
@@ -457,7 +456,18 @@ hide:
     lines.append('        });')
     lines.append('')
     lines.append('        if (searchCounter) {')
-    lines.append('            searchCounter.textContent = visibili + " organizzazioni";')
+    lines.append('            searchCounter.textContent = visibili + (visibili === 1 ? " organizzazione" : " organizzazioni");')
+    lines.append('        }')
+    lines.append('        let vuoto = document.getElementById("search-vuoto");')
+    lines.append('        if (!vuoto) {')
+    lines.append('            vuoto = document.createElement("p");')
+    lines.append('            vuoto.id = "search-vuoto";')
+    lines.append('            vuoto.className = "ami-vuoto";')
+    lines.append('            grid.insertAdjacentElement("afterend", vuoto);')
+    lines.append('        }')
+    lines.append('        vuoto.hidden = visibili > 0;')
+    lines.append('        if (!visibili) {')
+    lines.append('            vuoto.textContent = query ? "Nessuna organizzazione trovata per «" + searchInput.value.trim() + "»." : "Nessuna organizzazione con questa iniziale.";')
     lines.append('        }')
     lines.append('    }')
     lines.append('')

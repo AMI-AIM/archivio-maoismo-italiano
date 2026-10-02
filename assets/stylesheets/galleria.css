@@ -10,19 +10,19 @@
 
 :root,
 [data-md-color-primary] {
-  --gal-bg: #f7f8fa;
-  --gal-ink: #111217;
-  --gal-muted: #626873;
+  --gal-bg: var(--md-default-bg-color, #fff);
+  --gal-ink: var(--ami-inchiostro, #1a1a1a);
+  --gal-muted: #5c5c5c;
   --gal-accent: var(--md-primary-fg-color);
   --gal-accent-dark: var(--md-primary-fg-color--dark);
-  --gal-linea: #d7dbe3;          /* bordi delle chip e dei pulsanti */
-  --gal-chip-ink: #424854;
-  --gal-azione-ink: #33383f;
-  --gal-segnaposto: #e7eaf0;     /* fondo delle immagini in caricamento */
+  --gal-linea: #d6d6d6;          /* bordi delle chip e dei pulsanti */
+  --gal-chip-ink: #424242;
+  --gal-azione-ink: #333333;
+  --gal-segnaposto: var(--md-code-bg-color, #f5f5f5);     /* fondo delle immagini in caricamento */
   --gal-notte: #101013;          /* fondo del visualizzatore */
   --gal-notte-skel: linear-gradient(90deg, #1c1c20 25%, #2a2a30 50%, #1c1c20 75%);
   --gal-su-scuro: #fff;
-  --gal-errore-su-scuro: #ffb4b4;
+  --gal-errore-su-scuro: var(--ami-su-colore-attenuato, #e0e0e0);
   --gal-gap: 14px;   /* sincronizzato con CARD_PAD in galleria.js */
   --gal-radius: 2px;
 }
@@ -37,7 +37,7 @@
 .galleria-wrapper {
   width: min(1240px, calc(100vw - 40px));
   margin: 0 auto;
-  padding: 32px 0 120px;
+  padding: 20px 0 120px;
   color: var(--gal-ink);
 }
 
@@ -111,8 +111,9 @@
   border-radius: 999px;
   background: var(--md-default-bg-color);
   color: var(--gal-chip-ink) !important;
+  font-family: var(--ami-font-label);
   font-size: var(--ami-font-size-xs);
-  font-weight: 750;
+  font-weight: 600;
   line-height: 1;
   letter-spacing: var(--ami-tracking-wide);
   text-decoration: none !important;
@@ -224,7 +225,9 @@
   filter: saturate(1.03) contrast(1.02);
 }
 
-.card-error .card-media { aspect-ratio: 4 / 5; }
+/* Segnaposto 4:5 finche' l'immagine non ha dimensioni (anche in errore) */
+.card-media { aspect-ratio: 4 / 5; }
+.is-sized .card-media { aspect-ratio: auto; }
 .card-error .galleria-img { display: none; }
 
 .img-overlay {
@@ -610,4 +613,12 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   .card-link:hover .galleria-img,
   .card-link:focus-visible .galleria-img { transform: none; }
   .galleria-timeline .timeline-link:hover { transform: none; }
+}
+
+/* SFUMATURA FILA ANNI: spazio sotto la sfumatura, allineamento invariato */
+.md-typeset .galleria-wrapper .galleria-timeline .timeline-list {
+  padding-left: 18px;
+  padding-right: 18px;
+  margin-left: -18px;
+  margin-right: -18px;
 }

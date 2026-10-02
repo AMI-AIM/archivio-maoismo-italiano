@@ -30,6 +30,14 @@ def valore_pulito(valore):
     return '' if v in ('nan', 'None', 'NaT') else v
 
 
+def iniziali(nome, max_lettere=2):
+    """Iniziali per il segnaposto "a timbro" (parole con iniziale maiuscola)."""
+    import re
+    parole = re.findall(r"[^\W\d_][\w'’]*", str(nome))
+    maiuscole = [w for w in parole if w[:1].isupper()] or parole
+    return ''.join(w[0].upper() for w in maiuscole[:max_lettere]) or '?'
+
+
 def meta_riga(tipo='', org='', etichette=()):
     """Riga dei metadati sotto il titolo: tipologia (etichetta grigia),
     organizzazione, eventuali etichette extra. Stessa forma in home,
@@ -37,7 +45,7 @@ def meta_riga(tipo='', org='', etichette=()):
     parti = []
     tipo = valore_pulito(tipo)
     if tipo:
-        tipo = 'Testo' if tipo == 'testo_bilingue' else tipo
+        tipo = 'Testo' if tipo.lower() == 'testo_bilingue' else tipo
         parti.append(f'<span class="doc-type-chip">{html.escape(tipo[:1].upper() + tipo[1:])}</span>')
     org = valore_pulito(org)
     if org:

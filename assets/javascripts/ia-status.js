@@ -158,13 +158,18 @@
       '.ia-status-banner__chiudi:hover {',
       '  background: rgba(255,255,255,0.15);',
       '}',
+      '.ia-status-banner__breve { display: none; }',
+      /* Telefono: una riga, non fissato in cima (scorre via con la pagina
+         e non copre l'header). Il testo completo resta per i lettori di
+         schermo. */
       '@media (max-width: 600px) {',
-      '  .ia-status-banner__inner {',
-      '    padding: 0.5rem 0.7rem;',
-      '  }',
-      '  .ia-status-banner__testo {',
-      '    font-size: 0.75rem;',
-      '  }',
+      '  #ia-status-banner { position: static; box-shadow: none; }',
+      '  .ia-status-banner__inner { padding: 0.15rem 0.2rem 0.15rem 0.8rem; gap: 0.5rem; }',
+      '  .ia-status-banner__icon { width: 1rem; height: 1rem; }',
+      '  .ia-status-banner__testo { font-size: 0.7rem; line-height: 1.3; }',
+      '  .ia-status-banner__lungo { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }',
+      '  .ia-status-banner__breve { display: inline; }',
+      '  .ia-status-banner__chiudi { margin: 0; }',
       '}'
     ].join('\n');
     document.head.appendChild(style);
@@ -186,8 +191,11 @@
           '<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>' +
         '</svg>' +
         '<span class="ia-status-banner__testo">' +
+          '<span class="ia-status-banner__lungo">' +
           'I documenti di questo archivio sono ospitati su Internet Archive, piattaforma al momento instabile o irraggiungibile. ' +
           'Se i documenti non si caricano, il problema è temporaneo e non riguarda il solo sito AMI. Riprovare più tardi.' +
+          '</span>' +
+          '<span class="ia-status-banner__breve" aria-hidden="true">Internet Archive è instabile: i documenti potrebbero non caricarsi.</span>' +
         '</span>' +
         '<button type="button" class="ia-status-banner__chiudi" aria-label="Chiudi avviso">' +
           '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +

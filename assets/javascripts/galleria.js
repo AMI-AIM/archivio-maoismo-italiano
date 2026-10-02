@@ -65,11 +65,14 @@
           } else {
             card.classList.remove("h-wide");
           }
-        } else if (img.complete) {
+          card.classList.add("is-sized");
+        } else if (img.complete && img.getAttribute("src")) {
+          // Caricamento tentato e fallito
           card.classList.add("card-error");
-        } else {
-          return;
         }
+        // Senza dimensioni (immagine non ancora caricata) si misura il
+        // segnaposto 4:5: la griglia ha subito l'altezza giusta e non
+        // "salta" quando arrivano le immagini.
 
         var h = media.getBoundingClientRect().height + CARD_PAD;
         card.style.gridRowEnd = "span " + Math.max(40, Math.round(h));
@@ -80,9 +83,7 @@
         Array.prototype.slice.call(grid.querySelectorAll(".galleria-card")).forEach(function (card) {
           var img = card.querySelector(".galleria-img");
           if (!img) return;
-          if (img.complete) {
-            layoutCard(card);
-          }
+          layoutCard(card);
           img.addEventListener("load", function () { layoutCard(card); }, { once: true });
           img.addEventListener("error", function () { layoutCard(card); }, { once: true });
           img.addEventListener("ami:lazy-loaded", function () {

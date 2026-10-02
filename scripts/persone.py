@@ -7,7 +7,7 @@ import sys
 
 import pandas as pd
 from core.catalog_indexer import CatalogIndexer
-from core.liste import GRUPPI_PERSONA, elenco_per_ruolo, valore_pulito
+from core.liste import GRUPPI_PERSONA, elenco_per_ruolo, iniziali, valore_pulito
 from core.schema_generator import SchemaGenerator
 from core.site_config import site_path
 from core.utils import escape_yaml_string, formatta_data, formatta_estremo, slugify
@@ -285,7 +285,7 @@ hide:
 """
         if not data['biografia']:
             # Nessun testo curatoriale ancora: testata compatta.
-            img_html = ''
+            img_html = f'<div class="soggetto-testata__timbro" aria-hidden="true">{html.escape(iniziali(nome))}</div>'
             if data.get('immagine'):
                 img_html = (f'<img src="{data["immagine"]}" alt="Foto di {nome_attr}" '
                             f'class="soggetto-testata__img soggetto-testata__img--cover" decoding="async">')
@@ -313,10 +313,9 @@ hide:
     # INDICE PERSONE CON RICERCA + FILTRO ALFABETICO
     # ============================================================
     persone_top = sorted(persone.items(), key=lambda x: x[1]['num_doc'], reverse=True)[:3]
-    persone_resto = sorted(
-        [item for item in persone.items() if item[0] not in [p[0] for p in persone_top]],
-        key=lambda x: x[0].lower()
-    )
+    # "In evidenza" mette in risalto, non separa: l'elenco completo (e la
+    # ricerca per nome) comprende anche le voci in evidenza.
+    persone_resto = sorted(persone.items(), key=lambda x: x[0].lower())
 
     lettere_presenti = sorted(set([nome[0].upper() for nome, _ in persone_resto]))
     tutte_lettere = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
@@ -346,7 +345,7 @@ hide:
             if data.get('immagine'):
                 avatar_html = f'<img src="{data["immagine"]}" alt="{nome_html}" class="top-card-avatar-img" width="500" height="500" decoding="async">'
             else:
-                avatar_html = f'<img src="{PLACEHOLDER_URL}" alt="{nome_html}" class="top-card-avatar-img" width="500" height="500" decoding="async">'
+                avatar_html = f'<div class="top-card-timbro" aria-hidden="true"><span>{html.escape(iniziali(nome))}</span></div>'
 
             count_text = "1 documento collegato" if num_doc == 1 else f"{num_doc} documenti collegati"
 
@@ -368,7 +367,7 @@ hide:
     lines.append('<div class="filtri-persone">')
     lines.append('    <div class="search-bar">')
     lines.append('        <input type="text" id="search-input" placeholder="Cerca per nome…" aria-label="Cerca persone">')
-    lines.append('        <span id="search-counter" class="search-counter"></span>')
+    lines.append('        <span id="search-counter" class="search-counter" aria-live="polite"></span>')
     lines.append('    </div>')
     lines.append('    <div class="alfabeto-bar">')
     lines.append('        <button class="lettera-btn lettera-btn--active" data-lettera="all">Tutte</button>')
@@ -433,7 +432,18 @@ hide:
     lines.append('        });')
     lines.append('')
     lines.append('        if (searchCounter) {')
-    lines.append('            searchCounter.textContent = visibili + " persone";')
+    lines.append('            searchCounter.textContent = visibili + (visibili === 1 ? " persona" : " persone");')
+    lines.append('        }')
+    lines.append('        let vuoto = document.getElementById("search-vuoto");')
+    lines.append('        if (!vuoto) {')
+    lines.append('            vuoto = document.createElement("p");')
+    lines.append('            vuoto.id = "search-vuoto";')
+    lines.append('            vuoto.className = "ami-vuoto";')
+    lines.append('            grid.insertAdjacentElement("afterend", vuoto);')
+    lines.append('        }')
+    lines.append('        vuoto.hidden = visibili > 0;')
+    lines.append('        if (!visibili) {')
+    lines.append('            vuoto.textContent = query ? "Nessuna persona trovata per «" + searchInput.value.trim() + "»." : "Nessuna persona con questa iniziale.";')
     lines.append('        }')
     lines.append('    }')
     lines.append('')
