@@ -215,29 +215,37 @@
       }
     }
 
+    // Stessa forma della citazione "semplice" delle schede documento
+    // (documenti.js): elementi separati solo da virgole; titolo attribuito
+    // tra parentesi quadre (ISAD 3.1.2). Testo semplice: va in una textarea.
     function buildCitation(card) {
       var titolo = card.getAttribute("data-titolo") || "Senza titolo";
-      var data = card.getAttribute("data-data") || "";
-      var org = card.getAttribute("data-org") || "";
-      var tipo = card.getAttribute("data-tipo") || "";
-      var ia = card.getAttribute("data-ia-url") || "";
+      var data = card.getAttribute("data-data") || "s.d.";
+      var produttore = card.getAttribute("data-produttore") || "";
+      var attribuito = card.getAttribute("data-attribuito") === "1";
       var schedaRel = card.getAttribute("data-scheda-url") || "";
       var id = card.id || "";
 
-      var oggi = new Date();
-      var accesso = oggi.getDate() + "/" + (oggi.getMonth() + 1) + "/" + oggi.getFullYear();
-
-      var head = org ? (org + ", " + titolo) : titolo;
-      var cit = head;
-      if (data) cit += ", " + data;
-      if (tipo) cit += " [" + tipo + "]";
-      if (ia) cit += ", in Internet Archive: " + ia;
-      if (schedaRel) {
-        cit += "; AMI — Archivio del Maoismo Italiano, scheda " + (id || "s.i.") +
-               ": " + absoluteUrl(schedaRel);
+      var accesso;
+      try {
+        accesso = new Intl.DateTimeFormat("it-IT", {
+          day: "numeric", month: "long", year: "numeric"
+        }).format(new Date());
+      } catch (e) {
+        accesso = new Date().toISOString().slice(0, 10);
       }
-      cit += " (consultato il " + accesso + ").";
-      return cit;
+
+      var el = [];
+      if (produttore) el.push(produttore);
+      el.push(attribuito ? "[" + titolo + "]" : titolo);
+      var luogo = card.getAttribute("data-luogo") || "";
+      if (luogo) el.push(luogo);
+      el.push(data);
+      el.push("Archivio del Maoismo Italiano");
+      if (id) el.push(id);
+      if (schedaRel) el.push(absoluteUrl(schedaRel));
+      el.push("consultato il " + accesso);
+      return el.join(", ") + ".";
     }
 
     function setHash(card) {
