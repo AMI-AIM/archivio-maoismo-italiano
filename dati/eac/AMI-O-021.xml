@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<eac xmlns="https://archivists.org/ns/eac/v2">
+  <control maintenanceStatus="new" languageEncoding="iso639-2b" scriptEncoding="iso15924">
+    <recordId>AMI-O-021</recordId>
+    <maintenanceAgency>
+      <agencyName>Archivio del Maoismo Italiano</agencyName>
+    </maintenanceAgency>
+    <maintenanceHistory>
+      <maintenanceEvent maintenanceEventType="created">
+        <agent agentType="human">Ivan Masci</agent>
+        <eventDateTime standardDateTime="2026-10-02">2026-10-02</eventDateTime>
+      </maintenanceEvent>
+      <maintenanceEvent maintenanceEventType="derived">
+        <agent agentType="machine">scripts/core/ead_export.py</agent>
+        <eventDateTime standardDateTime="2026-10-02">2026-10-02</eventDateTime>
+      </maintenanceEvent>
+    </maintenanceHistory>
+    <conventionDeclaration>
+      <reference>ISAAR(CPF): International Standard Archival Authority Record for Corporate Bodies, Persons and Families, 2nd ed., 2004</reference>
+    </conventionDeclaration>
+    <languageDeclaration languageCode="ita" scriptCode="Latn" />
+  </control>
+  <cpfDescription>
+    <identity>
+      <entityType value="corporateBody" />
+      <nameEntry status="authorized">
+        <part>Partito Comunista Unificato d'Italia</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>PCUd'I</part>
+      </nameEntry>
+    </identity>
+    <description>
+      <legalStatuses>
+        <legalStatus>
+          <term>Partito</term>
+        </legalStatus>
+      </legalStatuses>
+      <existDates>
+        <dateRange>
+          <fromDate standardDate="1977">1977</fromDate>
+          <toDate standardDate="1984">1984</toDate>
+        </dateRange>
+      </existDates>
+    </description>
+    <relations>
+      <relation>
+        <targetEntity targetType="person" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-P-003.xml">
+          <part>Osvaldo Pesce</part>
+        </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1977">1977</fromDate>
+          <toDate standardDate="1984">1984</toDate>
+        </dateRange>
+        <relationType>gerarchica</relationType>
+        <descriptiveNote>
+          <p>Osvaldo Pesce segretario di Partito Comunista Unificato d'Italia</p>
+        </descriptiveNote>
+      </relation>
+    </relations>
+  </cpfDescription>
+</eac>

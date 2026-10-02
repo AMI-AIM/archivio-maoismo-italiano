@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<eac xmlns="https://archivists.org/ns/eac/v2">
+  <control maintenanceStatus="new" languageEncoding="iso639-2b" scriptEncoding="iso15924">
+    <recordId>AMI-O-024</recordId>
+    <maintenanceAgency>
+      <agencyName>Archivio del Maoismo Italiano</agencyName>
+    </maintenanceAgency>
+    <maintenanceHistory>
+      <maintenanceEvent maintenanceEventType="created">
+        <agent agentType="human">Ivan Masci</agent>
+        <eventDateTime standardDateTime="2026-10-02">2026-10-02</eventDateTime>
+      </maintenanceEvent>
+      <maintenanceEvent maintenanceEventType="derived">
+        <agent agentType="machine">scripts/core/ead_export.py</agent>
+        <eventDateTime standardDateTime="2026-10-02">2026-10-02</eventDateTime>
+      </maintenanceEvent>
+    </maintenanceHistory>
+    <conventionDeclaration>
+      <reference>ISAAR(CPF): International Standard Archival Authority Record for Corporate Bodies, Persons and Families, 2nd ed., 2004</reference>
+    </conventionDeclaration>
+    <languageDeclaration languageCode="ita" scriptCode="Latn" />
+  </control>
+  <cpfDescription>
+    <identity>
+      <entityType value="corporateBody" />
+      <nameEntry status="authorized">
+        <part>Organizzazione Comunista (marxista-leninista) Fronte Unito</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Organizzazione Comunista (marxista-leninista)</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Organizzazione Comunista (marxista-leninista) - Fronte Unito</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>OC(m-l) - Fronte Unito</part>
+      </nameEntry>
+    </identity>
+    <description>
+      <legalStatuses>
+        <legalStatus>
+          <term>Partito</term>
+        </legalStatus>
+      </legalStatuses>
+      <existDates>
+        <dateRange>
+          <fromDate standardDate="1973">1973</fromDate>
+          <toDate standardDate="1977">1977</toDate>
+        </dateRange>
+      </existDates>
+    </description>
+  </cpfDescription>
+</eac>

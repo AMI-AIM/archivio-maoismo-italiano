@@ -1,0 +1,4429 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ead xmlns="http://ead3.archivists.org/schema/">
+  <control>
+    <recordid instanceurl="https://ami-aim.github.io/archivio-maoismo-italiano/dati/ami-ead.xml">AMI</recordid>
+    <filedesc>
+      <titlestmt>
+        <titleproper>Archivio del Maoismo Italiano</titleproper>
+        <author>Ivan Masci</author>
+      </titlestmt>
+    </filedesc>
+    <maintenancestatus value="revised" />
+    <maintenanceagency>
+      <agencyname>Archivio del Maoismo Italiano</agencyname>
+    </maintenanceagency>
+    <languagedeclaration>
+      <language langcode="ita">italiano</language>
+      <script scriptcode="Latn">latino</script>
+    </languagedeclaration>
+    <conventiondeclaration>
+      <citation>ISAD(G): General International Standard Archival Description, 2nd ed., 2000</citation>
+    </conventiondeclaration>
+    <conventiondeclaration>
+      <citation>ISAAR(CPF): International Standard Archival Authority Record for Corporate Bodies, Persons and Families, 2nd ed., 2004</citation>
+    </conventiondeclaration>
+    <maintenancehistory>
+      <maintenanceevent>
+        <eventtype value="created" />
+        <eventdatetime standarddatetime="2026-10-02">2026-10-02</eventdatetime>
+        <agenttype value="human" />
+        <agent>Ivan Masci</agent>
+      </maintenanceevent>
+      <maintenanceevent>
+        <eventtype value="derived" />
+        <eventdatetime standarddatetime="2026-10-02">2026-10-02</eventdatetime>
+        <agenttype value="machine" />
+        <agent>scripts/core/ead_export.py</agent>
+        <eventdescription>File generato automaticamente da data/dati.xlsx</eventdescription>
+      </maintenanceevent>
+    </maintenancehistory>
+  </control>
+  <archdesc level="collection">
+    <did>
+      <unitid>AMI</unitid>
+      <unittitle>Archivio del Maoismo Italiano</unittitle>
+      <unitdate normal="1964/1993" unitdatetype="inclusive">1964-1993</unitdate>
+      <origination>
+        <persname relator="curatore della raccolta">
+          <part>Ivan Masci</part>
+        </persname>
+      </origination>
+      <physdesc>96 unità</physdesc>
+      <langmaterial>
+        <language langcode="ita">italiano</language>
+        <language langcode="chi">cinese</language>
+      </langmaterial>
+    </did>
+    <accruals>
+      <p>Raccolta aperta, in costante accrescimento.</p>
+    </accruals>
+    <arrangement>
+      <p>Unità descritte singolarmente e identificate da una segnatura progressiva (AMI-0001…); accesso per percorsi tematici, tipologia, organizzazione, persona e anno.</p>
+    </arrangement>
+    <accessrestrict>
+      <p>Libero.</p>
+    </accessrestrict>
+    <userestrict>
+      <p>Libero.</p>
+    </userestrict>
+    <otherfindaid>
+      <p>Catalogo online del sito AMI.</p>
+    </otherfindaid>
+    <altformavail>
+      <p>Riproduzioni digitali consultabili sul sito AMI e su Internet Archive.</p>
+    </altformavail>
+    <processinfo>
+      <p>Descrizione redatta da Ivan Masci.</p>
+    </processinfo>
+    <dsc>
+      <c level="item" id="AMI-0001">
+        <did>
+          <unitid>AMI-0001</unitid>
+          <unittitle>Citazioni dalle opere del presidente Mao Tse-tung</unittitle>
+          <unitdate normal="1969">1969</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/1967-citazioni-dalle-opere-del-presidente-mao-tse-tung-lingue-estere" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Prima edizione italiana del famoso Libretto rosso, contenente le iconiche citazioni del presidente cinese Mao Zedong, stampata a Pechino dalla Casa editrice in lingue estere, 1967. L'indice è stato spostato all'inizio del libro per una consultazione più agevole.</p>
+          <p>Quotations from Chairman Mao Tse-tung (Little red book) in Italian, official translation by the Foreign Languages Press, published in Peking (Beijing) in 1967.</p>
+          <p>毛主席语录 (Máo Zhǔxí Yǔlù)</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0001/">Scheda AMI-0001 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Libro</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+          <subject>
+            <part>Fondamenti del maoismo</part>
+          </subject>
+          <subject>
+            <part>Libretti rossi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0002">
+        <did>
+          <unitid>AMI-0002</unitid>
+          <unittitle>Sulla giusta soluzione delle contraddizioni in seno al popolo</unittitle>
+          <unitdate normal="1967">1967</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/sulla-giusta-soluzione-delle-contraddizioni-in-seno-al-popolo" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Famoso discorso del Presidente cinese Mao Zedong. Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, 1967.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0002/">Scheda AMI-0002 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+          <subject>
+            <part>Fondamenti del maoismo</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0003">
+        <did>
+          <unitid>AMI-0003</unitid>
+          <unittitle>Come correggere le idee errate nel Partito</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/idee-errate" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Opuscolo tradotto e pubblicato dalla Casa editrice in lingue estere di Pechino. Testo originale "ON CORRECTING MISTAKEN IDEAS IN THE PARTY (December 1929)"</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0003/">Scheda AMI-0003 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+          <subject>
+            <part>Fondamenti del maoismo</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0004">
+        <did>
+          <unitid>AMI-0004</unitid>
+          <unittitle>Dichiarazione del compagno Mao Tse-tung, presidente del Comitato Centrale del Partito Comunista Cinese, in appoggio alla lotta degli afroamericani contro la repressione violenta</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/dichiarazione-in-supporto-degli-afroamericani" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Discorso del Presidente cinese Mao Zedong in supporto alla lotta degli afroamericani, pronunciato in occasione dell'omicidio del Dottor Martin Luther King Jr.</p>
+          <p>Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, 1968.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Fondo Filippo Grossi</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0004/">Scheda AMI-0004 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0005">
+        <did>
+          <unitid>AMI-0005</unitid>
+          <unittitle>Da dove provengono le idee giuste?</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/idee-giuste" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Articolo del presidente cinese Mao Zedong, parte della "Risoluzione del Comitato centrale del Partito comunista cinese su alcuni problemi dell'attuale lavoro nelle campagne''</p>
+          <p>La presente traduzione è conforme al testo cinese (Testi scelti dalle opere di Mao Tse-tung, Serie A, Casa Editrice del Popolo; Pechino, Aprile 1965).</p>
+          <p>Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, seconda edizione, 1968.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Fondo Filippo Grossi</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0005/">Scheda AMI-0005 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0006">
+        <did>
+          <unitid>AMI-0006</unitid>
+          <unittitle>Al servizio del popolo; In memoria di Norman Bethune; Come Yu Kung rimosse le montagne</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/tre-vecchi-articoli" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Collezione dei "tre vecchi articoli" (anche detti tre articoli letti costantemente), tradotta e pubblicata dalla Casa editrice in lingue estere di Pechino, 1968.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0006/">Scheda AMI-0006 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+          <subject>
+            <part>Fondamenti del maoismo</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0007">
+        <did>
+          <unitid>AMI-0007</unitid>
+          <unittitle>Preoccuparsi delle condizioni di vita delle masse fare attenzione ai metodi di lavoro</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/preoccuparsi-delle-condizioni-di-vita-delle-masse-fare-attenzione-ai-metodi-di-lavoro" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Opuscolo contenente le conclusioni del presidente cinese Mao Zedong al II Congresso nazionale dei rappresentanti operai e contadini. Tradotto e pubblicato dalla Casa editrice in lingue estere di Pechino, 1968.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0007/">Scheda AMI-0007 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0008">
+        <did>
+          <unitid>AMI-0008</unitid>
+          <unittitle>Sul rafforzamento del sistema dei comitati di partito</unittitle>
+          <unitdate normal="1969">1969</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/comitati-di-partito" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Opuscolo contenente due testi del Presidente Mao Zedong, "Sul Rafforzamento Del Sistema Dei Comitati Di Partito" e "Metodi Di Lavoro Dei Comitati Di Partito". Traduzione ufficiale a cura della Casa editrice in lingue estere di Pechino</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0008/">Scheda AMI-0008 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0009">
+        <did>
+          <unitid>AMI-0009</unitid>
+          <unittitle>Orientamento del movimento giovanile</unittitle>
+          <unitdate normal="1969">1969</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/movimento-giovanile" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Discorso del Presidente cinese Mao Zedong. Traduzione e pubblicazione a cura della Casa editrice in lingue estere di Pechino, 1969.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0009/">Scheda AMI-0009 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0010">
+        <did>
+          <unitid>AMI-0010</unitid>
+          <unittitle>Popoli di tutto il mondo, unitevi per sconfiggere gli aggressori americani e tutti i loro lacché! (Dichiarazione del 20 maggio 1970)</unittitle>
+          <unitdate normal="1970">1970</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/popoli-di-tutto-il-mondo" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Opuscolo contenente la dichiarazione anti-imperialista del presidente cinese Mao Zedong, tradotto e pubblicato dalla Casa editrice in lingue estere di Pechino, 1970.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0010/">Scheda AMI-0010 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0011">
+        <did>
+          <unitid>AMI-0011</unitid>
+          <unittitle>Circolare del 16 maggio 1966 - Un grande documento storico</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-012">
+              <part>Comitato Centrale del PCC</part>
+            </corpname>
+            <corpname identifier="AMI-O-004">
+              <part>Renmin Ribao</part>
+            </corpname>
+            <corpname identifier="AMI-O-005">
+              <part>Hongqi</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/circolare-16-maggio" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Opuscolo contente la "Circolare del Comitato Centrale del Partito Comunista</p>
+          <p>Cinese (16 maggio 1966)", documento che segna l'inizio ufficiale della Rivoluzione culturale e l'articolo "Un Grande Documento Storico", pubblicato su Bandiera Rossa e il Quotidiano del Popolo</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0011/">Scheda AMI-0011 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0012">
+        <did>
+          <unitid>AMI-0012</unitid>
+          <unittitle>La classe operaia deve esercitare la sua direzione in ogni campo</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-004">
+              <part>Yao Wenyuan</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/la-classe-operai-deve-esercitare-la-sua-direzione-in-ogni-cam" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Articolo ad opera di Yao Wenyuan e pubblicato originariamente su Hongqi. Traduzione ufficiale a cura della Casa editrice in lingue estere di Pechino, 1968.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0012/">Scheda AMI-0012 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0013">
+        <did>
+          <unitid>AMI-0013</unitid>
+          <unittitle>Dichiarazione di Principio - Statuto</unittitle>
+          <unitdate normal="1967">1967</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-009">
+              <part>Ufficio Politico del PCd'I (m-l)</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/statuto-pcdiml" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Opuscolo contenente Dichiarazione di principio e Statuto del Partito Comunista d'Italia (marxista-leninista), fondato nell'ottobre del 1966 a Livorno.</p>
+          <p>L'opuscolo è composto dalle seguenti sezioni:</p>
+          <p>• Dichiarazione di principio</p>
+          <p>• Statuto del Partito</p>
+          <p>• Alla classe operaia, ai contadini, alle masse popolari italiane</p>
+          <p>• Saluto ai partiti fratelli</p>
+          <p>• Due documenti sulla vigilanza rivoluzionaria</p>
+          <p>• Due scritti di Fosco Dinucci, segretario del Partito</p>
+          <p>Stampato da Periodici Operai, Livorno, pp. 32, 1967.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Livorno: Periodici Operai</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0013/">Scheda AMI-0013 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <corpname identifier="AMI-O-006">
+            <part>Nuova Unità</part>
+          </corpname>
+          <corpname identifier="AMI-O-011">
+            <part>Unione della gioventù comunista d’Italia (marxista-leninista)</part>
+          </corpname>
+          <persname identifier="AMI-P-002">
+            <part>Fosco Dinucci</part>
+          </persname>
+          <persname identifier="AMI-P-003">
+            <part>Osvaldo Pesce</part>
+          </persname>
+          <geogname>
+            <part>Livorno</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0014">
+        <did>
+          <unitid>AMI-0014</unitid>
+          <unittitle localtype="attribuito">Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta dalla leadership del Partito Comunista Cinese</unittitle>
+          <unitdate normal="1968-08-14">1968-08-14</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-004">
+              <part>Renmin Ribao</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/delegazione-pcd-i-pcc" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta a Pechino dalla leadership del Partito Comunista Cinese. In rappresentanza del PCd'I (ml), in ordine, Osvaldo Pesce e Dino Dini. La leadership cinese è composta da, sempre in ordine, Chen Boda, Kang Sheng, Jiang Qing, Mao Zedong, Zhou Enlai, Yao Wenyuan.</p>
+          <p>Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 14 agosto 1968, p. 1), Peking Review (no. 33, 1968, p. 8) e Nuova Unità (31 agosto 1968, p. 1)</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0014/">Scheda AMI-0014 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <persname identifier="AMI-P-003">
+            <part>Osvaldo Pesce</part>
+          </persname>
+          <persname identifier="AMI-P-007">
+            <part>Dino Dini</part>
+          </persname>
+          <persname identifier="AMI-P-001">
+            <part>Mao Zedong</part>
+          </persname>
+          <persname identifier="AMI-P-010">
+            <part>Zhou Enlai</part>
+          </persname>
+          <persname identifier="AMI-P-012">
+            <part>Jiang Qing</part>
+          </persname>
+          <persname identifier="AMI-P-009">
+            <part>Kang Sheng</part>
+          </persname>
+          <persname identifier="AMI-P-011">
+            <part>Chen Boda</part>
+          </persname>
+          <persname identifier="AMI-P-004">
+            <part>Yao Wenyuan</part>
+          </persname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Foto</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0015">
+        <did>
+          <unitid>AMI-0015</unitid>
+          <unittitle localtype="attribuito">Osvaldo Pesce, Partito Comunista d'Italia (marxista-leninista), incontra il presidente Mao Zedong</unittitle>
+          <unitdate normal="1968-08-31">1968-08-31</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-006">
+              <part>Nuova Unità</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/Pesce-e-Mao" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Osvaldo Pesce, rappresentante del Partito Comunista d'Italia (marxista-leninista), incontra il presidente del Partito Comunista Cinese Mao Zedong. Foto pubblicata su Nuova Unità (31 agosto 1968, p. 4.)</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0015/">Scheda AMI-0015 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <persname identifier="AMI-P-003">
+            <part>Osvaldo Pesce</part>
+          </persname>
+          <persname identifier="AMI-P-001">
+            <part>Mao Zedong</part>
+          </persname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Foto</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0016">
+        <did>
+          <unitid>AMI-0016</unitid>
+          <unittitle localtype="attribuito">Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese</unittitle>
+          <unitdate normal="1969-10-03">1969-10-03</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-004">
+              <part>Renmin Ribao</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/renmin-ribao-3-ottobre-1969-p.-1-fosco-dinucci-ai-festeggiamenti-rpc" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Fosco Dinucci, segretario del Partito comunista d'Italia (marxista-leninista), ricevuto dalla leadership cinese in occasione dei festeggiamenti del 1° ottobre 1969. Nella foto compaiono, in ordine, Zhou Enlai, Mao Zedong, Lin Biao, Kang Sheng e Chen Boda. Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 3 ottobre 1969, p. 1).</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0016/">Scheda AMI-0016 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <persname identifier="AMI-P-002">
+            <part>Fosco Dinucci</part>
+          </persname>
+          <persname identifier="AMI-P-001">
+            <part>Mao Zedong</part>
+          </persname>
+          <persname identifier="AMI-P-008">
+            <part>Lin Biao</part>
+          </persname>
+          <persname identifier="AMI-P-010">
+            <part>Zhou Enlai</part>
+          </persname>
+          <persname identifier="AMI-P-009">
+            <part>Kang Sheng</part>
+          </persname>
+          <persname identifier="AMI-P-011">
+            <part>Chen Boda</part>
+          </persname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Foto</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0017">
+        <did>
+          <unitid>AMI-0017</unitid>
+          <unittitle>Studenti ed intellettuali rivoluzionari</unittitle>
+          <unitdate normal="1969-10-09">1969-10-09</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-010">
+              <part>Comitato di Partito di Catania (UCI m-l)</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/studenti-ed-intellettuali-ciclostilato-uci-m-l" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Volantino ciclostilato a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), meglio conosciuta come Servire il Popolo. Il volantino riporta un appello a "Studenti ed Intellettuali Rivoluzionari" affinché questi si uniscano all'organizzazione maoista.</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0017/">Scheda AMI-0017 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-014">
+            <part>Unione dei Comunisti Italiani (marxisti-leninisti)</part>
+          </corpname>
+          <geogname>
+            <part>Catania</part>
+          </geogname>
+          <genreform>
+            <part>Volantino</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0018">
+        <did>
+          <unitid>AMI-0018</unitid>
+          <unittitle localtype="attribuito">Delegazione delle Edizioni Oriente accolta dal Presidente Mao Zedong</unittitle>
+          <unitdate normal="1964-05-17">1964-05-17</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-006">
+              <part>Nuova Unità</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/delegazione-edizioni-oriente" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>"Il compagno Mao Tse-tung riceve la delegazione delle Edizioni Oriente, guidata dal compagno Dino Frangioni (Livio), Pechino, 17 maggio 1964." Da Nuova Unità, no. 4, giugno 1964.</p>
+          <p>Presenti anche rappresentanti dell'organizzazione milanese Gruppo Proletario Luglio 60 (GPL60), come Giacomo (Gino) Montemezzani (alla sinistra di Mao)</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0018/">Scheda AMI-0018 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-003">
+            <part>Edizioni Oriente</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Foto</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0019">
+        <did>
+          <unitid>AMI-0019</unitid>
+          <unittitle>Citazioni del presidente Mao Tse-tung</unittitle>
+          <unitdate normal="1969">1969</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/mao-tse-tung-citazioni-presidente-vinile" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Vinile 33rpm delle dimensioni di un vinile 45rpm con discorsi di Mao Tse-Tung tradotti in italiano con musica popolare cinese in background.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Signal</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0019/">Scheda AMI-0019 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <genreform>
+            <part>Audio</part>
+          </genreform>
+          <subject>
+            <part>Varie</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0020">
+        <did>
+          <unitid>AMI-0020</unitid>
+          <unittitle>Ribellarsi è giusto! Antologia</unittitle>
+          <unitdate normal="1993">1993</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+            <persname identifier="AMI-P-005">
+              <part>Roberto Sassi</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/ribellarsi-e-giusto" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Mao Tse Tung Ribellarsi è giusto</p>
+          <p>Antologia a cura di Roberto Sassi</p>
+          <p>Editore: Synergon</p>
+          <p>Anno: 1993</p>
+          <p>Numero di pagine: 127</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Bologna: Synergon</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0020/">Scheda AMI-0020 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Libro</part>
+          </genreform>
+          <subject>
+            <part>Varie</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0021">
+        <did>
+          <unitid>AMI-0021</unitid>
+          <unittitle>Lavoro Politico, no. 1</unittitle>
+          <unitdate normal="1967-10">1967-10</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-020">
+              <part>Lavoro Politico</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lavoro-politico-01" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>rivista "Lavoro politico", n. 1 - ottobre 1967</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Verona: Centro di Informazione di Verona</p>
+        </odd>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0021/">Scheda AMI-0021 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-020">
+            <part>Lavoro Politico</part>
+          </corpname>
+          <geogname>
+            <part>Verona</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0022">
+        <did>
+          <unitid>AMI-0022</unitid>
+          <unittitle>Lavoro Politico, no. 2</unittitle>
+          <unitdate normal="1967-11">1967-11</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-020">
+              <part>Lavoro Politico</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lavoro-politico-02" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>rivista "Lavoro politico", n. 2 - novembre 1967</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Verona: Centro di Informazione di Verona</p>
+        </odd>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0022/">Scheda AMI-0022 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-020">
+            <part>Lavoro Politico</part>
+          </corpname>
+          <geogname>
+            <part>Verona</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0023">
+        <did>
+          <unitid>AMI-0023</unitid>
+          <unittitle>Lavoro Politico, no. 3</unittitle>
+          <unitdate normal="1968-01">1968-01</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-020">
+              <part>Lavoro Politico</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lavoro-politico-03" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>rivista "Lavoro politico", n. 3 - gennaio 1968</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Verona: Centro di Informazione di Verona</p>
+        </odd>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0023/">Scheda AMI-0023 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-020">
+            <part>Lavoro Politico</part>
+          </corpname>
+          <geogname>
+            <part>Verona</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0024">
+        <did>
+          <unitid>AMI-0024</unitid>
+          <unittitle>Lavoro Politico, no. 4</unittitle>
+          <unitdate normal="1968-02">1968-02</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-020">
+              <part>Lavoro Politico</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lavoro-politico-04" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>rivista "Lavoro politico", n. 4 - febbraio 1968</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Verona: Centro di Informazione di Verona</p>
+        </odd>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0024/">Scheda AMI-0024 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-020">
+            <part>Lavoro Politico</part>
+          </corpname>
+          <geogname>
+            <part>Verona</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0025">
+        <did>
+          <unitid>AMI-0025</unitid>
+          <unittitle>Lavoro Politico, no. 5/6</unittitle>
+          <unitdate normal="1968-03">1968-03</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-020">
+              <part>Lavoro Politico</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lavoro-politico-05-06" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>rivista "Lavoro politico", n. 5 - 6, marzo - aprile 1968</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Verona: Centro di Informazione di Verona</p>
+        </odd>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0025/">Scheda AMI-0025 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-020">
+            <part>Lavoro Politico</part>
+          </corpname>
+          <geogname>
+            <part>Verona</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0026">
+        <did>
+          <unitid>AMI-0026</unitid>
+          <unittitle>Lavoro Politico, no. 7</unittitle>
+          <unitdate normal="1968-05">1968-05</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-020">
+              <part>Lavoro Politico</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lavoro-politico-07" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>rivista "Lavoro politico", n. 7 - maggio 1968</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Verona: Centro di Informazione di Verona</p>
+        </odd>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0026/">Scheda AMI-0026 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-020">
+            <part>Lavoro Politico</part>
+          </corpname>
+          <geogname>
+            <part>Verona</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0027">
+        <did>
+          <unitid>AMI-0027</unitid>
+          <unittitle>Lavoro Politico, no. 8/9</unittitle>
+          <unitdate normal="1968-06">1968-06</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-020">
+              <part>Lavoro Politico</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lavoro-politico-08-09" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>rivista "Lavoro politico", n. 8 - 9, giugno - luglio 1968</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Verona: Centro di Informazione di Verona</p>
+        </odd>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0027/">Scheda AMI-0027 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-020">
+            <part>Lavoro Politico</part>
+          </corpname>
+          <geogname>
+            <part>Verona</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0028">
+        <did>
+          <unitid>AMI-0028</unitid>
+          <unittitle>Lavoro Politico, no. 10</unittitle>
+          <unitdate normal="1968-09">1968-09</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-020">
+              <part>Lavoro Politico</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lavoro-politico-10" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>rivista "Lavoro politico", n. 10 - settembre 1968</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Verona: Centro di Informazione di Verona</p>
+        </odd>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0028/">Scheda AMI-0028 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-020">
+            <part>Lavoro Politico</part>
+          </corpname>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <geogname>
+            <part>Verona</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0029">
+        <did>
+          <unitid>AMI-0029</unitid>
+          <unittitle>Lavoro Politico, no. 11/12</unittitle>
+          <unitdate normal="1968-12">1968-12</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-020">
+              <part>Lavoro Politico</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lavoro-politico-11-12" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>rivista "Lavoro politico", n. 11 - 12, dicembre 1968 - gennaio 1969</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Verona: Centro di Informazione di Verona</p>
+        </odd>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0029/">Scheda AMI-0029 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-020">
+            <part>Lavoro Politico</part>
+          </corpname>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <corpname identifier="AMI-O-016">
+            <part>Partito Comunista d'Italia (marxista-leninista) - Linea rossa</part>
+          </corpname>
+          <geogname>
+            <part>Verona</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0030">
+        <did>
+          <unitid>AMI-0030</unitid>
+          <unittitle>La bussola che guida i popoli rivoluzionari di tutti i paesi verso la vittoria</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-004">
+              <part>Renmin Ribao</part>
+            </corpname>
+            <corpname identifier="AMI-O-007">
+              <part>Jiefangjun Bao</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/bussola-popoli-rivoluzionari" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Opuscolo contenente un editoriale del Renmin Ribao (Quotidiano del Popolo) del 18 settembre 1968 e uno del Jiefangjun Bao dello stesso giorno.</p>
+          <p>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 16, 1968.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0030/">Scheda AMI-0030 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0031">
+        <did>
+          <unitid>AMI-0031</unitid>
+          <unittitle>Sulla tattica contro l'imperialismo giapponese</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/sulla-tattica-contro-limperialismo-giapponese" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Rapporto del presidente cinese Mao Zedong alla Conferenza degli attivisti del Partito tenutasi il 27 dicembre 1935 a Wayaopao.</p>
+          <p>Traduzione ufficiale dell'opuscolo a cura della Casa editrice in lingue estere di Pechino.</p>
+          <p>Il testo originale compare in Opere Scelte, Vol. 1.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Fondo Filippo Grossi</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0031/">Scheda AMI-0031 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0032">
+        <did>
+          <unitid>AMI-0032</unitid>
+          <unittitle>Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</unittitle>
+          <unitdate normal="1970">1970</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-017">
+              <part>Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/statuto-stella-rossa" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Estratto dall'opuscolo "PER LA VITTORIA DEL POTERE ROSSO IN ITALIA-ATTI DEL CONGRESSO NAZIONALE COSTITUTIVO DI STELLA ROSSA FRONTE RIVOLUZIONARIO MARXISTA-LENINISTA".</p>
+          <p>Approvato nel suo testo definitivo dal Congresso Nazionale in seduta plenaria il 4 Novembre 1970.</p>
+          <p>Stella Rossa fu un'organizzazione marxista-leninista (di orientamento maoista), fondata da Vincenzo Calò (già Viva il Leninismo!, Federazione Marxista-Leninista d'Italia, Tribuna Rossa) nel 1969. Nel 1976 si trasforma in Partito della rivoluzione socialista.</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0032/">Scheda AMI-0032 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-017">
+            <part>Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</part>
+          </corpname>
+          <persname identifier="AMI-P-006">
+            <part>Vincenzo Calò</part>
+          </persname>
+          <genreform>
+            <part>Testo</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0033">
+        <did>
+          <unitid>AMI-0033</unitid>
+          <unittitle>Verbale della conversazione del Presidente Mao con la delegazione comunista (marxista-leninista) italiana</unittitle>
+          <unitdate normal="1968-08-13">1968-08-13</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-013">
+              <part>Partito Comunista d'Italia (marxista-leninista)</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="chi">cinese</language>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/conversazione-mao-pesce" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Trascrizione della conversazione tenuta tra il Presidente cinese Mao Zedong e due rappresentanti del Partito Comunista d'Italia (marxista-leninista), Osvaldo Pesce e Dino Dini, il 13 agosto 1968.</p>
+          <p>La conversazione verte sugli sviluppi della Grande Rivoluzione Proletaria Culturale e sulla situazione politica europea. In particolare, Mao consiglia agli italiani di non partecipare alle elezioni, per evitare il pericolo revisionista.</p>
+          <p>Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018.</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0033/">Scheda AMI-0033 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <persname identifier="AMI-P-003">
+            <part>Osvaldo Pesce</part>
+          </persname>
+          <persname identifier="AMI-P-007">
+            <part>Dino Dini</part>
+          </persname>
+          <persname identifier="AMI-P-001">
+            <part>Mao Zedong</part>
+          </persname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Testo bilingue</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0034">
+        <did>
+          <unitid>AMI-0034</unitid>
+          <unittitle>Nota del Presidente Mao sulla relazione di Kang Sheng riguardante la raccolta di materiale sulle elezioni parlamentari nei paesi capitalisti</unittitle>
+          <unitdate normal="1968-08-31">1968-08-31</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="chi">cinese</language>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/istruzioni-mao-italiano" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Nota del presidente Mao Zedong riguardante la partecipazione dei partiti comunisti marxisti-leninisti alle elezioni parlamentari dei propri paesi.</p>
+          <p>Dopo aver discusso dell'argomento con Osvaldo Pesce (13/08/1968), il Presidente cinese ha incaricato Kang Sheng di presentare un rapporto sulla questione.</p>
+          <p>Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018.</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0034/">Scheda AMI-0034 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <persname identifier="AMI-P-003">
+            <part>Osvaldo Pesce</part>
+          </persname>
+          <persname identifier="AMI-P-001">
+            <part>Mao Zedong</part>
+          </persname>
+          <persname identifier="AMI-P-007">
+            <part>Dino Dini</part>
+          </persname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Testo bilingue</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0035">
+        <did>
+          <unitid>AMI-0035</unitid>
+          <unittitle>Viva il popolo cinese</unittitle>
+          <unitdate normal="1969-08">1969-08</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-014">
+              <part>Unione dei Comunisti Italiani (marxisti-leninisti)</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/viva-il-popolo-cinese" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Magazine a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), pubblicata attraverso la casa editrice di partito, Edizioni Servire il Popolo.</p>
+          <p>La rivista illustra gli sviluppi della Grande Rivoluzione Proletaria Culturale in Cina e auspica una sua versione italiana.</p>
+          <p>"Da quando l'Unione dei Comunisti è stata fondata, il 2 ottobre 1968, è ripresa la marcia del popolo italiano verso l'instaurazione della dittatura del proletariato. E' il pensiero del presidente Mao che ci ha illuminati, è il libretto rosso delle citazioni che ci ha uniti. L'Unione dei Comunisti ha insegnato ai proletari italiani la massima fondamentale del socialismo: «Servire il popolo»."</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0035/">Scheda AMI-0035 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-014">
+            <part>Unione dei Comunisti Italiani (marxisti-leninisti)</part>
+          </corpname>
+          <geogname>
+            <part>Milano</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0036">
+        <did>
+          <unitid>AMI-0036</unitid>
+          <unittitle>In caso di golpe: Manuale teorico-pratico per il cittadino, di resistenza totale e di guerra di popolo, di guerriglia e di controguerriglia</unittitle>
+          <unitdate normal="1975">1975</unitdate>
+          <origination>
+            <persname identifier="AMI-P-006">
+              <part>Vincenzo Calò</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/in-caso-di-golpe-AMI" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Antologia pubblicata dalla casa editrice di Nuova Sinistra Savelli, a cura di Vincenzo Calò, fondatore di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista.</p>
+          <p>Il libro, contenente estratti ad argomento militare da scritti di Carl von Clausewitz, Vladimir Lenin e Mao Zedong, si pone di istruire il militante ai principi della lotta armata in caso di golpe militare (effettivamente tentato pochi anni prima da Junio Valerio Borghese).</p>
+          <p>La copia qui presente riporta cancellature sulla prefazione a cura di Calò, probabilmente causate da antipatie politiche, vista anche la scritta "VIVA L'ORGANIZZAZIONE COMBATTENTE COMUNISTA PRIMA LINEA" sull'indice in fondo.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Roma: Savelli</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0036/">Scheda AMI-0036 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-017">
+            <part>Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</part>
+          </corpname>
+          <corpname identifier="AMI-O-017">
+            <part>Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</part>
+          </corpname>
+          <geogname>
+            <part>Roma</part>
+          </geogname>
+          <genreform>
+            <part>Libro</part>
+          </genreform>
+          <subject>
+            <part>Varie</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0037">
+        <did>
+          <unitid>AMI-0037</unitid>
+          <unittitle>I compiti del Partito Comunista Cinese nel periodo della resistenza al Giappone</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/compiti-guerra-giapponese" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>"Questo rapporto fu presentato dal compagno Mao Tse-tung alla conferenza nazionale del Partito comunista cinese tenutasi a Yenan il 3 maggio 1937."</p>
+          <p>Nel contesto dell'invasione giapponese della Manciuria, Mao Zedong - allora presidente della commissione militare centrale del PCC - affronta il tema del fronte unito nazionale antigiapponese con il Guomindang (KMT)</p>
+          <p>Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 66, 1968.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0037/">Scheda AMI-0037 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0038">
+        <did>
+          <unitid>AMI-0038</unitid>
+          <unittitle>Comunicato della seconda sessione plenaria del IX Comitato Centrale del Partito Comunista Cinese</unittitle>
+          <unitdate normal="1970">1970</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-012">
+              <part>Comitato Centrale del PCC</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/comunicato-ix-cc" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Sommario della seconda sessione plenaria del CC del PCC, tenutasi in seguito al IX Congresso (1969).</p>
+          <p>"Il Partito del Lavoro d'Albania e i partiti e le organizzazioni autenticamente marxisti-leninisti del mondo conseguono di continuo enormi successi nella lotta contro l'imperialismo capeggiato dagli Stati Uniti, contro il revisionismo moderno con al centro il revisionismo sovietico e contro la reazione dei vari paesi."</p>
+          <p>Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 15, 1970.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0038/">Scheda AMI-0038 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <persname identifier="AMI-P-001">
+            <part>Mao Zedong</part>
+          </persname>
+          <persname identifier="AMI-P-008">
+            <part>Lin Biao</part>
+          </persname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0039">
+        <did>
+          <unitid>AMI-0039</unitid>
+          <unittitle>Il Presidente Mao Tse-tung sulla Guerra Popolare</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/sulla-guerra-popolare" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Raccolta antologica di citazioni a tema militare (in particolare sulla "Guerra popolare di lunga durata" maoista) del Presidente cinese Mao Zedong. Segue lo stile delle più famose Citazioni dalle opere del Presidente Mao Tse-tung, meglio conosciuto come Libretto rosso, e ne fornisce una sorta di appendice tematica.</p>
+          <p>Libro tradotto e pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, 1968. Copertina in vinile rosso, 18 x 11 cm, pp. 54.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0039/">Scheda AMI-0039 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Libro</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+          <subject>
+            <part>Libretti rossi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0040">
+        <did>
+          <unitid>AMI-0040</unitid>
+          <unittitle>I membri del Partito Comunista devono essere elementi avanzati del proletariato</unittitle>
+          <unitdate normal="1970">1970</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-004">
+              <part>Renmin Ribao</part>
+            </corpname>
+            <corpname identifier="AMI-O-007">
+              <part>Jiefangjun Bao</part>
+            </corpname>
+            <corpname identifier="AMI-O-005">
+              <part>Hongqi</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/membri-del-partito-avanzati" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>L'opuscolo contiene un editoriale condiviso tra Renmin Ribao (Quotidiano del Popolo), Hongqi (Bandiera Rossa) e Jiefangjun Bao (Quotidiano dell'EPL), pubblicato il 1 luglio 1970, in commemorazione del 49° anniversario della fondazione del Partito Comunista Cinese</p>
+          <p>Opuscolo prodotto dalla Casa editrice in lingue estere di Pechino, Cina, pp. 12, 1970.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0040/">Scheda AMI-0040 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0041">
+        <did>
+          <unitid>AMI-0041</unitid>
+          <unittitle>Citazioni del presidente Mao Tse-tung: Il libro delle guardie rosse</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/citazioni-del-presidente-mao-tse-tung-feltrinelli" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Edizione italiana del famoso Libretto rosso [originale 毛主席语录 (Máo Zhǔxí Yǔlù)] a cura della casa editrice milanese Feltrinelli. L'edizione si distingue per la mancanza della prefazione del Maresciallo Lin Biao e per l'anonimità del processo di traduzione.</p>
+          <p>III edizione (settembre 1968), pp. 198.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Milano: Feltrinelli</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0041/">Scheda AMI-0041 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <geogname>
+            <part>Milano</part>
+          </geogname>
+          <genreform>
+            <part>Libro</part>
+          </genreform>
+          <subject>
+            <part>Libretti rossi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0042">
+        <did>
+          <unitid>AMI-0042</unitid>
+          <unittitle>Citazioni: Il breviario delle guardie rosse</unittitle>
+          <unitdate normal="1967">1967</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/breviario-delle-guardie-rosse" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Edizione italiana del famoso Libretto rosso [originale 毛主席语录 (Máo Zhǔxí Yǔlù)] a cura della casa editrice milanese Longanesi &amp; C. L'edizione si distingue per il colore bianco della copertina e per l'utilizzo della prefazione firmata dal "Dipartimento Politico dell'Esercito Popolare di Liberazione" (1 agosto 1965) antecedente a quella del Maresciallo Lin Biao (16 dicembre 1966)</p>
+          <p>La traduzione del libro è stata curata da Giorgio Zucchetti, presidente dell'Associazione Italia-Cina e collaboratore di Radio Pechino.</p>
+          <p>II edizione/ristampa (1967), pp. 263</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Milano: Longanesi &amp; C.</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0042/">Scheda AMI-0042 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-001">
+            <part>Associazione Italia-Cina</part>
+          </corpname>
+          <persname identifier="AMI-P-014">
+            <part>Giorgio Zucchetti</part>
+          </persname>
+          <geogname>
+            <part>Milano</part>
+          </geogname>
+          <genreform>
+            <part>Libro</part>
+          </genreform>
+          <subject>
+            <part>Libretti rossi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0043">
+        <did>
+          <unitid>AMI-0043</unitid>
+          <unittitle>Sulla Nuova Democrazia</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/sulla-nuova-democrazia" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Questo saggio, scritto da Mao Zedong nel 1940, è trai testi fondativi del maoismo e del sistema di governance della Repubblica Popolare Cinese. Esso immagina la società di "Nuova Democrazia", applicazione cinese di una transizione graduale al socialismo. Questo periodo si caratterizza per la collaborazione del Partito Comunista Cinese con le "classi patriottiche", cioè tutte le persone anti-imperialiste e anti-feudali.</p>
+          <p>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 73, 1968.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0043/">Scheda AMI-0043 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+          <subject>
+            <part>Fondamenti del maoismo</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0044">
+        <did>
+          <unitid>AMI-0044</unitid>
+          <unittitle>Analisi delle classi nella società cinese</unittitle>
+          <unitdate normal="1967">1967</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/analisi-delle-classi" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>In questo articolo del 1926 Mao Zedong, allora Segretario della Commissione del Movimento Contadino, polemizza con due ali distinte del Partito, l'una esclusivamente concentrata sull'alleanza con il Guomindang (KMT), l'altra sul lavoro tra il numericamente esiguo proletariato industriale cinese. Mao divide la popolazione cinese in nemici e alleati della rivoluzione, individuando nel proletariato la forza guida, nei contadini il principale alleato e nella borghesia terriera il nemico.</p>
+          <p>Copia annotata e recante il timbro delle "Nuove Edizioni Oriente", frazione autodefinitasi "linea rossa" delle Edizioni Oriente, politicamente allineata al Partito Comunista d'Italia (marxista-leninista) di Fosco Dinucci.</p>
+          <p>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 14, 1967.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0044/">Scheda AMI-0044 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+          <subject>
+            <part>Fondamenti del maoismo</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0045">
+        <did>
+          <unitid>AMI-0045</unitid>
+          <unittitle>Sulla pratica</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/sulla-pratica" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Saggio fondamentale del maoismo, scritto dal Presidente Mao Zedong nel 1937 "per denunciare, basandosi sulla teoria marxista della conoscenza, gli errori di carattere soggettivo del dogmatismo e dell'empirismo [...] in seno al nostro Partito".</p>
+          <p>Opuscolo pubblicato dalla Casa editrice in lingue estere, Pechino, Cina, pp. 22, 1968.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0045/">Scheda AMI-0045 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+          <subject>
+            <part>Fondamenti del maoismo</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0046">
+        <did>
+          <unitid>AMI-0046</unitid>
+          <unittitle>La lotta sui monti Chingkang</unittitle>
+          <unitdate normal="1969">1969</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-monti-chingkang" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>L'opuscolo contiene il rapporto, scritto da Mao Zedong il 25 novembre 1928, riguardante l'esperienza della prima base rivoluzionaria dell'Esercito rosso cinese.</p>
+          <p>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 50, 1969.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0046/">Scheda AMI-0046 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0047">
+        <did>
+          <unitid>AMI-0047</unitid>
+          <unittitle>La questione dell'indipendenza e dell'autonomia nel Fronte Unito</unittitle>
+          <unitdate normal="1971">1971</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/questione-dellindipendenza" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Saggio presentato durante la sesta sessione plenaria del VI Comitato Centrale del Partito Comunista Cinese (1938). In esso il Presidente Mao Zedong illustra la politica seguita dal Partito nel periodo del Fronte Unito con i nazionalisti del Guomindang (KMT)</p>
+          <p>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 7, 1971.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0047/">Scheda AMI-0047 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0048">
+        <did>
+          <unitid>AMI-0048</unitid>
+          <unittitle>Rapporto d'inchiesta sul movimento contadino nello Hunan</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/inchiesta-movimento-contadino-hunan" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Nel rapporto, scritto nel 1927, Mao Zedong polemizza con la linea dell'attuale leader del Partito Comunista Cinese, Chen Duxiu, esclusivamente concentrata sul proletariato industriale urbano ed opposta ai contadini, che nel frattempo mostravano segnali insurrezionali o rivoluzionari. In questo testo, quindi, emerge la centralità dei contadini nel pensiero di Mao Zedong.</p>
+          <p>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 55, 1968.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0048/">Scheda AMI-0048 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+          <subject>
+            <part>Fondamenti del maoismo</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0049">
+        <did>
+          <unitid>AMI-0049</unitid>
+          <unittitle>Sulla contraddizione</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/sulla-contraddizione" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Il seguente testo rappresenta il fondamento filosofico del maoismo. Il saggio, scritto dopo Sulla pratica (1937), mira allo stesso scopo: la correzione del "dogmatismo" all'interno del Partito Comunista Cinese. Nell'analisi della contraddizione, intesa come qualcosa di universale - insita in ogni cosa, Mao esplicita per la prima volta il rapporto tra contraddizioni principali e secondarie.</p>
+          <p>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 95, 1968.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0049/">Scheda AMI-0049 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+          <subject>
+            <part>Fondamenti del maoismo</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0050">
+        <did>
+          <unitid>AMI-0050</unitid>
+          <unittitle>Problemi strategici della guerra rivoluzionaria in Cina</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/problemi-strategici-della-guerra-rivoluzionaria" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Testo prodotto, nel 1936, come bilancio dell'esperienza militare acquisita nel corso della Seconda guerra civile con il Guomindang (KMT) e successivamente utilizzato come materiale per un ciclo di conferenze tenuto all'Accademia dell'Esercito rosso. Nell'opera emergono esplicitamente la teoria della guerriglia contadina e della guerra prolungata.</p>
+          <p>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 115, 1968.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0050/">Scheda AMI-0050 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+          <subject>
+            <part>Fondamenti del maoismo</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0051">
+        <did>
+          <unitid>AMI-0051</unitid>
+          <unittitle>Rapporto alla seconda sessione plenaria del settimo Comitato Centrale del Partito Comunista Cinese</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/rapporto-seconda-sessione-plenaria" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Rapporto presentato dal Presidente Mao Zedong il 1 marzo 1949, alla sessione del settimo Comitato Centrale del PCC antecedente alla vittoria della guerra rivoluzionaria contro i nazionalisti del Guomindang (KMT). Nel rapporto Mao anticipa la svolta politica che il partito dovrà attuare una volta al potere.</p>
+          <p>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 35, 1968.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0051/">Scheda AMI-0051 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0052">
+        <did>
+          <unitid>AMI-0052</unitid>
+          <unittitle>Gli studenti alleati del proletariato nella lotta rivoluzionaria in Italia</unittitle>
+          <unitdate normal="1969">1969</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-018">
+              <part>Avanguardia Proletaria Maoista</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/studenti-alleati-proletariato" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Opera di riflessione sulla condizione dello studente universitario italiano nel contesto dei movimenti di contestazione del Sessantotto. Il testo espone il punto di vista specifico dell'organizzazione/partito Avanguardia Proletaria Maoista, organismo animato da Giuliano Spazzali e Michele Semeraro, emerso dalla disgregazione della Federazione Marxista-Leninista d'Italia (1968).</p>
+          <p>Libro pubblicato da Biblioteca dell'Avanguardia Proletaria, pp. 42, 1969.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Milano: Biblioteca dell'Avanguardia Proletaria</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0052/">Scheda AMI-0052 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-018">
+            <part>Avanguardia Proletaria Maoista</part>
+          </corpname>
+          <geogname>
+            <part>Milano</part>
+          </geogname>
+          <genreform>
+            <part>Libro</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0053">
+        <did>
+          <unitid>AMI-0053</unitid>
+          <unittitle>Sosteniamo il Congresso di fondazione del PARTITO COMUNISTA (marxista-leninista) ITALIANO per fare l'Italia rossa e socialista come la Cina di Mao</unittitle>
+          <unitdate normal="1972">1972</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-014">
+              <part>Unione dei Comunisti Italiani (marxisti-leninisti)</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/volantino-congresso-di-fondazione-pcm-l-i" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Volantino dell'Unione dei Comunisti Italiani (marxisti-leninisti) / Servire il popolo che annuncia l'imminente congresso di fondazione del Partito Comunista (marxista-leninista) Italiano (PC(m-l)I), il 16 aprile 1972. Coloro che ricevono il volantino - nelle intenzioni dell'UCI "Operai, lavoratori e democratici che avete a cuore la causa della fondazione del PC(m-l)I" - sono invitati ad inviare un saluta al congresso tramite l'apposito modulo sul retro.</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0053/">Scheda AMI-0053 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-014">
+            <part>Unione dei Comunisti Italiani (marxisti-leninisti)</part>
+          </corpname>
+          <corpname identifier="AMI-O-019">
+            <part>Partito Comunista (marxista-leninista) Italiano</part>
+          </corpname>
+          <geogname>
+            <part>Cinisello Balsamo</part>
+          </geogname>
+          <genreform>
+            <part>Volantino</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0054">
+        <did>
+          <unitid>AMI-0054</unitid>
+          <unittitle>RICERCATO: Leonida Breznev - Manifesto del Partito Comunista Unificato d'Italia</unittitle>
+          <unitdate normal="1978-03">1978-03</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-021">
+              <part>Partito Comunista Unificato d'Italia</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/manifesto-pcudi-breznev" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Manifesto polemico prodotto dal Partito Comunista Unificato d'Italia di Osvaldo Pesce nel marzo 1978, poco dopo il sequestro di Aldo Moro (16 marzo). Il poster mostra il leader sovietico "Leonida Breznev" come un ricercato latitante ed elenca i suoi "crimini". Questi, oltre il succitato rapimento Moro, includono l'omicidio di Carlo Casalegno e le aggressioni militari contro Cecoslovacchia, Angola e Somalia.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Milano: Linea Proletaria</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0054/">Scheda AMI-0054 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-021">
+            <part>Partito Comunista Unificato d'Italia</part>
+          </corpname>
+          <persname identifier="AMI-P-003">
+            <part>Osvaldo Pesce</part>
+          </persname>
+          <geogname>
+            <part>Milano</part>
+          </geogname>
+          <genreform>
+            <part>Manifesto</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0055">
+        <did>
+          <unitid>AMI-0055</unitid>
+          <unittitle>Osare pensare, osare parlare, osare agire, osare fare la rivoluzione - Manifesto PCd'I (m-l)</unittitle>
+          <unitdate normal="1967">1967</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-013">
+              <part>Partito Comunista d'Italia (marxista-leninista)</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/osare-poster-pcdi" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Manifesto prodotto dal Partito Comunista d'Italia (marxista-leninista) nell'ottobre 1967. Sotto il grande logo del partito si legge l'appello all'internazionalismo di Mao Zedong, proveniente dalla "Dichiarazione in appoggio al popolo del Congo (Leopoldville) contro l'aggressione degli Stati Uniti" del 28 novembre 1964.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Nuova Unità</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0055/">Scheda AMI-0055 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <genreform>
+            <part>Manifesto</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0056">
+        <did>
+          <unitid>AMI-0056</unitid>
+          <unittitle>Il Presidente Mao Tse-tung sulla Guerra di popolo</unittitle>
+          <unitdate normal="1967">1967</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/mao-tse-tung-guerra-di-popolo" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Traduzione a cura della casa editrice militante Edizioni Oriente della raccolta antologica di citazioni a tema militare del Presidente cinese Mao Zedong "毛主席论人民战争". Segue lo stile delle più famose Citazioni dalle opere del Presidente Mao Tse-tung, meglio conosciuto come Libretto rosso, e ne fornisce una sorta di appendice tematica.</p>
+          <p>Libro tradotto e pubblicato dalle Edizioni Oriente, Milano, pp. 38, 1967.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Milano: Edizioni Oriente</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0056/">Scheda AMI-0056 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-003">
+            <part>Edizioni Oriente</part>
+          </corpname>
+          <geogname>
+            <part>Milano</part>
+          </geogname>
+          <genreform>
+            <part>Libro</part>
+          </genreform>
+          <subject>
+            <part>Libretti rossi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0057">
+        <did>
+          <unitid>AMI-0057</unitid>
+          <unittitle localtype="attribuito">Congresso di fondazione del Partito Comunista Unificato d'Italia</unittitle>
+          <unitdate normal="1977-05-08">1977-05-08</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-021">
+              <part>Partito Comunista Unificato d'Italia</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/fondazione-pcudi-1977" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Foto dal "Congresso di ricostruzione del Partito Comunista Unificato della classe operaia - Roma, 6-7-8 Maggio 1977", che sancirà la fondazione del Partito Comunista Unificato d'Italia, guidato da Osvaldo Pesce. Confluiscono nel PCUd'I:</p>
+          <p>• L'Organizzazione dei Comunisti (marxisti-leninisti) d'Italia di Pesce (nata nel 1970)</p>
+          <p>• L'Organizzazione Comunista (marxista-leninista) - Fronte Unito di Giuseppe Burgani (nata nel 1973)</p>
+          <p>• Il Partito Comunista d'Italia (marxista-leninista) - Lotta di lunga durata di Gustavo Hermann (nato nel 1969)</p>
+          <p>• Il Partito Marxista-Leninista-Maoista Italiano di Michele Semeraro (nato nel 1969 come scissione di Avanguardia Proletaria Maoista)</p>
+          <p>• I gruppi minori di "Coscienza Operaia" e "Ideologia Proletaria"</p>
+          <p>Il partito pubblica il giornale "Linea Proletaria", ereditato dall'organizzazione di Pesce.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Roma: Linea Proletaria</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0057/">Scheda AMI-0057 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-021">
+            <part>Partito Comunista Unificato d'Italia</part>
+          </corpname>
+          <corpname identifier="AMI-O-026">
+            <part>Organizzazione dei Comunisti (marxisti-leninisti) d'Italia</part>
+          </corpname>
+          <corpname identifier="AMI-O-024">
+            <part>Organizzazione Comunista (marxista-leninista) Fronte Unito</part>
+          </corpname>
+          <corpname identifier="AMI-O-027">
+            <part>Partito Comunista (marxista-leninista) d'Italia - Lotta di lunga durata</part>
+          </corpname>
+          <corpname identifier="AMI-O-028">
+            <part>Partito Comunista Marxista-Leninista-Maoista Italiano</part>
+          </corpname>
+          <persname identifier="AMI-P-003">
+            <part>Osvaldo Pesce</part>
+          </persname>
+          <geogname>
+            <part>Roma</part>
+          </geogname>
+          <genreform>
+            <part>Foto</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0058">
+        <did>
+          <unitid>AMI-0058</unitid>
+          <unittitle>Proletari senza rivoluzione: Storia delle classi subalterne italiane dal 1860 al 1950, Vol. 1</unittitle>
+          <unitdate normal="1970">1970</unitdate>
+          <origination>
+            <persname identifier="AMI-P-016">
+              <part>Renzo Del Carria</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/proletari-senza-rivoluzione-1" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>"Best-seller" del marxismo-leninismo, il libro è una ricostruzione storica-militante a cura di Renzo Del Carria, delle vicende sociali e politiche (e la lotta di classe) delle classi subalterne italiane dall’unità al dopoguerra.</p>
+          <p>Pubblicato da Edizioni Oriente, Milano, pp. 461, 1970 (II ed.)</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Milano: Edizioni Oriente</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0058/">Scheda AMI-0058 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-003">
+            <part>Edizioni Oriente</part>
+          </corpname>
+          <geogname>
+            <part>Milano</part>
+          </geogname>
+          <genreform>
+            <part>Libro</part>
+          </genreform>
+          <subject>
+            <part>Varie</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0059">
+        <did>
+          <unitid>AMI-0059</unitid>
+          <unittitle>Proletari senza rivoluzione: Storia delle classi subalterne italiane dal 1860 al 1950, Vol. 2</unittitle>
+          <unitdate normal="1970">1970</unitdate>
+          <origination>
+            <persname identifier="AMI-P-016">
+              <part>Renzo Del Carria</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/proletari-senza-rivoluzione-2" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>"Best-seller" del marxismo-leninismo, il libro (secondo volume) è una ricostruzione storica-militante a cura di Renzo Del Carria, delle vicende sociali e politiche (e la lotta di classe) delle classi subalterne italiane dall’unità al dopoguerra.</p>
+          <p>Pubblicato da Edizioni Oriente, Milano, pp. 449, 1970 (II ed.)</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Milano: Edizioni Oriente</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0059/">Scheda AMI-0059 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-003">
+            <part>Edizioni Oriente</part>
+          </corpname>
+          <geogname>
+            <part>Milano</part>
+          </geogname>
+          <genreform>
+            <part>Libro</part>
+          </genreform>
+          <subject>
+            <part>Varie</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0060">
+        <did>
+          <unitid>AMI-0060</unitid>
+          <unittitle>Come diventare un buon comunista</unittitle>
+          <unitdate normal="1965">1965</unitdate>
+          <origination>
+            <persname identifier="AMI-P-015">
+              <part>Liu Shaoqi</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/come-diventare-un-buon-comunista" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Prima di essere identificato come capo della "linea nera anti-partito" durante la Rivoluzione culturale, il presidente della Repubblica Popolare Cinese Liu Shaoqi era considerato uno dei "vecchi gloriosi compagni" del Partito Comunista Cinese. Fino alla sua "scomunica", quindi, i filo-cinesi italiani leggono e pubblicano i suoi discorsi e le sue opere, tra cui il seguente volume, una guida all'autoeducazione ideologica dei comunisti cinesi, composto dalla compilazione di una serie di conferenze tenute da Liu nel 1939.</p>
+          <p>Libro tradotto da Arnaldo Bressan (Lega della gioventù comunista (marxista-leninista) d'Italia) e pubblicato dalle Edizioni Oriente, Milano, pp. 143, 1965.</p>
+          <p>Copertina ricostruita digitalmente sulla base del frontespizio e della comparazione con il catalogo delle Edizioni Oriente.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Milano: Edizioni Oriente</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0060/">Scheda AMI-0060 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-003">
+            <part>Edizioni Oriente</part>
+          </corpname>
+          <persname identifier="AMI-P-017">
+            <part>Arnaldo Bressan</part>
+          </persname>
+          <geogname>
+            <part>Milano</part>
+          </geogname>
+          <genreform>
+            <part>Libro</part>
+          </genreform>
+          <subject>
+            <part>Varie</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0061">
+        <did>
+          <unitid>AMI-0061</unitid>
+          <unittitle>Sulla guerra di lunga durata</unittitle>
+          <unitdate normal="1971">1971</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/guerra-di-lunga-durata" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Basato su una serie di lezioni tenute a Yan'an nel corso del 1938, il testo vede Mao Zedong, ormai a capo della strategia militare del Partito Comunista Cinese, discutere dell'esperienza accumulata nell'anno precedente, in seguito all'invasione giapponese della Manciuria (1937). La resistenza antigiapponese deve, secondo Mao, trasformarsi in una "Guerra di lunga durata".</p>
+          <p>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 131, 1971.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0061/">Scheda AMI-0061 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+          <subject>
+            <part>Fondamenti del maoismo</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0062">
+        <did>
+          <unitid>AMI-0062</unitid>
+          <unittitle localtype="attribuito">Delegazione del movimento studentesco dell'Università di Trieste sulla nave cinese Jinsha</unittitle>
+          <unitdate normal="1968-03-20">1968-03-20</unitdate>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/1968-delegazione-nave-jinsha" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Studenti "reduci" dall'occupazione della facoltà di Lettere e Filosofia dell'Università di Trieste sulla nave cinese Jinsha, attraccata all'Arsenale Triestino. Gli studenti, tra cui Dario Visintini - PCd'I (m-l) - e Marina Rossi, posano intorno ad un marinaio cinese e sventolano i loro "Libretti rossi".</p>
+          <p>L'episodio non causò particolari disordini, a differenza del precedente caso "Li-ming" del 1967, quando una nave cinese diretta a Genova fu trattenuta in quarantena per circa un mese, a causa degli striscioni inneggianti al pensiero di Mao Tse-tung esposti sulla nave.</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0062/">Scheda AMI-0062 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <corpname identifier="AMI-O-025">
+            <part>Movimento Studentesco</part>
+          </corpname>
+          <geogname>
+            <part>Trieste</part>
+          </geogname>
+          <genreform>
+            <part>Foto</part>
+          </genreform>
+          <subject>
+            <part>Varie</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0063">
+        <did>
+          <unitid>AMI-0063</unitid>
+          <unittitle>Volantino del PC(m-l)I contro il carovita sotto il governo Rumor</unittitle>
+          <unitdate normal="1974-01">1974-01</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-019">
+              <part>Partito Comunista (marxista-leninista) Italiano</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/pcmli-volantino-contro-rumor" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Volantino curato dal Comitato provinciale di Brindisi del Partito Comunista (marxista-leninista) Italiano, evoluzione dell'Unione dei Comunisti Italiani (marxisti-leninisti) di Aldo Brandirali.</p>
+          <p>Ciclostilato in proprio, gennaio 1974.</p>
+          <p>Documento originale disponibile presso l'Archivio Storico Benedetto Petrone (https://www.pugliantagonista.it/)</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico Benedetto Petrone</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0063/">Scheda AMI-0063 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-019">
+            <part>Partito Comunista (marxista-leninista) Italiano</part>
+          </corpname>
+          <geogname>
+            <part>Brindisi</part>
+          </geogname>
+          <genreform>
+            <part>Volantino</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0064">
+        <did>
+          <unitid>AMI-0064</unitid>
+          <unittitle>Volantino dell'OC(m-l) - Fronte Unito contro l'aumento del costo della benzina</unittitle>
+          <unitdate normal="1973-10-19">1973-10-19</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-024">
+              <part>Organizzazione Comunista (marxista-leninista) Fronte Unito</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/ocml-volantino-anti-rumor" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Volantino curato dall'Organizzazione Comunista (marxista-leninista) (detta Fronte Unito dal titolo del suo organo di stampa), scissione del Partito Comunista d'Italia (marxista-leninista) di Fosco Dinucci, guidata da Giuseppe "Beppe" Burgani. Il volantino, pubblicato a Brindisi nel 1973, lamenta l'aumento delle tasse e del costo della vita, benzina in particolare.</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico Benedetto Petrone</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0064/">Scheda AMI-0064 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-024">
+            <part>Organizzazione Comunista (marxista-leninista) Fronte Unito</part>
+          </corpname>
+          <geogname>
+            <part>Brindisi</part>
+          </geogname>
+          <genreform>
+            <part>Volantino</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0065">
+        <did>
+          <unitid>AMI-0065</unitid>
+          <unittitle localtype="attribuito">Manifestazione del Partito Comunista d'Italia (marxista-leninista)</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-013">
+              <part>Partito Comunista d'Italia (marxista-leninista)</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/1968.manifestazione.PCDI" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Militanti del Partito Comunista d'Italia (marxista-leninista) in manifestazione a Milano, 1968. I militanti innalzano cartelloni raffiguranti Iosif Stalin e Mao Zedong.</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0065/">Scheda AMI-0065 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <geogname>
+            <part>Milano</part>
+          </geogname>
+          <genreform>
+            <part>Foto</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0066">
+        <did>
+          <unitid>AMI-0066</unitid>
+          <unittitle localtype="attribuito">Manifestazione del Movimento Studentesco</unittitle>
+          <unitdate normal="1970">1970</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-025">
+              <part>Movimento Studentesco</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/1970-movimento-studentesco-pensierodi-mao" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Militanti del Movimento Studentesco di Milano, guidato da Mario Capanna, sorreggono uno striscione inneggiante al Pensiero di Mao Tse-tung, Milano, 1970.</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0066/">Scheda AMI-0066 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-025">
+            <part>Movimento Studentesco</part>
+          </corpname>
+          <geogname>
+            <part>Milano</part>
+          </geogname>
+          <genreform>
+            <part>Foto</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0067">
+        <did>
+          <unitid>AMI-0067</unitid>
+          <unittitle>Volantino del PCd'I(m-l) contro l'eccidio di Avola</unittitle>
+          <unitdate normal="1968-12">1968-12</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-013">
+              <part>Partito Comunista d'Italia (marxista-leninista)</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/1968-volantino-pcdi-avola" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Volantino pubblicato dal Partito Comunista d'Italia (marxista-leninista) contro l'eccidio di Avola (2 dicembre 1968), quando la polizia locale sparò ad altezza uomo su dei contadini che manifestavano contro il caporalato. Nel volantino il partito m-l accusa l'intero arco parlamentare di complicità con i fatti, PCI e PSIUP compresi, in quanto intenderebbero "disarmare la classe operaia".</p>
+          <p>Stampato a Livorno, dicembre 1968.</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0067/">Scheda AMI-0067 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <geogname>
+            <part>Livorno</part>
+          </geogname>
+          <genreform>
+            <part>Volantino</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0068">
+        <did>
+          <unitid>AMI-0068</unitid>
+          <unittitle>Lotta di Classe, no. 1</unittitle>
+          <unitdate normal="1970-05">1970-05</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1970-01" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale a cura del circolo Lenin di Budrio - n. 1 (1970)</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0068/">Scheda AMI-0068 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0069">
+        <did>
+          <unitid>AMI-0069</unitid>
+          <unittitle>Lotta di Classe, no. 2</unittitle>
+          <unitdate normal="1970-05-16">1970-05-16</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1970-02" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale a cura del circolo Lenin di Budrio - n. 2 (1970)</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0069/">Scheda AMI-0069 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0070">
+        <did>
+          <unitid>AMI-0070</unitid>
+          <unittitle>Lotta di Classe, supplemento al no. 2</unittitle>
+          <unitdate normal="1970-05-30">1970-05-30</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1970-02-suppl" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, organo del circolo Lenin di Faenza. Supplemento al n. 2 di "Lotta di classe", quindicinale a cura del circolo Lenin di Budrio</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0070/">Scheda AMI-0070 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0071">
+        <did>
+          <unitid>AMI-0071</unitid>
+          <unittitle>Lotta di Classe, no. 3</unittitle>
+          <unitdate normal="1970-05-31">1970-05-31</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1970-03" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 3 (1970)</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0071/">Scheda AMI-0071 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0072">
+        <did>
+          <unitid>AMI-0072</unitid>
+          <unittitle>Lotta di Classe, no. 4</unittitle>
+          <unitdate normal="1970-06-21">1970-06-21</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1970-04" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 4</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0072/">Scheda AMI-0072 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0073">
+        <did>
+          <unitid>AMI-0073</unitid>
+          <unittitle>Lotta di Classe, no. 5/6</unittitle>
+          <unitdate normal="1970-07-16">1970-07-16</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1970-05-06" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 5/6</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0073/">Scheda AMI-0073 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0074">
+        <did>
+          <unitid>AMI-0074</unitid>
+          <unittitle>Lotta di Classe, no. 7/8</unittitle>
+          <unitdate normal="1970-09-13">1970-09-13</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1970-07-08" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 7/8</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0074/">Scheda AMI-0074 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0075">
+        <did>
+          <unitid>AMI-0075</unitid>
+          <unittitle>Lotta di Classe, no. 9/10</unittitle>
+          <unitdate normal="1970-10-25">1970-10-25</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1970-09-10" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 9/10</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0075/">Scheda AMI-0075 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0076">
+        <did>
+          <unitid>AMI-0076</unitid>
+          <unittitle>Lotta di Classe, no. 11</unittitle>
+          <unitdate normal="1970-11-15">1970-11-15</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1970-11" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 11</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0076/">Scheda AMI-0076 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0077">
+        <did>
+          <unitid>AMI-0077</unitid>
+          <unittitle>Lotta di Classe, no. 12</unittitle>
+          <unitdate normal="1970-12-13">1970-12-13</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1970-12" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 12</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0077/">Scheda AMI-0077 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0078">
+        <did>
+          <unitid>AMI-0078</unitid>
+          <unittitle>Lotta di Classe, no. 13</unittitle>
+          <unitdate normal="1971-01-17">1971-01-17</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1971-13" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 13</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0078/">Scheda AMI-0078 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0079">
+        <did>
+          <unitid>AMI-0079</unitid>
+          <unittitle>Lotta di Classe, no. 14</unittitle>
+          <unitdate normal="1971-02-07">1971-02-07</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1971-14" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 14</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0079/">Scheda AMI-0079 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0080">
+        <did>
+          <unitid>AMI-0080</unitid>
+          <unittitle>Lotta di Classe, no. 15/16</unittitle>
+          <unitdate normal="1971-03-07">1971-03-07</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1971-15-16" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 15/16</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0080/">Scheda AMI-0080 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0081">
+        <did>
+          <unitid>AMI-0081</unitid>
+          <unittitle>Lotta di Classe, no. 17/18</unittitle>
+          <unitdate normal="1971-04-04">1971-04-04</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1971-17-18" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 17/18</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0081/">Scheda AMI-0081 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0082">
+        <did>
+          <unitid>AMI-0082</unitid>
+          <unittitle>Lotta di Classe, no. 19/20</unittitle>
+          <unitdate normal="1971-05-01">1971-05-01</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1971-19-20" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 19/20</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0082/">Scheda AMI-0082 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0083">
+        <did>
+          <unitid>AMI-0083</unitid>
+          <unittitle>Lotta di Classe, no. 21</unittitle>
+          <unitdate normal="1971-05-23">1971-05-23</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1971-21" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 21</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0083/">Scheda AMI-0083 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0084">
+        <did>
+          <unitid>AMI-0084</unitid>
+          <unittitle>Lotta di Classe, no. 22</unittitle>
+          <unitdate normal="1971-06-20">1971-06-20</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1971-22" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 22</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0084/">Scheda AMI-0084 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0085">
+        <did>
+          <unitid>AMI-0085</unitid>
+          <unittitle>Lotta di Classe, no. 23</unittitle>
+          <unitdate normal="1971-07-25">1971-07-25</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1971-23" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 23</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0085/">Scheda AMI-0085 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0086">
+        <did>
+          <unitid>AMI-0086</unitid>
+          <unittitle>Lotta di Classe, no. 24/25</unittitle>
+          <unitdate normal="1971-11-28">1971-11-28</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1971-24-25" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 24/25</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0086/">Scheda AMI-0086 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0087">
+        <did>
+          <unitid>AMI-0087</unitid>
+          <unittitle>Lotta di Classe, anno III, no. 1</unittitle>
+          <unitdate normal="1972-01-09">1972-01-09</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1972-01" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 1/1972</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0087/">Scheda AMI-0087 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0088">
+        <did>
+          <unitid>AMI-0088</unitid>
+          <unittitle>Lotta di Classe, anno III, no. 2/3</unittitle>
+          <unitdate normal="1972-03-12">1972-03-12</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1972-02-03" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 2/3-1972</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0088/">Scheda AMI-0088 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0089">
+        <did>
+          <unitid>AMI-0089</unitid>
+          <unittitle>Lotta di Classe, anno III, no. 4/5</unittitle>
+          <unitdate normal="1972-05-01">1972-05-01</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1972-04-05" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 4/5-1972</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0089/">Scheda AMI-0089 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0090">
+        <did>
+          <unitid>AMI-0090</unitid>
+          <unittitle>Lotta di Classe, anno III, no. 6</unittitle>
+          <unitdate normal="1972-11-05">1972-11-05</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1972-06" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, giornale politico dei comitati degli operai, dei contadini e degli studenti. Quindicinale marxista leninista dei circoli Lenin dell'Emilia Romagna - n. 6/1972</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0090/">Scheda AMI-0090 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0091">
+        <did>
+          <unitid>AMI-0091</unitid>
+          <unittitle>Lotta di Classe, anno IV, no. 1/2</unittitle>
+          <unitdate normal="1973-05-01">1973-05-01</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-022">
+              <part>Circoli Lenin dell'Emilia Romagna</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/lotta-di-classe-1973-01-02" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Lotta di classe, mensile marxista leninista del circolo Lenin-sedi di Budrio, Bologna, Castenaso - n. 2/3-1973</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0091/">Scheda AMI-0091 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-022">
+            <part>Circoli Lenin dell'Emilia Romagna</part>
+          </corpname>
+          <geogname>
+            <part>Bologna</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0092">
+        <did>
+          <unitid>AMI-0092</unitid>
+          <unittitle>Avanziamo lungo la via aperta dalla Rivoluzione socialista d'ottobre</unittitle>
+          <unitdate normal="1969">1969</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-014">
+              <part>Unione dei Comunisti Italiani (marxisti-leninisti)</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/avanziamo-lungo-la-via" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Opuscolo compilato e pubblicato dall'Unione dei Comunisti Italiani (marxisti-leninisti), contenente:</p>
+          <p>• "Discorso del Compagno Lin Piao"</p>
+          <p>• "Avanziamo lungo la via aperta dalla Rivoluzione socialista d'ottobre", editoriale a cura delle redazioni del Quotidiano del Popolo, Bandiera rossa e Quotidiano dell'Esercito popolare di Liberazione</p>
+          <p>Entrambi gli articoli commemorano il cinquantesimo anniversario della rivoluzione d'ottobre (1917).</p>
+          <p>Libro pubblicato da Edizioni Servire il Popolo, Milano, pp. 37, 1969.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Milano: Edizioni Servire il Popolo</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0092/">Scheda AMI-0092 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-014">
+            <part>Unione dei Comunisti Italiani (marxisti-leninisti)</part>
+          </corpname>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Milano</part>
+          </geogname>
+          <genreform>
+            <part>Libro</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0093">
+        <did>
+          <unitid>AMI-0093</unitid>
+          <unittitle>Ai comunisti ai lavoratori</unittitle>
+          <unitdate normal="1971-06">1971-06</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-023">
+              <part>Centro Karl Marx</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/ai-comunisti-ai-lavoratori" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Documento, a cura del Centro Karl Marx Toscano, incentrato sull'analisi delle elezioni amministrative del 13-14 giugno 1971 e degli esiti del Sessantotto italiano.</p>
+          <p>Il CKM (prima pisano, poi toscano), nasce dalle ceneri de Il potere operaio pisano nel 1969. Nel 1972, dall'unione con i Circoli Lenin toscani, diventa l'Organizzazione dei lavoratori comunisti, per poi confluire nel PCI poco dopo. [1] (https://www.bfscollezionidigitali.org/entita/22-centro-karl-marx)</p>
+          <p>Ciclostilato in proprio, Firenze, 8 pp., giugno 1971.</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0093/">Scheda AMI-0093 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-023">
+            <part>Centro Karl Marx</part>
+          </corpname>
+          <geogname>
+            <part>Firenze</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0094">
+        <did>
+          <unitid>AMI-0094</unitid>
+          <unittitle>Contro il liberalismo</unittitle>
+          <unitdate normal="1968">1968</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/1968-contro-il-liberalismo" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Breve articolo scritto dal presidente cinese Mao Zedong il 7 settembre 1937, in cui vengono condannate tendenze interne al Partito Comunista Cinese, indicate come liberali, ovvero "nocive in una collettività rivoluzionaria".</p>
+          <p>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 7, II ed. 1968.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Fondo Filippo Grossi</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0094/">Scheda AMI-0094 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0095">
+        <did>
+          <unitid>AMI-0095</unitid>
+          <unittitle>Presentazione della rivista Il Comunista</unittitle>
+          <unitdate normal="1969">1969</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/1969-presentazione-il-comunista" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Articolo scritto dal presidente cinese Mao Zedong, il 4 ottobre 1939, sul primo numero della rivista teorica del Partito Comunista Cinese, Il Comunista. L'editoriale spiega la decisione di avviare la nuova pubblicazione, inserisce tale decisione nel contesto della guerra all'invasione giapponese, delinea i compiti del PCC in tale conflitto.</p>
+          <p>Copia timbrata dall'Associazione italiana per i rapporti culturali e di amicizia con la Repubblica Popolare Cinese (conosciuta più semplicemente come Associazione Italia-Cina).</p>
+          <p>Opuscolo pubblicato dalla Casa editrice in lingue estere di Pechino, Cina, pp. 30, 1969.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Fondo Filippo Grossi</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0095/">Scheda AMI-0095 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <corpname identifier="AMI-O-001">
+            <part>Associazione Italia-Cina</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0096">
+        <did>
+          <unitid>AMI-0096</unitid>
+          <unittitle localtype="attribuito">Pubblicità "Amaro Ramazzotti" raffigurante Mao Zedong</unittitle>
+          <unitdate normal="1973">1973</unitdate>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/ramazzotti-1973" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <scopecontent>
+          <p>Annuncio pubblicitario per l'Amaro Ramazzotti risalente al 1973, parte della campagna di marketing segnata dallo slogan «Non stupitevi… niente è impossibile per un grande amaro». Insieme a "Mao" fanno parte della campagna i sosia di Richard Nixon, Fidel Castro e del generale israeliano Moshe Dayan.</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0096/">Scheda AMI-0096 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <persname identifier="AMI-P-001">
+            <part>Mao Zedong</part>
+          </persname>
+          <genreform>
+            <part>Foto</part>
+          </genreform>
+          <subject>
+            <part>Varie</part>
+          </subject>
+        </controlaccess>
+      </c>
+    </dsc>
+  </archdesc>
+</ead>
