@@ -161,6 +161,7 @@ def blocco_autorita(nome, data_range, record, relazioni, indexer):
         _campo('Luoghi', html.escape(dati.get('luoghi', ''))),
         _campo('Relazioni', _relazioni_html(nome, relazioni, record, indexer)),
         _campo('Identificativi esterni', ', '.join(esterni)),
+        _campo('Formato XML', f'<a href="{html.escape(site_path("dati/eac/" + dati["id_autorita"] + ".xml"), quote=True)}">EAC-CPF</a>'),
         _campo('Norme', html.escape(dati.get('norme', ''))),
         _campo('Redazione', html.escape(dati.get('data_redazione', ''))),
     ])

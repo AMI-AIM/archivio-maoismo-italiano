@@ -3,3 +3,4 @@ openpyxl
 requests
 Pillow
 mkdocs-material
+lxml

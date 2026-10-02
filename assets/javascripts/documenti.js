@@ -64,7 +64,8 @@
   //  - MLA Handbook, 9a ed. (container: titolo della risorsa, poi
   //    l'archivio come secondo container);
   //  - BibTeX (campi url/urldate supportati da biblatex e natbib);
-  //  - "Semplice": tutti gli elementi separati solo da virgole.
+  //  - "Semplice": elementi separati da virgole; solo Luogo: Editore
+  //    restano uniti dai due punti.
   // I nomi in cui il cognome precede il nome (es. cinesi: "Mao Zedong")
   // non vengono invertiti in Chicago e MLA.
   // ------------------------------------------------------------
@@ -268,7 +269,7 @@
 
   // ---------------- Semplice ----------------
   // Tutti gli elementi separati solo da virgole:
-  // Cognome, Nome, Titolo, Luogo, Editore, Data, Archivio, ID, URL, consultato il ….
+  // Cognome, Nome, Titolo, Luogo: Editore, Data, Archivio, ID, URL, consultato il ….
   function simpleAuthors(authors) {
     return joinItalian(authors.map(function (a, i) {
       return escapeHtml(displayName(a, i === 0));
@@ -295,11 +296,13 @@
         el.push(simpleAuthors(authors));
       }
       el.push(titleHtml(doc));
-      if (safeText(doc.place)) {
-        el.push(escapeHtml(doc.place));
-      }
-      if (safeText(doc.publisher)) {
-        el.push(escapeHtml(doc.publisher));
+      // Luogo e editore restano uniti dai due punti: "Milano: Edizioni Oriente"
+      var place = safeText(doc.place);
+      var publisher = safeText(doc.publisher);
+      if (place && publisher) {
+        el.push(escapeHtml(place) + ': ' + escapeHtml(publisher));
+      } else if (place || publisher) {
+        el.push(escapeHtml(place || publisher));
       }
     }
     el.push(dateText(doc));

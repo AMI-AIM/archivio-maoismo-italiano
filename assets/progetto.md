@@ -91,6 +91,15 @@ A questi si aggiungono, quando disponibili, le altre forme del nome attestate ne
 <p><strong>Convenzioni.</strong> Gli identificativi hanno la forma <code>AMI-P-001</code> per le persone e <code>AMI-O-001</code> per gli enti. I nomi cinesi sono registrati in trascrizione pinyin; le grafie storiche, come quelle delle edizioni italiane dell'epoca (per esempio "Mao Tse-tung"), sono riportate tra le altre forme del nome.</p>
 </div>
 
+<h3>Formati di scambio</h3>
+
+Le descrizioni sono pubblicate anche nei formati XML standard per lo scambio di dati archivistici, così da poter essere importate da altri archivi e portali:
+
+- **EAD3** (Encoded Archival Description): la raccolta e tutte le unità in un unico file, [ami-ead.xml](dati/ami-ead.xml);
+- **EAC-CPF 2.0** (Encoded Archival Context): un file per ogni persona o ente, raggiungibile dalla sezione "Record d'autorità" della relativa scheda.
+
+I file sono generati automaticamente a ogni aggiornamento dell'archivio e verificati con gli schemi ufficiali della Society of American Archivists.
+
 <div class="progetto-bibliografia">
 <p>INTERNATIONAL COUNCIL ON ARCHIVES, <em>ISAD(G): General International Standard Archival Description</em>, 2nd ed., Ottawa: International Council on Archives, 2000.</p>
 <p>INTERNATIONAL COUNCIL ON ARCHIVES, <em>ISAAR(CPF): International Standard Archival Authority Record for Corporate Bodies, Persons and Families</em>, 2nd ed., Paris: International Council on Archives, 2004.</p>

@@ -5,6 +5,7 @@ import pandas as pd
 from core.archivio import genera_indice
 from core.home import genera_home
 from core.raccolta import inserisci_scheda_raccolta
+from core.ead_export import esporta_tutto
 from core.json_export import genera_json
 from core.json_optimizer import JSONOptimizer
 from core.schede import crea_schede
@@ -374,6 +375,24 @@ def main():
             print("[INFO] Segnaposto della scheda raccolta non trovato in progetto.md")
     except Exception as e:
         print(f"[WARN] Errore scheda raccolta: {e}")
+
+    # ================================================================
+    # EXPORT: EAD3 (documenti) ed EAC-CPF (record d'autorita')
+    # ================================================================
+    print("\n[EXPORT] Esportazione EAD3 / EAC-CPF...")
+    try:
+        n_file, errori = esporta_tutto(df, catalogo_path, OUTPUT_DIR)
+        print(f"[OK] {n_file} file XML scritti in build/dati/")
+        if errori is None:
+            print("[WARN] Validazione non eseguita: installare lxml (pip install lxml)")
+        elif errori:
+            print(f"[WARN] {len(errori)} file XML non validi rispetto allo schema:")
+            for nome_file, messaggi in list(errori.items())[:5]:
+                print(f"   - {nome_file}: {messaggi[0]}")
+        else:
+            print("[OK] Tutti i file XML sono validi (ead3.xsd, eac.xsd)")
+    except Exception as e:
+        print(f"[WARN] Errore esportazione EAD3/EAC-CPF: {e}")
 
     # ================================================================
     # GENERAZIONE: Home page
