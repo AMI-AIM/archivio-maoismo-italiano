@@ -2,6 +2,7 @@ import hashlib
 import html
 import json
 import os
+import urllib.parse
 import sys
 from datetime import datetime
 
@@ -13,6 +14,7 @@ from core.argomenti import (
     split_argomenti,
 )
 from core.site_config import site_path
+from core.liste import meta_riga
 from core.utils import formatta_data, slugify
 
 try:
@@ -219,11 +221,18 @@ def generate_single_page(item):
         '<span class="doc-percorso__sep" aria-hidden="true">›</span>'
         f'<a href="{back_url}">Percorsi tematici</a></nav>'
     )
+    # Testata: la stessa fotografia della card dell'indice, cosi' la
+    # promessa del banner continua nella pagina.
+    if item.get('immagine'):
+        body.append(f'<figure class="percorso-testata"><img src="{item["immagine"]}" alt="" '
+                    'class="percorso-testata__img" decoding="async" fetchpriority="high"></figure>')
     body.append(f'<h1 class="person-name">{escape_html(label)}</h1>')
-    body.append(f'<div class="org-dates">{count_text(num_doc)}</div>')
-    body.append('<p class="percorso-intro">')
-    body.append('Documenti catalogati in questo percorso tematico.')
-    body.append('</p>')
+    anni = get_years_text(item['docs'])
+    meta = count_text(num_doc) + (f' · {anni}' if anni else '')
+    body.append(f'<div class="org-dates">{escape_html(meta)}</div>')
+    url_archivio = site_path('documenti/') + '?serie=' + urllib.parse.quote(label, safe='')
+    body.append(f'<p class="soggetto-azione"><a class="doc-correlati__tutti" href="{escape_html(url_archivio)}">'
+                "Vedi questi documenti nell'archivio</a></p>")
     body.append('')
     body.append('<h2 class="soggetto-sezione">Documenti</h2>')
     body.append('')
@@ -239,9 +248,9 @@ def generate_single_page(item):
         body.append('    <div class="doc-contenuto">')
         body.append(f'        <div class="doc-titolo"><a href="{doc_url}">{titolo_html}</a></div>')
 
-        if doc.get('badge'):
-            badge_html = escape_html(doc['badge'])
-            body.append(f'        <div class="doc-meta-riga">{badge_html}</div>')
+        meta = meta_riga(doc.get('tipo', ''), doc.get('org', ''))
+        if meta:
+            body.append(f'        {meta}')
 
         body.append('    </div>')
         body.append('</div>')
@@ -491,10 +500,6 @@ def genera_argomenti():
         if tipo in ['nan', 'None']:
             tipo = ''
 
-        if organizzazione and tipo:
-            badge = f'{organizzazione} · {tipo}'
-        else:
-            badge = organizzazione or tipo
 
         argomenti = split_argomenti(row.get(topic_column, ''))
         if not argomenti:
@@ -505,7 +510,8 @@ def genera_argomenti():
             'titolo': titolo,
             'data': data_form,
             'data_ordine': data_ordine,
-            'badge': badge,
+            'tipo': tipo,
+            'org': organizzazione,
         }
 
         seen_keys = set()

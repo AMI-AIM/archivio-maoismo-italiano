@@ -57,7 +57,7 @@ def _link_ia(url_attr, etichetta="Apri su Internet Archive"):
 # Versione dell'impaginazione della scheda: entra nell'hash della cache,
 # cosi' un cambio di template rigenera tutte le schede anche se i dati
 # della riga non sono cambiati.
-SCHEDA_TEMPLATE_VERSION = "2026-10-catalogo-4"
+SCHEDA_TEMPLATE_VERSION = "2026-10-catalogo-5"
 
 _MAX_CORRELATI = 4
 
@@ -690,9 +690,9 @@ hide:
             if correlati_org:
                 org_nome = doc_indice["org"]
                 url_org = (site_path("documenti/") + "?organizzazione="
-                           + urllib.parse.quote(urllib.parse.quote(org_nome, safe=""), safe=""))
+                           + urllib.parse.quote(org_nome, safe=""))
                 colonne += f"""<div class="doc-correlati__gruppo">
-<h3>Stessa organizzazione <span class="doc-correlati__chiave">{html.escape(org_nome)}</span></h3>
+<h3>Stessa organizzazione<span class="ami-sr-only">:</span> <span class="doc-correlati__chiave">{html.escape(org_nome)}</span></h3>
 {_lista_correlati(correlati_org)}
 <a class="doc-correlati__tutti" href="{html.escape(url_org, quote=True)}">Tutti i documenti di {html.escape(org_nome)}</a>
 </div>
@@ -701,7 +701,7 @@ hide:
                 anno = doc_indice["anno"]
                 url_anno = site_path("documenti/") + f"?anno_min={anno}&amp;anno_max={anno}"
                 colonne += f"""<div class="doc-correlati__gruppo">
-<h3>Stesso anno <span class="doc-correlati__chiave">{anno}</span></h3>
+<h3>Stesso anno<span class="ami-sr-only">:</span> <span class="doc-correlati__chiave">{anno}</span></h3>
 {_lista_correlati(correlati_anno)}
 <a class="doc-correlati__tutti" href="{url_anno}">Tutti i documenti del {anno}</a>
 </div>

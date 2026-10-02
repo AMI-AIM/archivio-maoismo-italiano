@@ -1,0 +1,371 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T06:42:56Z",
+  "title": "Design System: AMI – Archivio del Maoismo Italiano",
+  "extensions": {
+    "colorMeta": {
+      "rosso-catalogo": {
+        "role": "primary",
+        "displayName": "Rosso catalogo",
+        "canonical": "#b71c1c",
+        "tonalRamp": [
+          "#360808",
+          "#5b0e0e",
+          "#801313",
+          "#a41919",
+          "#c54949",
+          "#d78282",
+          "#e9baba",
+          "#f7e8e8"
+        ]
+      },
+      "rosso-inchiostro": {
+        "role": "primary",
+        "displayName": "Rosso inchiostro",
+        "canonical": "#8e0000",
+        "tonalRamp": [
+          "#2a0000",
+          "#470000",
+          "#630000",
+          "#7f0000",
+          "#a43333",
+          "#c07272",
+          "#ddb2b2",
+          "#f3e5e5"
+        ]
+      },
+      "rosso-tenue": {
+        "role": "primary",
+        "displayName": "Rosso tenue",
+        "canonical": "#f9ecec",
+        "tonalRamp": [
+          "#4a4646",
+          "#7c7676",
+          "#aea5a5",
+          "#e0d4d4",
+          "#faefef",
+          "#fbf4f4",
+          "#fdf9f9",
+          "#fefdfd"
+        ]
+      },
+      "inchiostro": {
+        "role": "neutral",
+        "displayName": "Inchiostro",
+        "canonical": "#1a1a1a",
+        "tonalRamp": [
+          "#070707",
+          "#0d0d0d",
+          "#121212",
+          "#171717",
+          "#474747",
+          "#818181",
+          "#bababa",
+          "#e8e8e8"
+        ]
+      },
+      "testo-secondario": {
+        "role": "neutral",
+        "displayName": "Grigio etichetta",
+        "canonical": "#5c5c5c",
+        "tonalRamp": [
+          "#1b1b1b",
+          "#2e2e2e",
+          "#404040",
+          "#525252",
+          "#7c7c7c",
+          "#a5a5a5",
+          "#cecece",
+          "#eeeeee"
+        ]
+      },
+      "carta": {
+        "role": "neutral",
+        "displayName": "Carta",
+        "canonical": "#f5f5f5",
+        "tonalRamp": [
+          "#494949",
+          "#7a7a7a",
+          "#ababab",
+          "#dcdcdc",
+          "#f7f7f7",
+          "#f9f9f9",
+          "#fcfcfc",
+          "#fefefe"
+        ]
+      },
+      "bianco": {
+        "role": "neutral",
+        "displayName": "Bianco",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#4c4c4c",
+          "#7f7f7f",
+          "#b2b2b2",
+          "#e5e5e5",
+          "#ffffff",
+          "#ffffff",
+          "#ffffff",
+          "#ffffff"
+        ]
+      },
+      "notte": {
+        "role": "neutral",
+        "displayName": "Notte",
+        "canonical": "#0d0d0d",
+        "tonalRamp": [
+          "#030303",
+          "#060606",
+          "#090909",
+          "#0b0b0b",
+          "#3d3d3d",
+          "#797979",
+          "#b6b6b6",
+          "#e6e6e6"
+        ]
+      },
+      "notte-superficie": {
+        "role": "neutral",
+        "displayName": "Notte (superficie)",
+        "canonical": "#1c1c1c",
+        "tonalRamp": [
+          "#080808",
+          "#0e0e0e",
+          "#131313",
+          "#191919",
+          "#494949",
+          "#828282",
+          "#bababa",
+          "#e8e8e8"
+        ]
+      },
+      "errore": {
+        "role": "error",
+        "displayName": "Errore",
+        "canonical": "#d32f2f",
+        "tonalRamp": [
+          "#3f0e0e",
+          "#691717",
+          "#932020",
+          "#bd2a2a",
+          "#db5858",
+          "#e68c8c",
+          "#f1c0c0",
+          "#faeaea"
+        ]
+      },
+      "testo": {
+        "role": "neutral",
+        "displayName": "Testo",
+        "canonical": "rgba(0, 0, 0, 0.87)"
+      },
+      "filetto": {
+        "role": "neutral",
+        "displayName": "Filetto",
+        "canonical": "rgba(0, 0, 0, 0.07)"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Titolo di pagina",
+        "purpose": "h1 di documento, persona, organizzazione, percorso."
+      },
+      "headline": {
+        "displayName": "Sezione",
+        "purpose": "Titoli di sezione (Descrizione, Scheda, Nell'archivio)."
+      },
+      "title": {
+        "displayName": "Titolo di riga",
+        "purpose": "Titoli negli elenchi e nei risultati."
+      },
+      "body": {
+        "displayName": "Corpo",
+        "purpose": "Descrizioni, biografie, testo del progetto (misura 68ch)."
+      },
+      "label": {
+        "displayName": "Etichetta",
+        "purpose": "Etichette di campo, tipologie, ruoli: Archivo maiuscoletto grigio."
+      },
+      "data": {
+        "displayName": "Dato d'archivio",
+        "purpose": "Segnature, valori della Scheda, conteggi: Courier Prime."
+      }
+    },
+    "shadows": [
+      {
+        "name": "sollevamento-card",
+        "value": "0 6px 16px rgba(0, 0, 0, 0.08)",
+        "purpose": "Card-vetrina al passaggio del mouse (con translateY(-4px))."
+      },
+      {
+        "name": "superficie-sospesa",
+        "value": "0 4px 12px rgba(0, 0, 0, 0.12)",
+        "purpose": "Tendine e pannelli."
+      },
+      {
+        "name": "maniglia",
+        "value": "0 1px 4px rgba(0, 0, 0, 0.25)",
+        "purpose": "Maniglie e pillole dello slider anno."
+      }
+    ],
+    "motion": [
+      {
+        "name": "transizione-stato",
+        "value": "0.15s–0.2s ease",
+        "purpose": "Colore e sollevamento al passaggio del mouse; azzerata con prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "telefono-stretto",
+        "value": "480px"
+      },
+      {
+        "name": "telefono",
+        "value": "600px"
+      },
+      {
+        "name": "tablet",
+        "value": "768px"
+      },
+      {
+        "name": "tablet-largo",
+        "value": "900px"
+      },
+      {
+        "name": "desktop-stretto",
+        "value": "1100px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Pulsante primario",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Azione principale (Tutti i documenti, Tutte le persone).",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Tutti i documenti</a>",
+      "css": ".ds-btn-primary{display:inline-block;background:#b71c1c;color:#fff;padding:12px 30px;border-radius:4px;font-family:Archivo, Arial, 'Helvetica Neue', sans-serif;font-weight:600;font-size:15px;text-decoration:none;transition:background-color .2s} .ds-btn-primary:hover{background:#8e0000} .ds-btn-primary:focus-visible{outline:2px solid #b71c1c;outline-offset:2px}"
+    },
+    {
+      "name": "Segnatura",
+      "kind": "custom",
+      "refersTo": "segnatura",
+      "description": "Firma della scheda documento, sopra il titolo.",
+      "html": "<p class=\"ds-segnatura\"><span class=\"ds-segnatura__id\">AMI-0043</span><span>·</span><span>Opuscolo</span><span>·</span><span>1968</span></p>",
+      "css": ".ds-segnatura{display:flex;gap:0 10px;margin:0;font-family:'Courier Prime', 'Courier New', monospace;font-size:16px;letter-spacing:.02em;color:#5c5c5c} .ds-segnatura__id{color:#b71c1c;font-weight:700}"
+    },
+    {
+      "name": "Etichetta",
+      "kind": "chip",
+      "refersTo": "etichetta",
+      "description": "Tipologia, ruolo, categoria: grigio maiuscoletto senza fondo.",
+      "html": "<span class=\"ds-etichetta\">Opuscolo</span>",
+      "css": ".ds-etichetta{font-family:Archivo, Arial, 'Helvetica Neue', sans-serif;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#5c5c5c}"
+    },
+    {
+      "name": "Chip filtro attivo",
+      "kind": "chip",
+      "refersTo": "chip-filtro",
+      "description": "Filtro applicato, rimovibile.",
+      "html": "<span class=\"ds-chip\"><span><strong>Organizzazione:</strong> Partito Comunista Cinese</span><button class=\"ds-chip__x\" aria-label=\"Rimuovi filtro\">✕</button></span>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;gap:8px;background:#f5f5f5;border:1px solid #b71c1c;color:#b71c1c;border-radius:999px;padding:5px 10px 5px 16px;font-family:Archivo, Arial, 'Helvetica Neue', sans-serif;font-size:15px} .ds-chip__x{border:0;background:none;color:inherit;cursor:pointer} .ds-chip__x:hover{color:#8e0000}"
+    },
+    {
+      "name": "Riga di catalogo",
+      "kind": "custom",
+      "description": "Data rossa, titolo, metadati; righe separate da filetti.",
+      "html": "<div class=\"ds-riga\"><div class=\"ds-riga__data\">1968</div><div><a class=\"ds-riga__titolo\" href=\"#\">Sulla Nuova Democrazia</a><div class=\"ds-riga__meta\">Partito Comunista Cinese · Opuscolo</div></div></div>",
+      "css": ".ds-riga{display:grid;grid-template-columns:6.5rem 1fr;gap:12px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,.07);font-family:Fraunces, Georgia, 'Times New Roman', serif} .ds-riga__data{color:#b71c1c;font-weight:400;font-size:15px;font-variant-numeric:tabular-nums} .ds-riga__titolo{color:rgba(0,0,0,.87);font-weight:600;font-size:18px;text-decoration:none} .ds-riga__titolo:hover{color:#b71c1c;text-decoration:underline} .ds-riga__meta{font-family:Archivo, Arial, 'Helvetica Neue', sans-serif;font-size:15px;color:#5c5c5c}"
+    },
+    {
+      "name": "Campo Scheda",
+      "kind": "custom",
+      "description": "Coppia etichetta/valore della Scheda dei metadati.",
+      "html": "<dl class=\"ds-scheda\"><dt>Editore</dt><dd>Casa editrice in lingue estere</dd></dl>",
+      "css": ".ds-scheda{margin:0;padding:11px 0;border-bottom:1px solid rgba(0,0,0,.07)} .ds-scheda dt{font-family:Archivo, Arial, 'Helvetica Neue', sans-serif;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#5c5c5c} .ds-scheda dd{margin:2px 0 0;font-family:'Courier Prime', 'Courier New', monospace;font-size:15px;color:rgba(0,0,0,.87)}"
+    },
+    {
+      "name": "Campo di ricerca",
+      "kind": "input",
+      "refersTo": "campo-ricerca",
+      "description": "Ricerca nel testo dell'archivio.",
+      "html": "<input class=\"ds-input\" type=\"search\" placeholder=\"Titolo, autore, descrizione…\">",
+      "css": ".ds-input{width:100%;padding:9px 12px;border:1px solid rgba(0,0,0,.07);border-radius:4px;background:#fff;color:rgba(0,0,0,.87);font-family:Fraunces, Georgia, 'Times New Roman', serif;font-size:16px} .ds-input:focus-visible{outline:2px solid #b71c1c;outline-offset:2px}"
+    },
+    {
+      "name": "Card vetrina",
+      "kind": "card",
+      "refersTo": "card-vetrina",
+      "description": "Card con immagine 4:3 delle pagine-vetrina.",
+      "html": "<a class=\"ds-card\" href=\"#\"><div class=\"ds-card__img\"></div><div class=\"ds-card__testo\"><span class=\"ds-card__tipo\">Partito</span><div class=\"ds-card__nome\">Partito Comunista Cinese</div><div class=\"ds-card__conta\">33 documenti</div></div></a>",
+      "css": ".ds-card{display:flex;flex-direction:column;width:260px;background:#f5f5f5;border:1px solid rgba(0,0,0,.07);border-radius:12px;overflow:hidden;color:inherit;text-decoration:none;transition:transform .15s,box-shadow .2s} .ds-card:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(0,0,0,.08)} .ds-card__img{aspect-ratio:4/3;background:#b71c1c} .ds-card__testo{padding:12px 20px 16px;border-top:1px solid rgba(0,0,0,.07)} .ds-card__tipo{font-family:Archivo, Arial, 'Helvetica Neue', sans-serif;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#5c5c5c} .ds-card__nome{font-family:Fraunces, Georgia, 'Times New Roman', serif;font-weight:600;font-size:18px} .ds-card__conta{font-family:Fraunces, Georgia, 'Times New Roman', serif;font-size:15px;color:#5c5c5c}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Catalogo e manifesto",
+    "overview": "Il sito parla con due voci dichiarate. Dove si consulta (archivio, schede documento, liste di persone, organizzazioni e percorsi) vale la sobrietà del catalogo: righe su filetti sottili, segnature dattiloscritte, etichette grigie in maiuscoletto, nessun riquadro superfluo. Dove si entra e si sceglie (home, indici, percorsi tematici, progetto) vale l'impatto della stampa militante: fotografie d'epoca a piena larghezza, card con immagine, il rosso pieno delle testate.\n\nIl tono è rigoroso ma militante. Il rigore viene dal metodo archivistico: ogni dato ha un posto fisso, una gerarchia leggibile e un carattere che ne dichiara la natura (il testo in Fraunces, le azioni in Archivo, i dati in Courier Prime). La militanza viene dai materiali stessi: il rosso, le testate, le immagini di cortei e opuscoli. Il design non aggiunge retorica propria; lascia parlare le fonti e le incornicia con precisione.\n\nLa densità è quella di una sala di consultazione: tanta informazione per schermo, ma ordinata in colonne, con la data sempre in testa alla riga e il titolo come elemento più forte.",
+    "keyCharacteristics": [
+      "Due registri: catalogo (filetti) per consultare, manifesto (card e immagini) per scegliere.",
+      "Tre famiglie con tre ruoli fissi: Fraunces per leggere, Archivo per agire ed etichettare, Courier Prime per i dati.",
+      "Un solo colore d'accento, il rosso, riservato a link, date e azioni primarie.",
+      "Etichette grigie in maiuscoletto, mai blocchi colorati.",
+      "Il documento è al centro: segnatura, scheda dei metadati, documenti collegati."
+    ],
+    "rules": [
+      {
+        "name": "The Red Pencil Rule",
+        "body": "Il rosso segna solo ciò che si clicca o che data un documento: link, date, pulsanti primari, selezione. Etichette, badge e categorie non sono mai rossi.",
+        "section": "colors"
+      },
+      {
+        "name": "The Darker Hover Rule",
+        "body": "Al passaggio del mouse il rosso si scurisce (rosso inchiostro), non si schiarisce. Un rosso più chiaro perde contrasto sul bianco.",
+        "section": "colors"
+      },
+      {
+        "name": "The Three Voices Rule",
+        "body": "Ogni testo appartiene a una sola voce: Fraunces se si legge, Archivo se si clicca o etichetta, Courier Prime se è un dato di catalogo. Le azioni (link \"Tutti i documenti di…\", \"Cita questo documento\", Reset) non vanno mai in Courier. Eccezione dichiarata: nella Scheda i valori restano in Courier anche quando sono link (autore, organizzazione, percorsi tematici), in rosso: sono dati prima che azioni.",
+        "section": "typography"
+      },
+      {
+        "name": "The Weight Ladder Rule",
+        "body": "La gerarchia dei titoli si fa col peso di Fraunces (900 → 750 → 650 → 600), non cambiando famiglia.",
+        "section": "typography"
+      },
+      {
+        "name": "The Date Stays Serif Rule",
+        "body": "Le date in testa alle righe restano in Fraunces rosso, in tutte le liste del sito; il Courier è per la segnatura e i valori di metadato.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hairline Rule",
+        "body": "Nel registro catalogo le righe si separano con un filetto di 1px, non con riquadri o sfondi alternati.",
+        "section": "layout"
+      },
+      {
+        "name": "The Two Registers Rule",
+        "body": "Le ombre esistono solo nel registro manifesto (home, indici di Persone e Organizzazioni, percorsi tematici, progetto). Archivio, schede documento e liste restano piatti.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do separare le righe di consultazione con filetti di 1px (The Hairline Rule).",
+      "Do mettere in Courier Prime segnature, valori di metadato e conteggi; in Archivo azioni ed etichette; in Fraunces tutto ciò che si legge (The Three Voices Rule).",
+      "Do usare il rosso solo per link, date, selezione e pulsanti primari (The Red Pencil Rule).",
+      "Do scurire il rosso al passaggio del mouse (The Darker Hover Rule).",
+      "Do mostrare le date incerte come \"s.d.\" (anno ignoto) e \"ca. 2010\" (cifre finali ignote).",
+      "Do mantenere card con immagine e ombre morbide nelle pagine-vetrina: sono una scelta di impatto, non un residuo.",
+      "Do garantire aree cliccabili di almeno 44px sugli schermi touch e un anello di focus visibile su ogni controllo."
+    ],
+    "donts": [
+      "Don't usare blocchi o badge rossi pieni per etichette, ruoli o categorie: sono grigi, in maiuscoletto, senza fondo.",
+      "Don't aggiungere ombre o riquadri nelle pagine di consultazione (The Two Registers Rule).",
+      "Don't usare Courier Prime per link e azioni (unica eccezione: i valori della Scheda).",
+      "Don't mettere titoli di pagina in rosso, né colorare di rosso icone decorative, barrette, avatar o titoli di card non cliccabili.",
+      "Don't usare emoji come icone: le icone sono SVG con lo stesso tratto.",
+      "Don't troncare i nomi nei filtri: vanno a capo interi.",
+      "Don't mostrare un titolo visibile in home (resta solo quello per i lettori di schermo) e non rimuovere l'avviso sullo stato di Internet Archive in cima alla pagina."
+    ]
+  }
+}

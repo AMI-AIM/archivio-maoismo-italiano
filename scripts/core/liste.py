@@ -24,23 +24,48 @@ GRUPPI_ORGANIZZAZIONE = (
 )
 
 
-def _riga(doc, ruolo_gruppo):
+def valore_pulito(valore):
+    """Testo di una cella del catalogo, senza 'nan'/'None'."""
+    v = str(valore if valore is not None else '').strip()
+    return '' if v in ('nan', 'None', 'NaT') else v
+
+
+def meta_riga(tipo='', org='', etichette=()):
+    """Riga dei metadati sotto il titolo: tipologia (etichetta grigia),
+    organizzazione, eventuali etichette extra. Stessa forma in home,
+    percorsi tematici, persone e organizzazioni."""
+    parti = []
+    tipo = valore_pulito(tipo)
+    if tipo:
+        tipo = 'Testo' if tipo == 'testo_bilingue' else tipo
+        parti.append(f'<span class="doc-type-chip">{html.escape(tipo[:1].upper() + tipo[1:])}</span>')
+    org = valore_pulito(org)
+    if org:
+        parti.append(f'<span class="doc-org">{html.escape(org)}</span>')
+    for e in etichette:
+        parti.append(f'<span class="ruolo-badge">{html.escape(e)}</span>')
+    return f'<div class="doc-meta">{"".join(parti)}</div>' if parti else ''
+
+
+def _riga(doc, ruolo_gruppo, escludi_org=''):
     altri = [r for r in doc['ruoli'] if r != ruolo_gruppo]
-    etichetta = ''
-    if altri:
-        testo = html.escape('anche ' + ', '.join(altri))
-        etichetta = f'\n        <div class="doc-ruoli"><span class="ruolo-badge">{testo}</span></div>'
+    etichette = ('anche ' + ', '.join(altri),) if altri else ()
+    org = doc.get('org', '')
+    if escludi_org and org.strip().lower() == escludi_org.strip().lower():
+        org = ''
+    meta = meta_riga(doc.get('tipo', ''), org, etichette)
     return f"""
 <div class="doc-row">
     <div class="doc-data">{html.escape(doc['data'])}</div>
     <div class="doc-contenuto">
-        <div class="doc-titolo"><a href="{site_path(f"documenti/{doc['id']}/")}">{html.escape(doc['titolo'])}</a></div>{etichetta}
+        <div class="doc-titolo"><a href="{site_path(f"documenti/{doc['id']}/")}">{html.escape(doc['titolo'])}</a></div>
+        {meta}
     </div>
 </div>
 """
 
 
-def elenco_per_ruolo(documenti, gruppi):
+def elenco_per_ruolo(documenti, gruppi, escludi_org=''):
     """HTML dei documenti raggruppati per ruolo (ordine cronologico interno)."""
     assegnati = {chiave: [] for chiave, _, _ in gruppi}
     for doc in documenti:
@@ -60,7 +85,7 @@ def elenco_per_ruolo(documenti, gruppi):
             f'<h3 class="doc-gruppo__titolo" id="gruppo-{ident}">{html.escape(titolo)}'
             f' <span class="doc-gruppo__conteggio">{conteggio}</span></h3>\n'
             '<div class="catalogo-lista">'
-            + ''.join(_riga(d, chiave) for d in docs)
+            + ''.join(_riga(d, chiave, escludi_org) for d in docs)
             + '</div>\n</section>\n'
         )
     return '\n'.join(out)

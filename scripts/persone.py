@@ -1,12 +1,13 @@
 import hashlib
 import html
+import urllib.parse
 import json
 import os
 import sys
 
 import pandas as pd
 from core.catalog_indexer import CatalogIndexer
-from core.liste import GRUPPI_PERSONA, elenco_per_ruolo
+from core.liste import GRUPPI_PERSONA, elenco_per_ruolo, valore_pulito
 from core.schema_generator import SchemaGenerator
 from core.site_config import site_path
 from core.utils import escape_yaml_string, formatta_data, formatta_estremo, slugify
@@ -155,7 +156,9 @@ def genera_persone():
                     'titolo': titolo,
                     'data': data_form,
                     'data_ordine': data_ordine,
-                    'ruoli': ruoli
+                    'ruoli': ruoli,
+                    'tipo': valore_pulito(doc.get('tipo', '')),
+                    'org': valore_pulito(doc.get('organizzazione', '')),
                 })
 
         if documenti:
@@ -268,12 +271,35 @@ hide:
         dates_html = f'<div class="person-dates">{data_range_html}</div>' if data['data_range'] else ''
 
         nome_html = html.escape(nome)
+        url_archivio = site_path('documenti/') + '?persona=' + urllib.parse.quote(nome, safe='')
+        azione_html = (f'<p class="soggetto-azione"><a class="doc-correlati__tutti" '
+                       f'href="{html.escape(url_archivio, quote=True)}">Vedi questi documenti nell\'archivio</a></p>')
         percorso_html = f'<nav class="doc-percorso" aria-label="Percorso"><a href="{site_path("persone/")}">Persone</a></nav>'
         content = f"""
 {percorso_html}
 <h1 class="person-name">{nome_html}</h1>
 {dates_html}
 {bio_section}
+{azione_html}
+<h2 class="soggetto-sezione">Documenti</h2>
+"""
+        if not data['biografia']:
+            # Nessun testo curatoriale ancora: testata compatta.
+            img_html = ''
+            if data.get('immagine'):
+                img_html = (f'<img src="{data["immagine"]}" alt="Foto di {nome_attr}" '
+                            f'class="soggetto-testata__img soggetto-testata__img--cover" decoding="async">')
+            content = f"""
+<div class="soggetto-testata">
+<div class="soggetto-testata__testo">
+{percorso_html}
+<h1 class="person-name">{nome_html}</h1>
+{dates_html}
+<p class="soggetto-nota">Scheda biografica in fase di redazione.</p>
+{azione_html}
+</div>
+{img_html}
+</div>
 <h2 class="soggetto-sezione">Documenti</h2>
 """
         # Documenti divisi per ruolo (core/liste.py): il ruolo diventa il
@@ -303,7 +329,9 @@ hide:
     lines.append('  - toc')
     lines.append('---')
     lines.append('')
-    lines.append('# Persone in evidenza')
+    lines.append('# Persone')
+    lines.append('')
+    lines.append('<h2 class="soggetto-sezione">In evidenza</h2>')
     lines.append('')
 
     if persone_top:
@@ -320,7 +348,7 @@ hide:
             else:
                 avatar_html = f'<img src="{PLACEHOLDER_URL}" alt="{nome_html}" class="top-card-avatar-img" width="500" height="500" decoding="async">'
 
-            count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
+            count_text = "1 documento collegato" if num_doc == 1 else f"{num_doc} documenti collegati"
 
             lines.append('    <div class="top-card">')
             lines.append(f'        <a href="{slug}/" class="top-card-link">')
@@ -336,6 +364,7 @@ hide:
             lines.append('    </div>')
         lines.append('</div>')
 
+    lines.append('<h2 class="soggetto-sezione">Tutte le persone</h2>')
     lines.append('<div class="filtri-persone">')
     lines.append('    <div class="search-bar">')
     lines.append('        <input type="text" id="search-input" placeholder="Cerca per nome…" aria-label="Cerca persone">')
@@ -347,7 +376,7 @@ hide:
         if lettera in lettere_presenti:
             lines.append(f'        <button class="lettera-btn" data-lettera="{lettera}">{lettera}</button>')
         else:
-            lines.append(f'        <button class="lettera-btn lettera-btn--disabled" data-lettera="{lettera}" disabled>{lettera}</button>')
+            lines.append(f'        <button class="lettera-btn lettera-btn--disabled" data-lettera="{lettera}" disabled aria-hidden="true">{lettera}</button>')
     lines.append('    </div>')
     lines.append('</div>')
 
@@ -357,7 +386,7 @@ hide:
             slug = data['slug']
             num_doc = data['num_doc']
             date_vita = data['data_range']
-            count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
+            count_text = "1 documento collegato" if num_doc == 1 else f"{num_doc} documenti collegati"
             lettera = html.escape(nome[0].upper(), quote=True)
             nome_html = html.escape(nome)
             date_vita_html = html.escape(date_vita)
