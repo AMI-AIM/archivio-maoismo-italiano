@@ -2546,10 +2546,14 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 }
 
-/* Una sola misura per tutta la pagina (680px, come la prosa a 16px):
-   lead, segnatura, aree, note, bibliografia e citazione si allineano a
-   destra sullo stesso bordo. */
-.md-typeset > p.progetto-lead,
+/* Una sola misura per il corpo della pagina (600px: circa 75-80 battute
+   in Fraunces a 16px): prosa, titoli, aree, note, bibliografia, Scheda e
+   citazione si allineano sullo stesso bordo destro. Solo l'apertura e'
+   piu' larga. */
+.md-content__inner:has(.progetto-aree) > p,
+.md-content__inner:has(.progetto-aree) > ul,
+.md-content__inner:has(.progetto-aree) > h2,
+.md-content__inner:has(.progetto-aree) > h3,
 .md-typeset .progetto-cifre,
 .md-typeset .progetto-aree,
 .md-typeset details.progetto-indice,
@@ -2557,11 +2561,18 @@ input[type="search"]::-webkit-search-cancel-button {
 .md-typeset .progetto-bibliografia,
 .md-typeset .progetto-citazione,
 .md-typeset .scheda-raccolta {
-  max-width: 34rem;
+  max-width: 30rem;
+}
+
+/* Titoli di sezione su filetto, come "Descrizione" e "Scheda" nelle
+   schede documento. */
+.md-content__inner:has(.progetto-aree) > h2 {
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lighter);
 }
 
 /* --- Apertura ------------------------------------------------------------ */
-.md-typeset h1:has(+ .progetto-lead)::after {
+.md-typeset h1:has(+ .progetto-apertura)::after {
   content: "";
   display: block;
   width: 60px;
@@ -2570,19 +2581,68 @@ input[type="search"]::-webkit-search-cancel-button {
   border-radius: 2px;
   background: var(--md-primary-fg-color);
 }
-.md-typeset > p.progetto-lead {
+.md-typeset .progetto-apertura > p {
+  max-width: 30rem;
+  line-height: var(--ami-line-height-relaxed);
+  text-wrap: pretty;
+}
+.md-typeset .progetto-apertura > p.progetto-lead {
+  max-width: 34rem;
   font-size: var(--ami-font-size-md);
   line-height: 1.55;
   font-variation-settings: "opsz" 30;
   color: var(--md-default-fg-color);
 }
+/* Desktop largo: apertura su due colonne, piu' larga del corpo. A sinistra
+   lead (22px) e presentazione, a destra la segnatura della raccolta in
+   colonna, come i dati a margine di una scheda. */
+@media screen and (min-width: 76.25em) {
+  .md-typeset .progetto-apertura {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 11rem;
+    grid-template-areas: "lead dati" "testo dati";
+    column-gap: 3rem;
+    align-items: start;
+    max-width: 46rem;
+    margin-bottom: 1.6rem;
+  }
+  .md-typeset .progetto-apertura > p.progetto-lead {
+    grid-area: lead;
+    max-width: none;
+    margin-top: 0;
+    font-size: 1.1rem;
+    line-height: 1.45;
+    letter-spacing: -0.005em;
+    font-variation-settings: "opsz" 48;
+  }
+  .md-typeset .progetto-apertura > p:not(.progetto-lead):not(.progetto-cifre) {
+    grid-area: testo;
+    max-width: none;
+    margin-bottom: 0;
+  }
+  .md-typeset .progetto-apertura > .progetto-cifre {
+    grid-area: dati;
+    margin: 0.35rem 0 0;
+    padding: 0;
+    border-bottom: 0;
+  }
+  .md-typeset .progetto-apertura .progetto-cifre__riga {
+    flex-direction: column;
+    margin-left: 0;
+  }
+  .md-typeset .progetto-apertura .progetto-cifre__riga > span {
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--md-default-fg-color--lighter);
+  }
+  .md-typeset .progetto-apertura .progetto-cifre__riga > span::before {
+    display: none;
+  }
+}
 
 /* Segnatura della raccolta (scripts/core/raccolta.py): come la segnatura
    delle schede documento, "AMI" rosso e il resto in Courier grigio. */
 .md-typeset .progetto-cifre {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.15rem 0;
+  overflow: hidden;
   margin: 1.4rem 0 1.6rem;
   padding: 0.55rem 0;
   border-top: 1px solid var(--md-default-fg-color--lighter);
@@ -2592,21 +2652,24 @@ input[type="search"]::-webkit-search-cancel-button {
   letter-spacing: 0.02em;
   color: var(--md-default-fg-color--light);
 }
-.md-typeset .progetto-cifre > span {
+/* Separatori: ogni voce porta il suo "·" davanti; la riga sborda a
+   sinistra di 1.6em e il contenitore la ritaglia, cosi' il punto che
+   finisce a inizio riga quando si va a capo non si vede. */
+.md-typeset .progetto-cifre__riga {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.15rem;
+  margin-left: -1.6em;
+}
+.md-typeset .progetto-cifre__riga > span {
   white-space: nowrap;
 }
-.md-typeset .progetto-cifre > span + span::before {
+.md-typeset .progetto-cifre__riga > span::before {
   content: "·";
-  margin: 0 0.55em;
+  display: inline-block;
+  width: 1.6em;
+  text-align: center;
   color: var(--md-default-fg-color--lighter);
-}
-@media (max-width: 600px) {
-  .md-typeset .progetto-cifre {
-    gap: 0.15rem 1rem;
-  }
-  .md-typeset .progetto-cifre > span + span::before {
-    display: none;
-  }
 }
 .md-typeset .progetto-cifre__id {
   color: var(--md-primary-fg-color);
@@ -2620,7 +2683,7 @@ input[type="search"]::-webkit-search-cancel-button {
   display: none;
 }
 @media screen and (max-width: 59.984375em) {
-  .md-typeset .progetto-cifre:has(+ details.progetto-indice) {
+  .md-typeset .progetto-apertura:has(+ details.progetto-indice) > .progetto-cifre {
     margin-bottom: 0;
     border-bottom: 0;
   }
@@ -2690,10 +2753,15 @@ input[type="search"]::-webkit-search-cancel-button {
   .md-typeset details.progetto-indice li::before {
     display: none;
   }
+  .md-typeset details.progetto-indice li.progetto-indice__sotto a {
+    padding-left: 1rem;
+    font-weight: 400;
+    color: var(--md-default-fg-color--light);
+  }
   .md-typeset details.progetto-indice a {
     display: flex;
     align-items: center;
-    min-height: 40px;
+    min-height: 44px;
     font-family: var(--ami-font-label);
     font-size: var(--ami-font-size-sm);
     font-weight: 500;
@@ -2876,9 +2944,97 @@ input[type="search"]::-webkit-search-cancel-button {
 
 /* --- Come citare l'AMI ---------------------------------------------------
    Pannello delle schede (.citazione-pannello, documenti.css), qui sempre
-   aperto. */
+   aperto e senza riquadri (corpo in registro catalogo): solo due filetti.
+   "Copia" resta il pulsante rosso pieno delle schede. */
 .md-typeset .progetto-citazione {
   margin: 0.6rem 0 1.2rem;
+  padding: 0.9rem 0;
+  background: none;
+  border-top: 1px solid var(--md-default-fg-color--lighter);
+  border-bottom: 1px solid var(--md-default-fg-color--lighter);
+}
+.md-typeset .progetto-citazione .citazione-testo {
+  max-height: none;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+.md-typeset .citazione-url > span {
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .md-typeset .progetto-citazione .citazione-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* --- Scheda della raccolta richiudibile (solo telefono) ----------------
+   Material stila <details> come un avviso: qui torna la scheda piatta. */
+.md-typeset details.scheda-raccolta {
+  margin: 0.8rem 0 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  font-size: inherit;
+}
+.md-typeset details.scheda-raccolta > summary {
+  display: none;
+}
+.md-typeset details.scheda-raccolta .doc-scheda__campo:first-child {
+  padding-top: 0.55rem;
+}
+@media (max-width: 600px) {
+  .md-typeset details.scheda-raccolta > summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-top: 1px solid var(--md-default-fg-color--lighter);
+    background: none;
+    font-family: var(--ami-font-label);
+    font-size: var(--ami-font-size-sm);
+    font-weight: 600;
+    color: var(--md-primary-fg-color);
+    cursor: pointer;
+    list-style: none;
+  }
+  .md-typeset details.scheda-raccolta > summary::-webkit-details-marker {
+    display: none;
+  }
+  .md-typeset details.scheda-raccolta > summary::before {
+    display: none;
+  }
+  .md-typeset details.scheda-raccolta > summary::after {
+    content: "";
+    position: static;
+    width: 0.4rem;
+    height: 0.4rem;
+    margin-bottom: 0.2rem;
+    -webkit-mask: none;
+    mask: none;
+    background: none;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+  }
+  .md-typeset details.scheda-raccolta[open] > summary::after {
+    transform: rotate(-135deg);
+    margin-bottom: -0.15rem;
+  }
+  .md-typeset .scheda-raccolta__chiudi,
+  .md-typeset details.scheda-raccolta[open] .scheda-raccolta__apri {
+    display: none;
+  }
+  .md-typeset details.scheda-raccolta[open] .scheda-raccolta__chiudi {
+    display: inline;
+  }
 }
 .md-typeset .progetto-citazione [hidden] {
   display: none !important;
@@ -2886,7 +3042,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 /* --- Chiusura ------------------------------------------------------------ */
 .md-typeset > p.progetto-chiusura {
-  margin: 1.6rem 0 0.4rem;
+  margin: 1.2rem 0 2rem;
 }
 .md-typeset a.progetto-esplora {
   font-family: var(--ami-font-label);
