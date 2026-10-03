@@ -264,11 +264,13 @@
   var formati = {
     chicago: "Masci, Ivan, a cura di. <em>" + TITOLO + "</em>. Consultato il " + it + ". " + URL_HTML + ".",
     mla: "Masci, Ivan, curatore. <em>" + TITOLO + "</em>, " + URL_HTML + ". Consultato il " + it + ".",
+    // @online (biblatex): risorsa web; nessun anno, perche' quello di
+    // pubblicazione del sito non e' dichiarato (urldate = consultazione).
     bibtex: [
-      "@misc{ami,",
+      "@online{ami,",
       "  title = {Archivio del Maoismo Italiano ({AMI})},",
       "  editor = {Masci, Ivan},",
-      "  url = {" + URL_AMI + "},",
+      "  url = {" + URL_HTML + "},",
       "  urldate = {" + iso + "}",
       "}"
     ].join("\n"),
@@ -323,7 +325,7 @@
       var sel = window.getSelection();
       sel.removeAllRanges();
       sel.addRange(range);
-      etichetta.textContent = "Testo selezionato: premi Ctrl+C";
+      etichetta.textContent = "Testo selezionato: copialo";
       setTimeout(function () { etichetta.textContent = originale; }, 3000);
     });
   });
@@ -333,7 +335,19 @@
 // sommario dice quanti campi contiene. Su desktop resta aperta.
 (function () {
   var scheda = document.querySelector("details.scheda-raccolta");
-  if (scheda && window.matchMedia("(max-width: 600px)").matches) {
+  if (!scheda) return;
+  if (window.matchMedia("(max-width: 600px)").matches) {
     scheda.open = false;
+  }
+  // "Nascondi i campi" in fondo alla scheda aperta: chiude e riporta al
+  // sommario, cosi' non si resta a meta' pagina.
+  var chiudi = scheda.querySelector(".scheda-raccolta__chiudi-fondo");
+  var sommario = scheda.querySelector("summary");
+  if (chiudi && sommario) {
+    chiudi.addEventListener("click", function () {
+      scheda.open = false;
+      sommario.scrollIntoView({ block: "center" });
+      sommario.focus({ preventScroll: true });
+    });
   }
 })();
