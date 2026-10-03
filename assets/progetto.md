@@ -4,12 +4,21 @@ description: Finalità, consistenza e norme di descrizione dell'Archivio del Mao
 
 # Il progetto
 
-<!-- Apertura (registro manifesto): sopra i 1220px lead e segnatura
-     della raccolta stanno affiancati su una griglia piu' larga del corpo. -->
+<!-- Apertura (registro manifesto): sopra i 1220px lead, presentazione e
+     segnatura a sinistra, fotografia a destra, su una griglia piu' larga
+     del corpo. -->
 <div class="progetto-apertura" markdown="1">
 
 L'**Archivio del Maoismo Italiano** (AMI) è un progetto di catalogazione e conservazione digitale dedicato alla documentazione relativa alla diffusione del maoismo e dell'influenza politico-culturale della Repubblica Popolare Cinese in Italia nella seconda metà del Novecento.
 { .progetto-lead }
+
+<!-- Fotografia d'apertura: un documento dell'archivio (AMI-0062), con la
+     miniatura locale gia' usata dalla galleria. Sopra i 1220px sta nella
+     colonna destra, sotto i 1220px e' ritagliata in 5:4 (dall'alto, per non tagliare i volti). -->
+<figure class="progetto-figura">
+<img src="../immagini/miniature/AMI-0062-1200.webp" width="1131" height="1600" alt="Fotografia in bianco e nero: un gruppo di studenti in cappotto posa con un marinaio cinese e mostra i «Libretti rossi»." decoding="async" fetchpriority="high">
+<figcaption>Delegazione del movimento studentesco dell'Università di Trieste sulla nave cinese Jinsha, 20 marzo 1968. <a class="progetto-figura__segnatura" href="../documenti/AMI-0062/">AMI-0062</a></figcaption>
+</figure>
 
 L'AMI nasce dal progressivo accumulo di materiale documentario relativo al movimento «filo-cinese», con l'obiettivo di raccogliere e rendere liberamente consultabile in un'unica piattaforma un patrimonio storico-politico-culturale disperso tra collezioni private, biblioteche e archivi. Il progetto mira inoltre a facilitare la ricerca sull'argomento, svantaggiata dall'attuale mancanza di poli stabili ed efficienti.
 
@@ -30,12 +39,12 @@ L'AMI raccoglie, tra l'altro:
      di Mao sono anche pubblicazioni del PCC) e portano alle pagine di
      persone e organizzazioni. -->
 <div class="progetto-aree">
-<a class="progetto-area" href="../persone/mao-zedong/#gruppo-autore">
+<a class="progetto-area" href="../persone/mao-zedong/">
 <span class="progetto-area__titolo">Opere di Mao Zedong</span>
 <span class="progetto-area__testo">Per lo più nelle traduzioni italiane ufficiali della Casa editrice in lingue estere di Pechino, accanto ad alcune edizioni di editori italiani.</span>
 <span class="progetto-area__azione">Vedi le opere</span>
 </a>
-<a class="progetto-area" href="../organizzazioni/partito-comunista-cinese/#gruppo-pubblicazioni">
+<a class="progetto-area" href="../organizzazioni/partito-comunista-cinese/">
 <span class="progetto-area__titolo">Pubblicazioni ufficiali del PCC</span>
 <span class="progetto-area__testo">Documenti ufficiali del Partito Comunista Cinese, anch'essi pubblicati dalla Casa editrice in lingue estere di Pechino.</span>
 <span class="progetto-area__azione">Vedi le pubblicazioni</span>
