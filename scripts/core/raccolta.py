@@ -82,7 +82,10 @@ def scheda_raccolta_html(excel_path, df_catalogo):
     return ('<details class="scheda-raccolta" open>\n'
             f'<summary><span class="scheda-raccolta__apri">Mostra i {len(righe)} campi</span>'
             '<span class="scheda-raccolta__chiudi">Nascondi i campi</span></summary>\n'
-            '<dl class="doc-scheda__campi">' + ''.join(righe) + '</dl>\n</details>')
+            '<dl class="doc-scheda__campi">' + ''.join(righe) + '</dl>\n'
+            # Su telefono, a scheda aperta, si chiude anche dal fondo.
+            '<button type="button" class="scheda-raccolta__chiudi-fondo">Nascondi i campi</button>\n'
+            '</details>')
 
 
 def _valori_raccolta(excel_path, df_catalogo):
@@ -116,6 +119,9 @@ def cifre_raccolta_html(excel_path, df_catalogo):
     if segnatura:
         parti.append(f'<span class="progetto-cifre__id">{html.escape(segnatura)}</span>')
     parti += [f'<span>{html.escape(x)}</span>' for x in altri]
+    # Rimando alla Scheda completa (sezione "La raccolta" della pagina).
+    parti.append('<span><a class="progetto-cifre__link" href="#scheda-della-raccolta">'
+                 'Scheda completa</a></span>')
     # La riga interna sborda a sinistra e il contenitore la ritaglia: il
     # punto separatore che finisce a inizio riga, andando a capo, sparisce.
     return ('<p class="progetto-cifre"><span class="progetto-cifre__riga">'

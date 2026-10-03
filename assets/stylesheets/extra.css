@@ -2587,7 +2587,7 @@ input[type="search"]::-webkit-search-cancel-button {
   text-wrap: pretty;
 }
 .md-typeset .progetto-apertura > p.progetto-lead {
-  max-width: 34rem;
+  max-width: 30rem;
   font-size: var(--ami-font-size-md);
   line-height: 1.55;
   font-variation-settings: "opsz" 30;
@@ -2670,6 +2670,19 @@ input[type="search"]::-webkit-search-cancel-button {
   width: 1.6em;
   text-align: center;
   color: var(--md-default-fg-color--lighter);
+}
+.md-typeset a.progetto-cifre__link {
+  font-family: var(--ami-font-label);
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--md-primary-fg-color);
+  text-decoration: none;
+}
+.md-typeset a.progetto-cifre__link::after {
+  content: " ›";
+}
+.md-typeset a.progetto-cifre__link:hover {
+  color: var(--md-accent-fg-color);
 }
 .md-typeset .progetto-cifre__id {
   color: var(--md-primary-fg-color);
@@ -2756,7 +2769,6 @@ input[type="search"]::-webkit-search-cancel-button {
   .md-typeset details.progetto-indice li.progetto-indice__sotto a {
     padding-left: 1rem;
     font-weight: 400;
-    color: var(--md-default-fg-color--light);
   }
   .md-typeset details.progetto-indice a {
     display: flex;
@@ -2806,7 +2818,9 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 .md-typeset a.progetto-area {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  /* Colonna dell'azione a larghezza fissa: i testi vanno a capo tutti
+     nello stesso punto, le azioni si allineano sul bordo destro. */
+  grid-template-columns: minmax(0, 1fr) 10rem;
   grid-template-areas: "titolo azione" "testo azione";
   column-gap: 2rem;
   row-gap: 0.15rem;
@@ -2841,6 +2855,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 .md-typeset .progetto-area__azione {
   grid-area: azione;
+  justify-self: end;
   font-family: var(--ami-font-label);
   font-size: var(--ami-font-size-sm);
   font-weight: 600;
@@ -2859,6 +2874,7 @@ input[type="search"]::-webkit-search-cancel-button {
     grid-template-areas: "titolo" "testo" "azione";
   }
   .md-typeset .progetto-area__azione {
+    justify-self: start;
     margin-top: 0.35rem;
   }
 }
@@ -2943,22 +2959,14 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 /* --- Come citare l'AMI ---------------------------------------------------
-   Pannello delle schede (.citazione-pannello, documenti.css), qui sempre
-   aperto e senza riquadri (corpo in registro catalogo): solo due filetti.
-   "Copia" resta il pulsante rosso pieno delle schede. */
+   Pannello delle schede (.citazione-pannello, documenti.css: fondo carta,
+   testo in riquadro bianco), qui sempre aperto. Senza fondo sembrava
+   staccato dal resto: e' l'unico riquadro del corpo, voluto. */
 .md-typeset .progetto-citazione {
   margin: 0.6rem 0 1.2rem;
-  padding: 0.9rem 0;
-  background: none;
-  border-top: 1px solid var(--md-default-fg-color--lighter);
-  border-bottom: 1px solid var(--md-default-fg-color--lighter);
 }
 .md-typeset .progetto-citazione .citazione-testo {
   max-height: none;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: none;
 }
 .md-typeset .citazione-url > span {
   white-space: nowrap;
@@ -3053,4 +3061,44 @@ input[type="search"]::-webkit-search-cancel-button {
 .md-typeset .scheda-raccolta .doc-scheda__campi {
   columns: 2 14rem;
   column-gap: 2rem;
+}
+/* Bibliografia divisa per argomento: sottotitoli di gruppo (Fraunces 650,
+   16px: un gradino sotto gli H3 delle norme, 20px), in HTML per restare
+   fuori dall'indice. */
+.md-typeset h3.progetto-bib-gruppo {
+  max-width: 30rem;
+  margin: 1.6rem 0 0.6rem;
+  font-family: var(--ami-font-display);
+  font-size: var(--ami-font-size-base);
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+.md-typeset h2 + h3.progetto-bib-gruppo,
+.md-typeset .progetto-bibliografia:has(+ h3.progetto-bib-gruppo) {
+  margin-bottom: 0.6rem;
+}
+.md-typeset h2#bibliografia + h3.progetto-bib-gruppo {
+  margin-top: 0.8rem;
+}
+/* "Nascondi i campi" in fondo alla Scheda della raccolta: solo telefono e
+   solo a scheda aperta. */
+.md-typeset .scheda-raccolta__chiudi-fondo {
+  display: none;
+}
+@media (max-width: 600px) {
+  .md-typeset details.scheda-raccolta[open] .scheda-raccolta__chiudi-fondo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 0.2rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-family: var(--ami-font-label);
+    font-size: var(--ami-font-size-sm);
+    font-weight: 600;
+    color: var(--md-primary-fg-color);
+    cursor: pointer;
+  }
 }

@@ -22,7 +22,9 @@ L'AMI nasce dal progressivo accumulo di materiale documentario relativo al movim
      di Material nella colonna destra). -->
 <!-- INDICE-PAGINA -->
 
-A oggi, il patrimonio dell'AMI è composto da:
+## Il patrimonio {#patrimonio}
+
+L'AMI raccoglie, tra l'altro:
 
 <!-- Le tre aree presentano il patrimonio (non sono una partizione: le opere
      di Mao sono anche pubblicazioni del PCC) e portano alle pagine di
@@ -49,17 +51,23 @@ L'AMI è concepito come un archivio in costante accrescimento. Nuove acquisizion
 
 ## Consultazione {#consultazione}
 
-L'AMI è un archivio digitale ad accesso libero: i suoi documenti sono conservati e consultabili attraverso questo sito, in particolare nella sezione <a href="../documenti/">Archivio</a>, oppure sulla piattaforma <a href="https://archive.org/details/@ivan_masci/lists/1/archivio-del-maoismo-italiano">Internet Archive</a>.
+L'AMI è un archivio digitale ad accesso libero: i suoi documenti sono consultabili su questo sito, in particolare nella sezione <a href="../documenti/">Archivio</a>, e sono conservati sulla piattaforma <a href="https://archive.org/details/@ivan_masci/lists/1/archivio-del-maoismo-italiano">Internet Archive</a>.
 
 <p class="progetto-chiusura"><a class="md-button md-button--primary progetto-esplora" href="../documenti/">Esplora l'archivio</a></p>
+
+## La raccolta {#scheda-della-raccolta}
+
+Descrizione dell'AMI nel suo insieme secondo ISAD(G), al livello della raccolta. Date, consistenza e lingue sono ricavate dal Catalogo a ogni aggiornamento.
+
+<!-- SCHEDA-RACCOLTA -->
 
 ## Norme di descrizione {#norme-di-descrizione}
 
 La descrizione segue gli standard internazionali del Consiglio Internazionale degli Archivi: ISAD(G) per i documenti, ISAAR(CPF) per le persone e gli enti.
 
 <div class="progetto-bibliografia progetto-bibliografia--norme">
-<p><span class="autore">INTERNATIONAL COUNCIL ON ARCHIVES</span>, <em>ISAD(G): General International Standard Archival Description</em>, 2a ed., Ottawa: International Council on Archives, 2000.</p>
-<p><span class="autore">INTERNATIONAL COUNCIL ON ARCHIVES</span>, <em>ISAAR(CPF): International Standard Archival Authority Record for Corporate Bodies, Persons and Families</em>, 2a ed., Paris: International Council on Archives, 2004.</p>
+<p><span class="autore">INTERNATIONAL COUNCIL ON ARCHIVES</span>, <em>ISAD(G): General International Standard Archival Description</em>, 2ª ed., Ottawa: International Council on Archives, 2000.</p>
+<p><span class="autore">INTERNATIONAL COUNCIL ON ARCHIVES</span>, <em>ISAAR(CPF): International Standard Archival Authority Record for Corporate Bodies, Persons and Families</em>, 2ª ed., Paris: International Council on Archives, 2004.</p>
 </div>
 
 ### Documenti {#documenti}
@@ -78,10 +86,6 @@ I documenti sono descritti secondo ISAD(G) su due livelli: la **raccolta**, cio�
 A questi si aggiungono, quando disponibili, la descrizione del contenuto, la lingua, il luogo e l'editore, la tipologia, le persone e le organizzazioni collegate, la provenienza e i percorsi tematici.
 
 <p class="progetto-nota"><strong>Convenzioni.</strong> Il soggetto produttore è l'autore del documento; quando l'autore è assente o anonimo, è l'organizzazione di riferimento. I titoli redatti dal catalogatore, come quelli delle fotografie, sono indicati come attribuiti. Le date incerte sono precedute da «ca.», quelle ignote sono indicate con «s.d.».</p>
-
-### Scheda della raccolta {#scheda-della-raccolta}
-
-<!-- SCHEDA-RACCOLTA -->
 
 ### Persone ed enti {#persone-ed-enti}
 
@@ -111,16 +115,42 @@ I file sono generati automaticamente a ogni aggiornamento dell'archivio e verifi
 
 ## Bibliografia essenziale {#bibliografia}
 
+<!-- Sottosezioni in HTML (<h3>) e non in Markdown (###): restano fuori
+     dall'indice della pagina, che altrimenti si allungherebbe di cinque voci. -->
+<h3 class="progetto-bib-gruppo" id="bib-generale">Sul movimento filo&#8209;cinese italiano in generale</h3>
+
 <div class="progetto-bibliografia">
-<p><span class="autore">DE GIORGI, LAURA</span> &amp; <span class="autore">ZAZZARA, GILDA</span> (a cura di), <em>Giuseppe Regis, Diario cinese 1957-1961</em>, Venezia: Edizioni Ca' Foscari, 2025.</p>
-<p><span class="autore">FERRANTE, STEFANO</span>, <em>La Cina non era vicina: Servire il popolo e il maoismo all'italiana</em>, Milano: Sperling &amp; Kupfer, 2008.</p>
 <p><span class="autore">FRANCESCANGELI, EROS</span>, <em>«Un mondo meglio di così»: La sinistra rivoluzionaria in Italia (1943-1978)</em>, Roma: Viella, 2023.</p>
 <p><span class="autore">GABBAS, MARCO</span> &amp; <span class="autore">CAPISANI, LORENZO</span>, <em>Maoism with Italian characteristics: China's global influence and the Italian left, 1956-1976</em>, Singapore: Springer, 2025.</p>
-<p><span class="autore">GRAZIANI, SOFIA</span>, <em>L'interesse politico-ideologico per la Cina di Mao sulla scia del contrasto sino-sovietico: Alcune considerazioni sulla nascita dell'Associazione Italia-Cina (1962-1963)</em>, in <span class="autore">MENEGUZZI ROSTAGNI, CARLA</span> &amp; <span class="autore">SAMARANI, GUIDO</span> (a cura di), <em>La Cina di Mao, l'Italia e l'Europa negli anni della Guerra fredda</em>, Bologna: il Mulino, 2014, pp. 147-173.</p>
-<p><span class="autore">LIOI, TIZIANA</span>, <em>People and Words: Spaces of Circulation and Political Encounters in the Experience of Edizioni Oriente (1963-79)</em>, «Annali di Ca' Foscari. Serie orientale», 61, 2025, pp. 97-129.</p>
 <p><span class="autore">NICCOLAI, ROBERTO</span>, <em>Quando la Cina era vicina: La rivoluzione culturale e la sinistra extraparlamentare italiana negli anni '60 e '70</em>, Pisa: BFS Edizioni, 1998.</p>
-<p><span class="autore">PEDRAZZI, NICOLA</span>, <em>L'Italia che sognava Enver. Partigiani, comunisti, marxisti-leninisti: gli amici italiani dell'Albania Popolare (1943-1976)</em>, Lecce: Besa Muci, 2017.</p>
+<p><span class="autore">PEROTTI, DANIELE</span>, <em>Il mito cinese nella Nuova Sinistra italiana (1960-1970)</em>, «Il Politico», vol. 46, n. 1/2, 1981, pp. 223-280.</p>
+<p><span class="autore">TOBAGI, WALTER</span>, <em>Storia del movimento studentesco e dei marxisti-leninisti in Italia</em>, Milano: Sugar, 1970.</p>
 <p><span class="autore">VETTORI, GIUSEPPE</span>, <em>La sinistra extraparlamentare in Italia: Storia. Documenti. Analisi politica</em>, Roma: Newton Compton Editori, 1973.</p>
+</div>
+
+<h3 class="progetto-bib-gruppo" id="bib-pcdi">Partito Comunista d'Italia (marxista-leninista)</h3>
+
+<div class="progetto-bibliografia">
+<p><span class="autore">PEDRAZZI, NICOLA</span>, <em>L'Italia che sognava Enver. Partigiani, comunisti, marxisti-leninisti: gli amici italiani dell'Albania Popolare (1943-1976)</em>, Lecce: Besa Muci, 2017.</p>
+</div>
+
+<h3 class="progetto-bib-gruppo" id="bib-uci">Unione dei Comunisti Italiani (marxisti-leninisti) / Servire il Popolo / Partito Comunista (marxista-leninista) Italiano</h3>
+
+<div class="progetto-bibliografia">
+<p><span class="autore">FERRANTE, STEFANO</span>, <em>La Cina non era vicina: Servire il popolo e il maoismo all'italiana</em>, Milano: Sperling &amp; Kupfer, 2008.</p>
+</div>
+
+<h3 class="progetto-bib-gruppo" id="bib-oriente">Edizioni Oriente</h3>
+
+<div class="progetto-bibliografia">
+<p><span class="autore">DE GIORGI, LAURA</span> &amp; <span class="autore">ZAZZARA, GILDA</span> (a cura di), <em>Giuseppe Regis, Diario cinese 1957-1961</em>, Venezia: Edizioni Ca' Foscari, 2025.</p>
+<p><span class="autore">LIOI, TIZIANA</span>, <em>People and Words: Spaces of Circulation and Political Encounters in the Experience of Edizioni Oriente (1963-79)</em>, «Annali di Ca' Foscari. Serie orientale», vol. 61, 2025, pp. 97-129.</p>
+</div>
+
+<h3 class="progetto-bib-gruppo" id="bib-altre">Altre organizzazioni</h3>
+
+<div class="progetto-bibliografia">
+<p><span class="autore">GRAZIANI, SOFIA</span>, <em>L'interesse politico-ideologico per la Cina di Mao sulla scia del contrasto sino-sovietico: Alcune considerazioni sulla nascita dell'Associazione Italia-Cina (1962-1963)</em>, in <span class="autore">MENEGUZZI ROSTAGNI, CARLA</span> &amp; <span class="autore">SAMARANI, GUIDO</span> (a cura di), <em>La Cina di Mao, l'Italia e l'Europa negli anni della Guerra fredda</em>, Bologna: il Mulino, 2014, pp. 147-173.</p>
 </div>
 
 ## Come citare l'AMI {#come-citare}

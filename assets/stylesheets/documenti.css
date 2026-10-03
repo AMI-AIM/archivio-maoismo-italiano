@@ -337,8 +337,13 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
   transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
 
-.citazione-tab:hover {
-  color: var(--md-default-fg-color);
+/* Hover solo sui formati non attivi e solo con un puntatore vero: prima
+   batteva .citazione-tab--active (specificita' piu' alta) e il formato
+   selezionato diventava nero su rosso, anche "incollato" dopo un tocco. */
+@media (hover: hover) {
+  .citazione-tab:not(.citazione-tab--active):hover {
+    color: var(--md-default-fg-color);
+  }
 }
 
 .citazione-tab--active {
