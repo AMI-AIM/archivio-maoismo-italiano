@@ -92,7 +92,7 @@ components:
 
 **Creative North Star: "Catalogo e manifesto"**
 
-Il sito parla con due voci dichiarate. Dove si consulta (archivio, schede documento, liste di persone, organizzazioni e percorsi) vale la sobrietà del catalogo: righe su filetti sottili, segnature dattiloscritte, etichette grigie in maiuscoletto, nessun riquadro superfluo. Dove si entra e si sceglie (home, indici, percorsi tematici, progetto) vale l'impatto della stampa militante: fotografie d'epoca a piena larghezza, card con immagine, il rosso pieno delle testate.
+Il sito parla con due voci dichiarate. Dove si consulta (archivio, schede documento, liste di persone, organizzazioni e percorsi) vale la sobrietà del catalogo: righe su filetti sottili, segnature dattiloscritte, etichette grigie in maiuscoletto, nessun riquadro superfluo. Dove si entra e si sceglie (home, indici, percorsi tematici) vale l'impatto della stampa militante: fotografie d'epoca a piena larghezza, card con immagine, il rosso pieno delle testate. "Il progetto" è in registro misto: apertura da manifesto, corpo da catalogo.
 
 Il tono è rigoroso ma militante. Il rigore viene dal metodo archivistico: ogni dato ha un posto fisso, una gerarchia leggibile e un carattere che ne dichiara la natura (il testo in Fraunces, le azioni in Archivo, i dati in Courier Prime). La militanza viene dai materiali stessi: il rosso, le testate, le immagini di cortei e opuscoli. Il design non aggiunge retorica propria; lascia parlare le fonti e le incornicia con precisione.
 
@@ -179,7 +179,7 @@ Sistema ibrido, diviso per registro. Le pagine di consultazione sono piatte: nes
 - **Maniglia** (`box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25)`): maniglie e pillole dello slider anno.
 
 ### Named Rules
-**The Two Registers Rule.** Le ombre esistono solo nel registro manifesto (home, indici di Persone e Organizzazioni, percorsi tematici, progetto). Archivio, schede documento e liste restano piatti.
+**The Two Registers Rule.** Le ombre esistono solo nel registro manifesto (home, indici di Persone e Organizzazioni, percorsi tematici). Archivio, schede documento e liste restano piatti. "Il progetto" è in registro misto: apertura da manifesto (lead a 18px, barretta rossa sotto il titolo, segnatura della raccolta), corpo da catalogo (righe su filetti, note su filetto, nessun riquadro né ombra).
 
 ## Shapes
 
@@ -232,6 +232,14 @@ Elenco di definizioni su filetti: etichetta in Archivo grigio maiuscoletto, valo
 Un solo componente in home, percorsi tematici, persone e organizzazioni: data rossa in Fraunces regolare nella colonna adattiva, titolo in Fraunces 600, poi una riga di metadati (tipologia come etichetta grigia, organizzazione in Archivo grigio, eventuale ruolo secondario). Al passaggio del mouse solo il fondo carta, nessuna striscia colorata. Nelle pagine di persone e organizzazioni le righe sono raggruppate per ruolo, con il conteggio del gruppo.
 - **Variante compatta** ("Nell'archivio"): data e titolo, senza metadati.
 - **Variante estesa** (risultati dell'archivio): data · segnatura in Courier, titolo, autore · organizzazione · tipologia, estratto della descrizione.
+
+### Pagina "Il progetto"
+Registro misto, una sola misura (34rem, 680px) per prosa, segnatura, righe, Scheda della raccolta, bibliografia e citazione.
+- **Apertura:** titolo con barretta rossa (Press Accent Rule), lead in Fraunces 18px, poi la segnatura della raccolta tra due filetti ("AMI · Raccolta · 96 unità · 1964 – 1993 · Italiano, cinese"), con gli stessi valori della Scheda (`scripts/core/raccolta.py`).
+- **Aree del patrimonio:** righe-link su filetti (titolo, testo grigio, azione rossa in Archivio con il conteggio calcolato a ogni generazione), come le righe di catalogo.
+- **Indice:** quello di Material nella colonna destra sopra i 960px; sotto, "In questa pagina" richiudibile tra due filetti.
+- **Note e bibliografia:** "Convenzioni" su filetto, senza riquadro; bibliografia a corpo testo con rientro sporgente e cognomi in maiuscolo ridotto (`.autore`).
+- **Chiusura:** "Come citare l'AMI" con lo stesso pannello di "Cita questo documento" (Chicago, MLA, BibTeX, Semplice; data di consultazione del giorno), qui sempre aperto; poi contatti, consultazione e pulsante primario "Esplora l'archivio".
 
 ### Testata di persona e organizzazione
 Con testo curatoriale: biografia o storia su fondo carta accanto all'immagine. Senza testo: nessun riquadro, immagine di 180px subito accanto al blocco di nome e date, una riga "in fase di redazione". Senza immagine: solo nome e date, nessun segnaposto (le iniziali "a timbro" servono solo nelle card "In evidenza" degli indici). Sempre il link "Vedi questi documenti nell'archivio" (archivio già filtrato).
