@@ -21,6 +21,7 @@ L'**Archivio del Maoismo Italiano** (AMI) è un progetto di catalogazione e cons
 </figure>
 
 L'AMI nasce dal progressivo accumulo di materiale documentario relativo al movimento «filo-cinese», con l'obiettivo di raccogliere e rendere liberamente consultabile in un'unica piattaforma un patrimonio storico-politico-culturale disperso tra collezioni private, biblioteche e archivi. Il progetto mira inoltre a facilitare la ricerca sull'argomento, svantaggiata dall'attuale mancanza di poli stabili ed efficienti.
+{ .progetto-presentazione }
 
 <!-- CIFRE-RACCOLTA -->
 

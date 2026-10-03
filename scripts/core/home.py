@@ -33,36 +33,55 @@ def estrai_iniziali(nome, max_lettere=2):
 
 # INCIPIT DEL PROGETTO
 # La fonte unica del testo e' la pagina "Il progetto" (progetto.md): la home
-# ne riprende il capoverso marcato con l'attributo { .progetto-lead }.
-# Correggendo quel capoverso in progetto.md si aggiornano entrambe le pagine.
-MARCATORE_INCIPIT = re.compile(r'\s*\{\s*\.progetto-lead\s*\}\s*$')
+# ne riprende i due capoversi d'apertura, marcati con gli attributi
+# { .progetto-lead } e { .progetto-presentazione }. Correggendoli in
+# progetto.md si aggiornano entrambe le pagine.
+def _marcatore(classe):
+    return re.compile(r'\s*\{\s*\.' + re.escape(classe) + r'\s*\}\s*$')
+
+
+MARCATORE_INCIPIT = _marcatore('progetto-lead')
+MARCATORE_PRESENTAZIONE = _marcatore('progetto-presentazione')
+
+
+def _leggi_capoverso(testo, marcatore):
+    """Capoverso di progetto.md che termina con il marcatore indicato,
+    in HTML (del Markdown in linea solo **grassetto** e *corsivo*: se nel
+    capoverso si aggiungono link o altro, va esteso qui), oppure None."""
+    for blocco in re.split(r'\n\s*\n', testo):
+        blocco = blocco.strip()
+        if not marcatore.search(blocco):
+            continue
+        capoverso = marcatore.sub('', blocco)
+        capoverso = ' '.join(r.strip() for r in capoverso.split('\n') if r.strip())
+        if not capoverso:
+            return None
+        capoverso_html = html.escape(capoverso, quote=False)
+        capoverso_html = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', capoverso_html)
+        capoverso_html = re.sub(r'(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])', r'<em>\1</em>', capoverso_html)
+        return capoverso_html
+    return None
 
 
 def leggi_incipit_progetto(percorso):
-    """Restituisce in HTML il capoverso marcato { .progetto-lead } di
-    progetto.md, oppure None se il file o il capoverso non si trovano
-    (in quel caso la home viene generata senza la sezione).
-    Del Markdown in linea converte solo **grassetto** e *corsivo*:
-    se nel capoverso si aggiungono link o altro, va esteso qui."""
+    """Restituisce la lista dei capoversi d'apertura di progetto.md in HTML:
+    il { .progetto-lead } (obbligatorio) e, se presente, il
+    { .progetto-presentazione }. None se il file o il lead non si trovano
+    (in quel caso la home viene generata senza la sezione)."""
     if not percorso or not os.path.isfile(percorso):
         print(f"  ATTENZIONE: {percorso} non trovato, sezione 'Il progetto' omessa dalla home.")
         return None
     with open(percorso, encoding='utf-8') as f:
         testo = f.read().replace('\r\n', '\n').replace('\r', '\n')
-    for blocco in re.split(r'\n\s*\n', testo):
-        blocco = blocco.strip()
-        if not MARCATORE_INCIPIT.search(blocco):
-            continue
-        capoverso = MARCATORE_INCIPIT.sub('', blocco)
-        capoverso = ' '.join(r.strip() for r in capoverso.split('\n') if r.strip())
-        if not capoverso:
-            break
-        capoverso_html = html.escape(capoverso, quote=False)
-        capoverso_html = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', capoverso_html)
-        capoverso_html = re.sub(r'(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])', r'<em>\1</em>', capoverso_html)
-        return capoverso_html
-    print(f"  ATTENZIONE: nessun capoverso {{ .progetto-lead }} in {percorso}, sezione 'Il progetto' omessa dalla home.")
-    return None
+    lead = _leggi_capoverso(testo, MARCATORE_INCIPIT)
+    if not lead:
+        print(f"  ATTENZIONE: nessun capoverso {{ .progetto-lead }} in {percorso}, sezione 'Il progetto' omessa dalla home.")
+        return None
+    capoversi = [lead]
+    presentazione = _leggi_capoverso(testo, MARCATORE_PRESENTAZIONE)
+    if presentazione:
+        capoversi.append(presentazione)
+    return capoversi
 
 
 def genera_home(df, persone, output_dir, organizzazioni=None, percorso_progetto=None):
@@ -272,8 +291,13 @@ hide:
     # ============================================================
     if percorso_progetto is None:
         percorso_progetto = os.path.join(output_dir, 'progetto.md')
-    incipit_html = leggi_incipit_progetto(percorso_progetto)
-    if incipit_html:
+    incipit = leggi_incipit_progetto(percorso_progetto)
+    if incipit:
+        # Primo capoverso a 18px, il secondo a corpo testo (come nella
+        # pagina "Il progetto").
+        incipit_html = '\n  '.join(
+            f'<p class="home-progetto__testo{"" if i == 0 else " home-progetto__testo--seguito"}">{c}</p>'
+            for i, c in enumerate(incipit))
         home_content += f"""
 <section class="home-column home-progetto" aria-labelledby="home-progetto-titolo">
   <h2 id="home-progetto-titolo">
@@ -282,7 +306,7 @@ hide:
     </svg>
     Il progetto
   </h2>
-  <p class="home-progetto__testo">{incipit_html}</p>
+  {incipit_html}
   <a class="home-progetto__link" href="progetto/">Scopri il progetto<span aria-hidden="true">&nbsp;›</span></a>
 </section>
 """

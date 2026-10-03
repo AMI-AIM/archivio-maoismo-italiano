@@ -209,6 +209,12 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   line-height: 1.6;
   color: var(--md-default-fg-color);
 }
+/* Secondo capoverso (presentazione): corpo testo, come nella pagina
+   "Il progetto"; il primo resta a 18px. */
+.home-progetto__testo--seguito {
+  font-size: var(--ami-font-size-base); /* 16px */
+  margin-bottom: 0.8rem;
+}
 .home-progetto__link {
   /* .home-column e' un flex in colonna: senza align-self il link si
      allargherebbe a tutta la riga, e l'area cliccabile con lui. */
