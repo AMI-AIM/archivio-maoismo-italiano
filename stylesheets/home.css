@@ -199,8 +199,11 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 .home-progetto {
   margin: 0 0 2rem 0;
 }
+/* Il capoverso occupa tutta la larghezza del contenitore, come le altre
+   sezioni della home (scelta del manutentore, in deroga alla misura di
+   68ch prevista dal DESIGN.md per la prosa). */
 .home-progetto__testo {
-  max-width: 65ch;
+  max-width: none;
   margin: 0 0 0.6rem 0;
   font-size: var(--ami-font-size-md); /* 18px */
   line-height: 1.6;
