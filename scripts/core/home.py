@@ -31,7 +31,41 @@ def estrai_iniziali(nome, max_lettere=2):
     return ''.join(p[0] for p in parti[:max_lettere]).upper()
 
 
-def genera_home(df, persone, output_dir, organizzazioni=None):
+# INCIPIT DEL PROGETTO
+# La fonte unica del testo e' la pagina "Il progetto" (progetto.md): la home
+# ne riprende il capoverso marcato con l'attributo { .progetto-lead }.
+# Correggendo quel capoverso in progetto.md si aggiornano entrambe le pagine.
+MARCATORE_INCIPIT = re.compile(r'\s*\{\s*\.progetto-lead\s*\}\s*$')
+
+
+def leggi_incipit_progetto(percorso):
+    """Restituisce in HTML il capoverso marcato { .progetto-lead } di
+    progetto.md, oppure None se il file o il capoverso non si trovano
+    (in quel caso la home viene generata senza la sezione).
+    Del Markdown in linea converte solo **grassetto** e *corsivo*:
+    se nel capoverso si aggiungono link o altro, va esteso qui."""
+    if not percorso or not os.path.isfile(percorso):
+        print(f"  ATTENZIONE: {percorso} non trovato, sezione 'Il progetto' omessa dalla home.")
+        return None
+    with open(percorso, encoding='utf-8') as f:
+        testo = f.read().replace('\r\n', '\n').replace('\r', '\n')
+    for blocco in re.split(r'\n\s*\n', testo):
+        blocco = blocco.strip()
+        if not MARCATORE_INCIPIT.search(blocco):
+            continue
+        capoverso = MARCATORE_INCIPIT.sub('', blocco)
+        capoverso = ' '.join(r.strip() for r in capoverso.split('\n') if r.strip())
+        if not capoverso:
+            break
+        capoverso_html = html.escape(capoverso, quote=False)
+        capoverso_html = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', capoverso_html)
+        capoverso_html = re.sub(r'(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])', r'<em>\1</em>', capoverso_html)
+        return capoverso_html
+    print(f"  ATTENZIONE: nessun capoverso {{ .progetto-lead }} in {percorso}, sezione 'Il progetto' omessa dalla home.")
+    return None
+
+
+def genera_home(df, persone, output_dir, organizzazioni=None, percorso_progetto=None):
     print("\nGenerazione della Home page...")
     schede = []
     conteggio_persone = Counter()
@@ -229,6 +263,28 @@ hide:
 ---
 
 {banner_html}
+"""
+
+    # ============================================================
+    # IL PROGETTO — incipit di progetto.md, tra "Documenti in evidenza"
+    # e "Aggiunti di recente". Registro manifesto: titolo con barretta
+    # rossa come le altre sezioni della home, testo senza riquadro.
+    # ============================================================
+    if percorso_progetto is None:
+        percorso_progetto = os.path.join(output_dir, 'progetto.md')
+    incipit_html = leggi_incipit_progetto(percorso_progetto)
+    if incipit_html:
+        home_content += f"""
+<section class="home-column home-progetto" aria-labelledby="home-progetto-titolo">
+  <h2 id="home-progetto-titolo">
+    <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+    </svg>
+    Il progetto
+  </h2>
+  <p class="home-progetto__testo">{incipit_html}</p>
+  <a class="home-progetto__link" href="progetto/">Scopri il progetto<span aria-hidden="true">&nbsp;›</span></a>
+</section>
 """
 
     # ============================================================

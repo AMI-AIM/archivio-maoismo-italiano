@@ -189,6 +189,54 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 }
 
 /* ------------------------------------------------------------
+   SEZIONE "IL PROGETTO" (incipit di progetto.md, generata da
+   core/home.py tra "Documenti in evidenza" e "Aggiunti di recente").
+   Registro manifesto: il titolo eredita da ".home-column h2" icona e
+   barretta rossa; il testo e' prosa in Fraunces, senza riquadro ne'
+   ombra; l'azione e' in Archivo rosso (The Three Voices Rule) e al
+   passaggio del mouse si scurisce (The Darker Hover Rule).
+------------------------------------------------------------ */
+.home-progetto {
+  margin: 0 0 2rem 0;
+}
+.home-progetto__testo {
+  max-width: 65ch;
+  margin: 0 0 0.6rem 0;
+  font-size: var(--ami-font-size-md); /* 18px */
+  line-height: 1.6;
+  color: var(--md-default-fg-color);
+}
+.home-progetto__link {
+  /* .home-column e' un flex in colonna: senza align-self il link si
+     allargherebbe a tutta la riga, e l'area cliccabile con lui. */
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  font-family: "Archivo", Arial, "Helvetica Neue", sans-serif;
+  font-size: var(--ami-font-size-sm); /* 14px */
+  font-weight: 600;
+  color: var(--md-primary-fg-color);
+  text-decoration: none;
+}
+.home-progetto__link:hover {
+  color: var(--md-accent-fg-color);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.home-progetto__link:focus-visible {
+  outline: 2px solid var(--md-primary-fg-color);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+/* Schermi touch: area cliccabile di almeno 44px (DESIGN.md, Layout) */
+@media (pointer: coarse) {
+  .home-progetto__link {
+    min-height: 44px;
+  }
+}
+
+/* ------------------------------------------------------------
    CATALOGO (home): riga documento, badge e pulsanti sono in extra.css.
    Qui restano solo le varianti proprie della home.
 ------------------------------------------------------------ */
@@ -426,6 +474,12 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   }
   :where(.home-column) .doc-sommario {
     font-size: var(--ami-font-size-sm); /* 14px */
+  }
+}
+
+@media (max-width: 600px) {
+  .home-progetto__testo {
+    font-size: var(--ami-font-size-base); /* 16px */
   }
 }
 
