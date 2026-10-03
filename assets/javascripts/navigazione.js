@@ -245,6 +245,11 @@
   var pulsante = document.getElementById("progetto-citazione-copia");
 
   var URL_AMI = "https://ami-aim.github.io/archivio-maoismo-italiano/";
+  // A video l'URL va a capo solo dopo le "/" (non sul trattino di
+  // "archivio-maoismo", che sembrerebbe una sillabazione); il testo
+  // copiato resta l'URL esatto.
+  var URL_HTML = '<span class="citazione-url"><span>https://</span><wbr>' +
+    '<span>ami-aim.github.io/</span><wbr><span>archivio-maoismo-italiano/</span></span>';
   var TITOLO = "Archivio del Maoismo Italiano (AMI)";
   var oggi = new Date();
   var iso = oggi.getFullYear() + "-" + String(oggi.getMonth() + 1).padStart(2, "0") +
@@ -257,8 +262,8 @@
   // Sito web curato: il curatore al posto dell'autore ("a cura di",
   // MLA "curatore"), nessun anno di pubblicazione (non dichiarato).
   var formati = {
-    chicago: "Masci, Ivan, a cura di. <em>" + TITOLO + "</em>. Consultato il " + it + ". " + URL_AMI + ".",
-    mla: "Masci, Ivan, curatore. <em>" + TITOLO + "</em>, " + URL_AMI + ". Consultato il " + it + ".",
+    chicago: "Masci, Ivan, a cura di. <em>" + TITOLO + "</em>. Consultato il " + it + ". " + URL_HTML + ".",
+    mla: "Masci, Ivan, curatore. <em>" + TITOLO + "</em>, " + URL_HTML + ". Consultato il " + it + ".",
     bibtex: [
       "@misc{ami,",
       "  title = {Archivio del Maoismo Italiano ({AMI})},",
@@ -267,7 +272,7 @@
       "  urldate = {" + iso + "}",
       "}"
     ].join("\n"),
-    semplice: "Masci, Ivan (a cura di), <em>" + TITOLO + "</em>, " + URL_AMI + ", consultato il " + it + "."
+    semplice: "Masci, Ivan (a cura di), <em>" + TITOLO + "</em>, " + URL_HTML + ", consultato il " + it + "."
   };
   var corrente = "chicago";
 
@@ -312,11 +317,23 @@
         pulsante.classList.remove("is-copiato");
       }, 1500);
     }).catch(function () {
+      // Appunti non disponibili: si seleziona il testo e lo si dice.
       var range = document.createRange();
       range.selectNodeContents(testo);
       var sel = window.getSelection();
       sel.removeAllRanges();
       sel.addRange(range);
+      etichetta.textContent = "Testo selezionato: premi Ctrl+C";
+      setTimeout(function () { etichetta.textContent = originale; }, 3000);
     });
   });
+})();
+
+// Scheda della raccolta ("Il progetto"): su telefono parte chiusa, il
+// sommario dice quanti campi contiene. Su desktop resta aperta.
+(function () {
+  var scheda = document.querySelector("details.scheda-raccolta");
+  if (scheda && window.matchMedia("(max-width: 600px)").matches) {
+    scheda.open = false;
+  }
 })();

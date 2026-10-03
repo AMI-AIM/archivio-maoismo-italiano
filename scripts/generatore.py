@@ -365,18 +365,6 @@ def main():
         raise
 
     # ================================================================
-    # GENERAZIONE: Scheda ISAD(G) della raccolta (pagina Il progetto)
-    # ================================================================
-    print("\n[GEN] Scheda della raccolta (ISAD)...")
-    try:
-        if inserisci_scheda_raccolta(OUTPUT_DIR, catalogo_path, df):
-            print("[OK] Scheda della raccolta inserita in progetto.md")
-        else:
-            print("[INFO] Segnaposto della scheda raccolta non trovato in progetto.md")
-    except Exception as e:
-        print(f"[WARN] Errore scheda raccolta: {e}")
-
-    # ================================================================
     # EXPORT: EAD3 (documenti) ed EAC-CPF (record d'autorita')
     # ================================================================
     print("\n[EXPORT] Esportazione EAD3 / EAC-CPF...")
@@ -393,6 +381,18 @@ def main():
             print("[OK] Tutti i file XML sono validi (ead3.xsd, eac.xsd)")
     except Exception as e:
         print(f"[WARN] Errore esportazione EAD3/EAC-CPF: {e}")
+
+    # ================================================================
+    # GENERAZIONE: Scheda ISAD(G) della raccolta (pagina Il progetto)
+    # ================================================================
+    print("\n[GEN] Scheda della raccolta (ISAD)...")
+    try:
+        if inserisci_scheda_raccolta(OUTPUT_DIR, catalogo_path, df):
+            print("[OK] Scheda della raccolta inserita in progetto.md")
+        else:
+            print("[INFO] Segnaposto della scheda raccolta non trovato in progetto.md")
+    except Exception as e:
+        print(f"[WARN] Errore scheda raccolta: {e}")
 
     # ================================================================
     # GENERAZIONE: Home page

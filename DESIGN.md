@@ -234,12 +234,15 @@ Un solo componente in home, percorsi tematici, persone e organizzazioni: data ro
 - **Variante estesa** (risultati dell'archivio): data · segnatura in Courier, titolo, autore · organizzazione · tipologia, estratto della descrizione.
 
 ### Pagina "Il progetto"
-Registro misto, una sola misura (34rem, 680px) per prosa, segnatura, righe, Scheda della raccolta, bibliografia e citazione.
-- **Apertura:** titolo con barretta rossa (Press Accent Rule), lead in Fraunces 18px, poi la segnatura della raccolta tra due filetti ("AMI · Raccolta · 96 unità · 1964 – 1993 · Italiano, cinese"), con gli stessi valori della Scheda (`scripts/core/raccolta.py`).
-- **Aree del patrimonio:** righe-link su filetti (titolo, testo grigio, azione rossa in Archivio con il conteggio calcolato a ogni generazione), come le righe di catalogo.
-- **Indice:** quello di Material nella colonna destra sopra i 960px; sotto, "In questa pagina" richiudibile tra due filetti.
+Registro misto. Corpo a una sola misura (30rem, 600px: circa 75-80 battute) per prosa, titoli, aree, note, Scheda della raccolta, bibliografia e citazione; solo l'apertura è più larga.
+- **Apertura:** titolo con barretta rossa (Press Accent Rule). Sopra i 1220px griglia di 46rem: lead in Fraunces 22px e presentazione a sinistra, segnatura della raccolta in colonna a destra (voci su filetti, "AMI" rosso). Sotto, segnatura in riga tra due filetti, con i separatori "·" che non restano mai a inizio riga. Valori dalla Scheda (`scripts/core/raccolta.py`).
+- **Aree del patrimonio:** vetrina, non partizione (le opere di Mao sono anche pubblicazioni del PCC): righe-link su filetti senza conteggi, titolo, testo grigio, azione rossa in Archivo.
+- **Ordine:** presentazione, aree, Consultazione con il pulsante primario "Esplora l'archivio", poi Norme di descrizione, Bibliografia, Come citare, Contatti.
+- **Titoli di sezione:** su filetto, come nelle schede documento.
+- **Indice:** quello di Material nella colonna destra sopra i 960px; sotto, "In questa pagina" richiudibile, generato da `raccolta.py` dai titoli ## e ### (voci di 44px).
+- **Scheda della raccolta:** `<details>` aperto su desktop (sommario nascosto), chiuso su telefono con "Mostra i N campi".
 - **Note e bibliografia:** "Convenzioni" su filetto, senza riquadro; bibliografia a corpo testo con rientro sporgente e cognomi in maiuscolo ridotto (`.autore`).
-- **Chiusura:** "Come citare l'AMI" con lo stesso pannello di "Cita questo documento" (Chicago, MLA, BibTeX, Semplice; data di consultazione del giorno), qui sempre aperto; poi contatti, consultazione e pulsante primario "Esplora l'archivio".
+- **Come citare:** stesso pannello di "Cita questo documento" (Chicago, MLA, BibTeX, Semplice; data del giorno), sempre aperto, senza fondo né riquadri, solo due filetti; "Copia" resta il pulsante rosso pieno delle schede. L'URL va a capo solo dopo le "/".
 
 ### Testata di persona e organizzazione
 Con testo curatoriale: biografia o storia su fondo carta accanto all'immagine. Senza testo: nessun riquadro, immagine di 180px subito accanto al blocco di nome e date, una riga "in fase di redazione". Senza immagine: solo nome e date, nessun segnaposto (le iniziali "a timbro" servono solo nelle card "In evidenza" degli indici). Sempre il link "Vedi questi documenti nell'archivio" (archivio già filtrato).

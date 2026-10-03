@@ -4,6 +4,10 @@ description: Finalità, consistenza e norme di descrizione dell'Archivio del Mao
 
 # Il progetto
 
+<!-- Apertura (registro manifesto): sopra i 1220px lead e segnatura
+     della raccolta stanno affiancati su una griglia piu' larga del corpo. -->
+<div class="progetto-apertura" markdown="1">
+
 L'**Archivio del Maoismo Italiano** (AMI) è un progetto di catalogazione e conservazione digitale dedicato alla documentazione relativa alla diffusione del maoismo e dell'influenza politico-culturale della Repubblica Popolare Cinese in Italia nella seconda metà del Novecento.
 { .progetto-lead }
 
@@ -11,48 +15,43 @@ L'AMI nasce dal progressivo accumulo di materiale documentario relativo al movim
 
 <!-- CIFRE-RACCOLTA -->
 
-<!-- Indice per telefono e tablet: sopra i 960px lo sostituisce l'indice
-     di Material nella colonna destra. Se si aggiunge una sezione (##),
-     aggiungerla anche qui con lo stesso id. -->
-<details class="progetto-indice">
-<summary>In questa pagina</summary>
-<ul>
-<li><a href="#catalogazione">Catalogazione</a></li>
-<li><a href="#norme-di-descrizione">Norme di descrizione</a></li>
-<li><a href="#bibliografia">Bibliografia essenziale</a></li>
-<li><a href="#come-citare">Come citare l'AMI</a></li>
-<li><a href="#contatti">Contatti e segnalazioni</a></li>
-<li><a href="#consultazione">Consultazione</a></li>
-</ul>
-</details>
+</div>
 
-Ad oggi, il patrimonio dell'AMI è composto da:
+<!-- Indice "In questa pagina", generato da scripts/core/raccolta.py dai
+     titoli ## e ### (solo telefono e tablet; sopra i 960px c'e' l'indice
+     di Material nella colonna destra). -->
+<!-- INDICE-PAGINA -->
 
-<!-- Le tre aree sono righe-link verso le pagine di persone e
-     organizzazioni. Il numero nell'etichetta (data-conta, data-etichetta)
-     e' calcolato a ogni generazione da scripts/core/raccolta.py con gli
-     stessi criteri dei gruppi "Come autore" e "Pubblicazioni". -->
+A oggi, il patrimonio dell'AMI è composto da:
+
+<!-- Le tre aree presentano il patrimonio (non sono una partizione: le opere
+     di Mao sono anche pubblicazioni del PCC) e portano alle pagine di
+     persone e organizzazioni. -->
 <div class="progetto-aree">
 <a class="progetto-area" href="../persone/mao-zedong/#gruppo-autore">
 <span class="progetto-area__titolo">Opere di Mao Zedong</span>
-<span class="progetto-area__testo">Nella loro traduzione italiana ufficiale, a cura della Casa editrice in lingue estere di Pechino.</span>
-<span class="progetto-area__azione" data-conta="autore=Mao Zedong" data-etichetta="Vedi le {n} opere">Vedi le opere</span>
+<span class="progetto-area__testo">Per lo più nelle traduzioni italiane ufficiali della Casa editrice in lingue estere di Pechino, accanto ad alcune edizioni di editori italiani.</span>
+<span class="progetto-area__azione">Vedi le opere</span>
 </a>
 <a class="progetto-area" href="../organizzazioni/partito-comunista-cinese/#gruppo-pubblicazioni">
 <span class="progetto-area__titolo">Pubblicazioni ufficiali del PCC</span>
-<span class="progetto-area__testo">Altri documenti ufficiali del Partito Comunista Cinese, curati sempre dalla Casa editrice in lingue estere di Pechino.</span>
-<span class="progetto-area__azione" data-conta="organizzazione=Partito Comunista Cinese" data-etichetta="Vedi le {n} pubblicazioni">Vedi le pubblicazioni</span>
+<span class="progetto-area__testo">Documenti ufficiali del Partito Comunista Cinese, anch'essi pubblicati dalla Casa editrice in lingue estere di Pechino.</span>
+<span class="progetto-area__azione">Vedi le pubblicazioni</span>
 </a>
 <a class="progetto-area" href="../organizzazioni/">
 <span class="progetto-area__titolo">Organizzazioni marxiste-leniniste italiane</span>
-<span class="progetto-area__testo">Pubblicazioni, opuscoli, volantini e foto delle principali organizzazioni ricettrici del «Pensiero di Mao Tse-tung» come: Partito Comunista d'Italia (m-l), Unione dei Comunisti Italiani (m-l) / Servire il popolo, Edizioni Oriente…</span>
+<span class="progetto-area__testo">Pubblicazioni, opuscoli, volantini e foto delle principali organizzazioni ricettrici del «Pensiero di Mao Tse-tung», tra cui il Partito Comunista d'Italia (m-l), l'Unione dei Comunisti Italiani (m-l) / Servire il popolo, le Edizioni Oriente e i Circoli Lenin dell'Emilia Romagna.</span>
 <span class="progetto-area__azione">Vedi le organizzazioni</span>
 </a>
 </div>
 
-## Catalogazione {#catalogazione}
-
 L'AMI è concepito come un archivio in costante accrescimento. Nuove acquisizioni e integrazioni vengono aggiunte progressivamente, mantenendo criteri descrittivi uniformi e privilegiando, ove possibile, la consultazione di copie complete e di buona qualità.
+
+## Consultazione {#consultazione}
+
+L'AMI è un archivio digitale ad accesso libero: i suoi documenti sono conservati e consultabili attraverso questo sito, in particolare nella sezione <a href="../documenti/">Archivio</a>, oppure sulla piattaforma <a href="https://archive.org/details/@ivan_masci/lists/1/archivio-del-maoismo-italiano">Internet Archive</a>.
+
+<p class="progetto-chiusura"><a class="md-button md-button--primary progetto-esplora" href="../documenti/">Esplora l'archivio</a></p>
 
 ## Norme di descrizione {#norme-di-descrizione}
 
@@ -105,7 +104,7 @@ A questi si aggiungono, quando disponibili, le altre forme del nome attestate ne
 
 Le descrizioni sono pubblicate anche nei formati XML standard per lo scambio di dati archivistici, così da poter essere importate da altri archivi e portali:
 
-- **EAD3** (Encoded Archival Description): la raccolta e tutte le unità in un unico file, [ami-ead.xml](dati/ami-ead.xml);
+- **EAD3** (Encoded Archival Description): la raccolta e tutte le unità in un unico file, [ami-ead.xml](dati/ami-ead.xml){ download="ami-ead.xml" } (XML<!-- PESO-EAD -->);
 - **EAC-CPF 2.0** (Encoded Archival Context): un file per ogni persona o ente, raggiungibile dalla sezione «Record d'autorità» della relativa scheda.
 
 I file sono generati automaticamente a ogni aggiornamento dell'archivio e verificati con gli schemi ufficiali della Society of American Archivists.
@@ -139,7 +138,7 @@ Per citare la raccolta nel suo insieme:
 <button class="citazione-tab" data-formato="bibtex" type="button" aria-pressed="false">BibTeX</button>
 <button class="citazione-tab" data-formato="semplice" type="button" aria-pressed="false">Semplice</button>
 </div>
-<div class="citazione-testo" id="progetto-citazione-testo" aria-live="polite">Masci, Ivan (a cura di), <em>Archivio del Maoismo Italiano (AMI)</em>, https://ami-aim.github.io/archivio-maoismo-italiano/, consultato il [data di consultazione].</div>
+<div class="citazione-testo" id="progetto-citazione-testo" aria-live="polite">Masci, Ivan (a cura di), <em>Archivio del Maoismo Italiano (AMI)</em>, <span class="citazione-url"><span>https://</span><wbr><span>ami-aim.github.io/</span><wbr><span>archivio-maoismo-italiano/</span></span>, consultato il [data di consultazione].</div>
 <button class="citazione-copia" id="progetto-citazione-copia" type="button" hidden><svg class="ami-icona" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span class="citazione-copia__etichetta">Copia</span></button>
 </div>
 
@@ -147,8 +146,7 @@ Per un singolo documento, usare «Cita questo documento» nella sua scheda: la c
 
 <!-- DIRITTI E RIUSO: sezione da completare prima di pubblicarla.
      Togliere il commento e scrivere la licenza dei testi descrittivi e
-     il regime delle riproduzioni; poi aggiungere la voce all'indice in
-     cima alla pagina (<li><a href="#diritti">Diritti e riuso</a></li>).
+     il regime delle riproduzioni (l'indice della pagina si aggiorna da solo).
 
 ## Diritti e riuso {#diritti}
 
@@ -156,10 +154,4 @@ Per un singolo documento, usare «Cita questo documento» nella sua scheda: la c
 
 ## Contatti e segnalazioni {#contatti}
 
-L'AMI è curato da Ivan Masci, dottore in Scienze della Storia e del Documento. Per segnalazioni, correzioni o proposte di nuovi materiali: <a href="mailto:ivan.masci@outlook.com">ivan.masci@outlook.com</a>.
-
-## Consultazione {#consultazione}
-
-L'AMI è un archivio digitale ad accesso libero: i suoi documenti sono conservati e consultabili attraverso questo sito, in particolare nella sezione <a href="../documenti/">Archivio</a>, oppure sulla piattaforma <a href="https://archive.org/details/@ivan_masci/lists/1/archivio-del-maoismo-italiano">Internet Archive</a>.
-
-<p class="progetto-chiusura"><a class="md-button md-button--primary progetto-esplora" href="../documenti/">Esplora l'archivio</a></p>
+L'AMI è curato da Ivan Masci. Per segnalazioni, correzioni o proposte di nuovi materiali: <a href="mailto:ivan.masci@outlook.com">ivan.masci@outlook.com</a>.

@@ -20,6 +20,8 @@ import pandas as pd
 
 SEGNAPOSTO = '<!-- SCHEDA-RACCOLTA -->'
 SEGNAPOSTO_CIFRE = '<!-- CIFRE-RACCOLTA -->'
+SEGNAPOSTO_INDICE = '<!-- INDICE-PAGINA -->'
+SEGNAPOSTO_PESO_EAD = '<!-- PESO-EAD -->'
 
 
 def _pulito(v):
@@ -74,8 +76,13 @@ def scheda_raccolta_html(excel_path, df_catalogo):
                      f'<dd>{valore_html}</dd></div>')
     if not righe:
         return ''
-    return ('<div class="scheda-raccolta">\n<dl class="doc-scheda__campi">'
-            + ''.join(righe) + '</dl>\n</div>')
+    # Richiudibile: aperta di base; su telefono navigazione.js la chiude e
+    # il sommario mostra quanti campi contiene. Su desktop il sommario e'
+    # nascosto e la scheda resta aperta.
+    return ('<details class="scheda-raccolta" open>\n'
+            f'<summary><span class="scheda-raccolta__apri">Mostra i {len(righe)} campi</span>'
+            '<span class="scheda-raccolta__chiudi">Nascondi i campi</span></summary>\n'
+            '<dl class="doc-scheda__campi">' + ''.join(righe) + '</dl>\n</details>')
 
 
 def _valori_raccolta(excel_path, df_catalogo):
@@ -109,47 +116,49 @@ def cifre_raccolta_html(excel_path, df_catalogo):
     if segnatura:
         parti.append(f'<span class="progetto-cifre__id">{html.escape(segnatura)}</span>')
     parti += [f'<span>{html.escape(x)}</span>' for x in altri]
-    return '<p class="progetto-cifre">' + ''.join(parti) + '</p>'
+    # La riga interna sborda a sinistra e il contenitore la ritaglia: il
+    # punto separatore che finisce a inizio riga, andando a capo, sparisce.
+    return ('<p class="progetto-cifre"><span class="progetto-cifre__riga">'
+            + ''.join(parti) + '</span></p>')
 
 
-def _conta_catalogo(df_catalogo, chiave, valore):
-    """Conta le unita' del Catalogo come i gruppi delle pagine di persone
-    e organizzazioni: 'autore' = nome tra gli autori ("Come autore"),
-    'organizzazione' = colonna Organizzazione ("Pubblicazioni")."""
-    colonna = {'autore': 'autore', 'organizzazione': 'organizzazione'}.get(chiave)
-    if not colonna or colonna not in df_catalogo.columns:
-        return None
-    n = 0
-    for v in df_catalogo[colonna]:
-        nomi = [x.strip() for x in re.split(r'[;,]+', _pulito(v)) if x.strip()]
-        if chiave == 'organizzazione':
-            nomi = [_pulito(v)]
-        if valore in nomi:
-            n += 1
-    return n
+def _slug(testo):
+    t = re.sub(r'[^\w\s-]', '', testo.lower(), flags=re.UNICODE)
+    return re.sub(r'[\s]+', '-', t.strip())
 
 
-def _sostituisci_conteggi(testo, df_catalogo):
-    """<span data-conta="autore=Mao Zedong" data-etichetta="Vedi le {n} opere">
-    Vedi le opere</span>: il testo diventa "Vedi le 31 opere". Se il
-    conteggio non riesce resta l'etichetta generica."""
-    def sostituisci(m):
-        apertura = m.group(0)[:m.group(0).index('>') + 1]
-        conta = re.search(r'data-conta="([^"]+)"', apertura)
-        modello = re.search(r'data-etichetta="([^"]+)"', apertura)
-        if not conta or not modello:
-            return m.group(0)
-        chiave, _, valore = html.unescape(conta.group(1)).partition('=')
-        n = _conta_catalogo(df_catalogo, chiave.strip(), valore.strip())
-        if not n:
-            return m.group(0)
-        return apertura + html.unescape(modello.group(1)).replace('{n}', str(n)) + '</span>'
-    return re.sub(r'<span[^>]*\bdata-conta="[^"]+"[^>]*>[^<]*</span>', sostituisci, testo)
+def indice_pagina_html(testo):
+    """Indice "In questa pagina" dai titoli ## e ### del Markdown (i titoli
+    dentro commenti HTML, come la sezione Diritti sospesa, non contano)."""
+    senza_commenti = re.sub(r'<!--.*?-->', '', testo, flags=re.S)
+    voci = []
+    for m in re.finditer(r'^(#{2,3})\s+(.+?)\s*(?:\{#([\w-]+)\})?\s*$', senza_commenti, flags=re.M):
+        livello, titolo, ident = len(m.group(1)), m.group(2).strip(), m.group(3)
+        ident = ident or _slug(titolo)
+        classe = ' class="progetto-indice__sotto"' if livello == 3 else ''
+        voci.append(f'<li{classe}><a href="#{ident}">{html.escape(titolo)}</a></li>')
+    if not voci:
+        return ''
+    return ('<details class="progetto-indice">\n<summary>In questa pagina</summary>\n<ul>\n'
+            + '\n'.join(voci) + '\n</ul>\n</details>')
+
+
+def _peso_file(percorso):
+    try:
+        byte = os.path.getsize(percorso)
+    except OSError:
+        return ''
+    if byte < 1024:
+        return f'{byte} byte'
+    if byte < 1024 * 1024:
+        return f'{round(byte / 1024)} kB'
+    return f'{byte / (1024 * 1024):.1f} MB'.replace('.', ',')
 
 
 def inserisci_scheda_raccolta(output_dir, excel_path, df_catalogo):
     """Sostituisce i segnaposti in build/progetto.md (scheda della
-    raccolta, segnatura d'apertura, conteggi delle aree). Restituisce
+    raccolta, segnatura d'apertura, indice della pagina, peso dell'EAD:
+    va chiamata dopo l'export EAD3). Restituisce
     True se la scheda e' stata inserita."""
     pagina = os.path.join(output_dir, 'progetto.md')
     if not os.path.exists(pagina):
@@ -158,7 +167,11 @@ def inserisci_scheda_raccolta(output_dir, excel_path, df_catalogo):
         testo = f.read()
     if SEGNAPOSTO_CIFRE in testo:
         testo = testo.replace(SEGNAPOSTO_CIFRE, cifre_raccolta_html(excel_path, df_catalogo))
-    testo = _sostituisci_conteggi(testo, df_catalogo)
+    if SEGNAPOSTO_INDICE in testo:
+        testo = testo.replace(SEGNAPOSTO_INDICE, indice_pagina_html(testo))
+    if SEGNAPOSTO_PESO_EAD in testo:
+        peso = _peso_file(os.path.join(output_dir, 'dati', 'ami-ead.xml'))
+        testo = testo.replace(SEGNAPOSTO_PESO_EAD, f', {peso}' if peso else '')
     inserita = SEGNAPOSTO in testo
     if inserita:
         testo = testo.replace(SEGNAPOSTO, scheda_raccolta_html(excel_path, df_catalogo))
