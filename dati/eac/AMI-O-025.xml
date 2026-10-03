@@ -12,7 +12,7 @@
       </maintenanceEvent>
       <maintenanceEvent maintenanceEventType="derived">
         <agent agentType="machine">scripts/core/ead_export.py</agent>
-        <eventDateTime standardDateTime="2026-10-02">2026-10-02</eventDateTime>
+        <eventDateTime standardDateTime="2026-10-03">2026-10-03</eventDateTime>
       </maintenanceEvent>
     </maintenanceHistory>
     <conventionDeclaration>

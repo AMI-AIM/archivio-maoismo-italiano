@@ -229,3 +229,94 @@
     });
   });
 })();
+
+// ============================================================
+// "IL PROGETTO" — COME CITARE L'AMI
+// ============================================================
+// Stessi formati e stesso pannello di "Cita questo documento" nelle
+// schede (documenti.js): Chicago, MLA, BibTeX, Semplice, con la data di
+// consultazione di oggi. Senza JavaScript resta la forma semplice scritta
+// in progetto.md, con "[data di consultazione]".
+(function () {
+  var testo = document.getElementById("progetto-citazione-testo");
+  if (!testo) return;
+  var pannello = testo.parentNode;
+  var schede = pannello.querySelector(".citazione-tabs");
+  var pulsante = document.getElementById("progetto-citazione-copia");
+
+  var URL_AMI = "https://ami-aim.github.io/archivio-maoismo-italiano/";
+  var TITOLO = "Archivio del Maoismo Italiano (AMI)";
+  var oggi = new Date();
+  var iso = oggi.getFullYear() + "-" + String(oggi.getMonth() + 1).padStart(2, "0") +
+    "-" + String(oggi.getDate()).padStart(2, "0");
+  var it = iso;
+  try {
+    it = new Intl.DateTimeFormat("it-IT", { day: "numeric", month: "long", year: "numeric" }).format(oggi);
+  } catch (e) { /* resta la data ISO */ }
+
+  // Sito web curato: il curatore al posto dell'autore ("a cura di",
+  // MLA "curatore"), nessun anno di pubblicazione (non dichiarato).
+  var formati = {
+    chicago: "Masci, Ivan, a cura di. <em>" + TITOLO + "</em>. Consultato il " + it + ". " + URL_AMI + ".",
+    mla: "Masci, Ivan, curatore. <em>" + TITOLO + "</em>, " + URL_AMI + ". Consultato il " + it + ".",
+    bibtex: [
+      "@misc{ami,",
+      "  title = {Archivio del Maoismo Italiano ({AMI})},",
+      "  editor = {Masci, Ivan},",
+      "  url = {" + URL_AMI + "},",
+      "  urldate = {" + iso + "}",
+      "}"
+    ].join("\n"),
+    semplice: "Masci, Ivan (a cura di), <em>" + TITOLO + "</em>, " + URL_AMI + ", consultato il " + it + "."
+  };
+  var corrente = "chicago";
+
+  function mostra(formato) {
+    corrente = formato;
+    testo.innerHTML = formati[formato];
+    if (!schede) return;
+    schede.querySelectorAll(".citazione-tab").forEach(function (b) {
+      var attivo = b.dataset.formato === formato;
+      b.classList.toggle("citazione-tab--active", attivo);
+      b.setAttribute("aria-pressed", attivo ? "true" : "false");
+    });
+  }
+
+  if (schede) {
+    schede.hidden = false;
+    schede.querySelectorAll(".citazione-tab").forEach(function (b) {
+      b.addEventListener("click", function () { mostra(b.dataset.formato); });
+    });
+  }
+  mostra(corrente);
+
+  if (!pulsante || !navigator.clipboard) return;
+  var etichetta = pulsante.querySelector(".citazione-copia__etichetta") || pulsante;
+  var originale = etichetta.textContent;
+  pulsante.hidden = false;
+  pulsante.setAttribute("aria-live", "polite");
+
+  pulsante.addEventListener("click", function () {
+    var semplice = testo.innerText;
+    var copia = (window.ClipboardItem && corrente !== "bibtex")
+      ? navigator.clipboard.write([new ClipboardItem({
+          "text/html": new Blob([testo.innerHTML], { type: "text/html" }),
+          "text/plain": new Blob([semplice], { type: "text/plain" })
+        })])
+      : navigator.clipboard.writeText(semplice);
+    copia.then(function () {
+      etichetta.textContent = "Copiato";
+      pulsante.classList.add("is-copiato");
+      setTimeout(function () {
+        etichetta.textContent = originale;
+        pulsante.classList.remove("is-copiato");
+      }, 1500);
+    }).catch(function () {
+      var range = document.createRange();
+      range.selectNodeContents(testo);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    });
+  });
+})();
