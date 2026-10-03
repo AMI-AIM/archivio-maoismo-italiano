@@ -2593,14 +2593,55 @@ input[type="search"]::-webkit-search-cancel-button {
   font-variation-settings: "opsz" 30;
   color: var(--md-default-fg-color);
 }
+/* Fotografia d'apertura (AMI-0062): sotto i 1220px a tutta misura,
+   ritagliata in 5:4 dall'alto (volti interi); didascalia in Fraunces piccolo con la
+   segnatura in Courier rossa che porta alla scheda. */
+.md-typeset figure.progetto-figura {
+  display: block;
+  width: auto;
+  max-width: 30rem;
+  margin: 1.2rem 0 1.4rem;
+  text-align: left;
+}
+.md-typeset .progetto-figura img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  object-position: 50% 8%;
+  background: var(--md-code-bg-color);
+}
+.md-typeset .progetto-figura figcaption {
+  max-width: none;
+  margin: 0.5rem 0 0;
+  font-size: var(--ami-font-size-sm);
+  font-style: normal;
+  line-height: 1.45;
+  text-align: left;
+  color: var(--md-default-fg-color--light);
+}
+.md-typeset a.progetto-figura__segnatura {
+  font-family: var(--ami-font-mono);
+  letter-spacing: 0.02em;
+  color: var(--md-primary-fg-color);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.md-typeset a.progetto-figura__segnatura:hover {
+  color: var(--md-accent-fg-color);
+  text-decoration: underline;
+}
+
 /* Desktop largo: apertura su due colonne, piu' larga del corpo. A sinistra
-   lead (22px) e presentazione, a destra la segnatura della raccolta in
-   colonna, come i dati a margine di una scheda. */
+   lead (22px), presentazione e segnatura della raccolta; a destra la
+   fotografia intera, in verticale. */
 @media screen and (min-width: 76.25em) {
   .md-typeset .progetto-apertura {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 11rem;
-    grid-template-areas: "lead dati" "testo dati";
+    grid-template-columns: minmax(0, 1fr) 15rem;
+    grid-template-areas: "lead foto" "testo foto" "dati foto";
+    grid-template-rows: auto auto 1fr;
     column-gap: 3rem;
     align-items: start;
     max-width: 46rem;
@@ -2622,20 +2663,14 @@ input[type="search"]::-webkit-search-cancel-button {
   }
   .md-typeset .progetto-apertura > .progetto-cifre {
     grid-area: dati;
-    margin: 0.35rem 0 0;
-    padding: 0;
-    border-bottom: 0;
+    margin: 1.4rem 0 0;
   }
-  .md-typeset .progetto-apertura .progetto-cifre__riga {
-    flex-direction: column;
-    margin-left: 0;
+  .md-typeset .progetto-apertura > figure.progetto-figura {
+    grid-area: foto;
+    margin: 0.3rem 0 0;
   }
-  .md-typeset .progetto-apertura .progetto-cifre__riga > span {
-    padding: 0.45rem 0;
-    border-bottom: 1px solid var(--md-default-fg-color--lighter);
-  }
-  .md-typeset .progetto-apertura .progetto-cifre__riga > span::before {
-    display: none;
+  .md-typeset .progetto-apertura .progetto-figura img {
+    aspect-ratio: auto;
   }
 }
 
@@ -3100,5 +3135,30 @@ input[type="search"]::-webkit-search-cancel-button {
     font-weight: 600;
     color: var(--md-primary-fg-color);
     cursor: pointer;
+  }
+}
+
+/* ==========================================================================
+   LOGO NELL'HEADER TRA 769 E 1219px
+   Material nasconde il logo dell'header sotto i 76.25em (lo mostra nel
+   menu laterale, che qui e' disattivato sopra i 768px): tra 769 e 1219px
+   l'header restava senza logo. Lo si rimette sempre, e nella fascia
+   stretta (769-1023px) logo e voci si stringono per stare su una riga.
+   ========================================================================== */
+@media screen and (max-width: 76.234375em) {
+  .md-header__button.md-logo {
+    display: inline-flex !important;
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1023px) {
+  .md-header__button.md-logo img {
+    height: 44px;
+    max-width: 160px;
+  }
+  .md-header__nav-list {
+    gap: 0.2rem;
+  }
+  .md-header__nav-item {
+    padding: 0.4rem 0.55rem;
   }
 }
