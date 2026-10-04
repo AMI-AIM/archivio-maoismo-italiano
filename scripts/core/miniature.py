@@ -32,6 +32,7 @@ import os
 import re
 import shutil
 
+from . import esito
 from .site_config import site_path
 
 _ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -47,9 +48,10 @@ _stato = {'errori_rete': 0, 'pil': None, 'avvisi': set()}
 
 
 def _avviso(chiave, testo):
+    """Registra un avviso nel riepilogo della pipeline, una sola volta per chiave."""
     if chiave not in _stato['avvisi']:
         _stato['avvisi'].add(chiave)
-        print(testo)
+        esito.avviso(testo)
 
 
 def _pil():
@@ -92,6 +94,8 @@ def _scarica(url):
     except requests.RequestException as errore:
         _stato['errori_rete'] += 1
         print(f'Miniature: rete non disponibile per {url} ({errore.__class__.__name__})')
+        _avviso('rete', 'Miniature: Internet Archive non raggiungibile, alcune copertine '
+                        'restano remote (verranno create al prossimo lancio con la rete)')
         return None
     _stato['errori_rete'] = 0
     with risposta:

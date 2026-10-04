@@ -79,4 +79,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    from core import esito
+    sys.exit(esito.esegui_script("sync_assets", main))

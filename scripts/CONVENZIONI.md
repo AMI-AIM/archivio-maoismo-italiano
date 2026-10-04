@@ -178,3 +178,54 @@ su GitHub (l'xlsx è binario) e copia dei dati in formato aperto.
 - La CI non usa i CSV: la generazione del sito legge sempre l'xlsx.
 - `.gitattributes` (`* text=auto`) normalizza i fine riga: nel repository LF,
   su Windows CRLF.
+
+## 10. Lettura dei dati: `core/dati.py` (ott. 2026)
+Tutti gli script leggono `dati.xlsx` con `leggi_foglio('Catalogo')` (o un
+altro foglio): il file viene letto una sola volta per processo, ogni cella è
+testo (`dtype=str`, vuoti = `''`), le colonne sono ripulite dagli spazi e,
+di default, in minuscolo (`colonne='originali'` per averle come in Excel).
+- Regola: **mai più `pd.read_excel` negli script**; usare `leggi_foglio`.
+- Un foglio mancante solleva `ErroreDati` (prima alcuni moduli restituivano
+  in silenzio un DataFrame vuoto e il sito usciva senza dati o senza link).
+- Ogni chiamata restituisce una copia: modificarla non tocca gli altri moduli.
+- Verificato al momento dell'introduzione: il sito generato è identico byte
+  per byte a quello prodotto dalla versione precedente.
+
+## 11. Errori e avvisi: `core/esito.py` (ott. 2026)
+- **ERRORE** = sito rotto o incompleto: lo script esce con codice 1, il
+  Launcher non pubblica, GitHub Actions fallisce. **AVVISO** = da sistemare,
+  non blocca.
+- Negli script: `sys.exit(esito.esegui_script('nome', main))` come punto
+  d'ingresso; nelle fasi `esito.passo("descrizione", funzione, ...,
+  bloccante=True/False)`; nei moduli `esito.avviso(...)` / `esito.errore(...)`.
+  Non usare più `print("[WARN] ...")`: un avviso stampato e basta si perde.
+- Classificazione in `generatore.py`: bloccanti schede, indice, JSON di
+  ricerca, home, caricamento dati; non bloccanti EAD3/EAC-CPF (anche XML non
+  valido rispetto allo schema), scheda raccolta, sitemap, ottimizzazione,
+  cache. Le miniature non scaricabili sono un avviso.
+- Riepilogo: ogni script aggiunge le sue voci a `.riepilogo-build.json`
+  (escluso da Git); il Launcher lo azzera all'avvio e lo stampa prima di
+  pubblicare. `python -m scripts.core.esito` mostra quello dell'ultima
+  esecuzione. Su GitHub Actions le voci finiscono anche nel riepilogo del run.
+
+## 12. Validazione: `core/validator.py` (riscritto ott. 2026)
+Ogni problema riporta foglio, riga di Excel e colonna. Livelli: ERRORE
+(blocca), AVVISO, NOTA (informazione, es. nomi citati senza scheda, che per
+scelta restano senza link). Controlli principali:
+- tutti i fogli: presenza dei fogli e delle colonne attese
+  (`COLONNE_ATTESE`), testi provvisori (TODO, DA FARE, ??) fuori dalle date;
+- Catalogo: ID unici e nel formato AMI-0001, titolo, tipo, livello, data
+  riconoscibile, Data_normalizzata ISO e coerente con Data, URL di Internet
+  Archive (e item non ripetuti), immagine per ogni percorso, nomi di autore
+  e organizzazione con scheda, forme varianti usate al posto della forma
+  autorizzata;
+- Persone/Organizzazioni: ID AMI-P-/AMI-O-, nomi unici, indirizzi di pagina
+  non in conflitto, estremi cronologici (1968, 196?, ????) e loro ordine,
+  file immagine esistente, Wikidata/VIAF ben formati;
+- Relazioni: ID esistenti, nome coerente con la scheda, ID mancante per
+  entità che una scheda ce l'hanno, categoria ISAAR, formato delle date,
+  relazioni ripetute;
+- Raccolta: codici ISAD ben formati e non ripetuti.
+Se Persone o Organizzazioni hanno problemi strutturali, i controlli
+incrociati si saltano (eviterebbero centinaia di falsi allarmi).
+Solo controllo dei dati, senza generare nulla: `python -m scripts.core.validator`.

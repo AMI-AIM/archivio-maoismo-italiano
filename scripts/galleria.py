@@ -6,6 +6,8 @@ from urllib.parse import quote
 
 import pandas as pd
 
+from core import esito
+from core.dati import leggi_foglio
 from core.miniature import miniatura
 from core.utils import soggetto_produttore
 
@@ -255,18 +257,18 @@ def generate_gallery():
     print("Generazione Galleria in corso...")
 
     if not DATA_PATH.exists():
-        print(f"Errore: {DATA_PATH} non trovato.")
+        esito.errore(f"{DATA_PATH} non trovato")
         return 1
 
     try:
         df = load_catalogo()
     except Exception as e:
-        print(f"Errore durante la lettura di {DATA_PATH}: {e}")
+        esito.errore(f"dati.xlsx: {e}")
         return 1
 
     for col in ("tipo", "data"):
         if col not in df.columns:
-            print(f"Errore: colonna '{col}' non trovata nel catalogo.")
+            esito.errore(f"colonna '{col}' non trovata nel foglio Catalogo")
             return 1
 
     mask = df["tipo"].astype(str).str.contains("foto|manifest", case=False, na=False)
@@ -361,21 +363,15 @@ def generate_gallery():
 
 
 def load_catalogo():
-    """Legge il foglio 'Catalogo'; in fallback il primo foglio disponibile."""
-    try:
-        df = pd.read_excel(DATA_PATH, sheet_name="Catalogo")
-    except ValueError:
-        df = pd.read_excel(DATA_PATH)
-    return normalize_columns(df)
+    """Legge il foglio 'Catalogo' (celle come testo, colonne minuscole)."""
+    return normalize_columns(leggi_foglio("Catalogo"))
 
 
 def main():
-    try:
-        return generate_gallery()
-    except Exception as e:
-        print(f"Errore inatteso durante la generazione della galleria: {e}")
-        return 1
+    # Le eccezioni non gestite vengono registrate come ERRORE da
+    # esito.esegui_script (codice d'uscita 1, traceback a schermo).
+    return generate_gallery()
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(esito.esegui_script("galleria", main))

@@ -23,8 +23,7 @@ import re
 import xml.etree.ElementTree as ET
 from datetime import date
 
-import pandas as pd
-
+from .dati import leggi_foglio
 from .site_config import site_url
 from .utils import formatta_estremo, soggetto_produttore, split_nomi
 
@@ -81,12 +80,7 @@ def _data_iso(valore):
 
 
 def _leggi(path, foglio):
-    try:
-        df = pd.read_excel(path, sheet_name=foglio, dtype=str).fillna('')
-    except Exception:
-        return pd.DataFrame()
-    df.columns = df.columns.str.strip().str.lower()
-    return df
+    return leggi_foglio(foglio, path)
 
 
 def _scrivi(root, path, ns):

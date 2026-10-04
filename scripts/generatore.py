@@ -1,10 +1,12 @@
 import os
+import sys
 from datetime import datetime
 
-import pandas as pd
 from core.archivio import genera_indice
 from core.home import genera_home
 from core.raccolta import inserisci_scheda_raccolta
+from core import esito
+from core.dati import leggi_foglio
 from core.ead_export import esporta_tutto
 from core.json_export import genera_json
 from core.json_optimizer import JSONOptimizer
@@ -38,7 +40,7 @@ def verifica_placeholder_profili():
     if os.path.exists(placeholder_src):
         print("[OK] placeholder.webp presente in 'assets/immagini/profili/'")
     else:
-        print(f"[WARN] Manca {placeholder_src}: le schede senza foto avranno un avatar rotto.")
+        esito.avviso(f"Manca {placeholder_src}: le schede senza foto avranno un avatar rotto.")
 
 
 def pubblica_file_seo():
@@ -59,7 +61,7 @@ Sitemap: https://ami-aim.github.io/archivio-maoismo-italiano/sitemap.txt
     # Verifica che non ci siano file robots.txt in assets/ che potrebbero sovrascriverlo
     assets_robots = os.path.join(ROOT_DIR, 'assets', 'robots.txt')
     if os.path.exists(assets_robots):
-        print(f"[WARNING] Trovato {assets_robots} - verrà rimosso per evitare conflitti")
+        esito.avviso(f"Trovato {assets_robots}: rimosso per evitare conflitti con robots.txt generato")
         os.remove(assets_robots)
 
 def genera_sitemap(output_dir, df, persone, organizzazioni):
@@ -184,7 +186,7 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
     if primo_xml == '<?xml':
         print(f"[OK] sitemap.xml generata ({len(pagine)} URL)")
     else:
-        print(f"[WARN] sitemap.xml: primi caratteri inattesi: {primo_xml!r}")
+        esito.avviso(f"sitemap.xml: primi caratteri inattesi: {primo_xml!r}")
 
     # Verifica TXT (prima riga deve essere un URL)
     with open(sitemap_txt_path, 'r', encoding='utf-8') as f:
@@ -193,7 +195,7 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
     if prima_riga.startswith('http'):
         print(f"[OK] sitemap.txt generata ({len(pagine)} URL)")
     else:
-        print(f"[WARN] sitemap.txt: prima riga inattesa: {prima_riga!r}")
+        esito.avviso(f"sitemap.txt: prima riga inattesa: {prima_riga!r}")
 
     print("[INFO] Entrambi i file pronti per essere serviti da GitHub Pages")
 
@@ -286,12 +288,10 @@ def main():
     # CARICA SOGGETTI: Persone e organizzazioni
     # ================================================================
     print("\n[LOAD] Caricamento persone e organizzazioni...")
-    try:
-        persone, organizzazioni = carica_soggetti(DATA_DIR)
-        print(f"[OK] Caricate {len(persone)} persone e {len(organizzazioni)} organizzazioni")
-    except Exception as e:
-        print(f"[ERROR] Errore caricamento soggetti: {e}")
-        return
+    # Un errore di lettura qui ferma lo script (codice 1): senza soggetti
+    # il sito uscirebbe senza link a persone e organizzazioni.
+    persone, organizzazioni = carica_soggetti(DATA_DIR)
+    print(f"[OK] Caricate {len(persone)} persone e {len(organizzazioni)} organizzazioni")
 
     # Esporta JSON soggetti per ricerca
     print("[EXPORT] Esportazione JSON soggetti...")
@@ -301,21 +301,7 @@ def main():
     # CARICA CATALOGO: Documenti
     # ================================================================
     print("\n[LOAD] Caricamento catalogo documenti...")
-    try:
-        df = pd.read_excel(
-            catalogo_path,
-            sheet_name='Catalogo',
-            dtype=str
-        ).fillna('')
-    except FileNotFoundError:
-        print(f"[ERROR] File non trovato: {catalogo_path}")
-        return
-    except Exception as e:
-        print(f"[ERROR] Errore lettura catalogo: {e}")
-        return
-
-    # Normalizza colonne
-    df.columns = df.columns.str.strip().str.lower()
+    df = leggi_foglio('Catalogo')
     # La colonna 'Percorsi' (percorsi tematici) e' letta internamente come
     # 'serie', chiave usata dal JSON e dai filtri (?serie=) del sito.
     if 'percorsi' in df.columns and 'serie' not in df.columns:
@@ -328,109 +314,88 @@ def main():
     # GENERAZIONE: Schede documenti
     # ================================================================
     print("\n[GEN] Generazione schede documenti...")
-    try:
-        conteggio_gen, conteggio_skip = crea_schede(
-            df,
-            persone,
-            organizzazioni,
-            OUTPUT_DIR,
-            cache_manager=cache_mgr
-        )
-        print(f"[OK] {conteggio_gen} generate, {conteggio_skip} saltate (cache)")
-    except Exception as e:
-        print(f"[ERROR] Errore generazione schede: {e}")
-        raise
+    # Fasi BLOCCANTI (esito.passo con bloccante=True): se falliscono il
+    # sito sarebbe incompleto, quindi lo script termina con codice 1 e la
+    # pubblicazione si ferma. Le fasi successive vengono comunque eseguite,
+    # così il riepilogo mostra tutti i problemi in una volta.
+    conteggi = esito.passo("Generazione schede documenti", crea_schede,
+                           df, persone, organizzazioni, OUTPUT_DIR,
+                           cache_manager=cache_mgr)
+    if conteggi:
+        print(f"[OK] {conteggi[0]} generate, {conteggi[1]} saltate (cache)")
 
     # ================================================================
     # GENERAZIONE: Indice archivio con filtri
     # ================================================================
     print("\n[GEN] Generazione indice archivio...")
-    try:
-        # Passa cache_mgr a genera_indice per caching descrizioni IA
-        genera_indice(df, OUTPUT_DIR, cache_manager=cache_mgr)
-        print("[OK] Indice archivio generato")
-    except Exception as e:
-        print(f"[ERROR] Errore generazione indice: {e}")
-        raise
+    esito.passo("Generazione indice archivio", genera_indice,
+                df, OUTPUT_DIR, cache_manager=cache_mgr)
 
     # ================================================================
     # EXPORT: JSON per ricerca e filtri frontend
     # ================================================================
     print("\n[EXPORT] Esportazione JSON documenti...")
-    try:
-        genera_json(df, persone, organizzazioni, OUTPUT_DIR)
-        print("[OK] JSON documenti esportato")
-    except Exception as e:
-        print(f"[ERROR] Errore esportazione JSON: {e}")
-        raise
+    esito.passo("Esportazione JSON documenti (ricerca e filtri)", genera_json,
+                df, persone, organizzazioni, OUTPUT_DIR)
 
     # ================================================================
     # EXPORT: EAD3 (documenti) ed EAC-CPF (record d'autorita')
     # ================================================================
     print("\n[EXPORT] Esportazione EAD3 / EAC-CPF...")
-    try:
-        n_file, errori = esporta_tutto(df, catalogo_path, OUTPUT_DIR)
+    # Fasi NON bloccanti: un problema diventa un avviso nel riepilogo.
+    risultato_xml = esito.passo("Esportazione EAD3/EAC-CPF", esporta_tutto,
+                                df, catalogo_path, OUTPUT_DIR, bloccante=False)
+    if risultato_xml:
+        n_file, errori = risultato_xml
         print(f"[OK] {n_file} file XML scritti in build/dati/")
         if errori is None:
-            print("[WARN] Validazione non eseguita: installare lxml (pip install lxml)")
+            esito.avviso("EAD3/EAC-CPF non validati rispetto agli schemi: "
+                         "installare lxml (pip install -r requirements.txt)")
         elif errori:
-            print(f"[WARN] {len(errori)} file XML non validi rispetto allo schema:")
-            for nome_file, messaggi in list(errori.items())[:5]:
-                print(f"   - {nome_file}: {messaggi[0]}")
+            dettaglio = "; ".join(f"{nome}: {msg[0]}" for nome, msg in list(errori.items())[:3])
+            esito.avviso(f"{len(errori)} file XML non validi rispetto allo schema "
+                         f"(primi: {dettaglio})")
         else:
             print("[OK] Tutti i file XML sono validi (ead3.xsd, eac.xsd)")
-    except Exception as e:
-        print(f"[WARN] Errore esportazione EAD3/EAC-CPF: {e}")
 
     # ================================================================
     # GENERAZIONE: Scheda ISAD(G) della raccolta (pagina Il progetto)
     # ================================================================
     print("\n[GEN] Scheda della raccolta (ISAD)...")
-    try:
-        if inserisci_scheda_raccolta(OUTPUT_DIR, catalogo_path, df):
-            print("[OK] Scheda della raccolta inserita in progetto.md")
-        else:
-            print("[INFO] Segnaposto della scheda raccolta non trovato in progetto.md")
-    except Exception as e:
-        print(f"[WARN] Errore scheda raccolta: {e}")
+    inserita = esito.passo("Scheda della raccolta (ISAD)", inserisci_scheda_raccolta,
+                           OUTPUT_DIR, catalogo_path, df, bloccante=False)
+    if inserita:
+        print("[OK] Scheda della raccolta inserita in progetto.md")
+    elif inserita is not None:
+        esito.avviso("Segnaposto della scheda raccolta non trovato in progetto.md: "
+                     "la scheda ISAD(G) non compare nella pagina Il progetto")
 
     # ================================================================
     # GENERAZIONE: Home page
     # ================================================================
     print("\n[GEN] Generazione home page...")
-    try:
-        genera_home(df, persone, OUTPUT_DIR, organizzazioni)
-        print("[OK] Home page generata")
-    except Exception as e:
-        print(f"[ERROR] Errore generazione home: {e}")
-        raise
+    esito.passo("Generazione home page", genera_home,
+                df, persone, OUTPUT_DIR, organizzazioni)
 
     # ================================================================
     # GENERAZIONE: Sitemap SEO
     # ================================================================
     print("\n[SEO] Generazione sitemap...")
-    try:
-        genera_sitemap(OUTPUT_DIR, df, persone, organizzazioni)
-    except Exception as e:
-        print(f"[WARN] Errore generazione sitemap: {e}")
+    esito.passo("Generazione sitemap", genera_sitemap,
+                OUTPUT_DIR, df, persone, organizzazioni, bloccante=False)
 
     # ================================================================
     # OTTIMIZZAZIONE: JSON compressione
     # ================================================================
     print("\n[OPTIMIZE] Ottimizzazione risorse frontend...")
-    try:
-        ottimizza_json(OUTPUT_DIR)
-    except Exception as e:
-        print(f"[WARN] Errore ottimizzazione: {e}")
+    esito.passo("Ottimizzazione JSON", ottimizza_json, OUTPUT_DIR, bloccante=False)
 
     # ================================================================
     # SALVA HASH: Cache per prossima esecuzione
     # ================================================================
     print("\n[CACHE] Salvataggio state cache...")
-    try:
-        cache_mgr.set_file_hash(catalogo_path, cache_mgr._hash_file(catalogo_path))
-    except Exception as e:
-        print(f"[WARN] Errore salvataggio cache: {e}")
+    esito.passo("Salvataggio cache", lambda: cache_mgr.set_file_hash(
+        catalogo_path, cache_mgr._hash_file(catalogo_path)), bloccante=False)
 
     # ================================================================
     # STATISTICHE FINALI
@@ -438,7 +403,8 @@ def main():
     stampa_statistiche(df, persone, organizzazioni, cache_mgr)
 
     print("=" * 60)
-    print("GENERAZIONE COMPLETATA CON SUCCESSO!")
+    print("GENERAZIONE NON RIUSCITA: vedi gli errori sopra" if esito.ci_sono_errori()
+          else "GENERAZIONE COMPLETATA")
     print(f"Fine: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60 + "\n")
 
@@ -448,10 +414,4 @@ def main():
 # ========================================================================
 
 if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("\n\n[INTERRUPTED] Generazione interrotta dall'utente.")
-    except Exception as e:
-        print(f"\n[FATAL] Errore fatale durante generazione:\n{e}")
-        raise
+    sys.exit(esito.esegui_script("generatore", main))

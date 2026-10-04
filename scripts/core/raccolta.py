@@ -16,7 +16,7 @@ import html
 import os
 import re
 
-import pandas as pd
+from .dati import leggi_foglio
 
 SEGNAPOSTO = '<!-- SCHEDA-RACCOLTA -->'
 SEGNAPOSTO_CIFRE = '<!-- CIFRE-RACCOLTA -->'
@@ -57,11 +57,7 @@ def _valori_calcolati(df):
 
 
 def scheda_raccolta_html(excel_path, df_catalogo):
-    try:
-        df = pd.read_excel(excel_path, sheet_name='Raccolta', dtype=str).fillna('')
-    except Exception:
-        return ''
-    df.columns = df.columns.str.strip().str.lower()
+    df = leggi_foglio('Raccolta', excel_path)
     calcolati = _valori_calcolati(df_catalogo)
 
     righe = []
@@ -91,11 +87,7 @@ def scheda_raccolta_html(excel_path, df_catalogo):
 def _valori_raccolta(excel_path, df_catalogo):
     """Codice ISAD -> valore pubblicato (foglio Raccolta, o calcolato)."""
     calcolati = _valori_calcolati(df_catalogo)
-    try:
-        df = pd.read_excel(excel_path, sheet_name='Raccolta', dtype=str).fillna('')
-    except Exception:
-        return calcolati
-    df.columns = df.columns.str.strip().str.lower()
+    df = leggi_foglio('Raccolta', excel_path)
     valori = dict(calcolati)
     for _, r in df.iterrows():
         codice = _pulito(r.get('codice_isad', ''))

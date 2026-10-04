@@ -3,6 +3,7 @@ import os
 import re
 from collections import Counter
 
+from . import esito
 from .miniature import miniatura
 from .site_config import site_path
 from .utils import formatta_data, formatta_intervallo, slugify, split_nomi
@@ -69,13 +70,13 @@ def leggi_incipit_progetto(percorso):
     { .progetto-presentazione }. None se il file o il lead non si trovano
     (in quel caso la home viene generata senza la sezione)."""
     if not percorso or not os.path.isfile(percorso):
-        print(f"  ATTENZIONE: {percorso} non trovato, sezione 'Il progetto' omessa dalla home.")
+        esito.avviso(f"{percorso} non trovato: sezione 'Il progetto' omessa dalla home")
         return None
     with open(percorso, encoding='utf-8') as f:
         testo = f.read().replace('\r\n', '\n').replace('\r', '\n')
     lead = _leggi_capoverso(testo, MARCATORE_INCIPIT)
     if not lead:
-        print(f"  ATTENZIONE: nessun capoverso {{ .progetto-lead }} in {percorso}, sezione 'Il progetto' omessa dalla home.")
+        esito.avviso(f"nessun capoverso {{ .progetto-lead }} in {percorso}: sezione 'Il progetto' omessa dalla home")
         return None
     capoversi = [lead]
     presentazione = _leggi_capoverso(testo, MARCATORE_PRESENTAZIONE)

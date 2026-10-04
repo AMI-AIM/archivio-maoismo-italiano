@@ -41,6 +41,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+from scripts.core import esito
 from scripts.core.cache_manager import CacheManager
 from scripts.core.export_dati import esporta_e_riepiloga
 from scripts.core.validator import run_validation
@@ -165,10 +166,8 @@ def identifier_ia_per_documento(ami_id):
         str o None se non trovato / url mancante.
     """
     try:
-        import pandas as pd
-        catalogo_path = ROOT_DIR / "data" / "dati.xlsx"
-        df = pd.read_excel(catalogo_path, sheet_name='Catalogo', dtype=str).fillna('')
-        df.columns = df.columns.str.strip().str.lower()
+        from scripts.core.dati import leggi_foglio
+        df = leggi_foglio('Catalogo')
         riga = df[df['id'].astype(str).str.strip() == ami_id]
         if riga.empty:
             return None
@@ -290,6 +289,8 @@ def componi_messaggio_commit():
 
 def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
     stampa_titolo("Aggiornamento del sito AMI")
+    # Riepilogo errori/avvisi: si riparte da zero a ogni esecuzione.
+    esito.azzera_riepilogo()
     verifica_dipendenze()
 
     # 0bis. Validazione dei dati (blocca la pubblicazione se ci sono errori)
@@ -346,6 +347,8 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
     esegui([sys.executable, "galleria.py"], cwd=SCRIPTS_DIR,
            descrizione="Generazione galleria fotografica (build/galleria/)")
 
+    stampa_riepilogo_build()
+
     # 6. Pubblicazione (pull --rebase -> add -> commit -> push)
     stampa_titolo("Pubblicazione")
     if not git_ci_sono_modifiche():
@@ -359,6 +362,13 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
     stampa_titolo("Sito aggiornato e pubblicato!")
     print("GitHub Actions builderà e pubblicherà automaticamente su GitHub Pages")
     print("(di solito ci vuole qualche minuto prima che sia visibile online).")
+
+
+def stampa_riepilogo_build():
+    """Riepilogo di errori e avvisi raccolti dagli script di generazione."""
+    voci = esito.leggi_riepilogo()
+    stampa_titolo("Riepilogo errori e avvisi della generazione")
+    print(esito.formatta_riepilogo(voci))
 
 
 def mostra_cache_stats():
@@ -421,6 +431,8 @@ def main():
                  skip_validation=skip_validation)
 
     except ErroreComando as e:
+        if esito.leggi_riepilogo():
+            stampa_riepilogo_build()
         print(f"\nERRORE: {e}")
         print("Il sito NON è stato pubblicato: correggi l'errore sopra e rilancia lo script.")
         codice_uscita = 1

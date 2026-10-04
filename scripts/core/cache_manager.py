@@ -51,7 +51,8 @@ class CacheManager:
             with open(file_path, 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
         except Exception as e:
-            print(f"[WARNING] Errore salvataggio cache: {e}")
+            from . import esito
+            esito.avviso(f"Salvataggio cache non riuscito ({file_path}): {e}")
 
     @staticmethod
     def _hash_file(file_path):

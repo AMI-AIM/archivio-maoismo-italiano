@@ -6,9 +6,10 @@ import os
 import re
 import sys
 
-import pandas as pd
 from core.autorita import arricchisci_schema, blocco_autorita, carica_autorita
 from core.catalog_indexer import CatalogIndexer
+from core import esito
+from core.dati import ErroreDati, PERCORSO_EXCEL, leggi_foglio
 from core.liste import GRUPPI_PERSONA, elenco_per_ruolo, iniziali, valore_pulito
 from core.schema_generator import SchemaGenerator
 from core.site_config import site_path
@@ -49,30 +50,15 @@ def genera_persone():
     print("\nGenerazione delle pagine delle persone...")
 
     try:
-        persone_path = os.path.join(DATA_DIR, 'dati.xlsx')
-        df_persone = pd.read_excel(persone_path, sheet_name='Persone', dtype=str).fillna('')
-        df_persone.columns = df_persone.columns.str.strip().str.lower()
-    except FileNotFoundError:
-        print(f"ERRORE: Non trovo '{persone_path}'.")
-        return 1
-    except Exception as e:
-        print(f"ERRORE durante la lettura del foglio 'Persone' in dati.xlsx: {e}")
+        df_persone = leggi_foglio('Persone')
+        df_catalogo = leggi_foglio('Catalogo')
+    except ErroreDati as e:
+        esito.errore(f"dati.xlsx: {e}")
         return 1
 
     if df_persone.empty:
         print("Il foglio 'Persone' in dati.xlsx è vuoto.")
         return 0
-
-    try:
-        catalogo_path = os.path.join(DATA_DIR, 'dati.xlsx')
-        df_catalogo = pd.read_excel(catalogo_path, sheet_name='Catalogo', dtype=str).fillna('')
-        df_catalogo.columns = df_catalogo.columns.str.strip().str.lower()
-    except FileNotFoundError:
-        print(f"ERRORE: Non trovo '{catalogo_path}'.")
-        return 1
-    except Exception as e:
-        print(f"ERRORE durante la lettura del foglio 'Catalogo' in dati.xlsx: {e}")
-        return 1
 
     print(f"Caricate {len(df_persone)} persone dal foglio 'Persone' di dati.xlsx")
     print(f"Caricati {len(df_catalogo)} documenti dal foglio 'Catalogo' di dati.xlsx")
@@ -85,7 +71,7 @@ def genera_persone():
     print("Indici creati")
 
     # Record d'autorità ISAAR(CPF) e relazioni (core/autorita.py)
-    record_aut, relazioni_aut = carica_autorita(os.path.join(DATA_DIR, 'dati.xlsx'))
+    record_aut, relazioni_aut = carica_autorita(PERCORSO_EXCEL)
 
     persone = {}
 
@@ -340,8 +326,6 @@ hide:
             slug = data['slug']
             num_doc = data['num_doc']
             date_vita = data['data_range']
-            # Intervallo aperto ("1921 –"): nelle card diventa "dal 1921".
-            date_vita = re.sub(r'^(.+?)\s*–\s*$', r'dal \1', date_vita)
             nome_html = html.escape(nome, quote=True)
             date_vita_html = html.escape(date_vita)
 
@@ -387,8 +371,6 @@ hide:
             slug = data['slug']
             num_doc = data['num_doc']
             date_vita = data['data_range']
-            # Intervallo aperto ("1921 –"): nelle card diventa "dal 1921".
-            date_vita = re.sub(r'^(.+?)\s*–\s*$', r'dal \1', date_vita)
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
             lettera = html.escape(nome[0].upper(), quote=True)
             nome_html = html.escape(nome)
@@ -486,4 +468,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(esito.esegui_script("persone", main))

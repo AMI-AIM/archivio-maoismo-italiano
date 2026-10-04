@@ -26,6 +26,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from .dati import fogli as fogli_excel
+
 CARTELLA_EXPORT = Path("data") / "export"
 MAX_ID_NEL_TITOLO = 5
 
@@ -44,10 +46,8 @@ def esporta_csv(root_dir):
     out_dir = root_dir / CARTELLA_EXPORT
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    fogli = pd.read_excel(excel_path, sheet_name=None, dtype=str)
     scritti = {}
-    for nome, df in fogli.items():
-        df = df.fillna("")
+    for nome, df in fogli_excel(excel_path).items():
         # Righe completamente vuote (residui di formattazione Excel): via.
         df = df[(df != "").any(axis=1)]
         rel = CARTELLA_EXPORT / _nome_file(nome)

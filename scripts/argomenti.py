@@ -6,7 +6,6 @@ import urllib.parse
 import sys
 from datetime import datetime
 
-import pandas as pd
 from core.argomenti import (
     build_argomenti_index,
     find_topic_column,
@@ -15,6 +14,8 @@ from core.argomenti import (
 )
 from core.site_config import site_path
 from core.liste import meta_riga
+from core import esito
+from core.dati import ErroreDati, leggi_foglio
 from core.utils import formatta_data, slugify
 
 try:
@@ -434,20 +435,10 @@ def genera_argomenti():
     """
     print('\nGenerazione delle pagine degli argomenti...')
 
-    catalogo_path = os.path.join(DATA_DIR, 'dati.xlsx')
-
     try:
-        df_catalogo = pd.read_excel(
-            catalogo_path,
-            sheet_name='Catalogo',
-            dtype=str
-        ).fillna('')
-        df_catalogo.columns = df_catalogo.columns.str.strip().str.lower()
-    except FileNotFoundError:
-        print(f'ERRORE: Non trovo {catalogo_path}.')
-        return 1
-    except Exception as e:
-        print(f"ERRORE durante la lettura del foglio 'Catalogo' in dati.xlsx: {e}")
+        df_catalogo = leggi_foglio('Catalogo')
+    except ErroreDati as e:
+        esito.errore(f'dati.xlsx: {e}')
         return 1
 
     if df_catalogo.empty:
@@ -460,11 +451,11 @@ def genera_argomenti():
     topic_column = find_topic_column(df_catalogo)
 
     if not topic_column:
-        print("ERRORE: nessuna colonna argomento trovata (cercavo 'Percorsi', 'Serie', 'Argomenti', 'Argomento', 'Tag', 'Tags').")
+        esito.errore("nessuna colonna dei percorsi nel Catalogo (cercavo 'Percorsi', 'Serie', 'Argomenti', 'Argomento', 'Tag', 'Tags')")
         return 1
 
     if 'id' not in df_catalogo.columns:
-        print("ERRORE: La colonna 'ID' non è presente nel foglio 'Catalogo'.")
+        esito.errore("la colonna 'ID' non è presente nel foglio Catalogo")
         return 1
 
     print(f"Caricati {len(df_catalogo)} documenti dal foglio 'Catalogo' di dati.xlsx")
@@ -594,4 +585,4 @@ def main():
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(esito.esegui_script('argomenti', main))

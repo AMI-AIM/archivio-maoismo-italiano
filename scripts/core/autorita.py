@@ -32,8 +32,7 @@ lavoro e non vengono pubblicati.
 import html
 import re
 
-import pandas as pd
-
+from core.dati import leggi_foglio
 from core.site_config import site_path
 from core.utils import formatta_data, slugify
 
@@ -46,12 +45,9 @@ def _pulito(valore):
 
 
 def _leggi_foglio(path, foglio):
-    try:
-        df = pd.read_excel(path, sheet_name=foglio, dtype=str).fillna('')
-    except Exception:
-        return pd.DataFrame()
-    df.columns = df.columns.str.strip().str.lower()
-    return df
+    # Foglio mancante -> errore esplicito (core.dati.ErroreDati), non più
+    # un DataFrame vuoto che generava schede senza dati.
+    return leggi_foglio(foglio, path)
 
 
 def carica_autorita(path):

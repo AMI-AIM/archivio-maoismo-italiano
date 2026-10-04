@@ -2,57 +2,47 @@ import html
 import json
 import os
 
-import pandas as pd
-
+from .dati import leggi_foglio
 from .site_config import site_path
 from .utils import formatta_estremo, forme_varianti, slugify, split_nomi
 
 
 def carica_soggetti(data_dir):
+    """{nome: dati} per persone e organizzazioni, dai fogli di dati.xlsx.
+
+    Gli errori di lettura (ErroreDati) NON vengono intercettati: prima un
+    foglio illeggibile produceva un sito senza link a persone e
+    organizzazioni, senza fermare la pubblicazione.
+    """
     persone = {}
     organizzazioni = {}
-    
-    try:
-        persone_path = os.path.join(data_dir, 'dati.xlsx')
-        df_persone = pd.read_excel(persone_path, sheet_name='Persone', dtype=str).fillna('')
-        df_persone.columns = df_persone.columns.str.strip().str.lower()
-        for _, row in df_persone.iterrows():
-            nome = str(row.get('nome', '')).strip()
-            if nome and nome not in ['nan', 'None']:
-                persone[nome] = {
-                    'slug': slugify(nome),
-                    'biografia': str(row.get('biografia', '')).strip(),
-                    'nascita': str(row.get('nascita', '')).strip(),
-                    'morte': str(row.get('morte', '')).strip(),
-                    'cognome': str(row.get('cognome', '')).strip(),
-                    'varianti': forme_varianti(row.get('forme_varianti', ''))
-                }
-        print(f"Caricate {len(persone)} persone dal foglio 'Persone' di dati.xlsx")
-    except FileNotFoundError:
-        print("File data/dati.xlsx non trovato. Le persone non saranno linkate.")
-    except Exception as e:
-        print(f"Errore durante il caricamento del foglio 'Persone' in dati.xlsx: {e}")
-    
-    try:
-        org_path = os.path.join(data_dir, 'dati.xlsx')
-        df_org = pd.read_excel(org_path, sheet_name='Organizzazioni', dtype=str).fillna('')
-        df_org.columns = df_org.columns.str.strip().str.lower()
-        for _, row in df_org.iterrows():
-            nome = str(row.get('nome', '')).strip()
-            if nome and nome not in ['nan', 'None']:
-                organizzazioni[nome] = {
-                    'slug': slugify(nome),
-                    'storia': str(row.get('storia', '')).strip(),
-                    'categoria': str(row.get('categoria', '')).strip(),
-                    'fondazione': str(row.get('fondazione', '')).strip(),
-                    'varianti': forme_varianti(row.get('forme_varianti', ''))
-                }
-        print(f"Caricate {len(organizzazioni)} organizzazioni dal foglio 'Organizzazioni' di dati.xlsx")
-    except FileNotFoundError:
-        print("File data/dati.xlsx non trovato. Le organizzazioni non saranno linkate.")
-    except Exception as e:
-        print(f"Errore durante il caricamento del foglio 'Organizzazioni' in dati.xlsx: {e}")
-    
+    excel_path = os.path.join(data_dir, 'dati.xlsx')
+
+    for _, row in leggi_foglio('Persone', excel_path).iterrows():
+        nome = str(row.get('nome', '')).strip()
+        if nome and nome not in ['nan', 'None']:
+            persone[nome] = {
+                'slug': slugify(nome),
+                'biografia': str(row.get('biografia', '')).strip(),
+                'nascita': str(row.get('nascita', '')).strip(),
+                'morte': str(row.get('morte', '')).strip(),
+                'cognome': str(row.get('cognome', '')).strip(),
+                'varianti': forme_varianti(row.get('forme_varianti', ''))
+            }
+    print(f"Caricate {len(persone)} persone dal foglio 'Persone' di dati.xlsx")
+
+    for _, row in leggi_foglio('Organizzazioni', excel_path).iterrows():
+        nome = str(row.get('nome', '')).strip()
+        if nome and nome not in ['nan', 'None']:
+            organizzazioni[nome] = {
+                'slug': slugify(nome),
+                'storia': str(row.get('storia', '')).strip(),
+                'categoria': str(row.get('categoria', '')).strip(),
+                'fondazione': str(row.get('fondazione', '')).strip(),
+                'varianti': forme_varianti(row.get('forme_varianti', ''))
+            }
+    print(f"Caricate {len(organizzazioni)} organizzazioni dal foglio 'Organizzazioni' di dati.xlsx")
+
     return persone, organizzazioni
 
 def trova_soggetto(nome, persone, organizzazioni):
