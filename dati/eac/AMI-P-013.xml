@@ -42,11 +42,13 @@
         <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-016.xml">
           <part>Partito Comunista d'Italia (marxista-leninista) - Linea rossa</part>
         </targetEntity>
-        <date standardDate="1968">1968</date>
+        <dateRange>
+          <fromDate standardDate="1968">1968</fromDate>
+          <toDate standardDate="1977">1977</toDate>
+        </dateRange>
         <relationType>gerarchica</relationType>
         <descriptiveNote>
           <p>Angiolo Gracci segretario di Partito Comunista d'Italia (marxista-leninista) - Linea rossa</p>
-          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
         </descriptiveNote>
       </relation>
     </relations>

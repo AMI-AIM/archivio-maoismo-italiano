@@ -35,10 +35,13 @@
         <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-024.xml">
           <part>Organizzazione Comunista (marxista-leninista) Fronte Unito</part>
         </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1973">1973</fromDate>
+          <toDate standardDate="1977">1977</toDate>
+        </dateRange>
         <relationType>gerarchica</relationType>
         <descriptiveNote>
           <p>Giuseppe Burgani segretario di Organizzazione Comunista (marxista-leninista) Fronte Unito</p>
-          <p>Fonte: AMI-0057; AMI-0064</p>
         </descriptiveNote>
       </relation>
     </relations>

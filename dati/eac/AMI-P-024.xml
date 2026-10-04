@@ -32,10 +32,13 @@
         <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-027.xml">
           <part>Partito Comunista (marxista-leninista) d'Italia - Lotta di lunga durata</part>
         </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1969">1969</fromDate>
+          <toDate standardDate="1977">1977</toDate>
+        </dateRange>
         <relationType>gerarchica</relationType>
         <descriptiveNote>
           <p>Gustavo Hermann segretario di Partito Comunista (marxista-leninista) d'Italia - Lotta di lunga durata</p>
-          <p>Fonte: AMI-0057</p>
         </descriptiveNote>
       </relation>
     </relations>

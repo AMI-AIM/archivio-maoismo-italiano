@@ -53,7 +53,6 @@
         <relationType>gerarchica</relationType>
         <descriptiveNote>
           <p>Mao Zedong presidente di Comitato Centrale del PCC</p>
-          <p>Fonte: AMI-0004</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -63,6 +62,7 @@
         <relationType>gerarchica</relationType>
         <descriptiveNote>
           <p>Comitato Centrale del PCC organo di Partito Comunista Cinese</p>
+          <p>1921-</p>
         </descriptiveNote>
       </relation>
     </relations>

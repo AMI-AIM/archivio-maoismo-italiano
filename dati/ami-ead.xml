@@ -945,6 +945,12 @@
           <corpname identifier="AMI-O-003">
             <part>Edizioni Oriente</part>
           </corpname>
+          <persname identifier="AMI-P-020">
+            <part>Dino Frangioni</part>
+          </persname>
+          <persname>
+            <part>Giacomo Monemezzani</part>
+          </persname>
           <geogname>
             <part>Pechino</part>
           </geogname>
@@ -1436,6 +1442,9 @@
           <corpname identifier="AMI-O-016">
             <part>Partito Comunista d'Italia (marxista-leninista) - Linea rossa</part>
           </corpname>
+          <persname identifier="AMI-P-013">
+            <part>Angiolo Gracci</part>
+          </persname>
           <geogname>
             <part>Verona</part>
           </geogname>

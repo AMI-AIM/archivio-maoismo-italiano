@@ -37,44 +37,52 @@
         <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-017.xml">
           <part>Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</part>
         </targetEntity>
-        <date standardDate="1969">1969</date>
+        <dateRange>
+          <fromDate standardDate="1969">1969</fromDate>
+          <toDate standardDate="1976">1976</toDate>
+        </dateRange>
         <relationType>associativa</relationType>
         <descriptiveNote>
           <p>Vincenzo Calò segretario di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</p>
-          <p>Fonte: AMI-0032; AMI-0036</p>
         </descriptiveNote>
       </relation>
       <relation>
         <targetEntity targetType="corporateBody">
           <part>Viva il Leninismo!</part>
         </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1962">1962</fromDate>
+          <toDate standardDate="1963">1963</toDate>
+        </dateRange>
         <relationType>associativa</relationType>
         <descriptiveNote>
           <p>Vincenzo Calò membro di Viva il Leninismo!</p>
-          <p>prima del 1969</p>
-          <p>Fonte: AMI-0032</p>
         </descriptiveNote>
       </relation>
       <relation>
         <targetEntity targetType="corporateBody">
           <part>Federazione Marxista-Leninista d'Italia</part>
         </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1966">1966</fromDate>
+          <toDate standardDate="1967">1967</toDate>
+        </dateRange>
         <relationType>associativa</relationType>
         <descriptiveNote>
           <p>Vincenzo Calò membro di Federazione Marxista-Leninista d'Italia</p>
-          <p>prima del 1969</p>
-          <p>Fonte: AMI-0032</p>
         </descriptiveNote>
       </relation>
       <relation>
         <targetEntity targetType="corporateBody">
           <part>Tribuna Rossa</part>
         </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1968">1968</fromDate>
+          <toDate standardDate="1969">1969</toDate>
+        </dateRange>
         <relationType>associativa</relationType>
         <descriptiveNote>
           <p>Vincenzo Calò membro di Tribuna Rossa</p>
-          <p>prima del 1969</p>
-          <p>Fonte: AMI-0032</p>
         </descriptiveNote>
       </relation>
     </relations>

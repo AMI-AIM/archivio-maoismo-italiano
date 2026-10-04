@@ -45,11 +45,13 @@
         <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-013.xml">
           <part>Partito Comunista d'Italia (marxista-leninista)</part>
         </targetEntity>
-        <date standardDate="1966">1966</date>
+        <dateRange>
+          <fromDate standardDate="1966">1966</fromDate>
+          <toDate standardDate="1991">1991</toDate>
+        </dateRange>
         <relationType>associativa</relationType>
         <descriptiveNote>
           <p>Nuova Unità oegano di stampa di Partito Comunista d'Italia (marxista-leninista)</p>
-          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
         </descriptiveNote>
       </relation>
     </relations>

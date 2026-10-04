@@ -35,11 +35,13 @@
         <targetEntity targetType="corporateBody">
           <part>Gruppo Proletario Luglio 60</part>
         </targetEntity>
-        <date standardDate="1964">1964</date>
+        <dateRange>
+          <fromDate standardDate="1964">1964</fromDate>
+          <toDate standardDate="1966">1966</toDate>
+        </dateRange>
         <relationType>associativa</relationType>
         <descriptiveNote>
-          <p>Giacomo Montemezzani rappresentante di Gruppo Proletario Luglio 60</p>
-          <p>Fonte: AMI-0018</p>
+          <p>Giacomo Montemezzani membro di Gruppo Proletario Luglio 60</p>
         </descriptiveNote>
       </relation>
     </relations>

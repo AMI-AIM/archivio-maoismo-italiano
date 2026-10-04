@@ -63,7 +63,6 @@
         <relationType>gerarchica</relationType>
         <descriptiveNote>
           <p>Fosco Dinucci segretario di Partito Comunista d'Italia (marxista-leninista)</p>
-          <p>Fonte: AMI-0013; AMI-0016</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -77,7 +76,6 @@
         <relationType>associativa</relationType>
         <descriptiveNote>
           <p>Osvaldo Pesce membro di Partito Comunista d'Italia (marxista-leninista)</p>
-          <p>Fonte: AMI-0014; AMI-0033</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -91,13 +89,16 @@
         <relationType>associativa</relationType>
         <descriptiveNote>
           <p>Dino Dini membro di Partito Comunista d'Italia (marxista-leninista)</p>
-          <p>Fonte: AMI-0014; AMI-0033</p>
         </descriptiveNote>
       </relation>
       <relation>
         <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-009.xml">
           <part>Ufficio Politico del PCd'I (m-l)</part>
         </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1966">1966</fromDate>
+          <toDate standardDate="1991">1991</toDate>
+        </dateRange>
         <relationType>gerarchica</relationType>
         <descriptiveNote>
           <p>Ufficio Politico del PCd'I (m-l) organo di Partito Comunista d'Italia (marxista-leninista)</p>
@@ -107,8 +108,19 @@
         <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-016.xml">
           <part>Partito Comunista d'Italia (marxista-leninista) - Linea rossa</part>
         </targetEntity>
+        <date standardDate="1968">1968</date>
         <descriptiveNote>
           <p>Partito Comunista d'Italia (marxista-leninista) - Linea rossa scissione di Partito Comunista d'Italia (marxista-leninista)</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="person" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-P-020.xml">
+          <part>Dino Frangioni</part>
+        </targetEntity>
+        <date standardDate="1966">1966</date>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Dino Frangioni membro di Partito Comunista d'Italia (marxista-leninista)</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -119,7 +131,6 @@
         <relationType>temporale</relationType>
         <descriptiveNote>
           <p>Organizzazione Comunista (marxista-leninista) Fronte Unito scissione di Partito Comunista d'Italia (marxista-leninista)</p>
-          <p>Fonte: AMI-0064</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -129,19 +140,19 @@
         <relationType>associativa</relationType>
         <descriptiveNote>
           <p>Dario Visintini membro di Partito Comunista d'Italia (marxista-leninista)</p>
-          <p>attestato 1968</p>
-          <p>Fonte: AMI-0062</p>
         </descriptiveNote>
       </relation>
       <relation>
         <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-006.xml">
           <part>Nuova Unità</part>
         </targetEntity>
-        <date standardDate="1966">1966</date>
+        <dateRange>
+          <fromDate standardDate="1966">1966</fromDate>
+          <toDate standardDate="1991">1991</toDate>
+        </dateRange>
         <relationType>associativa</relationType>
         <descriptiveNote>
           <p>Nuova Unità oegano di stampa di Partito Comunista d'Italia (marxista-leninista)</p>
-          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -152,7 +163,6 @@
         <relationType>temporale</relationType>
         <descriptiveNote>
           <p>Organizzazione Comunista Italiana (marxista-leninista) scissione di Partito Comunista d'Italia (marxista-leninista)</p>
-          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -163,7 +173,6 @@
         <relationType>temporale</relationType>
         <descriptiveNote>
           <p>Partito Comunista (marxista-leninista) d'Italia - Lotta di lunga durata scissione di Partito Comunista d'Italia (marxista-leninista)</p>
-          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -174,7 +183,6 @@
         <relationType>temporale</relationType>
         <descriptiveNote>
           <p>Organizzazione Comunista Bolscevica Italiana scissione di Partito Comunista d'Italia (marxista-leninista)</p>
-          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -185,7 +193,6 @@
         <relationType>temporale</relationType>
         <descriptiveNote>
           <p>Organizzazione dei Comunisti (marxisti-leninisti) d'Italia scissione di Partito Comunista d'Italia (marxista-leninista)</p>
-          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -196,7 +203,6 @@
         <relationType>temporale</relationType>
         <descriptiveNote>
           <p>Ottobre scissione di Partito Comunista d'Italia (marxista-leninista)</p>
-          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -207,7 +213,6 @@
         <relationType>temporale</relationType>
         <descriptiveNote>
           <p>Organizzazione per la ricostruzione del Partito rivoluzionario del proletariato scissione di Partito Comunista d'Italia (marxista-leninista)</p>
-          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -218,7 +223,6 @@
         <relationType>temporale</relationType>
         <descriptiveNote>
           <p>Partito Comunista d'Italia (marxista-leninista) confluito in Partito della Rifondazione Comunista</p>
-          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
         </descriptiveNote>
       </relation>
       <relation>

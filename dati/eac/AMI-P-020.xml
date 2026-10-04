@@ -32,14 +32,26 @@
     </identity>
     <relations>
       <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-013.xml">
+          <part>Partito Comunista d'Italia (marxista-leninista)</part>
+        </targetEntity>
+        <date standardDate="1966">1966</date>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Dino Frangioni membro di Partito Comunista d'Italia (marxista-leninista)</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
         <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-003.xml">
           <part>Edizioni Oriente</part>
         </targetEntity>
-        <date standardDate="1964">1964</date>
+        <dateRange>
+          <fromDate standardDate="1964">1964</fromDate>
+          <toDate standardDate="1966">1966</toDate>
+        </dateRange>
         <relationType>associativa</relationType>
         <descriptiveNote>
-          <p>Dino Frangioni rappresentante di Edizioni Oriente</p>
-          <p>Fonte: AMI-0018</p>
+          <p>Dino Frangioni membro di Edizioni Oriente</p>
         </descriptiveNote>
       </relation>
     </relations>

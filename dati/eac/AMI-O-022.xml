@@ -45,11 +45,13 @@
         <targetEntity targetType="corporateBody">
           <part>Lotta di Classe</part>
         </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1970">1970</fromDate>
+          <toDate standardDate="1973">1973</toDate>
+        </dateRange>
         <relationType>associativa</relationType>
         <descriptiveNote>
           <p>Circoli Lenin dell'Emilia Romagna curatore di Lotta di Classe</p>
-          <p>attestato 1970</p>
-          <p>Fonte: AMI-0070</p>
         </descriptiveNote>
       </relation>
     </relations>
