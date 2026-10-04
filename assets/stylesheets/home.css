@@ -106,7 +106,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   align-items: flex-start !important;
   gap: 1.5rem !important;
   overflow-x: auto;
-  padding-bottom: 2.6rem;
+  padding-bottom: 0.6rem;
   margin-bottom: 0;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -117,6 +117,9 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 .evidenza-card {
   position: relative;
   flex: 0 0 auto !important;
+  /* Larga quanto la copertina: il titolo va a capo dentro questa misura
+     invece di allargare la card. */
+  width: min-content;
   min-width: 0;
   transition: transform 0.25s ease;
 }
@@ -171,21 +174,20 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   opacity: 0.5;
 }
 /* Titolo su fondo scuro: testo chiaro, leggermente piu' pesante e con
-   piu' interlinea (compensazione light-on-dark). */
+   piu' interlinea (compensazione light-on-dark). Va a capo per intero
+   sotto la copertina (prima era su una riga sola, troncato con "…"). */
 .evidenza-titolo {
-  position: absolute !important;
-  top: 100% !important;
-  left: 0 !important;
-  right: 0 !important;
+  position: static !important;
   margin-top: 0.75rem !important;
   font-size: var(--ami-font-size-sm); /* 14px */
   font-weight: 500;
   line-height: var(--ami-line-height-snug);
   color: rgba(255, 255, 255, 0.92);
   text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  text-wrap: balance;
 }
 
 /* ------------------------------------------------------------
@@ -420,7 +422,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
     justify-content: flex-start !important;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    padding: 0 1rem 2.4rem 1rem !important;
+    padding: 0 1rem 0.6rem 1rem !important;
     margin: 0 -1rem !important;
     gap: 1.25rem !important;
   }

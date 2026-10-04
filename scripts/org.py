@@ -441,7 +441,7 @@ hide:
     lines.append('    const cards = grid.querySelectorAll(".org-card");')
     lines.append('')
     lines.append('    function filtra() {')
-    lines.append('        const query = searchInput.value.toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").replace(/\\s+/g, " ").trim();')
+    lines.append('        const query = searchInput.value.toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").replace(/[^\\p{L}\\p{N}]+/gu, " ").replace(/\\s+/g, " ").trim();')
     lines.append('        const letteraAttiva = document.querySelector(".lettera-btn--active");')
     lines.append('        const lettera = letteraAttiva ? letteraAttiva.dataset.lettera : "all";')
     lines.append('        let visibili = 0;')

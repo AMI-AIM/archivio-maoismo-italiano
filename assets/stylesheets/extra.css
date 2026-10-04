@@ -458,6 +458,13 @@ button.md-header__nav-link--dropdown {
   min-width: 140px;
   flex: 1 1 auto;
 }
+/* Nessun anello sul campo: lo porta la pillola (:focus-within, sopra).
+   Serve la specificita' di :focus-visible per battere la regola
+   generale ".banner-content :focus-visible", che disegnava un riquadro
+   bianco attorno al campo dentro la pillola. */
+.banner-search input:focus-visible {
+  outline: none;
+}
 .banner-search-submit {
   background: none;
   border: none;
@@ -944,7 +951,7 @@ in home.css, che le definisce da sola: rimosse)
     justify-content: flex-start !important;
     scroll-snap-type: x mandatory !important;
     -webkit-overflow-scrolling: touch !important;
-    padding: 0 1rem 2.4rem 1rem !important;
+    padding: 0 1rem 0.6rem 1rem !important;
     margin: 0 -1rem !important;
     gap: 1.25rem !important;
   }
@@ -981,10 +988,6 @@ in home.css, che le definisce da sola: rimosse)
     object-fit: contain !important;
   }
   .evidenza-titolo {
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    right: 0 !important;
     margin-top: 0.75rem !important;
     font-size: var(--ami-font-size-sm) !important;
   }
@@ -1517,7 +1520,6 @@ textarea {
 .lazy-img {
     transition: opacity 300ms ease-in-out;
     opacity: 0;
-    will-change: opacity;
 }
 
 .lazy-img.lazy-loaded {
@@ -2317,6 +2319,20 @@ input[type="search"]::-webkit-search-cancel-button {
 .md-typeset h3.doc-gruppo__titolo {
   font-size: var(--ami-font-size-lg);
   font-weight: 650;
+}
+/* Gruppo unico (core/liste.py): il ruolo e' un'etichetta, non un titolo. */
+.md-typeset .doc-gruppo__titolo--unico {
+  margin-top: 0.5rem;
+  font-family: var(--ami-font-label);
+  font-size: var(--ami-font-size-2xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--md-default-fg-color--light);
+}
+.md-typeset .doc-gruppo__titolo--unico .doc-gruppo__conteggio {
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 /* --- Rosso solo su cio' che si clicca (Red Pencil Rule) -----------------

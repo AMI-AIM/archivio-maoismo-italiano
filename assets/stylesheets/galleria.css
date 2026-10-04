@@ -451,18 +451,19 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
 
 .lightbox-line {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   gap: 10px;
   flex: 1 1 auto;
   min-width: 0;
   margin: 0;
 }
+/* Il titolo va a capo per intero (prima era troncato con "…"). */
 .lightbox-title {
   flex: 0 1 auto;
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: break-word;
+  text-wrap: balance;
   font-size: var(--ami-font-size-md);
   font-weight: 700;
   line-height: var(--ami-line-height-snug);
@@ -486,6 +487,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   display: inline-flex;
   align-items: center;
   gap: .35rem;
+  font-family: var(--ami-font-label);
   padding: 5px 10px;
   border: 1px solid var(--gal-linea);
   border-radius: var(--ami-radius-pillola);

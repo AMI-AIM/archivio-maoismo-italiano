@@ -363,9 +363,12 @@ def _relations_eac(nome, relazioni, indice, nome_da_id):
             continue
         altro = b if a == nome else a
         info = indice.get(altro, {})
+        # Entità senza record d'autorità: il tipo viene dalla colonna
+        # 'Tipo_senza_ID' del foglio Relazioni (Persona/Ente), default Ente.
+        tipo = info.get('tipo') or ('persona' if _v(rel.get('tipo_senza_id')).lower().startswith('pers') else 'ente')
         relation = _sub(rel_el, NS_EAC, 'relation')
         te = _sub(relation, NS_EAC, 'targetEntity',
-                  targetType='person' if info.get('tipo') == 'persona' else 'corporateBody',
+                  targetType='person' if tipo == 'persona' else 'corporateBody',
                   valueURI=site_url(f"dati/eac/{info['id']}.xml") if info.get('id') else None)
         _sub(te, NS_EAC, 'part', altro)
         # Date della relazione: "1966-1968", "1968-????" -> dateRange;

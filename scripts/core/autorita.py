@@ -35,7 +35,7 @@ import re
 import pandas as pd
 
 from core.site_config import site_path
-from core.utils import slugify
+from core.utils import formatta_data, slugify
 
 ETICHETTE_TIPO = {'persona': 'Persona', 'ente': 'Ente', 'famiglia': 'Famiglia'}
 
@@ -104,7 +104,21 @@ def _nome_linkato(nome, record, indexer):
         sezione = record[nome]['_sezione']
         url = site_path(f'{sezione}/{slugify(nome)}/')
         return f'<a href="{html.escape(url, quote=True)}">{nome_html}</a>'
-    return nome_html
+    # Soggetto senza pagina: senza documenti collegati oppure citato solo
+    # nella relazione, senza record d'autorità (colonna ID vuota nel foglio
+    # Relazioni). Il nome resta in grigio, senza link.
+    return (f'<span class="autorita-rel__senza-pagina" '
+            f'title="Nessun documento nell\'archivio">{nome_html}</span>')
+
+
+def _data_redazione(valore):
+    """Data di redazione leggibile ("2 ottobre 2026"). Excel la consegna
+    come timestamp ("2026-10-02 00:00:00"); se non e' una data
+    riconoscibile resta com'e'. Nell'export EAC-CPF resta in ISO."""
+    if not valore:
+        return ''
+    leggibile, ordine = formatta_data(str(valore).split(' ')[0])
+    return leggibile if ordine[0] != 9999 else str(valore)
 
 
 def _campo(etichetta, valore_html):
@@ -163,7 +177,7 @@ def blocco_autorita(nome, data_range, record, relazioni, indexer):
         _campo('Identificativi esterni', ', '.join(esterni)),
         _campo('Formato XML', f'<a href="{html.escape(site_path("dati/eac/" + dati["id_autorita"] + ".xml"), quote=True)}">EAC-CPF</a>'),
         _campo('Norme', html.escape(dati.get('norme', ''))),
-        _campo('Redazione', html.escape(dati.get('data_redazione', ''))),
+        _campo('Redazione', html.escape(_data_redazione(dati.get('data_redazione', '')))),
     ])
 
     url_progetto = site_path('progetto/') + '#norme-di-descrizione'

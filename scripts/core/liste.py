@@ -82,16 +82,21 @@ def elenco_per_ruolo(documenti, gruppi, escludi_org=''):
                 assegnati[chiave].append(doc)
                 break
     out = []
+    # Con un solo gruppo un sottotitolo h3 sotto l'h2 "Documenti" e'
+    # ridondante: il ruolo resta come etichetta (p), non come titolo.
+    unico = sum(1 for chiave, _, _ in gruppi if assegnati[chiave]) == 1
     for chiave, titolo, ident in gruppi:
         docs = assegnati[chiave]
         if not docs:
             continue
         n = len(docs)
         conteggio = '1 documento' if n == 1 else f'{n} documenti'
+        tag = 'p' if unico else 'h3'
+        classe = 'doc-gruppo__titolo doc-gruppo__titolo--unico' if unico else 'doc-gruppo__titolo'
         out.append(
             f'<section class="doc-gruppo" aria-labelledby="gruppo-{ident}">\n'
-            f'<h3 class="doc-gruppo__titolo" id="gruppo-{ident}">{html.escape(titolo)}'
-            f' <span class="doc-gruppo__conteggio">{conteggio}</span></h3>\n'
+            f'<{tag} class="{classe}" id="gruppo-{ident}">{html.escape(titolo)}'
+            f' <span class="doc-gruppo__conteggio">{conteggio}</span></{tag}>\n'
             '<div class="catalogo-lista">'
             + ''.join(_riga(d, chiave, escludi_org) for d in docs)
             + '</div>\n</section>\n'
