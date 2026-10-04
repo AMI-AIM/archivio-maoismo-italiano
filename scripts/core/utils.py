@@ -275,3 +275,23 @@ def soggetto_produttore(autore_raw, org_raw):
         return autore
     org = (org_raw or '').strip()
     return '' if org.lower() in ('nan', 'none', 'n/a') else org
+
+
+def forme_varianti(valore):
+    """Elenco delle "Altre forme del nome" (colonna Forme_varianti dei
+    fogli Persone e Organizzazioni, valori separati da punto e virgola)."""
+    testo = str(valore or '').strip()
+    if testo in ('', 'nan', 'None'):
+        return []
+    return [v.strip() for v in testo.split(';') if v.strip()]
+
+
+def testo_ricerca(*parti):
+    """Testo normalizzato per le ricerche per nome negli indici di Persone
+    e Organizzazioni: minuscole, senza accenti, spazi singoli. Lo stesso
+    trattamento lo applica il JavaScript alla query (normalize NFD)."""
+    import unicodedata
+    testo = ' '.join(str(p) for p in parti if p)
+    testo = unicodedata.normalize('NFD', testo.lower())
+    testo = ''.join(c for c in testo if not unicodedata.combining(c))
+    return re.sub(r'\s+', ' ', testo).strip()

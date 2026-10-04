@@ -11,7 +11,7 @@ from core.catalog_indexer import CatalogIndexer
 from core.liste import GRUPPI_ORGANIZZAZIONE, elenco_per_ruolo, iniziali, valore_pulito
 from core.schema_generator import SchemaGenerator
 from core.site_config import site_path
-from core.utils import escape_yaml_string, formatta_data, formatta_estremo, formatta_intervallo, slugify
+from core.utils import escape_yaml_string, formatta_data, formatta_estremo, formatta_intervallo, forme_varianti, slugify, testo_ricerca
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
@@ -195,7 +195,8 @@ def genera_organizzazioni():
                 'data_range': data_range,
                 'documenti': documenti,
                 'immagine': immagine_url,
-                'num_doc': len(documenti)
+                'num_doc': len(documenti),
+                'varianti': forme_varianti(row.get('forme_varianti', ''))
             }
 
     if not organizzazioni:
@@ -412,7 +413,10 @@ hide:
             date_range_html = html.escape(date_range)
             categoria_html = html.escape(categoria)
 
-            lines.append(f'<div class="org-card" data-lettera="{lettera}">')
+            # La ricerca per nome trova la scheda anche con le altre forme
+            # del nome (es. "Lin Piao" -> Lin Biao), senza mostrarle.
+            cerca_attr = html.escape(testo_ricerca(nome, *data.get('varianti', [])), quote=True)
+            lines.append(f'<div class="org-card" data-lettera="{lettera}" data-cerca="{cerca_attr}">')
             lines.append(f'    <a href="{slug}/" class="org-link">')
             lines.append(f'        <div class="org-tipo">{categoria_html}</div>')
             lines.append(f'        <div class="org-name">{nome_html}</div>')
@@ -437,13 +441,13 @@ hide:
     lines.append('    const cards = grid.querySelectorAll(".org-card");')
     lines.append('')
     lines.append('    function filtra() {')
-    lines.append('        const query = searchInput.value.toLowerCase().trim();')
+    lines.append('        const query = searchInput.value.toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").replace(/\\s+/g, " ").trim();')
     lines.append('        const letteraAttiva = document.querySelector(".lettera-btn--active");')
     lines.append('        const lettera = letteraAttiva ? letteraAttiva.dataset.lettera : "all";')
     lines.append('        let visibili = 0;')
     lines.append('')
     lines.append('        cards.forEach(card => {')
-    lines.append('            const nome = card.querySelector(".org-name").textContent.toLowerCase();')
+    lines.append('            const nome = card.dataset.cerca || "";')
     lines.append('            const cardLettera = card.dataset.lettera;')
     lines.append('            const matchLettera = (lettera === "all" || cardLettera === lettera);')
     lines.append('            const matchRicerca = nome.includes(query);')

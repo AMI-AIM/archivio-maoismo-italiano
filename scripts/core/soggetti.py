@@ -5,7 +5,7 @@ import os
 import pandas as pd
 
 from .site_config import site_path
-from .utils import formatta_estremo, slugify, split_nomi
+from .utils import formatta_estremo, forme_varianti, slugify, split_nomi
 
 
 def carica_soggetti(data_dir):
@@ -24,7 +24,8 @@ def carica_soggetti(data_dir):
                     'biografia': str(row.get('biografia', '')).strip(),
                     'nascita': str(row.get('nascita', '')).strip(),
                     'morte': str(row.get('morte', '')).strip(),
-                    'cognome': str(row.get('cognome', '')).strip()
+                    'cognome': str(row.get('cognome', '')).strip(),
+                    'varianti': forme_varianti(row.get('forme_varianti', ''))
                 }
         print(f"Caricate {len(persone)} persone dal foglio 'Persone' di dati.xlsx")
     except FileNotFoundError:
@@ -43,7 +44,8 @@ def carica_soggetti(data_dir):
                     'slug': slugify(nome),
                     'storia': str(row.get('storia', '')).strip(),
                     'categoria': str(row.get('categoria', '')).strip(),
-                    'fondazione': str(row.get('fondazione', '')).strip()
+                    'fondazione': str(row.get('fondazione', '')).strip(),
+                    'varianti': forme_varianti(row.get('forme_varianti', ''))
                 }
         print(f"Caricate {len(organizzazioni)} organizzazioni dal foglio 'Organizzazioni' di dati.xlsx")
     except FileNotFoundError:
@@ -111,7 +113,8 @@ def genera_json_soggetti(persone, organizzazioni, output_dir):
             'slug': info.get('slug', ''),
             'biografia': info.get('biografia', ''),
             'nascita': formatta_estremo(info.get('nascita', '')),
-            'morte': formatta_estremo(info.get('morte', ''))
+            'morte': formatta_estremo(info.get('morte', '')),
+            'varianti': info.get('varianti', [])
         })
 
     organizzazioni_json = []
@@ -121,7 +124,8 @@ def genera_json_soggetti(persone, organizzazioni, output_dir):
             'slug': info.get('slug', ''),
             'storia': info.get('storia', ''),
             'categoria': info.get('categoria', ''),
-            'fondazione': formatta_estremo(info.get('fondazione', ''))
+            'fondazione': formatta_estremo(info.get('fondazione', '')),
+            'varianti': info.get('varianti', [])
         })
 
     data = {

@@ -183,3 +183,24 @@
   </script>
   {% endif %}
 {% endblock %}
+
+{# Script di sezione: caricati solo dove servono (prima erano in
+   extra_javascript, quindi su tutte le pagine). Ognuno controlla
+   comunque la presenza dei propri elementi prima di agire. #}
+{% block scripts %}
+  {{ super() }}
+  {% set ami_url = page.url if page and page.url else '' %}
+  {% if page and page.is_homepage %}
+    <script src="{{ 'javascripts/hero-search.js' | url }}"></script>
+  {% endif %}
+  {% if ami_url.startswith('documenti/') %}
+    <script src="{{ 'javascripts/lazy-loading.js' | url }}"></script>
+    <script src="{{ 'javascripts/documenti.js' | url }}"></script>
+  {% endif %}
+  {% if ami_url == 'documenti/' %}
+    <script src="{{ 'javascripts/archivio-filtri.js' | url }}"></script>
+  {% endif %}
+  {% if ami_url == 'galleria/' %}
+    <script src="{{ 'javascripts/galleria.js' | url }}"></script>
+  {% endif %}
+{% endblock %}

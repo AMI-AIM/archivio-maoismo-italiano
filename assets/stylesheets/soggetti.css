@@ -48,7 +48,7 @@
     margin: 1rem 0 1.5rem 0;
     padding: 1rem;
     background: var(--md-code-bg-color);
-    border-radius: 8px;
+    border-radius: var(--ami-radius-md);
     border: 1px solid var(--md-default-fg-color--lightest);
     align-items: flex-start;
 }
@@ -83,7 +83,7 @@
     height: auto;
     max-height: 400px;
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: var(--ami-radius-md);
     flex-shrink: 0;
 }
 
@@ -101,7 +101,7 @@
     margin: 1rem 0 1.5rem 0;
     padding: 1rem;
     background: var(--md-code-bg-color);
-    border-radius: 8px;
+    border-radius: var(--ami-radius-md);
     border: 1px solid var(--md-default-fg-color--lightest);
 }
 

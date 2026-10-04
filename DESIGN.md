@@ -51,6 +51,7 @@ typography:
     letterSpacing: "0.02em"
 rounded:
   filetto: "0"
+  xs: "2px"
   sm: "4px"
   md: "8px"
   card: "12px"
@@ -149,6 +150,10 @@ Un rosso da timbro su fondo carta, con neutri caldi e un nero profondo per le fa
 - **Label** (600, 13px, maiuscolo, spaziatura 0,06em): etichette di campo nella Scheda, tipologia, ruolo secondario ("anche menzionato"), categorie delle organizzazioni.
 - **Data** (400, 15px): segnatura AMI, valori della Scheda, chiavi di "Nell'archivio", conteggi nei filtri.
 
+Fuori scala, dichiarati come variabili: il lead d'apertura del progetto (`--ami-font-size-lead`, 22px), il "404" monumentale (`--ami-size-404`) e i titoli-manifesto della galleria (`--gal-size-titolo`, `--gal-size-anno`, `--gal-size-anno-telefono`).
+
+**Lingua:** i caratteri cinesi sono marcati `lang="zh-Hans"` in fase di build (hook `scripts/hooks/lingua_cinese.py`), così i lettori di schermo cambiano voce e il browser sceglie glifi cinesi.
+
 ### Named Rules
 **The Three Voices Rule.** Ogni testo appartiene a una sola voce: Fraunces se si legge, Archivo se si clicca o etichetta, Courier Prime se è un dato di catalogo. Le azioni (link "Tutti i documenti di…", "Cita questo documento", Reset) non vanno mai in Courier. Eccezione dichiarata: nella Scheda i valori restano in Courier anche quando sono link (autore, organizzazione, percorsi tematici), in rosso: sono dati prima che azioni.
 
@@ -185,11 +190,14 @@ Sistema ibrido, diviso per registro. Le pagine di consultazione sono piatte: nes
 
 Angoli diritti o appena arrotondati nel catalogo, morbidi nelle vetrine.
 
+In CSS i raggi sono le variabili `--ami-radius-xs|sm|md|card|pillola` (extra.css, `:root`): niente valori scritti a mano. Unica eccezione rimasta: le card dei percorsi tematici (argomenti.css), in attesa di decidere il futuro dei percorsi.
+
 - **Filetti e righe** (0): elenchi, Scheda, filtri.
+- **Segni** (2px, `xs`): barre dell'istogramma, sottolineature, piccoli riquadri squadrati.
 - **Campi e pulsanti** (4px): ricerca, select di ordinamento, pulsanti primari, riquadro del visore.
-- **Riquadri di nota** (8px): pannelli di ricerca negli indici.
+- **Superfici sospese e riquadri di nota** (8px, `md`): tendine del menu, pannelli, pannelli di ricerca negli indici.
 - **Card-vetrina** (12px): card di persone, organizzazioni e percorsi.
-- **Pillole** (999px): chip dei filtri attivi, pillole degli anni nello slider.
+- **Pillole** (999px): chip dei filtri attivi, pillole degli anni nello slider, ricerca della home, pulsante "Filtri" flottante su telefono.
 - **Cerchi**: avatar con iniziali in home "a timbro": fondo bianco, bordo di 2px e iniziali in rosso catalogo.
 
 ## Components
@@ -214,7 +222,9 @@ Netti, rossi, senza ornamenti.
 ### Inputs / Fields
 - **Style:** filetto di 1px, fondo bianco, angoli 4px, testo a 16px (sotto, iOS ingrandisce la pagina).
 - **Focus:** bordo e anello rossi.
-- **Filtri a spunta:** caselle native colorate di rosso, nome completo che va a capo, conteggio in Courier a destra; la voce selezionata diventa rossa e in grassetto. Sopra le 10 voci compare un campo per restringere l'elenco.
+- **Filtri a spunta:** caselle native colorate di rosso, nome completo che va a capo, conteggio in Courier a destra; la voce selezionata diventa rossa e in grassetto. Sopra le 10 voci compare un campo per restringere l'elenco, che trova le voci di Persona e Organizzazione anche con le "Altre forme del nome" (es. "Lin Piao" → Lin Biao) senza mostrarle.
+- **Ricerca testuale dell'archivio:** ogni parola deve comparire come inizio di parola (accenti ignorati, il trattino resta dentro la parola); cerca anche segnatura e nomi collegati. Le grafie varianti NON entrano qui: restano limitate alla ricerca delle persone e organizzazioni (indici, filtri, ricerca della home).
+- **Pulsante "Filtri" flottante:** solo su telefono, compare quando il pannello filtri esce dallo schermo; riapre il pannello.
 
 ### Navigation
 - **Header:** fascia rossa piena, voci in Archivo 600 bianche, voce attiva sottolineata anche nelle pagine interne della sezione (una scheda documento accende "Archivio", una persona accende "Persone"); menu "Archivio" a tendina (Tutti i documenti, Percorsi tematici, Galleria).
@@ -265,4 +275,6 @@ Con testo curatoriale: biografia o storia su fondo carta accanto all'immagine. S
 - **Don't** mettere titoli di pagina in rosso, né colorare di rosso titoli di card non cliccabili; nel registro catalogo niente rosso decorativo (in home sì: The Press Accent Rule).
 - **Don't** usare emoji come icone: le icone sono SVG con lo stesso tratto.
 - **Don't** troncare i nomi nei filtri: vanno a capo interi.
-- **Don't** mostrare un titolo visibile in home (resta solo quello per i lettori di schermo) e non rimuovere l'avviso sullo stato di Internet Archive in cima alla pagina.
+- **Don't** mostrare un titolo visibile in home (resta solo quello per i lettori di schermo).
+- **Don't** mostrare l'avviso su Internet Archive dove non c'è nulla da Internet Archive: compare solo su schede documento e galleria, dopo il link "Vai al contenuto", e sul visore guasto c'è un avviso proprio con "Riprova".
+- **Don't** introdurre un tema scuro senza progettarlo: oggi il sito ha un solo schema chiaro (i colori "notte" servono solo alla fascia in evidenza della home).

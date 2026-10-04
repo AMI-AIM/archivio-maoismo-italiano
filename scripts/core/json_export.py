@@ -157,7 +157,16 @@ def genera_json(df, persone, organizzazioni, output_dir):
     json_data = {
         'documenti': documenti_json,
         'anno_min': min(anni_valori) if anni_valori else 1900,
-        'anno_max': max(anni_valori) if anni_valori else 2025
+        'anno_max': max(anni_valori) if anni_valori else 2025,
+        # Altre forme del nome di persone e organizzazioni: servono solo a
+        # restringere gli elenchi dei filtri Persona e Organizzazione
+        # dell'archivio (es. "Lin Piao" trova la voce Lin Biao).
+        'varianti': {
+            nome: info['varianti']
+            for fonte in (persone, organizzazioni)
+            for nome, info in fonte.items()
+            if isinstance(info, dict) and info.get('varianti')
+        }
     }
 
     json_path = os.path.join(output_dir, 'documenti.json')

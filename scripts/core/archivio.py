@@ -111,7 +111,7 @@ hide:
         
         <div class="filtro-gruppo filtro-gruppo--testo">
             <label for="filtro-testo">Cerca nel testo</label>
-            <input type="search" id="filtro-testo" placeholder="Titolo, autore, descrizione…">
+            <input type="search" id="filtro-testo" placeholder="Titolo, nome, segnatura…">
         </div>
 
         <div class="filtri-corpo" id="filtri-corpo">

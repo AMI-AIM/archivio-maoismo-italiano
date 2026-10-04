@@ -140,7 +140,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 }
 .md-header__nav-item {
   padding: 0.4rem 0.8rem;
-  border-radius: 4px;
+  border-radius: var(--ami-radius-sm);
   transition: background 0.15s;
   white-space: nowrap;
 }
@@ -168,7 +168,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   right: 0;
   bottom: -0.2rem;
   height: 2px;
-  border-radius: 2px;
+  border-radius: var(--ami-radius-xs);
   background: var(--ami-su-colore);
   transform: scaleX(0);
   transform-origin: left center;
@@ -227,7 +227,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   padding: 0.4rem 0;
   list-style: none;
   background: var(--ami-superficie);
-  border-radius: 10px;
+  border-radius: var(--ami-radius-md);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
   z-index: 1000;
 }
@@ -403,27 +403,37 @@ button.md-header__nav-link--dropdown {
   color: var(--md-primary-fg-color) !important; /* serve: vince su .md-typeset a (rosso link Material) */
   font-weight: 600;
   font-size: var(--ami-font-size-sm);
-  border-radius: 6px;
+  border-radius: var(--ami-radius-sm);
   text-decoration: none;
   transition: transform 0.2s, box-shadow 0.2s;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
   white-space: nowrap;
   flex-shrink: 0;
 }
+/* Ricerca della hero. Un'unica regola per elemento (prima erano sparse
+   in cinque punti del file): pillola scura sulla foto, tutta la pillola
+   e' il bersaglio (44px), l'anello di focus va sulla pillola. */
 .banner-search {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  background: rgba(255, 255, 255, 0.15);
+  min-height: 44px;
+  background: rgba(13, 13, 13, 0.62);
   border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 24px;
-  padding: 0.3rem 0.8rem;
+  border-radius: var(--ami-radius-pillola);
+  padding: 0 0.8rem;
   backdrop-filter: blur(2px);
   transition: background 0.2s, border-color 0.2s;
   position: relative;
   flex: 1 1 auto;
   min-width: 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  cursor: text;
+}
+.banner-search:focus-within {
+  background: rgba(13, 13, 13, 0.72);
+  border-color: var(--ami-su-colore);
+  box-shadow: 0 0 0 2px var(--ami-su-colore), 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 .banner-search-icon {
   width: 1.1rem;
@@ -437,10 +447,12 @@ button.md-header__nav-link--dropdown {
 /* Campo di input: mai sotto il corpo base (16px). Sotto i 16px iOS Safari
    ingrandisce la pagina al focus. */
 .banner-search input {
+  align-self: stretch;
   background: transparent;
   border: none;
-  outline: none;
+  outline: none; /* l'anello e' sulla pillola */
   color: var(--ami-su-colore);
+  caret-color: var(--ami-su-colore);
   font-size: var(--ami-font-size-base);
   width: 100%;
   min-width: 140px;
@@ -453,16 +465,18 @@ button.md-header__nav-link--dropdown {
   font-weight: 600;
   font-size: var(--ami-font-size-sm);
   cursor: pointer;
-  padding: 0.2rem 0.4rem;
+  align-self: stretch;
+  padding: 0 0.6rem;
   text-decoration: underline;
   text-underline-offset: 2px;
   white-space: nowrap;
   flex-shrink: 0;
 }
-/* Placeholder ricerca più leggibile */
+/* Testo d'esempio: bianco pieno sulla pillola scura (prima #e0e0e0,
+   3,3:1 sulle zone chiare della foto). */
 #hero-search-input::placeholder {
-  color: var(--ami-su-colore-attenuato) !important;
-  opacity: 1 !important;
+  color: var(--ami-su-colore) !important;
+  opacity: 0.9 !important;
 }
 
 /* ------------------------------------------------------------
@@ -546,7 +560,7 @@ button.md-header__nav-link--dropdown {
   font-weight: 500;
   color: var(--md-default-fg-color);
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: var(--ami-radius-sm);
   transition: background 0.15s, color 0.15s;
 }
 .md-drawer__link:hover {
@@ -652,16 +666,15 @@ button.md-header__nav-link--dropdown {
   }
   .banner-search {
     flex: 1 1 100%;
-    padding: 0.2rem 0.6rem;
+    padding: 0 0.6rem;
     gap: 0.3rem;
   }
   .banner-search input {
     min-width: 80px;
-    font-size: var(--ami-font-size-base);
   }
   .banner-search-submit {
     font-size: var(--ami-font-size-xs);
-    padding: 0.1rem 0.3rem;
+    padding-inline: 0.3rem;
   }
   .banner-search-icon {
     width: 0.9rem;
@@ -802,7 +815,7 @@ button.md-header__nav-link--dropdown {
 .md-button {
   display: inline-block;
   padding: 0.6rem 1.5rem;
-  border-radius: 0.25rem;
+  border-radius: var(--ami-radius-sm);
   font-weight: 600;
   text-decoration: none;
   transition: background-color 0.2s;
@@ -894,7 +907,6 @@ button.md-header__nav-link--dropdown {
     font-size: var(--ami-font-size-xs);
   }
   .banner-search input {
-    font-size: var(--ami-font-size-base);
     min-width: 60px;
   }
   .banner-search-submit {
@@ -1058,6 +1070,18 @@ REGOLE DI SPECIFICITA'
   --ami-font-size-3xl: 2.2rem;  /* 44px - display grande */
   /* Titolo di pagina fluido (29px su telefono, 38px su desktop) */
   --ami-size-h1: clamp(1.45rem, 1.05rem + 1.5vw, 1.9rem);
+  /* Fuori scala, dichiarati: lead d'apertura del progetto (22px) e il
+     "404" monumentale della pagina d'errore. */
+  --ami-font-size-lead: 1.1rem;
+  --ami-size-404: clamp(4rem, 12vw, 6rem);
+
+  /* Raggi: cinque gradini (DESIGN.md, "rounded"). Il catalogo resta
+     quasi squadrato; card e pillole solo nel registro manifesto. */
+  --ami-radius-xs: 2px;       /* barre, segni, piccoli badge squadrati */
+  --ami-radius-sm: 4px;       /* campi, pulsanti, riquadri del catalogo */
+  --ami-radius-md: 8px;       /* superfici sospese: tendine, pannelli */
+  --ami-radius-card: 12px;    /* card-vetrina */
+  --ami-radius-pillola: 999px; /* chip, pillole, ricerca della home */
 
   /* ALIAS legacy (--fs-*): puntano alla scala unica. Esistevano due scale
      parallele con valori diversi per lo stesso ruolo. Non aggiungerne. */
@@ -1356,7 +1380,7 @@ body, fuori da .md-typeset, ma usa gli stessi token).
   overflow-y: auto;
   background: var(--ami-superficie);
   color: var(--ami-inchiostro);
-  border-radius: 10px;
+  border-radius: var(--ami-radius-md);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
   z-index: 9999;
   font-family: var(--ami-font-text);
@@ -1412,7 +1436,7 @@ body, fuori da .md-typeset, ma usa gli stessi token).
   text-transform: uppercase;
   letter-spacing: var(--ami-tracking-wide);
   padding: 0.1rem 0.45rem;
-  border-radius: 10px;
+  border-radius: var(--ami-radius-pillola);
   color: var(--ami-su-colore);
   white-space: nowrap;
   margin-left: 0.4em;
@@ -1456,9 +1480,6 @@ archivio-filtri.js), senza piu' stili inline Word */
 input,
 textarea {
   caret-color: var(--md-primary-fg-color);
-}
-.banner-search input {
-  caret-color: var(--ami-su-colore);
 }
 
 /* ==========================================================================
@@ -1515,7 +1536,7 @@ textarea {
 .photo-viewer .lazy-skeleton {
     width: 100%;
     min-height: 300px;
-    border-radius: 8px;
+    border-radius: var(--ami-radius-md);
 }
 
 /* Nota: i contesti doc-thumbnail / subject-avatar / archive-card non sono
@@ -1530,7 +1551,7 @@ textarea {
 .evidenza-thumbnail .lazy-skeleton {
     width: 100% !important;
     height: 100% !important;
-    border-radius: 8px;
+    border-radius: var(--ami-radius-md);
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
 }
 
@@ -1772,7 +1793,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
 .ami-footer :focus-visible {
   outline: 2px solid var(--ami-su-colore);
   outline-offset: 3px;
-  border-radius: 3px;
+  border-radius: var(--ami-radius-xs);
 }
 .md-header .md-header__dropdown-menu :focus-visible {
   /* menu bianco dentro l'header rosso: anello rosso, interno alla voce */
@@ -1781,18 +1802,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
 }
 .evidenza-band .evidenza-link:focus-visible {
   outline-offset: 6px;
-  border-radius: 10px;
-}
-
-/* Campo di ricerca della hero: l'input non ha bordo proprio, l'anello va
-   sulla "pillola" che lo contiene. */
-.banner-search:focus-within {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: var(--ami-su-colore);
-  box-shadow: 0 0 0 2px var(--ami-su-colore), 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-.banner-search input:focus-visible {
-  outline: none; /* l'anello e' sulla pillola (sopra) */
+  border-radius: var(--ami-radius-md);
 }
 
 /* --- Drawer: pulsante di chiusura ------------------------------------ */
@@ -1904,7 +1914,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   gap: 0.4rem;
   min-height: 36px;
   padding: 0 0.5rem;
-  border-radius: 6px;
+  border-radius: var(--ami-radius-sm);
   font-family: var(--ami-font-label);
   font-weight: 600;
   text-decoration: none;
@@ -1951,20 +1961,6 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
     flex: 0 0 auto;
     white-space: normal;
   }
-}
-
-/* --- Ricerca hero: tutta la "pillola" e' il bersaglio ------------------- */
-.banner-search {
-  min-height: 44px;
-  padding-block: 0;
-  cursor: text;
-}
-.banner-search input {
-  align-self: stretch;
-}
-.banner-search-submit {
-  align-self: stretch;
-  padding-inline: 0.6rem;
 }
 
 /* --- Persone / organizzazioni: icona di ricerca nel campo -------------- */
@@ -2049,7 +2045,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   margin: 0 0 0.5rem;
   font-family: var(--ami-font-display);
   font-weight: var(--fw-title);
-  font-size: clamp(4rem, 12vw, 6rem);
+  font-size: var(--ami-size-404);
   line-height: 1;
   letter-spacing: var(--ami-tracking-tight);
   color: var(--md-primary-fg-color);
@@ -2077,7 +2073,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   min-height: 44px;
   padding: 0 1.6rem;
   border: 0;
-  border-radius: 6px;
+  border-radius: var(--ami-radius-sm);
   background: var(--md-primary-fg-color);
   color: var(--ami-su-colore);
   font-family: var(--ami-font-label);
@@ -2127,7 +2123,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   min-height: 44px;
   padding: 0 0.9rem;
   border: 1px solid var(--md-default-fg-color--lighter);
-  border-radius: 6px;
+  border-radius: var(--ami-radius-sm);
   font-family: var(--ami-font-text);
   font-size: var(--ami-font-size-base);
 }
@@ -2369,7 +2365,7 @@ input[type="search"]::-webkit-search-cancel-button {
   width: 9rem;
   height: 9rem;
   margin-top: 1.2rem;
-  border-radius: 8px;
+  border-radius: var(--ami-radius-md);
 }
 .soggetto-testata__img--cover {
   object-fit: cover;
@@ -2401,7 +2397,7 @@ input[type="search"]::-webkit-search-cancel-button {
   margin: 0.6rem 0 1rem;
   aspect-ratio: 3 / 1;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: var(--ami-radius-card);
   background: var(--md-code-bg-color);
 }
 .percorso-testata__img {
@@ -2434,14 +2430,6 @@ input[type="search"]::-webkit-search-cancel-button {
   .top-row .top-card-image-wrapper {
     aspect-ratio: 16 / 9;
   }
-}
-
-/* --- Ricerca della home: fondo piu' scuro, testo leggibile ---------------- */
-.banner-search {
-  background: rgba(13, 13, 13, 0.55);
-}
-.banner-search:focus-within {
-  background: rgba(13, 13, 13, 0.7);
 }
 
 /* --- Archivio: frecce SVG, nessun risultato ------------------------------ */
@@ -2578,7 +2566,7 @@ input[type="search"]::-webkit-search-cancel-button {
   width: 60px;
   height: 3px;
   margin-top: 0.6rem;
-  border-radius: 2px;
+  border-radius: var(--ami-radius-xs);
   background: var(--md-primary-fg-color);
 }
 .md-typeset .progetto-apertura > p {
@@ -2651,7 +2639,7 @@ input[type="search"]::-webkit-search-cancel-button {
     grid-area: lead;
     max-width: none;
     margin-top: 0;
-    font-size: 1.1rem;
+    font-size: var(--ami-font-size-lead);
     line-height: 1.45;
     letter-spacing: -0.005em;
     font-variation-settings: "opsz" 48;
@@ -3160,5 +3148,21 @@ input[type="search"]::-webkit-search-cancel-button {
   }
   .md-header__nav-item {
     padding: 0.4rem 0.55rem;
+  }
+}
+
+/* --- Touch: link nelle righe di catalogo ------------------------------- */
+/* Percorso di navigazione e titoli di riga erano alti 20-23px (WCAG 2.5.8
+   chiede almeno 24px). Il padding su un elemento in linea allarga l'area
+   toccabile senza spostare l'impaginazione. */
+@media (pointer: coarse) {
+  .md-typeset .doc-percorso a,
+  .risultato-titolo a,
+  .md-typeset .doc-titolo a,
+  .md-typeset .doc-correlati__tutti,
+  .md-typeset .progetto-cifre__link,
+  .md-typeset .progetto-figura__segnatura,
+  .md-typeset .ami-404__secondario {
+    padding-block: 0.3rem;
   }
 }

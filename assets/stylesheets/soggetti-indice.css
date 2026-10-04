@@ -25,7 +25,7 @@
 
 .top-card {
     background: var(--md-code-bg-color);
-    border-radius: 12px;
+    border-radius: var(--ami-radius-card);
     border: 1px solid var(--md-default-fg-color--lightest);
     overflow: hidden;
     transition: transform 0.15s, box-shadow 0.2s;
@@ -97,7 +97,7 @@
     margin: 1rem 0 1.5rem 0;
     padding: 0.8rem 1rem;
     background: var(--md-code-bg-color);
-    border-radius: 8px;
+    border-radius: var(--ami-radius-md);
     border: 1px solid var(--md-default-fg-color--lightest);
 }
 
@@ -114,7 +114,7 @@
     flex: 1;
     padding: 0.5rem 0.8rem;
     border: 1px solid var(--md-default-fg-color--lightest);
-    border-radius: 6px;
+    border-radius: var(--ami-radius-sm);
     background: var(--md-default-bg-color);
     color: var(--md-default-fg-color);
     font-size: var(--ami-font-size-base);
@@ -142,7 +142,7 @@
 .lettera-btn {
     background: transparent;
     border: 1px solid var(--md-default-fg-color--lightest);
-    border-radius: 4px;
+    border-radius: var(--ami-radius-sm);
     padding: 0.2rem 0.5rem;
     font-size: var(--ami-font-size-xs);
     cursor: pointer;
@@ -179,7 +179,7 @@
 .people-card,
 .org-card {
     background: var(--md-code-bg-color);
-    border-radius: 8px;
+    border-radius: var(--ami-radius-md);
     padding: 1rem 1.2rem;
     transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
     border: 1px solid var(--md-default-fg-color--lightest);

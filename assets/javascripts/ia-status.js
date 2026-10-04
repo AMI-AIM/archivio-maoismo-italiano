@@ -36,6 +36,16 @@
  *    Se l'iframe .universal-embed non emette 'load' entro una
  *    soglia di tempo, è un segnale di mancata risposta da IA.
  *
+ * DOVE SI ATTIVA: solo sulle pagine che caricano davvero qualcosa da
+ * Internet Archive (visore delle schede documento, immagini a piena
+ * risoluzione della galleria). Altrove il banner non compare e il
+ * probe non parte.
+ *
+ * SUL VISORE: quando il visore di una scheda non risponde, o il probe
+ * fallisce, sopra il visore compare un avviso con "Riprova" e il link
+ * diretto. L'iframe resta al suo posto: se in realtà sta funzionando
+ * (falso allarme del probe) il lettore può continuare a usarlo.
+ *
  * LIMITI NOTI (nessun sistema client-side può coprire tutto):
  * - non distingue "IA giù" da problemi di rete locali dell'utente
  *   (adblocker, VPN, firewall aziendale che blocca archive.org);
@@ -66,6 +76,15 @@
   var DISMISS_KEY = 'ami_ia_status_dismissed';
 
   var bannerMostrato = false;
+
+  // Elementi che dipendono da Internet Archive: senza nessuno di questi
+  // la pagina non ha nulla da avvisare.
+  var SELETTORE_CONTENUTI_IA = [
+    '.universal-embed',
+    'img[src*="archive.org"]',
+    'img[data-src*="archive.org"]',
+    '[data-full-src*="archive.org"]'
+  ].join(',');
 
   // ------------------------------------------------------------
   // UTILITY: sessionStorage sicuro (può non essere disponibile,
@@ -159,6 +178,36 @@
       '  background: rgba(255,255,255,0.15);',
       '}',
       '.ia-status-banner__breve { display: none; }',
+      /* Avviso dentro il visore della scheda documento */
+      '.ia-visore-avviso {',
+      '  display: flex;',
+      '  flex-wrap: wrap;',
+      '  align-items: center;',
+      '  gap: 0.5rem 1rem;',
+      '  padding: 0.6rem 0.8rem;',
+      '  border-bottom: 1px solid var(--md-default-fg-color--lightest);',
+      '  background: var(--md-default-bg-color);',
+      '  font-family: var(--ami-font-label, "Archivo", sans-serif);',
+      '  font-size: var(--ami-font-size-sm, 0.75rem);',
+      '  line-height: 1.4;',
+      '  color: var(--md-default-fg-color);',
+      '}',
+      '.ia-visore-avviso__testo { flex: 1 1 18rem; margin: 0; }',
+      '.ia-visore-avviso__azioni { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; }',
+      '.ia-visore-avviso__riprova {',
+      '  min-height: 2.2rem;',
+      '  padding: 0 0.9rem;',
+      '  border: 1px solid var(--md-primary-fg-color);',
+      '  border-radius: var(--ami-radius-sm, 4px);',
+      '  background: transparent;',
+      '  color: var(--md-primary-fg-color);',
+      '  font: inherit;',
+      '  font-weight: 600;',
+      '  cursor: pointer;',
+      '}',
+      '.ia-visore-avviso__riprova:hover { background: var(--ami-rosso-tenue, #f9ecec); }',
+      '.ia-visore-avviso__riprova:focus-visible { outline: 2px solid var(--md-primary-fg-color); outline-offset: 2px; }',
+      '.ia-visore-avviso a { color: var(--md-primary-fg-color); font-weight: 600; }',
       /* Telefono: una riga, non fissato in cima (scorre via con la pagina
          e non copre l'header). Il testo completo resta per i lettori di
          schermo. */
@@ -204,7 +253,13 @@
         '</button>' +
       '</div>';
 
-    document.body.insertBefore(banner, document.body.firstChild);
+    // Dopo il link "Vai al contenuto": il primo Tab resta quello.
+    var salto = document.querySelector('body > .md-skip');
+    if (salto && salto.nextSibling) {
+      document.body.insertBefore(banner, salto.nextSibling);
+    } else {
+      document.body.insertBefore(banner, document.body.firstChild);
+    }
 
     var chiudiBtn = banner.querySelector('.ia-status-banner__chiudi');
     if (chiudiBtn) {
@@ -241,11 +296,16 @@
     }));
   }
 
-  function eseguiProbe() {
-    var cache = leggiCacheProbe();
+  function segnalaGuasto() {
+    mostraAvviso();
+    segnalaVisori();
+  }
+
+  function eseguiProbe(ignoraCache) {
+    var cache = ignoraCache ? null : leggiCacheProbe();
     if (cache) {
       if (!cache.raggiungibile) {
-        mostraAvviso();
+        segnalaGuasto();
       }
       return;
     }
@@ -256,7 +316,7 @@
       if (risolto) return;
       risolto = true;
       scriviCacheProbe(false);
-      mostraAvviso();
+      segnalaGuasto();
     }, PROBE_TIMEOUT_MS);
 
     img.onload = function () {
@@ -271,7 +331,7 @@
       risolto = true;
       clearTimeout(timeoutId);
       scriviCacheProbe(false);
-      mostraAvviso();
+      segnalaGuasto();
     };
 
     // Cache-busting: evita che il browser risponda da cache locale
@@ -321,31 +381,77 @@
   // ------------------------------------------------------------
   // SEGNALE 3: MONITORAGGIO IFRAME (.universal-embed)
   // ------------------------------------------------------------
+  function sorvegliaIframe(iframe) {
+    var caricato = false;
+
+    var timeoutId = setTimeout(function () {
+      if (caricato) return;
+      // L'iframe non ha emesso 'load' entro la soglia: possibile
+      // mancata risposta da IA (non copre il caso di risposta
+      // ricevuta ma con contenuto d'errore, che emette comunque load).
+      mostraAvviso();
+      segnalaVisore(iframe);
+    }, IFRAME_TIMEOUT_MS);
+
+    iframe.addEventListener('load', function () {
+      caricato = true;
+      clearTimeout(timeoutId);
+    }, { once: true });
+
+    iframe.addEventListener('error', function () {
+      caricato = true;
+      clearTimeout(timeoutId);
+      mostraAvviso();
+      segnalaVisore(iframe);
+    }, { once: true });
+  }
+
   function attivaMonitoraggioIframe() {
     var iframes = document.querySelectorAll('.universal-embed');
     if (!iframes.length) return;
+    iframes.forEach(sorvegliaIframe);
+  }
 
-    iframes.forEach(function (iframe) {
-      var caricato = false;
+  // ------------------------------------------------------------
+  // AVVISO NEL VISORE (schede documento)
+  // ------------------------------------------------------------
+  function segnalaVisori() {
+    var iframes = document.querySelectorAll('.universal-embed');
+    for (var i = 0; i < iframes.length; i++) segnalaVisore(iframes[i]);
+  }
 
-      var timeoutId = setTimeout(function () {
-        if (caricato) return;
-        // L'iframe non ha emesso 'load' entro la soglia: possibile
-        // mancata risposta da IA (non copre il caso di risposta
-        // ricevuta ma con contenuto d'errore, che emette comunque load).
-        mostraAvviso();
-      }, IFRAME_TIMEOUT_MS);
+  function segnalaVisore(iframe) {
+    var contenitore = iframe.closest('.embed-container') || iframe.parentNode;
+    if (!contenitore || contenitore.querySelector('.ia-visore-avviso')) return;
+    iniettaStile();
 
-      iframe.addEventListener('load', function () {
-        caricato = true;
-        clearTimeout(timeoutId);
-      }, { once: true });
+    // Link diretto: lo stesso "Apri su Internet Archive" del piede del
+    // visore, se c'e'; altrimenti la pagina dell'oggetto ricavata
+    // dall'indirizzo dell'embed.
+    var link = contenitore.querySelector('a.embed-azione[href*="archive.org"]');
+    var href = link ? link.getAttribute('href')
+      : (iframe.getAttribute('src') || '').replace('/embed/', '/details/').split('?')[0];
 
-      iframe.addEventListener('error', function () {
-        caricato = true;
-        clearTimeout(timeoutId);
-        mostraAvviso();
-      }, { once: true });
+    var avviso = document.createElement('div');
+    avviso.className = 'ia-visore-avviso';
+    avviso.setAttribute('role', 'status');
+    avviso.innerHTML =
+      '<p class="ia-visore-avviso__testo">Il visore di Internet Archive non risponde. ' +
+      'Di solito torna disponibile entro poco.</p>' +
+      '<div class="ia-visore-avviso__azioni">' +
+        '<button type="button" class="ia-visore-avviso__riprova">Riprova</button>' +
+        (href ? '<a href="' + href.replace(/"/g, '&quot;') + '" target="_blank" rel="noopener">' +
+          'Apri su Internet Archive<span class="ami-sr-only"> (si apre in una nuova scheda)</span></a>' : '') +
+      '</div>';
+    contenitore.insertBefore(avviso, contenitore.firstChild);
+
+    avviso.querySelector('.ia-visore-avviso__riprova').addEventListener('click', function () {
+      avviso.remove();
+      var src = iframe.getAttribute('src');
+      iframe.setAttribute('src', 'about:blank');
+      iframe.setAttribute('src', src);
+      sorvegliaIframe(iframe);
+      eseguiProbe(true);
     });
   }
 
@@ -353,6 +459,7 @@
   // AVVIO
   // ------------------------------------------------------------
   function init() {
+    if (!document.querySelector(SELETTORE_CONTENUTI_IA)) return;
     eseguiProbe();
     attivaMonitoraggioImmagini();
     attivaMonitoraggioIframe();

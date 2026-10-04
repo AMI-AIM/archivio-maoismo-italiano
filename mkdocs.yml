@@ -30,17 +30,19 @@ extra_css:
   - stylesheets/soggetti.css
   - stylesheets/soggetti-indice.css
 
+# Script comuni a tutte le pagine. Quelli di una sola sezione (ricerca
+# della home, schede documento, archivio, galleria) li carica
+# overrides/main.html (blocco "scripts") solo dove servono.
 extra_javascript:
   - javascripts/navigazione.js
-  - javascripts/hero-search.js
-  - javascripts/documenti.js
-  - javascripts/archivio-filtri.js
-  - javascripts/lazy-loading.js
-  - javascripts/galleria.js
   - javascripts/ia-status.js
 
 plugins:
   - search
+
+# Marca come cinese (lang="zh-Hans") il testo in caratteri cinesi.
+hooks:
+  - scripts/hooks/lingua_cinese.py
 
 markdown_extensions:
   - attr_list
@@ -79,4 +81,4 @@ meta:
 social:
   - icon: fontawesome/brands/internet-archive
     link: https://archive.org/details/@ivan_masci/lists/1/archivio-del-maoismo-italiano
-    name: Internet Archive
+    name: Internet Archive
