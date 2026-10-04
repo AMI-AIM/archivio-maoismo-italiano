@@ -53,7 +53,7 @@
         </descriptiveNote>
       </relation>
       <relation>
-        <targetEntity targetType="person">
+        <targetEntity targetType="corporateBody">
           <part>Walter Peruzzi</part>
         </targetEntity>
         <relationType>associativa</relationType>
@@ -63,7 +63,7 @@
         </descriptiveNote>
       </relation>
       <relation>
-        <targetEntity targetType="person">
+        <targetEntity targetType="corporateBody">
           <part>Renato Curcio</part>
         </targetEntity>
         <relationType>associativa</relationType>
@@ -73,7 +73,7 @@
         </descriptiveNote>
       </relation>
       <relation>
-        <targetEntity targetType="person">
+        <targetEntity targetType="corporateBody">
           <part>Mara Cagol</part>
         </targetEntity>
         <relationType>associativa</relationType>
