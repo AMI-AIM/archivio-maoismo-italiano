@@ -1,6 +1,7 @@
-pandas
-openpyxl
-requests
-Pillow
-mkdocs-material
-lxml
+pandas>=2.2,<4
+openpyxl>=3.1,<4
+requests>=2.31,<3
+Pillow>=10,<13
+mkdocs>=1.6,<2
+mkdocs-material>=9.5,<10
+lxml>=5,<7

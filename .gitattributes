@@ -1,0 +1,14 @@
+# Fine riga: nel repository sempre LF, nella cartella di lavoro quella del
+# sistema (CRLF su Windows). Evita file "modificati" solo per i fine riga.
+* text=auto
+
+# Binari espliciti
+*.xlsx binary
+*.webp binary
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary
+
+# CSV esportati da data/dati.xlsx: confronto riga per riga su GitHub
+*.csv text diff

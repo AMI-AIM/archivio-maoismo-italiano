@@ -3,6 +3,7 @@ import html
 import urllib.parse
 import json
 import os
+import re
 import sys
 
 import pandas as pd
@@ -339,6 +340,8 @@ hide:
             slug = data['slug']
             num_doc = data['num_doc']
             date_vita = data['data_range']
+            # Intervallo aperto ("1921 –"): nelle card diventa "dal 1921".
+            date_vita = re.sub(r'^(.+?)\s*–\s*$', r'dal \1', date_vita)
             nome_html = html.escape(nome, quote=True)
             date_vita_html = html.escape(date_vita)
 
@@ -347,7 +350,7 @@ hide:
             else:
                 avatar_html = f'<div class="top-card-timbro" aria-hidden="true"><span>{html.escape(iniziali(nome))}</span></div>'
 
-            count_text = "1 documento collegato" if num_doc == 1 else f"{num_doc} documenti collegati"
+            count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
 
             lines.append('    <div class="top-card">')
             lines.append(f'        <a href="{slug}/" class="top-card-link">')
@@ -356,8 +359,7 @@ hide:
             lines.append('            </div>')
             lines.append('            <div class="top-card-text">')
             lines.append(f'                <div class="top-card-name">{nome_html}</div>')
-            lines.append(f'                <div class="top-card-dates">{date_vita_html}</div>')
-            lines.append(f'                <div class="top-card-count">{count_text}</div>')
+            lines.append(f'                <div class="top-card-meta"><span class="top-card-dates">{date_vita_html}</span><span class="top-card-count">{count_text}</span></div>')
             lines.append('            </div>')
             lines.append('        </a>')
             lines.append('    </div>')
@@ -385,7 +387,9 @@ hide:
             slug = data['slug']
             num_doc = data['num_doc']
             date_vita = data['data_range']
-            count_text = "1 documento collegato" if num_doc == 1 else f"{num_doc} documenti collegati"
+            # Intervallo aperto ("1921 –"): nelle card diventa "dal 1921".
+            date_vita = re.sub(r'^(.+?)\s*–\s*$', r'dal \1', date_vita)
+            count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
             lettera = html.escape(nome[0].upper(), quote=True)
             nome_html = html.escape(nome)
             date_vita_html = html.escape(date_vita)
@@ -396,8 +400,7 @@ hide:
             lines.append(f'<div class="people-card" data-lettera="{lettera}" data-cerca="{cerca_attr}">')
             lines.append(f'    <a href="{slug}/" class="people-link">')
             lines.append(f'        <div class="people-name">{nome_html}</div>')
-            lines.append(f'        <div class="people-dates">{date_vita_html}</div>')
-            lines.append(f'        <div class="people-count">{count_text}</div>')
+            lines.append(f'        <div class="people-meta"><span class="people-dates">{date_vita_html}</span><span class="people-count">{count_text}</span></div>')
             lines.append('    </a>')
             lines.append('</div>')
         lines.append('</div>')
@@ -417,7 +420,7 @@ hide:
     lines.append('    const cards = grid.querySelectorAll(".people-card");')
     lines.append('')
     lines.append('    function filtra() {')
-    lines.append('        const query = searchInput.value.toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").replace(/[^\\p{L}\\p{N}\\s-]+/gu, " ").replace(/\\s+/g, " ").trim();')
+    lines.append('        const query = searchInput.value.toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").replace(/[^\\p{L}\\p{N}]+/gu, " ").replace(/\\s+/g, " ").trim();')
     lines.append('        const letteraAttiva = document.querySelector(".lettera-btn--active");')
     lines.append('        const lettera = letteraAttiva ? letteraAttiva.dataset.lettera : "all";')
     lines.append('        let visibili = 0;')

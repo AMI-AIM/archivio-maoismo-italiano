@@ -63,6 +63,17 @@ python Launcher.py --help
 - A fine esecuzione il Launcher attende INVIO ("Premi INVIO per chiudere"):
   comodo dal doppio click su Windows; nei terminali automatizzati/CI l'attesa
   viene saltata automaticamente (stdin chiuso).
-- Pillow non e' una dipendenza del progetto: l'avatar placeholder.webp e' un
-  asset statico in assets/immagini/profili/, copiato in build/ da sync_assets.py.
-  Vedi CONVENZIONI.md §6.
+- Pillow E' una dipendenza: core/miniature.py la usa per creare le miniature
+  WebP delle copertine. L'avatar placeholder.webp invece e' un asset statico
+  in assets/immagini/profili/. Vedi scripts/CONVENZIONI.md §6.
+- Commit selettivo: il Launcher committa solo i percorsi elencati in
+  PERCORSI_PUBBLICATI (in testa a Launcher.py). Gli altri file modificati
+  vengono elencati a schermo ma non pubblicati.
+- Export CSV: a ogni esecuzione i fogli di data/dati.xlsx vengono esportati
+  in data/export/*.csv. Non modificarli a mano (la fonte e' l'xlsx): servono
+  a vedere su GitHub, riga per riga, cosa e' cambiato in ogni scheda.
+- Messaggio di commit automatico: riassume le modifiche ai dati, es.
+  "Dati: Catalogo +2 ~1 (AMI-0097, AMI-0098, AMI-0034)". Se passi un
+  messaggio a mano, diventa il titolo e il riepilogo va nel corpo del commit.
+  Per vedere la storia di una scheda su GitHub: apri data/export/catalogo.csv
+  e usa "History" / "Blame".

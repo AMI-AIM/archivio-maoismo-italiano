@@ -1,0 +1,27 @@
+﻿ID_autorita,Tipo_entita,Norme,Lingua_record,Nome,Cognome,Forme_varianti,Nascita,Morte,Immagine,Biografia,Luoghi,Wikidata,VIAF,Stato_record,Livello_dettaglio,Data_redazione,Note_redazionali
+AMI-P-001,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Mao Zedong,Mao,Mao Tse-tung; Mao Tsetung; Mao Tze-tung; Mao Tse-dun; Mao Ze-dun,1893,1976,mao.webp,,,Q5816,51699962,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-002,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Fosco Dinucci,Dinucci,,1921,1993,dinucci.webp,,,Q3748946,,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-003,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Osvaldo Pesce,Pesce,,1938,2021,pesce.webp,,,,,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-004,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Yao Wenyuan,Yao,Yao Wen-yuan,1931,2005,,,,Q382645,95006973,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-005,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Roberto Sassi,Sassi,,1960,2023,,,,,,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-006,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Vincenzo Calò,Calò,,????,????,,,,,,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-007,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Dino Dini,Dini,,????,????,,,,,,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-008,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Lin Biao,Lin,Lin Piao,1907,1971,,,,Q315475,88047076,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-009,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Kang Sheng,Kang,,1898,1975,,,,Q544432,40906844,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-010,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Zhou Enlai,Zhou,Chou En-lai; Chou Enlai; Ciu En-lai; Ciu Enlai; Chu En-lai,1898,1976,,,,Q17410,24599625,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-011,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Chen Boda,Chen,Chen Po-ta; Chen Pota,1904,1989,,,,Q47677,90737923,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-012,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Jiang Qing,Jiang,Chiang Ching,1914,1991,,,,Q236017,32804921,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-013,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Angiolo Gracci,Gracci,,1920,2004,,,,Q3617366,61719115,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-014,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Giorgio Zucchetti,Zucchetti,,1920,1997,,,,,,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-015,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Liu Shaoqi,Liu,Liu Shao-chi; Liu Shaochi; Liu Shaoci; Liu Sciao-ci,1898,1969,,,,Q16988,22167823,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-016,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Renzo Del Carria,Del Carria,,1924,2010,,,,Q17280054,116302383,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-017,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Arnaldo Bressan,Bressan,,1933,1996,,,,Q59852266,242460805,Bozza,Minimo,2026-10-02 00:00:00,Biografia da redigere
+AMI-P-018,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Aldo Brandirali,Brandirali,,1941,,,,,Q3609139,2520889,Bozza,Minimo,2026-10-04 00:00:00,Biografia da redigere
+AMI-P-019,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Dario Visintini,Visintini,,,,,,,,,Bozza,Minimo,2026-10-04 00:00:00,Biografia da redigere
+AMI-P-020,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Dino Frangioni,Frangioni,Livio,1898,1973,,,,Q137799718,,Bozza,Minimo,2026-10-04 00:00:00,Biografia da redigere
+AMI-P-021,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Giacomo Montemezzani,Montemezzani,Gino Montemezzani,,,,,,,,Bozza,Minimo,2026-10-04 00:00:00,Biografia da redigere
+AMI-P-022,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Sergio Spazzali,Spazzali,,1936,1994,,,,Q20858268,55924629,Bozza,Minimo,2026-10-04 00:00:00,"Biografia da redigere; Date di esistenza da Wikidata Q20858268 (fonte terziaria, da verificare)"
+AMI-P-023,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Giuseppe Burgani,Burgani,Beppe Burgani,,,,,,,,Bozza,Minimo,2026-10-04 00:00:00,Biografia da redigere
+AMI-P-024,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Gustavo Hermann,Hermann,,,,,,,,,Bozza,Minimo,2026-10-04 00:00:00,Biografia da redigere
+AMI-P-025,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Mario Capanna,Capanna,,1945,,,,,Q1054010,205144928833154440408,Bozza,Minimo,2026-10-04 00:00:00,Biografia da redigere
+AMI-P-026,Persona,"ISAAR(CPF), 2a ed., 2004",ita,Michele Semeraro,Semeraro,,,,,,,,,Bozza,Minimo,2026-10-04 00:00:00,Biografia da redigere

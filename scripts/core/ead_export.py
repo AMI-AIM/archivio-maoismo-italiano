@@ -433,6 +433,13 @@ def genera_eac(excel_path, output_dir):
         path = os.path.join(output_dir, 'dati', 'eac', f'{rid}.xml')
         _scrivi(eac, path, NS_EAC)
         percorsi.append(path)
+
+    # Rimuove i file di record d'autorità eliminati dal foglio dati
+    cartella = os.path.join(output_dir, 'dati', 'eac')
+    attuali = {os.path.basename(p) for p in percorsi}
+    for nome_file in os.listdir(cartella):
+        if nome_file.endswith('.xml') and nome_file not in attuali:
+            os.remove(os.path.join(cartella, nome_file))
     return percorsi
 
 

@@ -86,3 +86,11 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+
+# ----------------------------------------------
+# 8. File di lavoro da non pubblicare
+# ----------------------------------------------
+# File di blocco di Office (es. ~$dati.xlsx, creato mentre Excel e' aperto)
+~$*
+# Stato dello strumento di design Impeccable
+.impeccable/

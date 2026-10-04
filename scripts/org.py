@@ -3,6 +3,7 @@ import html
 import urllib.parse
 import json
 import os
+import re
 import sys
 
 import pandas as pd
@@ -357,6 +358,8 @@ hide:
             slug = data['slug']
             num_doc = data['num_doc']
             date_range = data['data_range']
+            # Intervallo aperto ("1921 –"): nelle card diventa "dal 1921".
+            date_range = re.sub(r'^(.+?)\s*–\s*$', r'dal \1', date_range)
             categoria = data['categoria']
             nome_html = html.escape(nome, quote=True)
             date_range_html = html.escape(date_range)
@@ -367,7 +370,7 @@ hide:
             else:
                 avatar_html = f'<div class="top-card-timbro" aria-hidden="true"><span>{html.escape(iniziali(nome))}</span></div>'
 
-            count_text = "1 documento collegato" if num_doc == 1 else f"{num_doc} documenti collegati"
+            count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
 
             lines.append('    <div class="top-card">')
             lines.append(f'        <a href="{slug}/" class="top-card-link">')
@@ -377,8 +380,7 @@ hide:
             lines.append('            <div class="top-card-text">')
             lines.append(f'                <div class="top-card-tipo">{categoria_html}</div>')
             lines.append(f'                <div class="top-card-name">{nome_html}</div>')
-            lines.append(f'                <div class="top-card-dates">{date_range_html}</div>')
-            lines.append(f'                <div class="top-card-count">{count_text}</div>')
+            lines.append(f'                <div class="top-card-meta"><span class="top-card-dates">{date_range_html}</span><span class="top-card-count">{count_text}</span></div>')
             lines.append('            </div>')
             lines.append('        </a>')
             lines.append('    </div>')
@@ -406,8 +408,10 @@ hide:
             slug = data['slug']
             num_doc = data['num_doc']
             date_range = data['data_range']
+            # Intervallo aperto ("1921 –"): nelle card diventa "dal 1921".
+            date_range = re.sub(r'^(.+?)\s*–\s*$', r'dal \1', date_range)
             categoria = data['categoria']
-            count_text = "1 documento collegato" if num_doc == 1 else f"{num_doc} documenti collegati"
+            count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
             lettera = html.escape(nome[0].upper(), quote=True)
             nome_html = html.escape(nome)
             date_range_html = html.escape(date_range)
@@ -420,8 +424,7 @@ hide:
             lines.append(f'    <a href="{slug}/" class="org-link">')
             lines.append(f'        <div class="org-tipo">{categoria_html}</div>')
             lines.append(f'        <div class="org-name">{nome_html}</div>')
-            lines.append(f'        <div class="org-dates">{date_range_html}</div>')
-            lines.append(f'        <div class="org-count">{count_text}</div>')
+            lines.append(f'        <div class="org-meta"><span class="org-dates">{date_range_html}</span><span class="org-count">{count_text}</span></div>')
             lines.append('    </a>')
             lines.append('</div>')
         lines.append('</div>')

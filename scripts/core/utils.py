@@ -288,12 +288,13 @@ def forme_varianti(valore):
 
 def testo_ricerca(*parti):
     """Testo normalizzato per le ricerche per nome negli indici di Persone
-    e Organizzazioni: minuscole, senza accenti, punteggiatura ridotta a
-    spazi (il trattino resta), spazi singoli. Cosi' "UCI m-l" trova
-    "UCI (m-l)". Lo stesso trattamento lo applica il JavaScript alla query."""
+    e Organizzazioni: minuscole, senza accenti, punteggiatura e trattini
+    ridotti a spazi, spazi singoli. Cosi' "UCI m-l" trova "UCI (m-l)" e
+    "Mao Tse Tung" trova "Mao Tse-tung" senza bisogno di una variante per
+    ogni trattino. Lo stesso trattamento lo applica il JavaScript alla query."""
     import unicodedata
     testo = ' '.join(str(p) for p in parti if p)
     testo = unicodedata.normalize('NFD', testo.lower())
     testo = ''.join(c for c in testo if not unicodedata.combining(c))
-    testo = re.sub(r'[^\w\s-]', ' ', testo)
+    testo = re.sub(r'[\W_]+', ' ', testo)
     return re.sub(r'\s+', ' ', testo).strip()

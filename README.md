@@ -88,6 +88,8 @@ La pipeline di generazione (Excel → Markdown → MkDocs Material) e' interamen
 in Python: i dati sorgente stanno in `data/dati.xlsx`, gli script in `scripts/`
 (punto d'ingresso: `python Launcher.py`; riferimento completo dei comandi in
 `comandi.txt`) e la deploy automatica in `.github/workflows/deploy.yml`.
+A ogni pubblicazione i fogli di `dati.xlsx` vengono esportati anche in
+`data/export/*.csv`, così la cronologia di ogni scheda è consultabile su GitHub.
 Le convenzioni tecniche del codice — incluso il registro dei debiti noti
 (CSS inline vs token, percorsi asset IT/EN, duplicazione pipeline Launcher/CI) —
 sono documentate in `scripts/CONVENZIONI.md`.

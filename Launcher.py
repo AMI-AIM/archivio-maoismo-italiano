@@ -22,6 +22,16 @@ la pubblicazione viene bloccata, a meno di usare --skip-validation.
 
 Sequenza di generazione, speculare a .github/workflows/deploy.yml:
     sync_assets -> persone -> org -> generatore -> argomenti -> galleria
+
+Dati in CSV e messaggio di commit: dopo la validazione ogni foglio di
+dati.xlsx viene esportato in data/export/*.csv (scripts/core/export_dati.py).
+Il confronto con l'ultimo commit genera il messaggio, es.
+"Dati: Catalogo +2 ~1 (AMI-0097, AMI-0098, AMI-0034)"; un messaggio passato
+a mano diventa il titolo e il riepilogo finisce nel corpo del commit.
+
+Commit selettivo: vengono aggiunti solo i percorsi elencati in
+PERCORSI_PUBBLICATI; i file modificati altrove vengono segnalati ma NON
+committati (evita di pubblicare per sbaglio file temporanei o di lavoro).
 """
 
 import re
@@ -32,10 +42,20 @@ from datetime import datetime
 from pathlib import Path
 
 from scripts.core.cache_manager import CacheManager
+from scripts.core.export_dati import esporta_e_riepiloga
 from scripts.core.validator import run_validation
 
 ROOT_DIR = Path(__file__).resolve().parent
 SCRIPTS_DIR = ROOT_DIR / "scripts"
+
+# Unici percorsi che il Launcher committa. Per pubblicare un nuovo file o una
+# nuova cartella in radice, aggiungerlo qui.
+PERCORSI_PUBBLICATI = [
+    ".github", ".gitignore", ".gitattributes", ".nojekyll",
+    "assets", "data", "overrides", "scripts",
+    "mkdocs.yml", "requirements.txt", "Launcher.py",
+    "README.md", "comandi.txt", "LICENSE", "DESIGN.md",
+]
 
 
 class ErroreComando(Exception):
@@ -69,7 +89,7 @@ def verifica_dipendenze():
     mappa_moduli = {
         "pandas": "pandas",
         "openpyxl": "openpyxl",
-        "mkdocs-material": "mkdocs",
+        "mkdocs-material": "material",
         "Pillow": "PIL",
     }
     if requirements_path.exists():
@@ -81,7 +101,9 @@ def verifica_dipendenze():
         print(f"'{requirements_path.name}' non trovato, uso elenco di fallback.")
         pacchetti = list(mappa_moduli.keys())
 
-    for pacchetto in pacchetti:
+    for requisito in pacchetti:
+        # "pandas>=2.2,<4" -> "pandas": i vincoli di versione li gestisce pip.
+        pacchetto = re.split(r"[<>=!~;\[ ]", requisito, maxsplit=1)[0].strip()
         modulo = mappa_moduli.get(pacchetto, pacchetto.replace("-", "_"))
         try:
             __import__(modulo)
@@ -106,12 +128,32 @@ def verifica_dipendenze():
         raise ErroreComando(msg)
 
 
+def percorsi_esistenti():
+    return [p for p in PERCORSI_PUBBLICATI if (ROOT_DIR / p).exists()]
+
+
+def git_stato(percorsi=None):
+    """Righe di `git status --porcelain`, eventualmente limitate a `percorsi`."""
+    comando = ["git", "status", "--porcelain"]
+    if percorsi:
+        comando += ["--"] + percorsi
+    risultato = subprocess.run(comando, cwd=ROOT_DIR, capture_output=True, text=True)
+    return [r for r in risultato.stdout.splitlines() if r.strip()]
+
+
 def git_ci_sono_modifiche():
-    risultato = subprocess.run(
-        ["git", "status", "--porcelain"],
-        cwd=ROOT_DIR, capture_output=True, text=True
-    )
-    return bool(risultato.stdout.strip())
+    """True se ci sono modifiche nei percorsi pubblicati."""
+    return bool(git_stato(percorsi_esistenti()))
+
+
+def segnala_file_esclusi():
+    """Avvisa dei file modificati FUORI da PERCORSI_PUBBLICATI (non committati)."""
+    dentro = set(git_stato(percorsi_esistenti()))
+    fuori = [r for r in git_stato() if r not in dentro]
+    if fuori:
+        print("File modificati fuori dai percorsi pubblicati (NON verranno committati):")
+        for riga in fuori:
+            print(f"   {riga}")
 
 
 def identifier_ia_per_documento(ami_id):
@@ -185,23 +227,65 @@ def git_sync_pubblicazione():
     esegui(["git", "pull", "--rebase", "--autostash"],
            descrizione="Sincronizzazione col remoto (rebase)")
 
-    # 2. Commit delle modifiche rigenerate (se ancora presenti dopo il pull).
+    # 2. Commit delle modifiche (se ancora presenti dopo il pull), limitato
+    #    ai PERCORSI_PUBBLICATI.
     if not git_ci_sono_modifiche():
         print("Nessuna modifica da committare dopo la sincronizzazione.")
         return False
-    if not messaggio_globale["testo"]:
-        messaggio_globale["testo"] = (
-            f"Aggiornamento automatico del sito — {datetime.now().strftime('%d/%m/%Y %H:%M')}"
-        )
-    esegui(["git", "add", "-A"], descrizione="Git add")
-    esegui(["git", "commit", "-m", messaggio_globale["testo"]], descrizione="Git commit")
+    segnala_file_esclusi()
+    titolo, corpo = componi_messaggio_commit()
+    esegui(["git", "add", "-A", "--"] + percorsi_esistenti(), descrizione="Git add")
+    comando_commit = ["git", "commit", "-m", titolo]
+    if corpo:
+        comando_commit += ["-m", corpo]
+    esegui(comando_commit, descrizione="Git commit")
 
     # 3. Push.
     esegui(["git", "push"], descrizione="Git push")
     return True
 
 
-messaggio_globale = {"testo": None}  # messaggio commit impostato in aggiorna()
+# Impostati in aggiorna(): messaggio scritto a mano e riepilogo dei dati.
+messaggio_globale = {"testo": None, "dati_titolo": None, "dati_corpo": None}
+
+
+def aree_modificate():
+    """Cartelle/file di primo livello modificati, esclusi i dati (es. 'scripts, assets')."""
+    aree = []
+    for riga in git_stato(percorsi_esistenti()):
+        percorso = riga[3:].strip().strip('"').split(" -> ")[-1]
+        area = percorso.split("/")[0]
+        if area != "data" and area not in aree:
+            aree.append(area)
+    return aree
+
+
+def componi_messaggio_commit():
+    """(titolo, corpo) del commit.
+
+    - messaggio a mano  -> titolo = messaggio, corpo = riepilogo dati;
+    - dati cambiati      -> titolo = riepilogo dati ("Dati: Catalogo +1 ...");
+    - solo codice/asset  -> "Aggiornamento sito: scripts, assets — data ora".
+    """
+    data_ora = datetime.now().strftime('%d/%m/%Y %H:%M')
+    dati_titolo = messaggio_globale["dati_titolo"]
+    dati_corpo = messaggio_globale["dati_corpo"]
+    aree = aree_modificate()
+    righe_corpo = []
+    if dati_corpo:
+        righe_corpo.append(dati_corpo)
+    if aree:
+        righe_corpo.append("Altri file: " + ", ".join(aree))
+
+    if messaggio_globale["testo"]:
+        if dati_titolo:
+            righe_corpo.insert(0, dati_titolo)
+        return messaggio_globale["testo"], "\n".join(righe_corpo)
+    if dati_titolo:
+        return dati_titolo, "\n".join(righe_corpo)
+    if aree:
+        return f"Aggiornamento sito: {', '.join(aree)} — {data_ora}", ""
+    return f"Aggiornamento automatico del sito — {data_ora}", ""
 
 
 def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
@@ -210,6 +294,15 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
 
     # 0bis. Validazione dei dati (blocca la pubblicazione se ci sono errori)
     esegui_validazione(bloccante=not skip_validation)
+
+    # 0ter. Export CSV dei fogli + riepilogo modifiche (messaggio di commit)
+    stampa_titolo("Export CSV dei dati (data/export/)")
+    try:
+        titolo, corpo = esporta_e_riepiloga(ROOT_DIR)
+    except Exception as e:
+        raise ErroreComando(f"export CSV di dati.xlsx non riuscito: {e}")
+    messaggio_globale["dati_titolo"] = titolo
+    messaggio_globale["dati_corpo"] = corpo
 
     # -1. Rigenerazione mirata di specifiche schede documento
     if only:
@@ -260,7 +353,7 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
         stampa_titolo("Completato (nessuna modifica)")
         return
 
-    messaggio_globale["testo"] = messaggio  # None -> default nel sync
+    messaggio_globale["testo"] = messaggio  # None -> messaggio automatico
     git_sync_pubblicazione()
 
     stampa_titolo("Sito aggiornato e pubblicato!")

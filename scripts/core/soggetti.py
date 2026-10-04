@@ -84,7 +84,10 @@ def crea_link(nome, persone, organizzazioni):
     if sezione:
         return f'<a href="{site_path(f"{sezione}/{slug}/")}">{nome_html}</a>'
     else:
-        return nome_html
+        # Soggetto senza record d'autorità: grigio, senza link (come nelle
+        # relazioni del "Record d'autorità", vedi core/autorita.py).
+        return (f'<span class="autorita-rel__senza-pagina" '
+                f'title="Nessuna scheda nell\'archivio">{nome_html}</span>')
 
 def link_lista(nomi_str, persone, organizzazioni):
     nomi = split_nomi(nomi_str)

@@ -1,0 +1,69 @@
+﻿ID_relazione,ID_entita_A,Entita_A,ID_entita_B,Entita_B,Relazione,Categoria_ISAAR,Date
+AMI-R-001,AMI-P-002,Fosco Dinucci,AMI-O-013,Partito Comunista d'Italia (marxista-leninista),segretario di,gerarchica,1966-1991
+AMI-R-002,AMI-P-003,Osvaldo Pesce,AMI-O-013,Partito Comunista d'Italia (marxista-leninista),membro di,associativa,1966-1970
+AMI-R-003,AMI-P-003,Osvaldo Pesce,AMI-O-026,Organizzazione dei Comunisti (marxisti-leninisti) d'Italia,segretario di,gerarchica,1970-1977
+AMI-R-004,AMI-P-003,Osvaldo Pesce,AMI-O-021,Partito Comunista Unificato d'Italia,segretario di,gerarchica,1977-1984
+AMI-R-005,AMI-P-001,Mao Zedong,AMI-O-015,Partito Comunista Cinese,presidente di,gerarchica,1943-1976
+AMI-R-006,AMI-P-001,Mao Zedong,AMI-O-012,Comitato Centrale del PCC,presidente di,gerarchica,1943-1976
+AMI-R-007,AMI-P-007,Dino Dini,AMI-O-013,Partito Comunista d'Italia (marxista-leninista),membro di,associativa,1966-1968
+AMI-R-008,AMI-P-007,Dino Dini,AMI-O-016,Partito Comunista d'Italia (marxista-leninista) - Linea rossa,membro di,associativa,1968-????
+AMI-R-009,AMI-O-009,Ufficio Politico del PCd'I (m-l),AMI-O-013,Partito Comunista d'Italia (marxista-leninista),organo di,gerarchica,1966-1991
+AMI-R-010,AMI-O-010,Comitato di Partito di Catania (UCI m-l),AMI-O-014,Unione dei Comunisti Italiani (marxisti-leninisti),articolazione locale di,gerarchica,
+AMI-R-011,AMI-O-012,Comitato Centrale del PCC,AMI-O-015,Partito Comunista Cinese,organo di,gerarchica,1921-
+AMI-R-012,AMI-O-016,Partito Comunista d'Italia (marxista-leninista) - Linea rossa,AMI-O-013,Partito Comunista d'Italia (marxista-leninista),scissione di,da definire,1968
+AMI-R-013,AMI-P-006,Vincenzo Calò,AMI-O-017,Stella Rossa - Fronte Rivoluzionario Marxista-Leninista,segretario di,associativa,1969-1976
+AMI-R-014,AMI-O-017,Stella Rossa - Fronte Rivoluzionario Marxista-Leninista,,Partito della rivoluzione socialista,predecessore di,temporale,1976-1981
+AMI-R-015,AMI-P-006,Vincenzo Calò,,Viva il Leninismo!,membro di,associativa,1962-1963
+AMI-R-016,AMI-P-006,Vincenzo Calò,,Federazione Marxista-Leninista d'Italia,membro di,associativa,1966-1967
+AMI-R-017,AMI-P-006,Vincenzo Calò,,Tribuna Rossa,membro di,associativa,1968-1969
+AMI-R-018,AMI-P-014,Giorgio Zucchetti,AMI-O-001,Associazione Italia-Cina,presidente di,gerarchica,1962-1977
+AMI-R-019,AMI-P-014,Giorgio Zucchetti,,Radio Pechino,collaboratore di,associativa,196?
+AMI-R-020,AMI-P-020,Dino Frangioni,AMI-O-013,Partito Comunista d'Italia (marxista-leninista),membro di,associativa,1966
+AMI-R-021,AMI-P-020,Dino Frangioni,AMI-O-003,Edizioni Oriente,membro di,associativa,1964-1966
+AMI-R-022,AMI-P-021,Giacomo Montemezzani,,Gruppo Proletario Luglio 60,membro di,associativa,1964-1966
+AMI-R-024,AMI-O-014,Unione dei Comunisti Italiani (marxisti-leninisti),AMI-O-019,Partito Comunista (marxista-leninista) Italiano,predecessore di,temporale,1972
+AMI-R-025,AMI-P-018,Aldo Brandirali,AMI-O-014,Unione dei Comunisti Italiani (marxisti-leninisti),segretario di,gerarchica,1968-1972
+AMI-R-026,AMI-O-029,Comitato provinciale di Brindisi del PC(m-l)I,AMI-O-019,Partito Comunista (marxista-leninista) Italiano,articolazione locale di,gerarchica,
+AMI-R-027,AMI-P-022,Sergio Spazzali,AMI-O-018,Avanguardia Proletaria Maoista,dirigente di,gerarchica,1968-1969
+AMI-R-028,AMI-P-026,Michele Semeraro,AMI-O-018,Avanguardia Proletaria Maoista,dirigente di,gerarchica,1968-1977
+AMI-R-029,AMI-O-018,Avanguardia Proletaria Maoista,,Federazione Marxista-Leninista d'Italia,derivata da,temporale,1968
+AMI-R-030,AMI-O-028,Partito Comunista Marxista-Leninista-Maoista Italiano,AMI-O-018,Avanguardia Proletaria Maoista,scissione di,temporale,1969
+AMI-R-031,AMI-P-026,Michele Semeraro,AMI-O-028,Partito Comunista Marxista-Leninista-Maoista Italiano,dirigente di,gerarchica,1969-1977
+AMI-R-032,AMI-O-026,Organizzazione dei Comunisti (marxisti-leninisti) d'Italia,AMI-O-021,Partito Comunista Unificato d'Italia,confluita in,temporale,1977
+AMI-R-033,AMI-O-024,Organizzazione Comunista (marxista-leninista) Fronte Unito,AMI-O-021,Partito Comunista Unificato d'Italia,confluita in,temporale,1977
+AMI-R-034,AMI-O-027,Partito Comunista (marxista-leninista) d'Italia - Lotta di lunga durata,AMI-O-021,Partito Comunista Unificato d'Italia,confluito in,temporale,1977
+AMI-R-035,AMI-O-028,Partito Comunista Marxista-Leninista-Maoista Italiano,AMI-O-021,Partito Comunista Unificato d'Italia,confluito in,temporale,1977
+AMI-R-036,,Coscienza Operaia,AMI-O-021,Partito Comunista Unificato d'Italia,confluito in,temporale,1977
+AMI-R-037,,Ideologia Proletaria,AMI-O-021,Partito Comunista Unificato d'Italia,confluito in,temporale,1977
+AMI-R-038,AMI-P-023,Giuseppe Burgani,AMI-O-024,Organizzazione Comunista (marxista-leninista) Fronte Unito,segretario di,gerarchica,1973-1977
+AMI-R-039,AMI-P-024,Gustavo Hermann,AMI-O-027,Partito Comunista (marxista-leninista) d'Italia - Lotta di lunga durata,segretario di,gerarchica,1969-1977
+AMI-R-040,,Linea Proletaria,AMI-O-021,Partito Comunista Unificato d'Italia,organo di stampa di,associativa,1977-1984
+AMI-R-041,,Linea Proletaria,AMI-O-026,Organizzazione dei Comunisti (marxisti-leninisti) d'Italia,organo di stampa di,associativa,1970-1977
+AMI-R-042,AMI-O-024,Organizzazione Comunista (marxista-leninista) Fronte Unito,AMI-O-013,Partito Comunista d'Italia (marxista-leninista),scissione di,temporale,1973
+AMI-R-043,,Fronte Unito,AMI-O-024,Organizzazione Comunista (marxista-leninista) Fronte Unito,organo di stampa di,associativa,1973-1977
+AMI-R-044,AMI-P-025,Mario Capanna,AMI-O-025,Movimento Studentesco,dirigente di,gerarchica,1968-1976
+AMI-R-045,AMI-O-022,Circoli Lenin dell'Emilia Romagna,,Lotta di Classe,curatore di,associativa,1970-1973
+AMI-R-046,AMI-O-023,Centro Karl Marx,,Il potere operaio pisano,derivato da,temporale,1969
+AMI-R-047,AMI-O-023,Centro Karl Marx,,Organizzazione dei lavoratori comunisti,predecessore di,temporale,1972
+AMI-R-048,AMI-P-017,Arnaldo Bressan,,Lega della gioventù comunista (marxista-leninista) d'Italia,membro di,associativa,
+AMI-R-049,AMI-P-019,Dario Visintini,AMI-O-013,Partito Comunista d'Italia (marxista-leninista),membro di,associativa,
+AMI-R-050,AMI-O-006,Nuova Unità,AMI-O-013,Partito Comunista d'Italia (marxista-leninista),oegano di stampa di,associativa,1966-1991
+AMI-R-051,,Tribuna Rossa,,Federazione Marxista-Leninista d'Italia,scissione di,temporale,1967
+AMI-R-052,,Tribuna Rossa,AMI-O-017,Stella Rossa - Fronte Rivoluzionario Marxista-Leninista,predecessore di,temporale,1969
+AMI-R-053,,FalceMartello,AMI-O-014,Unione dei Comunisti Italiani (marxisti-leninisti),confluito in,temporale,1968
+AMI-R-054,,Organizzazione Comunista Italiana (marxista-leninista),AMI-O-013,Partito Comunista d'Italia (marxista-leninista),scissione di,temporale,1969
+AMI-R-055,AMI-O-027,Partito Comunista (marxista-leninista) d'Italia - Lotta di lunga durata,AMI-O-013,Partito Comunista d'Italia (marxista-leninista),scissione di,temporale,1969
+AMI-R-056,,Organizzazione Comunista Bolscevica Italiana,AMI-O-013,Partito Comunista d'Italia (marxista-leninista),scissione di,temporale,1969
+AMI-R-057,AMI-O-026,Organizzazione dei Comunisti (marxisti-leninisti) d'Italia,AMI-O-013,Partito Comunista d'Italia (marxista-leninista),scissione di,temporale,1970
+AMI-R-058,,Organizzazione Comunista Bolscevica Italiana,,Partito Marxista-Leninista Italiano,predecessore di,temporale,1977
+AMI-R-059,,Ottobre,AMI-O-013,Partito Comunista d'Italia (marxista-leninista),scissione di,temporale,1979
+AMI-R-060,,Organizzazione per la ricostruzione del Partito rivoluzionario del proletariato,AMI-O-013,Partito Comunista d'Italia (marxista-leninista),scissione di,temporale,1980
+AMI-R-061,AMI-O-013,Partito Comunista d'Italia (marxista-leninista),,Partito della Rifondazione Comunista,confluito in,temporale,1991
+AMI-R-062,AMI-P-013,Angiolo Gracci,AMI-O-016,Partito Comunista d'Italia (marxista-leninista) - Linea rossa,segretario di,gerarchica,1968-1977
+AMI-R-063,AMI-O-020,Lavoro Politico,AMI-O-016,Partito Comunista d'Italia (marxista-leninista) - Linea rossa,confluito in,temporale,1968
+AMI-R-064,,Walter Peruzzi,AMI-O-020,Lavoro Politico,membro di,associativa,
+AMI-R-065,,Renato Curcio,AMI-O-020,Lavoro Politico,membro di,associativa,
+AMI-R-066,,Mara Cagol,AMI-O-020,Lavoro Politico,membro di,associativa,
+AMI-R-067,,Il Partito,AMI-O-016,Partito Comunista d'Italia (marxista-leninista) - Linea rossa,organo di stampa di,associativa,1969-1973
+AMI-R-068,AMI-O-016,Partito Comunista d'Italia (marxista-leninista) - Linea rossa,,Democrazia Proletaria,confluito in,temporale,1977
+AMI-R-069,AMI-O-011,Unione della gioventù comunista d’Italia (marxista-leninista),AMI-O-013,Partito Comunista d'Italia (marxista-leninista),giovanile di,gerarchica,1966-1991

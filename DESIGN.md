@@ -218,6 +218,7 @@ Netti, rossi, senza ornamenti.
 - **Shadow Strategy:** vedi Elevation & Depth, solo registro manifesto.
 - **Border:** filetto di 1px.
 - **Internal Padding:** circa 0,6 × 1rem nella parte testuale.
+- **Card degli indici Persone/Organizzazioni:** categoria in maiuscoletto (solo organizzazioni), nome in Fraunces 650 che diventa rosso al passaggio del mouse, poi una sola riga «date · N documenti»: date in Fraunces corsivo, conteggio in Courier. Gli intervalli aperti si scrivono «dal 1921». Il timbro delle iniziali in «In evidenza» è di 110px (84px su telefono), non domina la card.
 
 ### Inputs / Fields
 - **Style:** filetto di 1px, fondo bianco, angoli 4px, testo a 16px (sotto, iOS ingrandisce la pagina).

@@ -78,6 +78,14 @@ function normalizzaRicerca(s) {
         .trim();
 }
 
+// Ricerca per NOME (elenchi dei filtri Persona e Organizzazione): anche
+// il trattino diventa spazio, cosi' "Mao Tse Tung" trova "Mao Tse-tung"
+// e "PCd'I m-l" trova "PCd'I (m-l)". Nella ricerca testuale dei documenti
+// invece il trattino resta dentro la parola (vedi sopra).
+function normalizzaNome(s) {
+    return normalizzaRicerca(s).replace(/-+/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
 function paroleQuery(q) {
     const n = normalizzaRicerca(q);
     return n ? n.split(' ') : [];
@@ -525,7 +533,7 @@ function popolaSpunte(id, conteggi, nomePlurale) {
         const idCasella = `${id}-${i}`;
         // Il campo "Restringi l'elenco" trova la voce anche con le altre
         // forme del nome, che restano nascoste (es. "Lin Piao" -> Lin Biao).
-        const testoCerca = normalizzaRicerca([voce].concat(varianti[voce] || []).join(' '));
+        const testoCerca = normalizzaNome([voce].concat(varianti[voce] || []).join(' '));
         html += `<li class="spunta" data-cerca="${escapeHtml(testoCerca)}"><input type="checkbox" id="${idCasella}" value="${escapeHtml(voce)}"${selezionati.includes(voce) ? ' checked' : ''}>` +
             `<label for="${idCasella}"><span class="spunta__nome">${escapeHtml(voce)}</span>` +
             `<span class="spunta__conteggio" aria-label="${n === 1 ? '1 documento' : n + ' documenti'}">${n}</span></label></li>`;
@@ -536,7 +544,7 @@ function popolaSpunte(id, conteggi, nomePlurale) {
     const cerca = gruppo.querySelector('.spunte-cerca');
     if (cerca) {
         cerca.addEventListener('input', function () {
-            const q = normalizzaRicerca(this.value);
+            const q = normalizzaNome(this.value);
             gruppo.querySelectorAll('.spunta').forEach(li => {
                 li.hidden = q !== '' && !(li.dataset.cerca || '').includes(q);
             });
