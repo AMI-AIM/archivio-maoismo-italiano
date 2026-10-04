@@ -110,7 +110,7 @@
     width: 100%;
     padding: 0.3rem 0.5rem;
     border: 1px solid var(--md-default-fg-color--lightest);
-    border-radius: 4px;
+    border-radius: var(--ami-radius-sm);
     background: var(--md-default-bg-color);
     color: var(--md-default-fg-color);
     font-size: var(--ami-font-size-sm); /* 14px */
@@ -139,7 +139,7 @@
     margin: 0 0 0.4rem;
     padding: 0.3rem 0.5rem;
     border: 1px solid var(--md-default-fg-color--lightest);
-    border-radius: 4px;
+    border-radius: var(--ami-radius-sm);
     background: var(--md-default-bg-color);
     color: var(--md-default-fg-color);
     font-family: var(--ami-font-label);
@@ -266,7 +266,7 @@
     min-width: 1px;
     background: var(--md-default-fg-color--lighter);
     opacity: 0.55;
-    border-radius: 1px 1px 0 0;
+    border-radius: var(--ami-radius-xs) var(--ami-radius-xs) 0 0;
     transition: background-color 0.15s, opacity 0.15s;
 }
 
@@ -281,7 +281,7 @@
     height: 3px;
     bottom: 12px;
     background: var(--md-default-fg-color--lightest);
-    border-radius: 2px;
+    border-radius: var(--ami-radius-xs);
     z-index: 2;
 }
 
@@ -304,7 +304,7 @@
     transform: translateX(-50%);
     background: var(--md-default-bg-color);
     border: 1.5px solid var(--md-primary-fg-color);
-    border-radius: 20px;
+    border-radius: var(--ami-radius-pillola);
     padding: 0.1rem 0.6rem;
     font-size: var(--ami-font-size-xs); /* 12px - etichetta */
     font-weight: 600;
@@ -337,7 +337,7 @@
     appearance: none;
     width: 10px;
     height: 26px;
-    border-radius: 3px;
+    border-radius: var(--ami-radius-xs);
     background: var(--md-primary-fg-color);
     cursor: pointer;
     pointer-events: auto;
@@ -355,7 +355,7 @@
 .slider-container input[type="range"]::-moz-range-thumb {
     width: 10px;
     height: 26px;
-    border-radius: 3px;
+    border-radius: var(--ami-radius-xs);
     background: var(--md-primary-fg-color);
     cursor: pointer;
     pointer-events: auto;
@@ -399,7 +399,7 @@
     padding: 0.2rem 0.8rem;
     background: var(--md-default-fg-color--lightest);
     border: none;
-    border-radius: 4px;
+    border-radius: var(--ami-radius-sm);
     color: var(--md-default-fg-color);
     font-size: var(--ami-font-size-xs); /* 12px */
     cursor: pointer;
@@ -440,7 +440,7 @@
     min-height: 36px;
     padding: 0 0.5rem;
     border: 1px solid var(--md-default-fg-color--lighter);
-    border-radius: 4px;
+    border-radius: var(--ami-radius-sm);
     background: var(--md-default-bg-color);
     color: var(--md-default-fg-color);
     font: inherit;
@@ -483,7 +483,7 @@
     background: var(--md-code-bg-color);
     border: 1px solid var(--md-primary-fg-color);
     color: var(--md-primary-fg-color);
-    border-radius: 20px;
+    border-radius: var(--ami-radius-pillola);
     padding: 0.25rem 0.5rem 0.25rem 0.8rem;
     font-size: var(--ami-font-size-sm); /* 14px */
     font-weight: 500;
@@ -646,7 +646,7 @@
     min-height: 44px;
     padding: 0.5rem 1.4rem;
     border: 0;
-    border-radius: 6px;
+    border-radius: var(--ami-radius-sm);
     background: var(--md-primary-fg-color);
     color: var(--ami-su-colore);
     cursor: pointer;
@@ -682,7 +682,7 @@
 .pag-btn {
     background: var(--md-code-bg-color);
     border: 1px solid var(--md-default-fg-color--lightest);
-    border-radius: 4px;
+    border-radius: var(--ami-radius-sm);
     padding: 0.3rem 0.7rem;
     font-size: var(--ami-font-size-sm); /* 14px */
     font-weight: 500;
@@ -752,7 +752,7 @@
 }
 .filtri-mostra__conteggio:not(:empty) {
     padding: 0.1rem 0.5rem;
-    border-radius: 999px;
+    border-radius: var(--ami-radius-pillola);
     background: var(--md-primary-fg-color);
     color: var(--ami-su-colore);
     font-size: var(--ami-font-size-xs);
@@ -801,5 +801,60 @@
     }
     .filtro-chip {
         font-size: var(--ami-font-size-xs); /* 12px */
+    }
+}
+
+/* Pulsante "Filtri" in basso (archivio-filtri.js): solo su telefono,
+   quando il pannello filtri e' uscito dallo schermo. Superficie sospesa,
+   nella zona del pollice. */
+.filtri-flottante {
+    position: fixed;
+    left: 50%;
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    padding: 0 1.1rem 0 0.9rem;
+    transform: translateX(-50%);
+    border: 0;
+    border-radius: var(--ami-radius-pillola);
+    background: var(--md-primary-fg-color);
+    color: var(--ami-su-colore);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    font-family: var(--ami-font-label);
+    font-size: var(--ami-font-size-sm);
+    font-weight: 600;
+    cursor: pointer;
+}
+.filtri-flottante[hidden] {
+    display: none;
+}
+.filtri-flottante svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: currentColor;
+}
+.filtri-flottante__conteggio:not(:empty) {
+    min-width: 1.4em;
+    padding: 0.05rem 0.4rem;
+    border-radius: var(--ami-radius-pillola);
+    background: var(--ami-su-colore);
+    color: var(--md-primary-fg-color);
+    font-size: var(--ami-font-size-xs);
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+}
+.filtri-flottante:hover {
+    background: var(--md-primary-fg-color--dark);
+}
+.filtri-flottante:focus-visible {
+    outline: 2px solid var(--md-primary-fg-color);
+    outline-offset: 3px;
+}
+@media (min-width: 769px) {
+    .filtri-flottante {
+        display: none;
     }
 }

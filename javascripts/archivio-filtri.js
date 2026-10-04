@@ -2,9 +2,16 @@
 // CARICAMENTO DATI
 // ============================================================
 let documenti = [];
+let varianti = {}; // nome -> altre forme del nome (per restringere gli elenchi)
 let annoMin = 1950;
 let annoMax = 2025;
 let currentPage = 1;
+// Stato della voce di cronologia all'arrivo (prima che i filtri
+// riscrivano l'URL): contiene la posizione salvata uscendo.
+const statoArrivo = window.history.state;
+// Parametri all'arrivo: applicaFiltri() riscrive l'URL (tornando a
+// pagina 1) prima che si possa leggere la pagina richiesta.
+const parametriArrivo = new URLSearchParams(window.location.search);
 const DOCS_PER_PAGE = 20;
 const baseUrl = (document.querySelector('meta[name="ami-base-url"]')?.content || '').replace(/\/$/, '');
 
@@ -49,6 +56,66 @@ function descrizionePulita(doc) {
     return doc._descrizionePulita;
 }
 
+// ------------------------------------------------------------
+// RICERCA TESTUALE
+// ------------------------------------------------------------
+// Testo e query passano per la stessa normalizzazione: minuscole,
+// accenti tolti (perche' = perche), punteggiatura ridotta a spazi.
+// Il trattino resta dentro la parola, cosi' "AMI-0004" e "Tse-tung"
+// restano interi e "lenin" non trova "marxista-leninista".
+// Ogni parola della query deve comparire come INIZIO di una parola
+// del documento (tutte le parole, in qualsiasi ordine).
+const RE_SEPARATORI = /[^\p{L}\p{N}-]+/gu;
+const RE_NON_LATINO = /[^\u0000-\u024f]/;
+
+function normalizzaRicerca(s) {
+    return String(s || '')
+        .toLocaleLowerCase('it')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(RE_SEPARATORI, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function paroleQuery(q) {
+    const n = normalizzaRicerca(q);
+    return n ? n.split(' ') : [];
+}
+
+// Indice di ricerca del documento, calcolato una volta sola: segnatura,
+// titolo, autore, organizzazioni e persone collegate, percorsi tematici
+// e descrizione.
+function indiceRicerca(doc) {
+    if (doc._indiceRicerca === undefined) {
+        const parti = [
+            doc.id,
+            doc.titolo,
+            doc.autore,
+            doc.organizzazione,
+            (doc.organizzazioni || []).join(' '),
+            (doc.persone || []).join(' '),
+            (Array.isArray(doc.serie) ? doc.serie : []).join(' '),
+            descrizionePulita(doc)
+        ];
+        doc._indiceRicerca = ' ' + normalizzaRicerca(parti.join(' '));
+        doc._idRicerca = normalizzaRicerca(doc.id);
+    }
+    return doc._indiceRicerca;
+}
+
+function corrispondeRicerca(doc, parole) {
+    const indice = indiceRicerca(doc);
+    return parole.every(p => {
+        // Cinese e altre scritture senza spazi tra le parole: basta
+        // che la sequenza compaia.
+        if (RE_NON_LATINO.test(p)) return indice.includes(p);
+        if (indice.includes(' ' + p)) return true;
+        // Solo cifre ("0004", "4"): cerca anche dentro la segnatura.
+        return /^\d+$/.test(p) && doc._idRicerca.includes(p);
+    });
+}
+
 function tronca(testo, max) {
     if (!testo || testo.length <= max) return testo || '';
     const taglio = testo.lastIndexOf(' ', max);
@@ -62,12 +129,14 @@ async function caricaDati() {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = await response.json();
         documenti = data.documenti;
+        varianti = data.varianti || {};
         annoMin = data.anno_min || 1900;
         annoMax = data.anno_max || 2025;
         
         inizializzaFiltri();
         precompilaRicercaDaURL();
         applicaFiltri();
+        ripristinaPaginaEPosizione();
     } catch (error) {
         console.error('Errore nel caricamento dei dati:', error);
         const container = document.getElementById('risultati-container');
@@ -105,6 +174,7 @@ async function caricaDati() {
 //   tipo           -> filtro-tipo           (valori multipli, separati da virgola)
 //   serie          -> filtro-argomento      (valori multipli, separati da virgola)
 //   anno_min / anno_max -> range anni (solo se diverso dal range completo)
+//   pagina         -> pagina dei risultati (solo se diversa dalla prima)
 const URL_PARAM_PER_SELECT = {
     'filtro-organizzazione': 'organizzazione',
     'filtro-persona': 'persona',
@@ -210,9 +280,38 @@ function aggiornaURLFiltri() {
         params.set('ordine', ordina.value);
     }
 
+    if (currentPage > 1) {
+        params.set('pagina', currentPage);
+    }
+
     const queryString = params.toString();
     const nuovoURL = window.location.pathname + (queryString ? `?${queryString}` : '');
     window.history.replaceState(null, '', nuovoURL);
+}
+
+// ------------------------------------------------------------
+// RITORNO DA UNA SCHEDA: pagina e posizione
+// ------------------------------------------------------------
+// La pagina dei risultati sta nell'URL (parametro "pagina"); la
+// posizione di scorrimento si salva nello stato della voce di
+// cronologia quando si lascia la pagina, e si ripristina tornando
+// indietro, dopo che i risultati sono stati disegnati.
+function ripristinaPaginaEPosizione() {
+    const pagina = parseInt(parametriArrivo.get('pagina'), 10);
+    if (!isNaN(pagina) && pagina > 1) {
+        currentPage = pagina;
+        mostraRisultati(calcolaRisultati()); // limita pagina al totale
+        aggiornaURLFiltri();
+    }
+    if (statoArrivo && typeof statoArrivo.amiScrollY === 'number') {
+        window.scrollTo(0, statoArrivo.amiScrollY);
+    }
+}
+
+function salvaPosizione() {
+    try {
+        window.history.replaceState({ amiScrollY: window.scrollY }, '', window.location.href);
+    } catch (e) { /* cronologia non disponibile: nessun ripristino */ }
 }
 
 // ============================================================
@@ -424,7 +523,10 @@ function popolaSpunte(id, conteggi, nomePlurale) {
     voci.forEach((voce, i) => {
         const n = conteggi.get(voce);
         const idCasella = `${id}-${i}`;
-        html += `<li class="spunta"><input type="checkbox" id="${idCasella}" value="${escapeHtml(voce)}"${selezionati.includes(voce) ? ' checked' : ''}>` +
+        // Il campo "Restringi l'elenco" trova la voce anche con le altre
+        // forme del nome, che restano nascoste (es. "Lin Piao" -> Lin Biao).
+        const testoCerca = normalizzaRicerca([voce].concat(varianti[voce] || []).join(' '));
+        html += `<li class="spunta" data-cerca="${escapeHtml(testoCerca)}"><input type="checkbox" id="${idCasella}" value="${escapeHtml(voce)}"${selezionati.includes(voce) ? ' checked' : ''}>` +
             `<label for="${idCasella}"><span class="spunta__nome">${escapeHtml(voce)}</span>` +
             `<span class="spunta__conteggio" aria-label="${n === 1 ? '1 documento' : n + ' documenti'}">${n}</span></label></li>`;
     });
@@ -434,10 +536,9 @@ function popolaSpunte(id, conteggi, nomePlurale) {
     const cerca = gruppo.querySelector('.spunte-cerca');
     if (cerca) {
         cerca.addEventListener('input', function () {
-            const q = this.value.trim().toLocaleLowerCase('it');
+            const q = normalizzaRicerca(this.value);
             gruppo.querySelectorAll('.spunta').forEach(li => {
-                const nome = li.querySelector('.spunta__nome').textContent.toLocaleLowerCase('it');
-                li.hidden = q !== '' && !nome.includes(q);
+                li.hidden = q !== '' && !(li.dataset.cerca || '').includes(q);
             });
         });
     }
@@ -455,7 +556,7 @@ function calcolaRisultati() {
     const argomentiSelezionati = getSelectedValues('filtro-argomento');
     const annoMinVal = parseInt(document.getElementById('filtro-anno-min').value);
     const annoMaxVal = parseInt(document.getElementById('filtro-anno-max').value);
-    const testo = document.getElementById('filtro-testo').value.toLowerCase().trim();
+    const parole = paroleQuery(document.getElementById('filtro-testo').value);
     
     let risultati = documenti.filter(doc => {
         if (orgSelezionate.length > 0 && !orgSelezionate.some(o => doc.organizzazioni.includes(o))) {
@@ -478,18 +579,8 @@ function calcolaRisultati() {
         if (doc.anno && (doc.anno < annoMinVal || doc.anno > annoMaxVal)) {
             return false;
         }
-        if (testo) {
-            // Ricerca solo su testo pulito: niente match dentro tag HTML.
-            const serieText = (doc.serie && Array.isArray(doc.serie)) ? doc.serie.join(' ') : '';
-            const testoDoc = (
-                (doc.titolo || '') + ' ' +
-                (doc.autore || '') + ' ' +
-                serieText + ' ' +
-                descrizionePulita(doc)
-            ).toLowerCase();
-            if (!testoDoc.includes(testo)) {
-                return false;
-            }
+        if (parole.length && !corrispondeRicerca(doc, parole)) {
+            return false;
         }
         return true;
     });
@@ -774,6 +865,7 @@ function generaIterfacciaPaginazione(container, current, total) {
                 currentPage = page;
                 const risultati = calcolaRisultati();
                 mostraRisultati(risultati);
+                aggiornaURLFiltri();
                 
                 // Riporta la vista in cima ai risultati: i pulsanti di paginazione
                 // sono in fondo alla lista, senza questo l'utente resterebbe
@@ -843,14 +935,47 @@ function inizializzaFiltriMobile() {
         if (!conteggio || !chips) return;
         const n = chips.querySelectorAll('.filtro-chip').length;
         conteggio.textContent = n ? `${n} attiv${n === 1 ? 'o' : 'i'}` : '';
+        const nFlottante = document.querySelector('.filtri-flottante__conteggio');
+        if (nFlottante) nFlottante.textContent = n ? String(n) : '';
     }
 
     bottone.addEventListener('click', function () {
         imposta(sidebar.classList.contains('filtri--aperti'));
     });
 
+    // Pulsante "Filtri" in basso, nella zona del pollice: compare su
+    // telefono quando il pannello filtri e' uscito dallo schermo (l'elenco
+    // dei risultati supera i 4.000px). Riporta al pannello e lo apre.
+    const flottante = document.createElement('button');
+    flottante.type = 'button';
+    flottante.className = 'filtri-flottante';
+    flottante.hidden = true;
+    flottante.setAttribute('aria-controls', 'filtri-corpo');
+    flottante.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg>' +
+        '<span>Filtri</span><span class="filtri-flottante__conteggio"></span>';
+    document.body.appendChild(flottante);
+    flottante.addEventListener('click', function () {
+        imposta(false);
+        const riduci = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        sidebar.scrollIntoView({ behavior: riduci ? 'auto' : 'smooth', block: 'start' });
+        bottone.focus({ preventScroll: true });
+    });
+    let sidebarVisibile = true;
+    const aggiornaFlottante = function () {
+        flottante.hidden = !mq.matches || sidebarVisibile;
+    };
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (voci) {
+            sidebarVisibile = voci[0].isIntersecting;
+            aggiornaFlottante();
+        }).observe(sidebar);
+    }
+
     // Su desktop il pannello e' sempre aperto; si richiude tornando su mobile.
-    const suCambio = function () { imposta(mq.matches); };
+    const suCambio = function () {
+        imposta(mq.matches);
+        if (typeof aggiornaFlottante === 'function') aggiornaFlottante();
+    };
     if (mq.addEventListener) mq.addEventListener('change', suCambio);
     else if (mq.addListener) mq.addListener(suCambio);
     imposta(mq.matches);
@@ -865,6 +990,10 @@ function inizializzaFiltriMobile() {
 // (documenti.json, ~100 KB) si scarica solo dove c'e' l'elenco dei risultati.
 document.addEventListener('DOMContentLoaded', function () {
     if (!document.getElementById('risultati-container')) return;
+    // Il ripristino lo fa lo script, a risultati disegnati: quello del
+    // browser arriverebbe prima, su una pagina ancora vuota.
+    if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+    window.addEventListener('pagehide', salvaPosizione);
     inizializzaFiltriMobile();
     caricaDati();
 });

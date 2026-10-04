@@ -12,6 +12,11 @@
 [data-md-color-primary] {
   --gal-bg: var(--md-default-bg-color, #fff);
   --gal-ink: var(--ami-inchiostro, #1a1a1a);
+  /* Titoli-manifesto della galleria: fuori dalla scala del catalogo,
+     voluti (registro manifesto, DESIGN.md). */
+  --gal-size-titolo: clamp(1.9rem, 4vw, 2.8rem);
+  --gal-size-anno: clamp(2.1rem, 5vw, 3.6rem);
+  --gal-size-anno-telefono: clamp(2rem, 13vw, 3.2rem);
   --gal-muted: #5c5c5c;
   --gal-accent: var(--md-primary-fg-color);
   --gal-accent-dark: var(--md-primary-fg-color--dark);
@@ -49,7 +54,7 @@
 .galleria-main-title {
   margin: 0 0 6px;
   color: var(--gal-ink);
-  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-size: var(--gal-size-titolo);
   font-weight: var(--fw-title);
   line-height: 1;
   letter-spacing: var(--ami-tracking-tighter);
@@ -108,7 +113,7 @@
   min-height: 28px;
   padding: 5px 12px;
   border: 1px solid var(--gal-linea);
-  border-radius: 999px;
+  border-radius: var(--ami-radius-pillola);
   background: var(--md-default-bg-color);
   color: var(--gal-chip-ink) !important;
   font-family: var(--ami-font-label);
@@ -155,7 +160,7 @@
   align-self: start;
   margin: 0;
   color: var(--gal-ink);
-  font-size: clamp(2.1rem, 5vw, 3.6rem);
+  font-size: var(--gal-size-anno);
   font-weight: var(--fw-title);
   font-variant-numeric: lining-nums;
   line-height: 0.95;
@@ -307,7 +312,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   height: min(92vh, 940px);
   background: var(--md-default-bg-color, #fff);
   color: var(--gal-ink);
-  border-radius: 6px;
+  border-radius: var(--ami-radius-sm);
   overflow: hidden;
   box-shadow: 0 24px 80px rgba(0, 0, 0, .45);
 }
@@ -358,7 +363,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   left: 10px;
   z-index: 2;
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: var(--ami-radius-pillola);
   background: rgba(0, 0, 0, .55);
   color: var(--gal-su-scuro);
   font-family: var(--ami-font-label, sans-serif);
@@ -375,7 +380,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   width: 44px;
   height: 44px;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--ami-radius-pillola);
   background: rgba(0, 0, 0, .45);
   color: var(--gal-su-scuro);
   font-size: var(--ami-font-size-xl);
@@ -403,7 +408,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   width: 40px;
   height: 40px;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--ami-radius-pillola);
   background: rgba(0, 0, 0, .55);
   color: var(--gal-su-scuro);
   font-size: var(--ami-font-size-md);
@@ -483,7 +488,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   gap: .35rem;
   padding: 5px 10px;
   border: 1px solid var(--gal-linea);
-  border-radius: 999px;
+  border-radius: var(--ami-radius-pillola);
   background: var(--md-default-bg-color);
   color: var(--gal-azione-ink);
   font-size: var(--ami-font-size-xs);
@@ -560,7 +565,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   .galleria-year-title {
     position: static;
     margin: 0 0 16px;
-    font-size: clamp(2rem, 13vw, 3.2rem);
+    font-size: var(--gal-size-anno-telefono);
   }
 }
 

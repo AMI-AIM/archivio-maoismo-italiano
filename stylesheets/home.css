@@ -89,7 +89,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   height: 3px;
   background: var(--md-primary-fg-color);
   margin-top: 0.4rem;
-  border-radius: 2px;
+  border-radius: var(--ami-radius-xs);
 }
 .section-icon {
   width: 1.4rem;
@@ -134,7 +134,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: var(--ami-radius-md);
   overflow: hidden;
 }
 .evidenza-thumbnail-img {
@@ -144,7 +144,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   width: auto !important;
   max-width: 100% !important;
   object-fit: contain !important;
-  border-radius: 8px;
+  border-radius: var(--ami-radius-md);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
   transition: transform 0.25s ease;
 }
@@ -236,7 +236,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 .home-progetto__link:focus-visible {
   outline: 2px solid var(--md-primary-fg-color);
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: var(--ami-radius-xs);
 }
 /* Schermi touch: area cliccabile di almeno 44px (DESIGN.md, Layout) */
 @media (pointer: coarse) {
@@ -342,7 +342,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   height: 3px;
   background: var(--md-primary-fg-color);
   margin-top: 0.4rem;
-  border-radius: 2px;
+  border-radius: var(--ami-radius-xs);
 }
 .button-icon {
   width: 1rem;

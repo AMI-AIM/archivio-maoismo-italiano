@@ -235,7 +235,7 @@
 
     const risultatiPersone = persone
       .filter((p) => {
-        const campo = ((p.nome || "") + " " + pulisciTesto(p.biografia)).toLowerCase();
+        const campo = ((p.nome || "") + " " + (p.varianti || []).join(" ") + " " + pulisciTesto(p.biografia)).toLowerCase();
         return campo.includes(q);
       })
       .map((p) => {
@@ -253,7 +253,7 @@
 
     const risultatiOrganizzazioni = organizzazioni
       .filter((o) => {
-        const campo = ((o.nome || "") + " " + pulisciTesto(o.storia) + " " + (o.categoria || "")).toLowerCase();
+        const campo = ((o.nome || "") + " " + (o.varianti || []).join(" ") + " " + pulisciTesto(o.storia) + " " + (o.categoria || "")).toLowerCase();
         return campo.includes(q);
       })
       .map((o) => {

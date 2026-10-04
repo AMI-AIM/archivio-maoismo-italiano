@@ -38,7 +38,7 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
   margin: 1.5rem 0;
   background: var(--md-code-bg-color);
   border: 1px solid var(--md-default-fg-color--lightest);
-  border-radius: 4px;
+  border-radius: var(--ami-radius-sm);
   overflow: hidden;
   min-height: 100px;
 }
@@ -63,7 +63,7 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
   max-width: 100%;
   max-height: 80vh;
   object-fit: contain;
-  border-radius: 4px;
+  border-radius: var(--ami-radius-sm);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -222,7 +222,7 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
 .text-bilingue {
   margin: 1rem 0;
   background: var(--md-code-bg-color);
-  border-radius: 8px;
+  border-radius: var(--ami-radius-md);
   overflow: hidden;
   border: 1px solid var(--md-default-fg-color--lightest);
 }
@@ -255,7 +255,7 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
 .lingua-btn {
   background: transparent;
   border: 2px solid transparent;
-  border-radius: 4px;
+  border-radius: var(--ami-radius-sm);
   padding: 0.3rem 1rem;
   font-size: var(--ami-font-size-sm);
   font-weight: 600;
@@ -300,7 +300,7 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
   font-size: var(--ami-font-size-sm);
   line-height: var(--ami-line-height-normal);
   padding: 0.7rem 0.9rem;
-  border-radius: 6px;
+  border-radius: var(--ami-radius-sm);
   border: 1px solid var(--md-default-fg-color--lightest);
   background: var(--md-default-bg-color);
   color: var(--md-default-fg-color);
@@ -328,7 +328,7 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
 .citazione-tab {
   background: transparent;
   border: 1px solid var(--md-default-fg-color--lightest);
-  border-radius: 20px;
+  border-radius: var(--ami-radius-pillola);
   padding: 0.2rem 0.8rem;
   font-size: var(--ami-font-size-xs);
   font-weight: 600;
@@ -357,7 +357,7 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
   background: var(--md-primary-fg-color);
   color: var(--ami-su-colore);
   border: none;
-  border-radius: 6px;
+  border-radius: var(--ami-radius-sm);
   padding: 0.4rem 1.2rem;
   font-size: var(--ami-font-size-sm);
   font-weight: 600;

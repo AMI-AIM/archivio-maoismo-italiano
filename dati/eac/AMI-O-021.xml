@@ -12,7 +12,7 @@
       </maintenanceEvent>
       <maintenanceEvent maintenanceEventType="derived">
         <agent agentType="machine">scripts/core/ead_export.py</agent>
-        <eventDateTime standardDateTime="2026-10-03">2026-10-03</eventDateTime>
+        <eventDateTime standardDateTime="2026-10-04">2026-10-04</eventDateTime>
       </maintenanceEvent>
     </maintenanceHistory>
     <conventionDeclaration>
@@ -29,6 +29,7 @@
       <nameEntry status="alternative">
         <part>PCUd'I</part>
       </nameEntry>
+      <identityId localType="Wikidata">Q7884917</identityId>
     </identity>
     <description>
       <legalStatuses>

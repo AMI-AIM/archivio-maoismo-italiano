@@ -12,7 +12,7 @@
       </maintenanceEvent>
       <maintenanceEvent maintenanceEventType="derived">
         <agent agentType="machine">scripts/core/ead_export.py</agent>
-        <eventDateTime standardDateTime="2026-10-03">2026-10-03</eventDateTime>
+        <eventDateTime standardDateTime="2026-10-04">2026-10-04</eventDateTime>
       </maintenanceEvent>
     </maintenanceHistory>
     <conventionDeclaration>
@@ -29,6 +29,8 @@
       <nameEntry status="alternative">
         <part>Bandiera Rossa</part>
       </nameEntry>
+      <identityId localType="Wikidata">Q3431681</identityId>
+      <identityId localType="VIAF">138944471</identityId>
     </identity>
     <description>
       <legalStatuses>

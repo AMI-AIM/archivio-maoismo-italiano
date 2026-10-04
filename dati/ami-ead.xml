@@ -31,7 +31,7 @@
       </maintenanceevent>
       <maintenanceevent>
         <eventtype value="derived" />
-        <eventdatetime standarddatetime="2026-10-03">2026-10-03</eventdatetime>
+        <eventdatetime standarddatetime="2026-10-04">2026-10-04</eventdatetime>
         <agenttype value="machine" />
         <agent>scripts/core/ead_export.py</agent>
         <eventdescription>File generato automaticamente da data/dati.xlsx</eventdescription>
@@ -92,9 +92,7 @@
           <dao daotype="derived" href="https://archive.org/details/1967-citazioni-dalle-opere-del-presidente-mao-tse-tung-lingue-estere" linktitle="Riproduzione digitale su Internet Archive" />
         </did>
         <scopecontent>
-          <p>Prima edizione italiana del famoso Libretto rosso, contenente le iconiche citazioni del presidente cinese Mao Zedong, stampata a Pechino dalla Casa editrice in lingue estere, 1967. L'indice è stato spostato all'inizio del libro per una consultazione più agevole.</p>
-          <p>Quotations from Chairman Mao Tse-tung (Little red book) in Italian, official translation by the Foreign Languages Press, published in Peking (Beijing) in 1967.</p>
-          <p>毛主席语录 (Máo Zhǔxí Yǔlù)</p>
+          <p>Traduzione ufficiale in lingua italiana del famoso Libretto rosso (毛主席语录, Máo Zhǔxí Yǔlù), contenente le iconiche citazioni del Presidente cinese Mao Zedong, stampata a Pechino dalla Casa editrice in lingue estere. L'edizione qui presente è la ristampa in formato tascabile del 1969 (11×7 cm).</p>
         </scopecontent>
         <odd localtype="editore">
           <p>Pechino: Casa editrice in lingue estere</p>
@@ -644,6 +642,7 @@
               <part>Ufficio Politico del PCd'I (m-l)</part>
             </corpname>
           </origination>
+          <physdesc>pp. 32</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -708,6 +707,7 @@
               <part>Renmin Ribao</part>
             </corpname>
           </origination>
+          <physdesc>1 fotografia, b/n</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -774,6 +774,7 @@
               <part>Nuova Unità</part>
             </corpname>
           </origination>
+          <physdesc>1 fotografia, b/n</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -821,6 +822,7 @@
               <part>Renmin Ribao</part>
             </corpname>
           </origination>
+          <physdesc>1 fotografia, b/n</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -921,6 +923,7 @@
               <part>Nuova Unità</part>
             </corpname>
           </origination>
+          <physdesc>1 fotografia, b/n</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -1457,6 +1460,7 @@
               <part>Jiefangjun Bao</part>
             </corpname>
           </origination>
+          <physdesc>pp. 16</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -1792,6 +1796,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 66</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -1838,6 +1843,7 @@
               <part>Comitato Centrale del PCC</part>
             </corpname>
           </origination>
+          <physdesc>pp. 15</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -1890,6 +1896,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 54; 18 x 11 cm</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -1944,6 +1951,7 @@
               <part>Hongqi</part>
             </corpname>
           </origination>
+          <physdesc>pp. 12</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -1989,6 +1997,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 198</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2031,6 +2040,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 263</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2080,6 +2090,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 73</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2128,6 +2139,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 14</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2177,6 +2189,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 22</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2225,6 +2238,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 50</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2270,6 +2284,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 7</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2315,6 +2330,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 55</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2363,6 +2379,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 95</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2411,6 +2428,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 115</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2459,6 +2477,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 35</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2504,6 +2523,7 @@
               <part>Avanguardia Proletaria Maoista</part>
             </corpname>
           </origination>
+          <physdesc>pp. 42</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2593,6 +2613,7 @@
               <part>Partito Comunista Unificato d'Italia</part>
             </corpname>
           </origination>
+          <physdesc>1 manifesto, colore</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2640,6 +2661,7 @@
               <part>Partito Comunista d'Italia (marxista-leninista)</part>
             </corpname>
           </origination>
+          <physdesc>1 manifesto, colore</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2681,6 +2703,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 38</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2726,6 +2749,7 @@
               <part>Partito Comunista Unificato d'Italia</part>
             </corpname>
           </origination>
+          <physdesc>1 fotografia, b/n</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2791,6 +2815,7 @@
               <part>Renzo Del Carria</part>
             </persname>
           </origination>
+          <physdesc>pp. 461</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2836,6 +2861,7 @@
               <part>Renzo Del Carria</part>
             </persname>
           </origination>
+          <physdesc>pp. 449</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2881,6 +2907,7 @@
               <part>Liu Shaoqi</part>
             </persname>
           </origination>
+          <physdesc>pp. 143</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2930,6 +2957,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 131</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -2973,6 +3001,7 @@
           <unitid>AMI-0062</unitid>
           <unittitle localtype="attribuito">Delegazione del movimento studentesco dell'Università di Trieste sulla nave cinese Jinsha</unittitle>
           <unitdate normal="1968-03-20">1968-03-20</unitdate>
+          <physdesc>1 fotografia, b/n</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -3102,6 +3131,7 @@
               <part>Partito Comunista d'Italia (marxista-leninista)</part>
             </corpname>
           </origination>
+          <physdesc>1 fotografia, b/n</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -3143,6 +3173,7 @@
               <part>Movimento Studentesco</part>
             </corpname>
           </origination>
+          <physdesc>1 fotografia, colore</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -4210,6 +4241,7 @@
               <part>Unione dei Comunisti Italiani (marxisti-leninisti)</part>
             </corpname>
           </origination>
+          <physdesc>pp. 37</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -4261,6 +4293,7 @@
               <part>Centro Karl Marx</part>
             </corpname>
           </origination>
+          <physdesc>pp. 8</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -4304,6 +4337,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 7</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -4349,6 +4383,7 @@
               <part>Mao Zedong</part>
             </persname>
           </origination>
+          <physdesc>pp. 30</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
@@ -4393,6 +4428,7 @@
           <unitid>AMI-0096</unitid>
           <unittitle localtype="attribuito">Pubblicità "Amaro Ramazzotti" raffigurante Mao Zedong</unittitle>
           <unitdate normal="1973">1973</unitdate>
+          <physdesc>1 annuncio pubblicitario, colore</physdesc>
           <langmaterial>
             <language langcode="ita">italiano</language>
           </langmaterial>
