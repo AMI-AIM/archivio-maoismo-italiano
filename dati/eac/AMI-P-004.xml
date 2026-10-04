@@ -26,6 +26,9 @@
       <nameEntry status="authorized">
         <part>Yao Wenyuan</part>
       </nameEntry>
+      <nameEntry status="alternative">
+        <part>Yao Wen-yuan</part>
+      </nameEntry>
       <identityId localType="Wikidata">Q382645</identityId>
       <identityId localType="VIAF">95006973</identityId>
     </identity>

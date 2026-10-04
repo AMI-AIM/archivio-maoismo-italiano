@@ -42,5 +42,18 @@
         </dateRange>
       </existDates>
     </description>
+    <relations>
+      <relation>
+        <targetEntity targetType="person" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-P-025.xml">
+          <part>Mario Capanna</part>
+        </targetEntity>
+        <relationType>gerarchica</relationType>
+        <descriptiveNote>
+          <p>Mario Capanna dirigente di Movimento Studentesco</p>
+          <p>attestato 1970</p>
+          <p>Fonte: AMI-0066</p>
+        </descriptiveNote>
+      </relation>
+    </relations>
   </cpfDescription>
 </eac>

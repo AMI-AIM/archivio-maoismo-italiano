@@ -36,9 +36,53 @@
       <existDates>
         <dateRange>
           <fromDate standardDate="1968">1968</fromDate>
-          <toDate>s.d.</toDate>
+          <toDate>ca. 1970</toDate>
         </dateRange>
       </existDates>
     </description>
+    <relations>
+      <relation>
+        <targetEntity targetType="person" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-P-022.xml">
+          <part>Giuliano Spazzali</part>
+        </targetEntity>
+        <relationType>gerarchica</relationType>
+        <descriptiveNote>
+          <p>Giuliano Spazzali dirigente di Avanguardia Proletaria Maoista</p>
+          <p>Fonte: AMI-0052</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="person" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-P-026.xml">
+          <part>Michele Semeraro</part>
+        </targetEntity>
+        <relationType>gerarchica</relationType>
+        <descriptiveNote>
+          <p>Michele Semeraro dirigente di Avanguardia Proletaria Maoista</p>
+          <p>Fonte: AMI-0052</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Federazione Marxista-Leninista d'Italia</part>
+        </targetEntity>
+        <date standardDate="1968">1968</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Avanguardia Proletaria Maoista derivata da Federazione Marxista-Leninista d'Italia</p>
+          <p>Fonte: AMI-0052</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-028.xml">
+          <part>Partito Comunista Marxista-Leninista-Maoista Italiano</part>
+        </targetEntity>
+        <date standardDate="1969">1969</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Partito Comunista Marxista-Leninista-Maoista Italiano scissione di Avanguardia Proletaria Maoista</p>
+          <p>Fonte: AMI-0057</p>
+        </descriptiveNote>
+      </relation>
+    </relations>
   </cpfDescription>
 </eac>

@@ -40,5 +40,18 @@
         </dateRange>
       </existDates>
     </description>
+    <relations>
+      <relation>
+        <targetEntity targetType="person" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-P-020.xml">
+          <part>Dino Frangioni</part>
+        </targetEntity>
+        <date standardDate="1964">1964</date>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Dino Frangioni rappresentante di Edizioni Oriente</p>
+          <p>Fonte: AMI-0018</p>
+        </descriptiveNote>
+      </relation>
+    </relations>
   </cpfDescription>
 </eac>

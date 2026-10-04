@@ -46,5 +46,39 @@
         </dateRange>
       </existDates>
     </description>
+    <relations>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-021.xml">
+          <part>Partito Comunista Unificato d'Italia</part>
+        </targetEntity>
+        <date standardDate="1977">1977</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Partito Comunista (marxista-leninista) d'Italia - Lotta di lunga durata confluito in Partito Comunista Unificato d'Italia</p>
+          <p>Fonte: AMI-0057</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="person" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-P-024.xml">
+          <part>Gustavo Hermann</part>
+        </targetEntity>
+        <relationType>gerarchica</relationType>
+        <descriptiveNote>
+          <p>Gustavo Hermann segretario di Partito Comunista (marxista-leninista) d'Italia - Lotta di lunga durata</p>
+          <p>Fonte: AMI-0057</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-013.xml">
+          <part>Partito Comunista d'Italia (marxista-leninista)</part>
+        </targetEntity>
+        <date standardDate="1969">1969</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Partito Comunista (marxista-leninista) d'Italia - Lotta di lunga durata scissione di Partito Comunista d'Italia (marxista-leninista)</p>
+          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
+        </descriptiveNote>
+      </relation>
+    </relations>
   </cpfDescription>
 </eac>

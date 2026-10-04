@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <eac xmlns="https://archivists.org/ns/eac/v2">
   <control maintenanceStatus="new" languageEncoding="iso639-2b" scriptEncoding="iso15924">
-    <recordId>AMI-O-022</recordId>
+    <recordId>AMI-P-022</recordId>
     <maintenanceAgency>
       <agencyName>Archivio del Maoismo Italiano</agencyName>
     </maintenanceAgency>
     <maintenanceHistory>
       <maintenanceEvent maintenanceEventType="created">
         <agent agentType="human">Ivan Masci</agent>
-        <eventDateTime standardDateTime="2026-10-02">2026-10-02</eventDateTime>
+        <eventDateTime standardDateTime="2026-10-04">2026-10-04</eventDateTime>
       </maintenanceEvent>
       <maintenanceEvent maintenanceEventType="derived">
         <agent agentType="machine">scripts/core/ead_export.py</agent>
@@ -22,34 +22,20 @@
   </control>
   <cpfDescription>
     <identity>
-      <entityType value="corporateBody" />
+      <entityType value="person" />
       <nameEntry status="authorized">
-        <part>Circoli Lenin dell'Emilia Romagna</part>
+        <part>Giuliano Spazzali</part>
       </nameEntry>
     </identity>
-    <description>
-      <legalStatuses>
-        <legalStatus>
-          <term>Gruppo</term>
-        </legalStatus>
-      </legalStatuses>
-      <existDates>
-        <dateRange>
-          <fromDate standardDate="1970">1970</fromDate>
-          <toDate standardDate="1973">1973</toDate>
-        </dateRange>
-      </existDates>
-    </description>
     <relations>
       <relation>
-        <targetEntity targetType="corporateBody">
-          <part>Lotta di Classe</part>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-018.xml">
+          <part>Avanguardia Proletaria Maoista</part>
         </targetEntity>
-        <relationType>associativa</relationType>
+        <relationType>gerarchica</relationType>
         <descriptiveNote>
-          <p>Circoli Lenin dell'Emilia Romagna curatore di Lotta di Classe</p>
-          <p>attestato 1970</p>
-          <p>Fonte: AMI-0070</p>
+          <p>Giuliano Spazzali dirigente di Avanguardia Proletaria Maoista</p>
+          <p>Fonte: AMI-0052</p>
         </descriptiveNote>
       </relation>
     </relations>

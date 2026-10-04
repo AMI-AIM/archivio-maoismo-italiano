@@ -32,6 +32,15 @@
       <nameEntry status="alternative">
         <part>Mao Tsetung</part>
       </nameEntry>
+      <nameEntry status="alternative">
+        <part>Mao Tze-tung</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Mao Tse-dun</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Mao Ze-dun</part>
+      </nameEntry>
       <identityId localType="Wikidata">Q5816</identityId>
       <identityId localType="VIAF">51699962</identityId>
     </identity>
@@ -55,6 +64,7 @@
         <relationType>gerarchica</relationType>
         <descriptiveNote>
           <p>Mao Zedong presidente di Partito Comunista Cinese</p>
+          <p>Fonte: AMI-0015</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -68,6 +78,7 @@
         <relationType>gerarchica</relationType>
         <descriptiveNote>
           <p>Mao Zedong presidente di Comitato Centrale del PCC</p>
+          <p>Fonte: AMI-0004</p>
         </descriptiveNote>
       </relation>
     </relations>

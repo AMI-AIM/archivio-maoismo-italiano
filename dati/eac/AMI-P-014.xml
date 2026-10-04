@@ -35,5 +35,29 @@
         </dateRange>
       </existDates>
     </description>
+    <relations>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-001.xml">
+          <part>Associazione Italia-Cina</part>
+        </targetEntity>
+        <relationType>gerarchica</relationType>
+        <descriptiveNote>
+          <p>Giorgio Zucchetti presidente di Associazione Italia-Cina</p>
+          <p>attestato 1967</p>
+          <p>Fonte: AMI-0042</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Radio Pechino</part>
+        </targetEntity>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Giorgio Zucchetti collaboratore di Radio Pechino</p>
+          <p>attestato 1967</p>
+          <p>Fonte: AMI-0042</p>
+        </descriptiveNote>
+      </relation>
+    </relations>
   </cpfDescription>
 </eac>

@@ -40,5 +40,48 @@
         </dateRange>
       </existDates>
     </description>
+    <relations>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-016.xml">
+          <part>Partito Comunista d'Italia (marxista-leninista) - Linea rossa</part>
+        </targetEntity>
+        <date standardDate="1968">1968</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Lavoro Politico confluito in Partito Comunista d'Italia (marxista-leninista) - Linea rossa</p>
+          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="person">
+          <part>Walter Peruzzi</part>
+        </targetEntity>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Walter Peruzzi membro di Lavoro Politico</p>
+          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="person">
+          <part>Renato Curcio</part>
+        </targetEntity>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Renato Curcio membro di Lavoro Politico</p>
+          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="person">
+          <part>Mara Cagol</part>
+        </targetEntity>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Mara Cagol membro di Lavoro Politico</p>
+          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
+        </descriptiveNote>
+      </relation>
+    </relations>
   </cpfDescription>
 </eac>

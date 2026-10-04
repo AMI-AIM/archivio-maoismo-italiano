@@ -49,5 +49,49 @@
         </dateRange>
       </existDates>
     </description>
+    <relations>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-021.xml">
+          <part>Partito Comunista Unificato d'Italia</part>
+        </targetEntity>
+        <date standardDate="1977">1977</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Organizzazione Comunista (marxista-leninista) Fronte Unito confluita in Partito Comunista Unificato d'Italia</p>
+          <p>Fonte: AMI-0057</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="person" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-P-023.xml">
+          <part>Giuseppe Burgani</part>
+        </targetEntity>
+        <relationType>gerarchica</relationType>
+        <descriptiveNote>
+          <p>Giuseppe Burgani segretario di Organizzazione Comunista (marxista-leninista) Fronte Unito</p>
+          <p>Fonte: AMI-0057; AMI-0064</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-013.xml">
+          <part>Partito Comunista d'Italia (marxista-leninista)</part>
+        </targetEntity>
+        <date standardDate="1973">1973</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Organizzazione Comunista (marxista-leninista) Fronte Unito scissione di Partito Comunista d'Italia (marxista-leninista)</p>
+          <p>Fonte: AMI-0064</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Fronte Unito</part>
+        </targetEntity>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Fronte Unito organo di stampa di Organizzazione Comunista (marxista-leninista) Fronte Unito</p>
+          <p>Fonte: AMI-0064</p>
+        </descriptiveNote>
+      </relation>
+    </relations>
   </cpfDescription>
 </eac>

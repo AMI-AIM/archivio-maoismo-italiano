@@ -45,5 +45,29 @@
         </dateRange>
       </existDates>
     </description>
+    <relations>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-014.xml">
+          <part>Unione dei Comunisti Italiani (marxisti-leninisti)</part>
+        </targetEntity>
+        <date standardDate="1972">1972</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Unione dei Comunisti Italiani (marxisti-leninisti) predecessore di Partito Comunista (marxista-leninista) Italiano</p>
+          <p>Fonte: AMI-0053; AMI-0063</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-029.xml">
+          <part>Comitato provinciale di Brindisi del PC(m-l)I</part>
+        </targetEntity>
+        <relationType>gerarchica</relationType>
+        <descriptiveNote>
+          <p>Comitato provinciale di Brindisi del PC(m-l)I articolazione locale di Partito Comunista (marxista-leninista) Italiano</p>
+          <p>attestato 1974</p>
+          <p>Fonte: AMI-0063</p>
+        </descriptiveNote>
+      </relation>
+    </relations>
   </cpfDescription>
 </eac>

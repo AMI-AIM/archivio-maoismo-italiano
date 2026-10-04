@@ -47,6 +47,7 @@
         <relationType>associativa</relationType>
         <descriptiveNote>
           <p>Osvaldo Pesce membro di Partito Comunista d'Italia (marxista-leninista)</p>
+          <p>Fonte: AMI-0014; AMI-0033</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -60,6 +61,7 @@
         <relationType>gerarchica</relationType>
         <descriptiveNote>
           <p>Osvaldo Pesce segretario di Organizzazione dei Comunisti (marxisti-leninisti) d'Italia</p>
+          <p>Fonte: AMI-0057</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -73,6 +75,7 @@
         <relationType>gerarchica</relationType>
         <descriptiveNote>
           <p>Osvaldo Pesce segretario di Partito Comunista Unificato d'Italia</p>
+          <p>Fonte: AMI-0057; AMI-0054</p>
         </descriptiveNote>
       </relation>
     </relations>

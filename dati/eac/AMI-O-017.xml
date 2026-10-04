@@ -43,5 +43,40 @@
         </dateRange>
       </existDates>
     </description>
+    <relations>
+      <relation>
+        <targetEntity targetType="person" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-P-006.xml">
+          <part>Vincenzo Calò</part>
+        </targetEntity>
+        <date standardDate="1969">1969</date>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Vincenzo Calò segretario di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</p>
+          <p>Fonte: AMI-0032; AMI-0036</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Partito della rivoluzione socialista</part>
+        </targetEntity>
+        <date standardDate="1976">1976</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Stella Rossa - Fronte Rivoluzionario Marxista-Leninista predecessore di Partito della rivoluzione socialista</p>
+          <p>Fonte: AMI-0032</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Tribuna Rossa</part>
+        </targetEntity>
+        <date standardDate="1969">1969</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Tribuna Rossa predecessore di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</p>
+          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
+        </descriptiveNote>
+      </relation>
+    </relations>
   </cpfDescription>
 </eac>

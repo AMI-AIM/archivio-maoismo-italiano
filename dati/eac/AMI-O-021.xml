@@ -56,6 +56,84 @@
         <relationType>gerarchica</relationType>
         <descriptiveNote>
           <p>Osvaldo Pesce segretario di Partito Comunista Unificato d'Italia</p>
+          <p>Fonte: AMI-0057; AMI-0054</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-026.xml">
+          <part>Organizzazione dei Comunisti (marxisti-leninisti) d'Italia</part>
+        </targetEntity>
+        <date standardDate="1977">1977</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Organizzazione dei Comunisti (marxisti-leninisti) d'Italia confluita in Partito Comunista Unificato d'Italia</p>
+          <p>Fonte: AMI-0057</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-024.xml">
+          <part>Organizzazione Comunista (marxista-leninista) Fronte Unito</part>
+        </targetEntity>
+        <date standardDate="1977">1977</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Organizzazione Comunista (marxista-leninista) Fronte Unito confluita in Partito Comunista Unificato d'Italia</p>
+          <p>Fonte: AMI-0057</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-027.xml">
+          <part>Partito Comunista (marxista-leninista) d'Italia - Lotta di lunga durata</part>
+        </targetEntity>
+        <date standardDate="1977">1977</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Partito Comunista (marxista-leninista) d'Italia - Lotta di lunga durata confluito in Partito Comunista Unificato d'Italia</p>
+          <p>Fonte: AMI-0057</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-028.xml">
+          <part>Partito Comunista Marxista-Leninista-Maoista Italiano</part>
+        </targetEntity>
+        <date standardDate="1977">1977</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Partito Comunista Marxista-Leninista-Maoista Italiano confluito in Partito Comunista Unificato d'Italia</p>
+          <p>Fonte: AMI-0057</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Coscienza Operaia</part>
+        </targetEntity>
+        <date standardDate="1977">1977</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Coscienza Operaia confluito in Partito Comunista Unificato d'Italia</p>
+          <p>Fonte: AMI-0057</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Ideologia Proletaria</part>
+        </targetEntity>
+        <date standardDate="1977">1977</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Ideologia Proletaria confluito in Partito Comunista Unificato d'Italia</p>
+          <p>Fonte: AMI-0057</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Linea Proletaria</part>
+        </targetEntity>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Linea Proletaria organo di stampa di Partito Comunista Unificato d'Italia</p>
+          <p>dal 1977</p>
+          <p>Fonte: AMI-0057</p>
         </descriptiveNote>
       </relation>
     </relations>

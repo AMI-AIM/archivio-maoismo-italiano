@@ -29,6 +29,9 @@
       <nameEntry status="alternative">
         <part>PCC</part>
       </nameEntry>
+      <nameEntry status="alternative">
+        <part>P.C.C.</part>
+      </nameEntry>
       <identityId localType="Wikidata">Q17427</identityId>
       <identityId localType="VIAF">132098431</identityId>
     </identity>
@@ -56,6 +59,7 @@
         <relationType>gerarchica</relationType>
         <descriptiveNote>
           <p>Mao Zedong presidente di Partito Comunista Cinese</p>
+          <p>Fonte: AMI-0015</p>
         </descriptiveNote>
       </relation>
       <relation>

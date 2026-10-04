@@ -32,6 +32,15 @@
       <nameEntry status="alternative">
         <part>Chou Enlai</part>
       </nameEntry>
+      <nameEntry status="alternative">
+        <part>Ciu En-lai</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Ciu Enlai</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Chu En-lai</part>
+      </nameEntry>
       <identityId localType="Wikidata">Q17410</identityId>
       <identityId localType="VIAF">24599625</identityId>
     </identity>

@@ -249,3 +249,9 @@
     columns: 2 18rem;
     column-gap: 2.5rem;
 }
+
+/* Relazioni: soggetti senza pagina (nessun documento collegato o senza
+   record d'autorità) in grigio, senza link. */
+.autorita-rel__senza-pagina {
+    color: var(--md-default-fg-color--light);
+}

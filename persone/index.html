@@ -924,14 +924,14 @@
         <div class="people-count">2 documenti collegati</div>
     </a>
 </div>
-<div class="people-card" data-lettera="L" data-cerca="liu shaoqi liu shao-chi">
+<div class="people-card" data-lettera="L" data-cerca="liu shaoqi liu shao-chi liu shaochi liu shaoci liu sciao-ci">
     <a href="liu-shaoqi/" class="people-link">
         <div class="people-name">Liu Shaoqi</div>
         <div class="people-dates">1898 – 1969</div>
         <div class="people-count">1 documento collegato</div>
     </a>
 </div>
-<div class="people-card" data-lettera="M" data-cerca="mao zedong mao tse-tung mao tsetung">
+<div class="people-card" data-lettera="M" data-cerca="mao zedong mao tse-tung mao tsetung mao tze-tung mao tse-dun mao ze-dun">
     <a href="mao-zedong/" class="people-link">
         <div class="people-name">Mao Zedong</div>
         <div class="people-dates">1893 – 1976</div>
@@ -966,14 +966,14 @@
         <div class="people-count">2 documenti collegati</div>
     </a>
 </div>
-<div class="people-card" data-lettera="Y" data-cerca="yao wenyuan">
+<div class="people-card" data-lettera="Y" data-cerca="yao wenyuan yao wen-yuan">
     <a href="yao-wenyuan/" class="people-link">
         <div class="people-name">Yao Wenyuan</div>
         <div class="people-dates">1931 – 2005</div>
         <div class="people-count">2 documenti collegati</div>
     </a>
 </div>
-<div class="people-card" data-lettera="Z" data-cerca="zhou enlai chou en-lai chou enlai">
+<div class="people-card" data-lettera="Z" data-cerca="zhou enlai chou en-lai chou enlai ciu en-lai ciu enlai chu en-lai">
     <a href="zhou-enlai/" class="people-link">
         <div class="people-name">Zhou Enlai</div>
         <div class="people-dates">1898 – 1976</div>
@@ -994,7 +994,7 @@
     const cards = grid.querySelectorAll(".people-card");
 
     function filtra() {
-        const query = searchInput.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ").trim();
+        const query = searchInput.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\p{L}\p{N}\s-]+/gu, " ").replace(/\s+/g, " ").trim();
         const letteraAttiva = document.querySelector(".lettera-btn--active");
         const lettera = letteraAttiva ? letteraAttiva.dataset.lettera : "all";
         let visibili = 0;

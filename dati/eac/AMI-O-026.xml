@@ -55,6 +55,40 @@
         <relationType>gerarchica</relationType>
         <descriptiveNote>
           <p>Osvaldo Pesce segretario di Organizzazione dei Comunisti (marxisti-leninisti) d'Italia</p>
+          <p>Fonte: AMI-0057</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-021.xml">
+          <part>Partito Comunista Unificato d'Italia</part>
+        </targetEntity>
+        <date standardDate="1977">1977</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Organizzazione dei Comunisti (marxisti-leninisti) d'Italia confluita in Partito Comunista Unificato d'Italia</p>
+          <p>Fonte: AMI-0057</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Linea Proletaria</part>
+        </targetEntity>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Linea Proletaria organo di stampa di Organizzazione dei Comunisti (marxisti-leninisti) d'Italia</p>
+          <p>fino al 1977</p>
+          <p>Fonte: AMI-0057</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-013.xml">
+          <part>Partito Comunista d'Italia (marxista-leninista)</part>
+        </targetEntity>
+        <date standardDate="1970">1970</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Organizzazione dei Comunisti (marxisti-leninisti) d'Italia scissione di Partito Comunista d'Italia (marxista-leninista)</p>
+          <p>Fonte: Infografica AMI «Il marxismo-leninismo italiano»</p>
         </descriptiveNote>
       </relation>
     </relations>
