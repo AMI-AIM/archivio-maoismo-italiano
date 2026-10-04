@@ -30,6 +30,14 @@
         <part>Gino Montemezzani</part>
       </nameEntry>
     </identity>
+    <description>
+      <existDates>
+        <dateRange>
+          <fromDate standardDate="1927">1927</fromDate>
+          <toDate standardDate="2009">2009</toDate>
+        </dateRange>
+      </existDates>
+    </description>
     <relations>
       <relation>
         <targetEntity targetType="corporateBody">

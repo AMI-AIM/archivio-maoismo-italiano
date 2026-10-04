@@ -109,6 +109,7 @@
           <part>Partito Comunista d'Italia (marxista-leninista) - Linea rossa</part>
         </targetEntity>
         <date standardDate="1968">1968</date>
+        <relationType>temporale</relationType>
         <descriptiveNote>
           <p>Partito Comunista d'Italia (marxista-leninista) - Linea rossa scissione di Partito Comunista d'Italia (marxista-leninista)</p>
         </descriptiveNote>

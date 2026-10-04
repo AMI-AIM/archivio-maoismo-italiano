@@ -45,7 +45,7 @@
       <existDates>
         <dateRange>
           <fromDate standardDate="1968">1968</fromDate>
-          <toDate standardDate="1969">1969</toDate>
+          <toDate standardDate="1977">1977</toDate>
         </dateRange>
       </existDates>
     </description>
@@ -68,6 +68,7 @@
           <part>Partito Comunista d'Italia (marxista-leninista)</part>
         </targetEntity>
         <date standardDate="1968">1968</date>
+        <relationType>temporale</relationType>
         <descriptiveNote>
           <p>Partito Comunista d'Italia (marxista-leninista) - Linea rossa scissione di Partito Comunista d'Italia (marxista-leninista)</p>
         </descriptiveNote>

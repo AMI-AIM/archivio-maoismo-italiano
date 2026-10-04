@@ -253,7 +253,7 @@
         return (qNome && nomi.includes(qNome)) || campo.includes(q);
       })
       .map((p) => {
-        const dateVita = (p.nascita === "s.d." && p.morte === "s.d.")
+        const dateVita = ((p.nascita === "s.d." || !p.nascita) && (p.morte === "s.d." || !p.morte))
             ? "s.d."
             : [p.nascita, p.morte].filter(Boolean).join(" – ");
         return {
