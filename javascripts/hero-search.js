@@ -229,14 +229,28 @@
   // è quasi sempre più specifico e rilevante di un riferimento generico
   // dentro un documento. I filtri usano solo testo pulito: cercare
   // "serif" o "0.75pt" non restituisce più match dentro i tag HTML.
+  // Confronto per nome di persone e organizzazioni: minuscole, senza
+  // accenti, punteggiatura e trattini ridotti a spazi ("Mao Tse Tung"
+  // trova Mao Zedong tramite la variante "Mao Tse-tung").
+  function normalizzaNome(s) {
+    return String(s || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^\p{L}\p{N}]+/gu, " ")
+      .trim();
+  }
+
   function cercaTutti(query) {
     const q = query.toLowerCase().trim();
     if (!q) return [];
+    const qNome = normalizzaNome(query);
 
     const risultatiPersone = persone
       .filter((p) => {
-        const campo = ((p.nome || "") + " " + (p.varianti || []).join(" ") + " " + pulisciTesto(p.biografia)).toLowerCase();
-        return campo.includes(q);
+        const nomi = normalizzaNome((p.nome || "") + " " + (p.varianti || []).join(" "));
+        const campo = ((p.nome || "") + " " + pulisciTesto(p.biografia)).toLowerCase();
+        return (qNome && nomi.includes(qNome)) || campo.includes(q);
       })
       .map((p) => {
         const dateVita = (p.nascita === "s.d." && p.morte === "s.d.")
@@ -253,8 +267,9 @@
 
     const risultatiOrganizzazioni = organizzazioni
       .filter((o) => {
-        const campo = ((o.nome || "") + " " + (o.varianti || []).join(" ") + " " + pulisciTesto(o.storia) + " " + (o.categoria || "")).toLowerCase();
-        return campo.includes(q);
+        const nomi = normalizzaNome((o.nome || "") + " " + (o.varianti || []).join(" "));
+        const campo = ((o.nome || "") + " " + pulisciTesto(o.storia) + " " + (o.categoria || "")).toLowerCase();
+        return (qNome && nomi.includes(qNome)) || campo.includes(q);
       })
       .map((o) => {
         return {

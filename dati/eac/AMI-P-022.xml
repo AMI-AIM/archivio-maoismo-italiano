@@ -24,9 +24,19 @@
     <identity>
       <entityType value="person" />
       <nameEntry status="authorized">
-        <part>Giuliano Spazzali</part>
+        <part>Sergio Spazzali</part>
       </nameEntry>
+      <identityId localType="Wikidata">Q20858268</identityId>
+      <identityId localType="VIAF">55924629</identityId>
     </identity>
+    <description>
+      <existDates>
+        <dateRange>
+          <fromDate standardDate="1936">1936</fromDate>
+          <toDate standardDate="1994">1994</toDate>
+        </dateRange>
+      </existDates>
+    </description>
     <relations>
       <relation>
         <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-018.xml">
@@ -38,7 +48,7 @@
         </dateRange>
         <relationType>gerarchica</relationType>
         <descriptiveNote>
-          <p>Giuliano Spazzali dirigente di Avanguardia Proletaria Maoista</p>
+          <p>Sergio Spazzali dirigente di Avanguardia Proletaria Maoista</p>
         </descriptiveNote>
       </relation>
     </relations>

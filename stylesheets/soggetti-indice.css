@@ -85,12 +85,6 @@
     color: var(--md-default-fg-color--light);
 }
 
-.top-card-count {
-    font-size: var(--ami-font-size-xs);
-    color: var(--md-default-fg-color--light);
-    font-weight: var(--fw-text);
-}
-
 /* Filtri container */
 .filtri-persone,
 .filtri-organizzazioni {
@@ -178,6 +172,7 @@
 
 .people-card,
 .org-card {
+    display: flex;
     background: var(--md-code-bg-color);
     border-radius: var(--ami-radius-md);
     padding: 1rem 1.2rem;
@@ -198,7 +193,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 0.05rem;
+    height: 100%;
+    gap: 0.15rem;
 }
 
 /* Badge categoria: solo layout. Tipografia e colori in extra.css. */
@@ -221,10 +217,59 @@
     margin: 0;
 }
 
-.people-card .people-count,
-.org-card .org-count {
-    font-size: var(--ami-font-size-xs);
+/* --- Ritocco card (ottobre 2026) ------------------------------------------
+   Nome piu' marcato; date e conteggio su un'unica riga in fondo alla card
+   ("1966 – 1991 · 12 documenti"): prima erano due righe di pari peso e il
+   conteggio diceva "documenti collegati" su ogni card. Il conteggio e' un
+   dato: Courier, come i conteggi dei filtri. Al passaggio del mouse il nome
+   diventa rosso (si clicca: Red Pencil Rule). */
+.md-typeset .people-card .people-name,
+.md-typeset .org-card .org-name,
+.md-typeset .top-card-name {
+    font-weight: 650;
+    text-wrap: balance;
+    transition: color 0.15s;
+}
+.people-meta,
+.org-meta,
+.top-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 0.45rem;
+    margin-top: 0.1rem;
+}
+.people-count,
+.org-count,
+.top-card-count {
+    font-family: var(--ami-font-mono);
+    font-size: var(--ami-font-size-sm);
+    font-weight: 400;
     color: var(--md-default-fg-color--light);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+.people-dates + .people-count::before,
+.org-dates + .org-count::before,
+.top-card-dates + .top-card-count::before {
+    content: "·";
+    margin-right: 0.45rem;
+    font-family: var(--ami-font-text);
+    color: var(--md-default-fg-color--lighter);
+}
+/* Intervallo vuoto (organizzazione senza date): niente puntino iniziale */
+.people-dates:empty,
+.org-dates:empty,
+.top-card-dates:empty {
+    display: none;
+}
+.people-card:hover .people-name,
+.org-card:hover .org-name,
+.top-card:hover .top-card-name,
+.people-link:focus-visible .people-name,
+.org-link:focus-visible .org-name,
+.top-card-link:focus-visible .top-card-name {
+    color: var(--md-primary-fg-color);
 }
 
 /* Responsive: tablet */
@@ -262,6 +307,11 @@
     .people-grid,
     .org-grid {
         grid-template-columns: 1fr;
+    }
+
+    .people-card,
+    .org-card {
+        padding: 0.7rem 1rem;
     }
 
     .people-card .people-name,

@@ -26,7 +26,16 @@
       <nameEntry status="authorized">
         <part>Mario Capanna</part>
       </nameEntry>
+      <identityId localType="Wikidata">Q1054010</identityId>
+      <identityId localType="VIAF">205144928833154440408</identityId>
     </identity>
+    <description>
+      <existDates>
+        <dateRange>
+          <fromDate standardDate="1945">1945</fromDate>
+        </dateRange>
+      </existDates>
+    </description>
     <relations>
       <relation>
         <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-025.xml">

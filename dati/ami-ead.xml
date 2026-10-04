@@ -254,6 +254,9 @@
           <corpname identifier="AMI-O-015">
             <part>Partito Comunista Cinese</part>
           </corpname>
+          <persname>
+            <part>Martin Luther King</part>
+          </persname>
           <geogname>
             <part>Pechino</part>
           </geogname>
@@ -299,6 +302,9 @@
         <controlaccess>
           <corpname identifier="AMI-O-015">
             <part>Partito Comunista Cinese</part>
+          </corpname>
+          <corpname identifier="AMI-O-012">
+            <part>Comitato Centrale del PCC</part>
           </corpname>
           <geogname>
             <part>Pechino</part>
@@ -621,6 +627,9 @@
           <corpname identifier="AMI-O-015">
             <part>Partito Comunista Cinese</part>
           </corpname>
+          <corpname identifier="AMI-O-005">
+            <part>Hongqi</part>
+          </corpname>
           <geogname>
             <part>Pechino</part>
           </geogname>
@@ -729,6 +738,15 @@
           <corpname identifier="AMI-O-013">
             <part>Partito Comunista d'Italia (marxista-leninista)</part>
           </corpname>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <corpname identifier="AMI-O-006">
+            <part>Nuova Unità</part>
+          </corpname>
+          <corpname>
+            <part>Peking Review</part>
+          </corpname>
           <persname identifier="AMI-P-003">
             <part>Osvaldo Pesce</part>
           </persname>
@@ -795,6 +813,9 @@
           <corpname identifier="AMI-O-013">
             <part>Partito Comunista d'Italia (marxista-leninista)</part>
           </corpname>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
           <persname identifier="AMI-P-003">
             <part>Osvaldo Pesce</part>
           </persname>
@@ -842,6 +863,9 @@
         <controlaccess>
           <corpname identifier="AMI-O-013">
             <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
           </corpname>
           <persname identifier="AMI-P-002">
             <part>Fosco Dinucci</part>
@@ -945,11 +969,17 @@
           <corpname identifier="AMI-O-003">
             <part>Edizioni Oriente</part>
           </corpname>
+          <corpname>
+            <part>Gruppo Proletario Luglio 60</part>
+          </corpname>
           <persname identifier="AMI-P-020">
             <part>Dino Frangioni</part>
           </persname>
-          <persname>
-            <part>Giacomo Monemezzani</part>
+          <persname identifier="AMI-P-021">
+            <part>Giacomo Montemezzani</part>
+          </persname>
+          <persname identifier="AMI-P-001">
+            <part>Mao Zedong</part>
           </persname>
           <geogname>
             <part>Pechino</part>
@@ -1692,6 +1722,9 @@
           <persname identifier="AMI-P-007">
             <part>Dino Dini</part>
           </persname>
+          <persname identifier="AMI-P-009">
+            <part>Kang Sheng</part>
+          </persname>
           <geogname>
             <part>Pechino</part>
           </geogname>
@@ -1735,6 +1768,9 @@
           <corpname identifier="AMI-O-014">
             <part>Unione dei Comunisti Italiani (marxisti-leninisti)</part>
           </corpname>
+          <persname identifier="AMI-P-001">
+            <part>Mao Zedong</part>
+          </persname>
           <geogname>
             <part>Milano</part>
           </geogname>
@@ -1784,6 +1820,12 @@
           <corpname identifier="AMI-O-017">
             <part>Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</part>
           </corpname>
+          <persname>
+            <part>Vladimir Lenin</part>
+          </persname>
+          <persname identifier="AMI-P-001">
+            <part>Mao Zedong</part>
+          </persname>
           <geogname>
             <part>Roma</part>
           </geogname>
@@ -2174,6 +2216,9 @@
           <corpname identifier="AMI-O-015">
             <part>Partito Comunista Cinese</part>
           </corpname>
+          <corpname>
+            <part>Nuove Edizioni Oriente</part>
+          </corpname>
           <geogname>
             <part>Pechino</part>
           </geogname>
@@ -2539,7 +2584,7 @@
           <dao daotype="derived" href="https://archive.org/details/studenti-alleati-proletariato" linktitle="Riproduzione digitale su Internet Archive" />
         </did>
         <scopecontent>
-          <p>Opera di riflessione sulla condizione dello studente universitario italiano nel contesto dei movimenti di contestazione del Sessantotto. Il testo espone il punto di vista specifico dell'organizzazione/partito Avanguardia Proletaria Maoista, organismo animato da Giuliano Spazzali e Michele Semeraro, emerso dalla disgregazione della Federazione Marxista-Leninista d'Italia (1968).</p>
+          <p>Opera di riflessione sulla condizione dello studente universitario italiano nel contesto dei movimenti di contestazione del Sessantotto. Il testo espone il punto di vista specifico dell'organizzazione/partito Avanguardia Proletaria Maoista, organismo animato da Sergio Spazzali e Michele Semeraro, emerso dalla disgregazione della Federazione Marxista-Leninista d'Italia (1968).</p>
           <p>Libro pubblicato da Biblioteca dell'Avanguardia Proletaria, pp. 42, 1969.</p>
         </scopecontent>
         <odd localtype="editore">
@@ -2557,6 +2602,12 @@
           <corpname identifier="AMI-O-018">
             <part>Avanguardia Proletaria Maoista</part>
           </corpname>
+          <persname identifier="AMI-P-022">
+            <part>Sergio Spazzali</part>
+          </persname>
+          <persname identifier="AMI-P-026">
+            <part>Michele Semeraro</part>
+          </persname>
           <geogname>
             <part>Milano</part>
           </geogname>
@@ -2649,6 +2700,15 @@
           <persname identifier="AMI-P-003">
             <part>Osvaldo Pesce</part>
           </persname>
+          <persname>
+            <part>Leonid Brežnev</part>
+          </persname>
+          <persname>
+            <part>Aldo Moro</part>
+          </persname>
+          <persname>
+            <part>Carlo Casalegno</part>
+          </persname>
           <geogname>
             <part>Milano</part>
           </geogname>
@@ -2694,6 +2754,9 @@
           <corpname identifier="AMI-O-013">
             <part>Partito Comunista d'Italia (marxista-leninista)</part>
           </corpname>
+          <persname identifier="AMI-P-001">
+            <part>Mao Zedong</part>
+          </persname>
           <genreform>
             <part>Manifesto</part>
           </genreform>
@@ -2800,8 +2863,26 @@
           <corpname identifier="AMI-O-028">
             <part>Partito Comunista Marxista-Leninista-Maoista Italiano</part>
           </corpname>
+          <corpname>
+            <part>Coscienza Operaia</part>
+          </corpname>
+          <corpname>
+            <part>Ideologia Proletaria</part>
+          </corpname>
+          <corpname>
+            <part>Linea Proletaria</part>
+          </corpname>
           <persname identifier="AMI-P-003">
             <part>Osvaldo Pesce</part>
+          </persname>
+          <persname identifier="AMI-P-023">
+            <part>Giuseppe Burgani</part>
+          </persname>
+          <persname identifier="AMI-P-024">
+            <part>Gustavo Hermann</part>
+          </persname>
+          <persname identifier="AMI-P-026">
+            <part>Michele Semeraro</part>
           </persname>
           <geogname>
             <part>Roma</part>
@@ -2942,6 +3023,12 @@
           <corpname identifier="AMI-O-003">
             <part>Edizioni Oriente</part>
           </corpname>
+          <corpname>
+            <part>Lega della gioventù comunista (marxista-leninista) d'Italia</part>
+          </corpname>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
           <persname identifier="AMI-P-017">
             <part>Arnaldo Bressan</part>
           </persname>
@@ -3078,6 +3165,9 @@
           <corpname identifier="AMI-O-019">
             <part>Partito Comunista (marxista-leninista) Italiano</part>
           </corpname>
+          <persname identifier="AMI-P-018">
+            <part>Aldo Brandirali</part>
+          </persname>
           <geogname>
             <part>Brindisi</part>
           </geogname>
@@ -3118,6 +3208,9 @@
         <controlaccess>
           <corpname identifier="AMI-O-024">
             <part>Organizzazione Comunista (marxista-leninista) Fronte Unito</part>
+          </corpname>
+          <corpname>
+            <part>Fronte Unito</part>
           </corpname>
           <geogname>
             <part>Brindisi</part>
@@ -3161,6 +3254,12 @@
           <corpname identifier="AMI-O-013">
             <part>Partito Comunista d'Italia (marxista-leninista)</part>
           </corpname>
+          <persname identifier="AMI-P-001">
+            <part>Mao Zedong</part>
+          </persname>
+          <persname>
+            <part>Iosif Stalin</part>
+          </persname>
           <geogname>
             <part>Milano</part>
           </geogname>
@@ -3203,6 +3302,12 @@
           <corpname identifier="AMI-O-025">
             <part>Movimento Studentesco</part>
           </corpname>
+          <persname identifier="AMI-P-025">
+            <part>Mario Capanna</part>
+          </persname>
+          <persname identifier="AMI-P-001">
+            <part>Mao Zedong</part>
+          </persname>
           <geogname>
             <part>Milano</part>
           </geogname>
@@ -4281,6 +4386,18 @@
           <corpname identifier="AMI-O-015">
             <part>Partito Comunista Cinese</part>
           </corpname>
+          <corpname identifier="AMI-O-004">
+            <part>Renmin Ribao</part>
+          </corpname>
+          <corpname identifier="AMI-O-005">
+            <part>Hongqi</part>
+          </corpname>
+          <corpname identifier="AMI-O-007">
+            <part>Jiefangjun Bao</part>
+          </corpname>
+          <persname identifier="AMI-P-008">
+            <part>Lin Biao</part>
+          </persname>
           <geogname>
             <part>Milano</part>
           </geogname>
@@ -4324,6 +4441,12 @@
         <controlaccess>
           <corpname identifier="AMI-O-023">
             <part>Centro Karl Marx</part>
+          </corpname>
+          <corpname>
+            <part>Il potere operaio pisano</part>
+          </corpname>
+          <corpname>
+            <part>Organizzazione dei lavoratori comunisti</part>
           </corpname>
           <geogname>
             <part>Firenze</part>

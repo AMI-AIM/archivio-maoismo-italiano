@@ -43,7 +43,7 @@
     <relations>
       <relation>
         <targetEntity targetType="person" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-P-022.xml">
-          <part>Giuliano Spazzali</part>
+          <part>Sergio Spazzali</part>
         </targetEntity>
         <dateRange>
           <fromDate standardDate="1968">1968</fromDate>
@@ -51,7 +51,7 @@
         </dateRange>
         <relationType>gerarchica</relationType>
         <descriptiveNote>
-          <p>Giuliano Spazzali dirigente di Avanguardia Proletaria Maoista</p>
+          <p>Sergio Spazzali dirigente di Avanguardia Proletaria Maoista</p>
         </descriptiveNote>
       </relation>
       <relation>

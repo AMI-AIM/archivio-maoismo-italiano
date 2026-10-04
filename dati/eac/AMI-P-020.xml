@@ -29,7 +29,16 @@
       <nameEntry status="alternative">
         <part>Livio</part>
       </nameEntry>
+      <identityId localType="Wikidata">Q137799718</identityId>
     </identity>
+    <description>
+      <existDates>
+        <dateRange>
+          <fromDate standardDate="1898">1898</fromDate>
+          <toDate standardDate="1973">1973</toDate>
+        </dateRange>
+      </existDates>
+    </description>
     <relations>
       <relation>
         <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-013.xml">

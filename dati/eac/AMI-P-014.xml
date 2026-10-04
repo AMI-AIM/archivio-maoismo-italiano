@@ -42,7 +42,7 @@
         </targetEntity>
         <dateRange>
           <fromDate standardDate="1962">1962</fromDate>
-          <toDate standardDate="2010">2010</toDate>
+          <toDate standardDate="1977">1977</toDate>
         </dateRange>
         <relationType>gerarchica</relationType>
         <descriptiveNote>
