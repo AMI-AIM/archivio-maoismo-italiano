@@ -20,14 +20,25 @@
              title="Archivio del Maoismo Italiano su Internet Archive"
              class="ami-footer__social-link">
             <img src="{{ base_url }}/immagini/internet-archive-logo.png"
-                 alt="Internet Archive"
+                 alt="Collezione su Internet Archive (si apre in una nuova scheda)"
                  width="44" height="44" loading="lazy" decoding="async"
                  class="ami-footer__ia-logo">
           </a>
         </div>
       </div>
+      <!-- Colonna centrale: le pagine di metodo cercate da chi fa ricerca
+           (tutte sezioni di "Il progetto") -->
+      <nav class="ami-footer__links ami-footer__links--consultare" aria-label="Consultare l'archivio">
+        <span class="ami-footer__links-title">Consultare</span>
+        <div class="ami-footer__links-list">
+          <a href="{{ base_url }}/progetto/#come-citare">Come citare</a>
+          <a href="{{ base_url }}/progetto/#norme-di-descrizione">Norme di descrizione</a>
+          <a href="{{ base_url }}/progetto/#formati-di-scambio">Dati (EAD3, EAC-CPF)</a>
+          <a href="{{ base_url }}/progetto/#bibliografia">Bibliografia</a>
+        </div>
+      </nav>
       <!-- Colonna link: sezioni del sito -->
-      <nav class="ami-footer__links" aria-label="Sezioni del sito">
+      <nav class="ami-footer__links ami-footer__links--sezioni" aria-label="Sezioni del sito">
         <span class="ami-footer__links-title">Sezioni</span>
         <div class="ami-footer__links-list">
           <a href="{{ base_url }}/">Home</a>
@@ -41,7 +52,11 @@
     <!-- Divisore + barra finale centrata -->
     <div class="ami-footer__divider"></div>
     <div class="ami-footer__bottom">
-      <span>&copy; {{ build_date_utc.strftime("%Y") if build_date_utc else "" }} Archivio del Maoismo Italiano</span>
+      {% set colophon = config.extra.ami_colophon if config.extra and config.extra.ami_colophon else none %}
+      {% if colophon %}
+      <span class="ami-footer__colophon">{% if colophon.documenti %}<span class="ami-footer__dato">{{ colophon.documenti }}</span> documenti &middot; {% endif %}aggiornato il {{ colophon.aggiornato }}</span>
+      {% endif %}
+      <span>&copy; {{ colophon.anno if colophon else (build_date_utc.strftime("%Y") if build_date_utc else "") }} Archivio del Maoismo Italiano</span>
     </div>
   </div>
 </footer>

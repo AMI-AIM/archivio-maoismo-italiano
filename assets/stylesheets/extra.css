@@ -3184,3 +3184,56 @@ input[type="search"]::-webkit-search-cancel-button {
     padding-block: 0.3rem;
   }
 }
+
+/* --- Footer: ritocco (ottobre 2026) --------------------------------------
+   Riga finale con il numero di documenti e la data di pubblicazione,
+   scritti dall'hook scripts/hooks/colophon.py. */
+.ami-footer__bottom {
+  flex-wrap: wrap;
+  column-gap: 0.5rem;
+  row-gap: 0.15rem;
+  text-align: center;
+}
+.ami-footer__colophon + span::before {
+  content: "·";
+  margin-right: 0.5rem;
+}
+.ami-footer__dato {
+  font-family: var(--ami-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 44rem) {
+  .ami-footer__colophon + span::before {
+    content: none;
+  }
+}
+
+/* --- Footer: tre colonne, filetto rosso (ottobre 2026) --------------------
+   Curatore | Consultare | Sezioni. Prima due blocchi ai lati con un
+   grande vuoto in mezzo. */
+/* Filetto rosso in cima (Press Accent Rule). Disegnato come immagine di
+   sfondo: bordi e ombre del footer sono azzerati dal reset piu' sopra. */
+.md-footer .ami-footer {
+  background-image: linear-gradient(var(--md-primary-fg-color), var(--md-primary-fg-color));
+  background-repeat: no-repeat;
+  background-size: 100% 3px;
+  background-position: top left;
+}
+.md-footer .ami-footer__grid {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 2rem;
+  padding-top: 1.2rem;
+}
+/* Email: e' un link, quindi Archivo come gli altri link (Three Voices Rule) */
+.md-footer-copyright__email a {
+  font-family: var(--ami-font-label);
+}
+@media (max-width: 44rem) {
+  .md-footer .ami-footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 1.25rem;
+  }
+  .ami-footer__brand {
+    grid-column: 1 / -1;
+  }
+}

@@ -35,6 +35,13 @@ python -m scripts.core.validator
 
 Elenca errori, avvisi e note con foglio, riga e colonna da correggere in Excel.
 
+### Controllo del sito già costruito (pagine, sitemap, JSON, link interni)
+
+mkdocs build
+python scripts/controlla_sito.py
+
+Il Launcher lo fa da solo prima di pubblicare.
+
 ### Riepilogo errori/avvisi dell'ultima generazione
 
 python -m scripts.core.esito

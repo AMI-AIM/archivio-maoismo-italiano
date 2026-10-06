@@ -21,10 +21,9 @@ recordId del file EAC-CPF corrispondente.
 import os
 import re
 import xml.etree.ElementTree as ET
-from datetime import date
 
 from .dati import leggi_foglio
-from .site_config import site_url
+from .site_config import data_pubblicazione, site_url
 from .utils import formatta_estremo, soggetto_produttore, split_nomi
 
 NS_EAD = 'http://ead3.archivists.org/schema/'
@@ -271,7 +270,7 @@ def _componente(dsc, r, indice):
 
 
 def genera_ead(df_catalogo, excel_path, output_dir):
-    oggi = date.today().isoformat()
+    oggi = data_pubblicazione().isoformat()
     indice = _indice_autorita(excel_path)
     raccolta = {_v(r.get('codice_isad')): _v(r.get('valore'))
                 for _, r in _leggi(excel_path, 'Raccolta').iterrows()}
@@ -392,7 +391,7 @@ def _relations_eac(nome, relazioni, indice, nome_da_id):
 
 
 def genera_eac(excel_path, output_dir):
-    oggi = date.today().isoformat()
+    oggi = data_pubblicazione().isoformat()
     indice = _indice_autorita(excel_path)
     relazioni = _leggi(excel_path, 'Relazioni')
     nome_da_id = {info['id']: n for n, info in indice.items() if info['id']}

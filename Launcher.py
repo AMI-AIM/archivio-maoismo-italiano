@@ -22,6 +22,7 @@ la pubblicazione viene bloccata, a meno di usare --skip-validation.
 
 Sequenza di generazione, speculare a .github/workflows/deploy.yml:
     sync_assets -> persone -> org -> generatore -> argomenti -> galleria
+    -> mkdocs build -> controlla_sito (pagine, sitemap, JSON, link interni)
 
 Dati in CSV e messaggio di commit: dopo la validazione ogni foglio di
 dati.xlsx viene esportato in data/export/*.csv (scripts/core/export_dati.py).
@@ -34,6 +35,7 @@ PERCORSI_PUBBLICATI; i file modificati altrove vengono segnalati ma NON
 committati (evita di pubblicare per sbaglio file temporanei o di lavoro).
 """
 
+import os
 import re
 import shutil
 import subprocess
@@ -52,7 +54,7 @@ SCRIPTS_DIR = ROOT_DIR / "scripts"
 # Unici percorsi che il Launcher committa. Per pubblicare un nuovo file o una
 # nuova cartella in radice, aggiungerlo qui.
 PERCORSI_PUBBLICATI = [
-    ".github", ".gitignore", ".gitattributes", ".nojekyll",
+    ".github", ".gitignore", ".gitattributes", ".nojekyll", ".python-version",
     "assets", "data", "overrides", "scripts",
     "mkdocs.yml", "requirements.txt", "Launcher.py",
     "README.md", "comandi.txt", "LICENSE", "DESIGN.md",
@@ -70,21 +72,38 @@ def stampa_titolo(testo):
     print("=" * 60)
 
 
-def esegui(comando, cwd=None, descrizione=None):
+def esegui(comando, cwd=None, descrizione=None, env=None):
     """Esegue un comando, mostra l'output in tempo reale, interrompe la sequenza se fallisce."""
     if descrizione:
         stampa_titolo(descrizione)
     anteprima = ' '.join(f'"{c}"' if ' ' in c else c for c in comando)
     print(f"$ {anteprima}")
-    risultato = subprocess.run(comando, cwd=cwd or ROOT_DIR)
+    risultato = subprocess.run(comando, cwd=cwd or ROOT_DIR,
+                               env={**os.environ, **env} if env else None)
     if risultato.returncode != 0:
         raise ErroreComando(
             f"il comando '{' '.join(comando)}' è fallito (codice {risultato.returncode})."
         )
 
 
+def verifica_versione_python():
+    """Avvisa se il Python locale non è quello di .python-version (usato da GitHub Actions)."""
+    file_versione = ROOT_DIR / ".python-version"
+    if not file_versione.exists():
+        return
+    attesa = file_versione.read_text(encoding="utf-8").strip()
+    locale = f"{sys.version_info.major}.{sys.version_info.minor}"
+    if locale == attesa:
+        print(f"Python {locale} (uguale a GitHub Actions)")
+    else:
+        print(f"ATTENZIONE: Python locale {locale}, GitHub Actions usa {attesa} "
+              "(.python-version). Il sito potrebbe comportarsi diversamente online: "
+              f"installa Python {attesa} oppure aggiorna .python-version.")
+
+
 def verifica_dipendenze():
     stampa_titolo("Verifica dipendenze")
+    verifica_versione_python()
     mancanti = []
     requirements_path = ROOT_DIR / "requirements.txt"
     mappa_moduli = {
@@ -346,6 +365,15 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
            descrizione="Generazione pagine argomenti")
     esegui([sys.executable, "galleria.py"], cwd=SCRIPTS_DIR,
            descrizione="Generazione galleria fotografica (build/galleria/)")
+
+    # 7. Costruzione del sito e controllo finale (pagine, sitemap, JSON, link
+    #    interni): gli stessi controlli girano su GitHub Actions prima del
+    #    deploy, ma qui un problema blocca la pubblicazione PRIMA del push.
+    esegui([sys.executable, "-m", "mkdocs", "build", "--quiet"],
+           descrizione="Costruzione del sito (mkdocs build -> site/)",
+           env={"NO_MKDOCS_2_WARNING": "true"})
+    esegui([sys.executable, str(SCRIPTS_DIR / "controlla_sito.py"), str(ROOT_DIR / "site")],
+           descrizione="Controllo del sito generato")
 
     stampa_riepilogo_build()
 

@@ -187,8 +187,14 @@ def genera_home(df, persone, output_dir, organizzazioni=None, percorso_progetto=
             if doc['id'] == id_target:
                 evidenza_ordinati.append(doc)
                 break
-    persone_top = conteggio_persone.most_common(3)
-    organizzazioni_top = conteggio_organizzazioni.most_common(3)
+    # A parità di documenti, ordine alfabetico: most_common() da solo
+    # sceglieva tra i pari in base all'ordine (casuale) di un set, quindi la
+    # home poteva cambiare tra due generazioni con gli stessi dati.
+    def _top(conteggio, n=3):
+        return sorted(conteggio.items(), key=lambda kv: (-kv[1], kv[0]))[:n]
+
+    persone_top = _top(conteggio_persone)
+    organizzazioni_top = _top(conteggio_organizzazioni)
 
     # BANNER — testo più grande e spesso per leggibilità
     # NOTA: gli stili del dropdown dei suggerimenti (.hero-search-*)

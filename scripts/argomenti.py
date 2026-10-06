@@ -4,7 +4,6 @@ import json
 import os
 import urllib.parse
 import sys
-from datetime import datetime
 
 from core.argomenti import (
     build_argomenti_index,
@@ -12,7 +11,7 @@ from core.argomenti import (
     normalize_key,
     split_argomenti,
 )
-from core.site_config import site_path
+from core.site_config import data_pubblicazione, site_path
 from core.liste import meta_riga
 from core import esito
 from core.dati import ErroreDati, leggi_foglio
@@ -353,7 +352,7 @@ def update_sitemap(argomenti):
     for item in argomenti:
         urls.append(f"{BASE_URL}/argomenti/{item['slug']}/")
 
-    oggi = datetime.now().strftime('%Y-%m-%d')
+    oggi = data_pubblicazione().isoformat()
 
     xml_path = os.path.join(OUTPUT_DIR, 'sitemap.xml')
 

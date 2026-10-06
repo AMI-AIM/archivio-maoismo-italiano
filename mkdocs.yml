@@ -43,6 +43,7 @@ plugins:
 # Marca come cinese (lang="zh-Hans") il testo in caratteri cinesi.
 hooks:
   - scripts/hooks/lingua_cinese.py
+  - scripts/hooks/colophon.py
 
 markdown_extensions:
   - attr_list

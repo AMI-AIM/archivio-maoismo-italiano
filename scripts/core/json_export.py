@@ -112,7 +112,9 @@ def genera_json(df, persone, organizzazioni, output_dir):
             for collegato in collegati:
                 if collegato in persone:
                     persone_lista.append(collegato)
-        persone_lista = list(set(persone_lista))
+        # Senza duplicati ma nell'ordine di comparsa (autore prima): list(set())
+        # dava un ordine diverso a ogni esecuzione.
+        persone_lista = list(dict.fromkeys(persone_lista))
 
         organizzazioni_lista = []
         if org_raw and org_raw not in ['nan', 'None']:
@@ -130,7 +132,7 @@ def genera_json(df, persone, organizzazioni, output_dir):
             for autore in autori:
                 if autore in organizzazioni:
                     organizzazioni_lista.append(autore)
-        organizzazioni_lista = list(set(organizzazioni_lista))
+        organizzazioni_lista = list(dict.fromkeys(organizzazioni_lista))
 
         doc_obj = {
             'id': ami_id,

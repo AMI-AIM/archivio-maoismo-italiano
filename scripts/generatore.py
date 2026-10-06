@@ -13,6 +13,7 @@ from core.json_optimizer import JSONOptimizer
 from core.schede import crea_schede
 
 # Import moduli core
+from core.site_config import data_pubblicazione
 from core.soggetti import carica_soggetti, genera_json_soggetti
 from core.utils import get_cache_manager
 
@@ -78,7 +79,7 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
     print("\n[SITEMAP] Generazione della sitemap (XML + TXT)...")
 
     base_url = "https://ami-aim.github.io/archivio-maoismo-italiano"
-    oggi_iso = datetime.now().strftime('%Y-%m-%d')
+    oggi_iso = data_pubblicazione().isoformat()
 
     def escape_xml(text):
         """Escape caratteri speciali per XML."""
@@ -124,7 +125,10 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
     # Aggiunge persone
     for nome in persone.keys():
         slug = persone[nome].get('slug', '')
-        if slug:
+        # Solo le schede generate davvero da persone.py (chi non ha documenti
+        # collegati non ha pagina: senza questo controllo la sitemap
+        # elencava indirizzi inesistenti).
+        if slug and os.path.isfile(os.path.join(output_dir, 'persone', f'{slug}.md')):
             pagine.append({
                 "loc": f"{base_url}/persone/{slug}/",
                 "priority": "0.6",
@@ -134,7 +138,7 @@ def genera_sitemap(output_dir, df, persone, organizzazioni):
     # Aggiunge organizzazioni
     for nome in organizzazioni.keys():
         slug = organizzazioni[nome].get('slug', '')
-        if slug:
+        if slug and os.path.isfile(os.path.join(output_dir, 'organizzazioni', f'{slug}.md')):
             pagine.append({
                 "loc": f"{base_url}/organizzazioni/{slug}/",
                 "priority": "0.6",

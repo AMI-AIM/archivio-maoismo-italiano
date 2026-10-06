@@ -126,10 +126,11 @@ invece un asset statico in `assets/immagini/profili/`, copiato da
 La CI installa da requirements.txt (`pip install -r`, deploy.yml).
 
 ### Versione Python
-La CI fissa Python **3.12** (setup-python in deploy.yml). Richiesta minima
-consigliata per l'ambiente locale: **>= 3.10**, coerente con la sintassi usata
-(type hint moderni, f-string). Non ci sono pin espliciti altrove: se si introduce
-un `.python-version` o constraint `python_requires`, aggiornare qui e nel README.
+Unica fonte: il file `.python-version` nella radice (oggi **3.14**, la versione
+usata in locale). GitHub Actions lo legge (`python-version-file` in deploy.yml)
+e il Launcher avvisa all'avvio se il Python locale è diverso. Per cambiare
+versione: aggiornare solo `.python-version` (verificato il 06/10/2026 che tutte
+le dipendenze di requirements.txt hanno pacchetti per 3.14 su Windows e Linux).
 
 ## 7. Naming IT/EN misto
 Funzioni/pubblico in italiano (`formatta_data`, `scarica_descrizione_ia`),
@@ -229,3 +230,32 @@ scelta restano senza link). Controlli principali:
 Se Persone o Organizzazioni hanno problemi strutturali, i controlli
 incrociati si saltano (eviterebbero centinaia di falsi allarmi).
 Solo controllo dei dati, senza generare nulla: `python -m scripts.core.validator`.
+
+## 13. Generazione deterministica (ott. 2026)
+A parità di dati, la generazione deve produrre file identici: è ciò che
+permette di confrontare due versioni del sito e di accorgersi di modifiche
+involontarie. Regole:
+- mai iterare un `set` per produrre output: usare `sorted(...)` oppure
+  `list(dict.fromkeys(...))` (toglie i doppioni conservando l'ordine);
+- a parità di conteggio, ordinare per nome (es. le "persone più presenti"
+  della home: prima `most_common()` sceglieva a caso tra i pari);
+- per le date scritte nei file usare `site_config.data_pubblicazione()`, non
+  `date.today()`: rispetta SOURCE_DATE_EPOCH, così due generazioni di prova
+  con la stessa data sono confrontabili byte per byte. (L'hook
+  `hooks/colophon.py` usa ancora `date.today()`: riguarda solo site/.)
+Verificato: generazioni con PYTHONHASHSEED diversi e stessa SOURCE_DATE_EPOCH
+producono una cartella build/ identica.
+
+## 14. Controllo del sito finito: `scripts/controlla_sito.py` (ott. 2026)
+Gira dopo `mkdocs build`, sia nel Launcher (prima del push) sia su GitHub
+Actions (prima del deploy). Sono ERRORI, e bloccano la pubblicazione:
+- pagine principali o schede documento mancanti;
+- indirizzi della sitemap (build/sitemap.xml) senza pagina;
+- documenti.json/soggetti.json illeggibili o con un numero di documenti
+  diverso dal Catalogo;
+- link, immagini e srcset interni che puntano a file inesistenti, o che
+  iniziano con "/" senza il prefisso del progetto (rotti su GitHub Pages).
+I link esterni non vengono controllati (servirebbe la rete).
+Primo risultato (06/10/2026): la sitemap elencava 4 schede inesistenti
+(persone/organizzazioni senza documenti collegati, che per scelta non hanno
+pagina); corretto in `generatore.genera_sitemap`.
