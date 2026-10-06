@@ -124,23 +124,72 @@ def _campo(etichetta, valore_html):
             f'<dd>{valore_html}</dd></div>')
 
 
+# Gruppi delle relazioni nella scheda di un soggetto. Per ogni tipo di
+# relazione: (ordine, etichetta se il soggetto della scheda è l'entità A,
+# etichetta se è l'entità B). Es. "Fosco Dinucci segretario di PCd'I":
+# nella scheda di Dinucci compare sotto "Segretario di", in quella del
+# PCd'I sotto "Segretari".
+GRUPPI_RELAZIONI = {
+    'presidente di': (10, 'Presidente di', 'Presidenti'),
+    'segretario di': (11, 'Segretario di', 'Segretari'),
+    'fondatore di': (12, 'Fondatore di', 'Fondatori'),
+    'dirigente di': (13, 'Dirigente di', 'Dirigenti'),
+    'rappresentante di': (14, 'Rappresentante di', 'Rappresentanti'),
+    'membro di': (15, 'Membro di', 'Membri'),
+    'collaboratore di': (16, 'Collaboratore di', 'Collaboratori'),
+    'organo di': (20, 'Organo di', 'Organi'),
+    'articolazione locale di': (21, 'Articolazione locale di', 'Articolazioni locali'),
+    'giovanile di': (21, 'Organizzazione giovanile di', 'Organizzazioni giovanili'),
+    'organo di stampa di': (22, 'Organo di stampa di', 'Organi di stampa'),
+    'casa editrice di': (23, 'Casa editrice di', 'Case editrici'),
+    'curatore di': (24, 'Curatore di', 'Curata da'),
+    'derivato da': (30, 'Derivato da', 'Gruppi derivati'),
+    'derivata da': (30, 'Derivato da', 'Gruppi derivati'),
+    'predecessore di': (31, 'Successori', 'Predecessori'),
+    'scissione di': (32, 'Scissione di', 'Scissioni'),
+    'confluito in': (33, 'Confluito in', 'Gruppi confluiti'),
+    'confluita in': (33, 'Confluito in', 'Gruppi confluiti'),
+    'discendenza ideologica': (34, 'Discendenza ideologica', 'Discendenza ideologica da'),
+}
+
+
+def _anno_ordinamento(testo):
+    m = re.search(r'(1[89]\d\d|20\d\d)', testo or '')
+    return int(m.group(1)) if m else 9999
+
+
 def _relazioni_html(nome, relazioni, record, indexer):
-    voci = []
+    """Relazioni del soggetto raggruppate per tipo (Segretari, Membri,
+    Scissioni…), in un ordine fisso; dentro ogni gruppo per data e nome."""
+    gruppi = {}
     for rel in relazioni:
         a, b = rel['entita_a'], rel['entita_b']
         if nome not in (a, b):
             continue
-        tipo = rel.get('relazione', '')
-        if not tipo or tipo == 'da definire':
-            tipo = 'in relazione con'
-        lato_a = html.escape(a) if a == nome else _nome_linkato(a, record, indexer)
-        lato_b = html.escape(b) if b == nome else _nome_linkato(b, record, indexer)
+        tipo = (rel.get('relazione', '') or '').strip().lower()
+        attivo = a == nome
+        altro = b if attivo else a
+        if tipo in GRUPPI_RELAZIONI:
+            ordine, et_attiva, et_passiva = GRUPPI_RELAZIONI[tipo]
+            etichetta = et_attiva if attivo else et_passiva
+        elif tipo and tipo != 'da definire':
+            ordine, etichetta = 90, (tipo.capitalize() if attivo else 'Altre relazioni')
+        else:
+            ordine, etichetta = 99, 'In relazione con'
         dettagli = [x for x in (rel.get('date', ''), rel.get('fonte', '') and f"fonte: {rel['fonte']}") if x]
-        dettagli_html = f' <span class="autorita-rel__nota">({html.escape("; ".join(dettagli))})</span>' if dettagli else ''
-        voci.append(f'<li>{lato_a} {html.escape(tipo)} {lato_b}{dettagli_html}</li>')
-    if not voci:
+        dettagli_html = (f' <span class="autorita-rel__nota">({html.escape("; ".join(dettagli))})</span>'
+                         if dettagli else '')
+        voce = f'<li>{_nome_linkato(altro, record, indexer)}{dettagli_html}</li>'
+        chiave = (_anno_ordinamento(rel.get('date', '')), altro.lower())
+        gruppi.setdefault((ordine, etichetta), []).append((chiave, voce))
+    if not gruppi:
         return ''
-    return '<ul class="autorita-rel">' + ''.join(voci) + '</ul>'
+    blocchi = []
+    for (ordine, etichetta), voci in sorted(gruppi.items()):
+        voci_html = ''.join(v for _, v in sorted(voci))
+        blocchi.append(f'<div class="autorita-rel__gruppo"><span class="autorita-rel__etichetta">'
+                       f'{html.escape(etichetta)}</span><ul class="autorita-rel">{voci_html}</ul></div>')
+    return ''.join(blocchi)
 
 
 def blocco_autorita(nome, data_range, record, relazioni, indexer):

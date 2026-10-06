@@ -259,3 +259,18 @@ I link esterni non vengono controllati (servirebbe la rete).
 Primo risultato (06/10/2026): la sitemap elencava 4 schede inesistenti
 (persone/organizzazioni senza documenti collegati, che per scelta non hanno
 pagina); corretto in `generatore.genera_sitemap`.
+
+## 15. Menu e conferma del Launcher (ott. 2026)
+- Senza argomenti e con un terminale interattivo (doppio click) il Launcher
+  mostra un menu; senza terminale (lancio da un altro programma) pubblica
+  come prima. `interattivo()` usa `sys.stdin.isatty()`.
+- Struttura di `Launcher.py`: `prepara()` (dipendenze, validazione, export
+  CSV), `invalida_cache()`, `genera_sito()` (script, mkdocs build,
+  controlla_sito, riepilogo), `pubblica()` (riepilogo di ciò che cambia,
+  conferma, pull/commit/push). `aggiorna()` le esegue in sequenza;
+  `anteprima()` usa prepara(esporta=False) + genera_sito() + `mkdocs serve`
+  su una porta libera; `solo_validazione()` non genera nulla.
+- La conferma arriva PRIMA del `git pull`: rispondendo no non si tocca né il
+  repository locale né GitHub. `--si` la salta.
+- Nuove voci di menu: aggiungerle a `VOCI_MENU` e a `menu()`, e documentarle
+  in comandi.txt.

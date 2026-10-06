@@ -2,8 +2,13 @@
 Launcher AMI — aggiorna e pubblica il sito.
 
 Uso:
-    python Launcher.py                          Rigenera e pubblica (con messaggio commit automatico)
+    python Launcher.py                          Menu (doppio click): controlla, anteprima, pubblica...
+                                                Se non c'è un terminale interattivo: pubblica.
+    python Launcher.py --pubblica               Rigenera e pubblica (chiede conferma prima del push)
     python Launcher.py "messaggio commit"       Rigenera e pubblica con messaggio custom
+    python Launcher.py --valida                 Controlla solo data/dati.xlsx (non genera, non pubblica)
+    python Launcher.py --anteprima              Rigenera e apre il sito nel browser (non pubblica)
+    python Launcher.py --si ...                 Pubblica senza chiedere conferma
     python Launcher.py --only AMI-0034          Rigenera SOLO le schede indicate (invalida cache
                                                 metadati documento + cache IA collegata), poi pubblica
     python Launcher.py --refresh-ia ID1,ID2     Invalida la cache IA solo per gli identifier indicati,
@@ -38,18 +43,26 @@ committati (evita di pubblicare per sbaglio file temporanei o di lavoro).
 import os
 import re
 import shutil
+import socket
 import subprocess
 import sys
+import time
+import webbrowser
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import urlparse
 
 from scripts.core import esito
 from scripts.core.cache_manager import CacheManager
 from scripts.core.export_dati import esporta_e_riepiloga
+from scripts.core.site_config import SITE_URL
 from scripts.core.validator import run_validation
 
 ROOT_DIR = Path(__file__).resolve().parent
 SCRIPTS_DIR = ROOT_DIR / "scripts"
+# Material for MkDocs stampa un lungo avviso su MkDocs 2.0: requirements.txt
+# blocca già mkdocs<2, quindi lo silenziamo.
+ENV_MKDOCS = {"NO_MKDOCS_2_WARNING": "true"}
 
 # Unici percorsi che il Launcher committa. Per pubblicare un nuovo file o una
 # nuova cartella in radice, aggiungerlo qui.
@@ -229,7 +242,7 @@ def esegui_validazione(bloccante=True):
         print("Dati validati correttamente.")
 
 
-def git_sync_pubblicazione():
+def git_sync_pubblicazione(titolo, corpo):
     """Sincronizza e pubblica: pull rebase -> add -> commit -> push.
 
     Il `git pull --rebase --autostash` iniziale recupera eventuali commit
@@ -250,8 +263,6 @@ def git_sync_pubblicazione():
     if not git_ci_sono_modifiche():
         print("Nessuna modifica da committare dopo la sincronizzazione.")
         return False
-    segnala_file_esclusi()
-    titolo, corpo = componi_messaggio_commit()
     esegui(["git", "add", "-A", "--"] + percorsi_esistenti(), descrizione="Git add")
     comando_commit = ["git", "commit", "-m", titolo]
     if corpo:
@@ -306,16 +317,18 @@ def componi_messaggio_commit():
     return f"Aggiornamento automatico del sito — {data_ora}", ""
 
 
-def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
-    stampa_titolo("Aggiornamento del sito AMI")
+def prepara(skip_validation=False, esporta=True):
+    """Dipendenze, validazione e (per la pubblicazione) export CSV dei dati."""
     # Riepilogo errori/avvisi: si riparte da zero a ogni esecuzione.
     esito.azzera_riepilogo()
     verifica_dipendenze()
 
-    # 0bis. Validazione dei dati (blocca la pubblicazione se ci sono errori)
+    # Validazione dei dati (blocca se ci sono errori)
     esegui_validazione(bloccante=not skip_validation)
 
-    # 0ter. Export CSV dei fogli + riepilogo modifiche (messaggio di commit)
+    if not esporta:
+        return
+    # Export CSV dei fogli + riepilogo modifiche (messaggio di commit)
     stampa_titolo("Export CSV dei dati (data/export/)")
     try:
         titolo, corpo = esporta_e_riepiloga(ROOT_DIR)
@@ -324,7 +337,9 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
     messaggio_globale["dati_titolo"] = titolo
     messaggio_globale["dati_corpo"] = corpo
 
-    # -1. Rigenerazione mirata di specifiche schede documento
+
+def invalida_cache(only=None, refresh_ia=None):
+    # Rigenerazione mirata di specifiche schede documento
     if only:
         stampa_titolo("Rigenerazione mirata")
         cache_mgr = CacheManager()
@@ -336,7 +351,7 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
         else:
             print(f"Verranno rigenerate: {', '.join(only)} (nessun identifier IA trovato/collegato)")
 
-    # -1bis. Invalidazione mirata/globale cache IA, se richiesta a parte
+    # Invalidazione mirata/globale cache IA, se richiesta a parte
     if refresh_ia:
         stampa_titolo("Invalidazione cache Internet Archive")
         cache_mgr = CacheManager()
@@ -347,11 +362,14 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
             cache_mgr.clear_ia_metadata(refresh_ia)
             print(f"Verranno ri-scaricati solo: {', '.join(refresh_ia)}")
 
-    # 0. Sincronizzazione file statici (deve girare per primo)
+
+def genera_sito():
+    """Generazione completa in build/, mkdocs build in site/ e controllo finale."""
+    # Sincronizzazione file statici (deve girare per primo)
     esegui([sys.executable, "sync_assets.py"], cwd=SCRIPTS_DIR,
            descrizione="Sincronizzazione file statici (assets/ → build/)")
 
-    # 1-5. Rigenerazione contenuti.
+    # Rigenerazione contenuti.
     # Ordine: persone/org PRIMA di generatore; argomenti DOPO generatore,
     # così argomenti.py può aggiornare la sitemap appena creata;
     # galleria DOPO argomenti, come in .github/workflows/deploy.yml.
@@ -366,30 +384,155 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False):
     esegui([sys.executable, "galleria.py"], cwd=SCRIPTS_DIR,
            descrizione="Generazione galleria fotografica (build/galleria/)")
 
-    # 7. Costruzione del sito e controllo finale (pagine, sitemap, JSON, link
-    #    interni): gli stessi controlli girano su GitHub Actions prima del
-    #    deploy, ma qui un problema blocca la pubblicazione PRIMA del push.
+    # Costruzione del sito e controllo finale (pagine, sitemap, JSON, link
+    # interni): gli stessi controlli girano su GitHub Actions prima del
+    # deploy, ma qui un problema blocca la pubblicazione PRIMA del push.
     esegui([sys.executable, "-m", "mkdocs", "build", "--quiet"],
            descrizione="Costruzione del sito (mkdocs build -> site/)",
-           env={"NO_MKDOCS_2_WARNING": "true"})
+           env=ENV_MKDOCS)
     esegui([sys.executable, str(SCRIPTS_DIR / "controlla_sito.py"), str(ROOT_DIR / "site")],
            descrizione="Controllo del sito generato")
 
     stampa_riepilogo_build()
 
-    # 6. Pubblicazione (pull --rebase -> add -> commit -> push)
+
+def interattivo():
+    """True se c'è una persona davanti al terminale (doppio click, cmd...)."""
+    try:
+        return sys.stdin.isatty()
+    except (AttributeError, ValueError):
+        return False
+
+
+def chiedi(domanda):
+    try:
+        return input(domanda).strip()
+    except EOFError:
+        return ""
+
+
+def conferma_pubblicazione(titolo, corpo, chiedi_conferma=True):
+    """Mostra cosa sta per essere pubblicato e, se richiesto, chiede conferma.
+
+    Senza terminale interattivo (es. lancio da un altro programma) o con
+    --si non chiede nulla e prosegue, come faceva il Launcher prima.
+    """
+    stampa_titolo("Cosa verrà pubblicato")
+    print(titolo)
+    if corpo:
+        for riga in corpo.splitlines():
+            print(f"  {riga}")
+    print()
+    righe = git_stato(percorsi_esistenti())
+    print(f"File modificati ({len(righe)}):")
+    for riga in righe[:25]:
+        print(f"  {riga}")
+    if len(righe) > 25:
+        print(f"  ... e altri {len(righe) - 25}")
+    segnala_file_esclusi()
+    voci = esito.leggi_riepilogo()
+    avvisi = sum(v["gravita"] == esito.AVVISO for v in voci)
+    if avvisi:
+        print(f"\nNota: la generazione ha prodotto {avvisi} avvisi (vedi il riepilogo sopra).")
+
+    if not chiedi_conferma:
+        return True
+    if not interattivo():
+        print("\n(Esecuzione non interattiva: pubblico senza chiedere conferma.)")
+        return True
+    risposta = chiedi("\nPubblicare queste modifiche su GitHub? [s/N] ").lower()
+    return risposta in ("s", "si", "sì", "y", "yes")
+
+
+def pubblica(messaggio=None, chiedi_conferma=True):
+    """Commit e push delle modifiche (dopo prepara() e genera_sito())."""
     stampa_titolo("Pubblicazione")
     if not git_ci_sono_modifiche():
         print("Nessuna modifica rispetto all'ultimo commit: niente da pubblicare.")
         stampa_titolo("Completato (nessuna modifica)")
-        return
+        return False
 
     messaggio_globale["testo"] = messaggio  # None -> messaggio automatico
-    git_sync_pubblicazione()
+    titolo, corpo = componi_messaggio_commit()
+    if not conferma_pubblicazione(titolo, corpo, chiedi_conferma):
+        stampa_titolo("Pubblicazione annullata")
+        print("Niente è stato inviato a GitHub: le modifiche restano nella cartella,")
+        print("pronte per la prossima pubblicazione.")
+        return False
 
+    if not git_sync_pubblicazione(titolo, corpo):
+        return False
     stampa_titolo("Sito aggiornato e pubblicato!")
     print("GitHub Actions builderà e pubblicherà automaticamente su GitHub Pages")
     print("(di solito ci vuole qualche minuto prima che sia visibile online).")
+    return True
+
+
+def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False,
+             chiedi_conferma=True):
+    stampa_titolo("Aggiornamento del sito AMI")
+    prepara(skip_validation=skip_validation)
+    invalida_cache(only=only, refresh_ia=refresh_ia)
+    genera_sito()
+    pubblica(messaggio, chiedi_conferma=chiedi_conferma)
+
+
+def solo_validazione():
+    """Controlla dati.xlsx e basta: nessuna generazione, nessuna pubblicazione."""
+    stampa_titolo("Controllo dei dati (data/dati.xlsx)")
+    risultato = run_validation(str(ROOT_DIR / "data"))
+    if risultato.get("error"):
+        raise ErroreComando(f"impossibile leggere i dati: {risultato['error']}")
+    print()
+    if risultato.get("success"):
+        print("Nessun errore: i dati possono essere pubblicati.")
+    else:
+        print("Ci sono errori da correggere in dati.xlsx prima di pubblicare (vedi sopra).")
+    return risultato.get("success", False)
+
+
+def _porta_libera():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind(("127.0.0.1", 0))
+        return s.getsockname()[1]
+
+
+def anteprima(skip_validation=False):
+    """Rigenera il sito e lo apre nel browser con `mkdocs serve`. Non pubblica."""
+    stampa_titolo("Anteprima del sito AMI")
+    prepara(skip_validation=skip_validation, esporta=False)
+    genera_sito()
+
+    porta = _porta_libera()
+    percorso = urlparse(SITE_URL).path.rstrip("/") + "/"
+    indirizzo = f"http://127.0.0.1:{porta}{percorso}"
+    stampa_titolo("Anteprima in corso")
+    print(f"Il sito è visibile su {indirizzo}")
+    print("Si aggiorna da solo se rigeneri il sito (es. dal menu in un'altra finestra).")
+    print("Per chiudere l'anteprima premi Ctrl+C.\n")
+    processo = subprocess.Popen(
+        [sys.executable, "-m", "mkdocs", "serve", "--quiet", "-a", f"127.0.0.1:{porta}"],
+        cwd=ROOT_DIR, env={**os.environ, **ENV_MKDOCS})
+    interrotto = False
+    try:
+        time.sleep(3)
+        if processo.poll() is None:
+            webbrowser.open(indirizzo)
+        processo.wait()
+    except KeyboardInterrupt:
+        interrotto = True
+        print("\nChiusura dell'anteprima...")
+    finally:
+        if processo.poll() is None:
+            processo.terminate()
+            try:
+                processo.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                processo.kill()
+    if not interrotto and processo.returncode:
+        raise ErroreComando(f"l'anteprima (mkdocs serve) si è chiusa con codice "
+                            f"{processo.returncode}: vedi i messaggi sopra")
+    print("Anteprima chiusa.")
 
 
 def stampa_riepilogo_build():
@@ -414,17 +557,91 @@ def svuota_cache():
     print("Cache completamente svuotata")
 
 
+# ---------------------------------------------------------------------------
+# Menu (doppio click sul Launcher)
+# ---------------------------------------------------------------------------
+
+VOCI_MENU = [
+    ("1", "Controlla i dati (dati.xlsx)", "non genera e non pubblica"),
+    ("2", "Anteprima del sito nel browser", "rigenera, non pubblica"),
+    ("3", "Pubblica", "rigenera, mostra le modifiche e chiede conferma"),
+    ("4", "Rigenera schede specifiche e pubblica", "es. AMI-0034"),
+    ("5", "Riepilogo errori e avvisi dell'ultima generazione", ""),
+    ("0", "Esci", ""),
+]
+
+
+def chiedi_id_schede():
+    testo = chiedi("ID delle schede da rigenerare (es. AMI-0034, AMI-0035): ")
+    ids = [i.strip().upper() for i in re.split(r"[,;\s]+", testo) if i.strip()]
+    errati = [i for i in ids if not re.fullmatch(r"AMI-\d{4,}", i)]
+    if errati:
+        print(f"ID non validi: {', '.join(errati)} (formato atteso: AMI-0034)")
+        return None
+    return ids or None
+
+
+def menu():
+    while True:
+        print()
+        print("=" * 60)
+        print("AMI — Archivio del Maoismo Italiano")
+        print("=" * 60)
+        for tasto, voce, nota in VOCI_MENU:
+            print(f"  {tasto}  {voce}" + (f"  ({nota})" if nota else ""))
+        try:
+            scelta = input("\nScelta: ").strip()
+        except EOFError:
+            return
+        if not scelta:
+            continue
+        if scelta in ("0", "q"):
+            return
+        try:
+            if scelta == "1":
+                solo_validazione()
+            elif scelta == "2":
+                anteprima()
+            elif scelta == "3":
+                aggiorna()
+            elif scelta == "4":
+                ids = chiedi_id_schede()
+                if ids:
+                    aggiorna(only=ids)
+            elif scelta == "5":
+                stampa_riepilogo_build()
+            else:
+                print("Scelta non valida.")
+                continue
+        except ErroreComando as e:
+            if esito.leggi_riepilogo() and scelta in ("2", "3", "4"):
+                stampa_riepilogo_build()
+            print(f"\nERRORE: {e}")
+            if scelta in ("3", "4"):
+                print("Il sito NON è stato pubblicato.")
+        except KeyboardInterrupt:
+            print("\n\nInterrotto: torno al menu.")
+        chiedi("\nPremi INVIO per tornare al menu...")
+
+
 def main():
+    args = sys.argv[1:]
+    if not args and interattivo():
+        try:
+            menu()
+        except KeyboardInterrupt:
+            pass
+        sys.exit(0)
+
     codice_uscita = 0
     try:
-        args = sys.argv[1:]
         refresh_ia = None
         only = None
         messaggio = None
 
         skip_validation = '--skip-validation' in args
-        if skip_validation:
-            args = [a for a in args if a != '--skip-validation']
+        chiedi_conferma = '--si' not in args
+        args = [a for a in args if a not in ('--skip-validation', '--si', '--pubblica')]
 
         if args:
             if args[0] == '--clear-cache':
@@ -435,6 +652,12 @@ def main():
                 return
             elif args[0] == '--help':
                 print(__doc__)
+                return
+            elif args[0] == '--valida':
+                codice_uscita = 0 if solo_validazione() else 1
+                return
+            elif args[0] == '--anteprima':
+                anteprima(skip_validation=skip_validation)
                 return
             elif args[0] == '--force-refresh-ia':
                 refresh_ia = 'all'
@@ -456,7 +679,7 @@ def main():
                 messaggio = args[0]
 
         aggiorna(messaggio=messaggio, refresh_ia=refresh_ia, only=only,
-                 skip_validation=skip_validation)
+                 skip_validation=skip_validation, chiedi_conferma=chiedi_conferma)
 
     except ErroreComando as e:
         if esito.leggi_riepilogo():
@@ -468,11 +691,9 @@ def main():
         print("\n\nInterrotto manualmente.")
         codice_uscita = 1
     finally:
-        print()
-        try:
-            input("Premi INVIO per chiudere...")
-        except EOFError:
-            pass
+        if interattivo():
+            print()
+            chiedi("Premi INVIO per chiudere...")
 
     sys.exit(codice_uscita)
 

@@ -10,9 +10,29 @@ python Launcher.py [comando] [argomenti]
 
 ## Uso quotidiano
 
-### Rigenera e pubblica tutto
+### Menu (doppio click su Launcher.py, oppure python Launcher.py)
 
-python Launcher.py
+  1  Controlla i dati (dati.xlsx)          non genera e non pubblica
+  2  Anteprima del sito nel browser        rigenera e apre il sito in locale;
+                                           Ctrl+C per chiudere
+  3  Pubblica                              rigenera, mostra cosa cambia e
+                                           chiede conferma [s/N] prima del push
+  4  Rigenera schede specifiche e pubblica chiede gli ID (es. AMI-0034)
+  5  Riepilogo errori e avvisi             dell'ultima generazione
+  0  Esci
+
+Dopo ogni azione si torna al menu. Rispondendo N (o solo INVIO) alla
+conferma, nulla viene inviato a GitHub e le modifiche restano nella cartella.
+
+### Gli stessi comandi da terminale
+
+python Launcher.py --valida        come la voce 1
+python Launcher.py --anteprima     come la voce 2
+python Launcher.py --pubblica      come la voce 3
+python Launcher.py --pubblica --si pubblica senza chiedere conferma
+
+Se Launcher.py viene lanciato da un altro programma (senza terminale
+interattivo), pubblica direttamente senza menu né conferma, come prima.
 
 ### Rigenera e pubblica con un messaggio di commit custom
 
