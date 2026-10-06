@@ -74,7 +74,10 @@
         <targetEntity targetType="corporateBody">
           <part>Tribuna Rossa</part>
         </targetEntity>
-        <date standardDate="1969">1969</date>
+        <dateRange>
+          <fromDate standardDate="1967">1967</fromDate>
+          <toDate standardDate="1969">1969</toDate>
+        </dateRange>
         <relationType>temporale</relationType>
         <descriptiveNote>
           <p>Tribuna Rossa predecessore di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</p>

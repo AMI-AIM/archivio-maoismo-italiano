@@ -130,6 +130,9 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
 .doc-abstract {
   margin: 0;
   padding: 0;
+  /* Misura sull'intero blocco (vale anche per il testo "nudo" esportato da
+     Internet Archive): prima le righe arrivavano a ~95-100 caratteri. */
+  max-width: 75ch;
   font-size: var(--ami-font-size-base);
   line-height: 1.65;
   color: var(--md-default-fg-color);
@@ -543,6 +546,7 @@ necessario. La data resta a 21px: titolo (29px+) e data si distinguono.
 .doc-segnatura__sep {
   color: var(--md-default-fg-color--lighter);
 }
+
 .md-typeset .doc-segnatura abbr {
   text-decoration: none;
   cursor: help;

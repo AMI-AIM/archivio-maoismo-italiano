@@ -309,6 +309,9 @@
       hashBeforeOpen = window.location.hash;
       dialog.showModal();
       populate(index);
+      // Focus dentro la finestra (prima restava sul body): da tastiera si
+      // parte dal pulsante di chiusura; alla chiusura torna alla card.
+      lbClose.focus({ preventScroll: true });
     }
 
     function navigate(delta) {

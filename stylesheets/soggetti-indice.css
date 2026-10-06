@@ -257,6 +257,18 @@
     font-family: var(--ami-font-text);
     color: var(--md-default-fg-color--lighter);
 }
+/* Data aperta ("1941 –"): il trattino fa gia' da separatore, il puntino
+   subito dopo si leggeva "1941 – · 2 documenti". */
+.people-dates--aperta + .people-count::before,
+.org-dates--aperta + .org-count::before,
+.top-card-dates--aperta + .top-card-count::before {
+    content: none;
+}
+.people-dates--aperta,
+.org-dates--aperta,
+.top-card-dates--aperta {
+    margin-right: 0.35rem;
+}
 /* Intervallo vuoto (organizzazione senza date): niente puntino iniziale */
 .people-dates:empty,
 .org-dates:empty,

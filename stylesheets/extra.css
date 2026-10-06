@@ -23,9 +23,6 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   --ami-skeleton-fermo: #e0e0e0;       /* segnaposto senza animazione */
   --ami-errore: #d32f2f;
   --ami-errore-tenue: #ffebee;
-  /* Etichette dei risultati di ricerca (tipo di voce) */
-  --ami-tipo-persona: #6a1b9a;
-  --ami-tipo-organizzazione: #1565c0;
   /* Home: avatar delle persone e organizzazioni piu' citate */
   --ami-avatar-2: #424242;
   --ami-avatar-3: #8d6e63;
@@ -367,7 +364,13 @@ button.md-header__nav-link--dropdown {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.45);
+  /* Velatura graduata: scura in basso a sinistra, dove stanno frase,
+     pulsante e ricerca; leggera in alto, dove la foto dei giornali resta
+     leggibile. Prima era un velo uniforme al 45% e il testo si reggeva
+     solo sull'ombra. */
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.5) 32%, rgba(0, 0, 0, 0.12) 70%, rgba(0, 0, 0, 0.06) 100%),
+    linear-gradient(to right, rgba(0, 0, 0, 0.38) 0%, rgba(0, 0, 0, 0) 55%);
 }
 .banner-content {
   position: absolute;
@@ -388,7 +391,7 @@ button.md-header__nav-link--dropdown {
   margin: 0 0 0.8rem 0;
   line-height: 1.4;
   letter-spacing: 0.005em;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65), 0 1px 3px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
 }
 .banner-actions {
   display: flex;
@@ -657,6 +660,12 @@ button.md-header__nav-link--dropdown {
     right: 0.3rem;
     max-width: none;
     padding: 0.3rem 0.6rem;
+  }
+  /* Su telefono frase, pulsante e ricerca occupano quasi tutta l'altezza
+     della foto: velatura piu' uniforme, cosi' la frase non si confonde
+     con i titoli dei giornali. */
+  .banner-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.62) 55%, rgba(0, 0, 0, 0.5) 100%);
   }
   .banner-content p {
     font-size: var(--ami-font-size-sm);
@@ -1432,21 +1441,22 @@ body, fuori da .md-typeset, ma usa gli stessi token).
   overflow: hidden;
 }
 .hero-search-item-tag {
+  /* Etichetta del catalogo (grigio, maiuscoletto, senza fondo): prima
+     erano pillole piene viola, blu e rosse, fuori palette. */
   display: inline-block;
-  vertical-align: middle;
-  font-size: var(--ami-font-size-2xs); /* 13px - badge maiuscolo */
+  vertical-align: baseline;
+  font-family: var(--ami-font-label);
+  font-size: var(--ami-font-size-2xs); /* 13px */
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: var(--ami-tracking-wide);
-  padding: 0.1rem 0.45rem;
-  border-radius: var(--ami-radius-pillola);
-  color: var(--ami-su-colore);
+  letter-spacing: 0.06em;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--md-default-fg-color--light);
   white-space: nowrap;
-  margin-left: 0.4em;
+  margin-left: 0.5em;
 }
-.hero-search-item-tag--persona { background: var(--ami-tipo-persona); }
-.hero-search-item-tag--organizzazione { background: var(--ami-tipo-organizzazione); }
-.hero-search-item-tag--documento { background: var(--md-primary-fg-color); }
 .hero-search-item-snippet {
   font-size: var(--ami-font-size-sm); /* 15px - testo secondario */
   color: var(--md-default-fg-color--light);
