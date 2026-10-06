@@ -6,9 +6,12 @@ Caricato SOLO dalla pagina con link diretto nel markdown,
 come da CONVENZIONI.md (niente extra_css globale).
 ============================================================ */
 
+/* Due colonne (3 + 3) da 769px in su: prima erano sei banner a tutta
+   larghezza, circa 3.500px di scorrimento per sei scelte. */
 .hero-stack {
     display: grid;
-    gap: 0.8rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
     margin: 0 0 2.5rem;
 }
 
@@ -17,8 +20,8 @@ come da CONVENZIONI.md (niente extra_css globale).
     display: block;
     background: var(--ami-notte-2);
     width: 100%;
-    height: 480px;
-    border-radius: 0.8rem;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--ami-radius-card);
     overflow: hidden;
     text-decoration: none;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
@@ -66,7 +69,9 @@ come da CONVENZIONI.md (niente extra_css globale).
 .hero-card-gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 38%, rgba(0, 0, 0, 0) 68%);
+    /* Velatura piu' piena in basso: titolo e conteggio restano leggibili
+       anche sulle foto chiare (prima il conteggio scendeva a 1,5:1). */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.72) 30%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0) 75%);
 }
 
 .hero-card-content {
@@ -89,14 +94,20 @@ come da CONVENZIONI.md (niente extra_css globale).
 .hero-card-meta {
     margin-top: 0.25rem;
     font-size: var(--ami-font-size-md);
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--ami-su-colore);
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+    .hero-stack {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
 }
 
 @media screen and (max-width: 40em) {
     .hero-card {
-        height: 320px;
-        border-radius: 0.6rem;
+        aspect-ratio: 3 / 2;
     }
 
     .hero-card-nome {

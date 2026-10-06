@@ -118,7 +118,6 @@ https://ami-aim.github.io/archivio-maoismo-italiano/persone/liu-shaoqi/
 https://ami-aim.github.io/archivio-maoismo-italiano/persone/renzo-del-carria/
 https://ami-aim.github.io/archivio-maoismo-italiano/persone/arnaldo-bressan/
 https://ami-aim.github.io/archivio-maoismo-italiano/persone/aldo-brandirali/
-https://ami-aim.github.io/archivio-maoismo-italiano/persone/dario-visintini/
 https://ami-aim.github.io/archivio-maoismo-italiano/persone/dino-frangioni/
 https://ami-aim.github.io/archivio-maoismo-italiano/persone/giacomo-montemezzani/
 https://ami-aim.github.io/archivio-maoismo-italiano/persone/sergio-spazzali/
@@ -127,13 +126,11 @@ https://ami-aim.github.io/archivio-maoismo-italiano/persone/gustavo-hermann/
 https://ami-aim.github.io/archivio-maoismo-italiano/persone/mario-capanna/
 https://ami-aim.github.io/archivio-maoismo-italiano/persone/michele-semeraro/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/associazione-italia-cina/
-https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/casa-editrice-in-lingue-estere/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/edizioni-oriente/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/renmin-ribao/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/hongqi/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/nuova-unita/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/jiefangjun-bao/
-https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/centro-di-informazione-di-verona/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/ufficio-politico-del-pcdi-m-l/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/comitato-di-partito-di-catania-uci-m-l/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/unione-della-gioventu-comunista-ditalia-marxista-leninista/
@@ -153,8 +150,7 @@ https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/organizzazion
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/movimento-studentesco/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/organizzazione-dei-comunisti-marxisti-leninisti-ditalia/
 https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/partito-comunista-marxista-leninista-ditalia-lotta-di-lunga-durata/
-https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/partito-comunista-marxista-leninista-maoista-italiano/
-https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/comitato-provinciale-di-brindisi-del-pc-m-l-i/https://ami-aim.github.io/archivio-maoismo-italiano/argomenti/
+https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/partito-comunista-marxista-leninista-maoista-italiano/https://ami-aim.github.io/archivio-maoismo-italiano/argomenti/
 https://ami-aim.github.io/archivio-maoismo-italiano/argomenti/materiali-cinesi/
 https://ami-aim.github.io/archivio-maoismo-italiano/argomenti/fondamenti-del-maoismo/
 https://ami-aim.github.io/archivio-maoismo-italiano/argomenti/libretti-rossi/
