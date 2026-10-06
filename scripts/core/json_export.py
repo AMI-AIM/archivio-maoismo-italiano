@@ -5,7 +5,7 @@ import re
 
 import pandas as pd
 
-from .utils import descrizione_da_catalogo, formatta_data, scarica_descrizione_ia, split_nomi
+from .utils import chiave_ordinamento_nome, descrizione_da_catalogo, formatta_data, scarica_descrizione_ia, split_nomi
 
 
 def pulisci_html(testo):
@@ -168,6 +168,13 @@ def genera_json(df, persone, organizzazioni, output_dir):
             for fonte in (persone, organizzazioni)
             for nome, info in fonte.items()
             if isinstance(info, dict) and info.get('varianti')
+        },
+        # Chiave d'ordine per cognome delle persone: il filtro Persona
+        # dell'archivio le elenca come l'indice delle persone.
+        'ordine_nomi': {
+            nome: chiave_ordinamento_nome(nome, info.get('cognome', ''))
+            for nome, info in persone.items()
+            if isinstance(info, dict)
         }
     }
 

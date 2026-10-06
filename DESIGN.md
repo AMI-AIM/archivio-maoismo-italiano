@@ -207,7 +207,7 @@ Netti, rossi, senza ornamenti.
 - **Shape:** angoli appena arrotondati (4px).
 - **Primary:** fondo rosso catalogo, testo bianco in Archivo 600, padding 0,6rem × 1,5rem.
 - **Hover / Focus:** fondo rosso inchiostro; anello di focus di 2px rosso a 2px di distanza, sempre bianco su fondi rossi, scuri o fotografici (header, testata della home, fascia "in evidenza", footer).
-- **Azioni secondarie** (Cita questo documento, Schermo intero, Apri su Internet Archive): testo rosso in Archivo con icona SVG, senza fondo.
+- **Azioni secondarie** (Cita questo documento, Schermo intero, Apri su Internet Archive, Azzera filtri nel pannello dell'archivio): testo rosso in Archivo, con icona SVG dove serve, senza fondo. «Azzera filtri» diventa pulsante pieno solo nello stato vuoto dei risultati, dove è l'unica via d'uscita.
 
 ### Chips
 - **Filtri attivi:** pillola su fondo carta con bordo e testo rossi, nome del gruppo in grassetto ("Organizzazione: …") e pulsante ✕ per rimuoverla.
@@ -218,19 +218,20 @@ Netti, rossi, senza ornamenti.
 - **Shadow Strategy:** vedi Elevation & Depth, solo registro manifesto.
 - **Border:** filetto di 1px.
 - **Internal Padding:** circa 0,6 × 1rem nella parte testuale.
-- **Card degli indici Persone/Organizzazioni:** categoria in maiuscoletto (solo organizzazioni), nome in Fraunces 650 che diventa rosso al passaggio del mouse, poi una sola riga «date · N documenti»: date in Fraunces corsivo, conteggio in Courier. Gli intervalli aperti restano nella forma archivistica «1921 –» (scelta del curatore: più rigorosa di «dal 1921»). Il timbro delle iniziali in «In evidenza» è di 110px (84px su telefono), non domina la card.
+- **Card degli indici Persone/Organizzazioni:** categoria in maiuscoletto (solo organizzazioni), nome in Fraunces 650 che diventa rosso al passaggio del mouse, poi una sola riga «date · N documenti»: date in Fraunces corsivo, conteggio in Courier. Gli intervalli aperti restano nella forma archivistica «1921 –» (scelta del curatore: più rigorosa di «dal 1921»). Il timbro delle iniziali in «In evidenza» è di 110px (84px su telefono), non domina la card. L'elenco «Tutte le persone» e la barra A–Z seguono il **cognome** (colonna Cognome di dati.xlsx: Brandirali sotto la B, Del Carria sotto la D), mentre il nome resta scritto nella forma naturale; i pulsanti delle lettere dichiarano la selezione con `aria-pressed`.
 
 ### Inputs / Fields
 - **Style:** filetto di 1px, fondo bianco, angoli 4px, testo a 16px (sotto, iOS ingrandisce la pagina).
 - **Focus:** bordo e anello rossi.
-- **Filtri a spunta:** caselle native colorate di rosso, nome completo che va a capo, conteggio in Courier a destra; la voce selezionata diventa rossa e in grassetto. Sopra le 10 voci compare un campo per restringere l'elenco, che trova le voci di Persona e Organizzazione anche con le "Altre forme del nome" (es. "Lin Piao" → Lin Biao) senza mostrarle.
-- **Ricerca testuale dell'archivio:** ogni parola deve comparire come inizio di parola (accenti ignorati, il trattino resta dentro la parola); cerca anche segnatura e nomi collegati. Le grafie varianti NON entrano qui: restano limitate alla ricerca delle persone e organizzazioni (indici, filtri, ricerca della home).
+- **Filtri a spunta:** caselle native colorate di rosso, nome completo che va a capo, conteggio in Courier a destra; la voce selezionata diventa rossa e in grassetto. Sopra le 10 voci compare un campo per restringere l'elenco, che trova le voci di Persona e Organizzazione anche con le "Altre forme del nome" (es. "Lin Piao" → Lin Biao) senza mostrarle. Le persone sono in ordine di cognome, come nell'indice. I conteggi seguono i risultati: ogni numero dice quanti documenti darebbe quella voce con gli altri filtri attivi; le voci a 0 si attenuano in grigio (testo secondario) ma restano al loro posto e cliccabili.
+- **Ricerca testuale dell'archivio:** ogni parola deve comparire come inizio di parola (accenti ignorati); cerca anche segnatura e nomi collegati. Una parola sola resta intera ("lenin" non trova "marxista-leninista"), ma tra parole vicine trattino e spazio si equivalgono: "mao tse tung" trova "Mao Tse-tung", "ciu en lai" trova "Ciu-En-lai". Le grafie varianti NON entrano nei risultati; se però la query contiene un'altra forma del nome, sopra i risultati compare una riga su filetto, «Nel catalogo: **Mao Zedong** (anche «Mao Tse-tung»)», con l'azione rossa «Vedi i N documenti collegati» che applica il filtro Persona (o Organizzazione) e toglie il testo.
+- **Paginazione:** ogni cambio di pagina è una voce di cronologia (Indietro torna alla pagina precedente dei risultati); la vista torna in cima ai risultati e il focus va sul conteggio.
 - **Pulsante "Filtri" flottante:** solo su telefono, compare quando il pannello filtri esce dallo schermo; riapre il pannello.
 
 ### Navigation
 - **Header:** fascia rossa piena, voci in Archivo 600 bianche, voce attiva sottolineata anche nelle pagine interne della sezione (una scheda documento accende "Archivio", una persona accende "Persone"); menu "Archivio" a tendina (Tutti i documenti, Percorsi tematici, Galleria).
 - **Avviso Internet Archive:** sempre in cima. Su desktop fisso, su telefono una riga breve che scorre via con la pagina e non copre l'header.
-- **Percorso di navigazione:** sopra il titolo, in Archivo grigio con separatore "›" ("Archivio › Opuscolo", "Persone", "Archivio › Percorsi tematici").
+- **Percorso di navigazione:** sopra il titolo, in Archivo grigio con separatore "›" ("Archivio › Opuscolo", "Persone", "Archivio › Percorsi tematici"). Nelle schede aperte dall'archivio con filtri o pagina, in fondo alla riga compare l'azione rossa «Torna ai risultati» (icona SVG a chevron), che riporta all'ultima ricerca; "Archivio" porta sempre all'archivio intero.
 - **Mobile:** menu laterale con intestazione rossa e logo; link "Vai al contenuto" come primo elemento raggiungibile da tastiera.
 
 ### Segnatura

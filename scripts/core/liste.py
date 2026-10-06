@@ -55,8 +55,17 @@ def meta_riga(tipo='', org='', etichette=()):
     return f'<div class="doc-meta">{"".join(parti)}</div>' if parti else ''
 
 
+# Ruolo secondario nella riga ("anche come autore"): il nome del ruolo da
+# solo ("anche autore", "anche menzionato") non diceva di chi fosse.
+ETICHETTE_RUOLO = {
+    'autore': 'come autore',
+    'menzionato': 'tra i citati',
+    'pubblicato da': 'come editore',
+}
+
+
 def _riga(doc, ruolo_gruppo, escludi_org=''):
-    altri = [r for r in doc['ruoli'] if r != ruolo_gruppo]
+    altri = [ETICHETTE_RUOLO.get(r, r) for r in doc['ruoli'] if r != ruolo_gruppo]
     etichette = ('anche ' + ', '.join(altri),) if altri else ()
     org = doc.get('org', '')
     if escludi_org and org.strip().lower() == escludi_org.strip().lower():

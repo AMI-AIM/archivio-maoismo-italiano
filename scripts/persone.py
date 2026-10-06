@@ -13,7 +13,7 @@ from core.dati import ErroreDati, PERCORSO_EXCEL, leggi_foglio
 from core.liste import GRUPPI_PERSONA, elenco_per_ruolo, iniziali, valore_pulito
 from core.schema_generator import SchemaGenerator
 from core.site_config import site_path
-from core.utils import escape_yaml_string, formatta_data, formatta_estremo, formatta_intervallo, forme_varianti, slugify, testo_ricerca
+from core.utils import chiave_ordinamento_nome, escape_yaml_string, formatta_data, formatta_estremo, formatta_intervallo, forme_varianti, slugify, testo_ricerca
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
@@ -156,7 +156,9 @@ def genera_persone():
                 'documenti': documenti,
                 'immagine': immagine_url,
                 'num_doc': len(documenti),
-                'varianti': forme_varianti(row.get('forme_varianti', ''))
+                'varianti': forme_varianti(row.get('forme_varianti', '')),
+                # Ordine dell'indice: per cognome (colonna Cognome)
+                'ordine': chiave_ordinamento_nome(nome, row.get('cognome', ''))
             }
 
     if not persone:
@@ -259,7 +261,7 @@ hide:
         nome_html = html.escape(nome)
         url_archivio = site_path('documenti/') + '?persona=' + urllib.parse.quote(nome, safe='')
         azione_html = (f'<p class="soggetto-azione"><a class="doc-correlati__tutti" '
-                       f'href="{html.escape(url_archivio, quote=True)}">Vedi questi documenti nell\'archivio</a></p>')
+                       f'href="{html.escape(url_archivio, quote=True)}">{'Vedi il documento' if data['num_doc'] == 1 else 'Vedi questi documenti'} nell\'archivio</a></p>')
         percorso_html = f'<nav class="doc-percorso" aria-label="Percorso"><a href="{site_path("persone/")}">Persone</a></nav>'
         content = f"""
 {percorso_html}
@@ -302,9 +304,10 @@ hide:
     persone_top = sorted(persone.items(), key=lambda x: x[1]['num_doc'], reverse=True)[:3]
     # "In evidenza" mette in risalto, non separa: l'elenco completo (e la
     # ricerca per nome) comprende anche le voci in evidenza.
-    persone_resto = sorted(persone.items(), key=lambda x: x[0].lower())
+    # Ordine per cognome, come in un indice dei nomi: Brandirali sotto la B.
+    persone_resto = sorted(persone.items(), key=lambda x: x[1]['ordine'])
 
-    lettere_presenti = sorted(set([nome[0].upper() for nome, _ in persone_resto]))
+    lettere_presenti = sorted(set([data['ordine'][0].upper() for _, data in persone_resto if data['ordine']]))
     tutte_lettere = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
 
     lines = []
@@ -355,13 +358,13 @@ hide:
     lines.append('        <input type="text" id="search-input" placeholder="Cerca per nome…" aria-label="Cerca persone">')
     lines.append('        <span id="search-counter" class="search-counter" aria-live="polite"></span>')
     lines.append('    </div>')
-    lines.append('    <div class="alfabeto-bar">')
-    lines.append('        <button class="lettera-btn lettera-btn--active" data-lettera="all">Tutte</button>')
+    lines.append('    <div class="alfabeto-bar" role="group" aria-label="Filtra per iniziale">')
+    lines.append('        <button type="button" class="lettera-btn lettera-btn--active" data-lettera="all" aria-pressed="true">Tutte</button>')
     for lettera in tutte_lettere:
         if lettera in lettere_presenti:
-            lines.append(f'        <button class="lettera-btn" data-lettera="{lettera}">{lettera}</button>')
+            lines.append(f'        <button type="button" class="lettera-btn" data-lettera="{lettera}" aria-pressed="false">{lettera}</button>')
         else:
-            lines.append(f'        <button class="lettera-btn lettera-btn--disabled" data-lettera="{lettera}" disabled aria-hidden="true">{lettera}</button>')
+            lines.append(f'        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="{lettera}" disabled aria-hidden="true">{lettera}</button>')
     lines.append('    </div>')
     lines.append('</div>')
 
@@ -372,7 +375,7 @@ hide:
             num_doc = data['num_doc']
             date_vita = data['data_range']
             count_text = "1 documento" if num_doc == 1 else f"{num_doc} documenti"
-            lettera = html.escape(nome[0].upper(), quote=True)
+            lettera = html.escape((data['ordine'] or nome)[0].upper(), quote=True)
             nome_html = html.escape(nome)
             date_vita_html = html.escape(date_vita)
 
@@ -441,8 +444,12 @@ hide:
     lines.append('        btn.addEventListener("click", function() {')
     lines.append('            if (this.disabled) return;')
     lines.append('')
-    lines.append('            letteraBtns.forEach(b => b.classList.remove("lettera-btn--active"));')
+    lines.append('            letteraBtns.forEach(b => {')
+    lines.append('                b.classList.remove("lettera-btn--active");')
+    lines.append('                if (!b.disabled) b.setAttribute("aria-pressed", "false");')
+    lines.append('            });')
     lines.append('            this.classList.add("lettera-btn--active");')
+    lines.append('            this.setAttribute("aria-pressed", "true");')
     lines.append('            filtra();')
     lines.append('        });')
     lines.append('    });')

@@ -8,7 +8,7 @@ import pandas as pd
 
 from core import esito
 from core.dati import leggi_foglio
-from core.miniature import miniatura
+from core.miniature import miniatura, percorso_miniatura, varianti_locali
 from core.utils import soggetto_produttore
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -192,8 +192,25 @@ def gallery_card(row):
     if mini:
         # width/height reali: il browser riserva lo spazio e la griglia si
         # impagina subito, senza aspettare il caricamento (niente salti).
+        # srcset: varianti da 600 e 900px ricavate in build dalla miniatura
+        # da 1200 (riquadri di ~500px su desktop, ~360px su telefono x2).
+        # Le immagini orizzontali (rapporto >= 1,45, come in galleria.js)
+        # occupano tutta la riga su desktop.
+        varianti = varianti_locali(percorso_miniatura(doc_id, 1200), 'immagini/miniature',
+                                   f'{doc_id}-1200', (600, 900))
+        srcset_attr = ''
+        if varianti:
+            candidati = [(u, w) for u, w, _ in varianti if w < mini['width']] + [(mini['url'], mini['width'])]
+            larga = mini['width'] / max(1, mini['height']) >= 1.45
+            sizes = ('(max-width: 560px) calc(100vw - 28px), (max-width: 840px) calc(100vw - 28px), 1000px'
+                     if larga else
+                     '(max-width: 560px) calc(100vw - 28px), (max-width: 840px) calc(50vw - 24px), 500px')
+            srcset_attr = (
+                f' srcset="{html.escape(", ".join(f"{u} {w}w" for u, w in candidati), quote=True)}"'
+                f' sizes="{sizes}"'
+            )
         img_html = (
-            f'<img class="galleria-img" src="{html.escape(mini["url"], quote=True)}" '
+            f'<img class="galleria-img" src="{html.escape(mini["url"], quote=True)}"{srcset_attr} '
             f'width="{mini["width"]}" height="{mini["height"]}" alt="{titolo_attr}" '
             'loading="lazy" decoding="async">\n'
         )

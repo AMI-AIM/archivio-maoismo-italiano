@@ -195,8 +195,8 @@
       '  line-height: 1.4;',
       '  color: var(--md-default-fg-color);',
       '}',
-      '.ia-visore-avviso__testo { flex: 1 1 18rem; margin: 0; }',
-      '.ia-visore-avviso__azioni { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; }',
+      '.ia-visore-avviso__testo { flex: 1 1 18rem; max-width: 68ch; margin: 0; }',
+      '.ia-visore-avviso__azioni { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; margin-left: auto; }',
       '.ia-visore-avviso__riprova {',
       '  min-height: 2.2rem;',
       '  padding: 0 0.9rem;',
@@ -215,8 +215,11 @@
          riquadro grigio vuoto; se esiste la miniatura locale la si mostra. */
       '.embed-container--guasto .universal-embed { height: 0 !important; min-height: 0 !important; visibility: hidden; }',
       '.embed-container--guasto .fullscreen-btn { display: none; }',
-      '.ia-visore-avviso__miniatura { flex: 0 0 auto; display: block; width: 4.5rem; height: auto; border: 1px solid var(--md-default-fg-color--lightest); border-radius: var(--ami-radius-xs, 2px); }',
-      '.ia-visore-avviso__miniatura[hidden] { display: none; }',
+      /* Lo spazio della miniatura e' riservato (3:4) mentre carica: prima
+         compariva dopo e spingeva giu' il resto della scheda. Se manca, il
+         riquadro sparisce (l'unico spostamento resta quello del caso raro). */
+      '.ia-visore-avviso__miniatura { flex: 0 0 auto; display: block; width: 4.5rem; height: auto; aspect-ratio: 3 / 4; object-fit: contain; border: 1px solid var(--md-default-fg-color--lightest); border-radius: var(--ami-radius-xs, 2px); }',
+      '.ia-visore-avviso__miniatura[hidden] { display: block; visibility: hidden; }',
       /* Telefono: una riga, non fissato in cima (scorre via con la pagina
          e non copre l'header). Il testo completo resta per i lettori di
          schermo. */

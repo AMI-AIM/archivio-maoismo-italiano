@@ -277,7 +277,7 @@ hide:
         nome_html = html.escape(nome)
         url_archivio = site_path('documenti/') + '?organizzazione=' + urllib.parse.quote(nome, safe='')
         azione_html = (f'<p class="soggetto-azione"><a class="doc-correlati__tutti" '
-                       f'href="{html.escape(url_archivio, quote=True)}">Vedi questi documenti nell\'archivio</a></p>')
+                       f'href="{html.escape(url_archivio, quote=True)}">{'Vedi il documento' if data['num_doc'] == 1 else 'Vedi questi documenti'} nell\'archivio</a></p>')
         percorso_html = f'<nav class="doc-percorso" aria-label="Percorso"><a href="{site_path("organizzazioni/")}">Organizzazioni</a></nav>'
         content = f"""
 {percorso_html}
@@ -376,13 +376,13 @@ hide:
     lines.append('        <input type="text" id="search-input" placeholder="Cerca per nome…" aria-label="Cerca organizzazioni">')
     lines.append('        <span id="search-counter" class="search-counter" aria-live="polite"></span>')
     lines.append('    </div>')
-    lines.append('    <div class="alfabeto-bar">')
-    lines.append('        <button class="lettera-btn lettera-btn--active" data-lettera="all">Tutte</button>')
+    lines.append('    <div class="alfabeto-bar" role="group" aria-label="Filtra per iniziale">')
+    lines.append('        <button type="button" class="lettera-btn lettera-btn--active" data-lettera="all" aria-pressed="true">Tutte</button>')
     for lettera in tutte_lettere:
         if lettera in lettere_presenti:
-            lines.append(f'        <button class="lettera-btn" data-lettera="{lettera}">{lettera}</button>')
+            lines.append(f'        <button type="button" class="lettera-btn" data-lettera="{lettera}" aria-pressed="false">{lettera}</button>')
         else:
-            lines.append(f'        <button class="lettera-btn lettera-btn--disabled" data-lettera="{lettera}" disabled aria-hidden="true">{lettera}</button>')
+            lines.append(f'        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="{lettera}" disabled aria-hidden="true">{lettera}</button>')
     lines.append('    </div>')
     lines.append('</div>')
 
@@ -465,8 +465,12 @@ hide:
     lines.append('        btn.addEventListener("click", function() {')
     lines.append('            if (this.disabled) return;')
     lines.append('')
-    lines.append('            letteraBtns.forEach(b => b.classList.remove("lettera-btn--active"));')
+    lines.append('            letteraBtns.forEach(b => {')
+    lines.append('                b.classList.remove("lettera-btn--active");')
+    lines.append('                if (!b.disabled) b.setAttribute("aria-pressed", "false");')
+    lines.append('            });')
     lines.append('            this.classList.add("lettera-btn--active");')
+    lines.append('            this.setAttribute("aria-pressed", "true");')
     lines.append('            filtra();')
     lines.append('        });')
     lines.append('    });')

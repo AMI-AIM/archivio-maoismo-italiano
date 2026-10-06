@@ -16,6 +16,7 @@ from core.liste import meta_riga
 from core import esito
 from core.dati import ErroreDati, leggi_foglio
 from core.utils import formatta_data, slugify
+from core.miniature import varianti_locali
 
 try:
     from core.site_config import SITE_URL
@@ -232,7 +233,8 @@ def generate_single_page(item):
     body.append(f'<div class="org-dates">{escape_html(meta)}</div>')
     url_archivio = site_path('documenti/') + '?serie=' + urllib.parse.quote(label, safe='')
     body.append(f'<p class="soggetto-azione"><a class="doc-correlati__tutti" href="{escape_html(url_archivio)}">'
-                "Vedi questi documenti nell'archivio</a></p>")
+                + ("Vedi il documento" if num_doc == 1 else "Vedi questi documenti")
+                + " nell'archivio</a></p>")
     body.append('')
     body.append('<h2 class="soggetto-sezione">Documenti</h2>')
     body.append('')
@@ -310,7 +312,15 @@ def generate_index(argomenti):
 
         if item.get('immagine'):
             lines.append(f'<a class="hero-card" href="{slug}/">')
-            lines.append(f'    <img class="hero-card-img" src="{item["immagine"]}" alt="" loading="lazy">')
+            if item.get('immagine_card'):
+                varianti = item['immagine_card']
+                srcset = ', '.join(f'{u} {w}w' for u, w, _ in varianti)
+                media = varianti[len(varianti) // 2]
+                lines.append(f'    <img class="hero-card-img" src="{media[0]}" srcset="{srcset}" '
+                             'sizes="(max-width: 768px) calc(100vw - 32px), 600px" '
+                             f'width="{media[1]}" height="{media[2]}" alt="" loading="lazy" decoding="async">')
+            else:
+                lines.append(f'    <img class="hero-card-img" src="{item["immagine"]}" alt="" loading="lazy">')
         else:
             colore = colore_hash(item['label'])
             scuro = scurisci(colore)
@@ -554,6 +564,14 @@ def genera_argomenti():
         immagine_url, immagine_file = trova_immagine_argomento(item['slug'])
         item['immagine'] = immagine_url
         item['immagine_file'] = immagine_file
+        # Card dell'indice (4:3, ~580px su desktop e tutta riga su telefono):
+        # ritagli centrati gia' in 4:3, come object-fit: cover, invece delle
+        # fotografie intere da 1.200-1.600px.
+        item['immagine_card'] = []
+        if immagine_file:
+            item['immagine_card'] = varianti_locali(
+                os.path.join(ASSETS_ARGOMENTI_IMG_DIR, immagine_file),
+                'immagini/argomenti', f"{item['slug']}-card", (640, 960, 1280), rapporto=4 / 3)
 
     print('Stato immagini argomenti:')
     for item in sorted(argomenti, key=lambda x: x['label'].lower()):

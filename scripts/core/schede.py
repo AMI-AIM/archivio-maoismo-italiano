@@ -505,6 +505,10 @@ hide:
                     f'<img data-src="{img_url_attr}" '
                     f'alt="{titolo_html}" '
                     'class="lazy-img photo-embed">'
+                    # Senza JavaScript la foto resta visibile (il CSS nasconde
+                    # la copia lazy, che non verrebbe mai caricata).
+                    f'<noscript><img src="{img_url_attr}" alt="{titolo_html}" '
+                    'class="photo-embed" loading="lazy"></noscript>'
                 )
             else:
                 img_url_jpg = f"https://archive.org/download/{identifier}/{identifier}.jpg"
@@ -516,6 +520,8 @@ hide:
                     f'data-src-fallback="{img_url_png_attr}" '
                     f'alt="{titolo_html}" '
                     'class="lazy-img photo-embed">'
+                    f'<noscript><img src="{img_url_jpg_attr}" alt="{titolo_html}" '
+                    'class="photo-embed" loading="lazy"></noscript>'
                 )
             
             label_ia = (
@@ -654,7 +660,7 @@ hide:
         content += f"""
 <div class="citazione-pannello" id="citazione-pannello-{citazione_id}" role="region" aria-label="Cita questo documento" style="display:none;">
 {tabs_html}
-<div class="citazione-testo" id="citazione-testo-{citazione_id}" aria-live="polite"></div>
+<div class="citazione-testo" id="citazione-testo-{citazione_id}"></div>
 <button class="citazione-copia" id="citazione-copia-{citazione_id}" type="button">{_icona("copia")}<span class="citazione-copia__etichetta">Copia</span></button>
 </div>
 <noscript>

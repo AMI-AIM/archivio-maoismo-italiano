@@ -127,6 +127,70 @@ def _crea(dati, percorso, larghezza):
     os.replace(temporaneo, percorso)
 
 
+CARTELLA_BUILD_RADICE = os.path.join(_ROOT, 'build')
+
+
+def varianti_locali(sorgente, cartella_rel, radice, larghezze, rapporto=None):
+    """Versioni piu' leggere di un'immagine GIA' locale, per ``srcset``.
+
+    Non scarica nulla: legge ``sorgente`` (file in assets/) e scrive in
+    ``build/<cartella_rel>/<radice>-w<larghezza>.webp``. Le varianti sono un
+    prodotto della build (si rifanno in pochi secondi, anche su GitHub
+    Actions) e non entrano nel repository.
+
+    ``rapporto`` (larghezza/altezza, es. 4/3): ritaglio centrato, lo stesso
+    che il browser farebbe con ``object-fit: cover``; serve alle card a
+    proporzione fissa, dove un'immagine molto larga richiederebbe altrimenti
+    piu' pixel della card stessa.
+
+    Mai ingrandire: le larghezze oltre quella disponibile vengono saltate.
+    Ritorna ``[(url, larghezza, altezza), ...]`` in ordine crescente, oppure
+    ``[]`` se Pillow manca o il file non si legge (si usa l'immagine intera).
+    """
+    if not _pil() or not sorgente or not os.path.exists(sorgente):
+        return []
+    from PIL import Image, ImageOps
+    cartella = os.path.join(CARTELLA_BUILD_RADICE, cartella_rel)
+    risultato = []
+    try:
+        with Image.open(sorgente) as im:
+            im = ImageOps.exif_transpose(im)
+            if im.mode not in ('RGB', 'RGBA'):
+                im = im.convert('RGBA' if 'transparency' in im.info else 'RGB')
+            if rapporto:
+                if im.width / im.height > rapporto:  # troppo larga: taglia i lati
+                    w = round(im.height * rapporto)
+                    x = (im.width - w) // 2
+                    im = im.crop((x, 0, x + w, im.height))
+                else:                                # troppo alta: taglia sopra e sotto
+                    h = round(im.width / rapporto)
+                    y = (im.height - h) // 2
+                    im = im.crop((0, y, im.width, y + h))
+            os.makedirs(cartella, exist_ok=True)
+            larghezze_utili = sorted({min(int(l), im.width) for l in larghezze})
+            for larghezza in larghezze_utili:
+                nome = f'{_nome_sicuro(radice)}-w{larghezza}.webp'
+                percorso = os.path.join(cartella, nome)
+                altezza = max(1, round(im.height * larghezza / im.width))
+                if (not os.path.exists(percorso)
+                        or os.path.getmtime(percorso) < os.path.getmtime(sorgente)):
+                    copia = im if larghezza == im.width else im.resize((larghezza, altezza), Image.LANCZOS)
+                    temporaneo = percorso + '.tmp'
+                    copia.save(temporaneo, 'WEBP', quality=QUALITA_WEBP, method=6)
+                    os.replace(temporaneo, percorso)
+                rel = f'{cartella_rel}/{nome}'.replace(os.sep, '/')
+                risultato.append((site_path(rel), larghezza, altezza))
+    except Exception as errore:
+        print(f'Miniature: varianti di {os.path.basename(sorgente)} non create ({errore})')
+        return []
+    return risultato
+
+
+def percorso_miniatura(chiave, larghezza):
+    """Percorso in assets/ della miniatura ``chiave``-``larghezza`` (per varianti_locali)."""
+    return os.path.join(CARTELLA_ASSETS, f'{_nome_sicuro(chiave)}-{int(larghezza)}.webp')
+
+
 def miniatura(chiave, urls, larghezza):
     """Miniatura locale per ``chiave`` (es. l'ID AMI del documento).
 

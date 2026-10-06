@@ -288,6 +288,27 @@ def forme_varianti(valore):
     return [v.strip() for v in testo.split(';') if v.strip()]
 
 
+def chiave_ordinamento_nome(nome, cognome=''):
+    """Chiave per l'ordine alfabetico delle persone: cognome, poi il resto
+    del nome, minuscolo e senza accenti ("Aldo Brandirali" ->
+    "brandirali aldo", "Renzo Del Carria" -> "del carria renzo"). I nomi
+    cinesi hanno gia' il cognome in testa e restano uguali. Senza cognome
+    nella colonna Cognome si usa il nome com'e'."""
+    import unicodedata
+    nome = str(nome or '').strip()
+    cognome = str(cognome or '').strip()
+    if cognome in ('nan', 'None'):
+        cognome = ''
+    if cognome and cognome in nome:
+        resto = nome.replace(cognome, '', 1).strip()
+        base = f'{cognome} {resto}'.strip()
+    else:
+        base = nome
+    base = unicodedata.normalize('NFD', base.casefold())
+    base = ''.join(c for c in base if not unicodedata.combining(c))
+    return re.sub(r'\s+', ' ', base).strip()
+
+
 def testo_ricerca(*parti):
     """Testo normalizzato per le ricerche per nome negli indici di Persone
     e Organizzazioni: minuscole, senza accenti, punteggiatura e trattini

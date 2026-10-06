@@ -1527,9 +1527,15 @@ textarea {
    IMMAGINI LAZY
    ========================================================================== */
 
-.lazy-img {
+/* Nascosta finche' carica solo se c'e' JavaScript (classe ami-js nel
+   <head>); senza, la copia lazy non verrebbe mai caricata e resta la
+   copia in <noscript>. */
+.ami-js .lazy-img {
     transition: opacity 300ms ease-in-out;
     opacity: 0;
+}
+html:not(.ami-js) .lazy-img[data-src] {
+    display: none;
 }
 
 .lazy-img.lazy-loaded {

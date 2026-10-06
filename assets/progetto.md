@@ -178,7 +178,7 @@ Per citare la raccolta nel suo insieme:
 <button class="citazione-tab" data-formato="bibtex" type="button" aria-pressed="false">BibTeX</button>
 <button class="citazione-tab" data-formato="semplice" type="button" aria-pressed="false">Semplice</button>
 </div>
-<div class="citazione-testo" id="progetto-citazione-testo" aria-live="polite">Masci, Ivan (a cura di), <em>Archivio del Maoismo Italiano (AMI)</em>, <span class="citazione-url"><span>https://</span><wbr><span>ami-aim.github.io/</span><wbr><span>archivio-maoismo-italiano/</span></span>, consultato il [data di consultazione].</div>
+<div class="citazione-testo" id="progetto-citazione-testo">Masci, Ivan (a cura di), <em>Archivio del Maoismo Italiano (AMI)</em>, <span class="citazione-url"><span>https://</span><wbr><span>ami-aim.github.io/</span><wbr><span>archivio-maoismo-italiano/</span></span>, consultato il [data di consultazione].</div>
 <button class="citazione-copia" id="progetto-citazione-copia" type="button" hidden><svg class="ami-icona" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg><span class="citazione-copia__etichetta">Copia</span></button>
 </div>
 

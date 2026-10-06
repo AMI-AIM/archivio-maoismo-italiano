@@ -525,6 +525,26 @@ necessario. La data resta a 21px: titolo (29px+) e data si distinguono.
 .doc-percorso__sep {
   color: var(--md-default-fg-color--lighter);
 }
+/* "Torna ai risultati" (documenti.js): solo arrivando dall'archivio con
+   filtri o pagina; e' un'azione, quindi rossa, in fondo alla riga. */
+.md-typeset .doc-percorso a.doc-percorso__ritorno {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin-left: auto;
+  min-height: 36px;
+  color: var(--md-primary-fg-color);
+  font-weight: 600;
+}
+.md-typeset .doc-percorso a.doc-percorso__ritorno:hover {
+  color: var(--md-primary-fg-color--dark);
+  text-underline-offset: 0.2em;
+}
+@media (pointer: coarse) {
+  .md-typeset .doc-percorso a.doc-percorso__ritorno {
+    min-height: 44px;
+  }
+}
 
 /* Segnatura: AMI-0043 · Opuscolo · 1968 — come l'etichetta di un faldone */
 .md-typeset .doc-segnatura {
