@@ -255,3 +255,18 @@
 .autorita-rel__senza-pagina {
     color: var(--md-default-fg-color--light);
 }
+
+/* Relazioni raggruppate per tipo (Segretari, Membri, Scissioni…) */
+.autorita-rel__gruppo + .autorita-rel__gruppo {
+    margin-top: 0.6rem;
+}
+.md-typeset .autorita-rel__etichetta {
+    display: block;
+    margin-bottom: 0.15rem;
+    font-family: var(--ami-font-label);
+    font-size: var(--ami-font-size-2xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--md-default-fg-color--light);
+}
