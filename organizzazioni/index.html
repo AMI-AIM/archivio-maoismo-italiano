@@ -837,34 +837,34 @@
         <input type="text" id="search-input" placeholder="Cerca per nome…" aria-label="Cerca organizzazioni">
         <span id="search-counter" class="search-counter" aria-live="polite"></span>
     </div>
-    <div class="alfabeto-bar">
-        <button class="lettera-btn lettera-btn--active" data-lettera="all">Tutte</button>
-        <button class="lettera-btn" data-lettera="A">A</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="B" disabled aria-hidden="true">B</button>
-        <button class="lettera-btn" data-lettera="C">C</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="D" disabled aria-hidden="true">D</button>
-        <button class="lettera-btn" data-lettera="E">E</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="F" disabled aria-hidden="true">F</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="G" disabled aria-hidden="true">G</button>
-        <button class="lettera-btn" data-lettera="H">H</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="I" disabled aria-hidden="true">I</button>
-        <button class="lettera-btn" data-lettera="J">J</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="K" disabled aria-hidden="true">K</button>
-        <button class="lettera-btn" data-lettera="L">L</button>
-        <button class="lettera-btn" data-lettera="M">M</button>
-        <button class="lettera-btn" data-lettera="N">N</button>
-        <button class="lettera-btn" data-lettera="O">O</button>
-        <button class="lettera-btn" data-lettera="P">P</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="Q" disabled aria-hidden="true">Q</button>
-        <button class="lettera-btn" data-lettera="R">R</button>
-        <button class="lettera-btn" data-lettera="S">S</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="T" disabled aria-hidden="true">T</button>
-        <button class="lettera-btn" data-lettera="U">U</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="V" disabled aria-hidden="true">V</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="W" disabled aria-hidden="true">W</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="X" disabled aria-hidden="true">X</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="Y" disabled aria-hidden="true">Y</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="Z" disabled aria-hidden="true">Z</button>
+    <div class="alfabeto-bar" role="group" aria-label="Filtra per iniziale">
+        <button type="button" class="lettera-btn lettera-btn--active" data-lettera="all" aria-pressed="true">Tutte</button>
+        <button type="button" class="lettera-btn" data-lettera="A" aria-pressed="false">A</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="B" disabled aria-hidden="true">B</button>
+        <button type="button" class="lettera-btn" data-lettera="C" aria-pressed="false">C</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="D" disabled aria-hidden="true">D</button>
+        <button type="button" class="lettera-btn" data-lettera="E" aria-pressed="false">E</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="F" disabled aria-hidden="true">F</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="G" disabled aria-hidden="true">G</button>
+        <button type="button" class="lettera-btn" data-lettera="H" aria-pressed="false">H</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="I" disabled aria-hidden="true">I</button>
+        <button type="button" class="lettera-btn" data-lettera="J" aria-pressed="false">J</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="K" disabled aria-hidden="true">K</button>
+        <button type="button" class="lettera-btn" data-lettera="L" aria-pressed="false">L</button>
+        <button type="button" class="lettera-btn" data-lettera="M" aria-pressed="false">M</button>
+        <button type="button" class="lettera-btn" data-lettera="N" aria-pressed="false">N</button>
+        <button type="button" class="lettera-btn" data-lettera="O" aria-pressed="false">O</button>
+        <button type="button" class="lettera-btn" data-lettera="P" aria-pressed="false">P</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="Q" disabled aria-hidden="true">Q</button>
+        <button type="button" class="lettera-btn" data-lettera="R" aria-pressed="false">R</button>
+        <button type="button" class="lettera-btn" data-lettera="S" aria-pressed="false">S</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="T" disabled aria-hidden="true">T</button>
+        <button type="button" class="lettera-btn" data-lettera="U" aria-pressed="false">U</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="V" disabled aria-hidden="true">V</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="W" disabled aria-hidden="true">W</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="X" disabled aria-hidden="true">X</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="Y" disabled aria-hidden="true">Y</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="Z" disabled aria-hidden="true">Z</button>
     </div>
 </div>
 <div class="org-grid" id="org-grid">
@@ -1103,8 +1103,12 @@
         btn.addEventListener("click", function() {
             if (this.disabled) return;
 
-            letteraBtns.forEach(b => b.classList.remove("lettera-btn--active"));
+            letteraBtns.forEach(b => {
+                b.classList.remove("lettera-btn--active");
+                if (!b.disabled) b.setAttribute("aria-pressed", "false");
+            });
             this.classList.add("lettera-btn--active");
+            this.setAttribute("aria-pressed", "true");
             filtra();
         });
     });

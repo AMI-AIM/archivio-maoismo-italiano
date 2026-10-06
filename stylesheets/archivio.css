@@ -208,6 +208,13 @@
     outline: 2px solid var(--md-primary-fg-color);
     outline-offset: 2px;
 }
+/* Voce che con i filtri attivi darebbe 0 documenti: attenuata ma
+   leggibile (>= 4,5:1) e ancora cliccabile, al suo posto nell'elenco. */
+.filtro-gruppo .spunta--zero label,
+.spunta--zero .spunta__conteggio {
+    color: var(--md-default-fg-color--light);
+    font-weight: 400;
+}
 
 /* Segnatura AMI accanto alla data nei risultati */
 .risultato-segnatura {
@@ -395,19 +402,33 @@
     padding-top: 0.8rem;
 }
 
+/* "Azzera filtri" nel pannello: azione secondaria come "Cita questo
+   documento" (testo rosso in Archivo, senza fondo). Nello stato vuoto la
+   stessa azione e' il pulsante pieno: li' e' l'unica via d'uscita. */
 #reset-filtri {
-    padding: 0.2rem 0.8rem;
-    background: var(--md-default-fg-color--lightest);
-    border: none;
-    border-radius: var(--ami-radius-sm);
-    color: var(--md-default-fg-color);
-    font-size: var(--ami-font-size-xs); /* 12px */
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: var(--ami-radius-xs);
+    font-family: var(--ami-font-label);
+    font-size: var(--ami-font-size-sm);
+    font-weight: 600;
+    color: var(--md-primary-fg-color);
     cursor: pointer;
-    transition: background 0.15s;
 }
 
 #reset-filtri:hover {
-    background: var(--md-default-fg-color--lighter);
+    color: var(--md-primary-fg-color--dark);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+#reset-filtri:focus-visible {
+    outline: 2px solid var(--md-primary-fg-color);
+    outline-offset: 2px;
 }
 
 /* Testata dei risultati: conteggio a sinistra, ordinamento a destra */
@@ -421,6 +442,70 @@
     margin-bottom: 0.75rem;
     border-bottom: 1px solid var(--md-default-fg-color--lighter);
 }
+/* Il conteggio riceve il focus dopo il cambio di pagina: anello solo
+   da tastiera. */
+#risultati-conteggio:focus {
+    outline: none;
+}
+#risultati-conteggio:focus-visible {
+    outline: 2px solid var(--md-primary-fg-color);
+    outline-offset: 4px;
+    border-radius: var(--ami-radius-xs);
+}
+
+/* Grafie d'epoca: "Nel catalogo: Mao Zedong (anche «Mao Tse-tung»)" con
+   l'azione che filtra per quella persona. Registro catalogo: una riga su
+   filetto, nessun riquadro. */
+.avviso-forma {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+    margin: 0 0 1rem;
+    padding: 0 0 0.6rem;
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
+    font-family: var(--ami-font-label);
+    font-size: var(--ami-font-size-sm);
+    line-height: var(--ami-line-height-snug);
+    color: var(--md-default-fg-color--light);
+}
+.avviso-forma[hidden] {
+    display: none;
+}
+.avviso-forma strong {
+    color: var(--md-default-fg-color);
+    font-weight: 600;
+}
+.avviso-forma__azione {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    min-height: 36px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-weight: 600;
+    color: var(--md-primary-fg-color);
+    cursor: pointer;
+}
+.avviso-forma__azione:hover {
+    color: var(--md-primary-fg-color--dark);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+.avviso-forma__azione:focus-visible {
+    outline: 2px solid var(--md-primary-fg-color);
+    outline-offset: 2px;
+    border-radius: var(--ami-radius-xs);
+}
+@media (pointer: coarse) {
+    .avviso-forma__azione {
+        min-height: 44px;
+    }
+}
+
 #risultati-conteggio {
     font-family: var(--ami-font-label);
     font-size: var(--ami-font-size-sm);

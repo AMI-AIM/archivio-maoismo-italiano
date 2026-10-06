@@ -3,6 +3,7 @@
 // ============================================================
 let documenti = [];
 let varianti = {}; // nome -> altre forme del nome (per restringere gli elenchi)
+let ordineNomi = {}; // persona -> chiave d'ordine per cognome ("brandirali aldo")
 let annoMin = 1950;
 let annoMax = 2025;
 let currentPage = 1;
@@ -112,16 +113,34 @@ function indiceRicerca(doc) {
     return doc._indiceRicerca;
 }
 
+function parolaPresente(doc, indice, p) {
+    // Cinese e altre scritture senza spazi tra le parole: basta
+    // che la sequenza compaia.
+    if (RE_NON_LATINO.test(p)) return indice.includes(p);
+    if (indice.includes(' ' + p)) return true;
+    // "tse-tung" nella query trova anche "Tse Tung" scritto staccato.
+    if (p.includes('-') && indice.includes(' ' + p.replace(/-+/g, ' '))) return true;
+    // Solo cifre ("0004", "4"): cerca anche dentro la segnatura.
+    return /^\d+$/.test(p) && doc._idRicerca.includes(p);
+}
+
+// Trattino e spazio sono equivalenti tra parole VICINE della query:
+// "mao tse tung" trova "Mao Tse-tung", "ciu en lai" trova "Ciu-En-lai".
+// Una parola sola resta intera: "lenin" non trova "marxista-leninista".
 function corrispondeRicerca(doc, parole) {
     const indice = indiceRicerca(doc);
-    return parole.every(p => {
-        // Cinese e altre scritture senza spazi tra le parole: basta
-        // che la sequenza compaia.
-        if (RE_NON_LATINO.test(p)) return indice.includes(p);
-        if (indice.includes(' ' + p)) return true;
-        // Solo cifre ("0004", "4"): cerca anche dentro la segnatura.
-        return /^\d+$/.test(p) && doc._idRicerca.includes(p);
-    });
+    const trovate = parole.map(p => parolaPresente(doc, indice, p));
+    if (trovate.every(Boolean)) return true;
+    for (let i = 0; i < parole.length - 1; i++) {
+        for (let j = i + 1; j < parole.length; j++) {
+            const gruppo = parole.slice(i, j + 1);
+            if (gruppo.some(p => RE_NON_LATINO.test(p))) break;
+            if (indice.includes(' ' + gruppo.join('-'))) {
+                for (let k = i; k <= j; k++) trovate[k] = true;
+            }
+        }
+    }
+    return trovate.every(Boolean);
 }
 
 function tronca(testo, max) {
@@ -138,6 +157,7 @@ async function caricaDati() {
         const data = await response.json();
         documenti = data.documenti;
         varianti = data.varianti || {};
+        ordineNomi = data.ordine_nomi || {};
         annoMin = data.anno_min || 1900;
         annoMax = data.anno_max || 2025;
         
@@ -195,17 +215,15 @@ function precompilaRicercaDaURL() {
 
     const ordineParam = params.get('ordine');
     const ordina = document.getElementById('ordina-risultati');
-    if (ordina && ordineParam && Array.from(ordina.options).some(o => o.value === ordineParam)) {
-        ordina.value = ordineParam;
+    if (ordina) {
+        ordina.value = (ordineParam && Array.from(ordina.options).some(o => o.value === ordineParam))
+            ? ordineParam : 'data';
     }
 
-    const query = params.get('q');
-    if (query) {
-        const campoTesto = document.getElementById('filtro-testo');
-        if (campoTesto) {
-            campoTesto.value = query;
-        }
-    }
+    // Lo stato si ricostruisce per intero dall'URL (anche cio' che manca
+    // va azzerato): la funzione serve all'arrivo e al tasto Indietro.
+    const campoTesto = document.getElementById('filtro-testo');
+    if (campoTesto) campoTesto.value = params.get('q') || '';
 
     // Filtri multi-select: ogni parametro puo' contenere piu' valori
     // separati da virgola (ognuno individualmente URL-encoded, cosi'
@@ -213,7 +231,10 @@ function precompilaRicercaDaURL() {
     Object.keys(URL_PARAM_PER_SELECT).forEach(selectId => {
         const paramName = URL_PARAM_PER_SELECT[selectId];
         const raw = params.get(paramName);
-        if (!raw) return;
+        if (!raw) {
+            caselle(selectId).forEach(c => { c.checked = false; });
+            return;
+        }
 
         const valoriRichiesti = raw.split(',').map(v => {
             try {
@@ -248,13 +269,25 @@ function precompilaRicercaDaURL() {
             document.getElementById('anno-max-label').textContent = maxSlider.value;
             aggiornaTrackSlider();
         }
+    } else {
+        const minSlider = document.getElementById('filtro-anno-min');
+        const maxSlider = document.getElementById('filtro-anno-max');
+        if (minSlider && maxSlider) {
+            minSlider.value = annoMin;
+            maxSlider.value = annoMax;
+            document.getElementById('anno-min-label').textContent = annoMin;
+            document.getElementById('anno-max-label').textContent = annoMax;
+            aggiornaTrackSlider();
+        }
     }
 }
 
 // Ricostruisce l'URL corrente in base allo stato attuale dei filtri.
 // Usa replaceState (non pushState) per non intasare la cronologia del
-// browser a ogni singola interazione con i filtri.
-function aggiornaURLFiltri() {
+// browser a ogni singola interazione con i filtri; il cambio di pagina
+// invece crea una voce (nuovaVoce), cosi' Indietro torna alla pagina
+// precedente dei risultati invece di uscire dall'archivio.
+function aggiornaURLFiltri(nuovaVoce) {
     const params = new URLSearchParams();
 
     const campoTesto = document.getElementById('filtro-testo');
@@ -294,7 +327,10 @@ function aggiornaURLFiltri() {
 
     const queryString = params.toString();
     const nuovoURL = window.location.pathname + (queryString ? `?${queryString}` : '');
-    window.history.replaceState(null, '', nuovoURL);
+    if (nuovaVoce) window.history.pushState(null, '', nuovoURL);
+    else window.history.replaceState(null, '', nuovoURL);
+    // Ultima ricerca, per "Torna ai risultati" nelle schede (documenti.js).
+    try { sessionStorage.setItem('ami-ultima-ricerca', nuovoURL); } catch (e) { /* storage non disponibile */ }
 }
 
 // ------------------------------------------------------------
@@ -521,7 +557,10 @@ function popolaSpunte(id, conteggi, nomePlurale) {
     const gruppo = document.getElementById(id);
     if (!gruppo) return;
     const selezionati = getSelectedValues(id);
-    const voci = Array.from(conteggi.keys()).sort((a, b) => a.localeCompare(b, 'it', { sensitivity: 'base' }));
+    // Persone in ordine di cognome ("Brandirali, Aldo" sotto la B), come
+    // nell'indice delle persone; le altre voci in ordine alfabetico.
+    const chiave = v => ordineNomi[v] || v;
+    const voci = Array.from(conteggi.keys()).sort((a, b) => chiave(a).localeCompare(chiave(b), 'it', { sensitivity: 'base' }));
 
     let html = '';
     if (voci.length > 10) {
@@ -557,41 +596,41 @@ function popolaSpunte(id, conteggi, nomePlurale) {
 // ============================================================
 // Unica fonte del filtraggio: usata sia da applicaFiltri() sia dai
 // pulsanti di paginazione, per evitare derive tra le due copie.
+// Gruppi di caselle e valori del documento che ciascuno filtra.
+const GRUPPI_FILTRO = {
+    'filtro-organizzazione': doc => doc.organizzazioni || [],
+    'filtro-persona': doc => doc.persone || [],
+    'filtro-tipo': doc => (doc.tipo ? [doc.tipo] : []),
+    'filtro-argomento': doc => (Array.isArray(doc.serie) ? doc.serie : [])
+};
+
+function leggiStatoFiltri() {
+    const selezioni = {};
+    Object.keys(GRUPPI_FILTRO).forEach(id => { selezioni[id] = getSelectedValues(id); });
+    return {
+        selezioni,
+        annoMin: parseInt(document.getElementById('filtro-anno-min').value, 10),
+        annoMax: parseInt(document.getElementById('filtro-anno-max').value, 10),
+        parole: paroleQuery(document.getElementById('filtro-testo').value)
+    };
+}
+
+// Entro un gruppo le voci si sommano (o), tra gruppi si restringe (e).
+// "escludi" ignora un gruppo: serve a contare le voci di quel gruppo.
+function passaFiltri(doc, stato, escludi) {
+    for (const id in GRUPPI_FILTRO) {
+        if (id === escludi) continue;
+        const scelti = stato.selezioni[id];
+        if (scelti.length && !GRUPPI_FILTRO[id](doc).some(v => scelti.includes(v))) return false;
+    }
+    if (doc.anno && (doc.anno < stato.annoMin || doc.anno > stato.annoMax)) return false;
+    if (stato.parole.length && !corrispondeRicerca(doc, stato.parole)) return false;
+    return true;
+}
+
 function calcolaRisultati() {
-    const orgSelezionate = getSelectedValues('filtro-organizzazione');
-    const personeSelezionate = getSelectedValues('filtro-persona');
-    const tipiSelezionati = getSelectedValues('filtro-tipo');
-    const argomentiSelezionati = getSelectedValues('filtro-argomento');
-    const annoMinVal = parseInt(document.getElementById('filtro-anno-min').value);
-    const annoMaxVal = parseInt(document.getElementById('filtro-anno-max').value);
-    const parole = paroleQuery(document.getElementById('filtro-testo').value);
-    
-    let risultati = documenti.filter(doc => {
-        if (orgSelezionate.length > 0 && !orgSelezionate.some(o => doc.organizzazioni.includes(o))) {
-            return false;
-        }
-        if (personeSelezionate.length > 0 && !personeSelezionate.some(p => doc.persone.includes(p))) {
-            return false;
-        }
-        if (tipiSelezionati.length > 0 && !tipiSelezionati.includes(doc.tipo)) {
-            return false;
-        }
-        if (argomentiSelezionati.length > 0) {
-            if (!doc.serie || !Array.isArray(doc.serie)) {
-                return false;
-            }
-            if (!argomentiSelezionati.some(arg => doc.serie.includes(arg))) {
-                return false;
-            }
-        }
-        if (doc.anno && (doc.anno < annoMinVal || doc.anno > annoMaxVal)) {
-            return false;
-        }
-        if (parole.length && !corrispondeRicerca(doc, parole)) {
-            return false;
-        }
-        return true;
-    });
+    const stato = leggiStatoFiltri();
+    let risultati = documenti.filter(doc => passaFiltri(doc, stato, null));
     
     // ORDINAMENTO: cronologico (predefinito), cronologico inverso o per
     // titolo. I documenti senza data restano sempre in fondo.
@@ -618,9 +657,125 @@ function calcolaRisultati() {
 
 function applicaFiltri() {
     currentPage = 1; // Reset pagina alla prima quando i filtri cambiano
-    mostraRisultati(calcolaRisultati());
-    renderFiltriAttivi(); // Aggiorna la riga di chip riepilogo filtri
+    aggiornaVista();
     aggiornaURLFiltri();  // Riflette lo stato corrente dei filtri nell'URL
+}
+
+function aggiornaVista() {
+    mostraRisultati(calcolaRisultati());
+    renderFiltriAttivi();     // Aggiorna la riga di chip riepilogo filtri
+    aggiornaConteggiFiltri(); // Numeri accanto alle caselle
+    aggiornaAvvisoForme();    // "Nel catalogo: Mao Zedong (anche ...)"
+}
+
+// ------------------------------------------------------------
+// CONTEGGI DELLE CASELLE: seguono i risultati
+// ------------------------------------------------------------
+// Ogni numero dice quanti documenti si otterrebbero spuntando quella
+// voce con gli altri filtri attivi (il proprio gruppo escluso, perche'
+// dentro un gruppo le voci si sommano). Le voci a 0 si attenuano ma
+// restano cliccabili e in ordine: l'elenco non salta sotto il dito.
+function aggiornaConteggiFiltri() {
+    const stato = leggiStatoFiltri();
+    Object.keys(GRUPPI_FILTRO).forEach(id => {
+        const gruppo = document.getElementById(id);
+        if (!gruppo) return;
+        const conteggi = new Map();
+        documenti.forEach(doc => {
+            if (!passaFiltri(doc, stato, id)) return;
+            new Set(GRUPPI_FILTRO[id](doc)).forEach(v => conteggi.set(v, (conteggi.get(v) || 0) + 1));
+        });
+        gruppo.querySelectorAll('.spunta').forEach(li => {
+            const casella = li.querySelector('input[type="checkbox"]');
+            const numero = li.querySelector('.spunta__conteggio');
+            if (!casella || !numero) return;
+            const n = conteggi.get(casella.value) || 0;
+            numero.textContent = n;
+            numero.setAttribute('aria-label', n === 1 ? '1 documento' : `${n} documenti`);
+            li.classList.toggle('spunta--zero', n === 0 && !casella.checked);
+        });
+    });
+}
+
+// ------------------------------------------------------------
+// GRAFIE D'EPOCA NELLA RICERCA TESTUALE
+// ------------------------------------------------------------
+// Le altre forme del nome non entrano nei risultati della ricerca
+// testuale (scelta del curatore). Se pero' la query contiene una di
+// queste forme ("mao tse tung", "ciu en lai", "lin piao"), sopra i
+// risultati compare la forma del catalogo con l'azione che raccoglie
+// tutti i documenti collegati a quella persona o organizzazione.
+function trovaFormaVariante(query) {
+    const q = ' ' + normalizzaNome(query) + ' ';
+    if (!q.trim()) return null;
+    let trovata = null;
+    Object.keys(varianti).forEach(nome => {
+        (varianti[nome] || []).forEach(forma => {
+            const f = normalizzaNome(forma);
+            if (f && q.includes(' ' + f + ' ') && (!trovata || f.length > trovata.lunghezza)) {
+                trovata = { nome, forma, lunghezza: f.length };
+            }
+        });
+    });
+    return trovata;
+}
+
+function aggiornaAvvisoForme() {
+    const campo = document.getElementById('filtro-testo');
+    const contenitore = document.getElementById('risultati-container');
+    if (!campo || !contenitore) return;
+    let avviso = document.getElementById('avviso-forma');
+
+    const trovata = trovaFormaVariante(campo.value);
+    let gruppoId = null;
+    let casella = null;
+    if (trovata) {
+        ['filtro-persona', 'filtro-organizzazione'].some(id => {
+            casella = caselle(id).find(c => c.value === trovata.nome) || null;
+            if (casella) gruppoId = id;
+            return Boolean(casella);
+        });
+    }
+    if (!trovata || !casella || casella.checked) {
+        if (avviso) avviso.hidden = true;
+        return;
+    }
+
+    // Quanti documenti darebbe il filtro, con gli altri filtri attivi
+    // e senza il testo cercato (che l'azione toglie).
+    const stato = leggiStatoFiltri();
+    stato.parole = [];
+    stato.selezioni[gruppoId] = [trovata.nome];
+    const n = documenti.filter(doc => passaFiltri(doc, stato, null)).length;
+
+    if (!avviso) {
+        avviso = document.createElement('p');
+        avviso.id = 'avviso-forma';
+        avviso.className = 'avviso-forma';
+        contenitore.parentNode.insertBefore(avviso, contenitore);
+    }
+    const azione = n === 1 ? 'Vedi il documento collegato' : `Vedi i ${n} documenti collegati`;
+    avviso.innerHTML =
+        `<span class="avviso-forma__testo">Nel catalogo: <strong>${escapeHtml(trovata.nome)}</strong> ` +
+        `<span class="avviso-forma__variante">(anche «${escapeHtml(trovata.forma)}»)</span></span>` +
+        `<button type="button" class="avviso-forma__azione">${azione}` +
+        '<svg class="ami-icona" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>';
+    avviso.hidden = false;
+    avviso.querySelector('button').addEventListener('click', function () {
+        casella.checked = true;
+        campo.value = '';
+        applicaFiltri();
+        mettiFocusSuiRisultati();
+    });
+}
+
+// Dopo un'azione che ridisegna l'elenco (pagina, forma del nome) il
+// focus va sul conteggio dei risultati: senza, restava sul body.
+function mettiFocusSuiRisultati() {
+    const conteggio = document.getElementById('risultati-conteggio');
+    if (!conteggio) return;
+    conteggio.setAttribute('tabindex', '-1');
+    conteggio.focus({ preventScroll: true });
 }
 
 function getSelectedValues(id) {
@@ -873,15 +1028,18 @@ function generaIterfacciaPaginazione(container, current, total) {
                 currentPage = page;
                 const risultati = calcolaRisultati();
                 mostraRisultati(risultati);
-                aggiornaURLFiltri();
+                aggiornaURLFiltri(true);
                 
                 // Riporta la vista in cima ai risultati: i pulsanti di paginazione
                 // sono in fondo alla lista, senza questo l'utente resterebbe
-                // scrollato in basso senza vedere i nuovi risultati.
-                const risultatiContainer = document.getElementById('risultati-container');
-                if (risultatiContainer) {
-                    risultatiContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // scrollato in basso senza vedere i nuovi risultati. Il focus
+                // segue la vista (il pulsante premuto non esiste piu').
+                const testata = document.querySelector('.risultati-testata') || document.getElementById('risultati-container');
+                if (testata) {
+                    const riduci = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    testata.scrollIntoView({ behavior: riduci ? 'auto' : 'smooth', block: 'start' });
                 }
+                mettiFocusSuiRisultati();
             }
         });
     });
@@ -1002,6 +1160,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // browser arriverebbe prima, su una pagina ancora vuota.
     if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
     window.addEventListener('pagehide', salvaPosizione);
+    // Indietro/Avanti tra le pagine dei risultati: lo stato si rilegge
+    // dall'URL della voce di cronologia.
+    window.addEventListener('popstate', function () {
+        if (!documenti.length) return;
+        precompilaRicercaDaURL();
+        const pagina = parseInt(new URLSearchParams(window.location.search).get('pagina'), 10);
+        currentPage = !isNaN(pagina) && pagina > 1 ? pagina : 1;
+        aggiornaVista();
+    });
     inizializzaFiltriMobile();
     caricaDati();
 });

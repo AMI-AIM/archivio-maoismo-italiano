@@ -834,53 +834,65 @@
         <input type="text" id="search-input" placeholder="Cerca per nome…" aria-label="Cerca persone">
         <span id="search-counter" class="search-counter" aria-live="polite"></span>
     </div>
-    <div class="alfabeto-bar">
-        <button class="lettera-btn lettera-btn--active" data-lettera="all">Tutte</button>
-        <button class="lettera-btn" data-lettera="A">A</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="B" disabled aria-hidden="true">B</button>
-        <button class="lettera-btn" data-lettera="C">C</button>
-        <button class="lettera-btn" data-lettera="D">D</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="E" disabled aria-hidden="true">E</button>
-        <button class="lettera-btn" data-lettera="F">F</button>
-        <button class="lettera-btn" data-lettera="G">G</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="H" disabled aria-hidden="true">H</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="I" disabled aria-hidden="true">I</button>
-        <button class="lettera-btn" data-lettera="J">J</button>
-        <button class="lettera-btn" data-lettera="K">K</button>
-        <button class="lettera-btn" data-lettera="L">L</button>
-        <button class="lettera-btn" data-lettera="M">M</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="N" disabled aria-hidden="true">N</button>
-        <button class="lettera-btn" data-lettera="O">O</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="P" disabled aria-hidden="true">P</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="Q" disabled aria-hidden="true">Q</button>
-        <button class="lettera-btn" data-lettera="R">R</button>
-        <button class="lettera-btn" data-lettera="S">S</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="T" disabled aria-hidden="true">T</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="U" disabled aria-hidden="true">U</button>
-        <button class="lettera-btn" data-lettera="V">V</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="W" disabled aria-hidden="true">W</button>
-        <button class="lettera-btn lettera-btn--disabled" data-lettera="X" disabled aria-hidden="true">X</button>
-        <button class="lettera-btn" data-lettera="Y">Y</button>
-        <button class="lettera-btn" data-lettera="Z">Z</button>
+    <div class="alfabeto-bar" role="group" aria-label="Filtra per iniziale">
+        <button type="button" class="lettera-btn lettera-btn--active" data-lettera="all" aria-pressed="true">Tutte</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="A" disabled aria-hidden="true">A</button>
+        <button type="button" class="lettera-btn" data-lettera="B" aria-pressed="false">B</button>
+        <button type="button" class="lettera-btn" data-lettera="C" aria-pressed="false">C</button>
+        <button type="button" class="lettera-btn" data-lettera="D" aria-pressed="false">D</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="E" disabled aria-hidden="true">E</button>
+        <button type="button" class="lettera-btn" data-lettera="F" aria-pressed="false">F</button>
+        <button type="button" class="lettera-btn" data-lettera="G" aria-pressed="false">G</button>
+        <button type="button" class="lettera-btn" data-lettera="H" aria-pressed="false">H</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="I" disabled aria-hidden="true">I</button>
+        <button type="button" class="lettera-btn" data-lettera="J" aria-pressed="false">J</button>
+        <button type="button" class="lettera-btn" data-lettera="K" aria-pressed="false">K</button>
+        <button type="button" class="lettera-btn" data-lettera="L" aria-pressed="false">L</button>
+        <button type="button" class="lettera-btn" data-lettera="M" aria-pressed="false">M</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="N" disabled aria-hidden="true">N</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="O" disabled aria-hidden="true">O</button>
+        <button type="button" class="lettera-btn" data-lettera="P" aria-pressed="false">P</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="Q" disabled aria-hidden="true">Q</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="R" disabled aria-hidden="true">R</button>
+        <button type="button" class="lettera-btn" data-lettera="S" aria-pressed="false">S</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="T" disabled aria-hidden="true">T</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="U" disabled aria-hidden="true">U</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="V" disabled aria-hidden="true">V</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="W" disabled aria-hidden="true">W</button>
+        <button type="button" class="lettera-btn lettera-btn--disabled" data-lettera="X" disabled aria-hidden="true">X</button>
+        <button type="button" class="lettera-btn" data-lettera="Y" aria-pressed="false">Y</button>
+        <button type="button" class="lettera-btn" data-lettera="Z" aria-pressed="false">Z</button>
     </div>
 </div>
 <div class="people-grid" id="people-grid">
-<div class="people-card" data-lettera="A" data-cerca="aldo brandirali">
+<div class="people-card" data-lettera="B" data-cerca="aldo brandirali">
     <a href="aldo-brandirali/" class="people-link">
         <div class="people-name">Aldo Brandirali</div>
         <div class="people-meta"><span class="people-dates people-dates--aperta">1941 – </span><span class="people-count">1 documento</span></div>
     </a>
 </div>
-<div class="people-card" data-lettera="A" data-cerca="angiolo gracci">
-    <a href="angiolo-gracci/" class="people-link">
-        <div class="people-name">Angiolo Gracci</div>
-        <div class="people-meta"><span class="people-dates">1920 – 2004</span><span class="people-count">1 documento</span></div>
-    </a>
-</div>
-<div class="people-card" data-lettera="A" data-cerca="arnaldo bressan">
+<div class="people-card" data-lettera="B" data-cerca="arnaldo bressan">
     <a href="arnaldo-bressan/" class="people-link">
         <div class="people-name">Arnaldo Bressan</div>
         <div class="people-meta"><span class="people-dates">1933 – 1996</span><span class="people-count">1 documento</span></div>
+    </a>
+</div>
+<div class="people-card" data-lettera="B" data-cerca="giuseppe burgani beppe burgani">
+    <a href="giuseppe-burgani/" class="people-link">
+        <div class="people-name">Giuseppe Burgani</div>
+        <div class="people-meta"><span class="people-dates">s.d.</span><span class="people-count">1 documento</span></div>
+    </a>
+</div>
+<div class="people-card" data-lettera="C" data-cerca="vincenzo calo">
+    <a href="vincenzo-calo/" class="people-link">
+        <div class="people-name">Vincenzo Calò</div>
+        <div class="people-meta"><span class="people-dates">s.d.</span><span class="people-count">2 documenti</span></div>
+    </a>
+</div>
+<div class="people-card" data-lettera="C" data-cerca="mario capanna">
+    <a href="mario-capanna/" class="people-link">
+        <div class="people-name">Mario Capanna</div>
+        <div class="people-meta"><span class="people-dates people-dates--aperta">1945 – </span><span class="people-count">1 documento</span></div>
     </a>
 </div>
 <div class="people-card" data-lettera="C" data-cerca="chen boda chen po ta chen pota">
@@ -889,43 +901,37 @@
         <div class="people-meta"><span class="people-dates">1904 – 1989</span><span class="people-count">2 documenti</span></div>
     </a>
 </div>
+<div class="people-card" data-lettera="D" data-cerca="renzo del carria">
+    <a href="renzo-del-carria/" class="people-link">
+        <div class="people-name">Renzo Del Carria</div>
+        <div class="people-meta"><span class="people-dates">1924 – 2010</span><span class="people-count">2 documenti</span></div>
+    </a>
+</div>
 <div class="people-card" data-lettera="D" data-cerca="dino dini">
     <a href="dino-dini/" class="people-link">
         <div class="people-name">Dino Dini</div>
         <div class="people-meta"><span class="people-dates">s.d.</span><span class="people-count">3 documenti</span></div>
     </a>
 </div>
-<div class="people-card" data-lettera="D" data-cerca="dino frangioni livio">
-    <a href="dino-frangioni/" class="people-link">
-        <div class="people-name">Dino Frangioni</div>
-        <div class="people-meta"><span class="people-dates">1898 – 1973</span><span class="people-count">1 documento</span></div>
-    </a>
-</div>
-<div class="people-card" data-lettera="F" data-cerca="fosco dinucci">
+<div class="people-card" data-lettera="D" data-cerca="fosco dinucci">
     <a href="fosco-dinucci/" class="people-link">
         <div class="people-name">Fosco Dinucci</div>
         <div class="people-meta"><span class="people-dates">1921 – 1993</span><span class="people-count">2 documenti</span></div>
     </a>
 </div>
-<div class="people-card" data-lettera="G" data-cerca="giacomo montemezzani gino montemezzani">
-    <a href="giacomo-montemezzani/" class="people-link">
-        <div class="people-name">Giacomo Montemezzani</div>
-        <div class="people-meta"><span class="people-dates">1927 – 2009</span><span class="people-count">1 documento</span></div>
+<div class="people-card" data-lettera="F" data-cerca="dino frangioni livio">
+    <a href="dino-frangioni/" class="people-link">
+        <div class="people-name">Dino Frangioni</div>
+        <div class="people-meta"><span class="people-dates">1898 – 1973</span><span class="people-count">1 documento</span></div>
     </a>
 </div>
-<div class="people-card" data-lettera="G" data-cerca="giorgio zucchetti">
-    <a href="giorgio-zucchetti/" class="people-link">
-        <div class="people-name">Giorgio Zucchetti</div>
-        <div class="people-meta"><span class="people-dates">1920 – 1997</span><span class="people-count">1 documento</span></div>
+<div class="people-card" data-lettera="G" data-cerca="angiolo gracci">
+    <a href="angiolo-gracci/" class="people-link">
+        <div class="people-name">Angiolo Gracci</div>
+        <div class="people-meta"><span class="people-dates">1920 – 2004</span><span class="people-count">1 documento</span></div>
     </a>
 </div>
-<div class="people-card" data-lettera="G" data-cerca="giuseppe burgani beppe burgani">
-    <a href="giuseppe-burgani/" class="people-link">
-        <div class="people-name">Giuseppe Burgani</div>
-        <div class="people-meta"><span class="people-dates">s.d.</span><span class="people-count">1 documento</span></div>
-    </a>
-</div>
-<div class="people-card" data-lettera="G" data-cerca="gustavo hermann">
+<div class="people-card" data-lettera="H" data-cerca="gustavo hermann">
     <a href="gustavo-hermann/" class="people-link">
         <div class="people-name">Gustavo Hermann</div>
         <div class="people-meta"><span class="people-dates">s.d.</span><span class="people-count">1 documento</span></div>
@@ -961,46 +967,34 @@
         <div class="people-meta"><span class="people-dates">1893 – 1976</span><span class="people-count">43 documenti</span></div>
     </a>
 </div>
-<div class="people-card" data-lettera="M" data-cerca="mario capanna">
-    <a href="mario-capanna/" class="people-link">
-        <div class="people-name">Mario Capanna</div>
-        <div class="people-meta"><span class="people-dates people-dates--aperta">1945 – </span><span class="people-count">1 documento</span></div>
+<div class="people-card" data-lettera="M" data-cerca="giacomo montemezzani gino montemezzani">
+    <a href="giacomo-montemezzani/" class="people-link">
+        <div class="people-name">Giacomo Montemezzani</div>
+        <div class="people-meta"><span class="people-dates">1927 – 2009</span><span class="people-count">1 documento</span></div>
     </a>
 </div>
-<div class="people-card" data-lettera="M" data-cerca="michele semeraro">
-    <a href="michele-semeraro/" class="people-link">
-        <div class="people-name">Michele Semeraro</div>
-        <div class="people-meta"><span class="people-dates">s.d.</span><span class="people-count">2 documenti</span></div>
-    </a>
-</div>
-<div class="people-card" data-lettera="O" data-cerca="osvaldo pesce">
+<div class="people-card" data-lettera="P" data-cerca="osvaldo pesce">
     <a href="osvaldo-pesce/" class="people-link">
         <div class="people-name">Osvaldo Pesce</div>
         <div class="people-meta"><span class="people-dates">1938 – 2021</span><span class="people-count">7 documenti</span></div>
     </a>
 </div>
-<div class="people-card" data-lettera="R" data-cerca="renzo del carria">
-    <a href="renzo-del-carria/" class="people-link">
-        <div class="people-name">Renzo Del Carria</div>
-        <div class="people-meta"><span class="people-dates">1924 – 2010</span><span class="people-count">2 documenti</span></div>
-    </a>
-</div>
-<div class="people-card" data-lettera="R" data-cerca="roberto sassi">
+<div class="people-card" data-lettera="S" data-cerca="roberto sassi">
     <a href="roberto-sassi/" class="people-link">
         <div class="people-name">Roberto Sassi</div>
         <div class="people-meta"><span class="people-dates">1960 – 2023</span><span class="people-count">1 documento</span></div>
+    </a>
+</div>
+<div class="people-card" data-lettera="S" data-cerca="michele semeraro">
+    <a href="michele-semeraro/" class="people-link">
+        <div class="people-name">Michele Semeraro</div>
+        <div class="people-meta"><span class="people-dates">s.d.</span><span class="people-count">2 documenti</span></div>
     </a>
 </div>
 <div class="people-card" data-lettera="S" data-cerca="sergio spazzali">
     <a href="sergio-spazzali/" class="people-link">
         <div class="people-name">Sergio Spazzali</div>
         <div class="people-meta"><span class="people-dates">1936 – 1994</span><span class="people-count">1 documento</span></div>
-    </a>
-</div>
-<div class="people-card" data-lettera="V" data-cerca="vincenzo calo">
-    <a href="vincenzo-calo/" class="people-link">
-        <div class="people-name">Vincenzo Calò</div>
-        <div class="people-meta"><span class="people-dates">s.d.</span><span class="people-count">2 documenti</span></div>
     </a>
 </div>
 <div class="people-card" data-lettera="Y" data-cerca="yao wenyuan yao wen yuan">
@@ -1013,6 +1007,12 @@
     <a href="zhou-enlai/" class="people-link">
         <div class="people-name">Zhou Enlai</div>
         <div class="people-meta"><span class="people-dates">1898 – 1976</span><span class="people-count">2 documenti</span></div>
+    </a>
+</div>
+<div class="people-card" data-lettera="Z" data-cerca="giorgio zucchetti">
+    <a href="giorgio-zucchetti/" class="people-link">
+        <div class="people-name">Giorgio Zucchetti</div>
+        <div class="people-meta"><span class="people-dates">1920 – 1997</span><span class="people-count">1 documento</span></div>
     </a>
 </div>
 </div>
@@ -1068,8 +1068,12 @@
         btn.addEventListener("click", function() {
             if (this.disabled) return;
 
-            letteraBtns.forEach(b => b.classList.remove("lettera-btn--active"));
+            letteraBtns.forEach(b => {
+                b.classList.remove("lettera-btn--active");
+                if (!b.disabled) b.setAttribute("aria-pressed", "false");
+            });
             this.classList.add("lettera-btn--active");
+            this.setAttribute("aria-pressed", "true");
             filtra();
         });
     });

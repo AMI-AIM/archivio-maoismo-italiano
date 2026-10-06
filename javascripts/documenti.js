@@ -727,3 +727,33 @@
     init();
   }
 })();
+
+// ============================================================
+// TORNA AI RISULTATI
+// ============================================================
+// Arrivando a una scheda dall'archivio (o da una scheda aperta da li'),
+// il percorso offre il ritorno all'ultima ricerca con filtri e pagina:
+// "Archivio" porta sempre all'archivio intero. L'ultima ricerca la
+// salva archivio-filtri.js (sessionStorage, solo per questa scheda
+// del browser).
+(function () {
+  'use strict';
+  var percorso = document.querySelector('.doc-percorso');
+  if (!percorso) return;
+
+  var ricerca = null;
+  try { ricerca = sessionStorage.getItem('ami-ultima-ricerca'); } catch (e) { return; }
+  if (!ricerca || ricerca.indexOf('?') === -1) return; // archivio intero: basta "Archivio"
+
+  var provenienza = '';
+  try { provenienza = new URL(document.referrer).pathname; } catch (e) { return; }
+  var baseArchivio = ricerca.split('?')[0];
+  if (provenienza.indexOf(baseArchivio) !== 0) return; // non arriva dall'archivio
+
+  var link = document.createElement('a');
+  link.className = 'doc-percorso__ritorno';
+  link.href = ricerca;
+  link.innerHTML = '<svg class="ami-icona" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+    '<path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg><span>Torna ai risultati</span>';
+  percorso.appendChild(link);
+})();
