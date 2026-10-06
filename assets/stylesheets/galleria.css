@@ -244,11 +244,12 @@
   gap: 4px;
   padding: 14px;
   background: linear-gradient(to top,
-    rgba(0, 0, 0, .78) 0%,
-    rgba(0, 0, 0, .48) 34%,
-    rgba(0, 0, 0, .06) 72%,
-    rgba(0, 0, 0, 0) 100%);
-  opacity: 0;
+    rgba(0, 0, 0, .74) 0%,
+    rgba(0, 0, 0, .38) 38%,
+    rgba(0, 0, 0, 0) 78%);
+  /* Didascalia sempre visibile (prima solo al passaggio del mouse: senza
+     mouse non si sapeva cosa mostrasse la foto). */
+  opacity: 1;
   transition: opacity .24s ease;
 }
 .card-link:hover .img-overlay,
@@ -381,20 +382,23 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   height: 44px;
   border: 0;
   border-radius: var(--ami-radius-pillola);
-  background: rgba(0, 0, 0, .45);
-  color: var(--gal-su-scuro);
+  /* Chiaro su scuro: prima un cerchio nero trasparente che spariva sulle
+     foto scure. */
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .35);
+  color: var(--gal-ink);
   font-size: var(--ami-font-size-xl);
   line-height: 1;
   cursor: pointer;
 }
 .lightbox-nav--prev { left: 10px; }
 .lightbox-nav--next { right: 10px; }
-.lightbox-nav:hover { background: var(--gal-accent); }
+.lightbox-nav:hover { background: var(--gal-accent); color: var(--gal-su-scuro); }
 .lightbox-nav[disabled] {
   opacity: .3;
   cursor: default;
 }
-.lightbox-nav[disabled]:hover { background: rgba(0, 0, 0, .45); }
+.lightbox-nav[disabled]:hover { background: rgba(255, 255, 255, .92); color: var(--gal-ink); }
 .lightbox-nav:focus-visible {
   outline: 3px solid var(--gal-su-scuro);
   outline-offset: 2px;
@@ -490,7 +494,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   font-family: var(--ami-font-label);
   padding: 5px 10px;
   border: 1px solid var(--gal-linea);
-  border-radius: var(--ami-radius-pillola);
+  border-radius: var(--ami-radius-sm); /* pulsanti, non pillole */
   background: var(--md-default-bg-color);
   color: var(--gal-azione-ink);
   font-size: var(--ami-font-size-xs);

@@ -122,12 +122,15 @@
     var style = document.createElement('style');
     style.id = 'ia-status-banner-style';
     style.textContent = [
+      /* Non adesivo: scorre via con la pagina. Da adesivo copriva l'header
+         (anch'esso fissato in cima) appena si scorreva. */
       '#ia-status-banner {',
-      '  position: sticky;',
-      '  top: 0;',
-      '  z-index: 1000;',
-      '  background: #7a4a00;',
-      '  color: #fff8ec;',
+      '  position: relative;',
+      /* Nero inchiostro del sito con icona rossa (prima marrone/ambra,
+         colori assenti dalla palette). */
+      '  background: var(--ami-inchiostro, #1a1a1a);',
+      '  color: var(--ami-su-colore, #fff);',
+      '  border-bottom: 2px solid var(--md-primary-fg-color, #b71c1c);',
       '  font-family: var(--ami-font-label, "Archivo", sans-serif);',
       '  box-shadow: 0 2px 10px rgba(0,0,0,0.25);',
       '}',
@@ -143,7 +146,7 @@
       '  flex: 0 0 auto;',
       '  width: 1.2rem;',
       '  height: 1.2rem;',
-      '  fill: currentColor;',
+      '  fill: var(--md-primary-fg-color--light, #e53935);',
       '}',
       '.ia-status-banner__testo {',
       '  flex: 1;',
@@ -171,7 +174,7 @@
       '  fill: currentColor;',
       '}',
       '.ia-status-banner__chiudi:focus-visible {',
-      '  outline: 2px solid #fff8ec;',
+      '  outline: 2px solid var(--ami-su-colore, #fff);',
       '  outline-offset: 0;',
       '}',
       '.ia-status-banner__chiudi:hover {',
@@ -208,6 +211,12 @@
       '.ia-visore-avviso__riprova:hover { background: var(--ami-rosso-tenue, #f9ecec); }',
       '.ia-visore-avviso__riprova:focus-visible { outline: 2px solid var(--md-primary-fg-color); outline-offset: 2px; }',
       '.ia-visore-avviso a { color: var(--md-primary-fg-color); font-weight: 600; }',
+      /* Visore guasto: l'iframe si chiude invece di lasciare ~500px di
+         riquadro grigio vuoto; se esiste la miniatura locale la si mostra. */
+      '.embed-container--guasto .universal-embed { height: 0 !important; min-height: 0 !important; visibility: hidden; }',
+      '.embed-container--guasto .fullscreen-btn { display: none; }',
+      '.ia-visore-avviso__miniatura { flex: 0 0 auto; display: block; width: 4.5rem; height: auto; border: 1px solid var(--md-default-fg-color--lightest); border-radius: var(--ami-radius-xs, 2px); }',
+      '.ia-visore-avviso__miniatura[hidden] { display: none; }',
       /* Telefono: una riga, non fissato in cima (scorre via con la pagina
          e non copre l'header). Il testo completo resta per i lettori di
          schermo. */
@@ -296,8 +305,14 @@
     }));
   }
 
+  // Sulle schede con il visore l'avviso sta solo dentro il visore: il
+  // banner globale ripeteva lo stesso messaggio due volte.
+  function haVisori() {
+    return !!document.querySelector('.universal-embed');
+  }
+
   function segnalaGuasto() {
-    mostraAvviso();
+    if (!haVisori()) mostraAvviso();
     segnalaVisori();
   }
 
@@ -389,7 +404,6 @@
       // L'iframe non ha emesso 'load' entro la soglia: possibile
       // mancata risposta da IA (non copre il caso di risposta
       // ricevuta ma con contenuto d'errore, che emette comunque load).
-      mostraAvviso();
       segnalaVisore(iframe);
     }, IFRAME_TIMEOUT_MS);
 
@@ -401,7 +415,6 @@
     iframe.addEventListener('error', function () {
       caricato = true;
       clearTimeout(timeoutId);
-      mostraAvviso();
       segnalaVisore(iframe);
     }, { once: true });
   }
@@ -425,28 +438,41 @@
     if (!contenitore || contenitore.querySelector('.ia-visore-avviso')) return;
     iniettaStile();
 
-    // Link diretto: lo stesso "Apri su Internet Archive" del piede del
-    // visore, se c'e'; altrimenti la pagina dell'oggetto ricavata
-    // dall'indirizzo dell'embed.
-    var link = contenitore.querySelector('a.embed-azione[href*="archive.org"]');
-    var href = link ? link.getAttribute('href')
-      : (iframe.getAttribute('src') || '').replace('/embed/', '/details/').split('?')[0];
-
+    // Il link diretto a Internet Archive c'e' gia' nel piede del visore
+    // ("Apri su Internet Archive"): qui non si ripete.
     var avviso = document.createElement('div');
     avviso.className = 'ia-visore-avviso';
     avviso.setAttribute('role', 'status');
     avviso.innerHTML =
-      '<p class="ia-visore-avviso__testo">Il visore di Internet Archive non risponde. ' +
-      'Di solito torna disponibile entro poco.</p>' +
+      '<img class="ia-visore-avviso__miniatura" alt="" hidden>' +
+      '<p class="ia-visore-avviso__testo">I documenti di questo archivio sono ospitati su Internet Archive, ' +
+      'piattaforma al momento instabile o irraggiungibile. Se i documenti non si caricano, il problema è ' +
+      'temporaneo e non riguarda il solo sito AMI. Riprovare più tardi.</p>' +
       '<div class="ia-visore-avviso__azioni">' +
         '<button type="button" class="ia-visore-avviso__riprova">Riprova</button>' +
-        (href ? '<a href="' + href.replace(/"/g, '&quot;') + '" target="_blank" rel="noopener">' +
-          'Apri su Internet Archive<span class="ami-sr-only"> (si apre in una nuova scheda)</span></a>' : '') +
       '</div>';
     contenitore.insertBefore(avviso, contenitore.firstChild);
+    contenitore.classList.add('embed-container--guasto');
+
+    // Miniatura locale della copertina (immagini/miniature/AMI-xxxx-340.webp
+    // o -1200.webp),
+    // se esiste: il riquadro guasto mostra almeno di che documento si tratta.
+    var segnatura = (iframe.id || '').replace(/^ia-embed-/, '');
+    var base = ((document.querySelector('meta[name="ami-base-url"]') || {}).content || '').replace(/\/$/, '');
+    if (/^AMI-\d+$/.test(segnatura)) {
+      var mini = avviso.querySelector('.ia-visore-avviso__miniatura');
+      mini.addEventListener('load', function () { mini.hidden = false; });
+      mini.addEventListener('error', function () {
+        // Alcune miniature esistono solo nella misura grande.
+        if (/-340\.webp$/.test(mini.src)) mini.src = mini.src.replace(/-340\.webp$/, '-1200.webp');
+        else mini.remove();
+      });
+      mini.src = base + '/immagini/miniature/' + segnatura + '-340.webp';
+    }
 
     avviso.querySelector('.ia-visore-avviso__riprova').addEventListener('click', function () {
       avviso.remove();
+      contenitore.classList.remove('embed-container--guasto');
       var src = iframe.getAttribute('src');
       iframe.setAttribute('src', 'about:blank');
       iframe.setAttribute('src', src);

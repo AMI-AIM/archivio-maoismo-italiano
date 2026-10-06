@@ -589,6 +589,7 @@
     text-overflow: ellipsis;
     max-height: 4.5em;
     margin: 0.1rem 0 0 0;
+    max-width: 80ch; /* prima ~110 caratteri per riga */
     font-size: var(--ami-font-size-sm); /* 14px */
     color: var(--md-default-fg-color--light);
     line-height: var(--ami-line-height-normal);

@@ -218,7 +218,7 @@ Netti, rossi, senza ornamenti.
 - **Shadow Strategy:** vedi Elevation & Depth, solo registro manifesto.
 - **Border:** filetto di 1px.
 - **Internal Padding:** circa 0,6 × 1rem nella parte testuale.
-- **Card degli indici Persone/Organizzazioni:** categoria in maiuscoletto (solo organizzazioni), nome in Fraunces 650 che diventa rosso al passaggio del mouse, poi una sola riga «date · N documenti»: date in Fraunces corsivo, conteggio in Courier. Gli intervalli aperti si scrivono «dal 1921». Il timbro delle iniziali in «In evidenza» è di 110px (84px su telefono), non domina la card.
+- **Card degli indici Persone/Organizzazioni:** categoria in maiuscoletto (solo organizzazioni), nome in Fraunces 650 che diventa rosso al passaggio del mouse, poi una sola riga «date · N documenti»: date in Fraunces corsivo, conteggio in Courier. Gli intervalli aperti restano nella forma archivistica «1921 –» (scelta del curatore: più rigorosa di «dal 1921»). Il timbro delle iniziali in «In evidenza» è di 110px (84px su telefono), non domina la card.
 
 ### Inputs / Fields
 - **Style:** filetto di 1px, fondo bianco, angoli 4px, testo a 16px (sotto, iOS ingrandisce la pagina).
@@ -277,5 +277,5 @@ Con testo curatoriale: biografia o storia su fondo carta accanto all'immagine. S
 - **Don't** usare emoji come icone: le icone sono SVG con lo stesso tratto.
 - **Don't** troncare i nomi nei filtri: vanno a capo interi.
 - **Don't** mostrare un titolo visibile in home (resta solo quello per i lettori di schermo).
-- **Don't** mostrare l'avviso su Internet Archive dove non c'è nulla da Internet Archive: compare solo su schede documento e galleria, dopo il link "Vai al contenuto", e sul visore guasto c'è un avviso proprio con "Riprova".
+- **Don't** mostrare l'avviso su Internet Archive dove non serve: il banner (non adesivo, dopo «Vai al contenuto») compare solo in galleria; nelle schede documento l'avviso sta dentro il visore, che si richiude a una fascia con miniatura locale e «Riprova». Il banner è in nero inchiostro con filetto e icona rossi (non più marrone/ambra). Banner e avviso nel visore usano la stessa frase: «I documenti di questo archivio sono ospitati su Internet Archive, piattaforma al momento instabile o irraggiungibile…».
 - **Don't** introdurre un tema scuro senza progettarlo: oggi il sito ha un solo schema chiaro (i colori "notte" servono solo alla fascia in evidenza della home).
