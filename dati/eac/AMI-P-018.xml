@@ -50,6 +50,19 @@
           <p>Aldo Brandirali segretario di Unione dei Comunisti Italiani (marxisti-leninisti)</p>
         </descriptiveNote>
       </relation>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-019.xml">
+          <part>Partito Comunista (marxista-leninista) Italiano</part>
+        </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1972">1972</fromDate>
+          <toDate standardDate="1977">1977</toDate>
+        </dateRange>
+        <relationType>gerarchica</relationType>
+        <descriptiveNote>
+          <p>Aldo Brandirali segretario di Partito Comunista (marxista-leninista) Italiano</p>
+        </descriptiveNote>
+      </relation>
     </relations>
   </cpfDescription>
 </eac>

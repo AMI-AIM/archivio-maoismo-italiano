@@ -51,6 +51,19 @@
           <p>Angiolo Gracci segretario di Partito Comunista d'Italia (marxista-leninista) - Linea rossa</p>
         </descriptiveNote>
       </relation>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-013.xml">
+          <part>Partito Comunista d'Italia (marxista-leninista)</part>
+        </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1966">1966</fromDate>
+          <toDate standardDate="1968">1968</toDate>
+        </dateRange>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Angiolo Gracci membro di Partito Comunista d'Italia (marxista-leninista)</p>
+        </descriptiveNote>
+      </relation>
     </relations>
   </cpfDescription>
 </eac>
