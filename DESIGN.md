@@ -210,7 +210,7 @@ Netti, rossi, senza ornamenti.
 - **Azioni secondarie** (Cita questo documento, Schermo intero, Apri su Internet Archive, Azzera filtri nel pannello dell'archivio): testo rosso in Archivo, con icona SVG dove serve, senza fondo. «Azzera filtri» diventa pulsante pieno solo nello stato vuoto dei risultati, dove è l'unica via d'uscita.
 
 ### Chips
-- **Filtri attivi:** pillola su fondo carta con bordo e testo rossi, nome del gruppo in grassetto ("Organizzazione: …") e pulsante ✕ per rimuoverla.
+- **Filtri attivi:** pillola su fondo carta con bordo e testo rossi, nome del gruppo in grassetto ("Organizzazione: …") e pulsante ✕ per rimuoverla, che ai lettori di schermo dice quale filtro toglie («Rimuovi il filtro Persona: Mao Zedong»).
 
 ### Cards / Containers
 - **Corner Style:** 12px.
@@ -224,14 +224,14 @@ Netti, rossi, senza ornamenti.
 - **Style:** filetto di 1px, fondo bianco, angoli 4px, testo a 16px (sotto, iOS ingrandisce la pagina).
 - **Focus:** bordo e anello rossi.
 - **Filtri a spunta:** caselle native colorate di rosso, nome completo che va a capo, conteggio in Courier a destra; la voce selezionata diventa rossa e in grassetto. Sopra le 10 voci compare un campo per restringere l'elenco, che trova le voci di Persona e Organizzazione anche con le "Altre forme del nome" (es. "Lin Piao" → Lin Biao) senza mostrarle. Le persone sono in ordine di cognome, come nell'indice. I conteggi seguono i risultati: ogni numero dice quanti documenti darebbe quella voce con gli altri filtri attivi; le voci a 0 si attenuano in grigio (testo secondario) ma restano al loro posto e cliccabili.
-- **Ricerca testuale dell'archivio:** ogni parola deve comparire come inizio di parola (accenti ignorati); cerca anche segnatura e nomi collegati. Una parola sola resta intera ("lenin" non trova "marxista-leninista"), ma tra parole vicine trattino e spazio si equivalgono: "mao tse tung" trova "Mao Tse-tung", "ciu en lai" trova "Ciu-En-lai". Le grafie varianti NON entrano nei risultati; se però la query contiene un'altra forma del nome, sopra i risultati compare una riga su filetto, «Nel catalogo: **Mao Zedong** (anche «Mao Tse-tung»)», con l'azione rossa «Vedi i N documenti collegati» che applica il filtro Persona (o Organizzazione) e toglie il testo.
+- **Ricerca testuale dell'archivio:** ogni parola deve comparire come inizio di parola (accenti ignorati); cerca anche segnatura e nomi collegati. Una parola sola resta intera ("lenin" non trova "marxista-leninista"), ma tra parole vicine trattino e spazio si equivalgono: "mao tse tung" trova "Mao Tse-tung", "ciu en lai" trova "Ciu-En-lai". Le grafie varianti NON entrano nei risultati; se però la query contiene un'altra forma del nome, sopra i risultati compare una riga su filetto, «Nel catalogo: **Mao Zedong** (anche «Mao Tse-tung»)», con l'azione rossa «Vedi i N documenti collegati» che applica il filtro Persona (o Organizzazione) e toglie il testo. Se la ricerca dà zero risultati la riga non compare: lo stato vuoto dice «Nessun documento contiene «Ciu En-lai» nel testo. Nel catalogo il nome è Zhou Enlai.» e il pulsante pieno diventa «Vedi i 2 documenti di Zhou Enlai», con «Azzera filtri» sotto come azione secondaria.
 - **Paginazione:** ogni cambio di pagina è una voce di cronologia (Indietro torna alla pagina precedente dei risultati); la vista torna in cima ai risultati e il focus va sul conteggio.
 - **Pulsante "Filtri" flottante:** solo su telefono, compare quando il pannello filtri esce dallo schermo; riapre il pannello.
 
 ### Navigation
 - **Header:** fascia rossa piena, voci in Archivo 600 bianche, voce attiva sottolineata anche nelle pagine interne della sezione (una scheda documento accende "Archivio", una persona accende "Persone"); menu "Archivio" a tendina (Tutti i documenti, Percorsi tematici, Galleria).
 - **Avviso Internet Archive:** sempre in cima. Su desktop fisso, su telefono una riga breve che scorre via con la pagina e non copre l'header.
-- **Percorso di navigazione:** sopra il titolo, in Archivo grigio con separatore "›" ("Archivio › Opuscolo", "Persone", "Archivio › Percorsi tematici"). Nelle schede aperte dall'archivio con filtri o pagina, in fondo alla riga compare l'azione rossa «Torna ai risultati» (icona SVG a chevron), che riporta all'ultima ricerca; "Archivio" porta sempre all'archivio intero.
+- **Percorso di navigazione:** sopra il titolo, in Archivo grigio con separatore "›" ("Archivio › Opuscolo", "Persone", "Archivio › Percorsi tematici"). Nelle schede aperte dall'archivio con filtri o pagina, in fondo alla riga compare l'azione rossa «Torna ai risultati» (icona SVG a chevron), che riporta all'ultima ricerca; "Archivio" porta sempre all'archivio intero. Tornando così, la lista si apre alla riga della scheda appena letta, con il focus sul titolo e un fondo rosso tenue che si spegne in circa due secondi (fisso con il movimento ridotto).
 - **Mobile:** menu laterale con intestazione rossa e logo; link "Vai al contenuto" come primo elemento raggiungibile da tastiera.
 
 ### Segnatura

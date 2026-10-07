@@ -195,7 +195,7 @@
       '  line-height: 1.4;',
       '  color: var(--md-default-fg-color);',
       '}',
-      '.ia-visore-avviso__testo { flex: 1 1 18rem; max-width: 68ch; margin: 0; }',
+      '.ia-visore-avviso__testo { flex: 1 1 18rem; max-width: 36em; margin: 0; }',
       '.ia-visore-avviso__azioni { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; margin-left: auto; }',
       '.ia-visore-avviso__riprova {',
       '  min-height: 2.2rem;',
@@ -214,7 +214,7 @@
       /* Visore guasto: l'iframe si chiude invece di lasciare ~500px di
          riquadro grigio vuoto; se esiste la miniatura locale la si mostra. */
       '.embed-container--guasto .universal-embed { height: 0 !important; min-height: 0 !important; visibility: hidden; }',
-      '.embed-container--guasto .fullscreen-btn { display: none; }',
+      '.md-typeset .embed-container--guasto .embed-footer .fullscreen-btn { display: none; }',
       /* Lo spazio della miniatura e' riservato (3:4) mentre carica: prima
          compariva dopo e spingeva giu' il resto della scheda. Se manca, il
          riquadro sparisce (l'unico spostamento resta quello del caso raro). */

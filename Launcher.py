@@ -9,6 +9,8 @@ Uso:
     python Launcher.py --valida                 Controlla solo data/dati.xlsx (non genera, non pubblica)
     python Launcher.py --anteprima              Rigenera e apre il sito nel browser (non pubblica)
     python Launcher.py --si ...                 Pubblica senza chiedere conferma
+    python Launcher.py --dettagli ...           Mostra a schermo tutto l'output degli script
+                                                (di norma va nel registro log/launcher_*.log)
     python Launcher.py --only AMI-0034          Rigenera SOLO le schede indicate (invalida cache
                                                 metadati documento + cache IA collegata), poi pubblica
     python Launcher.py --refresh-ia ID1,ID2     Invalida la cache IA solo per gli identifier indicati,
@@ -35,10 +37,15 @@ Il confronto con l'ultimo commit genera il messaggio, es.
 "Dati: Catalogo +2 ~1 (AMI-0097, AMI-0098, AMI-0034)"; un messaggio passato
 a mano diventa il titolo e il riepilogo finisce nel corpo del commit.
 
+Interfaccia (scripts/core/interfaccia.py): ogni fase occupa una riga con
+esito e durata; l'output dettagliato va in log/ (ultimi 30 registri). Se una
+fase fallisce compaiono le sue ultime righe e il percorso del registro.
+
 Commit selettivo: vengono aggiunti solo i percorsi elencati in
 PERCORSI_PUBBLICATI; i file modificati altrove vengono segnalati ma NON
 committati (evita di pubblicare per sbaglio file temporanei o di lavoro).
 """
+
 
 import os
 import re
@@ -55,6 +62,7 @@ from urllib.parse import urlparse
 from scripts.core import esito
 from scripts.core.cache_manager import CacheManager
 from scripts.core.export_dati import esporta_e_riepiloga
+from scripts.core.interfaccia import ErroreComando, Interfaccia
 from scripts.core.site_config import SITE_URL
 from scripts.core.validator import run_validation
 
@@ -73,93 +81,118 @@ PERCORSI_PUBBLICATI = [
     "README.md", "comandi.txt", "LICENSE", "DESIGN.md",
 ]
 
+# Interfaccia a terminale; main() la ricrea con --dettagli se richiesto.
+ui = Interfaccia(ROOT_DIR)
 
-class ErroreComando(Exception):
-    pass
-
-
-def stampa_titolo(testo):
-    print()
-    print("=" * 60)
-    print(testo)
-    print("=" * 60)
+# Impostati durante l'esecuzione: messaggio scritto a mano e riepilogo dei dati.
+messaggio_globale = {"testo": None, "dati_titolo": None, "dati_corpo": None}
 
 
-def esegui(comando, cwd=None, descrizione=None, env=None):
-    """Esegue un comando, mostra l'output in tempo reale, interrompe la sequenza se fallisce."""
-    if descrizione:
-        stampa_titolo(descrizione)
-    anteprima = ' '.join(f'"{c}"' if ' ' in c else c for c in comando)
-    print(f"$ {anteprima}")
-    risultato = subprocess.run(comando, cwd=cwd or ROOT_DIR,
-                               env={**os.environ, **env} if env else None)
-    if risultato.returncode != 0:
-        raise ErroreComando(
-            f"il comando '{' '.join(comando)}' è fallito (codice {risultato.returncode})."
-        )
+# ---------------------------------------------------------------------------
+# Controlli preliminari
+# ---------------------------------------------------------------------------
 
-
-def verifica_versione_python():
-    """Avvisa se il Python locale non è quello di .python-version (usato da GitHub Actions)."""
+def versione_python_diversa():
+    """Messaggio se il Python locale non è quello di .python-version, altrimenti None."""
     file_versione = ROOT_DIR / ".python-version"
     if not file_versione.exists():
-        return
+        return None
     attesa = file_versione.read_text(encoding="utf-8").strip()
     locale = f"{sys.version_info.major}.{sys.version_info.minor}"
     if locale == attesa:
-        print(f"Python {locale} (uguale a GitHub Actions)")
-    else:
-        print(f"ATTENZIONE: Python locale {locale}, GitHub Actions usa {attesa} "
-              "(.python-version). Il sito potrebbe comportarsi diversamente online: "
-              f"installa Python {attesa} oppure aggiorna .python-version.")
+        return None
+    return (f"Python locale {locale}, GitHub Actions usa {attesa} (.python-version): "
+            f"installa Python {attesa} oppure aggiorna .python-version.")
 
 
 def verifica_dipendenze():
-    stampa_titolo("Verifica dipendenze")
-    verifica_versione_python()
-    mancanti = []
-    requirements_path = ROOT_DIR / "requirements.txt"
-    mappa_moduli = {
-        "pandas": "pandas",
-        "openpyxl": "openpyxl",
-        "mkdocs-material": "material",
-        "Pillow": "PIL",
-    }
-    if requirements_path.exists():
-        pacchetti = [
-            riga.strip() for riga in requirements_path.read_text(encoding="utf-8").splitlines()
-            if riga.strip() and not riga.strip().startswith("#")
-        ]
-    else:
-        print(f"'{requirements_path.name}' non trovato, uso elenco di fallback.")
-        pacchetti = list(mappa_moduli.keys())
+    with ui.fase("Dipendenze") as stato:
+        mancanti = []
+        requirements_path = ROOT_DIR / "requirements.txt"
+        mappa_moduli = {
+            "pandas": "pandas",
+            "openpyxl": "openpyxl",
+            "mkdocs-material": "material",
+            "Pillow": "PIL",
+        }
+        if requirements_path.exists():
+            pacchetti = [
+                riga.strip() for riga in requirements_path.read_text(encoding="utf-8").splitlines()
+                if riga.strip() and not riga.strip().startswith("#")
+            ]
+        else:
+            pacchetti = list(mappa_moduli.keys())
 
-    for requisito in pacchetti:
-        # "pandas>=2.2,<4" -> "pandas": i vincoli di versione li gestisce pip.
-        pacchetto = re.split(r"[<>=!~;\[ ]", requisito, maxsplit=1)[0].strip()
-        modulo = mappa_moduli.get(pacchetto, pacchetto.replace("-", "_"))
-        try:
-            __import__(modulo)
-            print(f"{pacchetto}")
-        except ImportError:
-            print(f"{pacchetto} non installato")
-            mancanti.append(pacchetto)
+        for requisito in pacchetti:
+            # "pandas>=2.2,<4" -> "pandas": i vincoli di versione li gestisce pip.
+            pacchetto = re.split(r"[<>=!~;\[ ]", requisito, maxsplit=1)[0].strip()
+            modulo = mappa_moduli.get(pacchetto, pacchetto.replace("-", "_"))
+            try:
+                __import__(modulo)
+            except ImportError:
+                mancanti.append(pacchetto)
+        if not shutil.which("git"):
+            mancanti.append("git")
 
-    if shutil.which("git"):
-        print("git")
-    else:
-        print("git non trovato nel PATH")
-        mancanti.append("git")
+        if mancanti:
+            msg = f"mancano le dipendenze: {', '.join(mancanti)}."
+            if "git" in mancanti:
+                msg += " Installa git dal sito ufficiale."
+            if [m for m in mancanti if m != "git"]:
+                msg += " Installa il resto con: pip install -r requirements.txt"
+            raise ErroreComando(msg)
+        stato["dettaglio"] = f"Python {sys.version_info.major}.{sys.version_info.minor}"
+    differenza = versione_python_diversa()
+    if differenza:
+        ui.avviso(differenza)
 
-    if mancanti:
-        msg = f"mancano le dipendenze: {', '.join(mancanti)}."
-        if "git" in mancanti:
-            msg += "\n   Installa git dal sito ufficiale per il tuo sistema operativo."
-        pacchetti_pip = [m for m in mancanti if m != "git"]
-        if pacchetti_pip:
-            msg += "\n   Installa il resto con: pip install -r requirements.txt"
-        raise ErroreComando(msg)
 
+def _conta(n, singolare, plurale):
+    return f"{n} {singolare if n == 1 else plurale}"
+
+
+def _riepilogo_validazione(r):
+    return (f"{_conta(r.get('errori', 0), 'errore', 'errori')} · "
+            f"{_conta(r.get('avvisi', 0), 'avviso', 'avvisi')} · "
+            f"{_conta(r.get('note', 0), 'nota', 'note')}")
+
+
+def _voci_validazione(voci, includi_note=False):
+    """Stampa errori, avvisi (e note) della validazione, indentati e colorati."""
+    stili = {"errore": "errore", "avviso": "avviso", "nota": "nota"}
+    for v in voci:
+        if v["gravita"] == "nota" and not includi_note:
+            continue
+        posizione = ", ".join(str(x) for x in (v["foglio"],
+                              f"riga {v['riga']}" if v["riga"] else None, v["colonna"]) if x)
+        etichetta = v["gravita"].upper()
+        ui.scrivi(f"     [{stili[v['gravita']]}]{etichetta}[/] [tenue]{ui.esc(posizione)}:[/] "
+                  f"{ui.esc(v['messaggio'])}"
+                  if ui.console else f"     {etichetta} {posizione}: {v['messaggio']}")
+
+
+def esegui_validazione(bloccante=True):
+    """Valida data/dati.xlsx; con errori blocca (salvo --skip-validation)."""
+    risultato = {}
+    try:
+        with ui.fase("Controllo dei dati") as stato:
+            risultato = ui.cattura(run_validation, str(ROOT_DIR / "data"))
+            if risultato.get("error"):
+                raise ErroreComando(f"impossibile leggere i dati: {risultato['error']}")
+            stato["dettaglio"] = _riepilogo_validazione(risultato)
+            if not risultato.get("success") and bloccante:
+                raise ErroreComando(
+                    "ci sono errori in data/dati.xlsx: correggili e rilancia "
+                    "(oppure usa --skip-validation per pubblicare comunque).")
+    finally:
+        _voci_validazione(risultato.get("voci", []))
+    if not risultato.get("success") and not bloccante:
+        ui.avviso("validazione fallita, ma proseguo (--skip-validation attivo)")
+
+
+# ---------------------------------------------------------------------------
+# Git
+# ---------------------------------------------------------------------------
 
 def percorsi_esistenti():
     return [p for p in PERCORSI_PUBBLICATI if (ROOT_DIR / p).exists()]
@@ -170,7 +203,8 @@ def git_stato(percorsi=None):
     comando = ["git", "status", "--porcelain"]
     if percorsi:
         comando += ["--"] + percorsi
-    risultato = subprocess.run(comando, cwd=ROOT_DIR, capture_output=True, text=True)
+    risultato = subprocess.run(comando, cwd=ROOT_DIR, capture_output=True, text=True,
+                               encoding="utf-8", errors="replace")
     return [r for r in risultato.stdout.splitlines() if r.strip()]
 
 
@@ -179,67 +213,10 @@ def git_ci_sono_modifiche():
     return bool(git_stato(percorsi_esistenti()))
 
 
-def segnala_file_esclusi():
-    """Avvisa dei file modificati FUORI da PERCORSI_PUBBLICATI (non committati)."""
+def file_esclusi():
+    """File modificati FUORI da PERCORSI_PUBBLICATI (non verranno committati)."""
     dentro = set(git_stato(percorsi_esistenti()))
-    fuori = [r for r in git_stato() if r not in dentro]
-    if fuori:
-        print("File modificati fuori dai percorsi pubblicati (NON verranno committati):")
-        for riga in fuori:
-            print(f"   {riga}")
-
-
-def identifier_ia_per_documento(ami_id):
-    """
-    Cerca nell'Excel del catalogo l'identifier Internet Archive collegato
-    a un documento AMI, per poter invalidare anche la cache IA in --only.
-
-    Returns:
-        str o None se non trovato / url mancante.
-    """
-    try:
-        from scripts.core.dati import leggi_foglio
-        df = leggi_foglio('Catalogo')
-        riga = df[df['id'].astype(str).str.strip() == ami_id]
-        if riga.empty:
-            return None
-        url = str(riga.iloc[0].get('url', '')).strip()
-        match = re.search(r'/details/([^/?#]+)', url)
-        return match.group(1) if match else None
-    except Exception as e:
-        print(f"Impossibile leggere l'identifier IA per {ami_id}: {e}")
-        return None
-
-
-def esegui_validazione(bloccante=True):
-    """
-    Esegue la validazione dei dati (data/dati.xlsx) tramite
-    scripts.core.validator prima di rigenerare il sito.
-
-    Args:
-        bloccante: Se True (default), interrompe l'aggiornamento se la
-            validazione fallisce. Se False, mostra comunque il report ma
-            prosegue (utile con --skip-validation).
-    """
-    stampa_titolo("Validazione dati (data/dati.xlsx)")
-    esito = run_validation(str(ROOT_DIR / "data"))
-
-    if esito.get('error'):
-        messaggio = f"Impossibile completare la validazione: {esito['error']}"
-        if bloccante:
-            raise ErroreComando(messaggio)
-        print(f"{messaggio} (proseguo comunque, --skip-validation attivo)")
-        return
-
-    if not esito.get('success', False):
-        if bloccante:
-            raise ErroreComando(
-                "la validazione dei dati è fallita (vedi errori sopra). "
-                "Correggi data/dati.xlsx oppure rilancia con --skip-validation per pubblicare comunque."
-            )
-        print("Validazione fallita, ma proseguo comunque (--skip-validation attivo).")
-    else:
-        print("Dati validati correttamente.")
+    return [r for r in git_stato() if r not in dentro]
 
 
 def git_sync_pubblicazione(titolo, corpo):
@@ -252,30 +229,24 @@ def git_sync_pubblicazione(titolo, corpo):
     sequenza e il commit locale resta integro, pronto per essere risolto a
     mano.
     """
-    # 1. Recupera gli aggiornamenti remoti RIAPPLICANDO i commit locali sopra
-    #    (niente merge commit; --autostash protegge da worktree sporco).
-    #    Non usare descrizione: non deve rientrare nel blocco "Git ...".
-    esegui(["git", "pull", "--rebase", "--autostash"],
-           descrizione="Sincronizzazione col remoto (rebase)")
+    with ui.fase("Sincronizzazione con GitHub"):
+        ui.esegui(["git", "pull", "--rebase", "--autostash"])
 
-    # 2. Commit delle modifiche (se ancora presenti dopo il pull), limitato
-    #    ai PERCORSI_PUBBLICATI.
     if not git_ci_sono_modifiche():
-        print("Nessuna modifica da committare dopo la sincronizzazione.")
+        ui.scrivi("  Nessuna modifica da registrare dopo la sincronizzazione.", "tenue")
         return False
-    esegui(["git", "add", "-A", "--"] + percorsi_esistenti(), descrizione="Git add")
-    comando_commit = ["git", "commit", "-m", titolo]
-    if corpo:
-        comando_commit += ["-m", corpo]
-    esegui(comando_commit, descrizione="Git commit")
-
-    # 3. Push.
-    esegui(["git", "push"], descrizione="Git push")
+    with ui.fase("Registrazione delle modifiche (commit)") as stato:
+        ui.esegui(["git", "add", "-A", "--"] + percorsi_esistenti())
+        comando_commit = ["git", "commit", "-m", titolo]
+        if corpo:
+            comando_commit += ["-m", corpo]
+        ui.esegui(comando_commit)
+        stato["dettaglio"] = subprocess.run(
+            ["git", "rev-parse", "--short", "HEAD"], cwd=ROOT_DIR,
+            capture_output=True, text=True).stdout.strip()
+    with ui.fase("Invio a GitHub (push)"):
+        ui.esegui(["git", "push"])
     return True
-
-
-# Impostati in aggiorna(): messaggio scritto a mano e riepilogo dei dati.
-messaggio_globale = {"testo": None, "dati_titolo": None, "dati_corpo": None}
 
 
 def aree_modificate():
@@ -317,83 +288,109 @@ def componi_messaggio_commit():
     return f"Aggiornamento automatico del sito — {data_ora}", ""
 
 
+def identifier_ia_per_documento(ami_id):
+    """Identifier Internet Archive collegato a un documento AMI (per --only), o None."""
+    try:
+        from scripts.core.dati import leggi_foglio
+        df = leggi_foglio('Catalogo')
+        riga = df[df['id'].astype(str).str.strip() == ami_id]
+        if riga.empty:
+            return None
+        url = str(riga.iloc[0].get('url', '')).strip()
+        match = re.search(r'/details/([^/?#]+)', url)
+        return match.group(1) if match else None
+    except Exception as e:
+        ui.avviso(f"impossibile leggere l'identifier IA per {ami_id}: {e}")
+        return None
+
+
+# ---------------------------------------------------------------------------
+# Fasi della pipeline
+# ---------------------------------------------------------------------------
+
 def prepara(skip_validation=False, esporta=True):
     """Dipendenze, validazione e (per la pubblicazione) export CSV dei dati."""
     # Riepilogo errori/avvisi: si riparte da zero a ogni esecuzione.
     esito.azzera_riepilogo()
     verifica_dipendenze()
-
-    # Validazione dei dati (blocca se ci sono errori)
     esegui_validazione(bloccante=not skip_validation)
 
     if not esporta:
         return
-    # Export CSV dei fogli + riepilogo modifiche (messaggio di commit)
-    stampa_titolo("Export CSV dei dati (data/export/)")
-    try:
-        titolo, corpo = esporta_e_riepiloga(ROOT_DIR)
-    except Exception as e:
-        raise ErroreComando(f"export CSV di dati.xlsx non riuscito: {e}")
+    with ui.fase("Export CSV dei dati") as stato:
+        try:
+            titolo, corpo = ui.cattura(esporta_e_riepiloga, ROOT_DIR)
+        except Exception as e:
+            raise ErroreComando(f"export CSV di dati.xlsx non riuscito: {e}")
+        stato["dettaglio"] = titolo or "dati invariati"
     messaggio_globale["dati_titolo"] = titolo
     messaggio_globale["dati_corpo"] = corpo
 
 
 def invalida_cache(only=None, refresh_ia=None):
-    # Rigenerazione mirata di specifiche schede documento
     if only:
-        stampa_titolo("Rigenerazione mirata")
-        cache_mgr = CacheManager()
-        cache_mgr.clear_doc_metadata(only)
-        identifiers = [i for i in (identifier_ia_per_documento(d) for d in only) if i]
-        if identifiers:
-            cache_mgr.clear_ia_metadata(identifiers)
-            print(f"Verranno rigenerate: {', '.join(only)} (IA: {', '.join(identifiers)})")
-        else:
-            print(f"Verranno rigenerate: {', '.join(only)} (nessun identifier IA trovato/collegato)")
+        with ui.fase("Rigenerazione mirata") as stato:
+            cache_mgr = ui.cattura(CacheManager)
+            ui.cattura(cache_mgr.clear_doc_metadata, only)
+            identifiers = [i for i in (identifier_ia_per_documento(d) for d in only) if i]
+            if identifiers:
+                ui.cattura(cache_mgr.clear_ia_metadata, identifiers)
+            stato["dettaglio"] = ", ".join(only)
 
-    # Invalidazione mirata/globale cache IA, se richiesta a parte
     if refresh_ia:
-        stampa_titolo("Invalidazione cache Internet Archive")
-        cache_mgr = CacheManager()
-        if refresh_ia == 'all':
-            cache_mgr.clear_ia_metadata()
-            print("Tutti i documenti verranno ri-scaricati da Internet Archive.")
-        else:
-            cache_mgr.clear_ia_metadata(refresh_ia)
-            print(f"Verranno ri-scaricati solo: {', '.join(refresh_ia)}")
+        with ui.fase("Cache di Internet Archive svuotata") as stato:
+            cache_mgr = ui.cattura(CacheManager)
+            if refresh_ia == 'all':
+                ui.cattura(cache_mgr.clear_ia_metadata)
+                stato["dettaglio"] = "tutti i documenti"
+            else:
+                ui.cattura(cache_mgr.clear_ia_metadata, refresh_ia)
+                stato["dettaglio"] = ", ".join(refresh_ia)
+
+
+# Ordine: sync_assets per primo; persone/org PRIMA di generatore; argomenti
+# DOPO generatore (aggiorna la sitemap appena creata); galleria per ultima,
+# come in .github/workflows/deploy.yml.
+SCRIPT_GENERAZIONE = [
+    ("sync_assets.py", "File statici"),
+    ("persone.py", "Schede persone"),
+    ("org.py", "Schede organizzazioni"),
+    ("generatore.py", "Documenti, archivio, home"),
+    ("argomenti.py", "Percorsi tematici"),
+    ("galleria.py", "Galleria"),
+]
+
+
+def _avvisi_nuovi(prima):
+    voci = esito.leggi_riepilogo()
+    nuove = voci[prima:]
+    n = sum(v["gravita"] == esito.AVVISO for v in nuove)
+    return len(voci), (_conta(n, "avviso", "avvisi") if n else "")
 
 
 def genera_sito():
     """Generazione completa in build/, mkdocs build in site/ e controllo finale."""
-    # Sincronizzazione file statici (deve girare per primo)
-    esegui([sys.executable, "sync_assets.py"], cwd=SCRIPTS_DIR,
-           descrizione="Sincronizzazione file statici (assets/ → build/)")
-
-    # Rigenerazione contenuti.
-    # Ordine: persone/org PRIMA di generatore; argomenti DOPO generatore,
-    # così argomenti.py può aggiornare la sitemap appena creata;
-    # galleria DOPO argomenti, come in .github/workflows/deploy.yml.
-    esegui([sys.executable, "persone.py"], cwd=SCRIPTS_DIR,
-           descrizione="Generazione schede persone")
-    esegui([sys.executable, "org.py"], cwd=SCRIPTS_DIR,
-           descrizione="Generazione schede organizzazioni")
-    esegui([sys.executable, "generatore.py"], cwd=SCRIPTS_DIR,
-           descrizione="Generazione documenti, archivio, home, sitemap")
-    esegui([sys.executable, "argomenti.py"], cwd=SCRIPTS_DIR,
-           descrizione="Generazione pagine argomenti")
-    esegui([sys.executable, "galleria.py"], cwd=SCRIPTS_DIR,
-           descrizione="Generazione galleria fotografica (build/galleria/)")
+    voci_lette = 0
+    for script, nome in SCRIPT_GENERAZIONE:
+        with ui.fase(nome) as stato:
+            try:
+                ui.esegui([sys.executable, script], cwd=SCRIPTS_DIR)
+            finally:
+                voci_lette, stato["dettaglio"] = _avvisi_nuovi(voci_lette)
 
     # Costruzione del sito e controllo finale (pagine, sitemap, JSON, link
     # interni): gli stessi controlli girano su GitHub Actions prima del
     # deploy, ma qui un problema blocca la pubblicazione PRIMA del push.
-    esegui([sys.executable, "-m", "mkdocs", "build", "--quiet"],
-           descrizione="Costruzione del sito (mkdocs build -> site/)",
-           env=ENV_MKDOCS)
-    esegui([sys.executable, str(SCRIPTS_DIR / "controlla_sito.py"), str(ROOT_DIR / "site")],
-           descrizione="Controllo del sito generato")
+    with ui.fase("Costruzione del sito (MkDocs)"):
+        ui.esegui([sys.executable, "-m", "mkdocs", "build", "--quiet"], env=ENV_MKDOCS)
+    with ui.fase("Controllo del sito") as stato:
+        uscita = ui.esegui([sys.executable, str(SCRIPTS_DIR / "controlla_sito.py"),
+                            str(ROOT_DIR / "site")])
+        m = re.search(r"Link interni: (\d+) controllati in (\d+) pagine", uscita)
+        if m:
+            stato["dettaglio"] = f"{m.group(2)} pagine · {m.group(1)} link"
 
-    stampa_riepilogo_build()
+    stampa_riepilogo_build(solo_se_presenti=True)
 
 
 def interattivo():
@@ -404,11 +401,13 @@ def interattivo():
         return False
 
 
-def chiedi(domanda):
-    try:
-        return input(domanda).strip()
-    except EOFError:
-        return ""
+def _stile_stato(riga):
+    codice = riga[:2]
+    if "D" in codice:
+        return "errore"
+    if "?" in codice or "A" in codice:
+        return "ok"
+    return "avviso"
 
 
 def conferma_pubblicazione(titolo, corpo, chiedi_conferma=True):
@@ -417,77 +416,93 @@ def conferma_pubblicazione(titolo, corpo, chiedi_conferma=True):
     Senza terminale interattivo (es. lancio da un altro programma) o con
     --si non chiede nulla e prosegue, come faceva il Launcher prima.
     """
-    stampa_titolo("Cosa verrà pubblicato")
-    print(titolo)
-    if corpo:
-        for riga in corpo.splitlines():
-            print(f"  {riga}")
-    print()
-    righe = git_stato(percorsi_esistenti())
-    print(f"File modificati ({len(righe)}):")
-    for riga in righe[:25]:
-        print(f"  {riga}")
-    if len(righe) > 25:
-        print(f"  ... e altri {len(righe) - 25}")
-    segnala_file_esclusi()
-    voci = esito.leggi_riepilogo()
-    avvisi = sum(v["gravita"] == esito.AVVISO for v in voci)
+    righe = [f"[titolo]{ui.esc(titolo)}[/]"]
+    righe += [f"[tenue]{ui.esc(r)}[/]" for r in (corpo.splitlines() if corpo else [])]
+    modificati = git_stato(percorsi_esistenti())
+    righe += ["", f"{len(modificati)} file modificati:"]
+    for r in modificati[:15]:
+        righe.append(f"  [{_stile_stato(r)}]{ui.esc(r[:2])}[/] {ui.esc(r[3:])}")
+    if len(modificati) > 15:
+        righe.append(f"  [tenue]… e altri {len(modificati) - 15}[/]")
+    esclusi = file_esclusi()
+    if esclusi:
+        righe += ["", f"[avviso]{len(esclusi)} file fuori dai percorsi pubblicati "
+                      "(NON verranno inviati):[/]"]
+        righe += [f"  [tenue]{ui.esc(r)}[/]" for r in esclusi[:8]]
+    avvisi = sum(v["gravita"] == esito.AVVISO for v in esito.leggi_riepilogo())
     if avvisi:
-        print(f"\nNota: la generazione ha prodotto {avvisi} avvisi (vedi il riepilogo sopra).")
+        righe += ["", f"[avviso]La generazione ha prodotto {_conta(avvisi, 'avviso', 'avvisi')} "
+                      "(vedi sopra).[/]"]
+    ui.scrivi()
+    ui.pannello("Cosa verrà pubblicato", righe)
 
     if not chiedi_conferma:
         return True
     if not interattivo():
-        print("\n(Esecuzione non interattiva: pubblico senza chiedere conferma.)")
+        ui.scrivi("  (esecuzione non interattiva: pubblico senza chiedere conferma)", "tenue")
         return True
-    risposta = chiedi("\nPubblicare queste modifiche su GitHub? [s/N] ").lower()
+    # "\\[" : la parentesi quadra va protetta, altrimenti rich la legge come markup.
+    risposta = ui.chiedi("  Pubblicare su GitHub? \\[s/N] ").lower()
     return risposta in ("s", "si", "sì", "y", "yes")
 
 
 def pubblica(messaggio=None, chiedi_conferma=True):
     """Commit e push delle modifiche (dopo prepara() e genera_sito())."""
-    stampa_titolo("Pubblicazione")
     if not git_ci_sono_modifiche():
-        print("Nessuna modifica rispetto all'ultimo commit: niente da pubblicare.")
-        stampa_titolo("Completato (nessuna modifica)")
+        ui.scrivi()
+        ui.pannello("Niente da pubblicare",
+                    ["Il sito generato coincide con l'ultima versione pubblicata."], "grey50")
         return False
 
     messaggio_globale["testo"] = messaggio  # None -> messaggio automatico
     titolo, corpo = componi_messaggio_commit()
     if not conferma_pubblicazione(titolo, corpo, chiedi_conferma):
-        stampa_titolo("Pubblicazione annullata")
-        print("Niente è stato inviato a GitHub: le modifiche restano nella cartella,")
-        print("pronte per la prossima pubblicazione.")
+        ui.scrivi()
+        ui.pannello("Pubblicazione annullata",
+                    ["Niente è stato inviato a GitHub: le modifiche restano nella cartella,",
+                     "pronte per la prossima pubblicazione."], "yellow")
         return False
 
+    ui.scrivi()
     if not git_sync_pubblicazione(titolo, corpo):
         return False
-    stampa_titolo("Sito aggiornato e pubblicato!")
-    print("GitHub Actions builderà e pubblicherà automaticamente su GitHub Pages")
-    print("(di solito ci vuole qualche minuto prima che sia visibile online).")
+    ui.scrivi()
+    ui.pannello("Sito pubblicato",
+                ["[ok]Le modifiche sono su GitHub.[/] GitHub Actions le metterà online",
+                 "tra qualche minuto."], "green")
     return True
 
 
 def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False,
              chiedi_conferma=True):
-    stampa_titolo("Aggiornamento del sito AMI")
+    ui.intestazione("Pubblicazione del sito")
+    inizio = time.monotonic()
     prepara(skip_validation=skip_validation)
     invalida_cache(only=only, refresh_ia=refresh_ia)
     genera_sito()
+    ui.scrivi(f"  Sito generato e controllato in {time.monotonic() - inizio:.0f} s", "tenue")
     pubblica(messaggio, chiedi_conferma=chiedi_conferma)
+    _chiusura()
+
+
+def _chiusura():
+    registro = ui.percorso_registro()
+    if registro:
+        ui.scrivi(f"  Registro completo: {registro}", "tenue")
 
 
 def solo_validazione():
     """Controlla dati.xlsx e basta: nessuna generazione, nessuna pubblicazione."""
-    stampa_titolo("Controllo dei dati (data/dati.xlsx)")
-    risultato = run_validation(str(ROOT_DIR / "data"))
+    ui.intestazione("Controllo dei dati")
+    risultato = ui.cattura(run_validation, str(ROOT_DIR / "data"))
     if risultato.get("error"):
         raise ErroreComando(f"impossibile leggere i dati: {risultato['error']}")
-    print()
+    riepilogo = _riepilogo_validazione(risultato)
     if risultato.get("success"):
-        print("Nessun errore: i dati possono essere pubblicati.")
+        ui.ok("Dati pronti per la pubblicazione", riepilogo)
     else:
-        print("Ci sono errori da correggere in dati.xlsx prima di pubblicare (vedi sopra).")
+        ui.fallito("Ci sono errori da correggere in dati.xlsx", riepilogo)
+    _voci_validazione(risultato.get("voci", []), includi_note=True)
     return risultato.get("success", False)
 
 
@@ -499,17 +514,18 @@ def _porta_libera():
 
 def anteprima(skip_validation=False):
     """Rigenera il sito e lo apre nel browser con `mkdocs serve`. Non pubblica."""
-    stampa_titolo("Anteprima del sito AMI")
+    ui.intestazione("Anteprima del sito")
     prepara(skip_validation=skip_validation, esporta=False)
     genera_sito()
 
     porta = _porta_libera()
     percorso = urlparse(SITE_URL).path.rstrip("/") + "/"
     indirizzo = f"http://127.0.0.1:{porta}{percorso}"
-    stampa_titolo("Anteprima in corso")
-    print(f"Il sito è visibile su {indirizzo}")
-    print("Si aggiorna da solo se rigeneri il sito (es. dal menu in un'altra finestra).")
-    print("Per chiudere l'anteprima premi Ctrl+C.\n")
+    ui.scrivi()
+    ui.pannello("Anteprima in corso", [
+        f"[titolo]{indirizzo}[/]",
+        "Si aggiorna da sola se rigeneri il sito da un'altra finestra.",
+        "[tenue]Ctrl+C per chiudere.[/]"], "green")
     processo = subprocess.Popen(
         [sys.executable, "-m", "mkdocs", "serve", "--quiet", "-a", f"127.0.0.1:{porta}"],
         cwd=ROOT_DIR, env={**os.environ, **ENV_MKDOCS})
@@ -521,7 +537,6 @@ def anteprima(skip_validation=False):
         processo.wait()
     except KeyboardInterrupt:
         interrotto = True
-        print("\nChiusura dell'anteprima...")
     finally:
         if processo.poll() is None:
             processo.terminate()
@@ -532,29 +547,48 @@ def anteprima(skip_validation=False):
     if not interrotto and processo.returncode:
         raise ErroreComando(f"l'anteprima (mkdocs serve) si è chiusa con codice "
                             f"{processo.returncode}: vedi i messaggi sopra")
-    print("Anteprima chiusa.")
+    ui.scrivi("  Anteprima chiusa.", "tenue")
 
 
-def stampa_riepilogo_build():
+def stampa_riepilogo_build(solo_se_presenti=False):
     """Riepilogo di errori e avvisi raccolti dagli script di generazione."""
     voci = esito.leggi_riepilogo()
-    stampa_titolo("Riepilogo errori e avvisi della generazione")
-    print(esito.formatta_riepilogo(voci))
+    if not voci:
+        if not solo_se_presenti:
+            ui.scrivi("  Nessun errore e nessun avviso nell'ultima generazione.", "tenue")
+        return
+    righe = []
+    for v in voci:
+        stile = "errore" if v["gravita"] == esito.ERRORE else "avviso"
+        righe.append(f"[{stile}]{v['gravita'].upper()}[/] [tenue]{ui.esc(v['fase'])}:[/] "
+                     f"{ui.esc(v['messaggio'])}")
+    errori = sum(v["gravita"] == esito.ERRORE for v in voci)
+    ui.scrivi()
+    ui.pannello(f"Errori e avvisi della generazione ({_conta(errori, 'errore', 'errori')}, "
+                f"{_conta(len(voci) - errori, 'avviso', 'avvisi')})",
+                righe, "red" if errori else "yellow")
 
 
 def mostra_cache_stats():
-    """Mostra statistiche cache."""
-    stampa_titolo("Statistiche Cache")
-    cache_mgr = CacheManager()
-    cache_mgr.print_stats()
+    ui.intestazione("Statistiche della cache")
+    CacheManager().print_stats()
 
 
 def svuota_cache():
-    """Svuota cache."""
-    stampa_titolo("Pulizia Cache")
-    cache_mgr = CacheManager()
-    cache_mgr.clear_all()
-    print("Cache completamente svuotata")
+    ui.intestazione("Pulizia della cache")
+    ui.cattura(CacheManager().clear_all)
+    ui.ok("Cache completamente svuotata")
+
+
+def mostra_errore(e, pubblicazione=True):
+    righe = [ui.esc(e)]
+    if pubblicazione:
+        righe.append("[titolo]Il sito NON è stato pubblicato.[/]")
+    registro = ui.percorso_registro()
+    if registro:
+        righe.append(f"[tenue]Registro completo: {registro}[/]")
+    ui.scrivi()
+    ui.pannello("Errore", righe, "red")
 
 
 # ---------------------------------------------------------------------------
@@ -562,35 +596,46 @@ def svuota_cache():
 # ---------------------------------------------------------------------------
 
 VOCI_MENU = [
-    ("1", "Controlla i dati (dati.xlsx)", "non genera e non pubblica"),
-    ("2", "Anteprima del sito nel browser", "rigenera, non pubblica"),
-    ("3", "Pubblica", "rigenera, mostra le modifiche e chiede conferma"),
-    ("4", "Rigenera schede specifiche e pubblica", "es. AMI-0034"),
-    ("5", "Riepilogo errori e avvisi dell'ultima generazione", ""),
+    ("1", "Controlla i dati", "dati.xlsx · non genera, non pubblica"),
+    ("2", "Anteprima nel browser", "rigenera · non pubblica"),
+    ("3", "Pubblica", "rigenera · mostra le modifiche · chiede conferma"),
+    ("4", "Rigenera schede e pubblica", "es. AMI-0034"),
+    ("5", "Riepilogo dell'ultima generazione", "errori e avvisi"),
     ("0", "Esci", ""),
 ]
 
 
 def chiedi_id_schede():
-    testo = chiedi("ID delle schede da rigenerare (es. AMI-0034, AMI-0035): ")
+    testo = ui.chiedi("  ID delle schede da rigenerare (es. AMI-0034, AMI-0035): ")
     ids = [i.strip().upper() for i in re.split(r"[,;\s]+", testo) if i.strip()]
     errati = [i for i in ids if not re.fullmatch(r"AMI-\d{4,}", i)]
     if errati:
-        print(f"ID non validi: {', '.join(errati)} (formato atteso: AMI-0034)")
+        ui.avviso(f"ID non validi: {', '.join(errati)} (formato atteso: AMI-0034)")
         return None
     return ids or None
 
 
-def menu():
-    while True:
-        print()
-        print("=" * 60)
-        print("AMI — Archivio del Maoismo Italiano")
-        print("=" * 60)
+def mostra_menu():
+    ui.intestazione()
+    if ui.console:
+        from rich.table import Table
+        tabella = Table.grid(padding=(0, 2))
+        tabella.add_column(justify="right", style="marchio")
+        tabella.add_column(style="titolo")
+        tabella.add_column(style="tenue")
+        for tasto, voce, nota in VOCI_MENU:
+            tabella.add_row(f"  {tasto}", voce, nota)
+        ui.console.print(tabella)
+    else:
         for tasto, voce, nota in VOCI_MENU:
             print(f"  {tasto}  {voce}" + (f"  ({nota})" if nota else ""))
+
+
+def menu():
+    while True:
+        mostra_menu()
         try:
-            scelta = input("\nScelta: ").strip()
+            scelta = (ui.console.input("\n  Scelta: ") if ui.console else input("\nScelta: ")).strip()
         except EOFError:
             return
         if not scelta:
@@ -609,23 +654,25 @@ def menu():
                 if ids:
                     aggiorna(only=ids)
             elif scelta == "5":
+                ui.intestazione("Riepilogo dell'ultima generazione")
                 stampa_riepilogo_build()
             else:
-                print("Scelta non valida.")
+                ui.avviso("scelta non valida")
                 continue
         except ErroreComando as e:
-            if esito.leggi_riepilogo() and scelta in ("2", "3", "4"):
-                stampa_riepilogo_build()
-            print(f"\nERRORE: {e}")
-            if scelta in ("3", "4"):
-                print("Il sito NON è stato pubblicato.")
+            mostra_errore(e, pubblicazione=scelta in ("3", "4"))
         except KeyboardInterrupt:
-            print("\n\nInterrotto: torno al menu.")
-        chiedi("\nPremi INVIO per tornare al menu...")
+            ui.scrivi("\n  Interrotto: torno al menu.", "avviso")
+        ui.chiedi("\n  Premi INVIO per tornare al menu…")
 
 
 def main():
+    global ui
     args = sys.argv[1:]
+    if "--dettagli" in args:
+        ui = Interfaccia(ROOT_DIR, verboso=True)
+        args = [a for a in args if a != "--dettagli"]
+
     if not args and interattivo():
         try:
             menu()
@@ -682,18 +729,14 @@ def main():
                  skip_validation=skip_validation, chiedi_conferma=chiedi_conferma)
 
     except ErroreComando as e:
-        if esito.leggi_riepilogo():
-            stampa_riepilogo_build()
-        print(f"\nERRORE: {e}")
-        print("Il sito NON è stato pubblicato: correggi l'errore sopra e rilancia lo script.")
+        mostra_errore(e)
         codice_uscita = 1
     except KeyboardInterrupt:
-        print("\n\nInterrotto manualmente.")
+        ui.scrivi("\n  Interrotto manualmente.", "avviso")
         codice_uscita = 1
     finally:
         if interattivo():
-            print()
-            chiedi("Premi INVIO per chiudere...")
+            ui.chiedi("\n  Premi INVIO per chiudere…")
 
     sys.exit(codice_uscita)
 

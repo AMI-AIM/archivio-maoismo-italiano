@@ -96,3 +96,5 @@ coverage.xml
 .impeccable/
 # Riepilogo errori/avvisi dell'ultima generazione (scripts/core/esito.py)
 .riepilogo-build.json
+# Registri delle esecuzioni del Launcher (scripts/core/interfaccia.py)
+log/

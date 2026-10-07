@@ -633,6 +633,44 @@
     transition: background 0.15s;
 }
 
+/* Riga della scheda da cui si torna con "Torna ai risultati": sfondo di
+   selezione (rosso tenue) che si spegne da solo. */
+.risultato-card--ultima {
+    animation: ami-riga-ultima 2.4s ease-out forwards;
+}
+@keyframes ami-riga-ultima {
+    0%, 45% { background: var(--ami-rosso-tenue); }
+    100% { background: transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .risultato-card--ultima {
+        animation: none;
+        background: var(--ami-rosso-tenue);
+    }
+}
+
+/* Stato vuoto con forma variante: sotto l'azione principale, l'azzeramento
+   resta come azione secondaria. */
+.nessun-risultato__altro {
+    margin: 0.75rem 0 0;
+}
+.nessun-risultato__azzera {
+    min-height: 36px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-family: var(--ami-font-label);
+    font-size: var(--ami-font-size-sm);
+    font-weight: 600;
+    color: var(--md-primary-fg-color);
+    cursor: pointer;
+}
+.nessun-risultato__azzera:hover {
+    color: var(--md-primary-fg-color--dark);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
 .risultato-card:hover {
     background: var(--md-code-bg-color);
 }

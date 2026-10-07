@@ -31,6 +31,16 @@ python Launcher.py --anteprima     come la voce 2
 python Launcher.py --pubblica      come la voce 3
 python Launcher.py --pubblica --si pubblica senza chiedere conferma
 
+python Launcher.py --dettagli ...  mostra a schermo tutto l'output degli script
+                                   (utile per capire un problema)
+
+### Registro delle esecuzioni
+
+A schermo ogni fase occupa una riga (esito e durata). L'output completo di
+ogni esecuzione è salvato in log/launcher_AAAA-MM-GG_HH-MM-SS.log (si tengono
+gli ultimi 30; la cartella log/ non viene pubblicata). Se una fase fallisce,
+il Launcher mostra le sue ultime righe e il percorso del registro.
+
 Se Launcher.py viene lanciato da un altro programma (senza terminale
 interattivo), pubblica direttamente senza menu né conferma, come prima.
 

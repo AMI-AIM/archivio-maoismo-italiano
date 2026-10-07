@@ -422,8 +422,10 @@ body:has(.banner-full) .md-content article h1:first-of-type {
     justify-content: flex-start !important;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    padding: 0 1rem 0.6rem 1rem !important;
-    margin: 0 -1rem !important;
+    /* 0.8rem = 16px, il margine laterale della pagina (radice a 20px):
+       con 1rem la striscia usciva di 4px per lato. */
+    padding: 0 0.8rem 0.6rem 0.8rem !important;
+    margin: 0 -0.8rem !important;
     gap: 1.25rem !important;
   }
   .evidenza-card {

@@ -274,3 +274,18 @@ pagina); corretto in `generatore.genera_sitemap`.
   repository locale né GitHub. `--si` la salta.
 - Nuove voci di menu: aggiungerle a `VOCI_MENU` e a `menu()`, e documentarle
   in comandi.txt.
+
+## 16. Interfaccia del Launcher: `core/interfaccia.py` (ott. 2026)
+- Libreria `rich` (in requirements.txt). Senza rich il Launcher funziona
+  comunque con un output testuale semplice, così può segnalare le
+  dipendenze mancanti.
+- Ogni fase: `with ui.fase("Nome") as stato:` (spinner, poi ✓/✗ e durata;
+  `stato["dettaglio"]` è il testo grigio a destra). I comandi esterni con
+  `ui.esegui([...])`, le funzioni Python che stampano con `ui.cattura(f, ...)`:
+  il loro output va nel registro `log/launcher_*.log` (ultimi 30), non a
+  schermo. Con `--dettagli` tutto torna a schermo.
+- Testo variabile dentro stringhe con markup rich (nomi, messaggi, file):
+  passarlo sempre da `ui.esc()`, altrimenti parentesi quadre come "[m-l]"
+  vengono lette come stili.
+- Ai processi figli il Launcher passa PYTHONIOENCODING=utf-8: l'output con
+  lettere accentate arriva intatto nel registro anche su Windows.
