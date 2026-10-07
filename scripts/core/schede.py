@@ -457,11 +457,6 @@ hide:
         # =====================================================================
         # CONTENUTO
         # =====================================================================
-        data_display_html = html.escape(
-            data_formattata
-            if data_formattata and data_formattata not in ("n.d.", "s.d.")
-            else "Data non disponibile"
-        )
         titolo_html = html.escape(titolo)
         url_ia_attr = html.escape(url_ia, quote=True)
         

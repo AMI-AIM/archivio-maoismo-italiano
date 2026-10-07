@@ -169,30 +169,3 @@ class SchemaGenerator:
             schema["image"] = immagine_url
 
         return schema
-
-    @staticmethod
-    def breadcrumb_schema(items):
-        """
-        Schema BreadcrumbList per navigazione.
-        
-        Args:
-            items: List di tuple (label, url)
-                   es: [("Home", "/"), ("Persone", "/persone/"), ("Mario Rossi", "/persone/mario-rossi/")]
-        
-        Returns:
-            dict: Schema.org BreadcrumbList
-        """
-        breadcrumbs = []
-        for pos, (label, url) in enumerate(items, 1):
-            breadcrumbs.append({
-                "@type": "ListItem",
-                "position": pos,
-                "name": label,
-                "item": f"{SITE_URL}{url}" if not url.startswith('http') else url
-            })
-        
-        return {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": breadcrumbs
-        }

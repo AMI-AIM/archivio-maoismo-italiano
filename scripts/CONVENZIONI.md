@@ -289,3 +289,16 @@ pagina); corretto in `generatore.genera_sitemap`.
   vengono lette come stili.
 - Ai processi figli il Launcher passa PYTHONIOENCODING=utf-8: l'output con
   lettere accentate arriva intatto nel registro anche su Windows.
+
+## 17. build/ e site/ ripartono da zero (ott. 2026)
+`Launcher.genera_sito()` svuota build/ e site/ prima di generare, come
+avviene su GitHub Actions. Prima vi restavano file non più prodotti dal
+codice (vecchi font, PNG dei percorsi, documenti_chunk_*.json, lazy-load.js),
+che finivano nell'anteprima e potevano nascondere un'immagine mancante in
+assets/ (argomenti.py la cerca anche in build/). Effetto collaterale: in
+locale la cache "schede saltate" di crea_schede non entra più in gioco
+(richiede che il file esista già), costo ~1 s. Se lo svuotamento fallisce
+su Windows è quasi sempre perché l'anteprima è ancora aperta.
+Rimosso codice mai usato: JSONOptimizer.compress_json,
+SchemaGenerator.breadcrumb_schema, argomenti.ESCLUDI_DALLA_RICERCA, una
+variabile in schede.py (verificato: sito generato identico).

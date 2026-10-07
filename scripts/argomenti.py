@@ -48,8 +48,6 @@ RESERVED_SLUGS = {
     'robots',
 }
 
-# La pagina ora E' in navigazione: la rendiamo ricercabile e indicizzata.
-ESCLUDI_DALLA_RICERCA = False
 AGGIORNA_SITEMAP = True
 
 

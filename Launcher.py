@@ -368,8 +368,30 @@ def _avvisi_nuovi(prima):
     return len(voci), (_conta(n, "avviso", "avvisi") if n else "")
 
 
+def svuota_cartelle_generate():
+    """Svuota build/ e site/ prima di generare: si parte da zero come su GitHub.
+
+    Senza questa pulizia vi restavano file che il codice non produce più
+    (vecchi font, immagini dei percorsi in PNG, JSON a blocchi): finivano
+    nell'anteprima locale e potevano nascondere un'immagine mancante in
+    assets/, perché argomenti.py la cerca anche in build/.
+    """
+    with ui.fase("Pulizia di build/ e site/"):
+        for nome in ("build", "site"):
+            cartella = ROOT_DIR / nome
+            if not cartella.exists():
+                continue
+            try:
+                shutil.rmtree(cartella)
+            except OSError as e:
+                raise ErroreComando(
+                    f"impossibile svuotare {nome}/ ({e}). Se l'anteprima è aperta in un'altra "
+                    "finestra, chiudila (Ctrl+C) e riprova.")
+
+
 def genera_sito():
     """Generazione completa in build/, mkdocs build in site/ e controllo finale."""
+    svuota_cartelle_generate()
     voci_lette = 0
     for script, nome in SCRIPT_GENERAZIONE:
         with ui.fase(nome) as stato:
