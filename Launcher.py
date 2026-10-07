@@ -8,6 +8,7 @@ Uso:
     python Launcher.py "messaggio commit"       Rigenera e pubblica con messaggio custom
     python Launcher.py --valida                 Controlla solo data/dati.xlsx (non genera, non pubblica)
     python Launcher.py --anteprima              Rigenera e apre il sito nel browser (non pubblica)
+    python Launcher.py --test                   Test automatici + confronto col sito di riferimento
     python Launcher.py --si ...                 Pubblica senza chiedere conferma
     python Launcher.py --dettagli ...           Mostra a schermo tutto l'output degli script
                                                 (di norma va nel registro log/launcher_*.log)
@@ -78,7 +79,7 @@ PERCORSI_PUBBLICATI = [
     ".github", ".gitignore", ".gitattributes", ".nojekyll", ".python-version",
     "assets", "data", "overrides", "scripts",
     "mkdocs.yml", "requirements.txt", "Launcher.py",
-    "README.md", "LICENSE", "DESIGN.md", "documentazione",
+    "README.md", "LICENSE", "DESIGN.md", "documentazione", "tests",
 ]
 
 # Interfaccia a terminale; main() la ricrea con --dettagli se richiesto.
@@ -328,10 +329,39 @@ def identifier_ia_per_documento(ami_id):
 # Fasi della pipeline
 # ---------------------------------------------------------------------------
 
+def controlla_excel_aperto():
+    """Se dati.xlsx è aperto in Excel, ricorda di salvarlo prima di proseguire.
+
+    Mentre il file è aperto Excel crea accanto a esso "~$dati.xlsx". Il
+    Launcher legge solo l'ultima versione SALVATA: le modifiche non salvate
+    resterebbero fuori dalla pubblicazione senza che nessuno se ne accorga.
+    (Se Excel si è chiuso in modo anomalo il file di blocco può restare anche
+    a Excel chiuso: in quel caso si può cancellare.)
+    """
+    blocco = ROOT_DIR / "data" / "~$dati.xlsx"
+    if not blocco.exists():
+        return
+    righe = ["dati.xlsx risulta [titolo]aperto in Excel[/].",
+             "Il Launcher usa solo l'ultima versione salvata: le modifiche non salvate",
+             "non entreranno nel sito.",
+             "",
+             "[tenue]Salva il file in Excel (non serve chiuderlo). Se Excel è già chiuso,",
+             "il blocco è rimasto da una chiusura anomala: puoi cancellare data/~$dati.xlsx.[/]"]
+    ui.scrivi()
+    ui.pannello("Excel aperto", righe, "yellow")
+    if interattivo():
+        risposta = ui.chiedi("  Premi INVIO dopo aver salvato (oppure scrivi A per annullare): ")
+        if risposta.lower() in ("a", "annulla"):
+            raise ErroreComando("operazione annullata: salva dati.xlsx e rilancia.")
+    else:
+        ui.avviso("dati.xlsx è aperto in Excel: uso l'ultima versione salvata")
+
+
 def prepara(skip_validation=False, esporta=True):
     """Dipendenze, validazione e (per la pubblicazione) export CSV dei dati."""
     # Riepilogo errori/avvisi: si riparte da zero a ogni esecuzione.
     esito.azzera_riepilogo()
+    controlla_excel_aperto()
     verifica_dipendenze()
     esegui_validazione(bloccante=not skip_validation)
 
@@ -536,6 +566,7 @@ def _chiusura():
 def solo_validazione():
     """Controlla dati.xlsx e basta: nessuna generazione, nessuna pubblicazione."""
     ui.intestazione("Controllo dei dati")
+    controlla_excel_aperto()
     risultato = ui.cattura(run_validation, str(ROOT_DIR / "data"))
     if risultato.get("error"):
         raise ErroreComando(f"impossibile leggere i dati: {risultato['error']}")
@@ -622,6 +653,59 @@ def svuota_cache():
     ui.ok("Cache completamente svuotata")
 
 
+def test_automatici():
+    """Test di base (python -m unittest) e confronto del sito di prova col riferimento."""
+    ui.intestazione("Test automatici")
+    base_ok = True
+    try:
+        with ui.fase("Test di base") as stato:
+            try:
+                uscita = ui.esegui([sys.executable, "-m", "unittest", "discover", "-s", "tests", "-t", "."])
+            except ErroreComando:
+                stato["dettaglio"] = "alcuni test non superati"
+                raise
+            m = re.search(r"Ran (\d+) test", uscita)
+            stato["dettaglio"] = f"{m.group(1)} test superati" if m else ""
+    except ErroreComando:
+        base_ok = False  # si prosegue col confronto: mostra anche l'effetto sul sito
+
+    from tests import confronto
+    with ui.fase("Confronto con il sito di riferimento") as stato:
+        try:
+            aggiunti, rimossi, cambiati, differenze = confronto.confronta()
+        except confronto.GenerazioneFallita as e:
+            ui.mostra_coda(str(e))
+            raise ErroreComando("la generazione del sito di prova è fallita")
+        n = len(aggiunti) + len(rimossi) + len(cambiati)
+        stato["dettaglio"] = f"{n} file diversi" if n else "identico"
+    if not n:
+        ui.ok("Il codice produce lo stesso sito")
+        if not base_ok:
+            raise ErroreComando("alcuni test di base non sono superati (vedi sopra)")
+        return True
+
+    righe = []
+    for etichetta, stile, elenco in (("nuovo", "ok", aggiunti), ("sparito", "errore", rimossi),
+                                     ("cambiato", "avviso", cambiati)):
+        righe += [f"[{stile}]{etichetta:>8}[/] {ui.esc(f)}" for f in elenco[:20]]
+    for f, diff in list(differenze.items())[:3]:
+        righe += ["", f"[titolo]{ui.esc(f)}[/]"]
+        for r in diff[:8]:
+            stile = "ok" if r.startswith("+") else "errore" if r.startswith("-") else "tenue"
+            righe.append(f"[{stile}]{ui.esc(r[:110])}[/]")
+    ui.scrivi()
+    ui.pannello("Differenze rispetto al riferimento", righe, "yellow")
+    ui.scrivi("  Se hai cambiato apposta il modo in cui il sito mostra queste pagine, accetta il nuovo\n"
+              "  risultato come riferimento. Se no, una modifica al codice ha avuto un effetto non voluto.",
+              "tenue")
+    if interattivo() and ui.chiedi("  Le differenze sono volute? Aggiorno il riferimento \\[s/N] ").lower() in ("s", "si", "sì"):
+        with ui.fase("Aggiornamento del riferimento") as stato:
+            stato["dettaglio"] = f"{confronto.aggiorna_riferimento()} file"
+    if not base_ok:
+        raise ErroreComando("alcuni test di base non sono superati (vedi sopra)")
+    return False
+
+
 def mostra_errore(e, pubblicazione=True):
     righe = [ui.esc(e)]
     if pubblicazione:
@@ -643,6 +727,7 @@ VOCI_MENU = [
     ("3", "Pubblica", "rigenera · mostra le modifiche · chiede conferma"),
     ("4", "Rigenera schede e pubblica", "es. AMI-0034"),
     ("5", "Riepilogo dell'ultima generazione", "errori e avvisi"),
+    ("6", "Test automatici", "dopo modifiche al codice"),
     ("0", "Esci", ""),
 ]
 
@@ -698,6 +783,8 @@ def menu():
             elif scelta == "5":
                 ui.intestazione("Riepilogo dell'ultima generazione")
                 stampa_riepilogo_build()
+            elif scelta == "6":
+                test_automatici()
             else:
                 ui.avviso("scelta non valida")
                 continue
@@ -747,6 +834,9 @@ def main():
                 return
             elif args[0] == '--anteprima':
                 anteprima(skip_validation=skip_validation)
+                return
+            elif args[0] == '--test':
+                codice_uscita = 0 if test_automatici() else 1
                 return
             elif args[0] == '--force-refresh-ia':
                 refresh_ia = 'all'

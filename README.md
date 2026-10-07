@@ -113,6 +113,7 @@ pip install -r requirements.txt
 | 3 | Pubblica | rigenera, mostra cosa cambia e chiede conferma prima dell'invio |
 | 4 | Rigenera schede e pubblica | chiede gli ID (es. AMI-0034) |
 | 5 | Riepilogo dell'ultima generazione | errori e avvisi |
+| 6 | Test automatici | da usare dopo modifiche al codice (vedi sotto) |
 | 0 | Esci | |
 
 Dopo ogni azione si torna al menu. Rispondendo N (o solo INVIO) alla
@@ -125,6 +126,7 @@ interattivo), pubblica direttamente senza menu né conferma.
 ```
 python Launcher.py --valida                  # come la voce 1
 python Launcher.py --anteprima               # come la voce 2
+python Launcher.py --test                    # come la voce 6
 python Launcher.py --pubblica                # come la voce 3
 python Launcher.py --pubblica --si           # pubblica senza chiedere conferma
 python Launcher.py "Aggiunta serie 1972-73"  # pubblica con un messaggio di commit scritto a mano
@@ -150,6 +152,24 @@ python scripts/controlla_sito.py    # ... e ne controlla pagine, sitemap, JSON e
 Il Launcher esegue da solo validazione, costruzione e controllo prima di ogni
 pubblicazione: con un errore, nulla viene inviato a GitHub.
 
+### Test automatici
+
+Servono dopo una modifica al codice (script, generatori), non dopo una
+modifica ai dati. Sono due:
+
+- **Test di base** (`tests/test_*.py`, `python -m unittest discover -s tests -t .`):
+  convenzioni delle date («ca.», «s.d.», formati italiani), validatore,
+  messaggi di commit. Girano anche su GitHub prima di ogni pubblicazione:
+  se falliscono il sito non viene aggiornato.
+- **Confronto con il sito di riferimento** (`python -m tests.confronto`): genera
+  il sito da un piccolo estratto fisso del catalogo (`tests/dati_prova.xlsx`,
+  senza collegamenti a Internet Archive) e lo confronta con quello salvato in
+  `tests/riferimento/`, mostrando le pagine cambiate. Se il cambiamento è
+  voluto (es. hai modificato come una scheda mostra le date) il Launcher
+  chiede se aggiornare il riferimento (`python -m tests.confronto --aggiorna`);
+  se non è voluto, hai trovato un effetto collaterale prima di pubblicarlo.
+  Gira solo in locale.
+
 ### Cache di Internet Archive
 
 ```
@@ -168,6 +188,9 @@ una singola scheda usa `--only`.
   l'output completo è salvato in `log/launcher_AAAA-MM-GG_HH-MM-SS.log`
   (si tengono gli ultimi 30; `log/` non viene pubblicata). Se una fase
   fallisce compaiono le sue ultime righe e il percorso del registro.
+- **Excel aperto:** se trova `data/~$dati.xlsx` (il file che Excel crea
+  mentre `dati.xlsx` è aperto) il Launcher ricorda di salvare: usa solo
+  l'ultima versione salvata.
 - **Ripartenza da zero:** `build/` e `site/` vengono svuotate e rigenerate
   a ogni esecuzione, come su GitHub Actions.
 - **Commit selettivo:** vengono pubblicati solo i percorsi elencati in

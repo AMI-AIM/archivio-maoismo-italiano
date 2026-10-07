@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<eac xmlns="https://archivists.org/ns/eac/v2">
+  <control maintenanceStatus="new" languageEncoding="iso639-2b" scriptEncoding="iso15924">
+    <recordId>AMI-P-001</recordId>
+    <maintenanceAgency>
+      <agencyName>Archivio del Maoismo Italiano</agencyName>
+    </maintenanceAgency>
+    <maintenanceHistory>
+      <maintenanceEvent maintenanceEventType="created">
+        <agent agentType="human">Ivan Masci</agent>
+        <eventDateTime standardDateTime="2026-10-02">2026-10-02</eventDateTime>
+      </maintenanceEvent>
+      <maintenanceEvent maintenanceEventType="derived">
+        <agent agentType="machine">scripts/core/ead_export.py</agent>
+        <eventDateTime standardDateTime="2026-10-02">2026-10-02</eventDateTime>
+      </maintenanceEvent>
+    </maintenanceHistory>
+    <conventionDeclaration>
+      <reference>ISAAR(CPF): International Standard Archival Authority Record for Corporate Bodies, Persons and Families, 2nd ed., 2004</reference>
+    </conventionDeclaration>
+    <languageDeclaration languageCode="ita" scriptCode="Latn" />
+  </control>
+  <cpfDescription>
+    <identity>
+      <entityType value="person" />
+      <nameEntry status="authorized">
+        <part>Mao Zedong</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Mao Tse-tung</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Mao Tsetung</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Mao Tze-tung</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Mao Tse-dun</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Mao Ze-dun</part>
+      </nameEntry>
+      <identityId localType="Wikidata">Q5816</identityId>
+      <identityId localType="VIAF">51699962</identityId>
+    </identity>
+    <description>
+      <existDates>
+        <dateRange>
+          <fromDate standardDate="1893">1893</fromDate>
+          <toDate standardDate="1976">1976</toDate>
+        </dateRange>
+      </existDates>
+    </description>
+    <relations>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-015.xml">
+          <part>Partito Comunista Cinese</part>
+        </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1943">1943</fromDate>
+          <toDate standardDate="1976">1976</toDate>
+        </dateRange>
+        <relationType>gerarchica</relationType>
+        <descriptiveNote>
+          <p>Mao Zedong presidente di Partito Comunista Cinese</p>
+        </descriptiveNote>
+      </relation>
+    </relations>
+  </cpfDescription>
+</eac>

@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='utf-8'?>
+<eac xmlns="https://archivists.org/ns/eac/v2">
+  <control maintenanceStatus="new" languageEncoding="iso639-2b" scriptEncoding="iso15924">
+    <recordId>AMI-P-006</recordId>
+    <maintenanceAgency>
+      <agencyName>Archivio del Maoismo Italiano</agencyName>
+    </maintenanceAgency>
+    <maintenanceHistory>
+      <maintenanceEvent maintenanceEventType="created">
+        <agent agentType="human">Ivan Masci</agent>
+        <eventDateTime standardDateTime="2026-10-02">2026-10-02</eventDateTime>
+      </maintenanceEvent>
+      <maintenanceEvent maintenanceEventType="derived">
+        <agent agentType="machine">scripts/core/ead_export.py</agent>
+        <eventDateTime standardDateTime="2026-10-02">2026-10-02</eventDateTime>
+      </maintenanceEvent>
+    </maintenanceHistory>
+    <conventionDeclaration>
+      <reference>ISAAR(CPF): International Standard Archival Authority Record for Corporate Bodies, Persons and Families, 2nd ed., 2004</reference>
+    </conventionDeclaration>
+    <languageDeclaration languageCode="ita" scriptCode="Latn" />
+  </control>
+  <cpfDescription>
+    <identity>
+      <entityType value="person" />
+      <nameEntry status="authorized">
+        <part>Vincenzo Calò</part>
+      </nameEntry>
+    </identity>
+    <description>
+      <existDates>
+        <date>s.d.</date>
+      </existDates>
+    </description>
+    <relations>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-017.xml">
+          <part>Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</part>
+        </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1969">1969</fromDate>
+          <toDate standardDate="1976">1976</toDate>
+        </dateRange>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Vincenzo Calò segretario di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Viva il Leninismo!</part>
+        </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1962">1962</fromDate>
+          <toDate standardDate="1963">1963</toDate>
+        </dateRange>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Vincenzo Calò membro di Viva il Leninismo!</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Federazione Marxista-Leninista d'Italia</part>
+        </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1966">1966</fromDate>
+          <toDate standardDate="1967">1967</toDate>
+        </dateRange>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Vincenzo Calò membro di Federazione Marxista-Leninista d'Italia</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Tribuna Rossa</part>
+        </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1968">1968</fromDate>
+          <toDate standardDate="1969">1969</toDate>
+        </dateRange>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Vincenzo Calò membro di Tribuna Rossa</p>
+        </descriptiveNote>
+      </relation>
+    </relations>
+  </cpfDescription>
+</eac>

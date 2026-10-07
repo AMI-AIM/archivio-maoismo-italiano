@@ -303,3 +303,31 @@ su Windows è quasi sempre perché l'anteprima è ancora aperta.
 Rimosso codice mai usato: JSONOptimizer.compress_json,
 SchemaGenerator.breadcrumb_schema, argomenti.ESCLUDI_DALLA_RICERCA, una
 variabile in schede.py (verificato: sito generato identico).
+
+## 18. Test automatici: cartella `tests/` (ott. 2026)
+- Libreria standard `unittest`, nessuna dipendenza in più. I file
+  `tests/test_*.py` importano i moduli come gli script (`core.*`, tramite
+  `tests/_percorsi.py`). Si lanciano con
+  `python -m unittest discover -s tests -t .` (anche su GitHub Actions,
+  prima della validazione: se falliscono il deploy si ferma).
+- `tests/confronto.py` (golden test, solo locale, voce 6 del menu): genera
+  il sito da `tests/dati_prova.xlsx` in una cartella temporanea, con data e
+  ordine fissi, e confronta i file .md/.json/.xml/.txt di build/ (esclusi
+  quelli copiati tali e quali da assets/) con `tests/riferimento/`. Dopo una
+  modifica voluta all'aspetto delle pagine: `python -m tests.confronto --aggiorna`.
+- `tests/dati_prova.xlsx` è un estratto di dati.xlsx (9 documenti, uno per
+  tipo più date particolari) senza URL né nomi file: niente rete. Si rifà
+  con `python -m tests.crea_dati_prova` (poi aggiornare il riferimento).
+- Il riferimento è stato creato su Linux con Python 3.14: se al primo
+  confronto su Windows compaiono differenze dovute solo al sistema (es.
+  separatori di percorso), vanno accettate una volta con --aggiorna.
+- Nuove convenzioni (es. un nuovo formato di data) = nuovo caso in
+  `test_formati.py`; nuovi controlli del validatore = nuovo caso in
+  `test_validatore.py`.
+
+## 19. Menu a tendina in dati.xlsx (ott. 2026)
+Convalida a elenco (errore bloccante in Excel) su Catalogo.Tipo,
+Catalogo.Livello, Catalogo.Titolo_attribuito e Relazioni.Categoria_ISAAR,
+righe 2-5000. I valori ammessi coincidono con quelli del validatore
+(`TIPI_DOCUMENTO`, `LIVELLI`, `SI_NO`, `CATEGORIE_ISAAR`): se si aggiunge un
+valore, aggiornare entrambi (in Excel: Dati > Convalida dati).

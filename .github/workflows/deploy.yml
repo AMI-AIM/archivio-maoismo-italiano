@@ -44,6 +44,12 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      # Test di base del codice (date, validatore, messaggi di commit): se
+      # falliscono il sito non viene pubblicato. Il confronto col sito di
+      # riferimento (tests/confronto.py) gira solo in locale, dal Launcher.
+      - name: Unit tests
+        run: python -m unittest discover -s tests -t .
+
       - name: Validate data (dati.xlsx)
         run: |
           python -c "

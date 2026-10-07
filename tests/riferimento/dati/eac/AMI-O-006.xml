@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='utf-8'?>
+<eac xmlns="https://archivists.org/ns/eac/v2">
+  <control maintenanceStatus="new" languageEncoding="iso639-2b" scriptEncoding="iso15924">
+    <recordId>AMI-O-006</recordId>
+    <maintenanceAgency>
+      <agencyName>Archivio del Maoismo Italiano</agencyName>
+    </maintenanceAgency>
+    <maintenanceHistory>
+      <maintenanceEvent maintenanceEventType="created">
+        <agent agentType="human">Ivan Masci</agent>
+        <eventDateTime standardDateTime="2026-10-02">2026-10-02</eventDateTime>
+      </maintenanceEvent>
+      <maintenanceEvent maintenanceEventType="derived">
+        <agent agentType="machine">scripts/core/ead_export.py</agent>
+        <eventDateTime standardDateTime="2026-10-02">2026-10-02</eventDateTime>
+      </maintenanceEvent>
+    </maintenanceHistory>
+    <conventionDeclaration>
+      <reference>ISAAR(CPF): International Standard Archival Authority Record for Corporate Bodies, Persons and Families, 2nd ed., 2004</reference>
+    </conventionDeclaration>
+    <languageDeclaration languageCode="ita" scriptCode="Latn" />
+  </control>
+  <cpfDescription>
+    <identity>
+      <entityType value="corporateBody" />
+      <nameEntry status="authorized">
+        <part>Nuova Unità</part>
+      </nameEntry>
+    </identity>
+    <description>
+      <legalStatuses>
+        <legalStatus>
+          <term>Giornale</term>
+        </legalStatus>
+      </legalStatuses>
+      <existDates>
+        <dateRange>
+          <fromDate standardDate="1964">1964</fromDate>
+          <toDate standardDate="1991">1991</toDate>
+        </dateRange>
+      </existDates>
+    </description>
+    <relations>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-013.xml">
+          <part>Partito Comunista d'Italia (marxista-leninista)</part>
+        </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1966">1966</fromDate>
+          <toDate standardDate="1991">1991</toDate>
+        </dateRange>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Nuova Unità organo di stampa di Partito Comunista d'Italia (marxista-leninista)</p>
+        </descriptiveNote>
+      </relation>
+    </relations>
+  </cpfDescription>
+</eac>

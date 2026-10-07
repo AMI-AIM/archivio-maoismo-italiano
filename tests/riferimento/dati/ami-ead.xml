@@ -1,0 +1,524 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ead xmlns="http://ead3.archivists.org/schema/">
+  <control>
+    <recordid instanceurl="https://ami-aim.github.io/archivio-maoismo-italiano/dati/ami-ead.xml">AMI</recordid>
+    <filedesc>
+      <titlestmt>
+        <titleproper>Archivio del Maoismo Italiano</titleproper>
+        <author>Ivan Masci</author>
+      </titlestmt>
+    </filedesc>
+    <maintenancestatus value="revised" />
+    <maintenanceagency>
+      <agencyname>Archivio del Maoismo Italiano</agencyname>
+    </maintenanceagency>
+    <languagedeclaration>
+      <language langcode="ita">italiano</language>
+      <script scriptcode="Latn">latino</script>
+    </languagedeclaration>
+    <conventiondeclaration>
+      <citation>ISAD(G): General International Standard Archival Description, 2nd ed., 2000</citation>
+    </conventiondeclaration>
+    <conventiondeclaration>
+      <citation>ISAAR(CPF): International Standard Archival Authority Record for Corporate Bodies, Persons and Families, 2nd ed., 2004</citation>
+    </conventiondeclaration>
+    <maintenancehistory>
+      <maintenanceevent>
+        <eventtype value="created" />
+        <eventdatetime standarddatetime="2026-10-02">2026-10-02</eventdatetime>
+        <agenttype value="human" />
+        <agent>Ivan Masci</agent>
+      </maintenanceevent>
+      <maintenanceevent>
+        <eventtype value="derived" />
+        <eventdatetime standarddatetime="2026-10-02">2026-10-02</eventdatetime>
+        <agenttype value="machine" />
+        <agent>scripts/core/ead_export.py</agent>
+        <eventdescription>File generato automaticamente da data/dati.xlsx</eventdescription>
+      </maintenanceevent>
+    </maintenancehistory>
+  </control>
+  <archdesc level="collection">
+    <did>
+      <unitid>AMI</unitid>
+      <unittitle>Archivio del Maoismo Italiano</unittitle>
+      <unitdate normal="1967/1978" unitdatetype="inclusive">1967-1978</unitdate>
+      <origination>
+        <persname relator="curatore della raccolta">
+          <part>Ivan Masci</part>
+        </persname>
+      </origination>
+      <physdesc>9 unità</physdesc>
+      <langmaterial>
+        <language langcode="ita">italiano</language>
+        <language langcode="chi">cinese</language>
+      </langmaterial>
+    </did>
+    <accruals>
+      <p>Raccolta aperta, in costante accrescimento.</p>
+    </accruals>
+    <arrangement>
+      <p>Unità descritte singolarmente e identificate da una segnatura progressiva (AMI-0001…); accesso per percorsi tematici, tipologia, organizzazione, persona e anno.</p>
+    </arrangement>
+    <accessrestrict>
+      <p>Libero.</p>
+    </accessrestrict>
+    <userestrict>
+      <p>Libero.</p>
+    </userestrict>
+    <otherfindaid>
+      <p>Catalogo online del sito AMI.</p>
+    </otherfindaid>
+    <altformavail>
+      <p>Riproduzioni digitali consultabili sul sito AMI e su Internet Archive.</p>
+    </altformavail>
+    <processinfo>
+      <p>Descrizione redatta da Ivan Masci.</p>
+    </processinfo>
+    <dsc>
+      <c level="item" id="AMI-0001">
+        <did>
+          <unitid>AMI-0001</unitid>
+          <unittitle>Citazioni dalle opere del presidente Mao Tse-tung</unittitle>
+          <unitdate normal="1969">1969</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+        </did>
+        <scopecontent>
+          <p>Traduzione ufficiale in lingua italiana del famoso Libretto rosso (毛主席语录, Máo Zhǔxí Yǔlù), contenente le iconiche citazioni del Presidente cinese Mao Zedong, stampata a Pechino dalla Casa editrice in lingue estere. L'edizione qui presente è la ristampa in formato tascabile del 1969 (11×7 cm).</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0001/">Scheda AMI-0001 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Libro</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+          <subject>
+            <part>Fondamenti del maoismo</part>
+          </subject>
+          <subject>
+            <part>Libretti rossi</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0002">
+        <did>
+          <unitid>AMI-0002</unitid>
+          <unittitle>Sulla giusta soluzione delle contraddizioni in seno al popolo</unittitle>
+          <unitdate normal="1967">1967</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+        </did>
+        <scopecontent>
+          <p>Famoso discorso del Presidente cinese Mao Zedong. Traduzione ufficiale curata dalla Casa editrice in lingue estere di Pechino, 1967.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Pechino: Casa editrice in lingue estere</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0002/">Scheda AMI-0002 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Materiali cinesi</part>
+          </subject>
+          <subject>
+            <part>Fondamenti del maoismo</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0014">
+        <did>
+          <unitid>AMI-0014</unitid>
+          <unittitle localtype="attribuito">Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta dalla leadership del Partito Comunista Cinese</unittitle>
+          <unitdate normal="1968-08-14">1968-08-14</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-004">
+              <part>Renmin Ribao</part>
+            </corpname>
+          </origination>
+          <physdesc>1 fotografia, b/n</physdesc>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+        </did>
+        <scopecontent>
+          <p>Delegazione del Partito Comunista d'Italia (marxista-leninista) ricevuta a Pechino dalla leadership del Partito Comunista Cinese. In rappresentanza del PCd'I (ml), in ordine, Osvaldo Pesce e Dino Dini. La leadership cinese è composta da, sempre in ordine, Chen Boda, Kang Sheng, Jiang Qing, Mao Zedong, Zhou Enlai, Yao Wenyuan.</p>
+          <p>Foto pubblicata su Renmin Ribao (Quotidiano del Popolo, 14 agosto 1968, p. 1), Peking Review (no. 33, 1968, p. 8) e Nuova Unità (31 agosto 1968, p. 1)</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0014/">Scheda AMI-0014 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <corpname identifier="AMI-O-006">
+            <part>Nuova Unità</part>
+          </corpname>
+          <corpname>
+            <part>Peking Review</part>
+          </corpname>
+          <persname identifier="AMI-P-003">
+            <part>Osvaldo Pesce</part>
+          </persname>
+          <persname identifier="AMI-P-007">
+            <part>Dino Dini</part>
+          </persname>
+          <persname identifier="AMI-P-001">
+            <part>Mao Zedong</part>
+          </persname>
+          <persname identifier="AMI-P-010">
+            <part>Zhou Enlai</part>
+          </persname>
+          <persname identifier="AMI-P-012">
+            <part>Jiang Qing</part>
+          </persname>
+          <persname identifier="AMI-P-009">
+            <part>Kang Sheng</part>
+          </persname>
+          <persname identifier="AMI-P-011">
+            <part>Chen Boda</part>
+          </persname>
+          <persname identifier="AMI-P-004">
+            <part>Yao Wenyuan</part>
+          </persname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Foto</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0017">
+        <did>
+          <unitid>AMI-0017</unitid>
+          <unittitle>Studenti ed intellettuali rivoluzionari</unittitle>
+          <unitdate normal="1969-10-09">1969-10-09</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-010">
+              <part>Comitato di Partito di Catania (UCI m-l)</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+        </did>
+        <scopecontent>
+          <p>Volantino ciclostilato a cura dell'Unione dei Comunisti Italiani (marxisti-leninisti), meglio conosciuta come Servire il Popolo. Il volantino riporta un appello a "Studenti ed Intellettuali Rivoluzionari" affinché questi si uniscano all'organizzazione maoista.</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0017/">Scheda AMI-0017 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-014">
+            <part>Unione dei Comunisti Italiani (marxisti-leninisti)</part>
+          </corpname>
+          <geogname>
+            <part>Catania</part>
+          </geogname>
+          <genreform>
+            <part>Volantino</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0019">
+        <did>
+          <unitid>AMI-0019</unitid>
+          <unittitle>Citazioni del presidente Mao Tse-tung</unittitle>
+          <unitdate normal="1969">1969</unitdate>
+          <origination>
+            <persname identifier="AMI-P-001">
+              <part>Mao Zedong</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+        </did>
+        <scopecontent>
+          <p>Vinile 33rpm delle dimensioni di un vinile 45rpm con discorsi di Mao Tse-Tung tradotti in italiano con musica popolare cinese in background.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Signal</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0019/">Scheda AMI-0019 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <genreform>
+            <part>Audio</part>
+          </genreform>
+          <subject>
+            <part>Varie</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0021">
+        <did>
+          <unitid>AMI-0021</unitid>
+          <unittitle>Lavoro Politico, no. 1</unittitle>
+          <unitdate normal="1967-10">1967-10</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-020">
+              <part>Lavoro Politico</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+        </did>
+        <scopecontent>
+          <p>rivista "Lavoro politico", n. 1 - ottobre 1967</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Verona: Centro di Informazione di Verona</p>
+        </odd>
+        <acqinfo>
+          <p>Archivio Storico della Nuova Sinistra "Marco Pezzi"</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0021/">Scheda AMI-0021 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-020">
+            <part>Lavoro Politico</part>
+          </corpname>
+          <geogname>
+            <part>Verona</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0032">
+        <did>
+          <unitid>AMI-0032</unitid>
+          <unittitle>Statuto di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</unittitle>
+          <unitdate normal="1970">1970</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-017">
+              <part>Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+        </did>
+        <scopecontent>
+          <p>Estratto dall'opuscolo "PER LA VITTORIA DEL POTERE ROSSO IN ITALIA-ATTI DEL CONGRESSO NAZIONALE COSTITUTIVO DI STELLA ROSSA FRONTE RIVOLUZIONARIO MARXISTA-LENINISTA".</p>
+          <p>Approvato nel suo testo definitivo dal Congresso Nazionale in seduta plenaria il 4 Novembre 1970.</p>
+          <p>Stella Rossa fu un'organizzazione marxista-leninista (di orientamento maoista), fondata da Vincenzo Calò (già Viva il Leninismo!, Federazione Marxista-Leninista d'Italia, Tribuna Rossa) nel 1969. Nel 1976 si trasforma in Partito della rivoluzione socialista.</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0032/">Scheda AMI-0032 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-017">
+            <part>Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</part>
+          </corpname>
+          <persname identifier="AMI-P-006">
+            <part>Vincenzo Calò</part>
+          </persname>
+          <genreform>
+            <part>Testo</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0033">
+        <did>
+          <unitid>AMI-0033</unitid>
+          <unittitle>Verbale della conversazione del Presidente Mao con la delegazione comunista (marxista-leninista) italiana</unittitle>
+          <unitdate normal="1968-08-13">1968-08-13</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-013">
+              <part>Partito Comunista d'Italia (marxista-leninista)</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="chi">cinese</language>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+        </did>
+        <scopecontent>
+          <p>Trascrizione della conversazione tenuta tra il Presidente cinese Mao Zedong e due rappresentanti del Partito Comunista d'Italia (marxista-leninista), Osvaldo Pesce e Dino Dini, il 13 agosto 1968.</p>
+          <p>La conversazione verte sugli sviluppi della Grande Rivoluzione Proletaria Culturale e sulla situazione politica europea. In particolare, Mao consiglia agli italiani di non partecipare alle elezioni, per evitare il pericolo revisionista.</p>
+          <p>Testo riprodotto in 宋永毅《机密档案中新发现的毛泽东讲话》[Discorsi di Mao Zedong recentemente scoperti negli archivi riservati], 国史出版社, 2018.</p>
+        </scopecontent>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0033/">Scheda AMI-0033 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <corpname identifier="AMI-O-015">
+            <part>Partito Comunista Cinese</part>
+          </corpname>
+          <persname identifier="AMI-P-003">
+            <part>Osvaldo Pesce</part>
+          </persname>
+          <persname identifier="AMI-P-007">
+            <part>Dino Dini</part>
+          </persname>
+          <persname identifier="AMI-P-001">
+            <part>Mao Zedong</part>
+          </persname>
+          <geogname>
+            <part>Pechino</part>
+          </geogname>
+          <genreform>
+            <part>Testo bilingue</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0054">
+        <did>
+          <unitid>AMI-0054</unitid>
+          <unittitle>RICERCATO: Leonida Breznev - Manifesto del Partito Comunista Unificato d'Italia</unittitle>
+          <unitdate normal="1978-03">1978-03</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-021">
+              <part>Partito Comunista Unificato d'Italia</part>
+            </corpname>
+          </origination>
+          <physdesc>1 manifesto, colore</physdesc>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+        </did>
+        <scopecontent>
+          <p>Manifesto polemico prodotto dal Partito Comunista Unificato d'Italia di Osvaldo Pesce nel marzo 1978, poco dopo il sequestro di Aldo Moro (16 marzo). Il poster mostra il leader sovietico "Leonida Breznev" come un ricercato latitante ed elenca i suoi "crimini". Questi, oltre il succitato rapimento Moro, includono l'omicidio di Carlo Casalegno e le aggressioni militari contro Cecoslovacchia, Angola e Somalia.</p>
+        </scopecontent>
+        <odd localtype="editore">
+          <p>Milano: Linea Proletaria</p>
+        </odd>
+        <acqinfo>
+          <p>Collezione personale</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0054/">Scheda AMI-0054 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-021">
+            <part>Partito Comunista Unificato d'Italia</part>
+          </corpname>
+          <persname identifier="AMI-P-003">
+            <part>Osvaldo Pesce</part>
+          </persname>
+          <persname>
+            <part>Leonid Brežnev</part>
+          </persname>
+          <persname>
+            <part>Aldo Moro</part>
+          </persname>
+          <persname>
+            <part>Carlo Casalegno</part>
+          </persname>
+          <geogname>
+            <part>Milano</part>
+          </geogname>
+          <genreform>
+            <part>Manifesto</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+    </dsc>
+  </archdesc>
+</ead>

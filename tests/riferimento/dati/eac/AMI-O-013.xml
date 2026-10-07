@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='utf-8'?>
+<eac xmlns="https://archivists.org/ns/eac/v2">
+  <control maintenanceStatus="new" languageEncoding="iso639-2b" scriptEncoding="iso15924">
+    <recordId>AMI-O-013</recordId>
+    <maintenanceAgency>
+      <agencyName>Archivio del Maoismo Italiano</agencyName>
+    </maintenanceAgency>
+    <maintenanceHistory>
+      <maintenanceEvent maintenanceEventType="created">
+        <agent agentType="human">Ivan Masci</agent>
+        <eventDateTime standardDateTime="2026-10-02">2026-10-02</eventDateTime>
+      </maintenanceEvent>
+      <maintenanceEvent maintenanceEventType="derived">
+        <agent agentType="machine">scripts/core/ead_export.py</agent>
+        <eventDateTime standardDateTime="2026-10-02">2026-10-02</eventDateTime>
+      </maintenanceEvent>
+    </maintenanceHistory>
+    <conventionDeclaration>
+      <reference>ISAAR(CPF): International Standard Archival Authority Record for Corporate Bodies, Persons and Families, 2nd ed., 2004</reference>
+    </conventionDeclaration>
+    <languageDeclaration languageCode="ita" scriptCode="Latn" />
+  </control>
+  <cpfDescription>
+    <identity>
+      <entityType value="corporateBody" />
+      <nameEntry status="authorized">
+        <part>Partito Comunista d'Italia (marxista-leninista)</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>PCd'I (m-l)</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>PCd'I(m-l)</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>PCd'I (ml)</part>
+      </nameEntry>
+      <identityId localType="Wikidata">Q3896697</identityId>
+      <identityId localType="VIAF">308697440</identityId>
+    </identity>
+    <description>
+      <legalStatuses>
+        <legalStatus>
+          <term>Partito</term>
+        </legalStatus>
+      </legalStatuses>
+      <existDates>
+        <dateRange>
+          <fromDate standardDate="1966">1966</fromDate>
+          <toDate standardDate="1991">1991</toDate>
+        </dateRange>
+      </existDates>
+    </description>
+    <relations>
+      <relation>
+        <targetEntity targetType="person" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-P-003.xml">
+          <part>Osvaldo Pesce</part>
+        </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1966">1966</fromDate>
+          <toDate standardDate="1970">1970</toDate>
+        </dateRange>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Osvaldo Pesce membro di Partito Comunista d'Italia (marxista-leninista)</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="person" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-P-007.xml">
+          <part>Dino Dini</part>
+        </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1966">1966</fromDate>
+          <toDate standardDate="1968">1968</toDate>
+        </dateRange>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Dino Dini membro di Partito Comunista d'Italia (marxista-leninista)</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-006.xml">
+          <part>Nuova Unità</part>
+        </targetEntity>
+        <dateRange>
+          <fromDate standardDate="1966">1966</fromDate>
+          <toDate standardDate="1991">1991</toDate>
+        </dateRange>
+        <relationType>associativa</relationType>
+        <descriptiveNote>
+          <p>Nuova Unità organo di stampa di Partito Comunista d'Italia (marxista-leninista)</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Organizzazione Comunista Italiana (marxista-leninista)</part>
+        </targetEntity>
+        <date standardDate="1969">1969</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Organizzazione Comunista Italiana (marxista-leninista) scissione di Partito Comunista d'Italia (marxista-leninista)</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Organizzazione Comunista Bolscevica Italiana</part>
+        </targetEntity>
+        <date standardDate="1969">1969</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Organizzazione Comunista Bolscevica Italiana scissione di Partito Comunista d'Italia (marxista-leninista)</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Ottobre</part>
+        </targetEntity>
+        <date standardDate="1979">1979</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Ottobre scissione di Partito Comunista d'Italia (marxista-leninista)</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Organizzazione per la ricostruzione del Partito rivoluzionario del proletariato</part>
+        </targetEntity>
+        <date standardDate="1980">1980</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Organizzazione per la ricostruzione del Partito rivoluzionario del proletariato scissione di Partito Comunista d'Italia (marxista-leninista)</p>
+        </descriptiveNote>
+      </relation>
+      <relation>
+        <targetEntity targetType="corporateBody">
+          <part>Partito della Rifondazione Comunista</part>
+        </targetEntity>
+        <date standardDate="1991">1991</date>
+        <relationType>temporale</relationType>
+        <descriptiveNote>
+          <p>Partito Comunista d'Italia (marxista-leninista) confluito in Partito della Rifondazione Comunista</p>
+        </descriptiveNote>
+      </relation>
+    </relations>
+  </cpfDescription>
+</eac>
