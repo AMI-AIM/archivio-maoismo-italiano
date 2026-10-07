@@ -26,6 +26,15 @@
       <nameEntry status="authorized">
         <part>Circoli Lenin dell'Emilia Romagna</part>
       </nameEntry>
+      <nameEntry status="alternative">
+        <part>Circolo Lenin di Budrio</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Circolo Lenin di Faenza</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Circoli Lenin di Budrio, Bologna e Castenaso</part>
+      </nameEntry>
     </identity>
     <description>
       <legalStatuses>
