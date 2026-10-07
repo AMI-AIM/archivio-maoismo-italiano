@@ -78,7 +78,7 @@ PERCORSI_PUBBLICATI = [
     ".github", ".gitignore", ".gitattributes", ".nojekyll", ".python-version",
     "assets", "data", "overrides", "scripts",
     "mkdocs.yml", "requirements.txt", "Launcher.py",
-    "README.md", "comandi.txt", "LICENSE", "DESIGN.md",
+    "README.md", "LICENSE", "DESIGN.md", "documentazione",
 ]
 
 # Interfaccia a terminale; main() la ricrea con --dettagli se richiesto.
@@ -195,7 +195,13 @@ def esegui_validazione(bloccante=True):
 # ---------------------------------------------------------------------------
 
 def percorsi_esistenti():
-    return [p for p in PERCORSI_PUBBLICATI if (ROOT_DIR / p).exists()]
+    """Percorsi pubblicati da passare a git: quelli presenti su disco e quelli
+    ancora in Git ma cancellati (così anche la cancellazione viene pubblicata)."""
+    tracciati = subprocess.run(["git", "ls-files", "--", *PERCORSI_PUBBLICATI], cwd=ROOT_DIR,
+                               capture_output=True, text=True, encoding="utf-8",
+                               errors="replace").stdout.splitlines()
+    in_git = {riga.split("/")[0] for riga in tracciati}
+    return [p for p in PERCORSI_PUBBLICATI if (ROOT_DIR / p).exists() or p in in_git]
 
 
 def git_stato(percorsi=None):
@@ -213,10 +219,24 @@ def git_ci_sono_modifiche():
     return bool(git_stato(percorsi_esistenti()))
 
 
-def file_esclusi():
-    """File modificati FUORI da PERCORSI_PUBBLICATI (non verranno committati)."""
+def _fuori_dai_percorsi():
     dentro = set(git_stato(percorsi_esistenti()))
     return [r for r in git_stato() if r not in dentro]
+
+
+def file_esclusi():
+    """File modificati FUORI da PERCORSI_PUBBLICATI (non verranno committati).
+
+    Non conta le modifiche già "preparate" con git (prima colonna di
+    `git status` piena, es. un file rimosso con `git rm`): il commit le
+    include comunque.
+    """
+    return [r for r in _fuori_dai_percorsi() if r[0] in " ?"]
+
+
+def file_preparati_fuori_percorsi():
+    """Modifiche già preparate con git fuori dai percorsi: entrano nel commit."""
+    return [r for r in _fuori_dai_percorsi() if r[0] not in " ?"]
 
 
 def git_sync_pubblicazione(titolo, corpo):
@@ -440,7 +460,7 @@ def conferma_pubblicazione(titolo, corpo, chiedi_conferma=True):
     """
     righe = [f"[titolo]{ui.esc(titolo)}[/]"]
     righe += [f"[tenue]{ui.esc(r)}[/]" for r in (corpo.splitlines() if corpo else [])]
-    modificati = git_stato(percorsi_esistenti())
+    modificati = git_stato(percorsi_esistenti()) + file_preparati_fuori_percorsi()
     righe += ["", f"{len(modificati)} file modificati:"]
     for r in modificati[:15]:
         righe.append(f"  [{_stile_stato(r)}]{ui.esc(r[:2])}[/] {ui.esc(r[3:])}")

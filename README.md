@@ -84,15 +84,105 @@ Tecnologie principali:
 * strumenti di versionamento Git;
 * metadati strutturati per la descrizione dei documenti.
 
-La pipeline di generazione (Excel → Markdown → MkDocs Material) e' interamente
+La pipeline di generazione (Excel → Markdown → MkDocs Material) è interamente
 in Python: i dati sorgente stanno in `data/dati.xlsx`, gli script in `scripts/`
-(punto d'ingresso: `python Launcher.py`; riferimento completo dei comandi in
-`comandi.txt`) e la deploy automatica in `.github/workflows/deploy.yml`.
+(punto d'ingresso: `python Launcher.py`, vedi la sezione seguente) e la
+pubblicazione automatica in `.github/workflows/deploy.yml`.
 A ogni pubblicazione i fogli di `dati.xlsx` vengono esportati anche in
 `data/export/*.csv`, così la cronologia di ogni scheda è consultabile su GitHub.
-Le convenzioni tecniche del codice — incluso il registro dei debiti noti
-(CSS inline vs token, percorsi asset IT/EN, duplicazione pipeline Launcher/CI) —
-sono documentate in `scripts/CONVENZIONI.md`.
+Le convenzioni tecniche del codice — incluso il registro dei debiti noti —
+sono documentate in `documentazione/CONVENZIONI.md`; il sistema grafico del
+sito in `DESIGN.md`.
+
+## Gestione del sito: il Launcher
+
+Tutte le operazioni si lanciano dalla radice del progetto con `Launcher.py`,
+l'unico punto d'ingresso previsto: gli script in `scripts/` non vanno
+lanciati direttamente. Prima installazione delle dipendenze:
+
+```
+pip install -r requirements.txt
+```
+
+### Menu (doppio click su Launcher.py, oppure `python Launcher.py`)
+
+| Voce | Azione | Cosa fa |
+|---|---|---|
+| 1 | Controlla i dati | valida `dati.xlsx`; non genera e non pubblica |
+| 2 | Anteprima nel browser | rigenera e apre il sito in locale; Ctrl+C per chiudere |
+| 3 | Pubblica | rigenera, mostra cosa cambia e chiede conferma prima dell'invio |
+| 4 | Rigenera schede e pubblica | chiede gli ID (es. AMI-0034) |
+| 5 | Riepilogo dell'ultima generazione | errori e avvisi |
+| 0 | Esci | |
+
+Dopo ogni azione si torna al menu. Rispondendo N (o solo INVIO) alla
+conferma, nulla viene inviato a GitHub e le modifiche restano nella cartella.
+Se `Launcher.py` viene lanciato da un altro programma (senza terminale
+interattivo), pubblica direttamente senza menu né conferma.
+
+### Gli stessi comandi da terminale
+
+```
+python Launcher.py --valida                  # come la voce 1
+python Launcher.py --anteprima               # come la voce 2
+python Launcher.py --pubblica                # come la voce 3
+python Launcher.py --pubblica --si           # pubblica senza chiedere conferma
+python Launcher.py "Aggiunta serie 1972-73"  # pubblica con un messaggio di commit scritto a mano
+python Launcher.py --only AMI-0034,AMI-0035  # rigenera solo queste schede (anche la cache IA) e pubblica
+python Launcher.py --dettagli ...            # mostra a schermo tutto l'output degli script
+python Launcher.py --skip-validation ...     # pubblica anche se dati.xlsx ha errori
+python Launcher.py --help                    # elenco completo delle opzioni
+```
+
+`--only` serve quando una scheda mostra dati sbagliati o non aggiornati
+(es. descrizione di Internet Archive cambiata) e vuoi correggerla senza
+toccare il resto.
+
+### Controlli senza pubblicare
+
+```
+python -m scripts.core.validator    # solo validazione di dati.xlsx: errori, avvisi e note con foglio, riga e colonna
+python -m scripts.core.esito        # errori e avvisi dell'ultima generazione
+mkdocs build                        # costruisce il sito in site/ ...
+python scripts/controlla_sito.py    # ... e ne controlla pagine, sitemap, JSON e link interni
+```
+
+Il Launcher esegue da solo validazione, costruzione e controllo prima di ogni
+pubblicazione: con un errore, nulla viene inviato a GitHub.
+
+### Cache di Internet Archive
+
+```
+python Launcher.py --refresh-ia identifier1,identifier2   # riscarica solo questi item
+python Launcher.py --force-refresh-ia                     # riscarica tutto
+python Launcher.py --clear-cache                          # svuota tutta la cache
+python Launcher.py --cache-stats                          # statistiche della cache
+```
+
+`--refresh-ia` non invalida la cache delle schede: per correggere del tutto
+una singola scheda usa `--only`.
+
+### Come lavora il Launcher
+
+- **Registro:** a schermo ogni fase occupa una riga (esito e durata);
+  l'output completo è salvato in `log/launcher_AAAA-MM-GG_HH-MM-SS.log`
+  (si tengono gli ultimi 30; `log/` non viene pubblicata). Se una fase
+  fallisce compaiono le sue ultime righe e il percorso del registro.
+- **Ripartenza da zero:** `build/` e `site/` vengono svuotate e rigenerate
+  a ogni esecuzione, come su GitHub Actions.
+- **Commit selettivo:** vengono pubblicati solo i percorsi elencati in
+  `PERCORSI_PUBBLICATI` (in testa a `Launcher.py`); gli altri file
+  modificati vengono segnalati ma non inviati.
+- **Export CSV e messaggi di commit:** i fogli di `dati.xlsx` vengono
+  esportati in `data/export/*.csv` (da non modificare a mano: la fonte è
+  l'xlsx). Il confronto con l'ultima versione genera il messaggio di commit,
+  es. «Dati: Catalogo +2 ~1 (AMI-0097, AMI-0098, AMI-0034)». Per la storia di
+  una scheda su GitHub: apri `data/export/catalogo.csv` e usa «History» o «Blame».
+- **Sincronizzazione:** prima dell'invio il Launcher esegue
+  `git pull --rebase --autostash`, così modifiche fatte altrove (es. su
+  GitHub) vengono recuperate senza operazioni manuali.
+- **Versione di Python:** quella indicata in `.python-version`, la stessa
+  usata da GitHub Actions; il Launcher avvisa se quella locale è diversa.
 
 ## Contributi
 

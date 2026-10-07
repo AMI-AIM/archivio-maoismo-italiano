@@ -140,8 +140,9 @@ nel modulo che si tocca.
 
 ## 8. Documentazione CLI
 Il riferimento completo dei comandi e' il docstring di `Launcher.py` e
-`comandi.txt`. `README.md` elenca solo i casi d'uso principali: alla fine di
-questa sezione c'e' il rimando. Aggiornare `comandi.txt` a ogni nuova opzione.
+la sezione «Gestione del sito: il Launcher» di `README.md` (ott. 2026:
+`comandi.txt` è stato fuso nel README e questo file spostato in
+`documentazione/`). Aggiornare il README a ogni nuova opzione.
 
 ### 7. Font: self-hosted, niente Google Fonts a runtime (anti-FOUT)
 
@@ -273,7 +274,7 @@ pagina); corretto in `generatore.genera_sitemap`.
 - La conferma arriva PRIMA del `git pull`: rispondendo no non si tocca né il
   repository locale né GitHub. `--si` la salta.
 - Nuove voci di menu: aggiungerle a `VOCI_MENU` e a `menu()`, e documentarle
-  in comandi.txt.
+  nel README (sezione «Gestione del sito: il Launcher»).
 
 ## 16. Interfaccia del Launcher: `core/interfaccia.py` (ott. 2026)
 - Libreria `rich` (in requirements.txt). Senza rich il Launcher funziona
