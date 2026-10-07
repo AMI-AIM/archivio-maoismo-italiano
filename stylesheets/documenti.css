@@ -132,7 +132,8 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
   padding: 0;
   /* Misura sull'intero blocco (vale anche per il testo "nudo" esportato da
      Internet Archive): prima le righe arrivavano a ~95-100 caratteri. */
-  max-width: 75ch;
+  /* In Fraunces 75ch davano ~100 battute per riga: 36em ne danno ~75. */
+  max-width: 36em;
   font-size: var(--ami-font-size-base);
   line-height: 1.65;
   color: var(--md-default-fg-color);
@@ -317,6 +318,9 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
 }
 
 /* Corsivo nelle citazioni (Courier Prime ha il corsivo reale) */
+.citazione-segnatura {
+  white-space: nowrap;
+}
 .citazione-testo em {
   font-style: italic;
   color: inherit;

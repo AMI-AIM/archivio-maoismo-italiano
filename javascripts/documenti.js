@@ -47,6 +47,12 @@
       .replace(/'/g, '&#39;');
   }
 
+  // Segnatura nella citazione: "AMI-0043" non va a capo dopo il trattino.
+  // Lo span non cambia il testo copiato.
+  function segnaturaHtml(id) {
+    return '<span class="citazione-segnatura">' + escapeHtml(id) + '</span>';
+  }
+
   function escapeBibtex(value) {
     var text = safeText(value);
     return text
@@ -185,7 +191,7 @@
   // Fascicolo: Ente. Testata 3, no. 1 (data). Archivio, ID. Consultato il … URL.
   function buildChicago(doc, date) {
     var parts = [];
-    var tail = escapeHtml(doc.archive) + ARCHIVIO_SEP + escapeHtml(doc.ami_id) + '. ' +
+    var tail = escapeHtml(doc.archive) + ARCHIVIO_SEP + segnaturaHtml(doc.ami_id) + '. ' +
       'Consultato il ' + escapeHtml(date.it) + '. ' + escapeHtml(doc.url) + '.';
 
     if (doc.is_periodical) {
@@ -232,7 +238,7 @@
   // Se l'autore coincide con l'editore, MLA lo omette e parte dal titolo.
   function buildMLA(doc, date) {
     var parts = [];
-    var tail = '<em>' + escapeHtml(doc.archive) + '</em>, ' + escapeHtml(doc.ami_id) + ', ' +
+    var tail = '<em>' + escapeHtml(doc.archive) + '</em>, ' + segnaturaHtml(doc.ami_id) + ', ' +
       escapeHtml(doc.url) + '. Consultato il ' + escapeHtml(date.it) + '.';
 
     if (doc.is_periodical) {
@@ -307,7 +313,7 @@
     }
     el.push(dateText(doc));
     el.push(escapeHtml(doc.archive));
-    el.push(escapeHtml(doc.ami_id));
+    el.push(segnaturaHtml(doc.ami_id));
     el.push(escapeHtml(doc.url));
     el.push(accessText(date));
     return el.join(', ') + '.';
@@ -327,7 +333,7 @@
     }
     el.push(dateText(doc));
     el.push(escapeHtml(doc.archive));
-    el.push(escapeHtml(doc.ami_id));
+    el.push(segnaturaHtml(doc.ami_id));
     el.push(escapeHtml(doc.url));
     el.push(accessText(date));
     return el.join(', ') + '.';
@@ -755,5 +761,9 @@
   link.href = ricerca;
   link.innerHTML = '<svg class="ami-icona" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
     '<path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg><span>Torna ai risultati</span>';
+  link.addEventListener('click', function () {
+    var id = (document.querySelector('.doc-segnatura__id') || {}).textContent || '';
+    try { sessionStorage.setItem('ami-ritorno-scheda', id.trim()); } catch (e) { /* niente */ }
+  });
   percorso.appendChild(link);
 })();

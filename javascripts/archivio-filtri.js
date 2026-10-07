@@ -349,7 +349,23 @@ function ripristinaPaginaEPosizione() {
     }
     if (statoArrivo && typeof statoArrivo.amiScrollY === 'number') {
         window.scrollTo(0, statoArrivo.amiScrollY);
+        return;
     }
+    // Ritorno da "Torna ai risultati" (documenti.js): nuova visita, senza
+    // posizione salvata; si va alla riga della scheda appena letta.
+    let ritorno = null;
+    try {
+        ritorno = sessionStorage.getItem('ami-ritorno-scheda');
+        sessionStorage.removeItem('ami-ritorno-scheda');
+    } catch (e) { /* storage non disponibile */ }
+    if (!ritorno) return;
+    const link = Array.from(document.querySelectorAll('#risultati-container .risultato-titolo a'))
+        .find(a => a.getAttribute('href').replace(/\/$/, '').endsWith('/' + ritorno));
+    if (!link) return;
+    const riga = link.closest('.risultato-card');
+    riga.scrollIntoView({ block: 'center' });
+    riga.classList.add('risultato-card--ultima');
+    link.focus({ preventScroll: true });
 }
 
 function salvaPosizione() {
@@ -720,33 +736,53 @@ function trovaFormaVariante(query) {
     return trovata;
 }
 
+// Forma variante presente nella query, con la casella del catalogo che
+// la raccoglie e il numero di documenti che darebbe (altri filtri attivi,
+// senza il testo cercato). null se non c'e' o se il filtro e' gia' attivo.
+function formaVarianteAttiva() {
+    const campo = document.getElementById('filtro-testo');
+    if (!campo) return null;
+    const trovata = trovaFormaVariante(campo.value);
+    if (!trovata) return null;
+    let gruppoId = null;
+    let casella = null;
+    ['filtro-persona', 'filtro-organizzazione'].some(id => {
+        casella = caselle(id).find(c => c.value === trovata.nome) || null;
+        if (casella) gruppoId = id;
+        return Boolean(casella);
+    });
+    if (!casella || casella.checked) return null;
+    const stato = leggiStatoFiltri();
+    stato.parole = [];
+    stato.selezioni[gruppoId] = [trovata.nome];
+    const n = documenti.filter(doc => passaFiltri(doc, stato, null)).length;
+    return { nome: trovata.nome, forma: trovata.forma, casella, n };
+}
+
+function applicaFormaVariante(variante) {
+    const campo = document.getElementById('filtro-testo');
+    variante.casella.checked = true;
+    if (campo) campo.value = '';
+    applicaFiltri();
+    mettiFocusSuiRisultati();
+}
+
 function aggiornaAvvisoForme() {
     const campo = document.getElementById('filtro-testo');
     const contenitore = document.getElementById('risultati-container');
     if (!campo || !contenitore) return;
     let avviso = document.getElementById('avviso-forma');
 
-    const trovata = trovaFormaVariante(campo.value);
-    let gruppoId = null;
-    let casella = null;
-    if (trovata) {
-        ['filtro-persona', 'filtro-organizzazione'].some(id => {
-            casella = caselle(id).find(c => c.value === trovata.nome) || null;
-            if (casella) gruppoId = id;
-            return Boolean(casella);
-        });
-    }
-    if (!trovata || !casella || casella.checked) {
+    const variante = formaVarianteAttiva();
+    // Con zero risultati la stessa proposta sta nello stato vuoto, come
+    // azione principale: qui non si ripete.
+    const vuoto = Boolean(contenitore.querySelector('.nessun-risultato'));
+    if (!variante || vuoto) {
         if (avviso) avviso.hidden = true;
         return;
     }
-
-    // Quanti documenti darebbe il filtro, con gli altri filtri attivi
-    // e senza il testo cercato (che l'azione toglie).
-    const stato = leggiStatoFiltri();
-    stato.parole = [];
-    stato.selezioni[gruppoId] = [trovata.nome];
-    const n = documenti.filter(doc => passaFiltri(doc, stato, null)).length;
+    const trovata = variante;
+    const n = variante.n;
 
     if (!avviso) {
         avviso = document.createElement('p');
@@ -762,10 +798,7 @@ function aggiornaAvvisoForme() {
         '<svg class="ami-icona" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></button>';
     avviso.hidden = false;
     avviso.querySelector('button').addEventListener('click', function () {
-        casella.checked = true;
-        campo.value = '';
-        applicaFiltri();
-        mettiFocusSuiRisultati();
+        applicaFormaVariante(variante);
     });
 }
 
@@ -797,7 +830,7 @@ const FILTRO_LABELS = {
     'filtro-argomento': 'Percorso tematico'
 };
 
-function creaChip(labelHtml, onRemove) {
+function creaChip(labelHtml, onRemove, descrizione) {
     const chip = document.createElement('span');
     chip.className = 'filtro-chip';
 
@@ -809,7 +842,7 @@ function creaChip(labelHtml, onRemove) {
     const removeBtn = document.createElement('button');
     removeBtn.type = 'button';
     removeBtn.className = 'filtro-chip-remove';
-    removeBtn.setAttribute('aria-label', 'Rimuovi filtro');
+    removeBtn.setAttribute('aria-label', descrizione ? `Rimuovi il filtro ${descrizione}` : 'Rimuovi filtro');
     removeBtn.textContent = '✕';
     removeBtn.addEventListener('click', onRemove);
     chip.appendChild(removeBtn);
@@ -858,7 +891,8 @@ function renderFiltriAttivi() {
         if (attivi) attivi.textContent = valori.length ? ` · ${valori.length}` : '';
         valori.forEach(valore => {
             const labelHtml = `<strong>${escapeHtml(FILTRO_LABELS[selectId])}:</strong> ${escapeHtml(valore)}`;
-            const chip = creaChip(labelHtml, () => rimuoviValoreSelezionato(selectId, valore));
+            const chip = creaChip(labelHtml, () => rimuoviValoreSelezionato(selectId, valore),
+                `${FILTRO_LABELS[selectId]}: ${valore}`);
             container.appendChild(chip);
             numeroFiltri++;
         });
@@ -872,7 +906,7 @@ function renderFiltriAttivi() {
         const maxVal = parseInt(maxSlider.value);
         if (minVal !== annoMin || maxVal !== annoMax) {
             const labelHtml = `<strong>Anni:</strong> ${minVal}–${maxVal}`;
-            const chip = creaChip(labelHtml, resetFiltroAnno);
+            const chip = creaChip(labelHtml, resetFiltroAnno, `Anni: ${minVal}–${maxVal}`);
             container.appendChild(chip);
             numeroFiltri++;
         }
@@ -882,7 +916,7 @@ function renderFiltriAttivi() {
     const campoTesto = document.getElementById('filtro-testo');
     if (campoTesto && campoTesto.value.trim()) {
         const labelHtml = `<strong>Testo:</strong> "${escapeHtml(campoTesto.value.trim())}"`;
-        const chip = creaChip(labelHtml, resetFiltroTesto);
+        const chip = creaChip(labelHtml, resetFiltroTesto, `Testo: ${campoTesto.value.trim()}`);
         container.appendChild(chip);
         numeroFiltri++;
     }
@@ -910,12 +944,29 @@ function mostraRisultati(risultati) {
     
     const totale = risultati.length;
     if (totale === 0) {
-        container.innerHTML =
-            '<div class="nessun-risultato">' +
-            '<p><strong>Nessun documento corrisponde a questa ricerca.</strong></p>' +
-            '<p>Prova a togliere un filtro, ad allargare l\'intervallo di anni o a cercare un termine più generico.</p>' +
-            '<button type="button" class="riprova-btn" id="nessun-risultato-reset">Azzera filtri</button>' +
-            '</div>';
+        // Grafia d'epoca senza risultati ("ciu en lai"): l'uscita giusta e'
+        // la forma del catalogo, non l'azzeramento dei filtri.
+        const variante = documenti.length ? formaVarianteAttiva() : null;
+        if (variante && variante.n > 0) {
+            const quanti = variante.n === 1 ? 'il documento' : `i ${variante.n} documenti`;
+            container.innerHTML =
+                '<div class="nessun-risultato">' +
+                `<p><strong>Nessun documento contiene «${escapeHtml(variante.forma)}» nel testo.</strong></p>` +
+                `<p>Nel catalogo il nome è <strong>${escapeHtml(variante.nome)}</strong>.</p>` +
+                `<button type="button" class="riprova-btn" id="nessun-risultato-forma">Vedi ${quanti} di ${escapeHtml(variante.nome)}</button>` +
+                '<p class="nessun-risultato__altro"><button type="button" class="nessun-risultato__azzera" id="nessun-risultato-reset">Azzera filtri</button></p>' +
+                '</div>';
+            document.getElementById('nessun-risultato-forma').addEventListener('click', function () {
+                applicaFormaVariante(variante);
+            });
+        } else {
+            container.innerHTML =
+                '<div class="nessun-risultato">' +
+                '<p><strong>Nessun documento corrisponde a questa ricerca.</strong></p>' +
+                '<p>Prova a togliere un filtro, ad allargare l\'intervallo di anni o a cercare un termine più generico.</p>' +
+                '<button type="button" class="riprova-btn" id="nessun-risultato-reset">Azzera filtri</button>' +
+                '</div>';
+        }
         const azzera = document.getElementById('nessun-risultato-reset');
         if (azzera) azzera.addEventListener('click', resetFiltri);
         if (conteggio) conteggio.textContent = '0 documenti';
