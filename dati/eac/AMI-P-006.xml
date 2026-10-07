@@ -41,7 +41,7 @@
           <fromDate standardDate="1969">1969</fromDate>
           <toDate standardDate="1976">1976</toDate>
         </dateRange>
-        <relationType>associativa</relationType>
+        <relationType>gerarchica</relationType>
         <descriptiveNote>
           <p>Vincenzo Calò segretario di Stella Rossa - Fronte Rivoluzionario Marxista-Leninista</p>
         </descriptiveNote>
