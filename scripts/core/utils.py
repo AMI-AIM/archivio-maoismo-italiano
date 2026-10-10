@@ -288,6 +288,23 @@ def forme_varianti(valore):
     return [v.strip() for v in testo.split(';') if v.strip()]
 
 
+def file_immagine_profilo(nome_file):
+    """Nome del file da usare per un'immagine di assets/immagini/profili.
+
+    Se accanto a un .png/.jpg esiste la versione .webp con lo stesso nome
+    (piu' leggera), si usa quella: dati.xlsx puo' continuare a indicare il
+    file originale."""
+    import os
+    nome_file = str(nome_file or '').strip()
+    radice, estensione = os.path.splitext(nome_file)
+    if estensione.lower() in ('.png', '.jpg', '.jpeg'):
+        cartella = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+                                'assets', 'immagini', 'profili')
+        if os.path.exists(os.path.join(cartella, radice + '.webp')):
+            return radice + '.webp'
+    return nome_file
+
+
 def chiave_ordinamento_nome(nome, cognome=''):
     """Chiave per l'ordine alfabetico delle persone: cognome, poi il resto
     del nome, minuscolo e senza accenti ("Aldo Brandirali" ->

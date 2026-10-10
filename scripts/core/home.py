@@ -396,8 +396,7 @@ hide:
         </div>
         <div class="doc-contenuto">
           <div class="doc-titolo"><a href="persone/{slug}/">{nome_html}</a></div>
-          <div class="doc-sommario">{etichetta_conteggio}</div>
-          {f'<div class="persona-date">{date_vita_html}</div>' if date_vita_html else ''}
+          <div class="persona-meta">{f'<span class="persona-date">{date_vita_html}</span>' if date_vita_html else ''}<span class="doc-sommario">{etichetta_conteggio}</span></div>
         </div>
       </div>
 """

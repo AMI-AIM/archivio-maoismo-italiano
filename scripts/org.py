@@ -13,7 +13,7 @@ from core.dati import ErroreDati, PERCORSO_EXCEL, leggi_foglio
 from core.liste import GRUPPI_ORGANIZZAZIONE, elenco_per_ruolo, iniziali, valore_pulito
 from core.schema_generator import SchemaGenerator
 from core.site_config import site_path
-from core.utils import escape_yaml_string, formatta_data, formatta_estremo, formatta_intervallo, forme_varianti, slugify, testo_ricerca
+from core.utils import escape_yaml_string, file_immagine_profilo, formatta_data, formatta_estremo, formatta_intervallo, forme_varianti, slugify, testo_ricerca
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
@@ -125,7 +125,7 @@ def genera_organizzazioni():
             if immagine_raw.startswith('http://') or immagine_raw.startswith('https://'):
                 immagine_url = immagine_raw
             else:
-                immagine_url = site_path(f'immagini/profili/{immagine_raw}')
+                immagine_url = site_path(f'immagini/profili/{file_immagine_profilo(immagine_raw)}')
         else:
             immagine_url = None
 

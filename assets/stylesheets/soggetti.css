@@ -231,6 +231,15 @@
 .md-typeset .autorita-rel li:last-child {
     margin-bottom: 0;
 }
+/* Valori-link come nel resto della Scheda: la regola dei link nel testo
+   (li > a sottolineato) li distingueva senza motivo. */
+.md-typeset .autorita-rel li > a:not([class]) {
+    text-decoration: none;
+}
+.md-typeset .autorita-rel li > a:not([class]):hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
 .autorita-rel__nota {
     color: var(--md-default-fg-color--light);
     font-size: var(--ami-font-size-2xs);

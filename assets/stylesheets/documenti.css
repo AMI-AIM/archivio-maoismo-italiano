@@ -616,6 +616,17 @@ necessario. La data resta a 21px: titolo (29px+) e data si distinguono.
 .doc-scheda__campo:first-child {
   padding-top: 0;
 }
+/* Su due colonne (record d'autorita', schede senza descrizione) la prima
+   voce della seconda colonna aveva il suo spazio sopra e partiva ~10px piu'
+   in basso: stesso spazio per tutte, compensato sul contenitore. */
+.soggetto-autorita .doc-scheda__campi,
+.doc-corpo:not(:has(.doc-corpo__testo)) .doc-scheda__campi {
+  margin-top: -0.55rem;
+}
+.soggetto-autorita .doc-scheda__campo:first-child,
+.doc-corpo:not(:has(.doc-corpo__testo)) .doc-scheda__campo:first-child {
+  padding-top: 0.55rem;
+}
 .md-typeset .doc-scheda__campo dt {
   margin: 0 0 0.1rem;
   font-family: var(--ami-font-label);
