@@ -4,11 +4,6 @@ Questo documento registra le **discordanze note** nel codice di AMI e le regole
 da seguire per non aggravarle. Ogni voce indica lo stato attuale e la direzione
 consigliata per i nuovi contributi.
 
-> Ripristinato il 04/10/2026: era stato cancellato per errore dal commit
-> automatico b7bee805 (30/09/2026, `git add -A` del Launcher). Aggiornati i
-> punti 4, 6, 7 (font) e aggiunto il 9; le sezioni 2 e 3 riflettono lo stato
-> di fine settembre e vanno riverificate rispetto a `DESIGN.md`.
-
 ## 1. Percorsi degli asset (CSS/JS) — due idiomi convissuti
 - Le pagine in **radice** (home, archivio) usano `site_path('...')`
   (`scripts/core/site_config.py`, URL derivati da `site_url` di `mkdocs.yml`).

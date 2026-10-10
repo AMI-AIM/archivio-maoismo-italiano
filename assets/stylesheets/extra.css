@@ -2142,7 +2142,8 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   padding: 0 0.9rem;
   border: 1px solid var(--md-default-fg-color--lighter);
   border-radius: var(--ami-radius-sm);
-  font-family: var(--ami-font-text);
+  /* Campi di ricerca in Archivo, come quello dell'archivio */
+  font-family: var(--ami-font-label);
   font-size: var(--ami-font-size-base);
 }
 .ami-404__campo input:focus {
@@ -2287,6 +2288,13 @@ input[type="search"]::-webkit-search-cancel-button {
 .md-typeset .doc-meta .doc-org {
   font-family: var(--ami-font-label);
   font-size: var(--ami-font-size-sm);
+}
+/* Ruolo secondario dopo la tipologia: senza separatore si leggeva
+   «OPUSCOLO ANCHE COME AUTORE» come un'unica etichetta. */
+.md-typeset .doc-meta > * + .ruolo-badge::before {
+  content: "·";
+  margin-right: 0.6rem;
+  color: var(--md-default-fg-color--lighter);
 }
 @supports (grid-template-columns: subgrid) and selector(:has(*)) {
   .md-typeset .catalogo-lista:not(:has(.doc-row-persona)) {
@@ -2451,7 +2459,12 @@ input[type="search"]::-webkit-search-cancel-button {
     gap: 0.8rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scroll-padding-inline: 0.2rem;
+    /* La striscia arriva ai bordi dello schermo (come quella della home):
+       le card restano allineate al margine di 16px e non finiscono tagliate
+       a filo del contenitore. */
+    margin-inline: -0.8rem;
+    padding-inline: 0.8rem;
+    scroll-padding-inline: 0.8rem;
     padding-bottom: 0.4rem;
   }
   .md-typeset .top-row .top-card {

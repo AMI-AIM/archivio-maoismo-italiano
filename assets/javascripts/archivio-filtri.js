@@ -767,6 +767,20 @@ function applicaFormaVariante(variante) {
     mettiFocusSuiRisultati();
 }
 
+// Consigli dello stato vuoto, solo per cio' che e' davvero attivo:
+// prima suggeriva di allargare gli anni anche senza filtro sugli anni.
+function consigliStatoVuoto() {
+    const stato = leggiStatoFiltri();
+    const consigli = [];
+    if (Object.values(stato.selezioni).some(v => v.length)) consigli.push('a togliere un filtro');
+    if (stato.annoMin !== annoMin || stato.annoMax !== annoMax) consigli.push("ad allargare l'intervallo di anni");
+    if (stato.parole.length) consigli.push('a cercare un termine più generico');
+    if (!consigli.length) return 'Prova a cambiare i criteri di ricerca.';
+    const elenco = consigli.length === 1 ? consigli[0]
+        : consigli.slice(0, -1).join(', ') + ' o ' + consigli[consigli.length - 1];
+    return 'Prova ' + elenco + '.';
+}
+
 function aggiornaAvvisoForme() {
     const campo = document.getElementById('filtro-testo');
     const contenitore = document.getElementById('risultati-container');
@@ -963,7 +977,7 @@ function mostraRisultati(risultati) {
             container.innerHTML =
                 '<div class="nessun-risultato">' +
                 '<p><strong>Nessun documento corrisponde a questa ricerca.</strong></p>' +
-                '<p>Prova a togliere un filtro, ad allargare l\'intervallo di anni o a cercare un termine più generico.</p>' +
+                `<p>${consigliStatoVuoto()}</p>` +
                 '<button type="button" class="riprova-btn" id="nessun-risultato-reset">Azzera filtri</button>' +
                 '</div>';
         }

@@ -241,7 +241,7 @@ La firma del sistema. In testa alla scheda documento, prima del titolo: id AMI i
 Elenco di definizioni su filetti: etichetta in Archivo grigio maiuscoletto, valore in Courier Prime. Mostra solo i campi compilati; i valori "N/A" non compaiono.
 
 ### Riga di catalogo
-Un solo componente in home, percorsi tematici, persone e organizzazioni: data rossa in Fraunces regolare nella colonna adattiva, titolo in Fraunces 600, poi una riga di metadati (tipologia come etichetta grigia, organizzazione in Archivo grigio, eventuale ruolo secondario). Al passaggio del mouse solo il fondo carta, nessuna striscia colorata. Nelle pagine di persone e organizzazioni le righe sono raggruppate per ruolo, con il conteggio del gruppo.
+Un solo componente in home, percorsi tematici, persone e organizzazioni: data rossa in Fraunces regolare nella colonna adattiva, titolo in Fraunces 600, poi una riga di metadati (tipologia come etichetta grigia, organizzazione in Archivo grigio, eventuale ruolo secondario, preceduto da «·»: «Opuscolo · anche come autore»). Al passaggio del mouse solo il fondo carta, nessuna striscia colorata. Nelle pagine di persone e organizzazioni le righe sono raggruppate per ruolo, con il conteggio del gruppo.
 - **Variante compatta** ("Nell'archivio"): data e titolo, senza metadati.
 - **Variante estesa** (risultati dell'archivio): data · segnatura in Courier, titolo, autore · organizzazione · tipologia, estratto della descrizione.
 

@@ -222,7 +222,12 @@ def gallery_card(row):
 
     return (
         f'<article class="galleria-card"{card_id}{data_attrs}>\n'
-        f'<a class="card-link" href="{html.escape(link_url, quote=True)}" target="_blank" rel="noopener noreferrer">\n'
+        # Il link porta alla scheda AMI (clic centrale, Ctrl+clic, senza
+        # JavaScript): prima apriva archive.org, spesso irraggiungibile. Il
+        # clic normale apre comunque il visualizzatore (galleria.js).
+        + (f'<a class="card-link" href="{html.escape(scheda_url, quote=True)}">\n' if scheda_url else
+           f'<a class="card-link" href="{html.escape(link_url, quote=True)}" target="_blank" rel="noopener noreferrer">\n')
+        + 
         '<div class="card-media">\n'
         f'{img_html}'
         '<div class="img-overlay">\n'

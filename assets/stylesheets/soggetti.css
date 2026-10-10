@@ -133,8 +133,10 @@
     gap: 1.5rem;
 }
 
-.doc-row:where(:not(.home-column *)):hover {
-    background-color: var(--md-code-bg-color);
+@media (hover: hover) {
+    .doc-row:where(:not(.home-column *)):hover {
+        background-color: var(--md-code-bg-color);
+    }
 }
 
 .doc-data:where(:not(.home-column *)) {

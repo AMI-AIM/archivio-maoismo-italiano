@@ -114,6 +114,12 @@
     font-size: var(--ami-font-size-base);
 }
 
+/* Campi di ricerca in Archivo, come quello dell'archivio (la regola di
+   Material su .md-typeset imponeva Fraunces). */
+.md-typeset .search-bar input {
+    font-family: var(--ami-font-label);
+}
+
 .search-bar input:focus {
     border-color: var(--md-primary-fg-color);
     outline: none;
