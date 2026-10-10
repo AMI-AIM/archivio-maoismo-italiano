@@ -898,6 +898,12 @@
     .ami-js .filtri-sidebar:not(.filtri--aperti) .filtri-corpo {
         display: none;
     }
+    /* Filtri chiusi: il filetto della ricerca e quello del pannello erano
+       due righe vuote una sopra l'altra. */
+    .ami-js .filtri-sidebar:not(.filtri--aperti) .filtro-gruppo--testo {
+        border-bottom: 0;
+        margin-bottom: 0;
+    }
     .filtri-sidebar {
         flex: 0 0 auto;
         position: static;

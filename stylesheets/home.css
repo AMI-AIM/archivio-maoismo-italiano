@@ -387,10 +387,22 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   letter-spacing: var(--ami-tracking-wider);
   user-select: none;
 }
+/* «date · N documenti collegati» su una riga, come negli indici */
+.persona-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 0.45rem;
+}
 .persona-date {
   font-size: var(--ami-font-size-sm); /* 14px */
   color: var(--md-default-fg-color--light);
   font-style: italic;
+}
+.persona-date + .doc-sommario::before {
+  content: "·";
+  margin-right: 0.45rem;
+  color: var(--md-default-fg-color--lighter);
 }
 
 /* ------------------------------------------------------------
