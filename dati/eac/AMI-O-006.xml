@@ -12,7 +12,7 @@
       </maintenanceEvent>
       <maintenanceEvent maintenanceEventType="derived">
         <agent agentType="machine">scripts/core/ead_export.py</agent>
-        <eventDateTime standardDateTime="2026-10-07">2026-10-07</eventDateTime>
+        <eventDateTime standardDateTime="2026-10-10">2026-10-10</eventDateTime>
       </maintenanceEvent>
     </maintenanceHistory>
     <conventionDeclaration>
@@ -25,6 +25,15 @@
       <entityType value="corporateBody" />
       <nameEntry status="authorized">
         <part>Nuova Unità</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Per la vittoria del marxismo-leninismo</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Organo del Movimento Marxista-Leninista Italiano</part>
+      </nameEntry>
+      <nameEntry status="alternative">
+        <part>Organo centrale del Partito Comunista d’Italia (m-l)</part>
       </nameEntry>
     </identity>
     <description>
