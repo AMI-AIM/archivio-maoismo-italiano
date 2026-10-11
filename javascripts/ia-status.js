@@ -195,7 +195,7 @@
       '  line-height: 1.4;',
       '  color: var(--md-default-fg-color);',
       '}',
-      '.ia-visore-avviso__testo { flex: 1 1 18rem; max-width: 36em; margin: 0; }',
+      '.ia-visore-avviso__testo { flex: 1 1 18rem; margin: 0; }',
       '.ia-visore-avviso__azioni { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; margin-left: auto; }',
       '.ia-visore-avviso__riprova {',
       '  min-height: 2.2rem;',

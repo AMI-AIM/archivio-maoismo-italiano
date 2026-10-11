@@ -181,7 +181,7 @@
 
     if (customFallback) {
       img.style.display = 'none';
-      customFallback.style.display = 'block';
+      customFallback.hidden = false;
       if (hasSkeleton) {
         skeleton.remove();
       }
