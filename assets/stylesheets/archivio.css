@@ -715,7 +715,8 @@
     text-overflow: ellipsis;
     max-height: 4.5em;
     margin: 0.1rem 0 0 0;
-    max-width: 36em; /* in Fraunces 80ch davano ~110 battute; 36em ~75 */
+    /* Nessun limite di battute: la descrizione occupa tutta la colonna dei
+       risultati (scelta del curatore, ott. 2026). */
     font-size: var(--ami-font-size-sm); /* 14px */
     color: var(--md-default-fg-color--light);
     line-height: var(--ami-line-height-normal);

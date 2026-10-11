@@ -108,16 +108,14 @@ def formatta_data(data_str):
             return f"{mesi[mese]} {anno}", (anno, mese, 1)
 
     try:
-        # NOTA sull'ordine dei formati: %m/%d/%Y e' volutamente per ULTIMO.
-        # Il data entry del catalogo segue la convenzione italiana gg/mm/aaaa,
-        # quindi %d/%m/%Y deve avere priorita'. %m/%d/%Y resta solo come
-        # fallback estremo (es. date esportate da fonti anglofone) per i casi
-        # non parsabili in nessun altro modo; su date ambigue (entrambi i
-        # numeri <= 12) la lettura resta comunque quella italiana.
-        for fmt in ['%Y-%m-%d %H:%M:%S', '%Y-%m-%d', '%Y-%m', '%d/%m/%Y %H:%M:%S', '%d/%m/%Y', '%m/%d/%Y']:
+        # Solo formati non ambigui e la convenzione italiana gg/mm/aaaa.
+        # Il vecchio ripiego anglofono mm/gg/aaaa e' stato tolto (ott. 2026):
+        # nessuna data del Catalogo lo usava, e una data come "12/25/1968"
+        # va corretta nel foglio (il validatore la segnala).
+        for fmt in ['%Y-%m-%d %H:%M:%S', '%Y-%m-%d', '%Y-%m', '%d/%m/%Y %H:%M:%S', '%d/%m/%Y']:
             try:
                 dt = datetime.strptime(data_str, fmt)
-                if fmt in ['%Y-%m-%d %H:%M:%S', '%Y-%m-%d', '%d/%m/%Y %H:%M:%S', '%d/%m/%Y', '%m/%d/%Y']:
+                if fmt in ['%Y-%m-%d %H:%M:%S', '%Y-%m-%d', '%d/%m/%Y %H:%M:%S', '%d/%m/%Y']:
                     return f"{dt.day} {mesi[dt.month]} {dt.year}", (dt.year, dt.month, dt.day)
                 else:
                     return f"{mesi[dt.month]} {dt.year}", (dt.year, dt.month, 1)

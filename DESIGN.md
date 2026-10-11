@@ -146,7 +146,7 @@ Un rosso da timbro su fondo carta, con neutri caldi e un nero profondo per le fa
 - **Headline** (750, 26px): titoli di sezione ("Descrizione", "Scheda", "Nell'archivio", "Documenti", "In evidenza").
 - **Gruppo** (650, 21px): sottosezioni dentro una sezione ("Come autore", "Pubblicazioni").
 - **Title** (600, 18px, interlinea 1,35): titolo di riga negli elenchi e nei risultati.
-- **Body** (400, 16px, interlinea 1,6, misura 68ch): descrizioni, biografie, testo del progetto. La misura delle biografie resta 68ch.
+- **Body** (400, 16px, interlinea 1,6): descrizioni, biografie, testo del progetto. Le descrizioni dei documenti (risultati dell'archivio, abstract delle schede) e l'avviso del visore occupano tutta la larghezza disponibile, senza limite di battute (scelta del curatore, ott. 2026); la misura delle biografie resta 68ch.
 - **Label** (600, 13px, maiuscolo, spaziatura 0,06em): etichette di campo nella Scheda, tipologia, ruolo secondario ("anche menzionato"), categorie delle organizzazioni.
 - **Data** (400, 15px): segnatura AMI, valori della Scheda, chiavi di "Nell'archivio", conteggi nei filtri.
 

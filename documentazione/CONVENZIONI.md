@@ -2,76 +2,68 @@
 
 Questo documento registra le **discordanze note** nel codice di AMI e le regole
 da seguire per non aggravarle. Ogni voce indica lo stato attuale e la direzione
-consigliata per i nuovi contributi.
+consigliata per i nuovi contributi. Revisione del 10/10/2026: tolte le voci
+risolte, aggiornate quelle superate dal codice, sezioni rinumerate.
 
-## 1. Percorsi degli asset (CSS/JS) — due idiomi convissuti
-- Le pagine in **radice** (home, archivio) usano `site_path('...')`
-  (`scripts/core/site_config.py`, URL derivati da `site_url` di `mkdocs.yml`).
-- Le pagine in **sottocartella** usano il relativo `../stylesheets/...`
-  (es. indici persone/organizzazioni in `persone.py:426`, `org.py:457`) oppure
-  l'assoluto `site_path(...)` (schede singolo soggetto, `argomenti.py`).
-- Regola: usare `site_path()` ogni volta che il generatore puo' importarlo;
-  il `../` relativo e' tollerato solo dove il livello di profondita' e' fisso.
-- Attenzione: `assets/stylesheets/documenti.css` e' caricato globalmente da
-  `mkdocs.yml` (`extra_css`), mentre `soggetti.css` e `soggetti-indice.css`
-  sono linkati esplicitamente dai generatori: quando si sposta una regola,
-  verificare quale dei due canali la eredita.
+## 1. Percorsi degli asset
+- Negli URL generati dagli script usare sempre `site_path('...')`
+  (`scripts/core/site_config.py`, URL derivati da `site_url` di `mkdocs.yml`):
+  un percorso che inizia con "/" senza il prefisso del progetto si rompe su
+  GitHub Pages (lo segnala `controlla_sito.py`, §15).
+- Tutti i fogli di stile si caricano da un solo canale, `extra_css` di
+  `mkdocs.yml` (extra, documenti, galleria, archivio, argomenti, home,
+  soggetti, soggetti-indice). I generatori non inseriscono più `<link>` ai CSS.
+  Un nuovo foglio va aggiunto lì, nell'ordine giusto della cascata.
 
-## 2. Stile CSS — due fonti (dopo la migrazione)
-1. Fogli in `assets/stylesheets/*.css` (token `--ami-*`): extra.css,
-   documenti.css, galleria.css, soggetti.css, soggetti-indice.css e i nuovi
-   **home.css**, **archivio.css** e **argomenti.css** (migrati dai blocchi
-   `<style>` inline di `core/home.py`, `core/archivio.py` e `argomenti.py`,
-   set. 2026). Gli stili del footer sono migrati da
-   `overrides/partials/footer.html` a fondo `extra.css`. Sono asset statici
-   versionati, modificabili a mano; `sync_assets.py` li copia in `build/` e
-   verifica che home.css/archivio.css/argomenti.css esistano (fallisce se
-   mancano).
-   Canali di caricamento: extra/documenti/galleria via `extra_css` di
-   mkdocs.yml; home.css/archivio.css/soggetti.css/argomenti.css via `<link>`
-   nel markdown generato (in coda alla pagina, per conservare la cascata
-   post-extra.css).
-2. Stili `style="..."` direttamente nell'HTML generato (banner, bottoni):
-   residui storici, da migrare solo insieme alle regole `[style]` correlate.
+## 2. Stile CSS
+Fonte unica: i fogli in `assets/stylesheets/*.css`, con i token `--ami-*`
+(blocco `:root` di `extra.css`). Sono asset statici versionati;
+`sync_assets.py` li copia in `build/` e fallisce se home.css, archivio.css,
+argomenti.css o fonts.css mancano. Nessuno script generatore né template di
+`overrides/` contiene blocchi `<style>`.
+Stili `style="..."` nell'HTML generato: ne resta uno solo, voluto, il
+gradiente delle card dei percorsi senza immagine (`argomenti.py`), perché il
+colore viene dai dati. Per nascondere un elemento usare l'attributo `hidden`
+(e, se il foglio gli dà un `display`, una regola `[hidden] { display: none }`),
+non `style="display:none"`.
 Decisioni prese (set. 2026):
 - **Solo light mode**: il tema scuro MkDocs slate e' abbandonato; `mkdocs.yml`
   fissa `scheme: default` senza toggle e i selettori slate sono stati rimossi
   da `extra.css`. Non reintrodurli.
-- **Rosso brand = `#b71c1c`** ovunque (hard-coded in `home.py`, `404.html`,
-  `galleria.css`); `palette.primary: red` di MkDocs resta solo per i componenti
-  nativi del tema.
-Problemi aperti (rinviati):
-- home.css duplica ancora alcune sezioni di `extra.css` con valori divergenti
-  (es. `.banner-content p[style]` 0.85rem vs 0.8rem in `extra.css:469`): ora
-  il duplicato vive nei due file invece che inline, ma la cascata e' invariata
-  (home.css arriva dopo). Da consolidare con confronto visivo.
-- ~~Blocchi `<style>` superstiti~~: **esauriti** (ott. 2026). Nessuno script
-  generatore ne template `overrides/` contiene piu' blocchi `<style>`; lo
-  stile inline residuo e' solo negli attributi `style="..."` dell'HTML
-  generato (banner hero, pannelli display:none) — vedi punto 2 sopra.
+- **Rosso brand = `#b71c1c`**, definito una sola volta come
+  `--md-primary-fg-color` in `extra.css`; ovunque si usa la variabile.
+  `palette.primary: red` di MkDocs resta solo per i componenti nativi del tema.
+Problema aperto (rinviato):
+- home.css ed extra.css definiscono ancora entrambi 11 selettori della home
+  (`.evidenza-band`, `.evidenza-card`, `.evidenza-grid`, `.evidenza-thumbnail`,
+  `.evidenza-titolo`, `.section-title`, `.home-column h2`, `.persona-date`…).
+  home.css arriva dopo nella cascata e prevale. Da consolidare in home.css,
+  con confronto visivo della home prima e dopo.
+
 ### 2.1 Scala tipografica unificata (token `--ami-font-size-*`)
-Definita in `extra.css` nel blocco `:root`. Tutti i CSS custom usano i token,
-non valori grezzi rem/px:
-- font-size: xs 0.75 · sm 0.875 · base 1 · md 1.125 · lg 1.25 · xl 1.5 · 2xl 2 · 3xl 2.5 (rem)
+Definita in `extra.css` nel blocco `:root`. Material porta la radice a 20px
+(125%), quindi 1rem = 20px. Tutti i CSS custom usano i token, non valori grezzi:
+- font-size: 2xs 0.65 (13px) · xs 0.7 (14px) · sm 0.75 (15px) · base 0.8 (16px)
+  · md 0.9 (18px) · lg 1.05 (21px) · xl 1.3 (26px) · 2xl 1.8 (36px)
+  · 3xl 2.2 (44px) rem; `lead` 1.1rem per l'apertura del Progetto
 - line-height: tight 1.2 · snug 1.35 · normal 1.5 · relaxed 1.6
 - letter-spacing: tighter -0.02 · tight -0.01 · normal 0 · wide 0.03 · wider 0.05 (em)
-Migrazione completata ott. 2026 su extra/home/archivio/argomenti/documenti/
-soggetti/soggetti-indice/galleria. Valori fuori scala arrotondati al token piu'
-vicino (es. 0.95→md, 0.8→sm, 0.65→xs): differenza ≤ 2px, da verificare visivamente.
+- pesi: `--fw-title` 900 · `--fw-heading` 750 · `--fw-emph` 600 ·
+  `--fw-text` 400 · `--fw-label` 700
 Eccezioni deliberate NON tokenizzate: display enormi di argomenti.css (5.5rem,
 4rem), `line-height: 1`/`2` strutturali, px nei componenti nativi del tema.
-Regola: nuovo CSS va in `assets/stylesheets/`, parametrizzato con `--ami-*`;
-i blocchi inline vanno progressivamente migrati (la migrazione completa richiede
-un confronto visivo pagina per pagina). Codice morto CSS rimosso: selettori mai
-presenti nel markup generato (`.doc-thumbnail`, `.subject-avatar`,
-`.archive-card`, `.skeleton-grid`, `.gallery-item`, utility aspect/w-*,
-`.home-page`) — prima di aggiungere una regola, verificare che la classe esista
-negli output dei generatori.
+Nei commenti dei CSS indicare i px con la radice a 20px (sm = 15px, non 14):
+alcuni commenti di home.css riportano ancora i valori vecchi.
+Regola: nuovo CSS va in `assets/stylesheets/`, parametrizzato con `--ami-*`.
+Prima di aggiungere una regola, verificare che la classe esista negli output
+dei generatori (in passato sono stati rimossi molti selettori mai usati).
 
 ## 3. Frontend JavaScript
-- Idiom misto: `getElementById` (archivio-filtri.js ~50 occorrenze) contro
-  `querySelector` (galleria.js, lazy-loading.js). Preferire `querySelector`.
-- Tutti gli script sono vanilla JS senza build step: niente minificazione.
+- Script vanilla senza build step: niente minificazione né dipendenze.
+- Ogni script è caricato solo dalle pagine che lo usano (blocco `scripts` di
+  `overrides/main.html`) e controlla comunque la presenza dei propri elementi.
+- `getElementById` per gli elementi con id, `querySelector` per il resto:
+  entrambi vanno bene, non è un debito da rimborsare.
 
 ## 4. Pipeline duplicata Launcher / CI
 L'ordine degli script (`sync_assets → persone → org → generatore → argomenti → galleria`)
@@ -90,24 +82,27 @@ operativa e' la coppia dei file.
 ### Pubblicazione git del Launcher
 `git_sync_pubblicazione()` esegue `pull --rebase --autostash → add → commit → push`.
 **Dal 04/10/2026 l'add è selettivo**: solo i percorsi di `PERCORSI_PUBBLICATI`
-(in testa a `Launcher.py`); i file modificati altrove vengono elencati a schermo
-ma non committati. Per pubblicare un nuovo file in radice, aggiungerlo alla lista.
+(in testa a `Launcher.py`: oggi comprende anche `documentazione/` e `tests/`); i file
+modificati altrove vengono elencati a schermo ma non committati. Per pubblicare
+un nuovo file o cartella in radice, aggiungerlo alla lista.
 Il pull iniziale
 recupera i commit fatti altrove (es. merge GitHub) prima di spingere, evitando il
 rifiuto non-fast-forward. Testato con remoto bare locale (storia divergente +
 worktree sporco: rebase lineare, modifiche preservate, push ricevuto).
 
 ## 5. Date
-Convenzione di data entry italiana `gg/mm/aaaa`. In `utils.formatta_data`
-`%m/%d/%Y` esiste solo come fallback estremo dopo `%d/%m/%Y` (vedi commento in
-`core/utils.py`). **Nota: il fallback `%m/%d/%Y` e' deprecato** — con la
-priorita' attuale una data come "05/12/1970" viene sempre letta 5 dicembre;
-le date anglofone vanno convertite in `gg/mm/aaaa` direttamente nel foglio.
-Non aggiungere formati ambigui prima di questi.
+Convenzione di data entry italiana `gg/mm/aaaa`. `utils.formatta_data` accetta
+solo formati non ambigui (`aaaa-mm-gg`, `aaaa-mm`, `mm/aaaa`, anni e date
+incerte come `196?`) e `gg/mm/aaaa`: "05/12/1970" è sempre il 5 dicembre.
+Il vecchio ripiego anglofono `mm/gg/aaaa` è stato **tolto** (10/10/2026):
+nessuna data del Catalogo lo usava. Una data anglofona va convertita
+direttamente nel foglio. Non aggiungere formati ambigui; ogni nuovo formato
+vuole un caso in `tests/test_formati.py` (c'è già quello che verifica che
+"12/25/1968" non venga letto come 25 dicembre).
 
 ## 6. Dipendenze Python
 Sorgente unica: `requirements.txt` (pandas, openpyxl, requests, Pillow, mkdocs,
-mkdocs-material, lxml), con intervalli di versione bloccati sulla major
+mkdocs-material, lxml, rich), con intervalli di versione bloccati sulla major
 (04/10/2026). In particolare `mkdocs<2`: MkDocs 2.0 non è compatibile con
 Material for MkDocs. Per aggiornare una dipendenza alla major successiva,
 alzare il limite e verificare il sito in locale prima di pubblicare.
@@ -139,31 +134,25 @@ la sezione «Gestione del sito: il Launcher» di `README.md` (ott. 2026:
 `comandi.txt` è stato fuso nel README e questo file spostato in
 `documentazione/`). Aggiornare il README a ogni nuova opzione.
 
-### 7. Font: self-hosted, niente Google Fonts a runtime (anti-FOUT)
-
+## 9. Font: self-hosted, niente Google Fonts a runtime
 I font (Fraunces, Archivo, Courier Prime) sono serviti in locale da
-`assets/fonts/*.woff2` + `assets/stylesheets/fonts.css`, caricati nel
+`assets/fonts/*.woff2` + `assets/stylesheets/fonts.css`, caricato solo dal
 `<head>` di `overrides/main.html`. Vietato reintrodurre link a
-`fonts.googleapis.com`/`fonts.gstatic.com`: il CSS remoto e' render-blocking
-e causava il FOUT (testo Georgia -> ridisegno al carico dei woff2).
-
-Strategia adottata (richiesta del manutentore: il font reale deve comparire
-SUBITO): `font-display: block` + preload dei tre file piu' critici
-(fraunces-900 titolo hero, fraunces-400 corpo, archivo-500 UI). Con i font
-self-hosted e preloaded il blocco iniziale dura pochi ms (stesso server,
-file piccoli) e non c'e' mai ridisegnamento a testo gia' visibile: niente
-FOUT e font corretto dalla prima visita. Nota: `optional` era la strategia
-precedente (font reale solo dalla seconda visita) - NON ripristinarla senza
-nuova decisione del manutentore.
-
-File attuali (ott. 2026): `fraunces-variable`, `fraunces-400-italic`,
-`archivo-variable`, `courier-prime-400/400-italic/700`; `fonts.css` è caricato
-solo da `overrides/main.html`. Lo script `fonti_locali.py` citato in passato
-non è più nel repository: per cambiare font sostituire a mano i woff2 e
-aggiornare `fonts.css`. `sync_assets.py` copiare
+`fonts.googleapis.com`/`fonts.gstatic.com`: il CSS remoto è render-blocking.
+Strategia attuale (decisione confermata dal manutentore il 10/10/2026):
+`font-display: swap` su tutte le facce, con preload dei due file variabili
+(`fraunces-variable.woff2`, `archivo-variable.woff2`), che coprono tutti i pesi.
+Con file locali e precaricati lo scambio col fallback è di norma impercettibile;
+`block` teneva il testo invisibile fino a 3 s con rete lenta. Le strategie
+precedenti (`block` con tre preload, poi `optional`) non vanno ripristinate
+senza una nuova decisione del manutentore.
+File attuali: `fraunces-variable`, `fraunces-400-italic`, `archivo-variable`,
+`courier-prime-400-normal`, `courier-prime-400-italic`, `courier-prime-700-normal`
+(il browser scarica solo le facce usate nella pagina). Per cambiare font
+sostituire a mano i woff2 e aggiornare `fonts.css`; `sync_assets.py` copia
 `fonts/` in `build/` e fallisce se `fonts.css` o i woff2 mancano.
 
-## 9. Export CSV dei dati e messaggi di commit
+## 10. Export CSV dei dati e messaggi di commit
 `scripts/core/export_dati.py`, chiamato dal Launcher subito dopo la
 validazione, esporta ogni foglio di `data/dati.xlsx` in `data/export/<foglio>.csv`
 (UTF-8 con BOM, apribili in Excel). Scopo: cronologia leggibile riga per riga
@@ -176,7 +165,7 @@ su GitHub (l'xlsx è binario) e copia dei dati in formato aperto.
 - `.gitattributes` (`* text=auto`) normalizza i fine riga: nel repository LF,
   su Windows CRLF.
 
-## 10. Lettura dei dati: `core/dati.py` (ott. 2026)
+## 11. Lettura dei dati: `core/dati.py` (ott. 2026)
 Tutti gli script leggono `dati.xlsx` con `leggi_foglio('Catalogo')` (o un
 altro foglio): il file viene letto una sola volta per processo, ogni cella è
 testo (`dtype=str`, vuoti = `''`), le colonne sono ripulite dagli spazi e,
@@ -188,7 +177,7 @@ di default, in minuscolo (`colonne='originali'` per averle come in Excel).
 - Verificato al momento dell'introduzione: il sito generato è identico byte
   per byte a quello prodotto dalla versione precedente.
 
-## 11. Errori e avvisi: `core/esito.py` (ott. 2026)
+## 12. Errori e avvisi: `core/esito.py` (ott. 2026)
 - **ERRORE** = sito rotto o incompleto: lo script esce con codice 1, il
   Launcher non pubblica, GitHub Actions fallisce. **AVVISO** = da sistemare,
   non blocca.
@@ -205,7 +194,7 @@ di default, in minuscolo (`colonne='originali'` per averle come in Excel).
   pubblicare. `python -m scripts.core.esito` mostra quello dell'ultima
   esecuzione. Su GitHub Actions le voci finiscono anche nel riepilogo del run.
 
-## 12. Validazione: `core/validator.py` (riscritto ott. 2026)
+## 13. Validazione: `core/validator.py` (riscritto ott. 2026)
 Ogni problema riporta foglio, riga di Excel e colonna. Livelli: ERRORE
 (blocca), AVVISO, NOTA (informazione, es. nomi citati senza scheda, che per
 scelta restano senza link). Controlli principali:
@@ -227,7 +216,7 @@ Se Persone o Organizzazioni hanno problemi strutturali, i controlli
 incrociati si saltano (eviterebbero centinaia di falsi allarmi).
 Solo controllo dei dati, senza generare nulla: `python -m scripts.core.validator`.
 
-## 13. Generazione deterministica (ott. 2026)
+## 14. Generazione deterministica (ott. 2026)
 A parità di dati, la generazione deve produrre file identici: è ciò che
 permette di confrontare due versioni del sito e di accorgersi di modifiche
 involontarie. Regole:
@@ -237,12 +226,12 @@ involontarie. Regole:
   della home: prima `most_common()` sceglieva a caso tra i pari);
 - per le date scritte nei file usare `site_config.data_pubblicazione()`, non
   `date.today()`: rispetta SOURCE_DATE_EPOCH, così due generazioni di prova
-  con la stessa data sono confrontabili byte per byte. (L'hook
-  `hooks/colophon.py` usa ancora `date.today()`: riguarda solo site/.)
+  con la stessa data sono confrontabili byte per byte. Dal 10/10/2026 la usa
+  anche l'hook `hooks/colophon.py` (data «aggiornato il …» del footer).
 Verificato: generazioni con PYTHONHASHSEED diversi e stessa SOURCE_DATE_EPOCH
 producono una cartella build/ identica.
 
-## 14. Controllo del sito finito: `scripts/controlla_sito.py` (ott. 2026)
+## 15. Controllo del sito finito: `scripts/controlla_sito.py` (ott. 2026)
 Gira dopo `mkdocs build`, sia nel Launcher (prima del push) sia su GitHub
 Actions (prima del deploy). Sono ERRORI, e bloccano la pubblicazione:
 - pagine principali o schede documento mancanti;
@@ -256,7 +245,7 @@ Primo risultato (06/10/2026): la sitemap elencava 4 schede inesistenti
 (persone/organizzazioni senza documenti collegati, che per scelta non hanno
 pagina); corretto in `generatore.genera_sitemap`.
 
-## 15. Menu e conferma del Launcher (ott. 2026)
+## 16. Menu e conferma del Launcher (ott. 2026)
 - Senza argomenti e con un terminale interattivo (doppio click) il Launcher
   mostra un menu; senza terminale (lancio da un altro programma) pubblica
   come prima. `interattivo()` usa `sys.stdin.isatty()`.
@@ -271,7 +260,7 @@ pagina); corretto in `generatore.genera_sitemap`.
 - Nuove voci di menu: aggiungerle a `VOCI_MENU` e a `menu()`, e documentarle
   nel README (sezione «Gestione del sito: il Launcher»).
 
-## 16. Interfaccia del Launcher: `core/interfaccia.py` (ott. 2026)
+## 17. Interfaccia del Launcher: `core/interfaccia.py` (ott. 2026)
 - Libreria `rich` (in requirements.txt). Senza rich il Launcher funziona
   comunque con un output testuale semplice, così può segnalare le
   dipendenze mancanti.
@@ -286,7 +275,7 @@ pagina); corretto in `generatore.genera_sitemap`.
 - Ai processi figli il Launcher passa PYTHONIOENCODING=utf-8: l'output con
   lettere accentate arriva intatto nel registro anche su Windows.
 
-## 17. build/ e site/ ripartono da zero (ott. 2026)
+## 18. build/ e site/ ripartono da zero (ott. 2026)
 `Launcher.genera_sito()` svuota build/ e site/ prima di generare, come
 avviene su GitHub Actions. Prima vi restavano file non più prodotti dal
 codice (vecchi font, PNG dei percorsi, documenti_chunk_*.json, lazy-load.js),
@@ -299,7 +288,7 @@ Rimosso codice mai usato: JSONOptimizer.compress_json,
 SchemaGenerator.breadcrumb_schema, argomenti.ESCLUDI_DALLA_RICERCA, una
 variabile in schede.py (verificato: sito generato identico).
 
-## 18. Test automatici: cartella `tests/` (ott. 2026)
+## 19. Test automatici: cartella `tests/` (ott. 2026)
 - Libreria standard `unittest`, nessuna dipendenza in più. I file
   `tests/test_*.py` importano i moduli come gli script (`core.*`, tramite
   `tests/_percorsi.py`). Si lanciano con
@@ -320,7 +309,7 @@ variabile in schede.py (verificato: sito generato identico).
   `test_formati.py`; nuovi controlli del validatore = nuovo caso in
   `test_validatore.py`.
 
-## 19. Menu a tendina in dati.xlsx (ott. 2026)
+## 20. Menu a tendina in dati.xlsx (ott. 2026)
 Convalida a elenco (errore bloccante in Excel) su Catalogo.Tipo,
 Catalogo.Livello, Catalogo.Titolo_attribuito e Relazioni.Categoria_ISAAR,
 righe 2-5000. I valori ammessi coincidono con quelli del validatore

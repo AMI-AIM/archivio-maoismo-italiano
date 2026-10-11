@@ -111,8 +111,7 @@ hide:
         </div>
         <div class="doc-contenuto">
           <div class="doc-titolo"><a href="persone/mao-zedong/">Mao Zedong</a></div>
-          <div class="doc-sommario">5 documenti collegati</div>
-          <div class="persona-date">1893 – 1976</div>
+          <div class="persona-meta"><span class="persona-date">1893 – 1976</span><span class="doc-sommario">5 documenti collegati</span></div>
         </div>
       </div>
 
@@ -122,8 +121,7 @@ hide:
         </div>
         <div class="doc-contenuto">
           <div class="doc-titolo"><a href="persone/osvaldo-pesce/">Osvaldo Pesce</a></div>
-          <div class="doc-sommario">3 documenti collegati</div>
-          <div class="persona-date">1938 – 2021</div>
+          <div class="persona-meta"><span class="persona-date">1938 – 2021</span><span class="doc-sommario">3 documenti collegati</span></div>
         </div>
       </div>
 
@@ -133,8 +131,7 @@ hide:
         </div>
         <div class="doc-contenuto">
           <div class="doc-titolo"><a href="persone/dino-dini/">Dino Dini</a></div>
-          <div class="doc-sommario">2 documenti collegati</div>
-          <div class="persona-date">s.d.</div>
+          <div class="persona-meta"><span class="persona-date">s.d.</span><span class="doc-sommario">2 documenti collegati</span></div>
         </div>
       </div>
 

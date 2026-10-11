@@ -566,8 +566,7 @@
             b.classList.toggle('lingua-btn--active', b === button);
           });
           contents.forEach(function (content) {
-            content.style.display =
-              content.dataset.linguaContent === lingua ? '' : 'none';
+            content.hidden = content.dataset.linguaContent !== lingua;
           });
         });
       });
@@ -636,13 +635,13 @@
       });
       
       function chiudiPannello(ridaiFocus) {
-        panel.style.display = 'none';
+        panel.hidden = true;
         toggleButton.setAttribute('aria-expanded', 'false');
         if (ridaiFocus) toggleButton.focus();
       }
 
       toggleButton.addEventListener('click', function () {
-        var isHidden = panel.style.display === 'none' || !panel.style.display;
+        var isHidden = panel.hidden;
         if (!isHidden) {
           chiudiPannello(false);
           return;
@@ -651,7 +650,7 @@
         // di consultazione è quella del momento effettivo.
         citations = buildCitations(payload);
         renderFormat();
-        panel.style.display = '';
+        panel.hidden = false;
         toggleButton.setAttribute('aria-expanded', 'true');
         // Il pannello si apre sotto il visore, spesso fuori schermo: lo si
         // porta in vista e il focus va sul formato attivo (o su Copia).

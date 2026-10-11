@@ -528,7 +528,7 @@ hide:
             content += f"""
 <div class="photo-viewer">
 {img_tag}
-<div class="photo-fallback" style="display:none; padding:1rem; text-align:center;">
+<div class="photo-fallback" hidden>
 <p><a href="{url_ia_attr}" target="_blank" rel="noopener">{label_ia}</a></p>
 </div>
 <div class="embed-footer">
@@ -569,7 +569,7 @@ hide:
 <div class="lingua-content lingua-content--originale" data-lingua-content="originale">
 <pre class="text-preview">{testo_originale}</pre>
 </div>
-<div class="lingua-content lingua-content--traduzione" data-lingua-content="traduzione" style="display:none;">
+<div class="lingua-content lingua-content--traduzione" data-lingua-content="traduzione" hidden>
 <pre class="text-preview">{testo_traduzione}</pre>
 </div>
 </div>
@@ -653,7 +653,7 @@ hide:
 """
         
         content += f"""
-<div class="citazione-pannello" id="citazione-pannello-{citazione_id}" role="region" aria-label="Cita questo documento" style="display:none;">
+<div class="citazione-pannello" id="citazione-pannello-{citazione_id}" role="region" aria-label="Cita questo documento" hidden>
 {tabs_html}
 <div class="citazione-testo" id="citazione-testo-{citazione_id}"></div>
 <button class="citazione-copia" id="citazione-copia-{citazione_id}" type="button">{_icona("copia")}<span class="citazione-copia__etichetta">Copia</span></button>

@@ -12,13 +12,19 @@ Registrato in mkdocs.yml alla voce "hooks".
 import datetime
 import json
 import os
+import sys
+
+# Stessa data dei file generati (core.site_config.data_pubblicazione):
+# con SOURCE_DATE_EPOCH due generazioni danno lo stesso footer.
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from core.site_config import data_pubblicazione  # noqa: E402
 
 _MESI = ('gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio',
          'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre')
 
 
 def on_config(config):
-    oggi = datetime.date.today()
+    oggi = data_pubblicazione()
     dati = {'aggiornato': f'{oggi.day} {_MESI[oggi.month - 1]} {oggi.year}',
             'anno': oggi.year, 'documenti': None}
     percorso = os.path.join(config['docs_dir'], 'documenti.json')

@@ -29,6 +29,10 @@ class TestDate(unittest.TestCase):
     def test_ambiguita_giorno_mese_letta_all_italiana(self):
         self.assertEqual(formatta_data("05/12/1970")[0], "5 dicembre 1970")
 
+    def test_formato_anglofono_non_accettato(self):
+        # mm/gg/aaaa non e' una convenzione del catalogo: mai "25 dicembre 1968"
+        self.assertNotEqual(formatta_data("12/25/1968")[0], "25 dicembre 1968")
+
     def test_data_non_riconosciuta_resta_com_e(self):
         self.assertEqual(formatta_data("primavera 1968"), ("primavera 1968", (9999, 1, 1)))
 
