@@ -115,122 +115,9 @@
   }
 
   // ------------------------------------------------------------
-  // BANNER: creazione e stile
+  // BANNER: creazione (lo stile sta in extra.css, sezione
+  // "STATO DI INTERNET ARCHIVE")
   // ------------------------------------------------------------
-  function iniettaStile() {
-    if (document.getElementById('ia-status-banner-style')) return;
-    var style = document.createElement('style');
-    style.id = 'ia-status-banner-style';
-    style.textContent = [
-      /* Non adesivo: scorre via con la pagina. Da adesivo copriva l'header
-         (anch'esso fissato in cima) appena si scorreva. */
-      '#ia-status-banner {',
-      '  position: relative;',
-      /* Nero inchiostro del sito con icona rossa (prima marrone/ambra,
-         colori assenti dalla palette). */
-      '  background: var(--ami-inchiostro, #1a1a1a);',
-      '  color: var(--ami-su-colore, #fff);',
-      '  border-bottom: 2px solid var(--md-primary-fg-color, #b71c1c);',
-      '  font-family: var(--ami-font-label, "Archivo", sans-serif);',
-      '  box-shadow: 0 2px 10px rgba(0,0,0,0.25);',
-      '}',
-      '.ia-status-banner__inner {',
-      '  max-width: 1200px;',
-      '  margin: 0 auto;',
-      '  padding: 0.6rem 1rem;',
-      '  display: flex;',
-      '  align-items: center;',
-      '  gap: 0.7rem;',
-      '}',
-      '.ia-status-banner__icon {',
-      '  flex: 0 0 auto;',
-      '  width: 1.2rem;',
-      '  height: 1.2rem;',
-      '  fill: var(--md-primary-fg-color--light, #e53935);',
-      '}',
-      '.ia-status-banner__testo {',
-      '  flex: 1;',
-      '  font-size: 0.82rem;',
-      '  line-height: 1.4;',
-      '}',
-      '.ia-status-banner__chiudi {',
-      '  flex: 0 0 auto;',
-      '  display: inline-flex;',
-      '  align-items: center;',
-      '  justify-content: center;',
-      '  width: 44px;',
-      '  height: 44px;',
-      '  margin: -0.4rem -0.4rem -0.4rem 0;',
-      '  padding: 0;',
-      '  background: transparent;',
-      '  border: 0;',
-      '  color: inherit;',
-      '  border-radius: 50%;',
-      '  cursor: pointer;',
-      '}',
-      '.ia-status-banner__chiudi svg {',
-      '  width: 1.25rem;',
-      '  height: 1.25rem;',
-      '  fill: currentColor;',
-      '}',
-      '.ia-status-banner__chiudi:focus-visible {',
-      '  outline: 2px solid var(--ami-su-colore, #fff);',
-      '  outline-offset: 0;',
-      '}',
-      '.ia-status-banner__chiudi:hover {',
-      '  background: rgba(255,255,255,0.15);',
-      '}',
-      '.ia-status-banner__breve { display: none; }',
-      /* Avviso dentro il visore della scheda documento */
-      '.ia-visore-avviso {',
-      '  display: flex;',
-      '  flex-wrap: wrap;',
-      '  align-items: center;',
-      '  gap: 0.5rem 1rem;',
-      '  padding: 0.6rem 0.8rem;',
-      '  border-bottom: 1px solid var(--md-default-fg-color--lightest);',
-      '  background: var(--md-default-bg-color);',
-      '  font-family: var(--ami-font-label, "Archivo", sans-serif);',
-      '  font-size: var(--ami-font-size-sm, 0.75rem);',
-      '  line-height: 1.4;',
-      '  color: var(--md-default-fg-color);',
-      '}',
-      '.ia-visore-avviso__testo { flex: 1 1 18rem; margin: 0; }',
-      '.ia-visore-avviso__azioni { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; margin-left: auto; }',
-      '.ia-visore-avviso__riprova {',
-      '  min-height: 2.2rem;',
-      '  padding: 0 0.9rem;',
-      '  border: 1px solid var(--md-primary-fg-color);',
-      '  border-radius: var(--ami-radius-sm, 4px);',
-      '  background: transparent;',
-      '  color: var(--md-primary-fg-color);',
-      '  font: inherit;',
-      '  font-weight: 600;',
-      '  cursor: pointer;',
-      '}',
-      '.ia-visore-avviso__riprova:hover { background: var(--ami-rosso-tenue, #f9ecec); }',
-      '.ia-visore-avviso__riprova:focus-visible { outline: 2px solid var(--md-primary-fg-color); outline-offset: 2px; }',
-      '.ia-visore-avviso a { color: var(--md-primary-fg-color); font-weight: 600; }',
-      /* Visore guasto: l'iframe si chiude invece di lasciare ~500px di
-         riquadro grigio vuoto. */
-      '.embed-container--guasto .universal-embed { height: 0 !important; min-height: 0 !important; visibility: hidden; }',
-      '.md-typeset .embed-container--guasto .embed-footer .fullscreen-btn { display: none; }',
-      /* Telefono: una riga, non fissato in cima (scorre via con la pagina
-         e non copre l'header). Il testo completo resta per i lettori di
-         schermo. */
-      '@media (max-width: 600px) {',
-      '  #ia-status-banner { position: static; box-shadow: none; }',
-      '  .ia-status-banner__inner { padding: 0.15rem 0.2rem 0.15rem 0.8rem; gap: 0.5rem; }',
-      '  .ia-status-banner__icon { width: 1rem; height: 1rem; }',
-      '  .ia-status-banner__testo { font-size: 0.7rem; line-height: 1.3; }',
-      '  .ia-status-banner__lungo { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }',
-      '  .ia-status-banner__breve { display: inline; }',
-      '  .ia-status-banner__chiudi { margin: 0; }',
-      '}'
-    ].join('\n');
-    document.head.appendChild(style);
-  }
-
   function mostraAvviso() {
     if (eDismisso() || bannerMostrato) return;
     if (document.getElementById('ia-status-banner')) return;
@@ -276,8 +163,6 @@
         segnaDismisso();
       });
     }
-
-    iniettaStile();
   }
 
   // ------------------------------------------------------------
@@ -434,7 +319,6 @@
   function segnalaVisore(iframe) {
     var contenitore = iframe.closest('.embed-container') || iframe.parentNode;
     if (!contenitore || contenitore.querySelector('.ia-visore-avviso')) return;
-    iniettaStile();
 
     // Il link diretto a Internet Archive c'e' gia' nel piede del visore
     // ("Apri su Internet Archive"): qui non si ripete.

@@ -47,20 +47,6 @@
     
       <link rel="stylesheet" href="../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="../stylesheets/documenti.css">
-    
-      <link rel="stylesheet" href="../stylesheets/galleria.css">
-    
-      <link rel="stylesheet" href="../stylesheets/archivio.css">
-    
-      <link rel="stylesheet" href="../stylesheets/argomenti.css">
-    
-      <link rel="stylesheet" href="../stylesheets/home.css">
-    
-      <link rel="stylesheet" href="../stylesheets/soggetti.css">
-    
-      <link rel="stylesheet" href="../stylesheets/soggetti-indice.css">
-    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -69,7 +55,22 @@
     
   
 
-  <!-- AMI-MAIN-ATTIVO v5 -->
+  
+  
+  
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="../stylesheets/archivio.css">
+  
+  
+  
+  
+  
+
+  <!-- AMI-MAIN-ATTIVO v6 -->
   <!-- Segnala subito (prima del rendering) che JavaScript e' attivo: il CSS
        puo' cosi' impostare gli stati iniziali dei componenti interattivi
        (es. filtri chiusi su mobile) senza spostamenti di layout quando gli
@@ -221,7 +222,7 @@
        title="AMI - Archivio del Maoismo Italiano"
        class="md-header__button md-logo"
        aria-label="AMI - Archivio del Maoismo Italiano - Home">
-      <img src="../immagini/logo.webp" alt="">
+      <img src="../immagini/logo.webp" alt="" width="400" height="127">
     </a>
 
     <!-- NAVIGAZIONE a destra (desktop) -->
@@ -360,6 +361,7 @@
          aria-label="AMI - Archivio del Maoismo Italiano - Home">
         <img src="../immagini/logo.webp"
              alt=""
+             width="400" height="127"
              class="md-drawer__logo">
       </a>
       <button type="button" class="md-drawer__close" id="drawer-close" aria-label="Chiudi il menu">
@@ -495,7 +497,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="/archivio-maoismo-italiano/" title="AMI - Archivio del Maoismo Italiano" class="md-nav__button md-logo" aria-label="AMI - Archivio del Maoismo Italiano" data-md-component="logo">
       
-  <img src="../immagini/logo.webp" alt="">
+  <img src="../immagini/logo.webp" alt="" width="400" height="127">
 
     </a>
     AMI - Archivio del Maoismo Italiano
@@ -794,9 +796,9 @@
 <div id="archivio-container" class="archivio-layout">
 
     <!-- SIDEBAR FILTRI -->
-    <aside class="filtri-sidebar" id="filtri-sidebar">
+    <section class="filtri-sidebar" id="filtri-sidebar" aria-labelledby="filtri-titolo">
         <div class="filtri-testata">
-            <h2 class="filtri-titolo">Filtri</h2>
+            <h2 class="filtri-titolo" id="filtri-titolo">Filtri</h2>
             <button type="button" class="filtri-mostra" id="filtri-mostra" aria-expanded="false" aria-controls="filtri-corpo">
                 <span class="filtri-mostra__etichetta">Mostra filtri</span>
                 <span class="filtri-mostra__conteggio" id="filtri-mostra-conteggio"></span>
@@ -876,7 +878,7 @@
         <div class="filtri-azioni" id="filtri-azioni" hidden>
             <button type="button" id="reset-filtri">Azzera filtri</button>
         </div>
-    </aside>
+    </section>
 
     <!-- RISULTATI -->
     <div class="risultati-main">
