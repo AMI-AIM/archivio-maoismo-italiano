@@ -315,6 +315,9 @@
     padding: 0.1rem 0.6rem;
     font-size: var(--ami-font-size-xs); /* 12px - etichetta */
     font-weight: 600;
+    /* Cifre di larghezza fissa: la pillola non cambia larghezza mentre
+       si trascina il cursore degli anni. */
+    font-variant-numeric: tabular-nums;
     color: var(--md-primary-fg-color);
     white-space: nowrap;
     pointer-events: none;
@@ -687,6 +690,7 @@
 .risultato-titolo {
     font-size: var(--ami-font-size-md); /* 18px - enfasi */
     font-weight: 600;
+    text-wrap: balance;
     margin: 0.1rem 0;
 }
 
@@ -778,7 +782,10 @@
     background: var(--md-primary-fg-color);
     color: var(--ami-su-colore);
     cursor: pointer;
-    transition: background 0.15s;
+    transition: background 0.15s, scale 0.15s ease-out;
+}
+.riprova-btn:active:not(:disabled) {
+    scale: 0.96;
 }
 .riprova-btn:hover {
     background: var(--md-primary-fg-color--dark);
@@ -808,6 +815,7 @@
 }
 
 .pag-btn {
+    font-variant-numeric: tabular-nums;
     background: var(--md-code-bg-color);
     border: 1px solid var(--md-default-fg-color--lightest);
     border-radius: var(--ami-radius-sm);

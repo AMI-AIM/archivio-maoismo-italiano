@@ -26,7 +26,8 @@ from datetime import datetime
 from pathlib import Path
 
 try:
-    from rich.console import Console
+    from rich.columns import Columns
+    from rich.console import Console, Group
     from rich.markup import escape
     from rich.panel import Panel
     from rich.table import Table
@@ -50,6 +51,7 @@ TEMA = {
     "nota": "grey58",
     "tenue": "grey58",
     "titolo": "bold",
+    "sezione": "bold grey70",
 }
 
 
@@ -114,6 +116,8 @@ class Interfaccia:
         self.verboso = verboso
         self.registro = Registro(self.radice / "log")
         self.console = Console(theme=Theme(TEMA), highlight=False) if RICH else None
+        # (n, totale) durante una sequenza numerata di fasi, altrimenti None.
+        self.contatore = None
 
     # ---------------------------------------------------------------- testo
     def scrivi(self, testo="", stile=None):
@@ -134,22 +138,82 @@ class Interfaccia:
         return escape(str(testo))
 
     def avviso(self, testo):
-        self.scrivi(f"  [avviso]![/avviso] {self.esc(testo)}" if self.console else f"  ! {testo}")
+        if self.console:
+            # Testo che va a capo allineato sotto se stesso, non dal bordo.
+            riga = Table.grid(expand=True, padding=(0, 1))
+            riga.add_column(width=3, no_wrap=True)
+            riga.add_column(ratio=1)
+            riga.add_row(Text(" !", style="avviso"), Text(str(testo)))
+            self.console.print(riga)
+        else:
+            print(f"  ! {testo}")
         self.registro.scrivi(f"AVVISO: {testo}")
+
+    def _numero(self):
+        if not self.contatore:
+            return ""
+        n, totale = self.contatore
+        return f"{n}/{totale}"
 
     def _riga(self, simbolo, stile, testo, dettaglio, durata):
         tempo = _durata(durata) if durata is not None else ""
+        numero = self._numero()
         if not self.console:
-            print(f"  {'OK' if simbolo == '✓' else 'X '} {testo}  {dettaglio}  {tempo}".rstrip())
+            print(f"  {'OK' if simbolo == '✓' else 'X '} {numero} {testo}  {dettaglio}  {tempo}".rstrip())
             return
         # Colonne a larghezza fissa: le righe delle fasi restano allineate.
+        # La colonna del numero (3/9) c'e' solo nelle sequenze numerate.
         riga = Table.grid(expand=False, padding=(0, 1))
         riga.add_column(width=3, no_wrap=True)
-        riga.add_column(width=40, no_wrap=True, overflow="ellipsis")
+        celle = [Text(f" {simbolo}", style=stile)]
+        if numero:
+            riga.add_column(width=4, no_wrap=True, justify="right")
+            celle.append(Text(numero, style="tenue"))
+        riga.add_column(width=40 if not numero else 36, no_wrap=True, overflow="ellipsis")
         riga.add_column(width=32, no_wrap=True, overflow="ellipsis")
         riga.add_column(justify="right", width=9, no_wrap=True)
-        riga.add_row(Text(f" {simbolo}", style=stile), Text(testo),
-                     Text(dettaglio, style="tenue"), Text(tempo, style="tenue"))
+        celle += [Text(testo), Text(dettaglio, style="tenue"), Text(tempo, style="tenue")]
+        riga.add_row(*celle)
+        self.console.print(riga)
+
+    def blocco(self, titolo):
+        """Titolo di un gruppo di fasi (Preparazione, Generazione, Pubblicazione)."""
+        if self.console:
+            self.console.print()
+            self.console.print(f"  {titolo.upper()}", style="sezione")
+        else:
+            print(f"\n{titolo.upper()}")
+
+    def pulisci(self):
+        """Schermo pulito (solo su un terminale vero)."""
+        if self.console and self.console.is_terminal:
+            self.console.clear()
+
+    def messaggio(self, etichetta, stile, posizione, testo):
+        """Errore/avviso/nota con il testo a capo allineato sotto se stesso.
+
+        Un messaggio che finisce con un elenco lungo («…: A, B, C, D») mostra
+        i nomi in colonne invece che in un'unica riga."""
+        if not self.console:
+            print(f"     {etichetta} {posizione}: {testo}")
+            return
+        intestazione = Text()
+        if posizione:
+            intestazione.append(f"{posizione}: ", style="tenue")
+        corpo = intestazione
+        testa, _, coda = str(testo).partition(": ")
+        nomi = [n.strip() for n in coda.split(", ")] if coda else []
+        if len(nomi) >= 4:
+            intestazione.append(testa + ":")
+            corpo = Group(intestazione, Columns([Text(f"· {n}") for n in nomi],
+                                                padding=(0, 3), expand=False))
+        else:
+            intestazione.append(str(testo))
+        riga = Table.grid(expand=True, padding=(0, 1))
+        riga.add_column(width=4, no_wrap=True)
+        riga.add_column(width=7, no_wrap=True)
+        riga.add_column(ratio=1)
+        riga.add_row("", Text(etichetta, style=stile), corpo)
         self.console.print(riga)
 
     def intestazione(self, sottotitolo=""):
@@ -198,7 +262,8 @@ class Interfaccia:
             # Il vecchio prompt dei comandi di Windows non ha i caratteri braille
             # dello spinner "dots": lì si usa la classica barretta che ruota.
             spinner = "line" if getattr(self.console, "legacy_windows", False) else "dots"
-            gestore = self.console.status(f"[tenue]{nome}…[/tenue]", spinner=spinner)
+            numero = f"{self._numero()}  " if self.contatore else ""
+            gestore = self.console.status(f"[tenue]{numero}{escape(nome)}…[/tenue]", spinner=spinner)
         try:
             with gestore:
                 yield stato

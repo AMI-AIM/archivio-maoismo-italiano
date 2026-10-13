@@ -269,6 +269,15 @@ pagina); corretto in `generatore.genera_sitemap`.
   `ui.esegui([...])`, le funzioni Python che stampano con `ui.cattura(f, ...)`:
   il loro output va nel registro `log/launcher_*.log` (ultimi 30), non a
   schermo. Con `--dettagli` tutto torna a schermo.
+- Gruppi e numeri (ott. 2026): `ui.blocco("Generazione")` stampa il titolo
+  di un gruppo di fasi; `ui.contatore = (n, totale)` fa comparire «3/9»
+  accanto alla fase (rimetterlo a `None` alla fine, in un `finally`). Errori,
+  avvisi e note con posizione passano da `ui.messaggio(...)`, che allinea il
+  testo a capo e mette in colonne gli elenchi lunghi («…: A, B, C, D»).
+- Testata del menu: `stato_progetto()` (ultima pubblicazione, file da
+  pubblicare, commit non inviati, Excel aperto) usa solo comandi git di
+  lettura con `--no-optional-locks`, senza rete; lo schermo si ripulisce a
+  ogni ritorno al menu (`ui.pulisci()`).
 - Testo variabile dentro stringhe con markup rich (nomi, messaggi, file):
   passarlo sempre da `ui.esc()`, altrimenti parentesi quadre come "[m-l]"
   vengono lette come stili.

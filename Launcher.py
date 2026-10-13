@@ -166,10 +166,7 @@ def _voci_validazione(voci, includi_note=False):
             continue
         posizione = ", ".join(str(x) for x in (v["foglio"],
                               f"riga {v['riga']}" if v["riga"] else None, v["colonna"]) if x)
-        etichetta = v["gravita"].upper()
-        ui.scrivi(f"     [{stili[v['gravita']]}]{etichetta}[/] [tenue]{ui.esc(posizione)}:[/] "
-                  f"{ui.esc(v['messaggio'])}"
-                  if ui.console else f"     {etichetta} {posizione}: {v['messaggio']}")
+        ui.messaggio(v["gravita"].upper(), stili[v["gravita"]], posizione, v["messaggio"])
 
 
 def esegui_validazione(bloccante=True):
@@ -207,7 +204,8 @@ def percorsi_esistenti():
 
 def git_stato(percorsi=None):
     """Righe di `git status --porcelain`, eventualmente limitate a `percorsi`."""
-    comando = ["git", "status", "--porcelain"]
+    # --no-optional-locks: una semplice lettura non deve lasciare .git/index.lock
+    comando = ["git", "--no-optional-locks", "status", "--porcelain"]
     if percorsi:
         comando += ["--"] + percorsi
     risultato = subprocess.run(comando, cwd=ROOT_DIR, capture_output=True, text=True,
@@ -250,12 +248,17 @@ def git_sync_pubblicazione(titolo, corpo):
     sequenza e il commit locale resta integro, pronto per essere risolto a
     mano.
     """
-    with ui.fase("Sincronizzazione con GitHub"):
-        ui.esegui(["git", "pull", "--rebase", "--autostash"])
+    ui.contatore = (1, 3)
+    try:
+        with ui.fase("Sincronizzazione con GitHub"):
+            ui.esegui(["git", "pull", "--rebase", "--autostash"])
+    finally:
+        ui.contatore = None
 
     if not git_ci_sono_modifiche():
         ui.scrivi("  Nessuna modifica da registrare dopo la sincronizzazione.", "tenue")
         return False
+    ui.contatore = (2, 3)
     with ui.fase("Registrazione delle modifiche (commit)") as stato:
         ui.esegui(["git", "add", "-A", "--"] + percorsi_esistenti())
         comando_commit = ["git", "commit", "-m", titolo]
@@ -265,8 +268,12 @@ def git_sync_pubblicazione(titolo, corpo):
         stato["dettaglio"] = subprocess.run(
             ["git", "rev-parse", "--short", "HEAD"], cwd=ROOT_DIR,
             capture_output=True, text=True).stdout.strip()
-    with ui.fase("Invio a GitHub (push)"):
-        ui.esegui(["git", "push"])
+    ui.contatore = (3, 3)
+    try:
+        with ui.fase("Invio a GitHub (push)"):
+            ui.esegui(["git", "push"])
+    finally:
+        ui.contatore = None
     return True
 
 
@@ -361,12 +368,27 @@ def prepara(skip_validation=False, esporta=True):
     """Dipendenze, validazione e (per la pubblicazione) export CSV dei dati."""
     # Riepilogo errori/avvisi: si riparte da zero a ogni esecuzione.
     esito.azzera_riepilogo()
+    ui.blocco("Preparazione")
     controlla_excel_aperto()
-    verifica_dipendenze()
-    esegui_validazione(bloccante=not skip_validation)
+    totale = 3 if esporta else 2
+    try:
+        ui.contatore = (1, totale)
+        verifica_dipendenze()
+        ui.contatore = (2, totale)
+        esegui_validazione(bloccante=not skip_validation)
+    finally:
+        ui.contatore = None
 
     if not esporta:
         return
+    ui.contatore = (3, totale)
+    try:
+        _esporta_csv()
+    finally:
+        ui.contatore = None
+
+
+def _esporta_csv():
     with ui.fase("Export CSV dei dati") as stato:
         try:
             titolo, corpo = ui.cattura(esporta_e_riepiloga, ROOT_DIR)
@@ -441,9 +463,14 @@ def svuota_cartelle_generate():
 
 def genera_sito():
     """Generazione completa in build/, mkdocs build in site/ e controllo finale."""
+    ui.blocco("Generazione")
+    # Fasi numerate: pulizia + script + MkDocs + controllo.
+    totale = len(SCRIPT_GENERAZIONE) + 3
+    ui.contatore = (1, totale)
     svuota_cartelle_generate()
     voci_lette = 0
-    for script, nome in SCRIPT_GENERAZIONE:
+    for i, (script, nome) in enumerate(SCRIPT_GENERAZIONE, start=2):
+        ui.contatore = (i, totale)
         with ui.fase(nome) as stato:
             try:
                 ui.esegui([sys.executable, script], cwd=SCRIPTS_DIR)
@@ -453,14 +480,17 @@ def genera_sito():
     # Costruzione del sito e controllo finale (pagine, sitemap, JSON, link
     # interni): gli stessi controlli girano su GitHub Actions prima del
     # deploy, ma qui un problema blocca la pubblicazione PRIMA del push.
+    ui.contatore = (totale - 1, totale)
     with ui.fase("Costruzione del sito (MkDocs)"):
         ui.esegui([sys.executable, "-m", "mkdocs", "build", "--quiet"], env=ENV_MKDOCS)
+    ui.contatore = (totale, totale)
     with ui.fase("Controllo del sito") as stato:
         uscita = ui.esegui([sys.executable, str(SCRIPTS_DIR / "controlla_sito.py"),
                             str(ROOT_DIR / "site")])
         m = re.search(r"Link interni: (\d+) controllati in (\d+) pagine", uscita)
         if m:
             stato["dettaglio"] = f"{m.group(2)} pagine · {m.group(1)} link"
+    ui.contatore = None
 
     stampa_riepilogo_build(solo_se_presenti=True)
 
@@ -528,6 +558,7 @@ def pubblica(messaggio=None, chiedi_conferma=True):
 
     messaggio_globale["testo"] = messaggio  # None -> messaggio automatico
     titolo, corpo = componi_messaggio_commit()
+    ui.blocco("Pubblicazione")
     if not conferma_pubblicazione(titolo, corpo, chiedi_conferma):
         ui.scrivi()
         ui.pannello("Pubblicazione annullata",
@@ -549,18 +580,26 @@ def aggiorna(messaggio=None, refresh_ia=None, only=None, skip_validation=False,
              chiedi_conferma=True):
     ui.intestazione("Pubblicazione del sito")
     inizio = time.monotonic()
-    prepara(skip_validation=skip_validation)
-    invalida_cache(only=only, refresh_ia=refresh_ia)
-    genera_sito()
-    ui.scrivi(f"  Sito generato e controllato in {time.monotonic() - inizio:.0f} s", "tenue")
-    pubblica(messaggio, chiedi_conferma=chiedi_conferma)
-    _chiusura()
+    try:
+        prepara(skip_validation=skip_validation)
+        invalida_cache(only=only, refresh_ia=refresh_ia)
+        genera_sito()
+        pubblica(messaggio, chiedi_conferma=chiedi_conferma)
+    finally:
+        ui.contatore = None
+    _chiusura(inizio)
 
 
-def _chiusura():
+def _chiusura(inizio=None):
+    from scripts.core.interfaccia import _durata
+    parti = []
+    if inizio is not None:
+        parti.append(f"Durata totale {_durata(time.monotonic() - inizio)}")
     registro = ui.percorso_registro()
     if registro:
-        ui.scrivi(f"  Registro completo: {registro}", "tenue")
+        parti.append(f"registro completo: {registro}")
+    if parti:
+        ui.scrivi("  " + " · ".join(parti), "tenue")
 
 
 def solo_validazione():
@@ -730,6 +769,52 @@ VOCI_MENU = [
     ("6", "Test automatici", "dopo modifiche al codice"),
     ("0", "Esci", ""),
 ]
+# Gruppi del menu: (titolo, tasti). "0" (Esci) sta sempre in fondo, da solo.
+GRUPPI_MENU = [("Lavoro quotidiano", ("1", "2", "3")),
+               ("Manutenzione", ("4", "5", "6"))]
+
+
+def _git_testo(*argomenti):
+    """Output di un comando git di sola lettura ('' se fallisce)."""
+    try:
+        r = subprocess.run(["git", "--no-optional-locks", *argomenti], cwd=ROOT_DIR,
+                           capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", timeout=10)
+        return r.stdout.strip() if r.returncode == 0 else ""
+    except (OSError, subprocess.SubprocessError):
+        return ""
+
+
+def stato_progetto():
+    """Righe (etichetta, valore con markup) per la testata del menu.
+
+    Solo letture locali, nessuna rete: l'ultima pubblicazione è l'ultimo
+    commit noto di origin (aggiornato a ogni pubblicazione dal Launcher)."""
+    righe = []
+    ultima = _git_testo("log", "-1", "--format=%cd", "--date=format:%d/%m/%Y %H:%M", "@{u}") \
+        or _git_testo("log", "-1", "--format=%cd", "--date=format:%d/%m/%Y %H:%M")
+    if ultima:
+        righe.append(("Ultima pubblicazione", ultima))
+    modifiche = git_stato(percorsi_esistenti())
+    if modifiche:
+        dati = any("data/dati.xlsx" in r for r in modifiche)
+        altri = len(modifiche) - (1 if dati else 0)
+        parti = []
+        if dati:
+            parti.append("[avviso]dati.xlsx modificato[/]")
+        if altri:
+            parti.append(_conta(altri, "altro file", "altri file") if dati
+                         else _conta(altri, "file modificato", "file modificati"))
+        righe.append(("Da pubblicare", " · ".join(parti)))
+    else:
+        righe.append(("Da pubblicare", "[ok]niente: il sito online è aggiornato[/]"))
+    non_inviati = _git_testo("rev-list", "--count", "@{u}..HEAD")
+    if non_inviati.isdigit() and int(non_inviati):
+        righe.append(("Attenzione", f"[avviso]{_conta(int(non_inviati), 'commit non inviato', 'commit non inviati')} "
+                                    "a GitHub (pubblica per inviarli)[/]"))
+    if (ROOT_DIR / "data" / "~$dati.xlsx").exists():
+        righe.append(("Attenzione", "[avviso]dati.xlsx è aperto in Excel: salvalo prima di pubblicare[/]"))
+    return righe
 
 
 def chiedi_id_schede():
@@ -744,22 +829,44 @@ def chiedi_id_schede():
 
 def mostra_menu():
     ui.intestazione()
-    if ui.console:
-        from rich.table import Table
-        tabella = Table.grid(padding=(0, 2))
-        tabella.add_column(justify="right", style="marchio")
-        tabella.add_column(style="titolo")
-        tabella.add_column(style="tenue")
-        for tasto, voce, nota in VOCI_MENU:
-            tabella.add_row(f"  {tasto}", voce, nota)
-        ui.console.print(tabella)
-    else:
-        for tasto, voce, nota in VOCI_MENU:
-            print(f"  {tasto}  {voce}" + (f"  ({nota})" if nota else ""))
+    voci = {tasto: (voce, nota) for tasto, voce, nota in VOCI_MENU}
+    stato = stato_progetto()
+    if not ui.console:
+        for etichetta, valore in stato:
+            ui.scrivi(f"  {etichetta}: {valore}")
+        for titolo, tasti in GRUPPI_MENU:
+            print(f"\n  {titolo}")
+            for t in tasti:
+                voce, nota = voci[t]
+                print(f"  {t}  {voce}" + (f"  ({nota})" if nota else ""))
+        print("\n  0  Esci")
+        return
+    from rich.table import Table
+    if stato:
+        griglia = Table.grid(padding=(0, 2))
+        griglia.add_column(style="tenue", width=22)
+        griglia.add_column()
+        for etichetta, valore in stato:
+            griglia.add_row(f"  {etichetta}", valore)
+        ui.console.print(griglia)
+    tabella = Table.grid(padding=(0, 2))
+    tabella.add_column(justify="right", style="marchio", width=5)
+    tabella.add_column(style="titolo", width=34)
+    tabella.add_column(style="tenue")
+    for titolo, tasti in GRUPPI_MENU:
+        tabella.add_row("", "", "")
+        tabella.add_row("", f"[sezione]{titolo.upper()}[/]", "")
+        for t in tasti:
+            voce, nota = voci[t]
+            tabella.add_row(t, voce, nota)
+    tabella.add_row("", "", "")
+    tabella.add_row("0", "Esci", "")
+    ui.console.print(tabella)
 
 
 def menu():
     while True:
+        ui.pulisci()
         mostra_menu()
         try:
             scelta = (ui.console.input("\n  Scelta: ") if ui.console else input("\nScelta: ")).strip()
