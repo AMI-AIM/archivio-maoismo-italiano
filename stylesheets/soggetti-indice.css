@@ -343,3 +343,12 @@
         font-size: var(--ami-font-size-xs);
     }
 }
+
+/* Movimento ridotto: le card non si sollevano (resta l'ombra) */
+@media (prefers-reduced-motion: reduce) {
+    .top-card:hover,
+    .people-card:hover,
+    .org-card:hover {
+        transform: none;
+    }
+}

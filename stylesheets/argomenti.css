@@ -89,6 +89,7 @@ come da CONVENZIONI.md (niente extra_css globale).
     line-height: var(--ami-line-height-snug);
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
     overflow-wrap: anywhere;
+    text-wrap: balance;
 }
 
 .hero-card-meta {
@@ -120,5 +121,13 @@ come da CONVENZIONI.md (niente extra_css globale).
 
     .hero-card-iniziali {
         font-size: 4rem;
+    }
+}
+
+/* Movimento ridotto: card e fotografia ferme (resta l'ombra) */
+@media (prefers-reduced-motion: reduce) {
+    .hero-card:hover,
+    .hero-card:hover .hero-card-img {
+        transform: none;
     }
 }
