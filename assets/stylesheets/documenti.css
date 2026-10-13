@@ -64,7 +64,9 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
   max-height: 80vh;
   object-fit: contain;
   border-radius: var(--ami-radius-sm);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Registro catalogo: contorno, non ombra */
+  outline: 1px solid oklch(0 0 0 / 0.1);
+  outline-offset: -1px;
 }
 
 .photo-fallback,

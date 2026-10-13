@@ -233,7 +233,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   list-style: none;
   background: var(--ami-superficie);
   border-radius: var(--ami-radius-md);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   z-index: 1000;
 }
 
@@ -416,10 +416,13 @@ button.md-header__nav-link--dropdown {
   font-size: var(--ami-font-size-sm);
   border-radius: var(--ami-radius-sm);
   text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: background-color 0.15s, color 0.15s, scale 0.15s ease-out;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
   white-space: nowrap;
   flex-shrink: 0;
+}
+.banner-button:active {
+  scale: 0.96;
 }
 /* Ricerca della hero. Un'unica regola per elemento (prima erano sparse
    in cinque punti del file): pillola scura sulla foto, tutta la pillola
@@ -449,10 +452,7 @@ button.md-header__nav-link--dropdown {
 .banner-search-icon {
   width: 1.1rem;
   height: 1.1rem;
-  fill: none;
-  stroke: var(--ami-su-colore);
-  stroke-width: 2.25;
-  stroke-linecap: round;
+  fill: var(--ami-su-colore);
   flex-shrink: 0;
 }
 /* Campo di input: mai sotto il corpo base (16px). Sotto i 16px iOS Safari
@@ -1410,7 +1410,7 @@ body, fuori da .md-typeset, ma usa gli stessi token).
   background: var(--ami-superficie);
   color: var(--ami-inchiostro);
   border-radius: var(--ami-radius-md);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   z-index: 9999;
   font-family: var(--ami-font-text);
 }
@@ -1662,12 +1662,6 @@ body:has(.banner-content-home) .lazy-skeleton {
 /* ==========================================================================
    PERFORMANCE OPTIMIZATIONS
    ========================================================================== */
-
-/* Usa GPU acceleration per animazioni fluide */
-.lazy-skeleton {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-}
 
 /* Previene reflow durante caricamento */
 .lazy-img[style*="opacity"] {
@@ -2461,11 +2455,20 @@ input[type="search"]::-webkit-search-cancel-button {
 
 /* --- Percorsi tematici: la fotografia dell'indice come testata ---------- */
 .md-typeset .percorso-testata {
+  position: relative;
   margin: 0.6rem 0 1rem;
   aspect-ratio: 3 / 1;
   overflow: hidden;
   border-radius: var(--ami-radius-card);
   background: var(--md-code-bg-color);
+}
+.md-typeset .percorso-testata::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px oklch(0 0 0 / 0.1);
+  pointer-events: none;
 }
 .percorso-testata__img {
   width: 100%;
@@ -2944,6 +2947,7 @@ input[type="search"]::-webkit-search-cancel-button {
   font-size: var(--ami-font-size-md);
   font-weight: 600;
   line-height: 1.35;
+  text-wrap: balance;
 }
 .md-typeset .progetto-area__testo {
   grid-area: testo;
@@ -2951,6 +2955,7 @@ input[type="search"]::-webkit-search-cancel-button {
   font-size: var(--ami-font-size-base);
   line-height: 1.5;
   color: var(--md-default-fg-color--light);
+  text-wrap: pretty;
 }
 .md-typeset .progetto-area__azione {
   grid-area: azione;
@@ -3038,6 +3043,7 @@ input[type="search"]::-webkit-search-cancel-button {
   font-size: var(--ami-font-size-base);
   line-height: 1.55;
   color: var(--md-default-fg-color);
+  text-wrap: pretty;
 }
 .md-typeset .progetto-bibliografia--norme p {
   font-size: var(--ami-font-size-sm);

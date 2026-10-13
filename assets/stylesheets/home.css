@@ -213,6 +213,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   font-size: var(--ami-font-size-md); /* 18px */
   line-height: 1.6;
   color: var(--md-default-fg-color);
+  text-wrap: pretty;
 }
 /* Secondo capoverso (presentazione): corpo testo, come nella pagina
    "Il progetto"; il primo resta a 18px. */
@@ -525,4 +526,12 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   /* Banner 480px: delegato a extra.css (sezione "Responsive extra"),
      duplicato rimosso con la migrazione CSS. Il titolo di sezione resta
      --fs-xl (prima scendeva a 1.2rem, un terzo valore per lo stesso ruolo). */
+}
+
+/* Movimento ridotto: copertine ferme al passaggio del mouse */
+@media (prefers-reduced-motion: reduce) {
+  .evidenza-card:hover,
+  .evidenza-card:hover .evidenza-thumbnail-img {
+    transform: none;
+  }
 }

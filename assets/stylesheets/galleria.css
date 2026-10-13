@@ -137,7 +137,7 @@
   border-color: var(--gal-accent);
 }
 .galleria-timeline .timeline-link:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--gal-accent) 35%, transparent);
+  outline: 2px solid var(--gal-accent);
   outline-offset: 2px;
 }
 
@@ -206,7 +206,7 @@
   text-decoration: none;
 }
 .card-link:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--gal-accent) 50%, transparent);
+  outline: 2px solid var(--gal-accent);
   outline-offset: 3px;
 }
 
@@ -281,6 +281,7 @@
   font-size: var(--ami-font-size-sm);
   font-weight: 760;
   line-height: var(--ami-line-height-snug);
+  text-wrap: balance;
   text-shadow: 0 2px 10px rgba(0, 0, 0, .45);
 }
 
@@ -408,6 +409,12 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   display: grid;
   place-items: center;
   padding: 0;
+  transition: background-color .15s, color .15s, scale .15s ease-out;
+}
+.lightbox-nav:active:not([disabled]),
+.lightbox-close:active,
+.lightbox-action:active {
+  scale: 0.96;
 }
 .lightbox-icona {
   width: 1.5rem;
@@ -533,6 +540,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
+  transition: background-color .15s, color .15s, border-color .15s, scale .15s ease-out;
 }
 .lightbox-action[hidden] { display: none !important; }
 .lightbox-action:hover {
@@ -551,7 +559,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   color: var(--gal-accent);
 }
 .lightbox-action:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--gal-accent) 45%, transparent);
+  outline: 2px solid var(--gal-accent);
   outline-offset: 2px;
 }
 
@@ -615,7 +623,6 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
     border-radius: 0;
   }
   .lightbox-caption { padding: 8px 12px; }
-  .lightbox-nav { width: 38px; height: 38px; }
 }
 
 @media screen and (max-width: 560px) {
@@ -641,6 +648,16 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
       rgba(0, 0, 0, 0) 78%);
   }
   .card-link:hover .galleria-img { transform: none; filter: none; }
+}
+
+/* Schermi touch: controlli del visualizzatore di almeno 44px */
+@media (pointer: coarse) {
+  .lightbox-close,
+  .lightbox-nav {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .lightbox-action { min-height: 44px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

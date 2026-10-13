@@ -321,7 +321,6 @@
     color: var(--md-primary-fg-color);
     white-space: nowrap;
     pointer-events: none;
-    transition: left 0.05s ease;
     box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     z-index: 5;
     line-height: var(--ami-line-height-normal);
@@ -504,7 +503,8 @@
     border-radius: var(--ami-radius-xs);
 }
 @media (pointer: coarse) {
-    .avviso-forma__azione {
+    .avviso-forma__azione,
+    .nessun-risultato__azzera {
         min-height: 44px;
     }
 }
@@ -590,6 +590,7 @@
 }
 
 .filtro-chip-remove {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -605,6 +606,19 @@
     flex-shrink: 0;
     padding: 0;
     transition: background 0.15s;
+}
+
+/* Area cliccabile di 40x40px attorno alla "x" di 18px, senza invadere i
+   chip vicini (distanza tra chip: 10px). */
+.filtro-chip-remove::after {
+    content: "";
+    position: absolute;
+    inset: -11px -10px -11px -12px;
+}
+.filtro-chip-remove svg {
+    width: 0.6rem;
+    height: 0.6rem;
+    fill: currentColor;
 }
 
 .filtro-chip-remove:hover {
@@ -969,6 +983,10 @@
     font-size: var(--ami-font-size-sm);
     font-weight: 600;
     cursor: pointer;
+    transition: background-color 0.15s, scale 0.15s ease-out;
+}
+.filtri-flottante:active {
+    scale: 0.96;
 }
 .filtri-flottante[hidden] {
     display: none;
