@@ -212,14 +212,9 @@
       '.ia-visore-avviso__riprova:focus-visible { outline: 2px solid var(--md-primary-fg-color); outline-offset: 2px; }',
       '.ia-visore-avviso a { color: var(--md-primary-fg-color); font-weight: 600; }',
       /* Visore guasto: l'iframe si chiude invece di lasciare ~500px di
-         riquadro grigio vuoto; se esiste la miniatura locale la si mostra. */
+         riquadro grigio vuoto. */
       '.embed-container--guasto .universal-embed { height: 0 !important; min-height: 0 !important; visibility: hidden; }',
       '.md-typeset .embed-container--guasto .embed-footer .fullscreen-btn { display: none; }',
-      /* Lo spazio della miniatura e' riservato (3:4) mentre carica: prima
-         compariva dopo e spingeva giu' il resto della scheda. Se manca, il
-         riquadro sparisce (l'unico spostamento resta quello del caso raro). */
-      '.ia-visore-avviso__miniatura { flex: 0 0 auto; display: block; width: 4.5rem; height: auto; aspect-ratio: 3 / 4; object-fit: contain; border: 1px solid var(--md-default-fg-color--lightest); border-radius: var(--ami-radius-xs, 2px); }',
-      '.ia-visore-avviso__miniatura[hidden] { display: block; visibility: hidden; }',
       /* Telefono: una riga, non fissato in cima (scorre via con la pagina
          e non copre l'header). Il testo completo resta per i lettori di
          schermo. */
@@ -447,7 +442,6 @@
     avviso.className = 'ia-visore-avviso';
     avviso.setAttribute('role', 'status');
     avviso.innerHTML =
-      '<img class="ia-visore-avviso__miniatura" alt="" hidden>' +
       '<p class="ia-visore-avviso__testo">I documenti di questo archivio sono ospitati su Internet Archive, ' +
       'piattaforma al momento instabile o irraggiungibile. Se i documenti non si caricano, il problema è ' +
       'temporaneo e non riguarda il solo sito AMI. Riprovare più tardi.</p>' +
@@ -456,22 +450,6 @@
       '</div>';
     contenitore.insertBefore(avviso, contenitore.firstChild);
     contenitore.classList.add('embed-container--guasto');
-
-    // Miniatura locale della copertina (immagini/miniature/AMI-xxxx-340.webp
-    // o -1200.webp),
-    // se esiste: il riquadro guasto mostra almeno di che documento si tratta.
-    var segnatura = (iframe.id || '').replace(/^ia-embed-/, '');
-    var base = ((document.querySelector('meta[name="ami-base-url"]') || {}).content || '').replace(/\/$/, '');
-    if (/^AMI-\d+$/.test(segnatura)) {
-      var mini = avviso.querySelector('.ia-visore-avviso__miniatura');
-      mini.addEventListener('load', function () { mini.hidden = false; });
-      mini.addEventListener('error', function () {
-        // Alcune miniature esistono solo nella misura grande.
-        if (/-340\.webp$/.test(mini.src)) mini.src = mini.src.replace(/-340\.webp$/, '-1200.webp');
-        else mini.remove();
-      });
-      mini.src = base + '/immagini/miniature/' + segnatura + '-340.webp';
-    }
 
     avviso.querySelector('.ia-visore-avviso__riprova').addEventListener('click', function () {
       avviso.remove();

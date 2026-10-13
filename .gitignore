@@ -92,8 +92,10 @@ coverage.xml
 # ----------------------------------------------
 # File di blocco di Office (es. ~$dati.xlsx, creato mentre Excel e' aperto)
 ~$*
-# Stato dello strumento di design Impeccable
+# Impeccable e Skills
 .impeccable/
+.claude
+
 # Riepilogo errori/avvisi dell'ultima generazione (scripts/core/esito.py)
 .riepilogo-build.json
 # Registri delle esecuzioni del Launcher (scripts/core/interfaccia.py)
