@@ -158,6 +158,14 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 .md-header__nav-link--active {
   color: var(--ami-su-colore) !important;
 }
+/* La pillola chiara al passaggio sta sulla voce (padding 0.4rem 0.8rem), ma
+   il link era alto solo quanto il testo: un clic sul bordo della pillola
+   non faceva nulla. Lo pseudo-elemento estende il link a tutta la pillola. */
+.md-header__nav-link::before {
+  content: "";
+  position: absolute;
+  inset: -0.4rem -0.8rem;
+}
 .md-header__nav-link::after {
   content: "";
   position: absolute;
@@ -740,6 +748,7 @@ button.md-header__nav-link--dropdown {
   min-width: 0;
 }
 .doc-titolo {
+  text-wrap: balance;
   font-size: var(--ami-font-size-md);
   font-weight: 600;
   margin-bottom: 0.1rem;
@@ -834,7 +843,15 @@ button.md-header__nav-link--dropdown {
   border-radius: var(--ami-radius-sm);
   font-weight: 600;
   text-decoration: none;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, scale 0.15s ease-out;
+}
+/* Pulsante con icona davanti al testo: 2px in meno dal lato dell'icona */
+.md-button:has(> .button-icon:first-child) {
+  padding-left: calc(2em - 2px); /* Material: padding .625em 2em */
+}
+/* Risposta al clic: leggera pressione */
+.md-button:active {
+  scale: 0.96;
 }
 .md-button--primary {
   background-color: var(--md-primary-fg-color);
@@ -1534,6 +1551,10 @@ textarea {
     transition: opacity 300ms ease-in-out;
     opacity: 0;
 }
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 html:not(.ami-js) .lazy-img[data-src] {
     display: none;
 }
@@ -2099,7 +2120,11 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   font-size: var(--ami-font-size-sm);
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, scale 0.15s ease-out;
+}
+.md-typeset .ami-404__primario:active,
+.ami-404__campo button:active {
+  scale: 0.96;
 }
 .md-typeset .ami-404__primario:hover,
 .ami-404__campo button:hover {
@@ -2406,6 +2431,8 @@ input[type="search"]::-webkit-search-cancel-button {
   height: 9rem;
   margin-top: 1.2rem;
   border-radius: var(--ami-radius-md);
+  outline: 1px solid oklch(0 0 0 / 0.1);
+  outline-offset: -1px;
 }
 .soggetto-testata__img--cover {
   object-fit: cover;
@@ -2639,6 +2666,8 @@ input[type="search"]::-webkit-search-cancel-button {
   text-align: left;
 }
 .md-typeset .progetto-figura img {
+  outline: 1px solid oklch(0 0 0 / 0.1);
+  outline-offset: -1px;
   display: block;
   width: 100%;
   height: auto;

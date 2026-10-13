@@ -127,6 +127,7 @@
 }
 
 .search-counter {
+    font-variant-numeric: tabular-nums; /* il numero cambia mentre si scrive */
     font-size: var(--ami-font-size-sm);
     color: var(--md-default-fg-color--light);
     white-space: nowrap;

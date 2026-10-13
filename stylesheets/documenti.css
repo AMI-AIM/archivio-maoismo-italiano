@@ -374,12 +374,15 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
   color: var(--ami-su-colore);
   border: none;
   border-radius: var(--ami-radius-sm);
-  padding: 0.4rem 1.2rem;
+  padding: 0.4rem 1.2rem 0.4rem calc(1.2rem - 2px); /* icona a sinistra */
   font-size: var(--ami-font-size-sm);
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, scale 0.15s ease-out;
   white-space: nowrap;
+}
+.citazione-copia:active {
+  scale: 0.96;
 }
 
 .citazione-copia:hover {

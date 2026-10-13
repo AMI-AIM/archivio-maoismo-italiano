@@ -216,6 +216,16 @@
   border-radius: var(--gal-radius);
   background: var(--gal-segnaposto);
 }
+/* Contorno di 1px: le foto chiare non si sciolgono nel bianco della pagina.
+   Sopra l'immagine (che si ingrandisce al passaggio) e mai cliccabile. */
+.card-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px oklch(0 0 0 / 0.1);
+  pointer-events: none;
+}
 
 .galleria-img {
   display: block;
@@ -369,6 +379,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   color: var(--gal-su-scuro);
   font-family: var(--ami-font-label, sans-serif);
   font-size: var(--ami-font-size-xs);
+  font-variant-numeric: tabular-nums;
   font-weight: 600;
   letter-spacing: var(--ami-tracking-wide);
 }
