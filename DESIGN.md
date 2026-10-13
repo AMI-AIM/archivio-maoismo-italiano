@@ -6,6 +6,8 @@ colors:
   rosso-inchiostro: "#8e0000"
   rosso-tenue: "#f9ecec"
   inchiostro: "#1a1a1a"
+  grafite: "#424242"
+  linea: "#d6d6d6"
   testo: "rgba(0, 0, 0, 0.87)"
   testo-secondario: "#5c5c5c"
   filetto: "rgba(0, 0, 0, 0.07)"
@@ -122,6 +124,8 @@ Un rosso da timbro su fondo carta, con neutri caldi e un nero profondo per le fa
 - **Carta** (`carta`): fondo delle card-vetrina, dei chip e dei riquadri di nota.
 - **Bianco** (`bianco`): fondo della pagina; testo e icone su rosso, nero e fotografie.
 - **Inchiostro** (`inchiostro`): testo su superfici chiare sospese (tendine, pannelli).
+- **Grafite** (`grafite`): testo di chip e pulsanti chiari (galleria) e fondo di un avatar della home.
+- **Linea** (`linea`): bordi di chip e pulsanti chiari, dove il filetto è troppo tenue.
 - **Notte** (`notte`, `notte-superficie`): fascia "Documenti in evidenza" in home e le sue copertine.
 - **Errore** (`errore`): messaggi di errore e stati non riusciti.
 

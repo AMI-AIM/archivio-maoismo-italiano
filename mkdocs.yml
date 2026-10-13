@@ -20,15 +20,11 @@ theme:
   logo: immagini/logo.webp
   favicon: favicon.ico
 
+# Foglio comune a tutte le pagine. Quelli di una sola sezione (documenti,
+# galleria, archivio, argomenti, home, soggetti, soggetti-indice) li carica
+# overrides/main.html (blocco "extrahead") solo dove servono, come gli script.
 extra_css:
   - stylesheets/extra.css
-  - stylesheets/documenti.css
-  - stylesheets/galleria.css
-  - stylesheets/archivio.css
-  - stylesheets/argomenti.css
-  - stylesheets/home.css
-  - stylesheets/soggetti.css
-  - stylesheets/soggetti-indice.css
 
 # Script comuni a tutte le pagine. Quelli di una sola sezione (ricerca
 # della home, schede documento, archivio, galleria) li carica
@@ -44,6 +40,8 @@ plugins:
 hooks:
   - scripts/hooks/lingua_cinese.py
   - scripts/hooks/colophon.py
+  # Comprime i CSS dell'archivio nel sito generato (i sorgenti restano leggibili).
+  - scripts/hooks/minifica_css.py
 
 markdown_extensions:
   - attr_list

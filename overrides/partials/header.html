@@ -34,7 +34,7 @@
        title="{{ config.site_name | e }}"
        class="md-header__button md-logo"
        aria-label="{{ config.site_name }} - Home">
-      <img src="{{ config.theme.logo | url }}" alt="">
+      <img src="{{ config.theme.logo | url }}" alt="" width="400" height="127">
     </a>
 
     <!-- NAVIGAZIONE a destra (desktop) -->
@@ -109,6 +109,7 @@
          aria-label="{{ config.site_name }} - Home">
         <img src="{{ config.theme.logo | url }}"
              alt=""
+             width="400" height="127"
              class="md-drawer__logo">
       </a>
       <button type="button" class="md-drawer__close" id="drawer-close" aria-label="Chiudi il menu">

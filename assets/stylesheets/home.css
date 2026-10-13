@@ -29,15 +29,15 @@
    un proprio <h1 class="ami-sr-only">; questa regola copre l'eventuale h1
    automatico del tema. */
 body:has(.banner-full) .md-content article h1:first-of-type {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  margin: -1px !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important;
-  border: 0 !important;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ------------------------------------------------------------
@@ -100,11 +100,11 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 
 /* Riga flex: larghezza card = larghezza copertina, spazi uniformi */
 .evidenza-grid {
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  justify-content: space-between !important;
-  align-items: flex-start !important;
-  gap: 1.5rem !important;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
   overflow-x: auto;
   padding-bottom: 0.6rem;
   margin-bottom: 0;
@@ -116,7 +116,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 }
 .evidenza-card {
   position: relative;
-  flex: 0 0 auto !important;
+  flex: 0 0 auto;
   /* Larga quanto la copertina: il titolo va a capo dentro questa misura
      invece di allargare la card. */
   width: min-content;
@@ -132,8 +132,8 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   color: inherit;
 }
 .evidenza-thumbnail {
-  height: 240px !important;
-  max-height: 240px !important;
+  height: 240px;
+  max-height: 240px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,12 +141,12 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   overflow: hidden;
 }
 .evidenza-thumbnail-img {
-  display: block !important;
+  display: block;
   height: 100% !important;
-  max-height: 240px !important;
-  width: auto !important;
+  max-height: 240px;
+  width: auto;
   max-width: 100% !important;
-  object-fit: contain !important;
+  object-fit: contain;
   border-radius: var(--ami-radius-md);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
   /* Sulla fascia nera: contorno bianco appena visibile */
@@ -163,7 +163,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
    la larghezza della card segue invece quella reale della copertina) */
 @media (min-width: 769px) {
   .evidenza-thumbnail {
-    width: 170px !important;
+    width: 170px;
     background: rgba(255, 255, 255, 0.04);
   }
   .evidenza-thumbnail-img {
@@ -180,8 +180,8 @@ body:has(.banner-full) .md-content article h1:first-of-type {
    piu' interlinea (compensazione light-on-dark). Va a capo per intero
    sotto la copertina (prima era su una riga sola, troncato con "…"). */
 .evidenza-titolo {
-  position: static !important;
-  margin-top: 0.75rem !important;
+  position: static;
+  margin-top: 0.75rem;
   font-size: var(--ami-font-size-sm); /* 14px */
   font-weight: 500;
   line-height: var(--ami-line-height-snug);
@@ -415,7 +415,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 @media (max-width: 1100px) {
   .evidenza-thumbnail {
     width: 135px !important;
-    height: 190px !important;
+    height: 190px;
     max-height: 190px !important;
   }
   .evidenza-thumbnail-img {
@@ -463,8 +463,8 @@ body:has(.banner-full) .md-content article h1:first-of-type {
     font-size: var(--ami-font-size-lg); /* 20px */
   }
   .evidenza-thumbnail {
-    height: 200px !important;
-    max-height: 200px !important;
+    height: 200px;
+    max-height: 200px;
   }
   .evidenza-titolo {
     font-size: var(--ami-font-size-sm); /* 14px */
@@ -478,11 +478,11 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 
 @media (max-width: 600px) {
   .evidenza-thumbnail {
-    height: 170px !important;
-    max-height: 170px !important;
+    height: 170px;
+    max-height: 170px;
   }
   .evidenza-thumbnail-img {
-    max-height: 170px !important;
+    max-height: 170px;
   }
   :where(.home-column) .doc-row {
     flex-direction: column;
@@ -517,7 +517,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
     font-size: var(--ami-font-size-md); /* 18px */
   }
   .evidenza-thumbnail {
-    height: 150px !important;
+    height: 150px;
     max-height: 150px !important;
   }
   .evidenza-thumbnail-img {

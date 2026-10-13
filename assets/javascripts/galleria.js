@@ -48,10 +48,11 @@
     if (grids.length) {
       var isMobile = window.matchMedia && window.matchMedia(MOBILE_MQ).matches;
 
-      var layoutCard = function (card) {
-        var media = card.querySelector(".card-media");
+      // Classi della card (formato largo, errore) dalle dimensioni
+      // dell'immagine. Solo scritture: nessuna misura del layout.
+      var classifyCard = function (card) {
         var img = card.querySelector(".galleria-img");
-        if (!media || !img) return;
+        if (!img) return;
 
         // Con le miniature locali width/height sono gia' nell'HTML: la card
         // si impagina subito, prima che l'immagine arrivi.
@@ -70,20 +71,36 @@
           // Caricamento tentato e fallito
           card.classList.add("card-error");
         }
-        // Senza dimensioni (immagine non ancora caricata) si misura il
-        // segnaposto 4:5: la griglia ha subito l'altezza giusta e non
-        // "salta" quando arrivano le immagini.
-
-        var h = media.getBoundingClientRect().height + CARD_PAD;
-        card.style.gridRowEnd = "span " + Math.max(40, Math.round(h));
       };
+
+      // Impagina un gruppo di card in tre passate: prima tutte le classi
+      // (scritture), poi tutte le misure (letture, un solo ricalcolo del
+      // layout), infine tutti gli span (scritture). Alternare lettura e
+      // scrittura card per card forzava un ricalcolo per ogni card.
+      // Senza dimensioni (immagine non ancora caricata) si misura il
+      // segnaposto 4:5: la griglia ha subito l'altezza giusta e non
+      // "salta" quando arrivano le immagini.
+      var layoutCards = function (cards) {
+        var conMedia = cards.filter(function (card) {
+          return card.querySelector(".card-media") && card.querySelector(".galleria-img");
+        });
+        conMedia.forEach(classifyCard);
+        var altezze = conMedia.map(function (card) {
+          return card.querySelector(".card-media").getBoundingClientRect().height + CARD_PAD;
+        });
+        conMedia.forEach(function (card, i) {
+          card.style.gridRowEnd = "span " + Math.max(40, Math.round(altezze[i]));
+        });
+      };
+      var layoutCard = function (card) { layoutCards([card]); };
 
       grids.forEach(function (grid) {
         grid.classList.add("is-js");
-        Array.prototype.slice.call(grid.querySelectorAll(".galleria-card")).forEach(function (card) {
+        var cards = Array.prototype.slice.call(grid.querySelectorAll(".galleria-card"));
+        layoutCards(cards);
+        cards.forEach(function (card) {
           var img = card.querySelector(".galleria-img");
           if (!img) return;
-          layoutCard(card);
           img.addEventListener("load", function () { layoutCard(card); }, { once: true });
           img.addEventListener("error", function () { layoutCard(card); }, { once: true });
           img.addEventListener("ami:lazy-loaded", function () {
@@ -101,7 +118,7 @@
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function () {
           isMobile = window.matchMedia && window.matchMedia(MOBILE_MQ).matches;
-          Array.prototype.slice.call(document.querySelectorAll(".galleria-card")).forEach(layoutCard);
+          layoutCards(Array.prototype.slice.call(document.querySelectorAll(".galleria-card")));
         }, 150);
       });
     }

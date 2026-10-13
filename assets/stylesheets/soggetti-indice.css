@@ -159,7 +159,7 @@
 
 .lettera-btn--active {
     background: var(--md-primary-fg-color);
-    color: var(--ami-su-colore) !important;
+    color: var(--ami-su-colore);
     border-color: var(--md-primary-fg-color);
 }
 

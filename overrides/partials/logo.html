@@ -2,7 +2,7 @@
     link o un'etichetta che ha gia' il nome del sito, quindi l'immagine e'
     decorativa (alt vuoto). Prima il testo alternativo era "logo". -#}
 {% if config.theme.logo %}
-  <img src="{{ config.theme.logo | url }}" alt="">
+  <img src="{{ config.theme.logo | url }}" alt="" width="400" height="127">
 {% else %}
   {% set icon = config.theme.icon.logo or "material/library" %}
   {% include ".icons/" ~ icon ~ ".svg" %}

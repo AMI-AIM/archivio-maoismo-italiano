@@ -10,24 +10,26 @@
 
 :root,
 [data-md-color-primary] {
-  --gal-bg: var(--md-default-bg-color, #fff);
-  --gal-ink: var(--ami-inchiostro, #1a1a1a);
+  /* Solo alias dei token di extra.css (palette unica del sito): qui non
+     si scrivono colori. */
+  --gal-bg: var(--md-default-bg-color);
+  --gal-ink: var(--ami-inchiostro);
   /* Titoli-manifesto della galleria: fuori dalla scala del catalogo,
      voluti (registro manifesto, DESIGN.md). */
   --gal-size-titolo: clamp(1.9rem, 4vw, 2.8rem);
   --gal-size-anno: clamp(2.1rem, 5vw, 3.6rem);
   --gal-size-anno-telefono: clamp(2rem, 13vw, 3.2rem);
-  --gal-muted: #5c5c5c;
+  --gal-muted: var(--md-default-fg-color--light);
   --gal-accent: var(--md-primary-fg-color);
   --gal-accent-dark: var(--md-primary-fg-color--dark);
-  --gal-linea: #d6d6d6;          /* bordi delle chip e dei pulsanti */
-  --gal-chip-ink: #424242;
-  --gal-azione-ink: #333333;
-  --gal-segnaposto: var(--md-code-bg-color, #f5f5f5);     /* fondo delle immagini in caricamento */
-  --gal-notte: #101013;          /* fondo del visualizzatore */
-  --gal-notte-skel: linear-gradient(90deg, #1c1c20 25%, #2a2a30 50%, #1c1c20 75%);
-  --gal-su-scuro: #fff;
-  --gal-errore-su-scuro: var(--ami-su-colore-attenuato, #e0e0e0);
+  --gal-linea: var(--ami-linea);              /* bordi delle chip e dei pulsanti */
+  --gal-chip-ink: var(--ami-grafite);
+  --gal-azione-ink: var(--ami-grafite);
+  --gal-segnaposto: var(--md-code-bg-color);  /* fondo delle immagini in caricamento */
+  --gal-notte: var(--ami-notte);              /* fondo del visualizzatore */
+  --gal-notte-skel: linear-gradient(90deg, var(--ami-notte-2) 25%, var(--ami-notte-3) 50%, var(--ami-notte-2) 75%);
+  --gal-su-scuro: var(--ami-su-colore);
+  --gal-errore-su-scuro: var(--ami-su-colore-attenuato);
   --gal-gap: 14px;   /* sincronizzato con CARD_PAD in galleria.js */
   --gal-radius: 2px;
 }
@@ -72,20 +74,20 @@
   z-index: 1;
   margin: 0 0 34px;
   padding: 8px 0;
-  background: color-mix(in srgb, var(--md-default-bg-color, #fff) 92%, transparent);
+  background: color-mix(in srgb, var(--md-default-bg-color) 92%, transparent);
   backdrop-filter: blur(10px);
 }
 
 .galleria-timeline .timeline-list,
 .md-typeset .galleria-timeline .timeline-list {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 8px;
   margin: 0;
   padding: 2px;
-  list-style: none !important;
+  list-style: none;
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -94,13 +96,13 @@
   mask-image: linear-gradient(90deg, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
 }
 .galleria-timeline .timeline-list::-webkit-scrollbar { display: none; }
-.galleria-timeline .timeline-list::before { content: none !important; }
+.galleria-timeline .timeline-list::before { content: none; }
 
 .galleria-timeline .timeline-item,
 .md-typeset .galleria-timeline .timeline-item {
-  display: inline-flex !important;
+  display: inline-flex;
   flex: 0 0 auto;
-  margin: 0 !important;
+  margin: 0;
   padding: 0;
 }
 
@@ -115,17 +117,17 @@
   border: 1px solid var(--gal-linea);
   border-radius: var(--ami-radius-pillola);
   background: var(--md-default-bg-color);
-  color: var(--gal-chip-ink) !important;
+  color: var(--gal-chip-ink);
   font-family: var(--ami-font-label);
   font-size: var(--ami-font-size-xs);
   font-weight: 600;
   line-height: 1;
   letter-spacing: var(--ami-tracking-wide);
-  text-decoration: none !important;
+  text-decoration: none;
   white-space: nowrap;
   transition: color .18s ease, background-color .18s ease, border-color .18s ease;
 }
-.galleria-timeline .timeline-link::before { content: none !important; }
+.galleria-timeline .timeline-link::before { content: none; }
 .galleria-timeline .timeline-link:hover {
   color: var(--gal-accent) !important;
   border-color: var(--gal-accent);
@@ -322,7 +324,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   width: 100%;
   max-width: min(1100px, 94vw);
   height: min(92vh, 940px);
-  background: var(--md-default-bg-color, #fff);
+  background: var(--md-default-bg-color);
   color: var(--gal-ink);
   border-radius: var(--ami-radius-sm);
   overflow: hidden;
@@ -475,7 +477,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   max-height: 34vh;
   overflow: auto;
 }
-.lightbox-cite[hidden] { display: none !important; }
+.lightbox-cite[hidden] { display: none; }
 
 /* BARRA COMPATTA: una sola riga, titolo + meta con ellissi */
 .lightbox-caption {
@@ -488,7 +490,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   gap: 8px 14px;
   padding: 8px 14px;
   border-top: 1px solid rgba(0, 0, 0, .08);
-  background: var(--md-default-bg-color, #fff);
+  background: var(--md-default-bg-color);
 }
 
 .lightbox-line {

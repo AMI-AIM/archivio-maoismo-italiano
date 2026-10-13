@@ -10,9 +10,9 @@ hide:
 <div id="archivio-container" class="archivio-layout">
 
     <!-- SIDEBAR FILTRI -->
-    <aside class="filtri-sidebar" id="filtri-sidebar">
+    <section class="filtri-sidebar" id="filtri-sidebar" aria-labelledby="filtri-titolo">
         <div class="filtri-testata">
-            <h2 class="filtri-titolo">Filtri</h2>
+            <h2 class="filtri-titolo" id="filtri-titolo">Filtri</h2>
             <button type="button" class="filtri-mostra" id="filtri-mostra" aria-expanded="false" aria-controls="filtri-corpo">
                 <span class="filtri-mostra__etichetta">Mostra filtri</span>
                 <span class="filtri-mostra__conteggio" id="filtri-mostra-conteggio"></span>
@@ -92,7 +92,7 @@ hide:
         <div class="filtri-azioni" id="filtri-azioni" hidden>
             <button type="button" id="reset-filtri">Azzera filtri</button>
         </div>
-    </aside>
+    </section>
 
     <!-- RISULTATI -->
     <div class="risultati-main">

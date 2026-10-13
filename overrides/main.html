@@ -15,7 +15,43 @@
 {% block extrahead %}
   {{ super() }}
 
-  <!-- AMI-MAIN-ATTIVO v5 -->
+  {# Fogli di stile di sezione: caricati solo dove servono, come gli script
+     (blocco "scripts" in fondo). mkdocs.yml carica soltanto extra.css, che
+     vale per tutte le pagine. Stanno qui in testa a extrahead, cioe' subito
+     dopo extra.css: l'ordine della cascata resta quello di prima
+     (documenti, galleria, archivio, argomenti, home, soggetti,
+     soggetti-indice). Mappa ricavata pagina per pagina (audit 13/10/2026):
+     - documenti.css: schede (documento, persona, organizzazione,
+       percorso), galleria (citazione nel visore), progetto ("Come citare");
+     - soggetti.css: le stesse schede, gli indici Persone e Organizzazioni,
+       il progetto (scheda della raccolta). #}
+  {% set css_url = page.url if page and page.url else '' %}
+  {% set css_parti = css_url.strip('/').split('/') if css_url else [] %}
+  {% set css_sezione = css_parti[0] if css_parti else '' %}
+  {% set css_scheda = css_parti | length > 1 and css_sezione in ['documenti', 'persone', 'organizzazioni', 'argomenti'] %}
+  {% if css_scheda or css_url in ['galleria/', 'progetto/'] %}
+  <link rel="stylesheet" href="{{ 'stylesheets/documenti.css' | url }}">
+  {% endif %}
+  {% if css_url == 'galleria/' %}
+  <link rel="stylesheet" href="{{ 'stylesheets/galleria.css' | url }}">
+  {% endif %}
+  {% if css_url == 'documenti/' %}
+  <link rel="stylesheet" href="{{ 'stylesheets/archivio.css' | url }}">
+  {% endif %}
+  {% if css_url == 'argomenti/' %}
+  <link rel="stylesheet" href="{{ 'stylesheets/argomenti.css' | url }}">
+  {% endif %}
+  {% if page and page.is_homepage %}
+  <link rel="stylesheet" href="{{ 'stylesheets/home.css' | url }}">
+  {% endif %}
+  {% if css_scheda or css_url in ['persone/', 'organizzazioni/', 'progetto/'] %}
+  <link rel="stylesheet" href="{{ 'stylesheets/soggetti.css' | url }}">
+  {% endif %}
+  {% if css_url in ['persone/', 'organizzazioni/'] %}
+  <link rel="stylesheet" href="{{ 'stylesheets/soggetti-indice.css' | url }}">
+  {% endif %}
+
+  <!-- AMI-MAIN-ATTIVO v6 -->
   <!-- Segnala subito (prima del rendering) che JavaScript e' attivo: il CSS
        puo' cosi' impostare gli stati iniziali dei componenti interattivi
        (es. filtri chiusi su mobile) senza spostamenti di layout quando gli
@@ -62,7 +98,7 @@
 
   {# Preload del banner (LCP) SOLO in home: prima veniva scaricato su ogni
      pagina del sito (~190 KB inutili e in concorrenza con il contenuto).
-     imagesrcset = stesso srcset dell'<img> in core/home.py: il telefono
+     imagesrcset = stesso srcset dell'immagine del banner in core/home.py: il telefono
      precarica la variante da 960px. #}
   {% if page and is_home %}
   <link rel="preload" as="image" href="{{ base_url }}/immagini/banner.webp"
