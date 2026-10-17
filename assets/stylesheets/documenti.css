@@ -774,3 +774,69 @@ necessario. La data resta a 21px: titolo (29px+) e data si distinguono.
     gap: 0.1rem;
   }
 }
+
+/* ------------------------------------------------------------
+   Attesa del visore di Internet Archive
+   Riquadro con segno rotante e testo finché l'iframe non ha caricato
+   (classi gestite da documenti.js e dall'onload dell'iframe in schede.py).
+   ------------------------------------------------------------ */
+.embed-visore {
+  position: relative;
+}
+
+.embed-visore--attesa:not(.embed-visore--pronto)::before {
+  content: "Caricamento del documento da Internet Archive…";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4.5rem 1.5rem 0;
+  background: var(--md-code-bg-color);
+  color: var(--md-default-fg-color--light);
+  font-family: var(--ami-font-label, 'Archivo', sans-serif);
+  font-size: var(--ami-font-size-sm);
+  text-align: center;
+  white-space: pre-line;
+  pointer-events: none;
+}
+
+.embed-visore--attesa:not(.embed-visore--pronto)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  width: 2rem;
+  height: 2rem;
+  margin: -2.5rem 0 0 -1rem;
+  border: 3px solid var(--ami-linea);
+  border-top-color: var(--md-primary-fg-color);
+  border-radius: 50%;
+  animation: ami-visore-giro 0.9s linear infinite;
+  pointer-events: none;
+}
+
+.embed-visore--lento:not(.embed-visore--pronto)::before {
+  content: "Internet Archive sta rispondendo lentamente…\A Il documento si apre anche dal link «Apri su Internet Archive» qui sotto.";
+}
+
+@keyframes ami-visore-giro {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .embed-visore--attesa:not(.embed-visore--pronto)::after {
+    animation: none;
+  }
+}
+
+/* Visore guasto (ia-status.js): l'avviso di Internet Archive prende il posto
+   del segnale di attesa. */
+.embed-container--guasto .embed-visore::before,
+.embed-container--guasto .embed-visore::after {
+  display: none;
+}

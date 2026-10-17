@@ -136,7 +136,7 @@ A questi si aggiungono, quando disponibili, le altre forme del nome attestate ne
 
 Le descrizioni sono pubblicate anche nei formati XML standard per lo scambio di dati archivistici, così da poter essere importate da altri archivi e portali:
 
-- **EAD3** (Encoded Archival Description): la raccolta e tutte le unità in un unico file, [ami-ead.xml](dati/ami-ead.xml){ download="ami-ead.xml" } (XML, 20 kB);
+- **EAD3** (Encoded Archival Description): la raccolta e tutte le unità in un unico file, [ami-ead.xml](dati/ami-ead.xml){ download="ami-ead.xml" } (XML, 21 kB);
 - **EAC-CPF 2.0** (Encoded Archival Context): un file per ogni persona o ente, raggiungibile dalla sezione «Record d'autorità» della relativa scheda.
 
 I file sono generati automaticamente a ogni aggiornamento dell'archivio e verificati con gli schemi ufficiali della Society of American Archivists.

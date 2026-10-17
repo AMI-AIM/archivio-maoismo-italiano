@@ -726,10 +726,42 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
+  // ------------------------------------------------------------
+  // ATTESA DEL VISORE DI INTERNET ARCHIVE
+  // ------------------------------------------------------------
+  // Finché l'iframe non ha finito di caricarsi, sopra il riquadro compare un
+  // segnale di attesa (disegnato in documenti.css). L'iframe segna da sé la
+  // fine del caricamento con l'attributo onload (classe embed-visore--pronto):
+  // così il segnale sparisce anche se il visore si carica prima di questo
+  // script. Senza JavaScript la classe --attesa non viene mai aggiunta e il
+  // segnale non compare. Dopo SECONDI_LENTO il testo invita ad aprire il
+  // documento direttamente su Internet Archive.
+  var SECONDI_LENTO = 15;
+
+  function attesaVisori() {
+    document.querySelectorAll('.embed-visore').forEach(function (visore) {
+      if (visore.classList.contains('embed-visore--pronto')) {
+        return;
+      }
+      visore.classList.add('embed-visore--attesa');
+      visore.setAttribute('aria-busy', 'true');
+      window.setTimeout(function () {
+        if (!visore.classList.contains('embed-visore--pronto')) {
+          visore.classList.add('embed-visore--lento');
+        }
+      }, SECONDI_LENTO * 1000);
+    });
+  }
+
+  function avvio() {
+    attesaVisori();
     init();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', avvio);
+  } else {
+    avvio();
   }
 })();
 

@@ -617,7 +617,7 @@ hide:
             fs_id = f"ia-embed-{ami_id}"
             
             content += f"""
-<iframe id="{fs_id}" src="{embed_url_attr}" class="universal-embed" title="Visore Internet Archive: {titolo_html}" loading="lazy" allowfullscreen></iframe>
+<div class="embed-visore"><iframe id="{fs_id}" src="{embed_url_attr}" class="universal-embed" title="Visore Internet Archive: {titolo_html}" loading="lazy" allowfullscreen onload="this.parentNode.classList.add('embed-visore--pronto');this.parentNode.removeAttribute('aria-busy')"></iframe></div>
 <div class="embed-footer">
 {citazione_bottone_html}
 <button class="fullscreen-btn embed-azione" data-target="{fs_id}" type="button">{_icona("schermo")}<span>Schermo intero</span></button>
