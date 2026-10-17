@@ -31,7 +31,7 @@
       </maintenanceevent>
       <maintenanceevent>
         <eventtype value="derived" />
-        <eventdatetime standarddatetime="2026-10-13">2026-10-13</eventdatetime>
+        <eventdatetime standarddatetime="2026-10-17">2026-10-17</eventdatetime>
         <agenttype value="machine" />
         <agent>scripts/core/ead_export.py</agent>
         <eventdescription>File generato automaticamente da data/dati.xlsx</eventdescription>
@@ -80,7 +80,7 @@
         <did>
           <unitid>AMI-0001</unitid>
           <unittitle>Citazioni dalle opere del presidente Mao Tse-tung</unittitle>
-          <unitdate normal="1969">1969</unitdate>
+          <unitdate normal="1968">1968</unitdate>
           <origination>
             <persname identifier="AMI-P-001">
               <part>Mao Zedong</part>
@@ -92,7 +92,7 @@
           <dao daotype="derived" href="https://archive.org/details/1967-citazioni-dalle-opere-del-presidente-mao-tse-tung-lingue-estere" linktitle="Riproduzione digitale su Internet Archive" />
         </did>
         <scopecontent>
-          <p>Traduzione ufficiale in lingua italiana del famoso Libretto rosso (毛主席语录, Máo Zhǔxí Yǔlù), contenente le iconiche citazioni del Presidente cinese Mao Zedong, stampata a Pechino dalla Casa editrice in lingue estere. L'edizione qui presente è la ristampa in formato tascabile del 1969 (11×7 cm).</p>
+          <p>Seconda edizione in italiano (1968) del famosissimo "Libretto rosso" (Quotations from Chairman Mao Tse-tung o ​毛主席语录), antologia contenente le iconiche citazioni del presidente cinese Mao Zedong, stampata a Pechino dalla Casa editrice in lingue estere. Libro tradotto da un team di italiani residenti a Pechino, tra cui Manlio Dinucci e Primerose Gigliesi, e pubblicato dalla Casa editrice in lingue estere, Pechino, pp. 328, 1968. Copertina in vinile rosso, 14 cm.</p>
         </scopecontent>
         <odd localtype="editore">
           <p>Pechino: Casa editrice in lingue estere</p>
