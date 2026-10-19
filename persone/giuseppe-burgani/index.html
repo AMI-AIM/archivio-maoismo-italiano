@@ -196,10 +196,10 @@
   
   
       <!-- overrides/partials/header.html -->
-<!-- Stato del drawer (menu laterale): checkbox nascosto, letto da Material
-     e dal CSS (#__drawer:checked ~ .md-drawer). Lo comanda il pulsante
-     hamburger tramite javascripts/navigazione.js. -->
-<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off" tabindex="-1" aria-hidden="true">
+<!-- Stato del drawer (menu laterale): e' il checkbox #__drawer che Material
+     mette in cima al body (qui non se ne crea un secondo: due elementi con
+     lo stesso id). Lo leggono il CSS (#__drawer:checked ~ .md-drawer) e
+     l'overlay qui sotto; lo comanda l'hamburger tramite navigazione.js. -->
 
 <header class="md-header" data-md-component="header">
   <div class="md-header__inner md-grid">
@@ -219,7 +219,6 @@
 
     <!-- LOGO a sinistra -->
     <a href="https://ami-aim.github.io/archivio-maoismo-italiano/"
-       title="AMI - Archivio del Maoismo Italiano"
        class="md-header__button md-logo"
        aria-label="AMI - Archivio del Maoismo Italiano - Home">
       <img src="../../immagini/logo.webp" alt="" width="400" height="127">
@@ -350,8 +349,10 @@
 <label class="md-drawer-overlay" for="__drawer" id="drawer-overlay" aria-hidden="true"></label>
 
 <!-- DRAWER PERSONALIZZATO (menu laterale). Chiuso = visibility:hidden in
-     extra.css, quindi i link non ricevono il focus mentre e' fuori schermo. -->
-<nav class="md-drawer" id="custom-drawer" aria-label="Menu">
+     extra.css, quindi i link non ricevono il focus mentre e' fuori schermo.
+     Aperto e' una finestra modale: navigazione.js rende inerte il resto
+     della pagina e ne blocca lo scorrimento. -->
+<div class="md-drawer" id="custom-drawer" role="dialog" aria-modal="true" aria-label="Menu">
   <div class="md-drawer__inner">
 
     <!-- INTESTAZIONE ROSSA CON LOGO E CHIUSURA -->
@@ -372,6 +373,7 @@
     </div>
 
     <!-- VOCI DI NAVIGAZIONE -->
+    <nav class="md-drawer__nav" aria-label="Navigazione principale">
     <ul class="md-drawer__list">
       
 
@@ -467,9 +469,10 @@
 
       
     </ul>
+    </nav>
 
   </div>
-</nav>
+</div>
     
 
     <div class="md-container" data-md-component="container">
@@ -820,7 +823,7 @@
 
 <section class="soggetto-autorita" aria-labelledby="autorita-giuseppe-burgani">
 <h2 class="soggetto-sezione" id="autorita-giuseppe-burgani">Record d'autorità</h2>
-<dl class="doc-scheda__campi"><div class="doc-scheda__campo"><dt>Identificativo</dt><dd>AMI-P-023</dd></div><div class="doc-scheda__campo"><dt>Tipo di entità</dt><dd>Persona</dd></div><div class="doc-scheda__campo"><dt>Forma autorizzata del nome</dt><dd>Giuseppe Burgani</dd></div><div class="doc-scheda__campo"><dt>Altre forme del nome</dt><dd>Beppe Burgani</dd></div><div class="doc-scheda__campo"><dt>Date di esistenza</dt><dd>s.d.</dd></div><div class="doc-scheda__campo"><dt>Relazioni</dt><dd><div class="autorita-rel__gruppo"><span class="autorita-rel__etichetta">Segretario di</span><ul class="autorita-rel"><li><a href="/archivio-maoismo-italiano/organizzazioni/organizzazione-comunista-marxista-leninista-fronte-unito/">Organizzazione Comunista (marxista-leninista) Fronte Unito</a> <span class="autorita-rel__nota">(1973-1977)</span></li></ul></div></dd></div><div class="doc-scheda__campo"><dt>Formato XML</dt><dd><a href="/archivio-maoismo-italiano/dati/eac/AMI-P-023.xml">EAC-CPF</a></dd></div><div class="doc-scheda__campo"><dt>Norme</dt><dd>ISAAR(CPF), 2a ed., 2004</dd></div><div class="doc-scheda__campo"><dt>Redazione</dt><dd>4 ottobre 2026</dd></div></dl>
+<dl class="doc-scheda__campi"><div class="doc-scheda__campo"><dt>Identificativo</dt><dd>AMI-P-023</dd></div><div class="doc-scheda__campo"><dt>Tipo di entità</dt><dd>Persona</dd></div><div class="doc-scheda__campo"><dt>Forma autorizzata del nome</dt><dd>Giuseppe Burgani</dd></div><div class="doc-scheda__campo"><dt>Altre forme del nome</dt><dd>Beppe Burgani</dd></div><div class="doc-scheda__campo"><dt>Date di esistenza</dt><dd>s.d.</dd></div><div class="doc-scheda__campo"><dt>Relazioni</dt><dd><div class="autorita-rel__gruppo"><span class="autorita-rel__etichetta">Segretario di</span><ul class="autorita-rel"><li><a href="/archivio-maoismo-italiano/organizzazioni/organizzazione-comunista-marxista-leninista-fronte-unito/">Organizzazione Comunista (marxista-leninista) - Fronte Unito</a> <span class="autorita-rel__nota">(1973-1977)</span></li></ul></div></dd></div><div class="doc-scheda__campo"><dt>Formato XML</dt><dd><a href="/archivio-maoismo-italiano/dati/eac/AMI-P-023.xml">EAC-CPF</a></dd></div><div class="doc-scheda__campo"><dt>Norme</dt><dd>ISAAR(CPF), 2a ed., 2004</dd></div><div class="doc-scheda__campo"><dt>Redazione</dt><dd>4 ottobre 2026</dd></div></dl>
 <p class="autorita-nota">Scheda redatta secondo ISAAR(CPF). <a href="/archivio-maoismo-italiano/progetto/#norme-di-descrizione">Norme di descrizione</a></p>
 </section>
 
@@ -913,7 +916,7 @@
     <div class="ami-footer__bottom">
       
       
-      <span class="ami-footer__colophon"><span class="ami-footer__dato">96</span> documenti &middot; aggiornato il 17 ottobre 2026</span>
+      <span class="ami-footer__colophon"><span class="ami-footer__dato">96</span> documenti &middot; aggiornato il 19 ottobre 2026</span>
       
       <span>&copy; 2026 Archivio del Maoismo Italiano</span>
     </div>

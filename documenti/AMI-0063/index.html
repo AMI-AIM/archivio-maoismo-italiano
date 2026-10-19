@@ -198,10 +198,10 @@
   
   
       <!-- overrides/partials/header.html -->
-<!-- Stato del drawer (menu laterale): checkbox nascosto, letto da Material
-     e dal CSS (#__drawer:checked ~ .md-drawer). Lo comanda il pulsante
-     hamburger tramite javascripts/navigazione.js. -->
-<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off" tabindex="-1" aria-hidden="true">
+<!-- Stato del drawer (menu laterale): e' il checkbox #__drawer che Material
+     mette in cima al body (qui non se ne crea un secondo: due elementi con
+     lo stesso id). Lo leggono il CSS (#__drawer:checked ~ .md-drawer) e
+     l'overlay qui sotto; lo comanda l'hamburger tramite navigazione.js. -->
 
 <header class="md-header" data-md-component="header">
   <div class="md-header__inner md-grid">
@@ -221,7 +221,6 @@
 
     <!-- LOGO a sinistra -->
     <a href="https://ami-aim.github.io/archivio-maoismo-italiano/"
-       title="AMI - Archivio del Maoismo Italiano"
        class="md-header__button md-logo"
        aria-label="AMI - Archivio del Maoismo Italiano - Home">
       <img src="../../immagini/logo.webp" alt="" width="400" height="127">
@@ -352,8 +351,10 @@
 <label class="md-drawer-overlay" for="__drawer" id="drawer-overlay" aria-hidden="true"></label>
 
 <!-- DRAWER PERSONALIZZATO (menu laterale). Chiuso = visibility:hidden in
-     extra.css, quindi i link non ricevono il focus mentre e' fuori schermo. -->
-<nav class="md-drawer" id="custom-drawer" aria-label="Menu">
+     extra.css, quindi i link non ricevono il focus mentre e' fuori schermo.
+     Aperto e' una finestra modale: navigazione.js rende inerte il resto
+     della pagina e ne blocca lo scorrimento. -->
+<div class="md-drawer" id="custom-drawer" role="dialog" aria-modal="true" aria-label="Menu">
   <div class="md-drawer__inner">
 
     <!-- INTESTAZIONE ROSSA CON LOGO E CHIUSURA -->
@@ -374,6 +375,7 @@
     </div>
 
     <!-- VOCI DI NAVIGAZIONE -->
+    <nav class="md-drawer__nav" aria-label="Navigazione principale">
     <ul class="md-drawer__list">
       
 
@@ -469,9 +471,10 @@
 
       
     </ul>
+    </nav>
 
   </div>
-</nav>
+</div>
     
 
     <div class="md-container" data-md-component="container">
@@ -922,7 +925,7 @@
     <div class="ami-footer__bottom">
       
       
-      <span class="ami-footer__colophon"><span class="ami-footer__dato">96</span> documenti &middot; aggiornato il 17 ottobre 2026</span>
+      <span class="ami-footer__colophon"><span class="ami-footer__dato">96</span> documenti &middot; aggiornato il 19 ottobre 2026</span>
       
       <span>&copy; 2026 Archivio del Maoismo Italiano</span>
     </div>

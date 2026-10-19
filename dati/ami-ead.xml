@@ -31,7 +31,7 @@
       </maintenanceevent>
       <maintenanceevent>
         <eventtype value="derived" />
-        <eventdatetime standarddatetime="2026-10-17">2026-10-17</eventdatetime>
+        <eventdatetime standarddatetime="2026-10-19">2026-10-19</eventdatetime>
         <agenttype value="machine" />
         <agent>scripts/core/ead_export.py</agent>
         <eventdescription>File generato automaticamente da data/dati.xlsx</eventdescription>
@@ -92,7 +92,7 @@
           <dao daotype="derived" href="https://archive.org/details/1967-citazioni-dalle-opere-del-presidente-mao-tse-tung-lingue-estere" linktitle="Riproduzione digitale su Internet Archive" />
         </did>
         <scopecontent>
-          <p>Seconda edizione in italiano (1968) del famosissimo "Libretto rosso" (Quotations from Chairman Mao Tse-tung o ​毛主席语录), antologia contenente le iconiche citazioni del presidente cinese Mao Zedong, stampata a Pechino dalla Casa editrice in lingue estere. Libro tradotto da un team di italiani residenti a Pechino, tra cui Manlio Dinucci e Primerose Gigliesi, e pubblicato dalla Casa editrice in lingue estere, Pechino, pp. 328, 1968. Copertina in vinile rosso, 14 cm.</p>
+          <p>Seconda edizione in italiano (1968) del famosissimo "Libretto rosso" (Quotations from Chairman Mao Tse-tung o ​毛主席语录), antologia contenente le iconiche citazioni del presidente cinese Mao Zedong, stampata a Pechino dalla Casa editrice in lingue estere. Libro tradotto da un team di italiani residenti a Pechino, tra cui Manlio Dinucci e Primerose Gigliesi, e pubblicato dalla Casa editrice in lingue estere, Pechino, pp. 328, 1968. Copertina in vinile rosso, 14x10 cm.</p>
         </scopecontent>
         <odd localtype="editore">
           <p>Pechino: Casa editrice in lingue estere</p>
@@ -2832,7 +2832,7 @@
           <p>• L'Organizzazione dei Comunisti (marxisti-leninisti) d'Italia di Pesce (nata nel 1970)</p>
           <p>• L'Organizzazione Comunista (marxista-leninista) - Fronte Unito di Giuseppe Burgani (nata nel 1973)</p>
           <p>• Il Partito Comunista d'Italia (marxista-leninista) - Lotta di lunga durata di Gustavo Hermann (nato nel 1969)</p>
-          <p>• Il Partito Marxista-Leninista-Maoista Italiano di Michele Semeraro (nato nel 1969 come scissione di Avanguardia Proletaria Maoista)</p>
+          <p>• Il Partito Comunista Marxista-Leninista-Maoista Italiano di Michele Semeraro (nato nel 1969 come scissione di Avanguardia Proletaria Maoista)</p>
           <p>• I gruppi minori di "Coscienza Operaia" e "Ideologia Proletaria"</p>
           <p>Il partito pubblica il giornale "Linea Proletaria", ereditato dall'organizzazione di Pesce.</p>
         </scopecontent>
@@ -2855,7 +2855,7 @@
             <part>Organizzazione dei Comunisti (marxisti-leninisti) d'Italia</part>
           </corpname>
           <corpname identifier="AMI-O-024">
-            <part>Organizzazione Comunista (marxista-leninista) Fronte Unito</part>
+            <part>Organizzazione Comunista (marxista-leninista) - Fronte Unito</part>
           </corpname>
           <corpname identifier="AMI-O-027">
             <part>Partito Comunista (marxista-leninista) d'Italia - Lotta di lunga durata</part>
@@ -3189,7 +3189,7 @@
           <unitdate normal="1973-10-19">1973-10-19</unitdate>
           <origination>
             <corpname identifier="AMI-O-024">
-              <part>Organizzazione Comunista (marxista-leninista) Fronte Unito</part>
+              <part>Organizzazione Comunista (marxista-leninista) - Fronte Unito</part>
             </corpname>
           </origination>
           <langmaterial>
@@ -3210,7 +3210,7 @@
         </otherfindaid>
         <controlaccess>
           <corpname identifier="AMI-O-024">
-            <part>Organizzazione Comunista (marxista-leninista) Fronte Unito</part>
+            <part>Organizzazione Comunista (marxista-leninista) - Fronte Unito</part>
           </corpname>
           <corpname>
             <part>Fronte Unito</part>

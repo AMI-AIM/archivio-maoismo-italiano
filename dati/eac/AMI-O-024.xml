@@ -12,7 +12,7 @@
       </maintenanceEvent>
       <maintenanceEvent maintenanceEventType="derived">
         <agent agentType="machine">scripts/core/ead_export.py</agent>
-        <eventDateTime standardDateTime="2026-10-17">2026-10-17</eventDateTime>
+        <eventDateTime standardDateTime="2026-10-19">2026-10-19</eventDateTime>
       </maintenanceEvent>
     </maintenanceHistory>
     <conventionDeclaration>
@@ -24,7 +24,7 @@
     <identity>
       <entityType value="corporateBody" />
       <nameEntry status="authorized">
-        <part>Organizzazione Comunista (marxista-leninista) Fronte Unito</part>
+        <part>Organizzazione Comunista (marxista-leninista) - Fronte Unito</part>
       </nameEntry>
       <nameEntry status="alternative">
         <part>Organizzazione Comunista (marxista-leninista)</part>
@@ -57,7 +57,7 @@
         <date standardDate="1977">1977</date>
         <relationType>temporale</relationType>
         <descriptiveNote>
-          <p>Organizzazione Comunista (marxista-leninista) Fronte Unito confluita in Partito Comunista Unificato d'Italia</p>
+          <p>Organizzazione Comunista (marxista-leninista) - Fronte Unito confluita in Partito Comunista Unificato d'Italia</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -70,7 +70,7 @@
         </dateRange>
         <relationType>gerarchica</relationType>
         <descriptiveNote>
-          <p>Giuseppe Burgani segretario di Organizzazione Comunista (marxista-leninista) Fronte Unito</p>
+          <p>Giuseppe Burgani segretario di Organizzazione Comunista (marxista-leninista) - Fronte Unito</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -80,7 +80,7 @@
         <date standardDate="1973">1973</date>
         <relationType>temporale</relationType>
         <descriptiveNote>
-          <p>Organizzazione Comunista (marxista-leninista) Fronte Unito scissione di Partito Comunista d'Italia (marxista-leninista)</p>
+          <p>Organizzazione Comunista (marxista-leninista) - Fronte Unito scissione di Partito Comunista d'Italia (marxista-leninista)</p>
         </descriptiveNote>
       </relation>
       <relation>
@@ -93,7 +93,7 @@
         </dateRange>
         <relationType>associativa</relationType>
         <descriptiveNote>
-          <p>Fronte Unito organo di stampa di Organizzazione Comunista (marxista-leninista) Fronte Unito</p>
+          <p>Fronte Unito organo di stampa di Organizzazione Comunista (marxista-leninista) - Fronte Unito</p>
         </descriptiveNote>
       </relation>
     </relations>

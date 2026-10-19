@@ -9,7 +9,7 @@
         <meta name="description" content="Volantino curato dall'Organizzazione Comunista (marxista-leninista) (detta Fronte Unito dal titolo del suo organo di stampa), scissione del Partito…">
       
       
-        <meta name="author" content="Organizzazione Comunista (marxista-leninista) Fronte Unito">
+        <meta name="author" content="Organizzazione Comunista (marxista-leninista) - Fronte Unito">
       
       
         <link rel="canonical" href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0064/">
@@ -198,10 +198,10 @@
   
   
       <!-- overrides/partials/header.html -->
-<!-- Stato del drawer (menu laterale): checkbox nascosto, letto da Material
-     e dal CSS (#__drawer:checked ~ .md-drawer). Lo comanda il pulsante
-     hamburger tramite javascripts/navigazione.js. -->
-<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off" tabindex="-1" aria-hidden="true">
+<!-- Stato del drawer (menu laterale): e' il checkbox #__drawer che Material
+     mette in cima al body (qui non se ne crea un secondo: due elementi con
+     lo stesso id). Lo leggono il CSS (#__drawer:checked ~ .md-drawer) e
+     l'overlay qui sotto; lo comanda l'hamburger tramite navigazione.js. -->
 
 <header class="md-header" data-md-component="header">
   <div class="md-header__inner md-grid">
@@ -221,7 +221,6 @@
 
     <!-- LOGO a sinistra -->
     <a href="https://ami-aim.github.io/archivio-maoismo-italiano/"
-       title="AMI - Archivio del Maoismo Italiano"
        class="md-header__button md-logo"
        aria-label="AMI - Archivio del Maoismo Italiano - Home">
       <img src="../../immagini/logo.webp" alt="" width="400" height="127">
@@ -352,8 +351,10 @@
 <label class="md-drawer-overlay" for="__drawer" id="drawer-overlay" aria-hidden="true"></label>
 
 <!-- DRAWER PERSONALIZZATO (menu laterale). Chiuso = visibility:hidden in
-     extra.css, quindi i link non ricevono il focus mentre e' fuori schermo. -->
-<nav class="md-drawer" id="custom-drawer" aria-label="Menu">
+     extra.css, quindi i link non ricevono il focus mentre e' fuori schermo.
+     Aperto e' una finestra modale: navigazione.js rende inerte il resto
+     della pagina e ne blocca lo scorrimento. -->
+<div class="md-drawer" id="custom-drawer" role="dialog" aria-modal="true" aria-label="Menu">
   <div class="md-drawer__inner">
 
     <!-- INTESTAZIONE ROSSA CON LOGO E CHIUSURA -->
@@ -374,6 +375,7 @@
     </div>
 
     <!-- VOCI DI NAVIGAZIONE -->
+    <nav class="md-drawer__nav" aria-label="Navigazione principale">
     <ul class="md-drawer__list">
       
 
@@ -469,9 +471,10 @@
 
       
     </ul>
+    </nav>
 
   </div>
-</nav>
+</div>
     
 
     <div class="md-container" data-md-component="container">
@@ -792,7 +795,7 @@
 
 
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "name": "Volantino dell'OC(m-l) - Fronte Unito contro l'aumento del costo della benzina", "identifier": "AMI-0064", "url": "https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0064/", "isPartOf": {"@type": "Collection", "name": "Archivio del Maoismo Italiano", "url": "https://ami-aim.github.io/archivio-maoismo-italiano"}, "inLanguage": "it", "description": "Volantino curato dall'Organizzazione Comunista (marxista-leninista) (detta Fronte Unito dal titolo del suo organo di stampa), scissione del Partito…", "author": [{"@type": "Organization", "name": "Organizzazione Comunista (marxista-leninista) Fronte Unito"}], "datePublished": "1973", "keywords": "Galassia marxista-leninista", "sameAs": "https://archive.org/details/ocml-volantino-anti-rumor/mode/2up", "image": "https://archive.org/services/img/ocml-volantino-anti-rumor"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "name": "Volantino dell'OC(m-l) - Fronte Unito contro l'aumento del costo della benzina", "identifier": "AMI-0064", "url": "https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0064/", "isPartOf": {"@type": "Collection", "name": "Archivio del Maoismo Italiano", "url": "https://ami-aim.github.io/archivio-maoismo-italiano"}, "inLanguage": "it", "description": "Volantino curato dall'Organizzazione Comunista (marxista-leninista) (detta Fronte Unito dal titolo del suo organo di stampa), scissione del Partito…", "author": [{"@type": "Organization", "name": "Organizzazione Comunista (marxista-leninista) - Fronte Unito"}], "datePublished": "1973", "keywords": "Galassia marxista-leninista", "sameAs": "https://archive.org/details/ocml-volantino-anti-rumor/mode/2up", "image": "https://archive.org/services/img/ocml-volantino-anti-rumor"}</script>
 <nav class="doc-percorso" aria-label="Percorso"><a href="/archivio-maoismo-italiano/documenti/">Archivio</a><span class="doc-percorso__sep" aria-hidden="true">›</span><a href="/archivio-maoismo-italiano/documenti/?tipo=Volantino">Volantino</a></nav>
 <p class="doc-segnatura"><span class="doc-segnatura__id">AMI-0064</span><span class="doc-segnatura__sep" aria-hidden="true">·</span>Volantino<span class="doc-segnatura__sep" aria-hidden="true">·</span>19 ottobre 1973</p>
 <h1 class="doc-title-large">Volantino dell&#x27;OC(m-l) - Fronte Unito contro l&#x27;aumento del costo della benzina</h1>
@@ -818,7 +821,7 @@
 <p class="citazione-noscript-msg">Abilita JavaScript per vedere e copiare la citazione completa con data di consultazione.</p>
 </div>
 </noscript>
-<script type="application/json" id="citazioni-dati-ami_0064">{"schema": "ami-citazioni/2", "mode": "minima", "formats": ["semplice"], "doc": {"ami_id": "AMI-0064", "citation_key": "ami_0064", "type": "volantino", "title": "Volantino dell'OC(m-l) - Fronte Unito contro l'aumento del costo della benzina", "title_devised": false, "date_display": "19 ottobre 1973", "year": "1973", "url": "https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0064/", "archive": "Archivio del Maoismo Italiano", "archive_id": "AMI-0064", "ia_identifier": "ocml-volantino-anti-rumor", "authors": [{"name": "Organizzazione Comunista (marxista-leninista) Fronte Unito", "corporate": true}], "author_display": "Organizzazione Comunista (marxista-leninista) Fronte Unito", "publisher": "Organizzazione Comunista (marxista-leninista) Fronte Unito", "place": "Brindisi", "is_periodical": false, "container_title": "", "volume": "", "issue": ""}}</script>
+<script type="application/json" id="citazioni-dati-ami_0064">{"schema": "ami-citazioni/2", "mode": "minima", "formats": ["semplice"], "doc": {"ami_id": "AMI-0064", "citation_key": "ami_0064", "type": "volantino", "title": "Volantino dell'OC(m-l) - Fronte Unito contro l'aumento del costo della benzina", "title_devised": false, "date_display": "19 ottobre 1973", "year": "1973", "url": "https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0064/", "archive": "Archivio del Maoismo Italiano", "archive_id": "AMI-0064", "ia_identifier": "ocml-volantino-anti-rumor", "authors": [{"name": "Organizzazione Comunista (marxista-leninista) - Fronte Unito", "corporate": true}], "author_display": "Organizzazione Comunista (marxista-leninista) - Fronte Unito", "publisher": "Organizzazione Comunista (marxista-leninista) - Fronte Unito", "place": "Brindisi", "is_periodical": false, "container_title": "", "volume": "", "issue": ""}}</script>
 
 <div class="doc-corpo">
 <div class="doc-corpo__testo">
@@ -829,7 +832,7 @@
 </div>
 <aside class="doc-scheda" aria-labelledby="scheda-ami_0064">
 <h2 class="doc-sezione" id="scheda-ami_0064">Scheda</h2>
-<dl class="doc-scheda__campi"><div class="doc-scheda__campo"><dt>Soggetto produttore</dt><dd><a href="/archivio-maoismo-italiano/organizzazioni/organizzazione-comunista-marxista-leninista-fronte-unito/">Organizzazione Comunista (marxista-leninista) Fronte Unito</a></dd></div><div class="doc-scheda__campo"><dt>Organizzazioni collegate</dt><dd><span class="autorita-rel__senza-pagina" title="Nessuna scheda nell'archivio">Fronte Unito</span></dd></div><div class="doc-scheda__campo"><dt>Data</dt><dd>19 ottobre 1973</dd></div><div class="doc-scheda__campo"><dt>Luogo</dt><dd>Brindisi</dd></div><div class="doc-scheda__campo"><dt>Tipologia</dt><dd>Volantino</dd></div><div class="doc-scheda__campo"><dt>Lingua</dt><dd>italiano</dd></div><div class="doc-scheda__campo"><dt>Livello di descrizione</dt><dd>Unità</dd></div><div class="doc-scheda__campo"><dt>Percorsi tematici</dt><dd><a href="/archivio-maoismo-italiano/argomenti/galassia-marxista-leninista/">Galassia marxista-leninista</a></dd></div><div class="doc-scheda__campo"><dt>Provenienza</dt><dd>Archivio Storico Benedetto Petrone</dd></div></dl>
+<dl class="doc-scheda__campi"><div class="doc-scheda__campo"><dt>Soggetto produttore</dt><dd><a href="/archivio-maoismo-italiano/organizzazioni/organizzazione-comunista-marxista-leninista-fronte-unito/">Organizzazione Comunista (marxista-leninista) - Fronte Unito</a></dd></div><div class="doc-scheda__campo"><dt>Organizzazioni collegate</dt><dd><span class="autorita-rel__senza-pagina" title="Nessuna scheda nell'archivio">Fronte Unito</span></dd></div><div class="doc-scheda__campo"><dt>Data</dt><dd>19 ottobre 1973</dd></div><div class="doc-scheda__campo"><dt>Luogo</dt><dd>Brindisi</dd></div><div class="doc-scheda__campo"><dt>Tipologia</dt><dd>Volantino</dd></div><div class="doc-scheda__campo"><dt>Lingua</dt><dd>italiano</dd></div><div class="doc-scheda__campo"><dt>Livello di descrizione</dt><dd>Unità</dd></div><div class="doc-scheda__campo"><dt>Percorsi tematici</dt><dd><a href="/archivio-maoismo-italiano/argomenti/galassia-marxista-leninista/">Galassia marxista-leninista</a></dd></div><div class="doc-scheda__campo"><dt>Provenienza</dt><dd>Archivio Storico Benedetto Petrone</dd></div></dl>
 </aside>
 </div>
 
@@ -933,7 +936,7 @@
     <div class="ami-footer__bottom">
       
       
-      <span class="ami-footer__colophon"><span class="ami-footer__dato">96</span> documenti &middot; aggiornato il 17 ottobre 2026</span>
+      <span class="ami-footer__colophon"><span class="ami-footer__dato">96</span> documenti &middot; aggiornato il 19 ottobre 2026</span>
       
       <span>&copy; 2026 Archivio del Maoismo Italiano</span>
     </div>

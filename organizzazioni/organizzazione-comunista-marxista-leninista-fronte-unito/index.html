@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documenti relativi a Organizzazione Comunista (marxista-leninista) Fronte Unito">
+        <meta name="description" content="Documenti relativi a Organizzazione Comunista (marxista-leninista) - Fronte Unito">
       
       
         <meta name="author" content="Ivan Masci">
@@ -25,7 +25,7 @@
     
     
       
-        <title>Organizzazione Comunista (marxista-leninista) Fronte Unito - AMI - Archivio del Maoismo Italiano</title>
+        <title>Organizzazione Comunista (marxista-leninista) - Fronte Unito - AMI - Archivio del Maoismo Italiano</title>
       
     
     
@@ -124,8 +124,8 @@
   <meta property="og:site_name" content="Archivio del Maoismo Italiano">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
-  <meta property="og:title" content="Organizzazione Comunista (marxista-leninista) Fronte Unito">
-  <meta property="og:description" content="Documenti relativi a Organizzazione Comunista (marxista-leninista) Fronte Unito">
+  <meta property="og:title" content="Organizzazione Comunista (marxista-leninista) - Fronte Unito">
+  <meta property="og:description" content="Documenti relativi a Organizzazione Comunista (marxista-leninista) - Fronte Unito">
   <meta property="og:url" content="https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/organizzazione-comunista-marxista-leninista-fronte-unito/">
   <meta property="og:image" content="https://ami-aim.github.io/archivio-maoismo-italiano/immagini/banner.webp">
   <meta property="og:image:width" content="1200">
@@ -133,8 +133,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Organizzazione Comunista (marxista-leninista) Fronte Unito">
-  <meta name="twitter:description" content="Documenti relativi a Organizzazione Comunista (marxista-leninista) Fronte Unito">
+  <meta name="twitter:title" content="Organizzazione Comunista (marxista-leninista) - Fronte Unito">
+  <meta name="twitter:description" content="Documenti relativi a Organizzazione Comunista (marxista-leninista) - Fronte Unito">
   <meta name="twitter:image" content="https://ami-aim.github.io/archivio-maoismo-italiano/immagini/banner.webp">
 
   
@@ -149,7 +149,7 @@
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://ami-aim.github.io/archivio-maoismo-italiano/"},
       {"@type": "ListItem", "position": 2, "name": "Organizzazioni", "item": "https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/"},
-      {"@type": "ListItem", "position": 3, "name": "Organizzazione Comunista (marxista-leninista) Fronte Unito", "item": "https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/organizzazione-comunista-marxista-leninista-fronte-unito/"}
+      {"@type": "ListItem", "position": 3, "name": "Organizzazione Comunista (marxista-leninista) - Fronte Unito", "item": "https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/organizzazione-comunista-marxista-leninista-fronte-unito/"}
     ]
   }
   </script>
@@ -159,8 +159,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Organizzazione Comunista (marxista-leninista) Fronte Unito",
-    "description": "Documenti relativi a Organizzazione Comunista (marxista-leninista) Fronte Unito",
+    "name": "Organizzazione Comunista (marxista-leninista) - Fronte Unito",
+    "description": "Documenti relativi a Organizzazione Comunista (marxista-leninista) - Fronte Unito",
     "url": "https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/organizzazione-comunista-marxista-leninista-fronte-unito/"
   }
   </script>
@@ -196,10 +196,10 @@
   
   
       <!-- overrides/partials/header.html -->
-<!-- Stato del drawer (menu laterale): checkbox nascosto, letto da Material
-     e dal CSS (#__drawer:checked ~ .md-drawer). Lo comanda il pulsante
-     hamburger tramite javascripts/navigazione.js. -->
-<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off" tabindex="-1" aria-hidden="true">
+<!-- Stato del drawer (menu laterale): e' il checkbox #__drawer che Material
+     mette in cima al body (qui non se ne crea un secondo: due elementi con
+     lo stesso id). Lo leggono il CSS (#__drawer:checked ~ .md-drawer) e
+     l'overlay qui sotto; lo comanda l'hamburger tramite navigazione.js. -->
 
 <header class="md-header" data-md-component="header">
   <div class="md-header__inner md-grid">
@@ -219,7 +219,6 @@
 
     <!-- LOGO a sinistra -->
     <a href="https://ami-aim.github.io/archivio-maoismo-italiano/"
-       title="AMI - Archivio del Maoismo Italiano"
        class="md-header__button md-logo"
        aria-label="AMI - Archivio del Maoismo Italiano - Home">
       <img src="../../immagini/logo.webp" alt="" width="400" height="127">
@@ -350,8 +349,10 @@
 <label class="md-drawer-overlay" for="__drawer" id="drawer-overlay" aria-hidden="true"></label>
 
 <!-- DRAWER PERSONALIZZATO (menu laterale). Chiuso = visibility:hidden in
-     extra.css, quindi i link non ricevono il focus mentre e' fuori schermo. -->
-<nav class="md-drawer" id="custom-drawer" aria-label="Menu">
+     extra.css, quindi i link non ricevono il focus mentre e' fuori schermo.
+     Aperto e' una finestra modale: navigazione.js rende inerte il resto
+     della pagina e ne blocca lo scorrimento. -->
+<div class="md-drawer" id="custom-drawer" role="dialog" aria-modal="true" aria-label="Menu">
   <div class="md-drawer__inner">
 
     <!-- INTESTAZIONE ROSSA CON LOGO E CHIUSURA -->
@@ -372,6 +373,7 @@
     </div>
 
     <!-- VOCI DI NAVIGAZIONE -->
+    <nav class="md-drawer__nav" aria-label="Navigazione principale">
     <ul class="md-drawer__list">
       
 
@@ -467,9 +469,10 @@
 
       
     </ul>
+    </nav>
 
   </div>
-</nav>
+</div>
     
 
     <div class="md-container" data-md-component="container">
@@ -791,16 +794,16 @@
 
 
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "Organization", "name": "Organizzazione Comunista (marxista-leninista) Fronte Unito", "url": "https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/organizzazione-comunista-marxista-leninista-fronte-unito/", "foundingDate": "1973", "additionalType": "Organization/Partito", "identifier": "AMI-O-024", "alternateName": ["Organizzazione Comunista (marxista-leninista)", "Organizzazione Comunista (marxista-leninista) - Fronte Unito", "OC(m-l) - Fronte Unito"], "dissolutionDate": "1977"}
+{"@context": "https://schema.org", "@type": "Organization", "name": "Organizzazione Comunista (marxista-leninista) - Fronte Unito", "url": "https://ami-aim.github.io/archivio-maoismo-italiano/organizzazioni/organizzazione-comunista-marxista-leninista-fronte-unito/", "foundingDate": "1973", "additionalType": "Organization/Partito", "identifier": "AMI-O-024", "alternateName": ["Organizzazione Comunista (marxista-leninista)", "Organizzazione Comunista (marxista-leninista) - Fronte Unito", "OC(m-l) - Fronte Unito"], "dissolutionDate": "1977"}
 </script>
 
 <div class="soggetto-testata">
 <div class="soggetto-testata__testo">
 <nav class="doc-percorso" aria-label="Percorso"><a href="/archivio-maoismo-italiano/organizzazioni/">Organizzazioni</a></nav>
-<h1 class="org-name">Organizzazione Comunista (marxista-leninista) Fronte Unito</h1>
+<h1 class="org-name">Organizzazione Comunista (marxista-leninista) - Fronte Unito</h1>
 <div class="org-dates">1973 – 1977</div>
 <p class="soggetto-nota">Scheda in fase di redazione.</p>
-<p class="soggetto-azione"><a class="doc-correlati__tutti" href="/archivio-maoismo-italiano/documenti/?organizzazione=Organizzazione%20Comunista%20%28marxista-leninista%29%20Fronte%20Unito">Vedi questi documenti nell'archivio</a></p>
+<p class="soggetto-azione"><a class="doc-correlati__tutti" href="/archivio-maoismo-italiano/documenti/?organizzazione=Organizzazione%20Comunista%20%28marxista-leninista%29%20-%20Fronte%20Unito">Vedi questi documenti nell'archivio</a></p>
 </div>
 
 </div>
@@ -833,7 +836,7 @@
 
 <section class="soggetto-autorita" aria-labelledby="autorita-organizzazione-comunista-marxista-leninista-fronte-unito">
 <h2 class="soggetto-sezione" id="autorita-organizzazione-comunista-marxista-leninista-fronte-unito">Record d'autorità</h2>
-<dl class="doc-scheda__campi"><div class="doc-scheda__campo"><dt>Identificativo</dt><dd>AMI-O-024</dd></div><div class="doc-scheda__campo"><dt>Tipo di entità</dt><dd>Ente</dd></div><div class="doc-scheda__campo"><dt>Forma autorizzata del nome</dt><dd>Organizzazione Comunista (marxista-leninista) Fronte Unito</dd></div><div class="doc-scheda__campo"><dt>Altre forme del nome</dt><dd>Organizzazione Comunista (marxista-leninista); Organizzazione Comunista (marxista-leninista) - Fronte Unito; OC(m-l) - Fronte Unito</dd></div><div class="doc-scheda__campo"><dt>Date di esistenza</dt><dd>1973 – 1977</dd></div><div class="doc-scheda__campo"><dt>Relazioni</dt><dd><div class="autorita-rel__gruppo"><span class="autorita-rel__etichetta">Segretari</span><ul class="autorita-rel"><li><a href="/archivio-maoismo-italiano/persone/giuseppe-burgani/">Giuseppe Burgani</a> <span class="autorita-rel__nota">(1973-1977)</span></li></ul></div><div class="autorita-rel__gruppo"><span class="autorita-rel__etichetta">Organi di stampa</span><ul class="autorita-rel"><li><span class="autorita-rel__senza-pagina" title="Nessun documento nell'archivio">Fronte Unito</span> <span class="autorita-rel__nota">(1973-1977)</span></li></ul></div><div class="autorita-rel__gruppo"><span class="autorita-rel__etichetta">Scissione di</span><ul class="autorita-rel"><li><a href="/archivio-maoismo-italiano/organizzazioni/partito-comunista-ditalia-marxista-leninista/">Partito Comunista d&#x27;Italia (marxista-leninista)</a> <span class="autorita-rel__nota">(1973)</span></li></ul></div><div class="autorita-rel__gruppo"><span class="autorita-rel__etichetta">Confluito in</span><ul class="autorita-rel"><li><a href="/archivio-maoismo-italiano/organizzazioni/partito-comunista-unificato-ditalia/">Partito Comunista Unificato d&#x27;Italia</a> <span class="autorita-rel__nota">(1977)</span></li></ul></div></dd></div><div class="doc-scheda__campo"><dt>Formato XML</dt><dd><a href="/archivio-maoismo-italiano/dati/eac/AMI-O-024.xml">EAC-CPF</a></dd></div><div class="doc-scheda__campo"><dt>Norme</dt><dd>ISAAR(CPF), 2a ed., 2004</dd></div><div class="doc-scheda__campo"><dt>Redazione</dt><dd>2 ottobre 2026</dd></div></dl>
+<dl class="doc-scheda__campi"><div class="doc-scheda__campo"><dt>Identificativo</dt><dd>AMI-O-024</dd></div><div class="doc-scheda__campo"><dt>Tipo di entità</dt><dd>Ente</dd></div><div class="doc-scheda__campo"><dt>Forma autorizzata del nome</dt><dd>Organizzazione Comunista (marxista-leninista) - Fronte Unito</dd></div><div class="doc-scheda__campo"><dt>Altre forme del nome</dt><dd>Organizzazione Comunista (marxista-leninista); Organizzazione Comunista (marxista-leninista) - Fronte Unito; OC(m-l) - Fronte Unito</dd></div><div class="doc-scheda__campo"><dt>Date di esistenza</dt><dd>1973 – 1977</dd></div><div class="doc-scheda__campo"><dt>Relazioni</dt><dd><div class="autorita-rel__gruppo"><span class="autorita-rel__etichetta">Segretari</span><ul class="autorita-rel"><li><a href="/archivio-maoismo-italiano/persone/giuseppe-burgani/">Giuseppe Burgani</a> <span class="autorita-rel__nota">(1973-1977)</span></li></ul></div><div class="autorita-rel__gruppo"><span class="autorita-rel__etichetta">Organi di stampa</span><ul class="autorita-rel"><li><span class="autorita-rel__senza-pagina" title="Nessun documento nell'archivio">Fronte Unito</span> <span class="autorita-rel__nota">(1973-1977)</span></li></ul></div><div class="autorita-rel__gruppo"><span class="autorita-rel__etichetta">Scissione di</span><ul class="autorita-rel"><li><a href="/archivio-maoismo-italiano/organizzazioni/partito-comunista-ditalia-marxista-leninista/">Partito Comunista d&#x27;Italia (marxista-leninista)</a> <span class="autorita-rel__nota">(1973)</span></li></ul></div><div class="autorita-rel__gruppo"><span class="autorita-rel__etichetta">Confluito in</span><ul class="autorita-rel"><li><a href="/archivio-maoismo-italiano/organizzazioni/partito-comunista-unificato-ditalia/">Partito Comunista Unificato d&#x27;Italia</a> <span class="autorita-rel__nota">(1977)</span></li></ul></div></dd></div><div class="doc-scheda__campo"><dt>Formato XML</dt><dd><a href="/archivio-maoismo-italiano/dati/eac/AMI-O-024.xml">EAC-CPF</a></dd></div><div class="doc-scheda__campo"><dt>Norme</dt><dd>ISAAR(CPF), 2a ed., 2004</dd></div><div class="doc-scheda__campo"><dt>Redazione</dt><dd>2 ottobre 2026</dd></div></dl>
 <p class="autorita-nota">Scheda redatta secondo ISAAR(CPF). <a href="/archivio-maoismo-italiano/progetto/#norme-di-descrizione">Norme di descrizione</a></p>
 </section>
 
@@ -926,7 +929,7 @@
     <div class="ami-footer__bottom">
       
       
-      <span class="ami-footer__colophon"><span class="ami-footer__dato">96</span> documenti &middot; aggiornato il 17 ottobre 2026</span>
+      <span class="ami-footer__colophon"><span class="ami-footer__dato">96</span> documenti &middot; aggiornato il 19 ottobre 2026</span>
       
       <span>&copy; 2026 Archivio del Maoismo Italiano</span>
     </div>

@@ -334,6 +334,10 @@
       '</div>';
     contenitore.insertBefore(avviso, contenitore.firstChild);
     contenitore.classList.add('embed-container--guasto');
+    // Il segnale di attesa (documenti.js) sparisce col guasto: il visore non
+    // e' piu' "in caricamento" per i lettori di schermo.
+    var visore = contenitore.querySelector('.embed-visore');
+    if (visore) visore.removeAttribute('aria-busy');
 
     avviso.querySelector('.ia-visore-avviso__riprova').addEventListener('click', function () {
       avviso.remove();

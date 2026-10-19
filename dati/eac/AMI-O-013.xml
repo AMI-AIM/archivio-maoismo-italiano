@@ -12,7 +12,7 @@
       </maintenanceEvent>
       <maintenanceEvent maintenanceEventType="derived">
         <agent agentType="machine">scripts/core/ead_export.py</agent>
-        <eventDateTime standardDateTime="2026-10-17">2026-10-17</eventDateTime>
+        <eventDateTime standardDateTime="2026-10-19">2026-10-19</eventDateTime>
       </maintenanceEvent>
     </maintenanceHistory>
     <conventionDeclaration>
@@ -126,12 +126,12 @@
       </relation>
       <relation>
         <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-024.xml">
-          <part>Organizzazione Comunista (marxista-leninista) Fronte Unito</part>
+          <part>Organizzazione Comunista (marxista-leninista) - Fronte Unito</part>
         </targetEntity>
         <date standardDate="1973">1973</date>
         <relationType>temporale</relationType>
         <descriptiveNote>
-          <p>Organizzazione Comunista (marxista-leninista) Fronte Unito scissione di Partito Comunista d'Italia (marxista-leninista)</p>
+          <p>Organizzazione Comunista (marxista-leninista) - Fronte Unito scissione di Partito Comunista d'Italia (marxista-leninista)</p>
         </descriptiveNote>
       </relation>
       <relation>

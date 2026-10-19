@@ -198,10 +198,10 @@
   
   
       <!-- overrides/partials/header.html -->
-<!-- Stato del drawer (menu laterale): checkbox nascosto, letto da Material
-     e dal CSS (#__drawer:checked ~ .md-drawer). Lo comanda il pulsante
-     hamburger tramite javascripts/navigazione.js. -->
-<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off" tabindex="-1" aria-hidden="true">
+<!-- Stato del drawer (menu laterale): e' il checkbox #__drawer che Material
+     mette in cima al body (qui non se ne crea un secondo: due elementi con
+     lo stesso id). Lo leggono il CSS (#__drawer:checked ~ .md-drawer) e
+     l'overlay qui sotto; lo comanda l'hamburger tramite navigazione.js. -->
 
 <header class="md-header" data-md-component="header">
   <div class="md-header__inner md-grid">
@@ -221,7 +221,6 @@
 
     <!-- LOGO a sinistra -->
     <a href="https://ami-aim.github.io/archivio-maoismo-italiano/"
-       title="AMI - Archivio del Maoismo Italiano"
        class="md-header__button md-logo"
        aria-label="AMI - Archivio del Maoismo Italiano - Home">
       <img src="../../immagini/logo.webp" alt="" width="400" height="127">
@@ -352,8 +351,10 @@
 <label class="md-drawer-overlay" for="__drawer" id="drawer-overlay" aria-hidden="true"></label>
 
 <!-- DRAWER PERSONALIZZATO (menu laterale). Chiuso = visibility:hidden in
-     extra.css, quindi i link non ricevono il focus mentre e' fuori schermo. -->
-<nav class="md-drawer" id="custom-drawer" aria-label="Menu">
+     extra.css, quindi i link non ricevono il focus mentre e' fuori schermo.
+     Aperto e' una finestra modale: navigazione.js rende inerte il resto
+     della pagina e ne blocca lo scorrimento. -->
+<div class="md-drawer" id="custom-drawer" role="dialog" aria-modal="true" aria-label="Menu">
   <div class="md-drawer__inner">
 
     <!-- INTESTAZIONE ROSSA CON LOGO E CHIUSURA -->
@@ -374,6 +375,7 @@
     </div>
 
     <!-- VOCI DI NAVIGAZIONE -->
+    <nav class="md-drawer__nav" aria-label="Navigazione principale">
     <ul class="md-drawer__list">
       
 
@@ -469,9 +471,10 @@
 
       
     </ul>
+    </nav>
 
   </div>
-</nav>
+</div>
     
 
     <div class="md-container" data-md-component="container">
@@ -828,12 +831,12 @@
 <div class="doc-corpo__testo">
 <h2 class="doc-sezione" id="descrizione-ami_0057">Descrizione</h2>
 <div class="doc-abstract">
-<p>Foto dal &quot;Congresso di ricostruzione del Partito Comunista Unificato della classe operaia - Roma, 6-7-8 Maggio 1977&quot;, che sancirà la fondazione del Partito Comunista Unificato d&#x27;Italia, guidato da Osvaldo Pesce. Confluiscono nel PCUd&#x27;I:</p><p>• L&#x27;Organizzazione dei Comunisti (marxisti-leninisti) d&#x27;Italia di Pesce (nata nel 1970)</p><p>• L&#x27;Organizzazione Comunista (marxista-leninista) - Fronte Unito di Giuseppe Burgani (nata nel 1973)</p><p>• Il Partito Comunista d&#x27;Italia (marxista-leninista) - Lotta di lunga durata di Gustavo Hermann (nato nel 1969)</p><p>• Il Partito Marxista-Leninista-Maoista Italiano di Michele Semeraro (nato nel 1969 come scissione di Avanguardia Proletaria Maoista)</p><p>• I gruppi minori di &quot;Coscienza Operaia&quot; e &quot;Ideologia Proletaria&quot;</p><p>Il partito pubblica il giornale &quot;Linea Proletaria&quot;, ereditato dall&#x27;organizzazione di Pesce.</p>
+<p>Foto dal &quot;Congresso di ricostruzione del Partito Comunista Unificato della classe operaia - Roma, 6-7-8 Maggio 1977&quot;, che sancirà la fondazione del Partito Comunista Unificato d&#x27;Italia, guidato da Osvaldo Pesce. Confluiscono nel PCUd&#x27;I:</p><p>• L&#x27;Organizzazione dei Comunisti (marxisti-leninisti) d&#x27;Italia di Pesce (nata nel 1970)</p><p>• L&#x27;Organizzazione Comunista (marxista-leninista) - Fronte Unito di Giuseppe Burgani (nata nel 1973)</p><p>• Il Partito Comunista d&#x27;Italia (marxista-leninista) - Lotta di lunga durata di Gustavo Hermann (nato nel 1969)</p><p>• Il Partito Comunista Marxista-Leninista-Maoista Italiano di Michele Semeraro (nato nel 1969 come scissione di Avanguardia Proletaria Maoista)</p><p>• I gruppi minori di &quot;Coscienza Operaia&quot; e &quot;Ideologia Proletaria&quot;</p><p>Il partito pubblica il giornale &quot;Linea Proletaria&quot;, ereditato dall&#x27;organizzazione di Pesce.</p>
 </div>
 </div>
 <aside class="doc-scheda" aria-labelledby="scheda-ami_0057">
 <h2 class="doc-sezione" id="scheda-ami_0057">Scheda</h2>
-<dl class="doc-scheda__campi"><div class="doc-scheda__campo"><dt>Soggetto produttore</dt><dd><a href="/archivio-maoismo-italiano/organizzazioni/partito-comunista-unificato-ditalia/">Partito Comunista Unificato d&#x27;Italia</a></dd></div><div class="doc-scheda__campo"><dt>Persone collegate</dt><dd><a href="/archivio-maoismo-italiano/persone/osvaldo-pesce/">Osvaldo Pesce</a>, <a href="/archivio-maoismo-italiano/persone/giuseppe-burgani/">Giuseppe Burgani</a>, <a href="/archivio-maoismo-italiano/persone/gustavo-hermann/">Gustavo Hermann</a>, <a href="/archivio-maoismo-italiano/persone/michele-semeraro/">Michele Semeraro</a></dd></div><div class="doc-scheda__campo"><dt>Organizzazioni collegate</dt><dd><a href="/archivio-maoismo-italiano/organizzazioni/organizzazione-dei-comunisti-marxisti-leninisti-ditalia/">Organizzazione dei Comunisti (marxisti-leninisti) d&#x27;Italia</a>, <a href="/archivio-maoismo-italiano/organizzazioni/organizzazione-comunista-marxista-leninista-fronte-unito/">Organizzazione Comunista (marxista-leninista) Fronte Unito</a>, <a href="/archivio-maoismo-italiano/organizzazioni/partito-comunista-marxista-leninista-ditalia-lotta-di-lunga-durata/">Partito Comunista (marxista-leninista) d&#x27;Italia - Lotta di lunga durata</a>, <a href="/archivio-maoismo-italiano/organizzazioni/partito-comunista-marxista-leninista-maoista-italiano/">Partito Comunista Marxista-Leninista-Maoista Italiano</a>, <span class="autorita-rel__senza-pagina" title="Nessuna scheda nell'archivio">Coscienza Operaia</span>, <span class="autorita-rel__senza-pagina" title="Nessuna scheda nell'archivio">Ideologia Proletaria</span>, <span class="autorita-rel__senza-pagina" title="Nessuna scheda nell'archivio">Linea Proletaria</span></dd></div><div class="doc-scheda__campo"><dt>Data</dt><dd>8 maggio 1977</dd></div><div class="doc-scheda__campo"><dt>Luogo</dt><dd>Roma</dd></div><div class="doc-scheda__campo"><dt>Editore</dt><dd>Linea Proletaria</dd></div><div class="doc-scheda__campo"><dt>Tipologia</dt><dd>Foto</dd></div><div class="doc-scheda__campo"><dt>Consistenza</dt><dd>1 fotografia, b/n</dd></div><div class="doc-scheda__campo"><dt>Lingua</dt><dd>italiano</dd></div><div class="doc-scheda__campo"><dt>Livello di descrizione</dt><dd>Unità</dd></div><div class="doc-scheda__campo"><dt>Titolo</dt><dd>Attribuito</dd></div><div class="doc-scheda__campo"><dt>Percorsi tematici</dt><dd><a href="/archivio-maoismo-italiano/argomenti/galassia-marxista-leninista/">Galassia marxista-leninista</a></dd></div><div class="doc-scheda__campo"><dt>Provenienza</dt><dd>Collezione personale</dd></div></dl>
+<dl class="doc-scheda__campi"><div class="doc-scheda__campo"><dt>Soggetto produttore</dt><dd><a href="/archivio-maoismo-italiano/organizzazioni/partito-comunista-unificato-ditalia/">Partito Comunista Unificato d&#x27;Italia</a></dd></div><div class="doc-scheda__campo"><dt>Persone collegate</dt><dd><a href="/archivio-maoismo-italiano/persone/osvaldo-pesce/">Osvaldo Pesce</a>, <a href="/archivio-maoismo-italiano/persone/giuseppe-burgani/">Giuseppe Burgani</a>, <a href="/archivio-maoismo-italiano/persone/gustavo-hermann/">Gustavo Hermann</a>, <a href="/archivio-maoismo-italiano/persone/michele-semeraro/">Michele Semeraro</a></dd></div><div class="doc-scheda__campo"><dt>Organizzazioni collegate</dt><dd><a href="/archivio-maoismo-italiano/organizzazioni/organizzazione-dei-comunisti-marxisti-leninisti-ditalia/">Organizzazione dei Comunisti (marxisti-leninisti) d&#x27;Italia</a>, <a href="/archivio-maoismo-italiano/organizzazioni/organizzazione-comunista-marxista-leninista-fronte-unito/">Organizzazione Comunista (marxista-leninista) - Fronte Unito</a>, <a href="/archivio-maoismo-italiano/organizzazioni/partito-comunista-marxista-leninista-ditalia-lotta-di-lunga-durata/">Partito Comunista (marxista-leninista) d&#x27;Italia - Lotta di lunga durata</a>, <a href="/archivio-maoismo-italiano/organizzazioni/partito-comunista-marxista-leninista-maoista-italiano/">Partito Comunista Marxista-Leninista-Maoista Italiano</a>, <span class="autorita-rel__senza-pagina" title="Nessuna scheda nell'archivio">Coscienza Operaia</span>, <span class="autorita-rel__senza-pagina" title="Nessuna scheda nell'archivio">Ideologia Proletaria</span>, <span class="autorita-rel__senza-pagina" title="Nessuna scheda nell'archivio">Linea Proletaria</span></dd></div><div class="doc-scheda__campo"><dt>Data</dt><dd>8 maggio 1977</dd></div><div class="doc-scheda__campo"><dt>Luogo</dt><dd>Roma</dd></div><div class="doc-scheda__campo"><dt>Editore</dt><dd>Linea Proletaria</dd></div><div class="doc-scheda__campo"><dt>Tipologia</dt><dd>Foto</dd></div><div class="doc-scheda__campo"><dt>Consistenza</dt><dd>1 fotografia, b/n</dd></div><div class="doc-scheda__campo"><dt>Lingua</dt><dd>italiano</dd></div><div class="doc-scheda__campo"><dt>Livello di descrizione</dt><dd>Unità</dd></div><div class="doc-scheda__campo"><dt>Titolo</dt><dd>Attribuito</dd></div><div class="doc-scheda__campo"><dt>Percorsi tematici</dt><dd><a href="/archivio-maoismo-italiano/argomenti/galassia-marxista-leninista/">Galassia marxista-leninista</a></dd></div><div class="doc-scheda__campo"><dt>Provenienza</dt><dd>Collezione personale</dd></div></dl>
 </aside>
 </div>
 
@@ -937,7 +940,7 @@
     <div class="ami-footer__bottom">
       
       
-      <span class="ami-footer__colophon"><span class="ami-footer__dato">96</span> documenti &middot; aggiornato il 17 ottobre 2026</span>
+      <span class="ami-footer__colophon"><span class="ami-footer__dato">96</span> documenti &middot; aggiornato il 19 ottobre 2026</span>
       
       <span>&copy; 2026 Archivio del Maoismo Italiano</span>
     </div>
