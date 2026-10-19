@@ -1,4 +1,3 @@
-import hashlib
 import html
 import json
 import os
@@ -146,21 +145,6 @@ def make_slug(label, used_slugs):
 # IMMAGINI ARGOMENTI
 # ============================================================
 
-def colore_hash(nome):
-    """Colore esadecimale stabile a partire dal nome (fallback senza foto)."""
-    hash_obj = hashlib.md5(str(nome).encode('utf-8'))
-    return f'#{hash_obj.hexdigest()[:6]}'
-
-
-def scurisci(hex_color, fattore=0.55):
-    """Scurisce un colore hex per il gradient di fallback."""
-    hex_color = hex_color.lstrip('#')
-    r = int(int(hex_color[0:2], 16) * fattore)
-    g = int(int(hex_color[2:4], 16) * fattore)
-    b = int(int(hex_color[4:6], 16) * fattore)
-    return f'#{r:02x}{g:02x}{b:02x}'
-
-
 def get_iniziali(nome, max_lettere=2):
     """Iniziali per la filigrana delle card senza foto."""
     parti = [p for p in str(nome).split() if p]
@@ -291,7 +275,8 @@ def generate_index(argomenti):
     lines.append('---')
     lines.append('')
 
-    # Stili delle hero card in assets/stylesheets/argomenti.css, foglio caricato una sola volta da mkdocs.yml (extra_css).
+    # Stili delle hero card in assets/stylesheets/argomenti.css (caricato solo
+    # qui da overrides/main.html, blocco extrahead).
 
     lines.append('<div class="hero-stack">')
 
@@ -320,10 +305,11 @@ def generate_index(argomenti):
             else:
                 lines.append(f'    <img class="hero-card-img" src="{item["immagine"]}" alt="" loading="lazy">')
         else:
-            colore = colore_hash(item['label'])
-            scuro = scurisci(colore)
+            # Senza fotografia: copertina "a stampa" dai token (rosso
+            # inchiostro su notte, argomenti.css), uguale per tutti; a
+            # distinguere le card restano le iniziali in filigrana.
             iniziali = escape_html(get_iniziali(item['label']))
-            lines.append(f'<a class="hero-card" href="{slug}/" style="background: linear-gradient(140deg, {colore} 0%, {scuro} 100%);">')
+            lines.append(f'<a class="hero-card hero-card--senza-foto" href="{slug}/">')
             lines.append(f'    <div class="hero-card-iniziali" aria-hidden="true">{iniziali}</div>')
 
         lines.append('    <div class="hero-card-gradient" aria-hidden="true"></div>')

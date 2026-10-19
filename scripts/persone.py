@@ -1,9 +1,7 @@
-import hashlib
 import html
 import urllib.parse
 import json
 import os
-import re
 import sys
 
 from core.autorita import arricchisci_schema, blocco_autorita, carica_autorita
@@ -20,21 +18,6 @@ DATA_DIR = os.path.join(ROOT_DIR, 'data')
 OUTPUT_DIR = os.path.join(ROOT_DIR, 'build')
 
 PLACEHOLDER_URL = site_path('immagini/profili/placeholder.webp')
-
-
-def colore_hash(nome):
-    hash_obj = hashlib.md5(nome.encode('utf-8'))
-    hex_color = hash_obj.hexdigest()[:6]
-    return f'#{hex_color}'
-
-
-def get_iniziali(nome, max_lettere=2):
-    parti = nome.split()
-    if not parti:
-        return '?'
-    if len(parti) == 1:
-        return parti[0][0].upper()
-    return ''.join(p[0] for p in parti[:max_lettere]).upper()
 
 
 def genera_persone():

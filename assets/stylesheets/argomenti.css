@@ -55,11 +55,20 @@ come da CONVENZIONI.md (niente extra_css globale).
     transform: scale(1.04);
 }
 
+/* Argomento senza fotografia: copertina "a stampa", rosso inchiostro che
+   scende nella notte. Colori solo dai token, uguali per tutte le card
+   (prima: un colore casuale ricavato dal nome, fuori palette e a volte
+   troppo chiaro per il titolo bianco). Il titolo poggia comunque sulla
+   velatura nera di .hero-card-gradient. */
+.hero-card--senza-foto {
+    background: linear-gradient(140deg, var(--md-primary-fg-color--dark) 0%, var(--ami-notte-2) 78%);
+}
+
 .hero-card-iniziali {
     position: absolute;
     top: 0.8rem;
     right: 1.2rem;
-    font-size: 5.5rem;
+    font-size: var(--ami-size-filigrana);
     font-weight: 800;
     color: rgba(255, 255, 255, 0.16);
     line-height: 1;
@@ -120,7 +129,7 @@ come da CONVENZIONI.md (niente extra_css globale).
     }
 
     .hero-card-iniziali {
-        font-size: 4rem;
+        font-size: var(--ami-size-filigrana-telefono);
     }
 }
 

@@ -3,6 +3,9 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 ============================================================ */
 :root {
   --ami-header-height: 80px;
+  /* Altezza del logo nell'header (e nell'intestazione del menu laterale,
+     che la riprende): 60px, 44px tra 769 e 1023px, 40px sotto i 769px. */
+  --ami-logo-height: 60px;
 
   /* --------------------------------------------------------------
      PALETTE: unico punto in cui sono scritti i colori del sito.
@@ -25,9 +28,6 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   --ami-skeleton-fermo: #e0e0e0;       /* segnaposto senza animazione */
   --ami-errore: #d32f2f;
   --ami-errore-tenue: #ffebee;
-  /* Home: avatar delle persone e organizzazioni piu' citate */
-  --ami-avatar-2: var(--ami-grafite);
-  --ami-avatar-3: #8d6e63;
   /* Token skeleton lazy-loading: unica fonte dei valori grafici degli
      skeleton creati da lazy-loading.js (che non applica piu stili inline
      propri; la variante home scura e definita nella sezione
@@ -113,14 +113,10 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   flex-shrink: 0;
 }
 .md-header__button.md-logo img {
-  height: 60px;
+  height: var(--ami-logo-height);
   width: auto;
-  max-width: 220px;
+  max-width: none;
   object-fit: contain;
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.md-header__button.md-logo:hover img {
-  transform: scale(1.03);
 }
 .md-header__nav {
   display: flex;
@@ -137,14 +133,13 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   align-items: center;
   flex-wrap: nowrap;
 }
+/* --ami-nav-pad-x: rientro orizzontale della voce, ripreso dall'area
+   cliccabile (::before) e dalle voci del menu a tendina, cosi' il testo
+   del menu sta in colonna con quello di "Archivio". */
 .md-header__nav-item {
-  padding: 0.4rem 0.8rem;
-  border-radius: var(--ami-radius-sm);
-  transition: background 0.15s;
+  --ami-nav-pad-x: 0.8rem;
+  padding: 0.4rem var(--ami-nav-pad-x);
   white-space: nowrap;
-}
-.md-header__nav-item:hover {
-  background: rgba(255, 255, 255, 0.15);
 }
 .md-header__nav-link {
   position: relative;
@@ -154,7 +149,11 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   color: rgba(255, 255, 255, 0.85);
   transition: color 0.15s;
 }
-.md-header__nav-link:hover {
+/* Passaggio del mouse e menu aperto: solo il testo, da bianco attenuato a
+   bianco pieno. La sottolineatura resta segno esclusivo della voce corrente
+   (prima la davano anche hover e menu aperto, con due voci "correnti"). */
+.md-header__nav-link:hover,
+.md-header__nav-item--dropdown.is-open .md-header__nav-link {
   color: var(--ami-su-colore);
 }
 .md-header__nav-link--active {
@@ -166,30 +165,24 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 .md-header__nav-link::before {
   content: "";
   position: absolute;
-  inset: -0.4rem -0.8rem;
+  inset: -0.4rem calc(-1 * var(--ami-nav-pad-x));
 }
-.md-header__nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -0.2rem;
-  height: 2px;
-  border-radius: var(--ami-radius-xs);
-  background: var(--ami-su-colore);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+/* Voce corrente: filetto bianco di 3px sotto il testo, fermo (non piu'
+   animato: segna dove si e', non risponde al mouse). E' una sottolineatura
+   del testo, quindi sta alla stessa distanza dalla linea di base in tutte
+   le voci, anche in "Archivio" (pulsante con icona, piu' alto dei link). */
+.md-header__nav-link--active {
+  text-decoration-line: underline;
+  text-decoration-thickness: 3px;
+  text-decoration-color: var(--ami-su-colore);
+  text-underline-offset: 0.45em;
+  text-decoration-skip-ink: none;
 }
-.md-header__nav-item:hover .md-header__nav-link::after,
-.md-header__nav-link--active::after {
-  transform: scaleX(1);
-}
-@media (prefers-reduced-motion: reduce) {
-  .md-header__nav-link::after,
-  .md-header__button.md-logo img {
-    transition: none;
-  }
+/* Ombra dell'header solo a pagina scorsa: in cima la fascia resta piatta
+   come una testata. La classe la mette navigazione.js; Material aggiunge
+   md-header--shadow gia' al caricamento. */
+.md-header.md-header--shadow:not(.ami-header--scorsa) {
+  box-shadow: none;
 }
 .md-header__title {
   display: none !important;
@@ -221,33 +214,43 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   flex-shrink: 0;
   transition: transform 0.2s ease;
 }
+@media (prefers-reduced-motion: reduce) {
+  .md-header__dropdown-caret {
+    transition: none;
+  }
+}
 
-/* Menu a tendina: nascosto di default.
-   Stesso linguaggio visivo di .hero-search-results (bianco, ombra, radius 10px) */
+/* Menu a tendina: nascosto di default. Prolunga la fascia rossa: appeso
+   al suo bordo inferiore (la voce e' centrata nell'header, quindi meta'
+   voce + meta' header = bordo della fascia), stesso rosso, angoli diritti,
+   voci separate da filetti chiari. Un'ombra breve lo stacca dal testo
+   della pagina che copre. */
 .md-header__dropdown-menu {
   display: none;
   position: absolute;
-  top: calc(100% + 0.5rem);
+  top: calc(50% + var(--ami-header-height) / 2);
   left: 0;
   min-width: 220px;
   margin: 0;
-  padding: 0.4rem 0;
+  padding: 0;
   list-style: none;
-  background: var(--ami-superficie);
-  border-radius: var(--ami-radius-md);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  background: var(--md-primary-fg-color);
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
   z-index: 1000;
 }
 
-/* Ponte invisibile sopra il menu: mantiene continuo l'hover
-   tra il trigger e il menu, evitando che si chiuda nel tragitto */
+/* Ponte invisibile tra la voce e il menu: serve solo senza JavaScript,
+   quando il menu si apre al passaggio del mouse (regole .no-js qui sotto). */
 .md-header__dropdown-menu::before {
   content: "";
   position: absolute;
-  top: -0.5rem;
+  top: -1.5rem;
   left: 0;
   width: 100%;
-  height: 0.5rem;
+  height: 1.5rem;
 }
 
 /* Apertura: la governa javascripts/navigazione.js (classe .is-open e
@@ -276,32 +279,42 @@ button.md-header__nav-link--dropdown {
   letter-spacing: inherit;
 }
 
-/* Singola voce del menu */
+/* Singola voce del menu, separata dalla precedente da un filetto */
 .md-header__dropdown-item {
   list-style: none;
 }
+.md-header__dropdown-item + .md-header__dropdown-item {
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
 
-/* Voce di menu: stesso corpo della nav (base), non piu' md */
+/* Voce di menu: stesso corpo della nav (base), testo in colonna con
+   quello di "Archivio" (stesso rientro della voce dell'header) */
 .md-header__dropdown-link {
   display: block;
-  padding: 0.55rem 1.1rem;
+  padding: 0.6rem var(--ami-nav-pad-x);
   font-family: var(--ami-font-label);
   font-size: var(--ami-font-size-base);
   font-weight: 600;
-  color: var(--ami-inchiostro);
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
   white-space: nowrap;
   transition: background 0.15s, color 0.15s;
 }
 
+/* Passaggio del mouse: il rosso si scurisce (Darker Hover Rule) */
 .md-header__dropdown-link:hover {
-  background: var(--md-code-bg-color);
-  color: var(--md-primary-fg-color);
+  background: var(--md-primary-fg-color--dark);
+  color: var(--ami-su-colore);
 }
 
+/* Pagina corrente: come nell'header, bianco pieno e filetto di 3px */
 .md-header__dropdown-link--active {
-  color: var(--md-primary-fg-color);
-  font-weight: 700;
+  color: var(--ami-su-colore);
+  text-decoration-line: underline;
+  text-decoration-thickness: 3px;
+  text-decoration-color: var(--ami-su-colore);
+  text-underline-offset: 0.45em;
+  text-decoration-skip-ink: none;
 }
 
 /* ------------------------------------------------------------
@@ -541,9 +554,14 @@ button.md-header__nav-link--dropdown {
   flex-direction: column;
   height: 100%;
 }
+/* Intestazione del menu laterale: stessa altezza della fascia della pagina
+   e logo alla stessa altezza, cosi' all'apertura non si vede un gradino
+   (prima 77px contro i 56px dell'header su telefono). */
 .md-drawer__header {
+  box-sizing: border-box;
+  height: var(--ami-header-height);
   background: var(--md-primary-fg-color);
-  padding: 0.8rem 0.5rem 0.8rem 1rem;
+  padding: 0 0.5rem 0 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -557,12 +575,13 @@ button.md-header__nav-link--dropdown {
   max-width: 100%;
 }
 .md-drawer__logo {
-  max-height: 40px;
-  max-width: 160px;
+  height: var(--ami-logo-height);
   width: auto;
-  height: auto;
   object-fit: contain;
   display: block;
+}
+.md-drawer__nav {
+  flex: 1;
 }
 .md-drawer__list {
   list-style: none;
@@ -590,6 +609,11 @@ button.md-header__nav-link--dropdown {
   color: var(--md-primary-fg-color);
   font-weight: 600;
   background: var(--md-code-bg-color);
+}
+/* Drawer aperto: la pagina sotto non scorre (classe messa da navigazione.js) */
+html.ami-drawer-aperto,
+html.ami-drawer-aperto body {
+  overflow: hidden;
 }
 #__drawer:checked ~ .md-drawer-overlay {
   opacity: 1;
@@ -926,10 +950,6 @@ button.md-header__nav-link--dropdown {
   .md-header__inner {
     height: var(--ami-header-height);
   }
-  .md-header__button.md-logo img {
-    height: 32px;
-    max-width: 120px;
-  }
   .banner-full {
     height: 180px;
     min-height: 150px;
@@ -959,10 +979,8 @@ in home.css, che le definisce da sola: rimosse)
     display: inline-flex;
     margin-right: auto;
   }
-  .md-header__button.md-logo img {
-    height: 40px;
-    width: auto;
-    max-width: 160px;
+  :root {
+    --ami-logo-height: 40px;
   }
   .banner-full {
     margin-bottom: 0;
@@ -1027,11 +1045,6 @@ in home.css, che le definisce da sola: rimosse)
   }
   .evidenza-thumbnail-img {
     max-height: 170px;
-  }
-}
-@media (max-width: 480px) {
-  .md-header__button.md-logo img {
-    height: 32px !important;
   }
 }
 
@@ -1101,10 +1114,13 @@ REGOLE DI SPECIFICITA'
   --ami-font-size-3xl: 2.2rem;  /* 44px - display grande */
   /* Titolo di pagina fluido (29px su telefono, 38px su desktop) */
   --ami-size-h1: clamp(1.45rem, 1.05rem + 1.5vw, 1.9rem);
-  /* Fuori scala, dichiarati: lead d'apertura del progetto (22px) e il
-     "404" monumentale della pagina d'errore. */
+  /* Fuori scala, dichiarati: lead d'apertura del progetto (22px), il
+     "404" monumentale della pagina d'errore e le iniziali in filigrana
+     delle copertine dei percorsi senza foto (110px, 80px su telefono). */
   --ami-font-size-lead: 1.1rem;
   --ami-size-404: clamp(4rem, 12vw, 6rem);
+  --ami-size-filigrana: 5.5rem;
+  --ami-size-filigrana-telefono: 4rem;
 
   /* Raggi: cinque gradini (DESIGN.md, "rounded"). Il catalogo resta
      quasi squadrato; card e pillole solo nel registro manifesto. */
@@ -1240,14 +1256,6 @@ body,
     font-size: var(--ami-font-size-lg);
   }
 }
-/* Gli <h2> delle schede persona/organizzazione/argomento sono generati con
-   style="font-size:1.2rem;font-weight:bold" inline (persone.py, org.py,
-   argomenti.py). Fino a quando i generatori non useranno una classe, questa
-   regola riporta quei titoli al ruolo "sottosezione". */
-.md-typeset h2[style] {
-  font-size: var(--ami-font-size-lg) !important;
-  font-weight: var(--fw-heading) !important;
-}
 /* Galleria: i pesi/tracking dichiarati in galleria.css perdevano contro
    .md-typeset h1/h2. Si ripristina l'intento (numeri d'anno in Black) senza
    toccare le dimensioni. */
@@ -1324,9 +1332,9 @@ body,
 .md-header__nav-link {
   font-weight: 600;
 }
-.md-drawer__link {
-  font-weight: 500;
-}
+/* Peso delle voci del drawer: 500, e 600 per la voce attiva (sezione 7).
+   Qui non si ripete: una regola .md-drawer__link { 500 } in questo punto
+   del file annullava il 600 della voce attiva. */
 .md-button,
 .banner-button {
   font-weight: 600 !important;
@@ -1831,9 +1839,9 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   border-radius: var(--ami-radius-xs);
 }
 .md-header .md-header__dropdown-menu :focus-visible {
-  /* menu bianco dentro l'header rosso: anello rosso, interno alla voce */
-  outline-color: var(--md-primary-fg-color);
-  outline-offset: -3px;
+  /* menu rosso come la fascia: anello bianco, interno alla voce */
+  outline-color: var(--ami-su-colore);
+  outline-offset: -4px;
 }
 .evidenza-band .evidenza-link:focus-visible {
   outline-offset: 6px;
@@ -3224,15 +3232,14 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 }
 @media screen and (min-width: 769px) and (max-width: 1023px) {
-  .md-header__button.md-logo img {
-    height: 44px;
-    max-width: 160px;
+  :root {
+    --ami-logo-height: 44px;
   }
   .md-header__nav-list {
     gap: 0.2rem;
   }
   .md-header__nav-item {
-    padding: 0.4rem 0.55rem;
+    --ami-nav-pad-x: 0.55rem;
   }
 }
 

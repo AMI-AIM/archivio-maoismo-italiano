@@ -15,7 +15,12 @@ colors:
   bianco: "#ffffff"
   notte: "#0d0d0d"
   notte-superficie: "#1c1c1c"
+  notte-segnaposto: "#2b2b2b"
+  attenuato-su-scuro: "#e0e0e0"
+  segnaposto: "#f0f0f0"
+  segnaposto-fermo: "#e0e0e0"
   errore: "#d32f2f"
+  errore-tenue: "#ffebee"
 typography:
   display:
     fontFamily: "Fraunces, Georgia, 'Times New Roman', serif"
@@ -124,10 +129,13 @@ Un rosso da timbro su fondo carta, con neutri caldi e un nero profondo per le fa
 - **Carta** (`carta`): fondo delle card-vetrina, dei chip e dei riquadri di nota.
 - **Bianco** (`bianco`): fondo della pagina; testo e icone su rosso, nero e fotografie.
 - **Inchiostro** (`inchiostro`): testo su superfici chiare sospese (tendine, pannelli).
-- **Grafite** (`grafite`): testo di chip e pulsanti chiari (galleria) e fondo di un avatar della home.
+- **Grafite** (`grafite`): testo di chip e pulsanti chiari (galleria).
 - **Linea** (`linea`): bordi di chip e pulsanti chiari, dove il filetto è troppo tenue.
-- **Notte** (`notte`, `notte-superficie`): fascia "Documenti in evidenza" in home e le sue copertine.
-- **Errore** (`errore`): messaggi di errore e stati non riusciti.
+- **Notte** (`notte`, `notte-superficie`): fascia "Documenti in evidenza" in home e le sue copertine, fondo del visore della galleria, copertina dei percorsi tematici senza fotografia.
+- **Notte segnaposto** (`notte-segnaposto`): segnaposto delle copertine sul fondo notte e lampo dello skeleton scuro della galleria.
+- **Attenuato su scuro** (`attenuato-su-scuro`): testo secondario e messaggi su fondo notte (errore di caricamento nel visore della galleria).
+- **Segnaposto** (`segnaposto`, `segnaposto-fermo`): skeleton delle immagini in caricamento su fondo chiaro, un lampo da `segnaposto` a `segnaposto-fermo`; con il movimento ridotto resta fermo su `segnaposto-fermo`.
+- **Errore** (`errore`, `errore-tenue`): messaggi di errore e stati non riusciti; il tenue è il fondo del segnaposto di un'immagine che non si è caricata.
 
 ### Named Rules
 **The Red Pencil Rule.** Nel registro catalogo il rosso segna solo ciò che si clicca o che data un documento: link, date, pulsanti primari, selezione. Etichette, badge e categorie non sono mai rossi.
@@ -154,7 +162,7 @@ Un rosso da timbro su fondo carta, con neutri caldi e un nero profondo per le fa
 - **Label** (600, 13px, maiuscolo, spaziatura 0,06em): etichette di campo nella Scheda, tipologia, ruolo secondario ("anche menzionato"), categorie delle organizzazioni.
 - **Data** (400, 15px): segnatura AMI, valori della Scheda, chiavi di "Nell'archivio", conteggi nei filtri.
 
-Fuori scala, dichiarati come variabili: il lead d'apertura del progetto (`--ami-font-size-lead`, 22px), il "404" monumentale (`--ami-size-404`) e i titoli-manifesto della galleria (`--gal-size-titolo`, `--gal-size-anno`, `--gal-size-anno-telefono`).
+Fuori scala, dichiarati come variabili: il lead d'apertura del progetto (`--ami-font-size-lead`, 22px), il "404" monumentale (`--ami-size-404`), i titoli-manifesto della galleria (`--gal-size-titolo`, `--gal-size-anno`, `--gal-size-anno-telefono`) e le iniziali in filigrana delle copertine dei percorsi senza fotografia (`--ami-size-filigrana`, 110px; `--ami-size-filigrana-telefono`, 80px: decorative, nascoste ai lettori di schermo).
 
 **Lingua:** i caratteri cinesi sono marcati `lang="zh-Hans"` in fase di build (hook `scripts/hooks/lingua_cinese.py`), così i lettori di schermo cambiano voce e il browser sceglie glifi cinesi.
 
@@ -172,7 +180,7 @@ Contenitore centrato di Material (circa 1220px utili su desktop), margine latera
 - **Archivio:** colonna filtri di 300px separata dai risultati da un filetto verticale, fissa allo scorrimento su desktop; sopra i 768px i filtri sono sempre aperti, sotto si chiudono dietro "Mostra filtri" e la ricerca testuale resta visibile in cima.
 - **Scheda documento:** percorso di navigazione, segnatura, titolo, visore a tutta larghezza, poi Descrizione e Scheda affiancate (colonna Scheda tra 16 e 20rem); sotto i 900px si impilano.
 - **Righe di catalogo:** data a sinistra, titolo e metadati a destra. In ogni elenco la colonna della data è larga quanto la data più lunga di quell'elenco (subgrid); sotto i 600px (480px in "Nell'archivio") la data va sopra il titolo.
-- **Vetrine:** griglie di card a tre colonne (indici) o a una colonna di banner (percorsi tematici); a due colonne sotto i 900px e a una sotto i 600px.
+- **Vetrine:** griglie di card a tre colonne negli indici di Persone e Organizzazioni (due sotto i 900px, una sotto i 600px); i percorsi tematici sono card 4:3 su due colonne (3 + 3), una colonna sotto i 768px, in formato 3:2 sotto i 640px.
 - **Soglie usate:** 480px, 600px, 768px, 900px, 1100px; schermi touch (pointer: coarse) con aree cliccabili di almeno 44px.
 
 ### Named Rules
@@ -180,11 +188,11 @@ Contenitore centrato di Material (circa 1220px utili su desktop), margine latera
 
 ## Elevation & Depth
 
-Sistema ibrido, diviso per registro. Le pagine di consultazione sono piatte: nessuna ombra, profondità data solo da filetti e spaziatura. Le pagine-vetrina usano ombre morbide e diffuse sulle card, che si sollevano leggermente al passaggio del mouse. Le superfici sospese (tendine del menu, pannelli, pillole dello slider) hanno un'ombra breve per staccarsi dal contenuto.
+Sistema ibrido, diviso per registro. Le pagine di consultazione sono piatte: nessuna ombra, profondità data solo da filetti e spaziatura. Le pagine-vetrina usano ombre morbide e diffuse sulle card, che si sollevano leggermente al passaggio del mouse. Le superfici sospese (pannelli, suggerimenti di ricerca, pillole dello slider) hanno un'ombra breve per staccarsi dal contenuto. La fascia dell'header è piatta in cima alla pagina e prende un'ombra solo quando la pagina scorre. Il menu a tendina dell'header, prolungamento della fascia rossa, ha un'ombra breve (`0 6px 14px rgba(0, 0, 0, 0.18)`) per staccarsi dal testo che copre.
 
 ### Shadow Vocabulary
 - **Sollevamento card** (`box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08)` con `translateY(-4px)`): card-vetrina al passaggio del mouse.
-- **Superficie sospesa** (`box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12)`): tendine e pannelli.
+- **Superficie sospesa** (`box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12)`): pannelli e suggerimenti di ricerca.
 - **Maniglia** (`box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25)`): maniglie e pillole dello slider anno.
 
 ### Named Rules
@@ -194,12 +202,12 @@ Sistema ibrido, diviso per registro. Le pagine di consultazione sono piatte: nes
 
 Angoli diritti o appena arrotondati nel catalogo, morbidi nelle vetrine.
 
-In CSS i raggi sono le variabili `--ami-radius-xs|sm|md|card|pillola` (extra.css, `:root`): niente valori scritti a mano. Unica eccezione rimasta: le card dei percorsi tematici (argomenti.css), in attesa di decidere il futuro dei percorsi.
+In CSS i raggi sono le variabili `--ami-radius-xs|sm|md|card|pillola` (extra.css, `:root`): niente valori scritti a mano, card dei percorsi tematici comprese.
 
 - **Filetti e righe** (0): elenchi, Scheda, filtri.
 - **Segni** (2px, `xs`): barre dell'istogramma, sottolineature, piccoli riquadri squadrati.
 - **Campi e pulsanti** (4px): ricerca, select di ordinamento, pulsanti primari, riquadro del visore.
-- **Superfici sospese e riquadri di nota** (8px, `md`): tendine del menu, pannelli, pannelli di ricerca negli indici.
+- **Superfici sospese e riquadri di nota** (8px, `md`): pannelli, pannelli di ricerca negli indici. Il menu a tendina dell'header è squadrato (0).
 - **Card-vetrina** (12px): card di persone, organizzazioni e percorsi.
 - **Pillole** (999px): chip dei filtri attivi, pillole degli anni nello slider, ricerca della home, pulsante "Filtri" flottante su telefono.
 - **Cerchi**: avatar con iniziali in home "a timbro": fondo bianco, bordo di 2px e iniziali in rosso catalogo.
@@ -219,6 +227,7 @@ Netti, rossi, senza ornamenti.
 ### Cards / Containers
 - **Corner Style:** 12px.
 - **Background:** fondo carta, immagine a proporzione fissa (4:3) in alto, testo sotto un filetto. Senza immagine: iniziali a timbro al centro dell'area, mai una sagoma generica.
+- **Card dei percorsi tematici:** registro manifesto pieno. Fotografia d'epoca a tutta card (4:3, 3:2 su telefono), velatura nera che sale dal basso, nome del percorso in Fraunces 700 bianco e riga «N documenti · anni» sotto; al passaggio del mouse la card si solleva e la foto si ingrandisce appena (ferme con il movimento ridotto). **Senza fotografia:** copertina "a stampa" dai token, rosso inchiostro che scende nella notte (gradiente a 140°, uguale per tutti i percorsi), con le iniziali del percorso in filigrana bianca al 16% in alto a destra: a distinguere le card sono le iniziali, non il colore.
 - **Shadow Strategy:** vedi Elevation & Depth, solo registro manifesto.
 - **Border:** filetto di 1px.
 - **Internal Padding:** circa 0,6 × 1rem nella parte testuale.
@@ -233,10 +242,14 @@ Netti, rossi, senza ornamenti.
 - **Pulsante "Filtri" flottante:** solo su telefono, compare quando il pannello filtri esce dallo schermo; riapre il pannello.
 
 ### Navigation
-- **Header:** fascia rossa piena, voci in Archivo 600 bianche, voce attiva sottolineata anche nelle pagine interne della sezione (una scheda documento accende "Archivio", una persona accende "Persone"); menu "Archivio" a tendina (Tutti i documenti, Percorsi tematici, Galleria).
+- **Header:** fascia rossa piena (80px, 56px sotto i 481px), logo alto 60px (44px tra 769 e 1023px, 40px sotto i 769px: `--ami-logo-height`), fermo al passaggio del mouse; voci in Archivo 600 bianche (all'85% a riposo, piene al passaggio del mouse). La voce corrente, e solo lei, ha una sottolineatura bianca di 3px, anche nelle pagine interne della sezione (una scheda documento accende "Archivio", una persona accende "Persone"): né il passaggio del mouse né il menu aperto sottolineano, così non compaiono mai due voci "correnti".
+- **Menu "Archivio":** un pulsante, non un link (l'archivio si articola in Tutti i documenti, Percorsi tematici, Galleria). Si apre col clic o da tastiera (Invio, Spazio, freccia giù), mai al solo passaggio del mouse; frecce, Inizio e Fine tra le voci; Esc, clic fuori o Tab oltre l'ultima voce lo chiudono. Il pannello prolunga la fascia: appeso al suo bordo inferiore, stesso rosso catalogo, angoli diritti, voci in Archivo 600 bianche all'85% separate da filetti bianchi trasparenti, testo in colonna con quello di "Archivio". Al passaggio del mouse il fondo della voce diventa rosso inchiostro (Darker Hover Rule); la pagina corrente è bianca piena con la stessa sottolineatura di 3px dell'header (sulla scheda si leggono insieme la sezione, «Archivio», e la pagina, «Tutti i documenti»). Anello di focus bianco, interno alla voce.
 - **Avviso Internet Archive:** sempre in cima. Su desktop fisso, su telefono una riga breve che scorre via con la pagina e non copre l'header.
 - **Percorso di navigazione:** sopra il titolo, in Archivo grigio con separatore "›" ("Archivio › Opuscolo", "Persone", "Archivio › Percorsi tematici"). Nelle schede aperte dall'archivio con filtri o pagina, in fondo alla riga compare l'azione rossa «Torna ai risultati» (icona SVG a chevron), che riporta all'ultima ricerca; "Archivio" porta sempre all'archivio intero. Tornando così, la lista si apre alla riga della scheda appena letta, con il focus sul titolo e un fondo rosso tenue che si spegne in circa due secondi (fisso con il movimento ridotto).
-- **Mobile:** menu laterale con intestazione rossa e logo; link "Vai al contenuto" come primo elemento raggiungibile da tastiera.
+- **Mobile:** menu laterale con intestazione rossa e logo, della stessa altezza della fascia e con il logo alla stessa misura (nessun gradino all'apertura); link "Vai al contenuto" come primo elemento raggiungibile da tastiera. Il menu aperto è una finestra modale (`role="dialog"`, `aria-modal`): il resto della pagina è inerte e non scorre; Esc, "Chiudi" o un tocco sullo sfondo lo chiudono e riportano il focus all'hamburger. Voci in Archivo 500, voce corrente 600 in rosso su fondo carta.
+
+### Attesa del visore
+Finché il visore di Internet Archive di una scheda documento non ha caricato, sopra il riquadro compare un fondo carta con un anello sottile (filetto `linea`, arco rosso catalogo) che gira, e sotto il testo in Archivo grigio «Caricamento del documento da Internet Archive…». Dopo 8 secondi il testo diventa «Internet Archive sta rispondendo lentamente…» con il rimando al link «Apri su Internet Archive». Se Internet Archive risulta guasto (7 secondi senza risposta al controllo, o 15 senza visore), il segnale lascia il posto all'avviso del visore. Il riquadro è `aria-busy` finché attende. Con il movimento ridotto l'anello resta fermo; senza JavaScript il segnale non compare.
 
 ### Segnatura
 La firma del sistema. In testa alla scheda documento, prima del titolo: id AMI in rosso, tipologia e data in Courier Prime grigio, separati da punti ("AMI-0043 · Opuscolo · 1968"). Ripresa in piccolo accanto alla data in ogni risultato dell'archivio.
@@ -283,4 +296,5 @@ Con testo curatoriale: biografia o storia su fondo carta accanto all'immagine. S
 - **Don't** troncare i nomi nei filtri: vanno a capo interi.
 - **Don't** mostrare un titolo visibile in home (resta solo quello per i lettori di schermo).
 - **Don't** mostrare l'avviso su Internet Archive dove non serve: il banner (non adesivo, dopo «Vai al contenuto») compare solo in galleria; nelle schede documento l'avviso sta dentro il visore, che si richiude a una fascia con il solo testo e «Riprova» (nessuna miniatura, così tutte le schede si presentano allo stesso modo). Il banner è in nero inchiostro con filetto e icona rossi (non più marrone/ambra). Banner e avviso nel visore usano la stessa frase: «I documenti di questo archivio sono ospitati su Internet Archive, piattaforma al momento instabile o irraggiungibile…».
-- **Don't** introdurre un tema scuro senza progettarlo: oggi il sito ha un solo schema chiaro (i colori "notte" servono solo alla fascia in evidenza della home).
+- **Don't** introdurre un tema scuro senza progettarlo: oggi il sito ha un solo schema chiaro (i colori "notte" servono solo a superfici-vetrina circoscritte: fascia in evidenza della home, visore della galleria, copertine dei percorsi senza foto).
+- **Don't** ricavare colori dal nome (hash) o scriverli negli script di generazione: anche segnaposto e card senza immagine prendono i fondi dai token, e l'HTML generato non porta stili inline.

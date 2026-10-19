@@ -381,9 +381,8 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
 }
-.persona-avatar--1 { background: var(--md-primary-fg-color); }
-.persona-avatar--2 { background: var(--ami-avatar-2); }
-.persona-avatar--3 { background: var(--ami-avatar-3); }
+/* Fondo, bordo e colore delle iniziali "a timbro": extra.css, sezione
+   "Rosso solo su cio' che si clicca" (Press Accent Rule). */
 .persona-iniziali {
   font-weight: 700;
   font-size: var(--ami-font-size-md); /* 18px */

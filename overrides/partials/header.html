@@ -8,10 +8,10 @@
   {%- endif -%}
 {%- endmacro -%}
 <!-- overrides/partials/header.html -->
-<!-- Stato del drawer (menu laterale): checkbox nascosto, letto da Material
-     e dal CSS (#__drawer:checked ~ .md-drawer). Lo comanda il pulsante
-     hamburger tramite javascripts/navigazione.js. -->
-<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off" tabindex="-1" aria-hidden="true">
+<!-- Stato del drawer (menu laterale): e' il checkbox #__drawer che Material
+     mette in cima al body (qui non se ne crea un secondo: due elementi con
+     lo stesso id). Lo leggono il CSS (#__drawer:checked ~ .md-drawer) e
+     l'overlay qui sotto; lo comanda l'hamburger tramite navigazione.js. -->
 
 <header class="md-header" data-md-component="header">
   <div class="md-header__inner md-grid">
@@ -31,7 +31,6 @@
 
     <!-- LOGO a sinistra -->
     <a href="{{ config.site_url | default(nav.homepage.url, true) | url }}"
-       title="{{ config.site_name | e }}"
        class="md-header__button md-logo"
        aria-label="{{ config.site_name }} - Home">
       <img src="{{ config.theme.logo | url }}" alt="" width="400" height="127">
@@ -98,8 +97,10 @@
 <label class="md-drawer-overlay" for="__drawer" id="drawer-overlay" aria-hidden="true"></label>
 
 <!-- DRAWER PERSONALIZZATO (menu laterale). Chiuso = visibility:hidden in
-     extra.css, quindi i link non ricevono il focus mentre e' fuori schermo. -->
-<nav class="md-drawer" id="custom-drawer" aria-label="Menu">
+     extra.css, quindi i link non ricevono il focus mentre e' fuori schermo.
+     Aperto e' una finestra modale: navigazione.js rende inerte il resto
+     della pagina e ne blocca lo scorrimento. -->
+<div class="md-drawer" id="custom-drawer" role="dialog" aria-modal="true" aria-label="Menu">
   <div class="md-drawer__inner">
 
     <!-- INTESTAZIONE ROSSA CON LOGO E CHIUSURA -->
@@ -120,6 +121,7 @@
     </div>
 
     <!-- VOCI DI NAVIGAZIONE -->
+    <nav class="md-drawer__nav" aria-label="Navigazione principale">
     <ul class="md-drawer__list">
       {% for nav_item in nav %}
 
@@ -154,6 +156,7 @@
 
       {% endfor %}
     </ul>
+    </nav>
 
   </div>
-</nav>
+</div>

@@ -8,13 +8,16 @@
 //    usano Material e il CSS). Il pulsante hamburger lo commuta e tiene
 //    sincronizzato aria-expanded; all'apertura il focus entra nel menu,
 //    resta intrappolato al suo interno (Tab / Maiusc+Tab) e alla chiusura
-//    (Esc, pulsante "Chiudi", clic sull'overlay) torna all'hamburger.
+//    (Esc, pulsante "Chiudi", tocco sull'overlay) torna all'hamburger.
+//    Mentre e' aperto il resto della pagina e' inerte (il lettore di
+//    schermo resta nel menu) e non scorre.
 //
 // 2) DROPDOWN DELL'HEADER ("Archivio"). Pattern "disclosure": il trigger
 //    e' un <button> con aria-expanded; si apre con clic, Invio, Spazio o
-//    freccia giu', e al passaggio del mouse sui dispositivi con hover. Si
-//    chiude con Esc (il focus torna al trigger), con un clic fuori o
-//    quando il focus esce dalla voce.
+//    freccia giu' (non al passaggio del mouse: l'apertura al passaggio
+//    faceva si' che il clic successivo richiudesse il menu). Si chiude con
+//    Esc (il focus torna al trigger), con un clic fuori o quando il focus
+//    esce dalla voce.
 (function () {
   "use strict";
 
@@ -33,6 +36,26 @@
       );
     };
 
+    // Pagina sotto il menu: inerte e ferma finche' il drawer e' aperto.
+    // Si rendono inerti i figli diretti del body tranne il drawer, il suo
+    // overlay, i checkbox di stato e gli script; si ricordano quelli toccati
+    // per restituirli tali e quali.
+    var resiInerti = [];
+    var bloccaPagina = function (blocca) {
+      document.documentElement.classList.toggle("ami-drawer-aperto", blocca);
+      if (blocca) {
+        Array.prototype.forEach.call(document.body.children, function (el) {
+          if (el === drawer || el.id === "drawer-overlay" || el.tagName === "SCRIPT" ||
+              el.tagName === "INPUT" || el.inert) return;
+          el.inert = true;
+          resiInerti.push(el);
+        });
+      } else {
+        resiInerti.forEach(function (el) { el.inert = false; });
+        resiInerti = [];
+      }
+    };
+
     // Allinea ARIA e focus allo stato del checkbox. "restituisci" indica
     // se, in chiusura, il focus deve tornare all'hamburger (non serve
     // quando la chiusura nasce da un clic su un link del menu).
@@ -40,6 +63,7 @@
       var aperto = toggle.checked;
       hamburger.setAttribute("aria-expanded", aperto ? "true" : "false");
       hamburger.setAttribute("aria-label", aperto ? "Chiudi il menu" : "Apri il menu");
+      bloccaPagina(aperto);
       if (aperto) {
         var primo = drawer.querySelector(".md-drawer__link--active") ||
           drawer.querySelector(".md-drawer__link") || focusabili()[0];
@@ -48,8 +72,14 @@
         window.requestAnimationFrame(function () {
           if (primo) primo.focus({ preventScroll: true });
         });
-      } else if (restituisci && drawer.contains(document.activeElement)) {
-        hamburger.focus();
+      } else if (restituisci) {
+        // Il focus torna all'hamburger se era nel menu o se si e' perso
+        // (tocco sull'overlay: l'etichetta non trattiene il focus, che
+        // finirebbe sul body).
+        var attivo = document.activeElement;
+        if (!attivo || attivo === document.body || drawer.contains(attivo)) {
+          hamburger.focus();
+        }
       }
     };
 
@@ -133,14 +163,30 @@
   }
 
   /* ------------------------------------------------------------
+     OMBRA DELL'HEADER: solo quando la pagina e' scorsa
+     ------------------------------------------------------------ */
+  var testata = document.querySelector(".md-header");
+  if (testata) {
+    var inAttesa = false;
+    var aggiornaOmbra = function () {
+      inAttesa = false;
+      testata.classList.toggle("ami-header--scorsa", window.scrollY > 0);
+    };
+    window.addEventListener("scroll", function () {
+      if (inAttesa) return;
+      inAttesa = true;
+      window.requestAnimationFrame(aggiornaOmbra);
+    }, { passive: true });
+    aggiornaOmbra();
+  }
+
+  /* ------------------------------------------------------------
      2) DROPDOWN DELL'HEADER
      ------------------------------------------------------------ */
   var voci = Array.prototype.slice.call(
     document.querySelectorAll(".md-header__nav-item--dropdown")
   );
   if (!voci.length) return;
-
-  var conHover = window.matchMedia("(hover: hover) and (pointer: fine)");
 
   var chiudiTutte = function (tranne) {
     voci.forEach(function (voce) {
@@ -162,8 +208,6 @@
     var link = function () {
       return Array.prototype.slice.call(menu.querySelectorAll("a[href]"));
     };
-    var timerChiusura = null;
-
     trigger.addEventListener("click", function () {
       var aperta = !voce.classList.contains("is-open");
       chiudiTutte(voce);
@@ -180,16 +224,20 @@
       }
     });
 
-    // Frecce su/giu' tra le voci del menu aperto (Tab funziona comunque).
+    // Frecce su/giu' tra le voci del menu aperto, Home/Fine alla prima e
+    // all'ultima (Tab funziona comunque).
     menu.addEventListener("keydown", function (event) {
-      if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+      var tasti = ["ArrowDown", "ArrowUp", "Home", "End"];
+      if (tasti.indexOf(event.key) === -1) return;
       var elenco = link();
       var i = elenco.indexOf(document.activeElement);
       if (i === -1) return;
       event.preventDefault();
-      var prossimo = event.key === "ArrowDown"
-        ? elenco[(i + 1) % elenco.length]
-        : elenco[(i - 1 + elenco.length) % elenco.length];
+      var prossimo;
+      if (event.key === "Home") prossimo = elenco[0];
+      else if (event.key === "End") prossimo = elenco[elenco.length - 1];
+      else if (event.key === "ArrowDown") prossimo = elenco[(i + 1) % elenco.length];
+      else prossimo = elenco[(i - 1 + elenco.length) % elenco.length];
       prossimo.focus();
     });
 
@@ -204,22 +252,6 @@
     // Il focus esce dalla voce (Tab oltre l'ultimo link): si chiude.
     voce.addEventListener("focusout", function (event) {
       if (!voce.contains(event.relatedTarget)) impostaVoce(voce, false);
-    });
-
-    // Hover solo con un puntatore preciso: su touch l'apertura e' il tap.
-    // Un breve ritardo in chiusura perdona il tragitto diagonale verso il menu.
-    voce.addEventListener("mouseenter", function () {
-      if (!conHover.matches) return;
-      clearTimeout(timerChiusura);
-      chiudiTutte(voce);
-      impostaVoce(voce, true);
-    });
-    voce.addEventListener("mouseleave", function () {
-      if (!conHover.matches) return;
-      clearTimeout(timerChiusura);
-      timerChiusura = setTimeout(function () {
-        if (!voce.contains(document.activeElement)) impostaVoce(voce, false);
-      }, 180);
     });
   });
 

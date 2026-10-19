@@ -736,7 +736,11 @@
   // script. Senza JavaScript la classe --attesa non viene mai aggiunta e il
   // segnale non compare. Dopo SECONDI_LENTO il testo invita ad aprire il
   // documento direttamente su Internet Archive.
-  var SECONDI_LENTO = 15;
+  // Deve restare sotto le soglie di ia-status.js: il probe dichiara il guasto
+  // a 7 s se IA non risponde affatto, il visore a 15 s (IFRAME_TIMEOUT_MS), e
+  // il guasto nasconde questo segnale. A 15 s il testo "lento" non si vedeva
+  // mai; a 8 s compare quando IA risponde ma il visore tarda.
+  var SECONDI_LENTO = 8;
 
   function attesaVisori() {
     document.querySelectorAll('.embed-visore').forEach(function (visore) {
