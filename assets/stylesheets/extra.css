@@ -139,22 +139,52 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 .md-header__nav-item {
   --ami-nav-pad-x: 0.8rem;
   padding: 0.4rem var(--ami-nav-pad-x);
+  border-radius: var(--ami-radius-sm);
   white-space: nowrap;
+  transition: background 0.15s;
 }
+/* Passaggio del mouse: la voce si illumina con una pillola chiara sul
+   rosso. Il menu "Archivio" aperto la tiene accesa (anche aperto da
+   tastiera), cosi' si vede da quale voce scende la tendina. */
+.md-header__nav-item:hover,
+.md-header__nav-item--dropdown.is-open {
+  background: rgba(255, 255, 255, 0.15);
+}
+@media (prefers-reduced-motion: reduce) {
+  .md-header__nav-item {
+    transition: none;
+  }
+}
+/* Tutte le voci hanno la sottolineatura (3px, stessa distanza dalla linea
+   di base), trasparente a riposo: il passaggio del mouse la accende a meta'
+   (bianco al 55%), la voce corrente la ha piena. Cosi' il passaggio
+   risponde ma non si confonde con "sei qui". */
 .md-header__nav-link {
   position: relative;
-  text-decoration: none;
   font-size: var(--ami-font-size-base);
   font-weight: 500;
   color: rgba(255, 255, 255, 0.85);
-  transition: color 0.15s;
+  text-decoration-line: underline;
+  text-decoration-thickness: 3px;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.45em;
+  text-decoration-skip-ink: none;
+  transition: color 0.15s, text-decoration-color 0.15s;
 }
-/* Passaggio del mouse e menu aperto: solo il testo, da bianco attenuato a
-   bianco pieno. La sottolineatura resta segno esclusivo della voce corrente
-   (prima la davano anche hover e menu aperto, con due voci "correnti"). */
+/* Passaggio del mouse: testo pieno e sottolineatura a meta'. Il menu aperto
+   schiarisce solo il testo (la sottolineatura segue il mouse, non lo stato
+   del menu: spostandosi tra le voci della tendina si spegne). */
 .md-header__nav-link:hover,
 .md-header__nav-item--dropdown.is-open .md-header__nav-link {
   color: var(--ami-su-colore);
+}
+.md-header__nav-link:hover {
+  text-decoration-color: rgba(255, 255, 255, 0.55);
+}
+@media (prefers-reduced-motion: reduce) {
+  .md-header__nav-link {
+    transition: none;
+  }
 }
 .md-header__nav-link--active {
   color: var(--ami-su-colore);
@@ -167,16 +197,12 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   position: absolute;
   inset: -0.4rem calc(-1 * var(--ami-nav-pad-x));
 }
-/* Voce corrente: filetto bianco di 3px sotto il testo, fermo (non piu'
-   animato: segna dove si e', non risponde al mouse). E' una sottolineatura
-   del testo, quindi sta alla stessa distanza dalla linea di base in tutte
-   le voci, anche in "Archivio" (pulsante con icona, piu' alto dei link). */
-.md-header__nav-link--active {
-  text-decoration-line: underline;
-  text-decoration-thickness: 3px;
+/* Voce corrente: sottolineatura bianca piena. E' una sottolineatura del
+   testo, quindi sta alla stessa distanza dalla linea di base in tutte le
+   voci, anche in "Archivio" (pulsante con icona, piu' alto dei link). */
+.md-header__nav-link--active,
+.md-header__nav-link--active:hover {
   text-decoration-color: var(--ami-su-colore);
-  text-underline-offset: 0.45em;
-  text-decoration-skip-ink: none;
 }
 /* Ombra dell'header solo a pagina scorsa: in cima la fascia resta piatta
    come una testata. La classe la mette navigazione.js; Material aggiunge
