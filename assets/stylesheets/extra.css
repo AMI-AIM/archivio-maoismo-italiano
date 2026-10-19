@@ -155,21 +155,13 @@ STILE PERSONALIZZATO — TEMA MATERIAL
     transition: none;
   }
 }
-/* Tutte le voci hanno la sottolineatura (3px, stessa distanza dalla linea
-   di base), trasparente a riposo: il passaggio del mouse la accende a meta'
-   (bianco al 55%), la voce corrente la ha piena. Cosi' il passaggio
-   risponde ma non si confonde con "sei qui". */
 .md-header__nav-link {
   position: relative;
+  text-decoration: none;
   font-size: var(--ami-font-size-base);
   font-weight: 500;
   color: rgba(255, 255, 255, 0.85);
-  text-decoration-line: underline;
-  text-decoration-thickness: 3px;
-  text-decoration-color: transparent;
-  text-underline-offset: 0.45em;
-  text-decoration-skip-ink: none;
-  transition: color 0.15s, text-decoration-color 0.15s;
+  transition: color 0.15s;
 }
 /* Passaggio del mouse: testo pieno e sottolineatura a meta'. Il menu aperto
    schiarisce solo il testo (la sottolineatura segue il mouse, non lo stato
@@ -178,11 +170,43 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 .md-header__nav-item--dropdown.is-open .md-header__nav-link {
   color: var(--ami-su-colore);
 }
-.md-header__nav-link:hover {
-  text-decoration-color: rgba(255, 255, 255, 0.55);
+/* Sottolineatura di 3px che scorre da sinistra: a meta' (bianco al 55%)
+   al passaggio del mouse, piena e ferma sulla voce corrente. Sta sul testo:
+   nei link sul link stesso, in "Archivio" sullo <span> del titolo, cosi'
+   e' alla stessa altezza in tutte le voci (il pulsante, con l'icona, e'
+   piu' alto dei link) e non passa sotto la freccia. */
+.md-header__nav-testo {
+  position: relative;
+  /* nel pulsante (flex) lo span e' un blocco alto quanto l'interlinea
+     (24px): con "normal" e' alto quanto il testo, come i link in linea */
+  line-height: normal;
+}
+.md-header__nav-link:not(.md-header__nav-link--dropdown)::after,
+.md-header__nav-link--dropdown .md-header__nav-testo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.3rem;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.55);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.md-header__nav-link:hover::after,
+.md-header__nav-link--dropdown:hover .md-header__nav-testo::after {
+  transform: scaleX(1);
+}
+.md-header__nav-link--active:not(.md-header__nav-link--dropdown)::after,
+.md-header__nav-link--active.md-header__nav-link--dropdown .md-header__nav-testo::after {
+  background: var(--ami-su-colore);
+  transform: scaleX(1);
 }
 @media (prefers-reduced-motion: reduce) {
-  .md-header__nav-link {
+  .md-header__nav-link,
+  .md-header__nav-link::after,
+  .md-header__nav-testo::after {
     transition: none;
   }
 }
@@ -196,13 +220,6 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   content: "";
   position: absolute;
   inset: -0.4rem calc(-1 * var(--ami-nav-pad-x));
-}
-/* Voce corrente: sottolineatura bianca piena. E' una sottolineatura del
-   testo, quindi sta alla stessa distanza dalla linea di base in tutte le
-   voci, anche in "Archivio" (pulsante con icona, piu' alto dei link). */
-.md-header__nav-link--active,
-.md-header__nav-link--active:hover {
-  text-decoration-color: var(--ami-su-colore);
 }
 /* Ombra dell'header solo a pagina scorsa: in cima la fascia resta piatta
    come una testata. La classe la mette navigazione.js; Material aggiunge
@@ -303,6 +320,9 @@ button.md-header__nav-link--dropdown {
   padding: 0;
   line-height: inherit;
   letter-spacing: inherit;
+  /* alto quanto una riga dei link (24px), anche se il titolo dentro e' a
+     interlinea "normal": pillola e voce restano allineate alle altre */
+  min-height: 1.2rem;
 }
 
 /* Singola voce del menu, separata dalla precedente da un filetto */
