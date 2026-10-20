@@ -199,9 +199,13 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   transform-origin: left center;
   transition: transform 0.2s var(--ami-ease-out);
 }
-.md-header__nav-link:hover::after,
-.md-header__nav-link--dropdown:hover .md-header__nav-testo::after {
-  transform: scaleX(1);
+/* Solo con un puntatore vero: sui tablet al tocco restava disegnata, come
+   se fosse la pagina corrente. */
+@media (hover: hover) and (pointer: fine) {
+  .md-header__nav-link:hover::after,
+  .md-header__nav-link--dropdown:hover .md-header__nav-testo::after {
+    transform: scaleX(1);
+  }
 }
 .md-header__nav-link--active:not(.md-header__nav-link--dropdown)::after,
 .md-header__nav-link--active.md-header__nav-link--dropdown .md-header__nav-testo::after {
@@ -482,7 +486,7 @@ button.md-header__nav-link--dropdown {
   font-size: var(--ami-font-size-sm);
   border-radius: var(--ami-radius-sm);
   text-decoration: none;
-  transition: background-color 0.15s, color 0.15s, scale 0.15s ease-out;
+  transition: background-color 0.15s, color 0.15s, scale 0.15s var(--ami-ease-out);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
   white-space: nowrap;
   flex-shrink: 0;
@@ -578,7 +582,8 @@ button.md-header__nav-link--dropdown {
   background: rgba(0, 0, 0, 0.5);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease;
+  /* Chiusura (risposta del sistema) piu' rapida dell'apertura */
+  transition: opacity 0.2s var(--ami-ease-out);
   z-index: 1001; /* sopra l'avviso Internet Archive (sticky, z 1000) */
   cursor: pointer;
 }
@@ -593,7 +598,7 @@ button.md-header__nav-link--dropdown {
   /* Chiuso = visibility:hidden (dopo la transizione): i link fuori schermo
      non devono ricevere il focus da tastiera ne' essere letti. */
   visibility: hidden;
-  transition: transform 0.25s var(--ami-ease-out), visibility 0s linear 0.25s;
+  transition: transform 0.2s var(--ami-ease-out), visibility 0s linear 0.2s;
   z-index: 1002;
   overflow-y: auto;
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
@@ -669,6 +674,7 @@ html.ami-drawer-aperto body {
 #__drawer:checked ~ .md-drawer-overlay {
   opacity: 1;
   pointer-events: auto;
+  transition-duration: 0.25s;
 }
 #__drawer:checked ~ .md-drawer {
   transform: translateX(0);
@@ -802,7 +808,7 @@ html.ami-drawer-aperto body {
   padding: 0.4rem 0.6rem;
   border-bottom: 1px solid var(--md-default-fg-color--lightest);
   border-left: 3px solid transparent;
-  transition: background-color 0.15s, border-left-color 0.15s;
+  transition: background-color 0.15s;
   gap: 1.5rem;
 }
 .doc-row:last-child {
@@ -920,7 +926,7 @@ html.ami-drawer-aperto body {
   border-radius: var(--ami-radius-sm);
   font-weight: 600;
   text-decoration: none;
-  transition: background-color 0.2s, scale 0.15s ease-out;
+  transition: background-color 0.2s, scale 0.15s var(--ami-ease-out);
 }
 /* Pulsante con icona davanti al testo: 2px in meno dal lato dell'icona */
 .md-button:has(> .button-icon:first-child) {
@@ -1595,7 +1601,7 @@ textarea {
     overflow: hidden;
     background: var(--ami-skeleton-bg);
     background-size: 200% 100%;
-    animation: skeleton-loading 1.5s infinite;
+    animation: skeleton-loading 1.5s linear infinite;
     border-radius: var(--ami-skeleton-radius);
     display: inline-block;
     vertical-align: middle;
@@ -2176,7 +2182,7 @@ RESET ESTESO: elimina qualunque bordo/ombra residuo del tema
   font-size: var(--ami-font-size-sm);
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.15s, scale 0.15s ease-out;
+  transition: background 0.15s, scale 0.15s var(--ami-ease-out);
 }
 .md-typeset .ami-404__primario:active,
 .ami-404__campo button:active {
@@ -3209,6 +3215,30 @@ input[type="search"]::-webkit-search-cancel-button {
   }
   .md-typeset details.scheda-raccolta[open] .scheda-raccolta__chiudi {
     display: inline;
+  }
+}
+/* Apertura dei <details> de "Il progetto" (indice e Scheda della raccolta,
+   su telefono): l'altezza cresce in 250ms. Solo l'apertura: la chiusura e'
+   immediata, cosi' non si anima la chiusura fatta dal JS al caricamento.
+   Dove ::details-content o interpolate-size non esistono, si apre di
+   scatto come prima. */
+@media (prefers-reduced-motion: no-preference) {
+  .md-typeset details.progetto-indice,
+  .md-typeset details.scheda-raccolta {
+    interpolate-size: allow-keywords;
+  }
+  .md-typeset details.progetto-indice::details-content,
+  .md-typeset details.scheda-raccolta::details-content {
+    height: 0;
+    overflow: clip;
+    overflow-clip-margin: 4px; /* non taglia gli anelli di focus */
+  }
+  .md-typeset details.progetto-indice[open]::details-content,
+  .md-typeset details.scheda-raccolta[open]::details-content {
+    height: auto;
+    transition:
+      height 250ms var(--ami-ease-out),
+      content-visibility 250ms allow-discrete;
   }
 }
 .md-typeset .progetto-citazione [hidden] {

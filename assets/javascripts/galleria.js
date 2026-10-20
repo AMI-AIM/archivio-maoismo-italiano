@@ -400,14 +400,29 @@
       lbCiteBtn.setAttribute("aria-expanded", String(aperto));
     });
 
+    // Etichetta in uno span, come nelle schede: la parola nuova entra
+    // sfocata (documenti.css, .citazione-copia__etichetta.is-entrata).
+    var lbCiteEtichetta = document.createElement("span");
+    lbCiteEtichetta.className = "citazione-copia__etichetta";
+    lbCiteEtichetta.textContent = lbCiteCopy.textContent;
+    lbCiteCopy.textContent = "";
+    lbCiteCopy.appendChild(lbCiteEtichetta);
+
+    function cambiaEtichetta(testo) {
+      lbCiteEtichetta.classList.remove("is-entrata");
+      void lbCiteEtichetta.offsetWidth;
+      lbCiteEtichetta.textContent = testo;
+      lbCiteEtichetta.classList.add("is-entrata");
+    }
+
     lbCiteCopy.addEventListener("click", function () {
       var testo = lbCiteText.value;
-      var originale = lbCiteCopy.textContent;
+      var originale = lbCiteEtichetta.textContent;
 
       function feedback() {
-        lbCiteCopy.textContent = "Copiato";
+        cambiaEtichetta("Copiato");
         setTimeout(function () {
-          lbCiteCopy.textContent = originale;
+          cambiaEtichetta(originale);
         }, 1500);
       }
 

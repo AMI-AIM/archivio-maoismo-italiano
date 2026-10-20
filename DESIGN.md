@@ -212,6 +212,24 @@ In CSS i raggi sono le variabili `--ami-radius-xs|sm|md|card|pillola` (extra.css
 - **Pillole** (999px): chip dei filtri attivi, pillole degli anni nello slider, ricerca della home, pulsante "Filtri" flottante su telefono.
 - **Cerchi**: avatar con iniziali in home "a timbro": fondo bianco, bordo di 2px e iniziali in rosso catalogo.
 
+## Motion
+
+Il movimento è breve, funzionale e raro: conferma un gesto o dice da dove arriva qualcosa, non decora. Quello che si usa decine di volte in una sessione non si anima.
+
+- **Curve:** due sole, in `:root` di extra.css. `--ami-ease-out` (`cubic-bezier(0.23, 1, 0.32, 1)`) per ciò che entra, esce o risponde a un gesto (hover, pressione, aperture); `--ami-ease-in-out` (`cubic-bezier(0.77, 0, 0.175, 1)`) per ciò che si trasforma sul posto (frecce che ruotano). Niente `ease`, `ease-in` o curve scritte a mano; unica eccezione dichiarata, lo scambio icona/etichetta del pulsante «Copia» (`cubic-bezier(0.2, 0, 0, 1)`).
+- **Durate:** 150ms per pressione, frecce e uscite; 200ms per hover delle card, aperture (visualizzatore, pannello di citazione) e dissolvenza delle immagini; 250ms per menu laterale e zoom delle foto. Mai oltre 300ms nell'interfaccia; l'uscita è più rapida dell'entrata.
+- **Senza animazione:** risultati dei filtri, paginazione, menu «Archivio» (si apre al passaggio del mouse), apertura dei gruppi di filtri (ruota solo la freccia), chiusura del pannello di citazione.
+- **Pressione:** `scale: 0.96` sui pulsanti pieni (rossi e bianchi), sul pulsante «Filtri» flottante e sui pulsanti del visualizzatore della galleria.
+- **Hover con movimento** (sollevamento delle card, zoom delle foto): solo dentro `@media (hover: hover) and (pointer: fine)`. Al tocco l'hover resta «incollato» e la card rimarrebbe sollevata.
+- **Comparse occasionali** (sempre 200ms in entrata, uscita immediata o a 150ms): il riquadro d'attesa del visore di Internet Archive sfuma via quando il documento è pronto; i pannelli che si aprono (citazione nelle schede e nel visualizzatore della galleria, «Mostra filtri» su telefono) entrano con dissolvenza e 4px di scivolamento; il pulsante «Filtri» flottante sale di 12px dal bordo basso. I `<details>` de «Il progetto» su telefono crescono in altezza in 250ms all'apertura e si chiudono di scatto.
+- **Visualizzatore della galleria:** entra con dissolvenza e scala da 0.96, sempre centrato; mostra subito la miniatura locale sfocata mentre l'originale arriva da Internet Archive.
+- **Conferma «Copiato»:** l'icona di copia lascia il posto a una spunta (opacità, scala da 0.25, sfocatura da 4px) e la parola nuova entra sfocata.
+- **Proprietà:** si animano solo `transform`/`translate`/`scale`, `opacity`, colori e `filter`. Mai `transition: all`, mai proprietà di layout (`left`, `width`, `height`, `margin`).
+- **Movimento ridotto** (`prefers-reduced-motion: reduce`): spariscono spostamenti, scale e sfocature; restano le dissolvenze e i cambi di colore.
+
+### Named Rules
+**The Quiet Motion Rule.** Un'animazione deve rispondere a «perché si muove?» con una funzione (conferma, provenienza, continuità). Se la risposta è «è più bello» e la cosa si vede spesso, non si anima.
+
 ## Components
 
 ### Buttons
@@ -222,7 +240,7 @@ Netti, rossi, senza ornamenti.
 - **Azioni secondarie** (Cita questo documento, Schermo intero, Apri su Internet Archive, Azzera filtri nel pannello dell'archivio): testo rosso in Archivo, con icona SVG dove serve, senza fondo. «Azzera filtri» diventa pulsante pieno solo nello stato vuoto dei risultati, dove è l'unica via d'uscita.
 
 ### Chips
-- **Filtri attivi:** pillola su fondo carta con bordo e testo rossi, nome del gruppo in grassetto ("Organizzazione: …") e pulsante ✕ per rimuoverla, che ai lettori di schermo dice quale filtro toglie («Rimuovi il filtro Persona: Mao Zedong»).
+- **Filtri attivi:** pillola su fondo carta con bordo e testo rossi, nome del gruppo in grassetto ("Organizzazione: …") e pulsante con la «x» (icona SVG, area cliccabile di 40px) per rimuoverla, che ai lettori di schermo dice quale filtro toglie («Rimuovi il filtro Persona: Mao Zedong»).
 
 ### Cards / Containers
 - **Corner Style:** 12px.

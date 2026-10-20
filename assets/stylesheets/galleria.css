@@ -236,10 +236,16 @@
   background: var(--gal-segnaposto);
   transition: transform .25s var(--ami-ease-out), filter .25s var(--ami-ease-out);
 }
-.card-link:hover .galleria-img,
 .card-link:focus-visible .galleria-img {
   transform: scale(1.02);
   filter: saturate(1.03) contrast(1.02);
+}
+/* Al passaggio solo con un puntatore vero (come le altre card) */
+@media (hover: hover) and (pointer: fine) {
+  .card-link:hover .galleria-img {
+    transform: scale(1.02);
+    filter: saturate(1.03) contrast(1.02);
+  }
 }
 
 /* Segnaposto 4:5 finche' l'immagine non ha dimensioni (anche in errore) */
@@ -394,7 +400,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
 .galleria-lightbox.is-loading .lightbox-media {
   background: var(--gal-notte-skel);
   background-size: 200% 100%;
-  animation: skeleton-loading 1.5s infinite;
+  animation: skeleton-loading 1.5s linear infinite;
 }
 
 .lightbox-img {
@@ -483,7 +489,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   display: grid;
   place-items: center;
   padding: 0;
-  transition: background-color .15s, color .15s, scale .15s ease-out;
+  transition: background-color .15s, color .15s, scale .15s var(--ami-ease-out);
 }
 .lightbox-nav:active:not([disabled]),
 .lightbox-close:active,
@@ -550,6 +556,24 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   overflow: auto;
 }
 .lightbox-cite[hidden] { display: none; }
+/* Apertura come il pannello di citazione delle schede: dissolvenza di
+   200ms (piu' 4px di scivolamento senza movimento ridotto), chiusura
+   immediata. */
+.lightbox-cite {
+  transition: opacity .2s var(--ami-ease-out), translate .2s var(--ami-ease-out);
+}
+@starting-style {
+  .lightbox-cite {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @starting-style {
+    .lightbox-cite {
+      translate: 0 4px;
+    }
+  }
+}
 
 /* BARRA COMPATTA: una sola riga, titolo + meta con ellissi */
 .lightbox-caption {
@@ -614,7 +638,7 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color .15s, color .15s, border-color .15s, scale .15s ease-out;
+  transition: background-color .15s, color .15s, border-color .15s, scale .15s var(--ami-ease-out);
 }
 .lightbox-action[hidden] { display: none !important; }
 .lightbox-action:hover {
@@ -721,7 +745,6 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
       rgba(0, 0, 0, .38) 38%,
       rgba(0, 0, 0, 0) 78%);
   }
-  .card-link:hover .galleria-img { transform: none; filter: none; }
 }
 
 /* Schermi touch: controlli del visualizzatore di almeno 44px */
@@ -735,13 +758,9 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* Movimento ridotto = meno movimento, non zero: restano dissolvenze e
+     cambi di colore; spariscono zoom, spostamenti e scorrimenti morbidi. */
   .galleria-timeline .timeline-list { scroll-behavior: auto; }
-  .galleria-wrapper *,
-  .galleria-wrapper *::before,
-  .galleria-wrapper *::after {
-    transition-duration: .01ms !important;
-    animation-duration: .01ms !important;
-  }
   .galleria-lightbox.is-loading .lightbox-media { animation: none; }
   .card-link:hover .galleria-img,
   .card-link:focus-visible .galleria-img { transform: none; }

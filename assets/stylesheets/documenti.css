@@ -400,7 +400,7 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
   font-size: var(--ami-font-size-sm);
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s, scale 0.15s ease-out;
+  transition: background 0.15s, scale 0.15s var(--ami-ease-out);
   white-space: nowrap;
 }
 .citazione-copia:active {
@@ -446,19 +446,16 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
   scale: 1;
   filter: blur(0);
 }
-/* L'etichetta cambia testo da JS: cambiando animazione a ogni stato, la
-   parola nuova entra sempre sfocata ("Copiato" e il ritorno a "Copia"). */
-.citazione-copia .citazione-copia__etichetta {
+/* Parola nuova dell'etichetta ("Copiato", il ritorno a "Copia"): entra
+   sfocata. La classe la mette il JS (cambiaEtichetta) solo quando cambia
+   il testo, non all'apertura del pannello. */
+.citazione-copia__etichetta {
   display: inline-block;
-  animation: ami-etichetta-a .15s cubic-bezier(0.2, 0, 0, 1);
 }
-.citazione-copia.is-copiato .citazione-copia__etichetta {
-  animation-name: ami-etichetta-b;
+.citazione-copia__etichetta.is-entrata {
+  animation: ami-etichetta-entra .15s cubic-bezier(0.2, 0, 0, 1);
 }
-@keyframes ami-etichetta-a {
-  from { opacity: 0; filter: blur(2px); }
-}
-@keyframes ami-etichetta-b {
+@keyframes ami-etichetta-entra {
   from { opacity: 0; filter: blur(2px); }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -467,6 +464,12 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
     scale: 1;
     filter: none;
   }
+  .citazione-copia__etichetta.is-entrata {
+    animation-name: ami-etichetta-entra-ridotta;
+  }
+}
+@keyframes ami-etichetta-entra-ridotta {
+  from { opacity: 0; }
 }
 
 .citazione-copia:hover {
@@ -866,7 +869,20 @@ necessario. La data resta a 21px: titolo (29px+) e data si distinguono.
   position: relative;
 }
 
-.embed-visore--attesa:not(.embed-visore--pronto)::before {
+/* Il riquadro resta sempre presente e, quando l'iframe e' pronto, sfuma
+   via in 200ms (prima spariva all'istante e il documento "saltava" dentro).
+   Anche con il movimento ridotto: e' una dissolvenza, non un movimento. */
+.embed-visore--attesa::before,
+.embed-visore--attesa::after {
+  transition: opacity 200ms var(--ami-ease-out), visibility 0s linear 200ms;
+}
+.embed-visore--attesa.embed-visore--pronto::before,
+.embed-visore--attesa.embed-visore--pronto::after {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.embed-visore--attesa::before {
   content: "Caricamento del documento da Internet Archive…";
   position: absolute;
   inset: 0;
@@ -884,7 +900,7 @@ necessario. La data resta a 21px: titolo (29px+) e data si distinguono.
   pointer-events: none;
 }
 
-.embed-visore--attesa:not(.embed-visore--pronto)::after {
+.embed-visore--attesa::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -900,7 +916,7 @@ necessario. La data resta a 21px: titolo (29px+) e data si distinguono.
   pointer-events: none;
 }
 
-.embed-visore--lento:not(.embed-visore--pronto)::before {
+.embed-visore--lento::before {
   content: "Internet Archive sta rispondendo lentamente…\A Il documento si apre anche dal link «Apri su Internet Archive» qui sotto.";
 }
 
@@ -911,7 +927,7 @@ necessario. La data resta a 21px: titolo (29px+) e data si distinguono.
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .embed-visore--attesa:not(.embed-visore--pronto)::after {
+  .embed-visore--attesa::after {
     animation: none;
   }
 }

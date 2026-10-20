@@ -682,11 +682,20 @@
           var etichetta = copyButton.querySelector('.citazione-copia__etichetta') || copyButton;
           var originalText = etichetta.textContent;
           
+          // Cambia la parola e la fa entrare sfocata (documenti.css,
+          // .is-entrata): la classe va tolta e rimessa per ripartire.
+          function cambiaEtichetta(testo) {
+            etichetta.classList.remove('is-entrata');
+            void etichetta.offsetWidth;
+            etichetta.textContent = testo;
+            etichetta.classList.add('is-entrata');
+          }
+
           function showCopied() {
-            etichetta.textContent = 'Copiato';
+            cambiaEtichetta('Copiato');
             copyButton.classList.add('is-copiato');
             setTimeout(function () {
-              etichetta.textContent = originalText;
+              cambiaEtichetta(originalText);
               copyButton.classList.remove('is-copiato');
             }, 1500);
           }
