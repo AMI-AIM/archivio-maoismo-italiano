@@ -12,6 +12,17 @@
   {{ super() }}
 {% endblock %}
 
+{# Titolo della scheda del browser: in home il titolo della pagina contiene
+   gia' il nome dell'archivio e la coda " - AMI - Archivio del Maoismo
+   Italiano" di Material lo ripeteva. Altrove resta quello di Material. #}
+{% block htmltitle %}
+  {% if page and page.is_homepage and page.meta and page.meta.title %}
+    <title>{{ page.meta.title }}</title>
+  {% else %}
+    {{ super() }}
+  {% endif %}
+{% endblock %}
+
 {% block extrahead %}
   {{ super() }}
 

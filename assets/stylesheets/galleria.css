@@ -125,7 +125,7 @@
   letter-spacing: var(--ami-tracking-wide);
   text-decoration: none;
   white-space: nowrap;
-  transition: color .18s ease, background-color .18s ease, border-color .18s ease;
+  transition: color .15s ease, background-color .15s ease, border-color .15s ease;
 }
 .galleria-timeline .timeline-link::before { content: none; }
 .galleria-timeline .timeline-link:hover {

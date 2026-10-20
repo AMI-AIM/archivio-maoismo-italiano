@@ -63,8 +63,8 @@ hide:
 <button class="lightbox-close" type="button" aria-label="Chiudi visualizzatore"><svg class="lightbox-icona" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
 </div>
 <div class="lightbox-cite" id="lightbox-cite-panel" hidden>
-<textarea class="citazione-testo" readonly rows="4"></textarea>
-<button class="citazione-copia" type="button">Copia citazione</button>
+<textarea class="citazione-testo" readonly rows="4" aria-label="Testo della citazione"></textarea>
+<button class="citazione-copia" type="button" aria-live="polite">Copia citazione</button>
 </div>
 <div class="lightbox-caption">
 <p class="lightbox-line">

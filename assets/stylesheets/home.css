@@ -106,6 +106,11 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   align-items: flex-start;
   gap: 1.5rem;
   overflow-x: auto;
+  /* overflow-x: auto ritaglia anche in verticale: 12px sopra (compensati
+     dal margine negativo) lasciano spazio alla card sollevata di 4px, che
+     prima perdeva il bordo superiore. */
+  padding-top: 0.6rem;
+  margin-top: -0.6rem;
   padding-bottom: 0.6rem;
   margin-bottom: 0;
   scrollbar-width: none;
@@ -127,9 +132,6 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 @media (hover: hover) and (pointer: fine) {
   .evidenza-card:hover {
     transform: translateY(-4px);
-  }
-  .evidenza-card:hover .evidenza-thumbnail-img {
-    transform: scale(1.04);
   }
 }
 .evidenza-link {
@@ -158,7 +160,6 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   /* Sulla fascia nera: contorno bianco appena visibile */
   outline: 1px solid oklch(1 0 0 / 0.1);
   outline-offset: -1px;
-  transition: transform 0.2s var(--ami-ease-out);
 }
 
 /* Griglia desktop: larghezza fissa per card uniformi (sotto i 769px
@@ -442,8 +443,8 @@ body:has(.banner-full) .md-content article h1:first-of-type {
     -webkit-overflow-scrolling: touch;
     /* 0.8rem = 16px, il margine laterale della pagina (radice a 20px):
        con 1rem la striscia usciva di 4px per lato. */
-    padding: 0 0.8rem 0.6rem 0.8rem !important;
-    margin: 0 -0.8rem !important;
+    padding: 0.6rem 0.8rem 0.6rem 0.8rem !important;
+    margin: -0.6rem -0.8rem 0 !important;
     gap: 1.25rem !important;
   }
   .evidenza-card {
@@ -532,8 +533,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
 
 /* Movimento ridotto: copertine ferme al passaggio del mouse */
 @media (prefers-reduced-motion: reduce) {
-  .evidenza-card:hover,
-  .evidenza-card:hover .evidenza-thumbnail-img {
+  .evidenza-card:hover {
     transform: none;
   }
 }

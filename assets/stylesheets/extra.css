@@ -681,10 +681,11 @@ html.ami-drawer-aperto body {
   visibility: visible;
   transition: transform 0.25s var(--ami-ease-out), visibility 0s;
 }
+/* Movimento ridotto: il menu compare senza scivolare; il velo scuro
+   resta una dissolvenza (aiuta a capire cosa succede, non si muove). */
 @media (prefers-reduced-motion: reduce) {
   .md-drawer,
-  #__drawer:checked ~ .md-drawer,
-  .md-drawer-overlay {
+  #__drawer:checked ~ .md-drawer {
     transition: none;
   }
 }
@@ -1054,8 +1055,8 @@ in home.css, che le definisce da sola: rimosse)
     justify-content: flex-start;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch !important;
-    padding: 0 1rem 0.6rem 1rem;
-    margin: 0 -1rem;
+    padding: 0.6rem 1rem 0.6rem 1rem;
+    margin: -0.6rem -1rem 0;
     gap: 1.25rem;
   }
   .evidenza-grid::-webkit-scrollbar {

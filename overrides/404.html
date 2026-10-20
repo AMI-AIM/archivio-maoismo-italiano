@@ -4,6 +4,12 @@
    contenuto fuori centro. #}
 {% block site_nav %}{% endblock %}
 
+{# Il titolo della scheda dice subito che la pagina non esiste (prima era
+   solo il nome del sito). #}
+{% block htmltitle %}
+  <title>Pagina non trovata - {{ config.site_name }}</title>
+{% endblock %}
+
 {% block content %}
 {# Stili in extra.css (sezione "PAGINA 404"): token del sito, niente inline.
    L'ancora serve al link "Vai al contenuto" dell'header (main.html):

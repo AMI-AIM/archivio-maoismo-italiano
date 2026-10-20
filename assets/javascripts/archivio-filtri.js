@@ -1099,10 +1099,12 @@ function generaIterfacciaPaginazione(container, current, total) {
                 // sono in fondo alla lista, senza questo l'utente resterebbe
                 // scrollato in basso senza vedere i nuovi risultati. Il focus
                 // segue la vista (il pulsante premuto non esiste piu').
+                // Salto immediato, non scorrimento morbido: il cambio pagina si
+                // ripete decine di volte e mezzo secondo di scorrimento ogni
+                // volta rallentava la consultazione.
                 const testata = document.querySelector('.risultati-testata') || document.getElementById('risultati-container');
                 if (testata) {
-                    const riduci = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                    testata.scrollIntoView({ behavior: riduci ? 'auto' : 'smooth', block: 'start' });
+                    testata.scrollIntoView({ block: 'start' });
                 }
                 mettiFocusSuiRisultati();
             }
