@@ -94,20 +94,30 @@
       };
       var layoutCard = function (card) { layoutCards([card]); };
 
+      // Card "pronta" (foto arrivata o fallita): solo allora compare la
+      // didascalia sulla sfumatura scura (galleria.css).
+      var segnaPronta = function (card) { card.classList.add("is-pronta"); };
+
       grids.forEach(function (grid) {
         grid.classList.add("is-js");
         var cards = Array.prototype.slice.call(grid.querySelectorAll(".galleria-card"));
         layoutCards(cards);
         cards.forEach(function (card) {
           var img = card.querySelector(".galleria-img");
-          if (!img) return;
-          img.addEventListener("load", function () { layoutCard(card); }, { once: true });
-          img.addEventListener("error", function () { layoutCard(card); }, { once: true });
+          if (!img) {
+            segnaPronta(card);
+            return;
+          }
+          if (img.complete && img.getAttribute("src")) segnaPronta(card);
+          img.addEventListener("load", function () { segnaPronta(card); layoutCard(card); }, { once: true });
+          img.addEventListener("error", function () { segnaPronta(card); layoutCard(card); }, { once: true });
           img.addEventListener("ami:lazy-loaded", function () {
             img.style.transition = "";
+            segnaPronta(card);
             layoutCard(card);
           }, { once: true });
           img.addEventListener("ami:lazy-error", function () {
+            segnaPronta(card);
             layoutCard(card);
           }, { once: true });
         });
@@ -220,6 +230,13 @@
     var lbCiteText = lbCitePanel.querySelector(".citazione-testo");
     var lbCiteCopy = lbCitePanel.querySelector(".citazione-copia");
 
+    // Anteprima sfocata (miniatura locale) mentre l'originale si carica
+    var lbThumb = document.createElement("img");
+    lbThumb.className = "lightbox-anteprima";
+    lbThumb.alt = "";
+    lbThumb.setAttribute("aria-hidden", "true");
+    lbImg.parentNode.insertBefore(lbThumb, lbImg);
+
     var currentIndex = -1;
     var lastTrigger = null;
     var hashBeforeOpen = "";
@@ -312,6 +329,12 @@
 
       dialog.classList.remove("is-error");
       dialog.classList.add("is-loading");
+      var thumbSrc = card.getAttribute("data-thumb-src") || "";
+      if (thumbSrc) {
+        lbThumb.src = thumbSrc;
+      } else {
+        lbThumb.removeAttribute("src");
+      }
       lbImg.removeAttribute("src");
       lbImg.alt = titolo;
       lbImg.src = fullSrc;

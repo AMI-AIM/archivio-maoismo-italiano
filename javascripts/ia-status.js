@@ -2,60 +2,50 @@
  * AVVISO DISPONIBILITÀ INTERNET ARCHIVE — AMI
  * ============================================================
  * L'archivio si appoggia a Internet Archive (IA) per gran parte dei
- * contenuti (embed multimediali, testi, immagini, copertine). Se IA
- * è irraggiungibile, degradata o troppo lenta, l'utente potrebbe
- * pensare che il problema sia del sito AMI stesso: questo script
- * mostra un avviso esplicito in cima alla pagina quando rileva
- * indizi di malfunzionamento da parte di IA.
+ * contenuti (visore delle schede, immagini a piena risoluzione della
+ * galleria). Se IA è irraggiungibile, degradata o troppo lenta, il
+ * lettore potrebbe pensare che il problema sia del sito AMI: questo
+ * script lo dice esplicitamente, e distingue tre situazioni:
  *
- * STRATEGIA A PIÙ SEGNALI (un singolo probe generico intercetta solo
- * i blackout totali, non le degradazioni parziali): questo script
- * combina tre fonti di segnale indipendenti, ciascuna con soglie
- * proprie, per coprire meglio gli scenari reali:
+ *   guasto          IA non risponde o risponde con errori;
+ *   non disponibile IA risponde, ma il documento della scheda al momento
+ *                   non c'è (manutenzione, record vuoto o oscurato);
+ *   offline         il browser non ha rete: la colpa non è di IA.
  *
- * 1. PROBE DI RAGGIUNGIBILITÀ (attivo su ogni pagina)
- *    Carica un'immagine leggera da archive.org con un tag <img>
- *    creato via JS (non fetch): a differenza di fetch in modalità
- *    'no-cors' (che spesso risulta "riuscito" anche su risposte di
- *    errore HTTP, essendo una risposta opaca), un tag <img> genera
- *    un evento 'error' affidabile sia su errori di rete sia su
- *    risposte HTTP 4xx/5xx, perché il browser non riesce a
- *    decodificare l'immagine. Ha anche un timeout manuale, perché
- *    <img> non ne ha uno nativo.
+ * SEGNALI
  *
- * 2. MONITORAGGIO IMMAGINI (attivo sulle pagine con immagini IA)
- *    Si aggancia all'evento 'ami:lazy-error', già emesso da
- *    lazy-loading.js quando un'immagine fallisce definitivamente
- *    (dopo aver esaurito anche l'eventuale fallback). Se n. errori
- *    riconducibili a archive.org si accumulano in una finestra
- *    breve, è un indizio che il problema è sistemico e non di un
- *    singolo file mancante (quel caso resta gestito a parte dai
- *    fallback già presenti in documenti.css/lazy-loading.js).
+ * 1. CONTROLLO DEL DOCUMENTO (schede con visore)
+ *    a) Miniatura del documento (archive.org/services/img/<id>) caricata
+ *       con un <img>: passa per gli stessi server che conservano i file
+ *       del visore, quindi si accorge anche dei guasti parziali che
+ *       lasciano in piedi archive.org. Un <img> dà un 'error' affidabile
+ *       sia per la rete sia per le risposte 4xx/5xx; il tempo massimo lo
+ *       mettiamo noi.
+ *    b) Metadati del documento (archive.org/metadata/<id>) letti con
+ *       fetch: un oggetto vuoto o un record oscurato vuol dire "non
+ *       disponibile", un 5xx vuol dire guasto. Se il browser non può
+ *       leggere la risposta (rete, CORS) il dato si ignora: decide la
+ *       miniatura.
+ * 2. CONTROLLO GENERICO (pagine senza visore, es. galleria)
+ *    L'icona di archive.org, come prima, con cache di sessione.
+ * 3. IMMAGINI: evento 'ami:lazy-error' di lazy-loading.js; 2 errori
+ *    di archive.org in 15 s fanno comparire il banner.
+ * 4. VISORE: se l'iframe non finisce di caricarsi entro 30 s, guasto.
+ *    Se poi arriva lo stesso, l'avviso sparisce e il visore si riapre.
  *
- * 3. MONITORAGGIO IFRAME (attivo sulle schede documento con embed)
- *    Se l'iframe .universal-embed non emette 'load' entro una
- *    soglia di tempo, è un segnale di mancata risposta da IA.
+ * I tempi massimi contano solo mentre la scheda del browser è visibile:
+ * una scheda aperta "in background" (frequente: si aprono molti
+ * documenti dall'archivio) può rimandare il caricamento del visore
+ * finché non la si guarda, e non deve trovarsi un guasto che non c'è.
  *
- * DOVE SI ATTIVA: solo sulle pagine che caricano davvero qualcosa da
- * Internet Archive (visore delle schede documento, immagini a piena
- * risoluzione della galleria). Altrove il banner non compare e il
- * probe non parte.
+ * DOVE: solo sulle pagine che caricano davvero qualcosa da IA. Sulle
+ * schede l'avviso sta dentro il visore (niente banner); altrove è il
+ * banner in cima.
  *
- * SUL VISORE: quando il visore di una scheda non risponde, o il probe
- * fallisce, sopra il visore compare un avviso con "Riprova" e il link
- * diretto. L'iframe resta al suo posto: se in realtà sta funzionando
- * (falso allarme del probe) il lettore può continuare a usarlo.
- *
- * LIMITI NOTI (nessun sistema client-side può coprire tutto):
- * - non distingue "IA giù" da problemi di rete locali dell'utente
- *   (adblocker, VPN, firewall aziendale che blocca archive.org);
- * - il monitoraggio iframe rileva la mancata risposta di rete, ma
- *   non un contenuto d'errore renderizzato correttamente da IA
- *   (in quel caso l'iframe emette comunque 'load');
- * - la cache di sessione del probe (punto 1) potrebbe ritardare la
- *   rilevazione di un'interruzione iniziata a metà sessione: per
- *   questo i segnali reattivi (punti 2-3) restano sempre attivi,
- *   indipendentemente dalla cache del probe.
+ * LIMITI NOTI
+ * - un firewall o un'estensione che blocca archive.org sembra un guasto;
+ * - se IA serve una pagina d'errore dentro il visore, il visore risulta
+ *   caricato: lo intercettano solo i metadati (punto 1b), se leggibili.
  */
 (function () {
   'use strict';
@@ -64,18 +54,46 @@
   // CONFIGURAZIONE
   // ------------------------------------------------------------
   var PROBE_URL_BASE = 'https://archive.org/favicon.ico';
-  var PROBE_TIMEOUT_MS = 7000;
+  var MINIATURA_URL = 'https://archive.org/services/img/';
+  var METADATI_URL = 'https://archive.org/metadata/';
+  // Soglie larghe: su una connessione lenta IA puo' metterci parecchio,
+  // e il guasto chiude il visore. Tempi contati solo a scheda visibile.
+  var PROBE_TIMEOUT_MS = 15000;
+  var METADATI_TIMEOUT_MS = 15000;
+  var IFRAME_TIMEOUT_MS = 30000;
   var PROBE_CACHE_KEY = 'ami_ia_probe_status';
   var PROBE_CACHE_TTL_MS = 5 * 60 * 1000; // 5 minuti
 
   var IMG_ERROR_THRESHOLD = 2;        // n. errori immagine IA per scattare
   var IMG_ERROR_WINDOW_MS = 15000;    // finestra temporale per il conteggio
 
-  var IFRAME_TIMEOUT_MS = 15000;      // tempo massimo di attesa per l'iframe
-
   var DISMISS_KEY = 'ami_ia_status_dismissed';
 
-  var bannerMostrato = false;
+  // Priorita': un avviso piu' preciso sostituisce uno piu' generico.
+  var PRIORITA = { offline: 1, guasto: 2, nondisponibile: 3 };
+
+  var TESTI_VISORE = {
+    guasto: 'I documenti di questo archivio sono ospitati su Internet Archive, ' +
+      'piattaforma al momento instabile o irraggiungibile. Se i documenti non si caricano, il problema è ' +
+      'temporaneo e non riguarda il solo sito AMI. Riprovare più tardi.',
+    nondisponibile: 'Internet Archive risponde, ma al momento non rende disponibile questo documento. ' +
+      'Il problema riguarda Internet Archive, non il sito AMI: riprovare più tardi.',
+    offline: 'Sembra che il dispositivo sia offline. Il documento, ospitato su Internet Archive, ' +
+      'si caricherà quando torna la connessione.'
+  };
+
+  var TESTI_BANNER = {
+    guasto: {
+      lungo: 'I documenti di questo archivio sono ospitati su Internet Archive, piattaforma al momento instabile o irraggiungibile. ' +
+        'Se i documenti non si caricano, il problema è temporaneo e non riguarda il solo sito AMI. Riprovare più tardi.',
+      breve: 'Internet Archive è instabile: i documenti potrebbero non caricarsi.'
+    },
+    offline: {
+      lungo: 'Sembra che il dispositivo sia offline: i documenti e le immagini ospitati su Internet Archive ' +
+        'si caricheranno quando torna la connessione.',
+      breve: 'Sei offline: i documenti si caricheranno al ritorno della rete.'
+    }
+  };
 
   // Elementi che dipendono da Internet Archive: senza nessuno di questi
   // la pagina non ha nulla da avvisare.
@@ -87,9 +105,9 @@
   ].join(',');
 
   // ------------------------------------------------------------
-  // UTILITY: sessionStorage sicuro (può non essere disponibile,
-  // es. modalità privata restrittiva su alcuni browser)
+  // UTILITY
   // ------------------------------------------------------------
+  // sessionStorage sicuro (puo' mancare, es. navigazione privata)
   function ssGet(key) {
     try {
       return sessionStorage.getItem(key);
@@ -102,10 +120,70 @@
     try {
       sessionStorage.setItem(key, value);
     } catch (e) {
-      /* ignora: nessun problema, si ripete il controllo alla prossima pagina */
+      /* ignora: si ripete il controllo alla prossima pagina */
     }
   }
 
+  function offline() {
+    return navigator.onLine === false;
+  }
+
+  // Tipo di avviso per un problema di rete: se il browser sa di essere
+  // offline la colpa non e' di Internet Archive.
+  function tipoGuasto() {
+    return offline() ? 'offline' : 'guasto';
+  }
+
+  // Timer che conta solo mentre la pagina e' visibile: si ferma quando
+  // la scheda del browser passa in secondo piano e riparte al ritorno.
+  function timerVisibile(fn, ms) {
+    var restante = ms;
+    var inizio = 0;
+    var id = null;
+    var finito = false;
+
+    function avvia() {
+      if (finito || id !== null || document.visibilityState === 'hidden') return;
+      inizio = Date.now();
+      id = window.setTimeout(function () {
+        id = null;
+        finito = true;
+        document.removeEventListener('visibilitychange', suCambio);
+        fn();
+      }, restante);
+    }
+    function ferma() {
+      if (id === null) return;
+      window.clearTimeout(id);
+      id = null;
+      restante = Math.max(0, restante - (Date.now() - inizio));
+    }
+    function suCambio() {
+      if (document.visibilityState === 'hidden') ferma();
+      else avvia();
+    }
+
+    document.addEventListener('visibilitychange', suCambio);
+    avvia();
+    return {
+      annulla: function () {
+        finito = true;
+        ferma();
+        document.removeEventListener('visibilitychange', suCambio);
+      }
+    };
+  }
+
+  // Identificativo IA dall'indirizzo del visore (archive.org/embed/<id>)
+  function identificativo(iframe) {
+    var m = /archive\.org\/embed\/([^/?#]+)/.exec(iframe.getAttribute('src') || '');
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+
+  // ------------------------------------------------------------
+  // BANNER (pagine senza visore). Stile in extra.css, sezione
+  // "STATO DI INTERNET ARCHIVE".
+  // ------------------------------------------------------------
   function eDismisso() {
     return ssGet(DISMISS_KEY) === '1';
   }
@@ -114,15 +192,22 @@
     ssSet(DISMISS_KEY, '1');
   }
 
-  // ------------------------------------------------------------
-  // BANNER: creazione (lo stile sta in extra.css, sezione
-  // "STATO DI INTERNET ARCHIVE")
-  // ------------------------------------------------------------
-  function mostraAvviso() {
-    if (eDismisso() || bannerMostrato) return;
-    if (document.getElementById('ia-status-banner')) return;
+  function testiBanner(banner, tipo) {
+    var t = TESTI_BANNER[tipo] || TESTI_BANNER.guasto;
+    banner.dataset.tipo = tipo;
+    banner.querySelector('.ia-status-banner__lungo').textContent = t.lungo;
+    banner.querySelector('.ia-status-banner__breve').textContent = t.breve;
+  }
 
-    bannerMostrato = true;
+  function mostraAvviso(tipo) {
+    tipo = tipo || 'guasto';
+    var esistente = document.getElementById('ia-status-banner');
+    if (esistente) {
+      // Un banner "offline" diventa "guasto" se la rete e' tornata.
+      if (esistente.dataset.tipo !== tipo) testiBanner(esistente, tipo);
+      return;
+    }
+    if (eDismisso()) return;
 
     var banner = document.createElement('div');
     banner.id = 'ia-status-banner';
@@ -134,11 +219,8 @@
           '<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>' +
         '</svg>' +
         '<span class="ia-status-banner__testo">' +
-          '<span class="ia-status-banner__lungo">' +
-          'I documenti di questo archivio sono ospitati su Internet Archive, piattaforma al momento instabile o irraggiungibile. ' +
-          'Se i documenti non si caricano, il problema è temporaneo e non riguarda il solo sito AMI. Riprovare più tardi.' +
-          '</span>' +
-          '<span class="ia-status-banner__breve" aria-hidden="true">Internet Archive è instabile: i documenti potrebbero non caricarsi.</span>' +
+          '<span class="ia-status-banner__lungo"></span>' +
+          '<span class="ia-status-banner__breve" aria-hidden="true"></span>' +
         '</span>' +
         '<button type="button" class="ia-status-banner__chiudi" aria-label="Chiudi avviso">' +
           '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
@@ -146,6 +228,7 @@
           '</svg>' +
         '</button>' +
       '</div>';
+    testiBanner(banner, tipo);
 
     // Dopo il link "Vai al contenuto": il primo Tab resta quello.
     var salto = document.querySelector('body > .md-skip');
@@ -155,18 +238,19 @@
       document.body.insertBefore(banner, document.body.firstChild);
     }
 
-    var chiudiBtn = banner.querySelector('.ia-status-banner__chiudi');
-    if (chiudiBtn) {
-      chiudiBtn.addEventListener('click', function () {
-        banner.remove();
-        bannerMostrato = false;
-        segnaDismisso();
-      });
-    }
+    banner.querySelector('.ia-status-banner__chiudi').addEventListener('click', function () {
+      banner.remove();
+      segnaDismisso();
+    });
+  }
+
+  function togliBannerOffline() {
+    var banner = document.getElementById('ia-status-banner');
+    if (banner && banner.dataset.tipo === 'offline') banner.remove();
   }
 
   // ------------------------------------------------------------
-  // SEGNALE 1: PROBE DI RAGGIUNGIBILITÀ (via <img>, con cache)
+  // CACHE DEL CONTROLLO GENERICO
   // ------------------------------------------------------------
   function leggiCacheProbe() {
     var raw = ssGet(PROBE_CACHE_KEY);
@@ -188,165 +272,252 @@
     }));
   }
 
-  // Sulle schede con il visore l'avviso sta solo dentro il visore: il
-  // banner globale ripeteva lo stesso messaggio due volte.
-  function haVisori() {
-    return !!document.querySelector('.universal-embed');
-  }
-
-  function segnalaGuasto() {
-    if (!haVisori()) mostraAvviso();
-    segnalaVisori();
-  }
-
-  function eseguiProbe(ignoraCache) {
-    var cache = ignoraCache ? null : leggiCacheProbe();
-    if (cache) {
-      if (!cache.raggiungibile) {
-        segnalaGuasto();
-      }
-      return;
-    }
-
+  // Carica un'immagine da IA con un tempo massimo (contato a scheda
+  // visibile). esito: 'ok', 'errore' (risposta d'errore o rete) o
+  // 'scaduto' (nessuna risposta in tempo).
+  function provaImmagine(url, ms, esito) {
     var risolto = false;
     var img = new Image();
-    var timeoutId = setTimeout(function () {
+    var timer = timerVisibile(function () {
       if (risolto) return;
       risolto = true;
-      scriviCacheProbe(false);
-      segnalaGuasto();
-    }, PROBE_TIMEOUT_MS);
-
+      img.src = '';
+      esito('scaduto');
+    }, ms);
     img.onload = function () {
       if (risolto) return;
       risolto = true;
-      clearTimeout(timeoutId);
-      scriviCacheProbe(true);
+      timer.annulla();
+      esito('ok');
     };
-
     img.onerror = function () {
       if (risolto) return;
       risolto = true;
-      clearTimeout(timeoutId);
-      scriviCacheProbe(false);
-      segnalaGuasto();
+      timer.annulla();
+      esito('errore');
     };
-
-    // Cache-busting: evita che il browser risponda da cache locale
-    // senza generare traffico reale verso archive.org.
-    img.src = PROBE_URL_BASE + '?_=' + Date.now();
+    // Cache-busting: evita che il browser risponda dalla cache locale.
+    img.src = url + (url.indexOf('?') === -1 ? '?' : '&') + '_=' + Date.now();
   }
 
   // ------------------------------------------------------------
-  // SEGNALE 2: MONITORAGGIO IMMAGINI (evento ami:lazy-error)
+  // 1. CONTROLLO DEL DOCUMENTO (schede con visore)
+  // ------------------------------------------------------------
+  function controllaDocumento(iframe) {
+    var id = identificativo(iframe);
+    if (!id) return;
+
+    // a) Miniatura: raggiungibilita' dei server dei file
+    provaImmagine(MINIATURA_URL + encodeURIComponent(id), PROBE_TIMEOUT_MS, function (esito) {
+      if (esito === 'ok') {
+        scriviCacheProbe(true);
+        return;
+      }
+      // Solo un errore vero si memorizza: una risposta lenta no.
+      if (esito === 'errore' && !offline()) scriviCacheProbe(false);
+      segnalaVisore(iframe, tipoGuasto());
+    });
+
+    // b) Metadati: il documento c'e'? Se la risposta non e' leggibile
+    //    (rete, CORS) non si conclude nulla.
+    if (!window.fetch) return;
+    var controller = window.AbortController ? new AbortController() : null;
+    var timer = timerVisibile(function () {
+      if (controller) controller.abort();
+    }, METADATI_TIMEOUT_MS);
+    fetch(METADATI_URL + encodeURIComponent(id), {
+      cache: 'no-store',
+      credentials: 'omit',
+      signal: controller ? controller.signal : undefined
+    }).then(function (risposta) {
+      timer.annulla();
+      if (risposta.status >= 500) {
+        segnalaVisore(iframe, 'guasto');
+        return null;
+      }
+      if (!risposta.ok) return null;
+      return risposta.json();
+    }).then(function (dati) {
+      if (!dati) return;
+      var vuoto = typeof dati === 'object' && Object.keys(dati).length === 0;
+      if (vuoto || dati.is_dark === true) {
+        segnalaVisore(iframe, 'nondisponibile');
+      }
+    }).catch(function () {
+      timer.annulla();
+      /* rete, CORS o tempo scaduto: decide la miniatura */
+    });
+  }
+
+  // ------------------------------------------------------------
+  // 2. CONTROLLO GENERICO (pagine senza visore)
+  // ------------------------------------------------------------
+  function controlloGenerico(ignoraCache) {
+    var cache = ignoraCache ? null : leggiCacheProbe();
+    if (cache) {
+      if (!cache.raggiungibile) mostraAvviso(tipoGuasto());
+      return;
+    }
+    provaImmagine(PROBE_URL_BASE, PROBE_TIMEOUT_MS, function (esito) {
+      if (esito === 'ok') {
+        scriviCacheProbe(true);
+        return;
+      }
+      if (esito === 'errore' && !offline()) scriviCacheProbe(false);
+      mostraAvviso(tipoGuasto());
+    });
+  }
+
+  // ------------------------------------------------------------
+  // 3. MONITORAGGIO IMMAGINI (evento ami:lazy-error)
   // ------------------------------------------------------------
   var erroriImmagineTimestamps = [];
-
-  function eDominioArchiveOrg(url) {
-    if (!url) return false;
-    return /archive\.org/i.test(url);
-  }
 
   function gestisciErroreImmagine(event) {
     var img = event.target;
     if (!img) return;
 
-    // Al momento dell'errore definitivo, l'immagine conserva ancora
-    // gli attributi data-src / data-src-fallback (rimossi solo in
-    // caso di successo da lazy-loading.js), quindi possiamo verificare
-    // se la fonte fallita puntava a archive.org.
+    // Al momento dell'errore definitivo l'immagine conserva ancora
+    // data-src / data-src-fallback (lazy-loading.js li toglie solo in
+    // caso di successo): si verifica che puntasse a archive.org.
     var src = img.getAttribute('data-src') || img.getAttribute('data-src-fallback') || img.currentSrc || img.src || '';
-    if (!eDominioArchiveOrg(src)) return;
+    if (!/archive\.org/i.test(src)) return;
+    // Sulle schede con il visore l'avviso sta nel visore: niente banner.
+    if (document.querySelector('.universal-embed')) return;
 
     var ora = Date.now();
     erroriImmagineTimestamps.push(ora);
-    // Mantiene solo i timestamp nella finestra temporale configurata
     erroriImmagineTimestamps = erroriImmagineTimestamps.filter(function (t) {
       return ora - t <= IMG_ERROR_WINDOW_MS;
     });
 
     if (erroriImmagineTimestamps.length >= IMG_ERROR_THRESHOLD) {
-      mostraAvviso();
+      mostraAvviso(tipoGuasto());
     }
   }
 
-  function attivaMonitoraggioImmagini() {
-    // 'ami:lazy-error' è dispatchato con bubbles:true da lazy-loading.js:
-    // un solo listener sul document intercetta tutte le immagini della pagina.
-    document.addEventListener('ami:lazy-error', gestisciErroreImmagine, { passive: true });
-  }
-
   // ------------------------------------------------------------
-  // SEGNALE 3: MONITORAGGIO IFRAME (.universal-embed)
+  // 4. VISORE (.universal-embed)
   // ------------------------------------------------------------
   function sorvegliaIframe(iframe) {
     var caricato = false;
 
-    var timeoutId = setTimeout(function () {
+    var timer = timerVisibile(function () {
       if (caricato) return;
-      // L'iframe non ha emesso 'load' entro la soglia: possibile
-      // mancata risposta da IA (non copre il caso di risposta
-      // ricevuta ma con contenuto d'errore, che emette comunque load).
-      segnalaVisore(iframe);
+      // Nessun 'load' entro la soglia: mancata risposta da IA.
+      segnalaVisore(iframe, tipoGuasto());
     }, IFRAME_TIMEOUT_MS);
 
     iframe.addEventListener('load', function () {
       caricato = true;
-      clearTimeout(timeoutId);
+      timer.annulla();
+      // Arrivato dopo un guasto (rete lenta, falso allarme): si riapre.
+      ripristinaVisore(iframe);
     }, { once: true });
 
     iframe.addEventListener('error', function () {
       caricato = true;
-      clearTimeout(timeoutId);
-      segnalaVisore(iframe);
+      timer.annulla();
+      segnalaVisore(iframe, tipoGuasto());
     }, { once: true });
   }
 
-  function attivaMonitoraggioIframe() {
-    var iframes = document.querySelectorAll('.universal-embed');
-    if (!iframes.length) return;
-    iframes.forEach(sorvegliaIframe);
+  function contenitoreDi(iframe) {
+    return iframe.closest('.embed-container') || iframe.parentNode;
   }
 
-  // ------------------------------------------------------------
-  // AVVISO NEL VISORE (schede documento)
-  // ------------------------------------------------------------
-  function segnalaVisori() {
-    var iframes = document.querySelectorAll('.universal-embed');
-    for (var i = 0; i < iframes.length; i++) segnalaVisore(iframes[i]);
-  }
+  // Avviso dentro il visore. Se c'e' gia', viene sostituito solo da uno
+  // piu' preciso (offline < guasto < non disponibile).
+  function segnalaVisore(iframe, tipo) {
+    var contenitore = contenitoreDi(iframe);
+    if (!contenitore) return;
+    var visore = contenitore.querySelector('.embed-visore');
+    var avviso = contenitore.querySelector('.ia-visore-avviso');
 
-  function segnalaVisore(iframe) {
-    var contenitore = iframe.closest('.embed-container') || iframe.parentNode;
-    if (!contenitore || contenitore.querySelector('.ia-visore-avviso')) return;
+    // Visore gia' caricato: un controllo fallito dopo (miniatura assente,
+    // rete a singhiozzo) non deve coprire un documento che si vede. Fa
+    // eccezione "non disponibile": allora il visore mostra la pagina
+    // d'errore di IA e l'avviso spiega di chi e' il problema.
+    if (tipo !== 'nondisponibile' && visore && visore.classList.contains('embed-visore--pronto')) return;
+
+    if (avviso) {
+      var attuale = contenitore.dataset.iaAvviso;
+      if (PRIORITA[tipo] > (PRIORITA[attuale] || 0)) {
+        contenitore.dataset.iaAvviso = tipo;
+        avviso.querySelector('.ia-visore-avviso__testo').textContent = TESTI_VISORE[tipo];
+      }
+      return;
+    }
 
     // Il link diretto a Internet Archive c'e' gia' nel piede del visore
     // ("Apri su Internet Archive"): qui non si ripete.
-    var avviso = document.createElement('div');
+    avviso = document.createElement('div');
     avviso.className = 'ia-visore-avviso';
     avviso.setAttribute('role', 'status');
     avviso.innerHTML =
-      '<p class="ia-visore-avviso__testo">I documenti di questo archivio sono ospitati su Internet Archive, ' +
-      'piattaforma al momento instabile o irraggiungibile. Se i documenti non si caricano, il problema è ' +
-      'temporaneo e non riguarda il solo sito AMI. Riprovare più tardi.</p>' +
+      '<p class="ia-visore-avviso__testo"></p>' +
       '<div class="ia-visore-avviso__azioni">' +
         '<button type="button" class="ia-visore-avviso__riprova">Riprova</button>' +
       '</div>';
+    avviso.querySelector('.ia-visore-avviso__testo').textContent = TESTI_VISORE[tipo];
+    contenitore.dataset.iaAvviso = tipo;
     contenitore.insertBefore(avviso, contenitore.firstChild);
     contenitore.classList.add('embed-container--guasto');
-    // Il segnale di attesa (documenti.js) sparisce col guasto: il visore non
-    // e' piu' "in caricamento" per i lettori di schermo.
-    var visore = contenitore.querySelector('.embed-visore');
+    // Il segnale di attesa (documenti.js) sparisce col guasto: il visore
+    // non e' piu' "in caricamento" per i lettori di schermo.
     if (visore) visore.removeAttribute('aria-busy');
 
     avviso.querySelector('.ia-visore-avviso__riprova').addEventListener('click', function () {
-      avviso.remove();
-      contenitore.classList.remove('embed-container--guasto');
-      var src = iframe.getAttribute('src');
-      iframe.setAttribute('src', 'about:blank');
-      iframe.setAttribute('src', src);
-      sorvegliaIframe(iframe);
-      eseguiProbe(true);
+      riprova(iframe);
+      // Il focus era sul pulsante appena rimosso: va sul visore.
+      var bersaglio = visore || iframe;
+      if (!bersaglio.hasAttribute('tabindex')) bersaglio.setAttribute('tabindex', '-1');
+      bersaglio.focus({ preventScroll: true });
+    });
+  }
+
+  function togliAvviso(contenitore) {
+    var avviso = contenitore.querySelector('.ia-visore-avviso');
+    if (avviso) avviso.remove();
+    contenitore.classList.remove('embed-container--guasto');
+    delete contenitore.dataset.iaAvviso;
+  }
+
+  // Il visore e' arrivato dopo l'avviso: si toglie, tranne quando IA ha
+  // detto che il documento non c'e' (il visore mostra allora la sua
+  // pagina d'errore, l'avviso spiega di chi e' il problema).
+  function ripristinaVisore(iframe) {
+    var contenitore = contenitoreDi(iframe);
+    if (!contenitore || !contenitore.classList.contains('embed-container--guasto')) return;
+    if (contenitore.dataset.iaAvviso === 'nondisponibile') return;
+    togliAvviso(contenitore);
+  }
+
+  function riprova(iframe) {
+    var contenitore = contenitoreDi(iframe);
+    var visore = contenitore && contenitore.querySelector('.embed-visore');
+    if (contenitore) togliAvviso(contenitore);
+    // Il segnale di attesa riparte da capo (documenti.js ascolta l'evento:
+    // rimette "Caricamento...", aria-busy e il tempo per "lento"). Va
+    // prima del ricaricamento, che a fine corsa segna il visore pronto.
+    if (visore) {
+      visore.dispatchEvent(new CustomEvent('ami:visore-riprova', { bubbles: true }));
+    }
+    // Ricarica riassegnando lo stesso indirizzo (niente passaggio da
+    // about:blank: il suo "load" segnerebbe subito il visore pronto).
+    iframe.setAttribute('src', iframe.getAttribute('src'));
+    sorvegliaIframe(iframe);
+    controllaDocumento(iframe);
+  }
+
+  // ------------------------------------------------------------
+  // RITORNO DELLA RETE: si riprova da soli
+  // ------------------------------------------------------------
+  function suOnline() {
+    togliBannerOffline();
+    document.querySelectorAll('.universal-embed').forEach(function (iframe) {
+      var contenitore = contenitoreDi(iframe);
+      if (contenitore && contenitore.dataset.iaAvviso === 'offline') riprova(iframe);
     });
   }
 
@@ -355,9 +526,17 @@
   // ------------------------------------------------------------
   function init() {
     if (!document.querySelector(SELETTORE_CONTENUTI_IA)) return;
-    eseguiProbe();
-    attivaMonitoraggioImmagini();
-    attivaMonitoraggioIframe();
+    var iframes = document.querySelectorAll('.universal-embed');
+    if (iframes.length) {
+      iframes.forEach(function (iframe) {
+        sorvegliaIframe(iframe);
+        controllaDocumento(iframe);
+      });
+    } else {
+      controlloGenerico();
+    }
+    document.addEventListener('ami:lazy-error', gestisciErroreImmagine, { passive: true });
+    window.addEventListener('online', suOnline);
   }
 
   if (document.readyState === 'loading') {
