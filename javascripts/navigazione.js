@@ -335,6 +335,15 @@
   pulsante.hidden = false;
   pulsante.setAttribute("aria-live", "polite");
 
+  // Cambia la parola e la fa entrare sfocata (documenti.css, .is-entrata):
+  // la classe va tolta e rimessa per far ripartire l'animazione.
+  function cambiaEtichetta(nuovo) {
+    etichetta.classList.remove("is-entrata");
+    void etichetta.offsetWidth;
+    etichetta.textContent = nuovo;
+    etichetta.classList.add("is-entrata");
+  }
+
   pulsante.addEventListener("click", function () {
     var semplice = testo.innerText;
     var copia = (window.ClipboardItem && corrente !== "bibtex")
@@ -344,10 +353,10 @@
         })])
       : navigator.clipboard.writeText(semplice);
     copia.then(function () {
-      etichetta.textContent = "Copiato";
+      cambiaEtichetta("Copiato");
       pulsante.classList.add("is-copiato");
       setTimeout(function () {
-        etichetta.textContent = originale;
+        cambiaEtichetta(originale);
         pulsante.classList.remove("is-copiato");
       }, 1500);
     }).catch(function () {
@@ -357,8 +366,8 @@
       var sel = window.getSelection();
       sel.removeAllRanges();
       sel.addRange(range);
-      etichetta.textContent = "Testo selezionato: copialo";
-      setTimeout(function () { etichetta.textContent = originale; }, 3000);
+      cambiaEtichetta("Testo selezionato: copialo");
+      setTimeout(function () { cambiaEtichetta(originale); }, 3000);
     });
   });
 })();
