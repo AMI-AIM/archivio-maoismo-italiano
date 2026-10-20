@@ -303,6 +303,26 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
   gap: 0.7rem;
 }
 
+/* Apertura del pannello nelle schede (id citazione-pannello-*): breve
+   dissolvenza, piu' uno scivolamento di 4px senza movimento ridotto. La
+   chiusura e' immediata. Il pannello sempre aperto de "Il progetto" e quello
+   senza JS non hanno quell'id: nessuna animazione al caricamento. */
+.citazione-pannello[id^="citazione-pannello-"] {
+  transition: opacity .2s var(--ami-ease-out), translate .2s var(--ami-ease-out);
+}
+@starting-style {
+  .citazione-pannello[id^="citazione-pannello-"] {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @starting-style {
+    .citazione-pannello[id^="citazione-pannello-"] {
+      translate: 0 -4px;
+    }
+  }
+}
+
 .citazione-pannello--noscript {
   margin-top: 1rem;
 }
@@ -385,6 +405,68 @@ dichiarato come ".md-typeset h1.doc-title-large" (0,2,1).
 }
 .citazione-copia:active {
   scale: 0.96;
+}
+
+/* Conferma della copia (schede e "Il progetto"): l'icona "copia" lascia il
+   posto a una spunta (opacita', scala da 0.25, sfocatura da 4px) e la nuova
+   etichetta entra sfocata. Solo per i pulsanti con icona (non la galleria). */
+.citazione-copia:has(> .ami-icona) {
+  position: relative;
+}
+.citazione-copia > .ami-icona,
+.citazione-copia:has(> .ami-icona)::before {
+  transition:
+    opacity .15s cubic-bezier(0.2, 0, 0, 1),
+    scale .15s cubic-bezier(0.2, 0, 0, 1),
+    filter .15s cubic-bezier(0.2, 0, 0, 1);
+}
+.citazione-copia:has(> .ami-icona)::before {
+  content: "";
+  position: absolute;
+  left: calc(1.2rem - 2px);
+  top: 50%;
+  width: 1.15em;
+  height: 1.15em;
+  margin-top: -0.575em;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E") center / contain no-repeat;
+  opacity: 0;
+  scale: .25;
+  filter: blur(4px);
+  pointer-events: none;
+}
+.citazione-copia.is-copiato > .ami-icona {
+  opacity: 0;
+  scale: .25;
+  filter: blur(4px);
+}
+.citazione-copia.is-copiato:has(> .ami-icona)::before {
+  opacity: 1;
+  scale: 1;
+  filter: blur(0);
+}
+/* L'etichetta cambia testo da JS: cambiando animazione a ogni stato, la
+   parola nuova entra sempre sfocata ("Copiato" e il ritorno a "Copia"). */
+.citazione-copia .citazione-copia__etichetta {
+  display: inline-block;
+  animation: ami-etichetta-a .15s cubic-bezier(0.2, 0, 0, 1);
+}
+.citazione-copia.is-copiato .citazione-copia__etichetta {
+  animation-name: ami-etichetta-b;
+}
+@keyframes ami-etichetta-a {
+  from { opacity: 0; filter: blur(2px); }
+}
+@keyframes ami-etichetta-b {
+  from { opacity: 0; filter: blur(2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .citazione-copia > .ami-icona,
+  .citazione-copia:has(> .ami-icona)::before {
+    scale: 1;
+    filter: none;
+  }
 }
 
 .citazione-copia:hover {
@@ -838,5 +920,12 @@ necessario. La data resta a 21px: titolo (29px+) e data si distinguono.
    del segnale di attesa. */
 .embed-container--guasto .embed-visore::before,
 .embed-container--guasto .embed-visore::after {
+  display: none;
+}
+
+/* Il pulsante "Torna su" di Material compariva al centro, in alto, sopra il
+   visore di Internet Archive (cioe' sul testo del documento). Nelle schede
+   documento (riconoscibili dalla segnatura) non si mostra. */
+body:has(.doc-segnatura) .md-top {
   display: none;
 }

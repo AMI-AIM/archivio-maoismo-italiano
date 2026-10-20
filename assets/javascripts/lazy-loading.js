@@ -30,7 +30,7 @@
   const CONFIG = {
     rootMargin: '50px',      // Carica immagine 50px prima che entri in viewport
     threshold: 0.01,         // Attiva quando l'1% dell'immagine è visibile
-    fadeInDuration: 300,     // Durata fade-in in ms
+    fadeInDuration: 200,     // Durata fade-in in ms
     skeletonClass: 'lazy-skeleton',
     loadedClass: 'lazy-loaded',
     errorClass: 'lazy-error',
@@ -103,7 +103,7 @@
       img.parentNode.insertBefore(skeleton, img);
       // Nascondi immagine finché non è caricata
       img.style.opacity = '0';
-      img.style.transition = `opacity ${CONFIG.fadeInDuration}ms ease-in-out`;
+      img.style.transition = `opacity ${CONFIG.fadeInDuration}ms var(--ami-ease-out)`;
     }
 
     attemptLoad(img, src, fallbackSrc, srcset, sizes);

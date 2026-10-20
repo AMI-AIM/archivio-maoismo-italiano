@@ -736,24 +736,72 @@
   // script. Senza JavaScript la classe --attesa non viene mai aggiunta e il
   // segnale non compare. Dopo SECONDI_LENTO il testo invita ad aprire il
   // documento direttamente su Internet Archive.
-  // Deve restare sotto le soglie di ia-status.js: il probe dichiara il guasto
-  // a 7 s se IA non risponde affatto, il visore a 15 s (IFRAME_TIMEOUT_MS), e
-  // il guasto nasconde questo segnale. A 15 s il testo "lento" non si vedeva
-  // mai; a 8 s compare quando IA risponde ma il visore tarda.
+  // Deve restare sotto le soglie di ia-status.js (guasto dopo 15 s senza
+  // risposta al controllo, 30 s senza visore): il guasto nasconde questo
+  // segnale.
+  // "Riprova" nell'avviso di guasto (ia-status.js) manda l'evento
+  // ami:visore-riprova: il segnale riparte da capo per il nuovo tentativo.
   var SECONDI_LENTO = 8;
+
+  function avviaAttesa(visore, daCapo) {
+    if (daCapo) {
+      visore.classList.remove('embed-visore--pronto', 'embed-visore--lento');
+    } else if (visore.classList.contains('embed-visore--pronto')) {
+      return;
+    }
+    visore.classList.add('embed-visore--attesa');
+    visore.setAttribute('aria-busy', 'true');
+    if (visore._amiTimerLento) visore._amiTimerLento.annulla();
+    visore._amiTimerLento = timerVisibile(function () {
+      if (!visore.classList.contains('embed-visore--pronto')) {
+        visore.classList.add('embed-visore--lento');
+      }
+    }, SECONDI_LENTO * 1000);
+  }
+
+  // Timer che conta solo a scheda del browser visibile (come in
+  // ia-status.js): aperta in secondo piano, la scheda non deve trovarsi
+  // "lento" prima ancora di aver provato a caricare il visore.
+  function timerVisibile(fn, ms) {
+    var restante = ms, inizio = 0, id = null, finito = false;
+    function avvia() {
+      if (finito || id !== null || document.visibilityState === 'hidden') return;
+      inizio = Date.now();
+      id = window.setTimeout(function () {
+        id = null;
+        finito = true;
+        document.removeEventListener('visibilitychange', suCambio);
+        fn();
+      }, restante);
+    }
+    function ferma() {
+      if (id === null) return;
+      window.clearTimeout(id);
+      id = null;
+      restante = Math.max(0, restante - (Date.now() - inizio));
+    }
+    function suCambio() {
+      if (document.visibilityState === 'hidden') ferma();
+      else avvia();
+    }
+    document.addEventListener('visibilitychange', suCambio);
+    avvia();
+    return {
+      annulla: function () {
+        finito = true;
+        ferma();
+        document.removeEventListener('visibilitychange', suCambio);
+      }
+    };
+  }
 
   function attesaVisori() {
     document.querySelectorAll('.embed-visore').forEach(function (visore) {
-      if (visore.classList.contains('embed-visore--pronto')) {
-        return;
-      }
-      visore.classList.add('embed-visore--attesa');
-      visore.setAttribute('aria-busy', 'true');
-      window.setTimeout(function () {
-        if (!visore.classList.contains('embed-visore--pronto')) {
-          visore.classList.add('embed-visore--lento');
-        }
-      }, SECONDI_LENTO * 1000);
+      avviaAttesa(visore, false);
+    });
+    document.addEventListener('ami:visore-riprova', function (event) {
+      var visore = event.target.closest && event.target.closest('.embed-visore');
+      if (visore) avviaAttesa(visore, true);
     });
   }
 

@@ -234,7 +234,7 @@
   width: 100%;
   height: auto;
   background: var(--gal-segnaposto);
-  transition: transform .35s ease, filter .35s ease;
+  transition: transform .25s var(--ami-ease-out), filter .25s var(--ami-ease-out);
 }
 .card-link:hover .galleria-img,
 .card-link:focus-visible .galleria-img {
@@ -262,7 +262,13 @@
   /* Didascalia sempre visibile (prima solo al passaggio del mouse: senza
      mouse non si sapeva cosa mostrasse la foto). */
   opacity: 1;
-  transition: opacity .24s ease;
+  transition: opacity .2s var(--ami-ease-out);
+}
+/* Finche' la foto non e' arrivata la sfumatura scura sul riquadro vuoto
+   sembrava un'immagine rotta: didascalia nascosta fino al caricamento (o
+   all'errore). Solo con JS (.is-js), che segna le card pronte. */
+.is-js .galleria-card:not(.is-pronta) .img-overlay {
+  opacity: 0;
 }
 .card-link:hover .img-overlay,
 .card-link:focus-visible .img-overlay { opacity: 1; }
@@ -339,6 +345,44 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
   backdrop-filter: blur(3px);
 }
 
+/* Apertura e chiusura: dissolvenza (200ms in entrata, 150ms in uscita) e,
+   senza movimento ridotto, un leggero ingrandimento da 0.96. La finestra
+   resta centrata. L'uscita animata usa overlay/display allow-discrete
+   (Chrome, Edge, Safari recenti); altrove si chiude all'istante. */
+.galleria-lightbox,
+.galleria-lightbox::backdrop {
+  opacity: 0;
+  transition:
+    opacity .15s var(--ami-ease-out),
+    scale .15s var(--ami-ease-out),
+    overlay .15s allow-discrete,
+    display .15s allow-discrete;
+}
+.galleria-lightbox[open],
+.galleria-lightbox[open]::backdrop {
+  opacity: 1;
+  transition-duration: .2s;
+}
+@starting-style {
+  .galleria-lightbox[open],
+  .galleria-lightbox[open]::backdrop {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .galleria-lightbox {
+    scale: .96;
+  }
+  .galleria-lightbox[open] {
+    scale: 1;
+  }
+  @starting-style {
+    .galleria-lightbox[open] {
+      scale: .96;
+    }
+  }
+}
+
 .lightbox-media {
   position: relative;
   flex: 1 1 auto;
@@ -354,11 +398,39 @@ html.no-js .galleria-wrapper .lazy-img { opacity: 1 !important; }
 }
 
 .lightbox-img {
+  position: relative;
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: center center;
   display: block;
+  transition: opacity .2s var(--ami-ease-out);
+}
+.galleria-lightbox.is-loading .lightbox-img {
+  opacity: 0;
+}
+
+/* Anteprima: la miniatura locale (gia' scaricata per la griglia) compare
+   subito, sfocata, mentre l'originale arriva da Internet Archive; poi
+   l'originale le si dissolve sopra. Creata da galleria.js. */
+.lightbox-anteprima {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s var(--ami-ease-out);
+}
+.galleria-lightbox.is-loading .lightbox-anteprima[src] {
+  opacity: 1;
+}
+/* Con l'anteprima il segnaposto animato non serve */
+.galleria-lightbox.is-loading .lightbox-media:has(.lightbox-anteprima[src]) {
+  background: var(--gal-notte);
+  animation: none;
 }
 .galleria-lightbox.is-error .lightbox-img { display: none; }
 .galleria-lightbox.is-error .lightbox-media::after {

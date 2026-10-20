@@ -3,6 +3,11 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 ============================================================ */
 :root {
   --ami-header-height: 80px;
+  /* Curve di movimento: due sole. ease-out per cio' che entra, esce o
+     risponde a un gesto (hover, pressione, apertura); ease-in-out per cio'
+     che si trasforma sul posto (frecce che ruotano). */
+  --ami-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ami-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   /* Altezza del logo nell'header (e nell'intestazione del menu laterale,
      che la riprende): 60px, 44px tra 769 e 1023px, 40px sotto i 769px. */
   --ami-logo-height: 60px;
@@ -192,7 +197,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
   background: rgba(255, 255, 255, 0.55);
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.2s var(--ami-ease-out);
 }
 .md-header__nav-link:hover::after,
 .md-header__nav-link--dropdown:hover .md-header__nav-testo::after {
@@ -255,7 +260,7 @@ STILE PERSONALIZZATO — TEMA MATERIAL
 /* Freccia: ruota di 180° quando il menu è aperto */
 .md-header__dropdown-caret {
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  transition: transform 0.15s var(--ami-ease-in-out);
 }
 @media (prefers-reduced-motion: reduce) {
   .md-header__dropdown-caret {
@@ -588,7 +593,7 @@ button.md-header__nav-link--dropdown {
   /* Chiuso = visibility:hidden (dopo la transizione): i link fuori schermo
      non devono ricevere il focus da tastiera ne' essere letti. */
   visibility: hidden;
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.25s;
+  transition: transform 0.25s var(--ami-ease-out), visibility 0s linear 0.25s;
   z-index: 1002;
   overflow-y: auto;
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
@@ -668,7 +673,7 @@ html.ami-drawer-aperto body {
 #__drawer:checked ~ .md-drawer {
   transform: translateX(0);
   visibility: visible;
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s;
+  transition: transform 0.25s var(--ami-ease-out), visibility 0s;
 }
 @media (prefers-reduced-motion: reduce) {
   .md-drawer,
@@ -1604,7 +1609,7 @@ textarea {
    <head>); senza, la copia lazy non verrebbe mai caricata e resta la
    copia in <noscript>. */
 .ami-js .lazy-img {
-    transition: opacity 300ms ease-in-out;
+    transition: opacity 200ms var(--ami-ease-out);
     opacity: 0;
 }
 html {
@@ -2907,7 +2912,7 @@ input[type="search"]::-webkit-search-cancel-button {
     border-right: 2px solid currentColor;
     border-bottom: 2px solid currentColor;
     transform: rotate(45deg);
-    transition: transform 0.2s ease-out;
+    transition: transform 0.15s var(--ami-ease-in-out);
   }
   .md-typeset details.progetto-indice[open] > summary::after {
     transform: rotate(-135deg);

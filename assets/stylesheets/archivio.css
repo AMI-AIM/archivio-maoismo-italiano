@@ -78,7 +78,9 @@
 
 .filtro-toggle .toggle-icon {
     font-size: var(--ami-font-size-xs); /* 12px */
-    transition: transform 0.25s ease;
+    /* Breve: il gruppo si apre all'istante, la freccia non deve restare
+       indietro (azione frequente). */
+    transition: transform 0.15s var(--ami-ease-in-out);
 }
 
 .filtro-toggle.open .toggle-icon {

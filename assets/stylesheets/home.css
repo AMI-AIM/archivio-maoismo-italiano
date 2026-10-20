@@ -121,10 +121,16 @@ body:has(.banner-full) .md-content article h1:first-of-type {
      invece di allargare la card. */
   width: min-content;
   min-width: 0;
-  transition: transform 0.25s ease;
+  transition: transform 0.2s var(--ami-ease-out);
 }
-.evidenza-card:hover {
-  transform: translateY(-4px);
+/* Sollevamento solo con un puntatore vero (al tocco restava sollevata) */
+@media (hover: hover) and (pointer: fine) {
+  .evidenza-card:hover {
+    transform: translateY(-4px);
+  }
+  .evidenza-card:hover .evidenza-thumbnail-img {
+    transform: scale(1.04);
+  }
 }
 .evidenza-link {
   display: block;
@@ -152,10 +158,7 @@ body:has(.banner-full) .md-content article h1:first-of-type {
   /* Sulla fascia nera: contorno bianco appena visibile */
   outline: 1px solid oklch(1 0 0 / 0.1);
   outline-offset: -1px;
-  transition: transform 0.25s ease;
-}
-.evidenza-card:hover .evidenza-thumbnail-img {
-  transform: scale(1.04);
+  transition: transform 0.2s var(--ami-ease-out);
 }
 
 /* Griglia desktop: larghezza fissa per card uniformi (sotto i 769px

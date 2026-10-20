@@ -28,12 +28,16 @@
     border-radius: var(--ami-radius-card);
     border: 1px solid var(--md-default-fg-color--lightest);
     overflow: hidden;
-    transition: transform 0.15s, box-shadow 0.2s;
+    transition: transform 0.2s var(--ami-ease-out), box-shadow 0.2s var(--ami-ease-out);
 }
 
-.top-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+/* Sollevamento solo con un puntatore vero: al tocco l'hover resta
+   "incollato" e la card rimane sollevata. */
+@media (hover: hover) and (pointer: fine) {
+    .top-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    }
 }
 
 .top-card-link {
@@ -183,15 +187,17 @@
     background: var(--md-code-bg-color);
     border-radius: var(--ami-radius-md);
     padding: 1rem 1.2rem;
-    transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    transition: background-color 0.2s var(--ami-ease-out), transform 0.2s var(--ami-ease-out), box-shadow 0.2s var(--ami-ease-out);
     border: 1px solid var(--md-default-fg-color--lightest);
 }
 
-.people-card:hover,
-.org-card:hover {
-    background: var(--md-default-bg-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+@media (hover: hover) and (pointer: fine) {
+    .people-card:hover,
+    .org-card:hover {
+        background: var(--md-default-bg-color);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
 }
 
 .people-link,
