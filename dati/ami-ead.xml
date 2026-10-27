@@ -48,7 +48,7 @@
           <part>Ivan Masci</part>
         </persname>
       </origination>
-      <physdesc>107 unità</physdesc>
+      <physdesc>109 unità</physdesc>
       <langmaterial>
         <language langcode="ita">italiano</language>
         <language langcode="chi">cinese</language>
@@ -687,7 +687,7 @@
             <part>Nuova Unità</part>
           </corpname>
           <corpname identifier="AMI-O-011">
-            <part>Unione della gioventù comunista d’Italia (marxista-leninista)</part>
+            <part>Unione della Gioventù Comunista d'Italia (marxista-leninista)</part>
           </corpname>
           <persname identifier="AMI-P-002">
             <part>Fosco Dinucci</part>
@@ -5135,6 +5135,101 @@
           </genreform>
           <subject>
             <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0108">
+        <did>
+          <unitid>AMI-0108</unitid>
+          <unittitle>3° Congresso del Partito Comunista D'Italia (m-l) - Documenti</unittitle>
+          <unitdate normal="1978">1978</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-013">
+              <part>Partito Comunista d'Italia (marxista-leninista)</part>
+            </corpname>
+          </origination>
+          <physdesc>pp. 131</physdesc>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/1978-iii-congresso-del-partito-comunista-d-italia-m-l" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <odd localtype="editore">
+          <p>Firenze: Edizioni Gramsci</p>
+        </odd>
+        <acqinfo>
+          <p>Centro Gramsci di Educazione</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0108/">Scheda AMI-0108 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <corpname identifier="AMI-O-011">
+            <part>Unione della Gioventù Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <persname identifier="AMI-P-002">
+            <part>Fosco Dinucci</part>
+          </persname>
+          <persname>
+            <part>Enver Hoxha</part>
+          </persname>
+          <geogname>
+            <part>Firenze</part>
+          </geogname>
+          <genreform>
+            <part>Libro</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0109">
+        <did>
+          <unitid>AMI-0109</unitid>
+          <unittitle>Quarto congresso del PCd'I(m-l) - Documenti</unittitle>
+          <unitdate normal="1985">1985</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-013">
+              <part>Partito Comunista d'Italia (marxista-leninista)</part>
+            </corpname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/1985-documenti-del-iv-congresso" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <odd localtype="editore">
+          <p>s.l.: Quaderni di Nuova Unità</p>
+        </odd>
+        <acqinfo>
+          <p>Centro Gramsci di Educazione</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0109/">Scheda AMI-0109 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <persname identifier="AMI-P-002">
+            <part>Fosco Dinucci</part>
+          </persname>
+          <geogname>
+            <part>s.l.</part>
+          </geogname>
+          <genreform>
+            <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
           </subject>
         </controlaccess>
       </c>

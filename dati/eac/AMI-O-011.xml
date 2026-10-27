@@ -24,7 +24,7 @@
     <identity>
       <entityType value="corporateBody" />
       <nameEntry status="authorized">
-        <part>Unione della gioventù comunista d’Italia (marxista-leninista)</part>
+        <part>Unione della Gioventù Comunista d'Italia (marxista-leninista)</part>
       </nameEntry>
       <nameEntry status="alternative">
         <part>UGCd'I(m-l)</part>
@@ -54,7 +54,7 @@
         </dateRange>
         <relationType>gerarchica</relationType>
         <descriptiveNote>
-          <p>Unione della gioventù comunista d’Italia (marxista-leninista) giovanile di Partito Comunista d'Italia (marxista-leninista)</p>
+          <p>Unione della Gioventù Comunista d'Italia (marxista-leninista) giovanile di Partito Comunista d'Italia (marxista-leninista)</p>
         </descriptiveNote>
       </relation>
     </relations>

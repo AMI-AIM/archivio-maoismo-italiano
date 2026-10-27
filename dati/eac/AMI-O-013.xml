@@ -228,7 +228,7 @@
       </relation>
       <relation>
         <targetEntity targetType="corporateBody" valueURI="https://ami-aim.github.io/archivio-maoismo-italiano/dati/eac/AMI-O-011.xml">
-          <part>Unione della gioventù comunista d’Italia (marxista-leninista)</part>
+          <part>Unione della Gioventù Comunista d'Italia (marxista-leninista)</part>
         </targetEntity>
         <dateRange>
           <fromDate standardDate="1966">1966</fromDate>
@@ -236,7 +236,7 @@
         </dateRange>
         <relationType>gerarchica</relationType>
         <descriptiveNote>
-          <p>Unione della gioventù comunista d’Italia (marxista-leninista) giovanile di Partito Comunista d'Italia (marxista-leninista)</p>
+          <p>Unione della Gioventù Comunista d'Italia (marxista-leninista) giovanile di Partito Comunista d'Italia (marxista-leninista)</p>
         </descriptiveNote>
       </relation>
       <relation>
