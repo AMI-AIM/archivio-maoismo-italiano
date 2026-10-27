@@ -31,7 +31,7 @@
       </maintenanceevent>
       <maintenanceevent>
         <eventtype value="derived" />
-        <eventdatetime standarddatetime="2026-10-20">2026-10-20</eventdatetime>
+        <eventdatetime standarddatetime="2026-10-27">2026-10-27</eventdatetime>
         <agenttype value="machine" />
         <agent>scripts/core/ead_export.py</agent>
         <eventdescription>File generato automaticamente da data/dati.xlsx</eventdescription>
@@ -48,7 +48,7 @@
           <part>Ivan Masci</part>
         </persname>
       </origination>
-      <physdesc>96 unità</physdesc>
+      <physdesc>107 unità</physdesc>
       <langmaterial>
         <language langcode="ita">italiano</language>
         <language langcode="chi">cinese</language>
@@ -3005,7 +3005,7 @@
         </did>
         <scopecontent>
           <p>Prima di essere identificato come capo della "linea nera anti-partito" durante la Rivoluzione culturale, il presidente della Repubblica Popolare Cinese Liu Shaoqi era considerato uno dei "vecchi gloriosi compagni" del Partito Comunista Cinese. Fino alla sua "scomunica", quindi, i filo-cinesi italiani leggono e pubblicano i suoi discorsi e le sue opere, tra cui il seguente volume, una guida all'autoeducazione ideologica dei comunisti cinesi, composto dalla compilazione di una serie di conferenze tenute da Liu nel 1939.</p>
-          <p>Libro tradotto da Arnaldo Bressan (Lega della gioventù comunista (marxista-leninista) d'Italia) e pubblicato dalle Edizioni Oriente, Milano, pp. 143, 1965.</p>
+          <p>Libro tradotto da Arnaldo Bressan (Lega della Gioventù Comunista (marxista-leninista) d'Italia) e pubblicato dalle Edizioni Oriente, Milano, pp. 143, 1965.</p>
           <p>Copertina ricostruita digitalmente sulla base del frontespizio e della comparazione con il catalogo delle Edizioni Oriente.</p>
         </scopecontent>
         <odd localtype="editore">
@@ -3024,7 +3024,7 @@
             <part>Edizioni Oriente</part>
           </corpname>
           <corpname>
-            <part>Lega della gioventù comunista (marxista-leninista) d'Italia</part>
+            <part>Lega della Gioventù Comunista (marxista-leninista) d'Italia</part>
           </corpname>
           <corpname identifier="AMI-O-015">
             <part>Partito Comunista Cinese</part>
@@ -4589,6 +4589,552 @@
           </genreform>
           <subject>
             <part>Varie</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0097">
+        <did>
+          <unitid>AMI-0097</unitid>
+          <unittitle>Nuova Unità, anno I, no. 1</unittitle>
+          <unitdate normal="1964-03">1964-03</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-006">
+              <part>Nuova Unità</part>
+            </corpname>
+          </origination>
+          <physdesc>pp. 8</physdesc>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/nuova-unita-1964-03" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <odd localtype="editore">
+          <p>Livorno: Nuova Unità</p>
+        </odd>
+        <acqinfo>
+          <p>Centro Gramsci di Educazione</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0097/">Scheda AMI-0097 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-006">
+            <part>Nuova Unità</part>
+          </corpname>
+          <persname>
+            <part>Ugo Duse</part>
+          </persname>
+          <geogname>
+            <part>Livorno</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0098">
+        <did>
+          <unitid>AMI-0098</unitid>
+          <unittitle>Nuova Unità, anno I, no. 2</unittitle>
+          <unitdate normal="1964-04">1964-04</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-006">
+              <part>Nuova Unità</part>
+            </corpname>
+          </origination>
+          <physdesc>pp. 8</physdesc>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/nuova-unita-1964-04" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <odd localtype="editore">
+          <p>Livorno: Nuova Unità</p>
+        </odd>
+        <acqinfo>
+          <p>Centro Gramsci di Educazione</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0098/">Scheda AMI-0098 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-006">
+            <part>Nuova Unità</part>
+          </corpname>
+          <corpname identifier="AMI-O-003">
+            <part>Edizioni Oriente</part>
+          </corpname>
+          <corpname>
+            <part>Gruppo Proletario Luglio 60</part>
+          </corpname>
+          <persname>
+            <part>Ugo Duse</part>
+          </persname>
+          <persname>
+            <part>Mario Geymonat</part>
+          </persname>
+          <persname>
+            <part>Giuseppe Regis</part>
+          </persname>
+          <geogname>
+            <part>Livorno</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0099">
+        <did>
+          <unitid>AMI-0099</unitid>
+          <unittitle>Nuova Unità, anno I, no. 3</unittitle>
+          <unitdate normal="1964-05">1964-05</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-006">
+              <part>Nuova Unità</part>
+            </corpname>
+          </origination>
+          <physdesc>pp. 8</physdesc>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/nuova-unita-1964-05" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <odd localtype="editore">
+          <p>Livorno: Nuova Unità</p>
+        </odd>
+        <acqinfo>
+          <p>Centro Gramsci di Educazione</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0099/">Scheda AMI-0099 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-006">
+            <part>Nuova Unità</part>
+          </corpname>
+          <corpname identifier="AMI-O-003">
+            <part>Edizioni Oriente</part>
+          </corpname>
+          <corpname>
+            <part>Gruppo Proletario Luglio 60</part>
+          </corpname>
+          <persname>
+            <part>Ugo Duse</part>
+          </persname>
+          <persname>
+            <part>Mario Geymonat</part>
+          </persname>
+          <persname>
+            <part>Giuseppe Regis</part>
+          </persname>
+          <persname>
+            <part>Franco Molfese</part>
+          </persname>
+          <geogname>
+            <part>Livorno</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0100">
+        <did>
+          <unitid>AMI-0100</unitid>
+          <unittitle>Nuova Unità, anno I, no. 4</unittitle>
+          <unitdate normal="1964-06">1964-06</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-006">
+              <part>Nuova Unità</part>
+            </corpname>
+          </origination>
+          <physdesc>pp. 8</physdesc>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/nuova-unita-1964-06" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <odd localtype="editore">
+          <p>Livorno: Nuova Unità</p>
+        </odd>
+        <acqinfo>
+          <p>Centro Gramsci di Educazione</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0100/">Scheda AMI-0100 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-006">
+            <part>Nuova Unità</part>
+          </corpname>
+          <corpname identifier="AMI-O-003">
+            <part>Edizioni Oriente</part>
+          </corpname>
+          <persname>
+            <part>Ugo Duse</part>
+          </persname>
+          <persname>
+            <part>Mario Geymonat</part>
+          </persname>
+          <geogname>
+            <part>Livorno</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0101">
+        <did>
+          <unitid>AMI-0101</unitid>
+          <unittitle>Nuova Unità, anno I, no. 5-6</unittitle>
+          <unitdate normal="1964-08">1964-08</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-006">
+              <part>Nuova Unità</part>
+            </corpname>
+          </origination>
+          <physdesc>pp. 12</physdesc>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/nuova-unita-1964-07-08" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <odd localtype="editore">
+          <p>Livorno: Nuova Unità</p>
+        </odd>
+        <acqinfo>
+          <p>Centro Gramsci di Educazione</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0101/">Scheda AMI-0101 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-006">
+            <part>Nuova Unità</part>
+          </corpname>
+          <persname>
+            <part>Ugo Duse</part>
+          </persname>
+          <persname>
+            <part>Mario Geymonat</part>
+          </persname>
+          <geogname>
+            <part>Livorno</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0102">
+        <did>
+          <unitid>AMI-0102</unitid>
+          <unittitle>Nuova Unità, anno I, no. 7</unittitle>
+          <unitdate normal="1964-09">1964-09</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-006">
+              <part>Nuova Unità</part>
+            </corpname>
+          </origination>
+          <physdesc>pp. 12</physdesc>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/nuova-unita-1964-09" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <odd localtype="editore">
+          <p>Livorno: Nuova Unità</p>
+        </odd>
+        <acqinfo>
+          <p>Centro Gramsci di Educazione</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0102/">Scheda AMI-0102 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-006">
+            <part>Nuova Unità</part>
+          </corpname>
+          <persname>
+            <part>Ugo Duse</part>
+          </persname>
+          <persname>
+            <part>Mario Geymonat</part>
+          </persname>
+          <geogname>
+            <part>Livorno</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0103">
+        <did>
+          <unitid>AMI-0103</unitid>
+          <unittitle>Nuova Unità, anno I, no. 8</unittitle>
+          <unitdate normal="1964-10">1964-10</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-006">
+              <part>Nuova Unità</part>
+            </corpname>
+          </origination>
+          <physdesc>pp. 12</physdesc>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/nuova-unita-1964-10" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <odd localtype="editore">
+          <p>Livorno: Nuova Unità</p>
+        </odd>
+        <acqinfo>
+          <p>Centro Gramsci di Educazione</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0103/">Scheda AMI-0103 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-006">
+            <part>Nuova Unità</part>
+          </corpname>
+          <persname>
+            <part>Ugo Duse</part>
+          </persname>
+          <persname>
+            <part>Mario Geymonat</part>
+          </persname>
+          <geogname>
+            <part>Livorno</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0104">
+        <did>
+          <unitid>AMI-0104</unitid>
+          <unittitle>Nuova Unità, anno I, no. 9</unittitle>
+          <unitdate normal="1964-11">1964-11</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-006">
+              <part>Nuova Unità</part>
+            </corpname>
+          </origination>
+          <physdesc>pp. 12</physdesc>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/nuova-unita-1964-11" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <odd localtype="editore">
+          <p>Livorno: Nuova Unità</p>
+        </odd>
+        <acqinfo>
+          <p>Centro Gramsci di Educazione</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0104/">Scheda AMI-0104 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-006">
+            <part>Nuova Unità</part>
+          </corpname>
+          <persname>
+            <part>Ugo Duse</part>
+          </persname>
+          <persname>
+            <part>Mario Geymonat</part>
+          </persname>
+          <geogname>
+            <part>Livorno</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0105">
+        <did>
+          <unitid>AMI-0105</unitid>
+          <unittitle>Nuova Unità, anno I, no. 10</unittitle>
+          <unitdate normal="1964-12">1964-12</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-006">
+              <part>Nuova Unità</part>
+            </corpname>
+          </origination>
+          <physdesc>pp. 12</physdesc>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/nuova-unita-1964-12" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <odd localtype="editore">
+          <p>Livorno: Nuova Unità</p>
+        </odd>
+        <acqinfo>
+          <p>Centro Gramsci di Educazione</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0105/">Scheda AMI-0105 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-006">
+            <part>Nuova Unità</part>
+          </corpname>
+          <persname>
+            <part>Ugo Duse</part>
+          </persname>
+          <geogname>
+            <part>Livorno</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0106">
+        <did>
+          <unitid>AMI-0106</unitid>
+          <unittitle>Nuova Unità, anno II, no. 1</unittitle>
+          <unitdate normal="1965-01">1965-01</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-006">
+              <part>Nuova Unità</part>
+            </corpname>
+          </origination>
+          <physdesc>pp. 12</physdesc>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/nuova-unita-1965-01" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <odd localtype="editore">
+          <p>Livorno: Nuova Unità</p>
+        </odd>
+        <acqinfo>
+          <p>Centro Gramsci di Educazione</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0106/">Scheda AMI-0106 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-006">
+            <part>Nuova Unità</part>
+          </corpname>
+          <corpname>
+            <part>Lega della Gioventù Comunista (marxista-leninista) d'Italia</part>
+          </corpname>
+          <persname>
+            <part>Ugo Duse</part>
+          </persname>
+          <geogname>
+            <part>Livorno</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0107">
+        <did>
+          <unitid>AMI-0107</unitid>
+          <unittitle>Nuova Unità, anno II, no. 2</unittitle>
+          <unitdate normal="1965-04">1965-04</unitdate>
+          <origination>
+            <corpname identifier="AMI-O-006">
+              <part>Nuova Unità</part>
+            </corpname>
+          </origination>
+          <physdesc>pp. 16</physdesc>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/nuova-unita-1965-04" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <odd localtype="editore">
+          <p>Livorno: Nuova Unità</p>
+        </odd>
+        <acqinfo>
+          <p>Centro Gramsci di Educazione</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0107/">Scheda AMI-0107 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-006">
+            <part>Nuova Unità</part>
+          </corpname>
+          <corpname identifier="AMI-O-030">
+            <part>Movimento Marxista-Leninista Italiano</part>
+          </corpname>
+          <persname>
+            <part>Vincenzo Misefari</part>
+          </persname>
+          <geogname>
+            <part>Livorno</part>
+          </geogname>
+          <genreform>
+            <part>Periodico</part>
+          </genreform>
+          <subject>
+            <part>Riviste marxiste-leniniste</part>
           </subject>
         </controlaccess>
       </c>
