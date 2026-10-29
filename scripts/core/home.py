@@ -167,10 +167,15 @@ def genera_home(df, persone, output_dir, organizzazioni=None, percorso_progetto=
         for nome in nomi_da_contare:
             if nome in persone:
                 conteggio_persone[nome] += 1
-        # ---- Conteggio ORGANIZZAZIONI (organizzazione + organizzazioni_collegate) ----
+        # ---- Conteggio ORGANIZZAZIONI (organizzazione + autore + organizzazioni_collegate) ----
+        # Stessi campi di CatalogIndexer.get_docs_for_organization (org.py):
+        # un'organizzazione autrice di un documento (periodico, organo di
+        # partito) conta come in scheda, così home e indice coincidono.
         org_raw = str(row.get('organizzazione', '')).strip()
         org_collegate_raw = str(row.get('organizzazioni_collegate', '')).strip()
         org_da_contare = set()
+        if autore_raw and autore_raw not in ['nan', 'None']:
+            org_da_contare.update(split_nomi(autore_raw))
         if org_raw and org_raw not in ['nan', 'None']:
             org_da_contare.update(split_nomi(org_raw))
         if org_collegate_raw and org_collegate_raw not in ['nan', 'None']:
