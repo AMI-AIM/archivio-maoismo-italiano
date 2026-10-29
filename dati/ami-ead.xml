@@ -31,7 +31,7 @@
       </maintenanceevent>
       <maintenanceevent>
         <eventtype value="derived" />
-        <eventdatetime standarddatetime="2026-10-27">2026-10-27</eventdatetime>
+        <eventdatetime standarddatetime="2026-10-29">2026-10-29</eventdatetime>
         <agenttype value="machine" />
         <agent>scripts/core/ead_export.py</agent>
         <eventdescription>File generato automaticamente da data/dati.xlsx</eventdescription>
@@ -48,7 +48,7 @@
           <part>Ivan Masci</part>
         </persname>
       </origination>
-      <physdesc>109 unità</physdesc>
+      <physdesc>110 unità</physdesc>
       <langmaterial>
         <language langcode="ita">italiano</language>
         <language langcode="chi">cinese</language>
@@ -5205,7 +5205,7 @@
           <dao daotype="derived" href="https://archive.org/details/1985-documenti-del-iv-congresso" linktitle="Riproduzione digitale su Internet Archive" />
         </did>
         <odd localtype="editore">
-          <p>s.l.: Quaderni di Nuova Unità</p>
+          <p>Quaderni di Nuova Unità</p>
         </odd>
         <acqinfo>
           <p>Centro Gramsci di Educazione</p>
@@ -5222,11 +5222,49 @@
           <persname identifier="AMI-P-002">
             <part>Fosco Dinucci</part>
           </persname>
-          <geogname>
-            <part>s.l.</part>
-          </geogname>
           <genreform>
             <part>Opuscolo</part>
+          </genreform>
+          <subject>
+            <part>Galassia marxista-leninista</part>
+          </subject>
+        </controlaccess>
+      </c>
+      <c level="item" id="AMI-0110">
+        <did>
+          <unitid>AMI-0110</unitid>
+          <unittitle>La forza di essere comunisti: Che cosa vuole il Partito Comunista d'Italia (m-l)</unittitle>
+          <unitdate normal="1986">1986</unitdate>
+          <origination>
+            <persname identifier="AMI-P-002">
+              <part>Fosco Dinucci</part>
+            </persname>
+          </origination>
+          <langmaterial>
+            <language langcode="ita">italiano</language>
+          </langmaterial>
+          <dao daotype="derived" href="https://archive.org/details/la-forza-di-essere-comunisti" linktitle="Riproduzione digitale su Internet Archive" />
+        </did>
+        <odd localtype="editore">
+          <p>Firenze: Quaderni di Nuova Unità</p>
+        </odd>
+        <acqinfo>
+          <p>Centro Gramsci di Educazione</p>
+        </acqinfo>
+        <otherfindaid>
+          <p>
+            <ref href="https://ami-aim.github.io/archivio-maoismo-italiano/documenti/AMI-0110/">Scheda AMI-0110 nel catalogo AMI</ref>
+          </p>
+        </otherfindaid>
+        <controlaccess>
+          <corpname identifier="AMI-O-013">
+            <part>Partito Comunista d'Italia (marxista-leninista)</part>
+          </corpname>
+          <geogname>
+            <part>Firenze</part>
+          </geogname>
+          <genreform>
+            <part>Libro</part>
           </genreform>
           <subject>
             <part>Galassia marxista-leninista</part>
